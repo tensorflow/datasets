@@ -1,0 +1,100 @@
+{
+  "citation": "@article{luo2023multistage,\n  author    = {Jianlan Luo and Charles Xu and Xinyang Geng and Gilbert Feng and Kuan Fang and Liam Tan and Stefan Schaal and Sergey Levine},\n  title     = {Multi-Stage Cable Routing through Hierarchical Imitation Learning},\n  journal   = {arXiv pre-print},\n  year      = {2023},\n  url       = {https://arxiv.org/abs/2307.08927},\n}",
+  "description": "Routing cable into clamps on table top",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://sites.google.com/view/cablerouting/home"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "berkeley_cable_routing",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "4526600607",
+      "shardLengths": [
+        "22",
+        "20",
+        "12",
+        "22",
+        "31",
+        "17",
+        "25",
+        "22",
+        "33",
+        "30",
+        "21",
+        "22",
+        "16",
+        "26",
+        "23",
+        "18",
+        "30",
+        "16",
+        "29",
+        "24",
+        "25",
+        "33",
+        "23",
+        "23",
+        "24",
+        "19",
+        "21",
+        "22",
+        "22",
+        "27",
+        "16",
+        "29",
+        "17",
+        "24",
+        "25",
+        "32",
+        "18",
+        "16",
+        "34",
+        "26",
+        "18",
+        "30",
+        "17",
+        "20",
+        "14",
+        "14",
+        "25",
+        "22",
+        "21",
+        "28",
+        "31",
+        "23",
+        "12",
+        "25",
+        "36",
+        "18",
+        "19",
+        "26",
+        "30",
+        "26",
+        "32",
+        "15",
+        "23",
+        "22"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "485641259",
+      "shardLengths": [
+        "43",
+        "35",
+        "47",
+        "40"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

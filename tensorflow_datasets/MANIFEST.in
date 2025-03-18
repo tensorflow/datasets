@@ -1,0 +1,2 @@
+include dataset_collections/*/*.md
+include dataset_collections/*/*.bib

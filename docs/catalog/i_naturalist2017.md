@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="i_naturalist2017" />
   <meta itemprop="description" content="This dataset contains a total of 5,089 categories, across 579,184 training&#10;images and 95,986 validation images. For the training set, the distribution of&#10;images per category follows the observation frequency of that category by the&#10;iNaturalist community.&#10;&#10;Although the original dataset contains some images with bounding boxes,&#10;currently, only image-level annotations are provided (single label/image).&#10;In addition, the organizers have not published the test labels, so we only&#10;provide the test images (label = -1).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;i_naturalist2017&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/i_naturalist2017-0.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/i_naturalist2017" />
@@ -11,6 +10,7 @@
 </div>
 
 # `i_naturalist2017`
+
 
 *   **Description**:
 
@@ -24,6 +24,12 @@ currently, only image-level annotations are provided (single label/image). In
 addition, the organizers have not published the test labels, so we only provide
 the test images (label = -1).
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/inaturalist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/visipedia/inat_comp/tree/master/2017](https://github.com/visipedia/inat_comp/tree/master/2017)
 
@@ -36,11 +42,11 @@ the test images (label = -1).
 
 *   **Download size**: `237.35 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `238.10 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -50,20 +56,72 @@ Split          | Examples
 `'train'`      | 579,184
 `'validation'` | 95,986
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'id': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5089),
-    'supercategory': ClassLabel(shape=(), dtype=tf.int64, num_classes=13),
+    'id': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5089),
+    'supercategory': ClassLabel(shape=(), dtype=int64, num_classes=13),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature       | Class        | Shape           | Dtype  | Description
+:------------ | :----------- | :-------------- | :----- | :----------
+              | FeaturesDict |                 |        |
+id            | Text         |                 | string |
+image         | Image        | (None, None, 3) | uint8  |
+label         | ClassLabel   |                 | int64  |
+supercategory | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/i_naturalist2017-0.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/i_naturalist2017-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -80,7 +138,3 @@ year = {2018}
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/i_naturalist2017-0.1.0.png" alt="Visualization" width="500px">

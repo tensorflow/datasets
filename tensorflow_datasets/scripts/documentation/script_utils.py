@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-r"""Script utils for generating datasets figures and dataframes.
-"""
+r"""Script utils for generating datasets figures and dataframes."""
 
+import concurrent.futures
 import functools
 import itertools
 import multiprocessing
@@ -25,15 +25,14 @@ from typing import Any, Callable, List, Optional, TypeVar
 
 from absl import app
 from absl import logging
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-# pylint: disable=logging-format-interpolation,logging-not-lazy
+# pylint: disable=logging-format-interpolation,logging-not-lazy,logging-fstring-interpolation
 
 T = TypeVar('T')
 
-WORKER_COUNT_DATASETS = 10
+_WORKER_COUNT_DATASETS = 10
 
 
 def _log_exception(fn):
@@ -55,13 +54,13 @@ def _log_exception(fn):
 def generate_and_save_artifact(
     full_name: str,
     *,
-    dst_dir: str,
+    dst_dir: tfds.typing.PathLike,
     overwrite: bool,
     file_extension: str,
     get_artifact_fn: Callable[[tf.data.Dataset, tfds.core.DatasetInfo], T],
     save_artifact_fn: Callable[[str, T], None],
 ) -> None:
-  """Builds and save the generated artifact for the dataset in dst_dir.
+  """Builds and saves the generated artifact for the dataset in dst_dir.
 
   Args:
     full_name: Name of the dataset to build `dataset`, `dataset/config`.
@@ -104,7 +103,7 @@ def generate_and_save_artifact(
 
 
 def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
-  """List all builder names `ds/version` and `ds/config/version` to generate.
+  """Lists all builder names `ds/version` and `ds/config/version` to generate.
 
   Args:
     datasets: List of datasets from which get the builder names.
@@ -113,14 +112,16 @@ def _get_full_names(datasets: Optional[List[str]] = None) -> List[str]:
     builder_names: The builder names.
   """
   if datasets is None:
-    return tfds.core.load.list_full_names(
-        current_version_only=True,
-    )
+    return tfds.core.load.list_full_names(current_version_only=True)
   else:
-    builder_names = list(itertools.chain.from_iterable([
-        tfds.core.load.single_full_names(builder_name)
-        for builder_name in datasets
-    ]))
+    builder_names = list(
+        itertools.chain.from_iterable(
+            [
+                tfds.core.load.single_full_names(builder_name)
+                for builder_name in datasets
+            ]
+        )
+    )
     return builder_names
 
 
@@ -128,7 +129,7 @@ def multi_process_map(
     worker_fn: Callable[..., None],
     datasets: Optional[List[str]] = None,
 ) -> None:
-  """Apply the function for each given datasets.
+  """Applies the function for each given datasets.
 
   Args:
     worker_fn: Function called on each dataset version.
@@ -137,8 +138,26 @@ def multi_process_map(
   """
   full_names = _get_full_names(datasets)
   logging.info(f'Generate figures for {len(full_names)} builders')
-  with multiprocessing.Pool(WORKER_COUNT_DATASETS) as tpool:
-    tpool.map(worker_fn, full_names)
+  with multiprocessing.Pool(_WORKER_COUNT_DATASETS) as tpool:
+    list(tpool.map(worker_fn, full_names))
+
+
+def multi_thread_map(
+    worker_fn: Callable[..., None],
+    datasets: Optional[List[str]] = None,
+) -> None:
+  """Applies the function for each given datasets.
+
+  Args:
+    worker_fn: Function called on each dataset version.
+    datasets: List of all `dataset` names to generate. If None, visualization
+      for all available datasets will be generated.
+  """
+  full_names = _get_full_names(datasets)
+  with concurrent.futures.ThreadPoolExecutor(
+      max_workers=_WORKER_COUNT_DATASETS,
+  ) as executor:
+    list(executor.map(worker_fn, full_names))
 
 
 def multi_process_run(main: Callable[[Any], None]) -> None:

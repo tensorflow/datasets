@@ -1,0 +1,45 @@
+{
+  "citation": "@misc{xu2021recipes,\n      title={Recipes for Safety in Open-domain Chatbots}, \n      author={Jing Xu and Da Ju and Margaret Li and Y-Lan Boureau and Jason Weston and Emily Dinan},\n      year={2021},\n      eprint={2010.07079},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}\n\n@inproceedings{xu2020safetyrecipes,\n  author={Jing Xu, Da Ju, Margaret Li, Y-Lan Boureau, Jason Weston, Emily Dinan},\n  title={Recipes for Safety in Open-domain Chatbots},\n  journal={arXiv preprint arXiv:2010.07079},\n  year={2020},\n}",
+  "configDescription": "The dialogue datasets, divided in train, validation and test splits.",
+  "configName": "dialogue_datasets",
+  "description": "# Bot Adversarial Dialogue Dataset.\n\nDialogue datasets labeled with offensiveness from Bot Adversarial Dialogue task.\nThe dialogues were collected by asking humans to adversarially talk to bots.\n\n\nMore details in the [paper](https://arxiv.org/abs/2010.07079).",
+  "downloadSize": "3209168",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/ParlAI/tree/main/parlai/tasks/bot_adversarial_dialogue"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.bot_adversarial_dialogue.bot_adversarial_dialogue_dataset_builder",
+  "name": "bot_adversarial_dialogue",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "21559987",
+      "shardLengths": [
+        "69274"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "valid",
+      "numBytes": "2153879",
+      "shardLengths": [
+        "7002"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "804034",
+      "shardLengths": [
+        "2598"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

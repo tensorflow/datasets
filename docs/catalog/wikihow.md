@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="wikihow" />
   <meta itemprop="description" content="WikiHow is a new large-scale dataset using the online WikiHow&#10;(http://www.wikihow.com/) knowledge base.&#10;&#10;There are two features:&#10;  - text: wikihow answers texts.&#10;  - headline: bold lines as summary.&#10;&#10;There are two separate versions:&#10;  - all: consisting of the concatenation of all paragraphs as the articles and&#10;         the bold lines as the reference summaries.&#10;  - sep: consisting of each paragraph and its summary.&#10;&#10;Download &quot;wikihowAll.csv&quot; and &quot;wikihowSep.csv&quot; from&#10;https://github.com/mahnazkoupaee/WikiHow-Dataset and place them in manual folder&#10;https://www.tensorflow.org/datasets/api_docs/python/tfds/download/DownloadConfig.&#10;Train/validation/test splits are provided by the authors.&#10;Preprocessing is applied to remove short articles&#10;(abstract length &lt; 0.75 article length) and clean up extra commas.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;wikihow&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/wikihow" />
@@ -11,6 +10,7 @@
 </div>
 
 # `wikihow`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -33,6 +33,12 @@ Train/validation/test splits are provided by the authors. Preprocessing is
 applied to remove short articles (abstract length < 0.75 article length) and
 clean up extra commas.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/wikihow">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/mahnazkoupaee/WikiHow-Dataset](https://github.com/mahnazkoupaee/WikiHow-Dataset)
 
@@ -45,8 +51,6 @@ clean up extra commas.
 
 *   **Download size**: `5.21 MiB`
 
-*   **Dataset size**: `Unknown size`
-
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
@@ -55,11 +59,15 @@ clean up extra commas.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'headline')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 *   **Citation**:
 
@@ -74,14 +82,13 @@ clean up extra commas.
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## wikihow/all (default config)
 
 *   **Config description**: Use the concatenation of all paragraphs as the
     articles and the bold lines as the reference summaries
+
+*   **Dataset size**: `531.56 MiB`
 
 *   **Splits**:
 
@@ -91,19 +98,67 @@ Split          | Examples
 `'train'`      | 157,252
 `'validation'` | 5,599
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+headline | Text         |       | string |
+text     | Text         |       | string |
+title    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikihow-all-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## wikihow/sep
 
 *   **Config description**: use each paragraph and its summary.
+
+*   **Dataset size**: `1.07 GiB`
 
 *   **Splits**:
 
@@ -113,14 +168,62 @@ Split          | Examples
 `'train'`      | 1,060,732
 `'validation'` | 37,932
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'headline': Text(shape=(), dtype=tf.string),
-    'overview': Text(shape=(), dtype=tf.string),
-    'sectionLabel': Text(shape=(), dtype=tf.string),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'headline': Text(shape=(), dtype=string),
+    'overview': Text(shape=(), dtype=string),
+    'sectionLabel': Text(shape=(), dtype=string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class        | Shape | Dtype  | Description
+:----------- | :----------- | :---- | :----- | :----------
+             | FeaturesDict |       |        |
+headline     | Text         |       | string |
+overview     | Text         |       | string |
+sectionLabel | Text         |       | string |
+text         | Text         |       | string |
+title        | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/wikihow-sep-1.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

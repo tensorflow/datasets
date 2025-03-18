@@ -5,6 +5,20 @@ Google Cloud Storage (GCS) can be used with tfds for multiple reasons:
 *   Storing preprocessed data
 *   Accessing datasets that have data stored on GCS
 
+## Access through TFDS GCS bucket
+
+Some datasets are available directly in our GCS bucket
+[`gs://tfds-data/datasets/`](https://console.cloud.google.com/storage/browser/tfds-data)
+without any authentication:
+
+*   If `tfds.load(..., try_gcs=False)` (default), the dataset will be copied
+    locally in `~/tensorflow_datasets` during `download_and_prepare`.
+*   If `tfds.load(..., try_gcs=True)`, the dataset will be streamed directly
+    from GCS (`download_and_prepare` will be skipped).
+
+You can check whether a dataset is hosted on the public bucket with
+`tfds.is_dataset_on_gcs('mnist')`.
+
 ## Authentication
 
 Before starting, you should decide on how you want to authenticate. There are
@@ -14,7 +28,7 @@ three options:
 *   using your Google account
 *   using a service account (can be easily shared with others in your team)
 
-You can find detailed informations in
+You can find detailed information in
 [Google Cloud documentation](https://cloud.google.com/docs/authentication/getting-started)
 
 ### Simplified instructions
@@ -30,7 +44,7 @@ If you run on your local machine (or in VM), you can authenticate with your
 account by running:
 
 ```shell
-gcloud login application-default
+gcloud auth application-default login
 ```
 
 If you want to login with service account, download the JSON file key and set

@@ -1,0 +1,14 @@
+{
+  "annotations": [
+    {"id": 2686843, "image_id": 2686843, "category_id": 0}, 
+    {"id": 2686844, "image_id": 2686844, "category_id": 1}
+    ], 
+  "images": [
+    {"id": 2686843, "width": 284, "height": 222, "file_name": "val/03938_Animalia_Chordata_Aves_Passeriformes_Meliphagidae_Ptilotula_penicillata/df8edd4c-fbb4-4886-8600-a429e5efac23.jpg", "license": 2, "rights_holder": "megatherium", "date": "2007-10-31 00:00:00+00:00", "latitude": -21.93073, "longitude": 114.12239, "location_uncertainty": null}, 
+    {"id": 2686844, "width": 500, "height": 375, "file_name": "val/03583_Animalia_Chordata_Aves_Cuculiformes_Cuculidae_Coccyzus_erythropthalmus/fc35080c-5ace-4485-a21f-b1447f27efc7.jpg", "license": 1, "rights_holder": "rpayne", "date": "2011-07-15 00:00:00+00:00", "latitude": 44.02901, "longitude": -73.17711, "location_uncertainty": null}
+    ], 
+  "categories": [
+    {"id": 0, "name": "Ptilotula penicillata", "common_name": "White-plumed Honeyeater", "supercategory": "Birds", "kingdom": "Animalia", "phylum": "Chordata", "class": "Aves", "order": "Passeriformes", "family": "Meliphagidae", "genus": "Ptilotula", "specific_epithet": "penicillata", "image_dir_name": "03938_Animalia_Chordata_Aves_Passeriformes_Meliphagidae_Ptilotula_penicillata"}, 
+    {"id": 1, "name": "Coccyzus erythropthalmus", "common_name": "Black-billed Cuckoo", "supercategory": "Birds", "kingdom": "Animalia", "phylum": "Chordata", "class": "Aves", "order": "Cuculiformes", "family": "Cuculidae", "genus": "Coccyzus", "specific_epithet": "erythropthalmus", "image_dir_name": "03583_Animalia_Chordata_Aves_Cuculiformes_Cuculidae_Coccyzus_erythropthalmus"}
+    ]
+}

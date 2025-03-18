@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,17 +23,17 @@ import zipfile
 
 from absl import app
 from absl import flags
-
 import numpy as np
-import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import utils
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.object_detection import kitti
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 
 FLAGS = flags.FLAGS
 NUM_IMAGES = 10
@@ -86,8 +86,16 @@ def _get_object_annotation():
   dimensions = _list_f2s(np.random.uniform(low=0, high=5, size=3))
   location = _list_f2s(np.random.uniform(low=0, high=30, size=3))
   rotation = _list_f2s(np.random.uniform(low=-np.pi, high=np.pi, size=1))
-  return " ".join(obj_type + truncated + occluded + alpha + bbox + dimensions +
-                  location + rotation)
+  return " ".join(
+      obj_type
+      + truncated
+      + occluded
+      + alpha
+      + bbox
+      + dimensions
+      + location
+      + rotation
+  )
 
 
 def _get_dontcare_object_annotation():
@@ -104,8 +112,16 @@ def _get_dontcare_object_annotation():
   dimensions = _list_f2s([-1] * 3)
   location = _list_f2s([-1000] * 3)
   rotation = _list_f2s([-10])
-  return " ".join(obj_type + truncated + occluded + alpha + bbox + dimensions +
-                  location + rotation)
+  return " ".join(
+      obj_type
+      + truncated
+      + occluded
+      + alpha
+      + bbox
+      + dimensions
+      + location
+      + rotation
+  )
 
 
 def _get_annotations():
@@ -123,8 +139,9 @@ def _get_annotations():
 
 def _output_dir():
   """Returns output directory."""
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "kitti")
+  return os.path.join(
+      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "kitti"
+  )
 
 
 def _get_label_file(annotation):
@@ -141,7 +158,8 @@ def _get_mapping_files():
   # Random indices file.
   train_rand = np.random.permutation(range(1, NUM_IMAGES + 1))  # 1-based index
   fobj_rand = tempfile.NamedTemporaryFile(
-      delete=False, mode="wb", suffix=".txt")
+      delete=False, mode="wb", suffix=".txt"
+  )
   fobj_rand.write(",".join([str(x) for x in train_rand]))  # pytype: disable=wrong-arg-types
   fobj_rand.close()
 
@@ -168,8 +186,8 @@ def _create_zip_files():
     for i in range(NUM_IMAGES):
       png = fake_data_utils.get_random_png(HEIGHT, WIDTH)
       image_zip.write(
-          png, os.path.join("training", "image_2",
-                            "image_{:06d}.png".format(i)))
+          png, os.path.join("training", "image_2", "image_{:06d}.png".format(i))
+      )
 
   label_out_path = os.path.join(_output_dir(), "data_object_label_2.zip")
   with zipfile.ZipFile(label_out_path, "w") as label_zip:
@@ -178,14 +196,16 @@ def _create_zip_files():
       label = _get_label_file(annotation)
       label_zip.write(
           label,
-          os.path.join("training", "label_2", "label_{:06d}.txt".format(i)))
+          os.path.join("training", "label_2", "label_{:06d}.txt".format(i)),
+      )
 
   devkit_out_path = os.path.join(_output_dir(), "devkit_object.zip")
   with zipfile.ZipFile(devkit_out_path, "w") as devkit_zip:
     train_rand, train_mapping = _get_mapping_files()
     devkit_zip.write(train_rand, os.path.join("mapping", "train_rand.txt"))
-    devkit_zip.write(train_mapping, os.path.join("mapping",
-                                                 "train_mapping.txt"))
+    devkit_zip.write(
+        train_mapping, os.path.join("mapping", "train_mapping.txt")
+    )
 
 
 def main(argv):

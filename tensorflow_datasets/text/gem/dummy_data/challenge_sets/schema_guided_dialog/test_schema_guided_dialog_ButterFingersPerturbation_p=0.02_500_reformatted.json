@@ -1,0 +1,42 @@
+{
+  "test": [
+    {
+      "dialog_acts": [
+        {
+          "act": 13,
+          "slot": "end_date",
+          "values": []
+        }
+      ],
+      "dialog_id": "25_00069",
+      "gem_id": "schema_guided_dialog-test-4345",
+      "prompt": "L'd like to pick up a Hatchback at Galeao International Airport on March 4th.",
+      "references": [
+        "When will you return it?"
+      ],
+      "target": "When will you return it?",
+      "turn_id": 19,
+      "context": [
+        "What alarms do I have?",
+        "You have one called Get Up for 6 am.",
+        "Okay, cool.",
+        "Do you want a new alarm?",
+        "Not right now. Find me a restaurant there.",
+        "What locations should I look in?",
+        "Find restaurants that sell Fish in Walnut Creek.",
+        "Andy's Sushi is a good restaurant in Walnut Creek.",
+        "Is outdoor seating available?",
+        "There is no outdoor seating.",
+        "Could you tell me their phone number?",
+        "The phone number is 925-378-7924.",
+        "Sounds good.",
+        "Do you need help with something else?",
+        "Find me a car there.",
+        "Would you like insurance? What time will you pick up the car?",
+        "Pick it up at 09:00. Purchase insurance for me.",
+        "When and where will you pick up the rental? Do you like Sedan, Hatchback or anything else?"
+      ],
+      "service": "RentalCars_3"
+    }
+  ]
+}

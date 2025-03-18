@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,21 +22,29 @@ import os
 from absl import app
 from absl import flags
 import numpy as np
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.testing import test_utils
 
 HEIGHT, WIDTH = (96, 96)
 NUMBER_LABELS = 10
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 FLAGS = flags.FLAGS
 
 
 def stl_output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "stl10", "stl10_binary")
+  return os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "stl10",
+      "stl10_binary",
+  )
 
 
 def dump(output_dir, fname, data):
@@ -51,17 +59,25 @@ def _generate_stl10_data():
   output_dir = stl_output_dir()
   test_utils.remake_dir(output_dir)
   for fname in ["train_y.bin", "test_y.bin"]:
-    labels = np.random.randint(
-        NUMBER_LABELS, size=(1), dtype=np.uint8)
+    labels = np.random.randint(NUMBER_LABELS, size=(1), dtype=np.uint8)
     dump(stl_output_dir(), fname, labels)
 
   for fname in ["train_X.bin", "test_X.bin", "unlabeled_X.bin"]:
     images = np.random.randint(
-        256, size=(1, HEIGHT * WIDTH * 3), dtype=np.uint8)
+        256, size=(1, HEIGHT * WIDTH * 3), dtype=np.uint8
+    )
     dump(stl_output_dir(), fname, images)
   label_names = [
-      "airplane", "bird", "car", "cat", "deer", "dog", "horse", "monkey",
-      "ship", "truck"
+      "airplane",
+      "bird",
+      "car",
+      "cat",
+      "deer",
+      "dog",
+      "horse",
+      "monkey",
+      "ship",
+      "truck",
   ]
   with open(os.path.join(output_dir, "class_names.txt"), "w") as f:
     f.write("\n".join(label_names))

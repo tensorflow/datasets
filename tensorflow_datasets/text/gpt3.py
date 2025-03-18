@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,8 @@ import gzip
 import json
 import os
 import uuid
-import tensorflow.compat.v2 as tf
+
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -66,16 +67,16 @@ def _is_gzip_file(task):
 
 
 def _make_builder_config(module):
-  return tfds.core.BuilderConfig(
-      name=module,
-      version=tfds.core.Version("1.0.0"),
-      description=_DESCRIPTION,
-  )
+  return tfds.core.BuilderConfig(name=module)
 
 
 class Gpt3(tfds.core.GeneratorBasedBuilder):
   """GPT-3 Dataset."""
 
+  VERSION = tfds.core.Version("1.1.0")
+  RELEASE_NOTES = {
+      "1.1.0": "New commit for the files.",
+  }
   BUILDER_CONFIGS = [_make_builder_config(module) for module in _MODULES]
 
   def _info(self):
@@ -94,9 +95,7 @@ class Gpt3(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerator."""
 
-    data = tfds.download.Resource(
-        url=_DATA_URL, extract_method=tfds.download.ExtractMethod.ZIP)
-    directory = dl_manager.download_and_extract(data)
+    directory = dl_manager.download_and_extract(_DATA_URL)
 
     return [
         tfds.core.SplitGenerator(
@@ -104,7 +103,8 @@ class Gpt3(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "directory": directory,
                 "task": self.builder_config.name,
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, directory, task):

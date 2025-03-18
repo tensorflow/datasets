@@ -1,0 +1,13 @@
+{
+    "test": [
+        {
+            "document": "It bought the Grade II listed building for \u00a3225,000 in the summer.\nThe Guildhall had been facing uncertainty after the Ministry of Justice announced it was one of 10 law courts to close in Wales.\nThe council said it was still investigating how to make best use of the venue.\nCarmarthenshire council's deputy leader and executive board member for resources, David Jenkins said one of the main reasons for buying it was to \"ensure a secure future.\"\nHe said it was a \"focal point\" not just for Carmarthen, but for the whole county.\n\"It has a tremendous history. Murderers have been tried and condemned to death here.\"\nThey include Ronnie Harries, who was one of the last men to be hanged in Wales. He was sentenced to death in 1953 after murdering his relatives Phoebe and John Harries at their home in Llangynin, Carmarthenshire.\nThe Guildhall was also the setting for Gwynfor Evans' landmark victory as first Plaid Cymru MP in 1966.\nMr Jenkins admitted when the Ministry of Justice announced the building was to be sold, they were hoping \"to pick it up for a \u00a31,\" but ended up paying the district valuer's price tag.\nThe council is now speaking to potential partners, including Carmarthen Town Council and Dyfed-Powys Police, about the building's future.\n\"We've got ideas of bringing some of our own services in here,\" said Cllr Jenkins.\n\"It'll also be good as a museum. We could bring people inside just to see how beautiful it is.\n\"The intention is to make the building self sufficient",
+            "gem_id": "xsum-test-880",
+            "references": [
+                "Carmarthen's Guildhall has a \"self sufficient\" future say council leaders, as the county takes ownership of the historic building."
+            ],
+            "target": "Carmarthen's Guildhall has a \"self sufficient\" future say council leaders, as the county takes ownership of the historic building.",
+            "xsum_id": "38190530"
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 """Tests for WMT translate dataset module."""
 
 import os
-import six
 from tensorflow_datasets import testing
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.translate import wmt
@@ -81,15 +80,14 @@ class TranslateWmtCustomConfigTest(testing.DatasetBuilderTestCase):
 
   def test_gzip_reading(self):
     results = [
-        x for _, x in wmt._parse_parallel_sentences(
-            os.path.join(self.example_dir, "first.cs.gz"),
-            os.path.join(self.example_dir, "second.en.txt"))
+        x
+        for _, x in wmt._parse_parallel_sentences(
+            os.path.join(self.dummy_data, "first.cs.gz"),
+            os.path.join(self.dummy_data, "second.en.txt"),
+        )
     ]
     self.assertEqual(results[1]["cs"], "zmizel")
-    if six.PY3:
-      self.assertEqual(results[0]["cs"], "běžím")
-    else:
-      self.assertTrue(results[0]["cs"] == u"běžím")  # pylint: disable=g-generic-assert
+    self.assertEqual(results[0]["cs"], "běžím")
 
 
 if __name__ == "__main__":

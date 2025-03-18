@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 
 import json
 import os
-import tensorflow.compat.v2 as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -71,21 +72,21 @@ class MovieRationales(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'train.jsonl')
+                'filepath': os.path.join(data_dir, 'train.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'val.jsonl')
+                'filepath': os.path.join(data_dir, 'val.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'data_dir': data_dir,
-                'filepath': os.path.join(data_dir, 'test.jsonl')
+                'filepath': os.path.join(data_dir, 'test.jsonl'),
             },
         ),
     ]
@@ -94,12 +95,12 @@ class MovieRationales(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     reviews_dir = os.path.join(data_dir, 'docs')
 
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line in f:
         row = json.loads(line)
         doc_id = row['annotation_id']
         review_file = os.path.join(reviews_dir, doc_id)
-        with tf.io.gfile.GFile(review_file) as f1:
+        with epath.Path(review_file).open() as f1:
           review_text = f1.read()
 
         evidences = []

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,8 +35,9 @@ def generate_ids(city, num=2):
     Generator for id strings.
   """
   for _ in range(num):
-    yield '{}_{:06d}_{:06d}'.format(city, random.randint(0, 999999),
-                                    random.randint(0, 999999))
+    yield '{}_{:06d}_{:06d}'.format(
+        city, random.randint(0, 999999), random.randint(0, 999999)
+    )
 
 
 def create_zipfile(zip_filepath, splits_with_ids, suffixes, maindir=None):
@@ -63,5 +64,6 @@ def create_zipfile(zip_filepath, splits_with_ids, suffixes, maindir=None):
             img = get_random_png(height=1024, width=2048, channels=3)
           else:
             img = get_random_png(height=1024, width=2048, channels=1)
-          z.write(img, os.path.join(split, city,
-                                    '{}_{}.png'.format(img_id, suffix)))
+          z.write(
+              img, os.path.join(split, city, '{}_{}.png'.format(img_id, suffix))
+          )

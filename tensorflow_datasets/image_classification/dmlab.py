@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,13 @@
 
 """Dmlab dataset."""
 
+from __future__ import annotations
+
 import io
-
 import os
-from absl import logging
-import tensorflow.compat.v2 as tf
 
+from absl import logging
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _URL = "https://storage.googleapis.com/dmlab-vtab/dmlab.tar.gz"
@@ -34,7 +35,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=(r"""
+        description=r"""
         The Dmlab dataset contains frames observed by the agent acting in the
         DeepMind Lab environment, which are annotated by the distance between
         the agent and various objects present in the environment. The goal is to
@@ -42,10 +43,11 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
         from the visual input in 3D environments. The Dmlab dataset consists of
         360x480 color images in 6 classes. The classes are
         {close, far, very far} x {positive reward, negative reward}
-        respectively."""),
+        respectively.""",
         features=tfds.features.FeaturesDict({
-            "image": tfds.features.Image(shape=(360, 480, 3),
-                                         encoding_format="jpeg"),
+            "image": tfds.features.Image(
+                shape=(360, 480, 3), encoding_format="jpeg"
+            ),
             "filename": tfds.features.Text(),
             "label": tfds.features.ClassLabel(num_classes=6),
         }),
@@ -64,7 +66,7 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
                               primaryClass={cs.CV},
                               url = {https://arxiv.org/abs/1910.04867}
                           }""",
-        supervised_keys=("image", "label")
+        supervised_keys=("image", "label"),
     )
 
   def _split_generators(self, dl_manager):
@@ -76,19 +78,22 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 "images_dir_path": path,
                 "split_name": "train",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "images_dir_path": path,
                 "split_name": "validation",
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "images_dir_path": path,
                 "split_name": "test",
-            }),
+            },
+        ),
     ]
 
   def _parse_single_image(self, example_proto):
@@ -112,8 +117,9 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
     return parse_single
 
   def _generate_examples(self, images_dir_path, split_name):
-    path_glob = os.path.join(images_dir_path,
-                             "dmlab-{}.tfrecord*".format(split_name))
+    path_glob = os.path.join(
+        images_dir_path, "dmlab-{}.tfrecord*".format(split_name)
+    )
     files = tf.io.gfile.glob(path_glob)
 
     logging.info("Reading data from %s.", ",".join(files))
@@ -121,7 +127,8 @@ class Dmlab(tfds.core.GeneratorBasedBuilder):
       ds = tf.data.TFRecordDataset(files)
       ds = ds.map(
           self._parse_single_image,
-          num_parallel_calls=tf.data.experimental.AUTOTUNE)
+          num_parallel_calls=tf.data.experimental.AUTOTUNE,
+      )
       iterator = tf.compat.v1.data.make_one_shot_iterator(ds).get_next()
       with tf.compat.v1.Session() as sess:
         sess.run(tf.compat.v1.global_variables_initializer())

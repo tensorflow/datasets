@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="geirhos_conflict_stimuli" />
   <meta itemprop="description" content="Shape/texture conflict stimuli from &quot;ImageNet-trained CNNs are biased towards texture; increasing shape bias improves accuracy and robustness.&quot;&#10;&#10;Note that, although the dataset source contains images with matching shape and&#10;texture and we include them here, they are ignored for most evaluations in the&#10;original paper.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;geirhos_conflict_stimuli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/geirhos_conflict_stimuli-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/geirhos_conflict_stimuli" />
@@ -11,6 +10,7 @@
 </div>
 
 # `geirhos_conflict_stimuli`
+
 
 *   **Description**:
 
@@ -45,22 +45,76 @@ Split    | Examples
 :------- | -------:
 `'test'` | 1,280
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'file_name': Text(shape=(), dtype=tf.string),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'shape_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'shape_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
-    'texture_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=1000)),
-    'texture_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=16),
+    'file_name': Text(shape=(), dtype=string),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'shape_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'shape_label': ClassLabel(shape=(), dtype=int64, num_classes=16),
+    'texture_imagenet_labels': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=1000)),
+    'texture_label': ClassLabel(shape=(), dtype=int64, num_classes=16),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature                 | Class                | Shape           | Dtype  | Description
+:---------------------- | :------------------- | :-------------- | :----- | :----------
+                        | FeaturesDict         |                 |        |
+file_name               | Text                 |                 | string |
+image                   | Image                | (None, None, 3) | uint8  |
+shape_imagenet_labels   | Sequence(ClassLabel) | (None,)         | int64  |
+shape_label             | ClassLabel           |                 | int64  |
+texture_imagenet_labels | Sequence(ClassLabel) | (None,)         | int64  |
+texture_label           | ClassLabel           |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'shape_label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/geirhos_conflict_stimuli-1.0.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/geirhos_conflict_stimuli-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -77,7 +131,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/geirhos_conflict_stimuli-1.0.0.png" alt="Visualization" width="500px">

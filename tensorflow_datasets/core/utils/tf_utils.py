@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,16 +15,22 @@
 
 """TensorFlow utils."""
 
+from __future__ import annotations
+
 import collections
 import contextlib
+from typing import Any, Union
 
 import numpy as np
-import tensorflow.compat.v2 as tf
-
+from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 # Struct containing a graph for the TFGraphRunner
 GraphRun = collections.namedtuple(
-    'GraphRun', 'graph, session, placeholder, output')
+    'GraphRun', 'graph, session, placeholder, output'
+)
 
 # Struct containing the run args, kwargs
 RunArgs = collections.namedtuple('RunArgs', 'fct, input')
@@ -54,7 +60,6 @@ class TFGraphRunner(object):
   Usage:
     graph_runner = TFGraphRunner()
     output = graph_runner.run(tf.sigmoid, np.ones(shape=(5,)))
-
   """
 
   __slots__ = ['_graph_run_cache']
@@ -64,6 +69,12 @@ class TFGraphRunner(object):
     # Cache containing all compiled graph and opened session. Only used in
     # non-eager mode.
     self._graph_run_cache = {}
+
+  def __getstate__(self):
+    return {}
+
+  def __setstate__(self, state):
+    self.__init__(**state)
 
   def run(self, fct, input_):
     """Execute the given TensorFlow function."""
@@ -99,7 +110,8 @@ class TFGraphRunner(object):
       # Create placeholder
       input_ = run_args.input
       placeholder = tf.compat.v1.placeholder(
-          dtype=input_.dtype, shape=input_.shape)
+          dtype=input_.dtype, shape=input_.shape
+      )
       output = run_args.fct(placeholder)
     return GraphRun(
         session=raw_nogpu_session(g),
@@ -118,17 +130,24 @@ class TFGraphRunner(object):
       graph_run.session.close()
 
 
-def is_dtype(value):
-  """Return True is the given value is a TensorFlow dtype."""
-  try:
-    tf.as_dtype(value)
-  except TypeError:
-    return False
-  return True
+def convert_to_shape(shape: Any) -> type_utils.Shape:
+  """Converts a shape to a TFDS shape."""
+  if isinstance(shape, tuple):
+    return shape
+  if isinstance(shape, tf.TensorShape):
+    return tuple(shape.as_list())
+  if isinstance(shape, list):
+    return tuple(shape)
+  raise ValueError(
+      f'Shape of type {type(shape)} with content {shape} is not supported!'
+  )
 
 
-def assert_shape_match(shape1, shape2):
-  """Ensure the shape1 match the pattern given by shape2.
+@py_utils.memoize(maxsize=1000)
+def assert_shape_match(
+    shape1: type_utils.Shape, shape2: type_utils.Shape
+) -> None:
+  """Ensure shape1 matches the pattern given by shape2.
 
   Ex:
     assert_shape_match((64, 64, 3), (None, None, 3))
@@ -137,13 +156,88 @@ def assert_shape_match(shape1, shape2):
     shape1 (tuple): Static shape
     shape2 (tuple): Dynamic shape (can contain None)
   """
-  shape1 = tf.TensorShape(shape1)
-  shape2 = tf.TensorShape(shape2)
-  if shape1.ndims is None or shape2.ndims is None:
-    raise ValueError('Shapes must have known rank. Got %s and %s.' %
-                     (shape1.ndims, shape2.ndims))
+  if shape1 is None or shape2 is None:
+    if shape1 != shape2:
+      raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
+    return
+  rank1 = len(shape1)
+  rank2 = len(shape2)
+  if rank1 != rank2:
+    raise ValueError(f'Shapes {shape1} and {shape2} must have the same rank')
+  for dimension1, dimension2 in zip(shape1, shape2):
+    if dimension1 is None or dimension2 is None:
+      continue
+    if dimension1 != dimension2:
+      raise ValueError(f'Shapes {shape1} and {shape2} are incompatible')
+
+
+def assert_tf_shape_match(
+    shape1: tf.TensorShape, shape2: tf.TensorShape
+) -> None:
+  if shape1.rank is None or shape2.rank is None:
+    raise ValueError(
+        'Shapes must have known rank. Got %s and %s.'
+        % (shape1.rank, shape2.rank)
+    )
   shape1.assert_same_rank(shape2)
   shape1.assert_is_compatible_with(shape2)
+
+
+def shapes_are_compatible(
+    shapes0: type_utils.TreeDict[type_utils.Shape],
+    shapes1: type_utils.TreeDict[type_utils.Shape],
+) -> bool:
+  """Returns True if all shapes are compatible."""
+  # Use `py_utils.map_nested` instead of `tree.map_structure` as shapes
+  # are tuple/list.
+  shapes0 = py_utils.map_nested(tf.TensorShape, shapes0, dict_only=True)
+  shapes1 = py_utils.map_nested(tf.TensorShape, shapes1, dict_only=True)
+  all_values = tree.map_structure(
+      lambda s0, s1: s0.is_compatible_with(s1),
+      shapes0,
+      shapes1,
+  )
+  return all(tf.nest.flatten(all_values))
+
+
+def normalize_shape(
+    shape: Union[type_utils.Shape, tf.TensorShape],
+) -> type_utils.Shape:
+  """Normalize `tf.TensorShape` to tuple of int/None."""
+  if isinstance(shape, tf.TensorShape):
+    return tuple(shape.as_list())  # pytype: disable=attribute-error
+  else:
+    assert isinstance(shape, tuple)
+    return shape
+
+
+def merge_shape(
+    tf_shape: Union[tf.Tensor, np.ndarray], np_shape: type_utils.Shape
+):
+  """Returns the most static version of the shape.
+
+  Static `None` values are replaced by dynamic `tf.Tensor` values.
+
+  Example:
+
+  ```
+  merge_shape(
+      tf_shape=tf.constant([28, 28, 3]),
+      np_shape=(None, None, 3),
+  ) == (tf.Tensor(numpy=28), tf.Tensor(numpy=28), 3)
+  ```
+
+  Args:
+    tf_shape: The tf.Tensor containing the shape (e.g. `tf.shape(x)`)
+    np_shape: The static shape tuple (e.g. `(None, None, 3)`)
+
+  Returns:
+    A tuple like np_shape, but with `None` values replaced by `tf.Tensor` values
+  """
+  assert_shape_match(tf_shape.shape, (len(np_shape),))
+  return tuple(
+      tf_shape[i] if dim is None else dim for i, dim in enumerate(np_shape)
+  )
 
 
 @contextlib.contextmanager

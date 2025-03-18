@@ -1,0 +1,41 @@
+{
+  "citation": "@inproceedings{kahn2018self,\n  title={Self-supervised deep reinforcement learning with generalized computation graphs for robot navigation},\n  author={Kahn, Gregory and Villaflor, Adam and Ding, Bosen and Abbeel, Pieter and Levine, Sergey},\n  booktitle={2018 IEEE international conference on robotics and automation (ICRA)},\n  pages={5129--5136},\n  year={2018},\n  organization={IEEE}\n}",
+  "description": "hallway navigation",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://arxiv.org/abs/1709.10489"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "berkeley_gnm_cory_hall",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1490024260",
+      "shardLengths": [
+        "459",
+        "438",
+        "429",
+        "467",
+        "451",
+        "441",
+        "443",
+        "465",
+        "431",
+        "452",
+        "472",
+        "437",
+        "485",
+        "494",
+        "482",
+        "485"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

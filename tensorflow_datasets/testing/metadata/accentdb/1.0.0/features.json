@@ -1,0 +1,29 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "audio": {
+            "type": "tensorflow_datasets.core.features.audio_feature.Audio",
+            "content": {
+                "file_format": "wav",
+                "shape": [
+                    null
+                ],
+                "dtype": "int64",
+                "sample_rate": 44100
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.class_label_feature.ClassLabel",
+            "content": {
+                "num_classes": 9
+            }
+        },
+        "speaker_id": {
+            "type": "tensorflow_datasets.core.features.feature.Tensor",
+            "content": {
+                "shape": [],
+                "dtype": "string"
+            }
+        }
+    }
+}

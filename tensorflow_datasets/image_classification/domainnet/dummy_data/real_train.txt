@@ -1,0 +1,2 @@
+real/yoga/dummy_01.jpg 0
+real/yoga/dummy_02.jpg 0

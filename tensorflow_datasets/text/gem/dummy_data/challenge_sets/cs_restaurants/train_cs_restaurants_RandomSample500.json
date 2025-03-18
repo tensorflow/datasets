@@ -1,0 +1,12 @@
+{
+    "train": [
+        {
+            "dialog_act": "?request(near)",
+            "dialog_act_delexicalized": "?request(near)",
+            "gem_id": "cs_restaurants-train-2497",
+            "references": [],
+            "target": "Pobl\u00ed\u017e \u010deho by se m\u011bla restaurace nach\u00e1zet ?",
+            "target_delexicalized": "Pobl\u00ed\u017e \u010deho by se m\u011bla restaurace nach\u00e1zet ?"
+        }
+    ]
+}

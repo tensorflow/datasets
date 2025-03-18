@@ -1,0 +1,17 @@
+{
+    "test": [
+        {
+            "concept_set_id": 1428,
+            "concepts": [
+                "ice",
+                "wall",
+                "use",
+                "climb",
+                "pick"
+            ],
+            "gem_id": "common_gen-test-1428",
+            "references": [],
+            "target": ""
+        }
+    ]
+}

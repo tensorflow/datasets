@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import collections
 
-import tensorflow.compat.v2 as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -40,54 +40,46 @@ _DATA_URL = "https://github.com/facebookresearch/flores/raw/master/data/wikipedi
 # Tuple that describes a single pair of files with matching translations.
 # language_to_file is the map from language (2 letter string: example 'en')
 # to the file path in the extracted directory.
-TranslateData = collections.namedtuple("TranslateData",
-                                       ["url", "language_to_file"])
+TranslateData = collections.namedtuple(
+    "TranslateData", ["url", "language_to_file"]
+)
 
 
 class FloresConfig(tfds.core.BuilderConfig):
   """BuilderConfig for FLoRes."""
 
-  def __init__(self,
-               *,
-               text_encoder_config=None,
-               language_pair=(None, None),
-               **kwargs):
+  def __init__(self, *, language_pair=(None, None), **kwargs):
     """BuilderConfig for FLoRes.
 
     Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        features feature.
       language_pair: pair of languages that will be used for translation. Should
         contain 2-letter coded strings. First will be used at source and second
         as target in supervised mode. For example: ("se", "en").
       **kwargs: keyword arguments forwarded to super.
     """
-    encoder_name = (
-        text_encoder_config.name if text_encoder_config else "plain_text")
-    name = "%s%s_%s" % (language_pair[0], language_pair[1], encoder_name)
+    name = f"{language_pair[0]}{language_pair[1]}"
 
     description = (
-        "Translation dataset from %s to %s, uses encoder %s.") % (
-            language_pair[0], language_pair[1], encoder_name)
+        f"Translation dataset from {language_pair[0]} to {language_pair[1]}."
+    )
     super(FloresConfig, self).__init__(
         name=name,
         description=description,
-        version=tfds.core.Version(
-            "1.1.0",
-            "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
+        version=tfds.core.Version("1.2.0"),
+        **kwargs,
+    )
 
     # Validate language pair.
     assert "en" in language_pair, (
         "Config language pair must contain `en`, got: %s",
-        language_pair)
+        language_pair,
+    )
     source, target = language_pair
     non_en = source if target == "en" else target
     assert non_en in ["ne", "si"], (
-        "Invalid non-en language in pair: %s", non_en)
+        "Invalid non-en language in pair: %s",
+        non_en,
+    )
 
     self.language_pair = language_pair
 
@@ -110,16 +102,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,
-            encoder_config=self.builder_config.text_encoder_config),
+            languages=self.builder_config.language_pair
+        ),
         supervised_keys=(source, target),
         homepage="https://github.com/facebookresearch/flores/",
         citation=_CITATION,
     )
-
-  def _vocab_text_gen(self, files, language):
-    for _, ex in self._generate_examples(**files):
-      yield ex[language]
 
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
@@ -128,46 +116,47 @@ class Flores(tfds.core.GeneratorBasedBuilder):
     non_en = source if target == "en" else target
     path_tmpl = (
         "{dl_dir}/wikipedia_en_ne_si_test_sets/wikipedia.{split}.{non_en}-en."
-        "{lang}")
+        "{lang}"
+    )
 
     files = {}
     for split in ("dev", "devtest"):
       files[split] = {
           "source_file": path_tmpl.format(
-              dl_dir=dl_dir, split=split, non_en=non_en, lang=source),
+              dl_dir=dl_dir, split=split, non_en=non_en, lang=source
+          ),
           "target_file": path_tmpl.format(
-              dl_dir=dl_dir, split=split, non_en=non_en, lang=target),
+              dl_dir=dl_dir, split=split, non_en=non_en, lang=target
+          ),
       }
-
-    # Generate vocabulary from dev data if text encoder configured.
-    for language in self.builder_config.language_pair:
-      self.info.features[source].maybe_build_from_corpus(
-          self._vocab_text_gen(files["dev"], language))
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs=files["dev"]),
+            name=tfds.Split.VALIDATION, gen_kwargs=files["dev"]
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=files["devtest"]),
+            name=tfds.Split.TEST, gen_kwargs=files["devtest"]
+        ),
     ]
 
   def _generate_examples(self, source_file, target_file):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(source_file) as f:
+    with epath.Path(source_file).open() as f:
       source_sentences = f.read().split("\n")
-    with tf.io.gfile.GFile(target_file) as f:
+    with epath.Path(target_file).open() as f:
       target_sentences = f.read().split("\n")
 
     assert len(target_sentences) == len(
-        source_sentences), "Sizes do not match: %d vs %d for %s vs %s." % (
-            len(source_sentences), len(target_sentences), source_file,
-            target_file)
+        source_sentences
+    ), "Sizes do not match: %d vs %d for %s vs %s." % (
+        len(source_sentences),
+        len(target_sentences),
+        source_file,
+        target_file,
+    )
 
     source, target = self.builder_config.language_pair
-    for idx, (l1, l2) in enumerate(
-        zip(source_sentences, target_sentences)):
+    for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.
       if all(result.values()):

@@ -1,0 +1,44 @@
+{
+  "citation": "@inproceedings{chapelle2011yahoo,\n  title={Yahoo! learning to rank challenge overview},\n  author={Chapelle, Olivier and Chang, Yi},\n  booktitle={Proceedings of the learning to rank challenge},\n  pages={1--24},\n  year={2011},\n  organization={PMLR}\n}",
+  "configName": "set2",
+  "description": "The Yahoo Learning to Rank Challenge dataset (also called \"C14\") is a\nLearning-to-Rank dataset released by Yahoo. The dataset consists of\nquery-document pairs represented as feature vectors and corresponding relevance\njudgment labels.\n\nThe dataset contains two versions:\n\n * `set1`: Containing 709,877 query-document pairs.\n * `set2`: Containing 172,870 query-document pairs.\n\nYou can specify whether to use the `set1` or `set2` version of the dataset as\nfollows:\n\n```python\nds = tfds.load(\"yahoo_ltrc/set1\")\nds = tfds.load(\"yahoo_ltrc/set2\")\n```\n\nIf only `yahoo_ltrc` is specified, the `yahoo_ltrc/set1` option is selected by\ndefault:\n\n```python\n# This is the same as `tfds.load(\"yahoo_ltrc/set1\")`\nds = tfds.load(\"yahoo_ltrc\")\n```",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://research.yahoo.com/datasets"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.ranking.yahoo_ltrc.yahoo_ltrc",
+  "name": "yahoo_ltrc",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.1.0": "Add query and document identifiers."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "40952765",
+      "shardLengths": [
+        "1266"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "vali",
+      "numBytes": "41463114",
+      "shardLengths": [
+        "1266"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "121974469",
+      "shardLengths": [
+        "3798"
+      ]
+    }
+  ],
+  "version": "1.1.0"
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,16 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Base visualizer class.
-"""
+"""Base visualizer class."""
+
+from __future__ import annotations
 
 import abc
 from typing import Any
 
-import six
-import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import dataset_info
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def extract_keys(feature_dict, feature_cls):
@@ -38,8 +37,7 @@ def extract_keys(feature_dict, feature_cls):
   return [k for k, f in feature_dict.items() if isinstance(f, feature_cls)]
 
 
-@six.add_metaclass(abc.ABCMeta)
-class Visualizer(object):
+class Visualizer(object, metaclass=abc.ABCMeta):
   """Visualizer."""
 
   @abc.abstractmethod
@@ -58,14 +56,14 @@ class Visualizer(object):
       self,
       ds: tf.data.Dataset,
       ds_info: dataset_info.DatasetInfo,
-      **options_kwargs: Any
+      **options_kwargs: Any,
   ):
     """Display the dataset.
 
     Args:
       ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-        should not be batched. Examples will be consumed in order until
-        (rows * cols) are read or the dataset is consumed.
+        should not be batched. Examples will be consumed in order until (rows *
+        cols) are read or the dataset is consumed.
       ds_info: `tfds.core.DatasetInfo` object of the dataset to visualize.
       **options_kwargs: Additional display options, specific to the dataset type
         to visualize. See the `tfds.visualization` for a list of available

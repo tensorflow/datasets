@@ -1,0 +1,17 @@
+<benchmark>
+  <entries>
+    <entry category="Airport" eid="Id1" size="2">
+      <originaltripleset>
+        <otriple>Aarhus | leaderName | Jacob_Bundsgaard</otriple>
+        <otriple>Aarhus_Airport | city | Aarhus</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Aarhus | leaderName | Jacob_Bundsgaard</mtriple>
+        <mtriple>Aarhus_Airport | cityServed | Aarhus</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Aarhus airport serves the city of Aarhus who's leader is Jacob Bundsgaard.</lex>
+      <lex comment="good" lid="Id2">Aarhus airport serves the city of Aarhus where Jacob Bundsgaard is a leader.</lex>
+      <lex comment="good" lid="Id3">Aarhus airport serves the city of Aarhus, it's leader is Jacob Bundsgaard.</lex>
+    </entry>
+  </entries>
+</benchmark>

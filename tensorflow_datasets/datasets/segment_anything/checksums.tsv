@@ -1,0 +1,3 @@
+# The links to the data are downloaded manually. The links are signed URLs that
+# expire, so checksums do not make sense for this dataset. Please, use
+# --noforce_checksums_validation when preparing the dataset with `tfds build`.

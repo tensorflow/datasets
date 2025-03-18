@@ -1,0 +1,132 @@
+{
+   "dev":{
+      "-7013890438520559398":{
+         "ambiguous_question":"Who has the highest goals in world football?",
+         "qa_pairs":[
+            {
+               "question":"Who has the highest goals in men's world international football?",
+               "short_answers":[
+                  "Daei",
+                  "Ali Daei"
+               ],
+               "context":"No context provided",
+               "wikipage":null
+            },
+            {
+               "question":"Who has the highest goals in women's world international football?",
+               "short_answers":[
+                  "Sinclair",
+                  "Christine Sinclair"
+               ],
+               "context":"The first player to reach 100 international goals was Italian Elisabetta Vignotto.",
+               "wikipage":"List of women's footballers with 100 or more international goals ..."
+            }
+         ],
+         "wikipages":{
+            "0":{
+               "title":"International Federation of Football History & Statistics",
+               "url":"https://en.wikipedia.org/wiki/International%20Federation%20of%20Football%20History%20%26%20Statistics"
+            },
+            "1":{
+               "title":"List of footballers with 500 or more goals",
+               "url":"https://en.wikipedia.org/wiki/List%20of%20footballers%20with%20500%20or%20more%20goals"
+            }
+         },
+         "annotations":[
+            {
+               "long_answer":"The players with the highest all-time goals and highest men's and women's international football goals differ.",
+               "knowledge":[
+                  {
+                     "content":"Sinclair is the world's all-time leader for international goals scored for men or women with 187 goals, and is one of the most-capped active international footballer with 300 caps.",
+                     "wikipage":"Christine Sinclair"
+                  }
+               ]
+            }
+         ]
+      }
+   },
+   "train":{
+      "-5742327688291876861":{
+         "ambiguous_question":"When does the new bunk'd come out?",
+         "qa_pairs":[
+            {
+               "question":"When does episode 42 of bunk'd come out?",
+               "short_answers":[
+                  "May 24, 2017"
+               ],
+               "context":"No context provided",
+               "wikipage":null
+            },
+            {
+               "question":"When does episode 40 of bunk'd come out?",
+               "short_answers":[
+                  "April 21, 2017"
+               ],
+               "context":"No context provided",
+               "wikipage":null
+            }
+         ],
+         "wikipages":{
+            "0":{
+               "title":"International Federation of Football History & Statistics",
+               "url":"https://en.wikipedia.org/wiki/International%20Federation%20of%20Football%20History%20%26%20Statistics"
+            },
+            "1":{
+               "title":"List of FIFA World Cup records and statistics",
+               "url":"https://en.wikipedia.org/wiki/List%20of%20FIFA%20World%20Cup%20records%20and%20statistics"
+            }
+         },
+         "annotations":[
+            {
+               "long_answer":"The new bunk'd episode 41 comes out on April 21, 2017, episode 42 comes out on April 28, 2017 and episode 42 is due to come out on May 24, 2017. ",
+               "knowledge":[
+                  {
+                     "content":null,
+                     "wikipage":"List of Bunk'd episodes"
+                  }
+               ]
+            }
+         ]
+      },
+      "-3582047784487750233":{
+         "ambiguous_question":"Who won the 2016 ncaa football national championship?",
+         "qa_pairs":[
+            {
+               "question":"Who won the 2016 season's ncaa football national championship?",
+               "short_answers":[
+                  "Clemson Tigers",
+                  "2016 Clemson Tigers football team"
+               ],
+               "context":"The 13\u20131 Alabama Crimson Tide won the game, holding off the undefeated Clemson Tigers 45\u201340 in the fourth quarter. Accompanied by a talented receiving corps, Clemson's Heisman Finalist quarterback Deshaun Watson had a historic performance, setting the record for most total yards in national championship game history, with 478 yards (405 passing / 73 rushing) against the nation's third-ranked defense in Alabama, breaking the record previously set by Vince Young in the 2006 Rose Bowl. Following the game, the AP Poll also named Alabama as its top team of the season, giving Alabama their fourth title in seven seasons. Both Clemson and Alabama finished the season 14\u20131.",
+               "wikipage":"2016 College Football Playoff National Championship"
+            },
+            {
+               "question":"Who won the ncaa football national championship played in 2016?",
+               "short_answers":[
+                  "2015 Alabama Crimson Tide football team",
+                  "Alabama Crimson Tide"
+               ],
+               "context":"The game was played between the winners of two pre-designated bowl games played on December 31, 2016: the Clemson Tigers, who defeated the Ohio State Buckeyes in the Fiesta Bowl, and the Alabama Crimson Tide, who defeated the Washington Huskies in the Peach Bowl. Having met in the previous year's championship game, the resulting title game between Clemson and Alabama became college football's first rematch between #1 and #2 in national championship game history.",
+               "wikipage":"2017 College Football Playoff National Championship"
+            }
+         ],
+         "wikipages":{
+            "0":{
+               "title":"2015 College Football Playoff National Championship",
+               "url":"https://en.wikipedia.org/wiki/2015%20College%20Football%20Playoff%20National%20Championship"
+            }
+         },
+         "annotations":[
+            {
+               "long_answer":"The 2015 - 2016 season's ncaa national football championship game was played between the Clemson Tigers and the Alabama Crimson Tide on January 11, 2016. The Alabama Crimson Tide won the game by holding off the undefeated Clemson Tigers 45\u201340 in the fourth quarter.",
+               "knowledge":[
+                  {
+                     "content":"The 13\u20131 Alabama Crimson Tide won the game, holding off the undefeated Clemson Tigers 45\u201340 in the fourth quarter. ",
+                     "wikipage":"2016 College Football Playoff National Championship"
+                  }
+               ]
+            }
+         ]
+      }
+   }
+}

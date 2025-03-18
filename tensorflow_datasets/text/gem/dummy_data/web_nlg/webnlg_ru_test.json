@@ -1,0 +1,20 @@
+{
+  "language": "ru",
+  "values": [
+      {
+          "input": [
+              "Baked_Alaska | course | Dessert",
+              "Dessert | dishVariation | Cookie",
+              "United_States | ethnicGroup | African_Americans",
+              "Baked_Alaska | country | United_States"
+          ],
+          "target": [
+              "“Запеченная Аляска” и печенье – десерты. \"Запеченная Аляска\" происходит из Соединённых Штатов Америки, в которых этническая группа - Афроамериканцы.",
+              "\"Запеченная Аляска\" и печенье - разновидность десерта и происходит из Соединённых Штатов Америки. Афроамериканцы - одна из этнических групп этой страны."
+          ],
+          "category": "Food",
+          "id": 0,
+          "webnlg-id": "test/Food/4/Id1"
+      }
+  ]
+}

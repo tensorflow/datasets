@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,11 @@
 
 """Iris dataset."""
 
-import tensorflow.compat.v2 as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-IRIS_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"
+IRIS_URL = "https://archive.ics.uci.edu/static/public/53/iris.zip"
 
 _CITATION = """\
 @misc{Dua:2019 ,
@@ -42,9 +43,13 @@ linearly separable from each other.
 
 class Iris(tfds.core.GeneratorBasedBuilder):
   """Iris flower dataset."""
+
   NUM_CLASSES = 3
-  VERSION = tfds.core.Version(
-      "2.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("2.1.0")
+  RELEASE_NOTES = {
+      "2.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+      "2.1.0": "Updated broken link",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -52,12 +57,11 @@ class Iris(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         # tfds.features.FeatureConnectors
         features=tfds.features.FeaturesDict({
-            "features":
-                tfds.features.Tensor(shape=(4,), dtype=tf.float32),
+            "features": tfds.features.Tensor(shape=(4,), dtype=np.float32),
             # Here, labels can be one of 3 classes
-            "label":
-                tfds.features.ClassLabel(
-                    names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]),
+            "label": tfds.features.ClassLabel(
+                names=["Iris-setosa", "Iris-versicolor", "Iris-virginica"]
+            ),
         }),
         supervised_keys=("features", "label"),
         homepage="https://archive.ics.uci.edu/ml/datasets/iris",
@@ -65,15 +69,16 @@ class Iris(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    iris_file = dl_manager.download(IRIS_URL)
+    iris_folder = dl_manager.download_and_extract(IRIS_URL)
+    iris_file = iris_folder / "iris.data"
     all_lines = tf.io.gfile.GFile(iris_file).read().splitlines()
     records = [l for l in all_lines if l]  # get rid of empty lines
 
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"records": records}),
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}
+        ),
     ]
 
   def _generate_examples(self, records):

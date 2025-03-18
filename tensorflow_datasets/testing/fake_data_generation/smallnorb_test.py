@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import os
 from absl.testing import absltest
 from absl.testing import parameterized
 import numpy as np
-from tensorflow_datasets.image_classification import smallnorb as smallnorb_tfds
+from tensorflow_datasets.datasets.smallnorb import smallnorb_dataset_builder as smallnorb_tfds
 from tensorflow_datasets.testing import test_utils
 from tensorflow_datasets.testing.fake_data_generation import smallnorb as smallnorb_builder
 
@@ -27,7 +27,8 @@ class SmallnorbTest(parameterized.TestCase):
 
   @parameterized.named_parameters(
       ("uint8", np.array([[1, 2, 3], [1, 2, 3]], dtype=np.dtype("|u1"))),
-      ("int32", np.array([-1, 0, 1], dtype=np.dtype("<i4"))),)
+      ("int32", np.array([-1, 0, 1], dtype=np.dtype("<i4"))),
+  )
   def test_write_and_read(self, matrix):
     with test_utils.tmp_dir() as directory:
       path = os.path.join(directory, "matrix.mat")

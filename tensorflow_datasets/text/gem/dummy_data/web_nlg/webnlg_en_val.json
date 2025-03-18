@@ -1,0 +1,16 @@
+{
+  "language": "en",
+  "values": [
+      {
+          "input": [
+              "Aarhus_Airport | cityServed | \"Aarhus, Denmark\""
+          ],
+          "target": [
+              "The Aarhus is the airport of Aarhus, Denmark."
+          ],
+          "category": "Airport",
+          "id": 0,
+          "webnlg-id": "train/Airport/1/Id1"
+      }
+    ]
+  }

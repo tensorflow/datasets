@@ -1,0 +1,20 @@
+<benchmark>
+  <entries>
+    <entry category="Astronaut" eid="Id1" size="2">
+      <originaltripleset>
+        <otriple>Alan_Bean | birthDate | "1932-03-15"</otriple>
+        <otriple>Alan_Bean | almaMater | "UT Austin, B.S. 1955"</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Alan_Bean | birthDate | "1932-03-15"</mtriple>
+        <mtriple>Alan_Bean | almaMater | "UT Austin, B.S. 1955"</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Alan Bean was born on March 15, 1932 and received a Bachelor of Science degree at the University of Texas at Austin in 1955.</lex>
+      <lex comment="good" lid="Id2">Alan Bean was born on the 15th of March 1932 and graduated from UT Austin in 1955 with a B.S.</lex>
+      <lex comment="good" lid="Id3">Alan Bean was born on the 15th of March 1932 and his Alma Mater is UT Austin, B.S. 1955.</lex>
+      <lex comment="good" lid="Id4">Alan Bean (born 1932-03-15)'s alma mater was UT Austin B.S. 1955.</lex>
+      <lex comment="good" lid="Id5">Alan Bean (born on 1932-03-15) graduated from UT Austin in 1955.</lex>
+      <lex comment="good" lid="Id6">Alan Bean was born on March 15, 1932 and his alma mater was UT Austin BS, in 1955.</lex>
+    </entry>
+  </entries>
+</benchmark>

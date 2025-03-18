@@ -1,0 +1,14 @@
+content.data-type.categorical # Contains categorical data.
+content.data-type.dialogue # Contains dialogue data.
+content.data-type.text # Contains text data.
+content.language.en # Contains text in language English / en.
+content.monolingual # Contains text in 1 natural language.
+ml.fairness.age # Contains data related to age. Example: 0-13, 14-18, 19-30, 31-65,65+
+ml.fairness.gender # Contains data related to roles, behaviours, activities, attributes and opportunities that any society considers appropriate for girls and boys, women and men, or other non-binary categories. (examples: transgender, non-binary, woman, man, etc.)
+ml.fairness.race-national-ethnic-origin # Contains data related to (a) the state of belonging to a social group that has a common national or cultural tradition or (b) a grouping of humans based on shared physical or social qualities into categories generally viewed as distinct by society. Examples: Chinese, indian, black, African American, hispanic
+ml.task.language-modeling # Relates to Language Modeling, a machine learning task.
+ml.task.language-modelling # Relates to Language Modelling, a machine learning task.
+ml.task.natural-language-inference # Relates to Natural Language Inference, a machine learning task.
+ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
+ml.task.text-classification # Relates to Text Classification, a machine learning task.
+ml.task.text-classification-toxicity-prediction # Relates to Text Classification Toxicity Prediction, a machine learning task.

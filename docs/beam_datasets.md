@@ -7,19 +7,7 @@ generating data across many machines by using
 This doc has two sections:
 
 *   For user who want to generate an existing Beam dataset
-*   For developper who want to create a new Beam dataset
-
-Table of content:
-
-*   [Generating a Beam dataset](#generating-a-beam-dataset)
-    *   [On Google Cloud Dataflow](#on-google-cloud-dataflow)
-    *   [Locally](#locally)
-    *   [Within a custom script](#with-a-custom-script)
-*   [Implementing a Beam dataset](#implementing-a-beam-dataset)
-    *   [Prerequisites](#prerequisites)
-    *   [Instructions](#instructions)
-    *   [Example](#example)
-    *   [Run your pipeline](#run-your-pipeline)
+*   For developers who want to create a new Beam dataset
 
 ## Generating a Beam dataset
 
@@ -27,11 +15,11 @@ Below are different examples of generating a Beam dataset, both on the cloud or
 locally.
 
 **Warning**: When generating the dataset with the
-`tensorflow_datasets.scripts.download_and_prepare` script, make sure to specify
-the dataset config you want to generate or it will default to generate all
-existing configs. For example, for
-[wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use
-`--dataset=wikipedia/20200301.en` instead of `--dataset=wikipedia`.
+[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset),
+make sure to specify the dataset config you want to generate or it will default
+to generate all existing configs. For example, for
+[wikipedia](https://www.tensorflow.org/datasets/catalog/wikipedia), use `tfds
+build wikipedia/20200301.en` instead of `tfds build wikipedia`.
 
 ### On Google Cloud Dataflow
 
@@ -40,7 +28,8 @@ To run the pipeline using
 of distributed computation, first follow the
 [Quickstart instructions](https://cloud.google.com/dataflow/docs/quickstarts/quickstart-python).
 
-Once your environment is set up, you can run the `download_and_prepare` script
+Once your environment is set up, you can run the
+[`tfds build` CLI](https://www.tensorflow.org/datasets/cli#tfds_build_download_and_prepare_a_dataset)
 using a data directory on [GCS](https://cloud.google.com/storage/) and
 specifying the
 [required options](https://cloud.google.com/dataflow/docs/guides/specifying-exec-params#configuring-pipelineoptions-for-execution-on-the-cloud-dataflow-service)
@@ -64,18 +53,20 @@ workers:
 echo "tensorflow_datasets[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
-If you're using `tfds-nightly`, make sure to to echo from `tfds-nightly` in case
+If you're using `tfds-nightly`, make sure to echo from `tfds-nightly` in case
 the dataset has been updated since the last release.
 
 ```sh
 echo "tfds-nightly[$DATASET_NAME]" > /tmp/beam_requirements.txt
 ```
 
+If you're using additional dependencies not included in TFDS library follow
+[the instructions for managing Python pipeline dependencies](https://beam.apache.org/documentation/sdks/python-pipeline-dependencies/#local-or-nonpypi).
+
 Finally, you can launch the job using the command below:
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=$DATASET_NAME/$DATASET_CONFIG \
+tfds build $DATASET_NAME/$DATASET_CONFIG \
   --data_dir=$GCS_BUCKET/tensorflow_datasets \
   --beam_pipeline_options=\
 "runner=DataflowRunner,project=$GCP_PROJECT,job_name=$DATASET_NAME-gen,"\
@@ -85,41 +76,68 @@ python -m tensorflow_datasets.scripts.download_and_prepare \
 
 ### Locally
 
-To run your script locally using the default Apache Beam runner, the command is
-the same as for other datasets:
+To run your script locally using the
+[default Apache Beam runner](https://beam.apache.org/documentation/runners/direct/)
+(it must fit all data in memory), the command is the same as for other datasets:
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --datasets=my_new_dataset
+tfds build my_dataset
 ```
 
-**Warning**: Beam datasets can be **huge** (TeraBytes) and take a significant
-amount of ressources to be generated (can take weeks on a local computer). It is
-recomended to generate the datasets using a distributed environement. Have a
-look at the [Apache Beam Documentation](https://beam.apache.org/) for a list of
-the supported runtimes.
+**Warning**: Beam datasets can be **huge** (terabytes or larger) and take a
+significant amount of resources to be generated (can take weeks on a local
+computer). It is recommended to generate the datasets using a distributed
+environment. Have a look at the
+[Apache Beam Documentation](https://beam.apache.org/) for a list of supported
+runtimes.
+
+### With Apache Flink
+
+To run the pipeline using [Apache Flink](https://flink.apache.org/) you can read
+the
+[official documentation](https://beam.apache.org/documentation/runners/flink).
+Make sure your Beam is compliant with
+[Flink Version Compatibility](https://beam.apache.org/documentation/runners/flink/#flink-version-compatibility)
+
+To make it easier to launch the script, it's helpful to define the following
+variables using the actual values for your Flink setup and the dataset you want
+to generate:
+
+```sh
+DATASET_NAME=<dataset-name>
+DATASET_CONFIG=<dataset-config>
+FLINK_CONFIG_DIR=<flink-config-directory>
+FLINK_VERSION=<flink-version>
+```
+
+To run on an embedded Flink cluster, you can launch the job using the command
+below:
+
+```sh
+tfds build $DATASET_NAME/$DATASET_CONFIG \
+  --beam_pipeline_options=\
+"runner=FlinkRunner,flink_version=$FLINK_VERSION,flink_conf_dir=$FLINK_CONFIG_DIR"
+```
 
 ### With a custom script
 
-To generate the dataset on Beam, the API is the same as for other datasets, but
-you have to pass the Beam options or runner to the `DownloadConfig`.
+To generate the dataset on Beam, the API is the same as for other datasets. You
+can customize the
+[`beam.Pipeline`](https://beam.apache.org/documentation/programming-guide/#creating-a-pipeline)
+using the `beam_options` (and `beam_runner`) arguments of `DownloadConfig`.
 
-```py
+```python
 # If you are running on Dataflow, Spark,..., you may have to set-up runtime
 # flags. Otherwise, you can leave flags empty [].
 flags = ['--runner=DataflowRunner', '--project=<project-name>', ...]
 
-# To use Beam, you have to set at least one of `beam_options` or `beam_runner`
+# `beam_options` (and `beam_runner`) will be forwarded to `beam.Pipeline`
 dl_config = tfds.download.DownloadConfig(
     beam_options=beam.options.pipeline_options.PipelineOptions(flags=flags)
 )
-
 data_dir = 'gs://my-gcs-bucket/tensorflow_datasets'
 builder = tfds.builder('wikipedia/20190301.en', data_dir=data_dir)
-builder.download_and_prepare(
-    download_dir=FLAGS.download_dir,
-    download_config=dl_config,
-)
+builder.download_and_prepare(download_config=dl_config)
 ```
 
 ## Implementing a Beam dataset
@@ -130,7 +148,7 @@ In order to write Apache Beam datasets, you should be familiar with the
 following concepts:
 
 *   Be familiar with the
-    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md)
+    [`tfds` dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md)
     as most of the content still applies for Beam datasets.
 *   Get an introduction to Apache Beam with the
     [Beam programming guide](https://beam.apache.org/documentation/programming-guide/).
@@ -142,17 +160,29 @@ following concepts:
 ### Instructions
 
 If you are familiar with the
-[dataset creation guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md),
-adding a Beam dataset only requires a few modifications:
+[dataset creation guide](https://github.com/tensorflow/datasets/blob/master/docs/add_dataset.md),
+adding a Beam dataset only requires to modify the `_generate_examples` function.
+The function should returns a beam object, rather than a generator:
 
-*   Your `DatasetBuilder` will inherit from `tfds.core.BeamBasedBuilder` instead
-    of `tfds.core.GeneratorBasedBuilder`.
-*   Beam datasets should implement the abstract method `_build_pcollection(self,
-    **kwargs)` instead of the method `_generate_examples(self, **kwargs)`.
-    `_build_pcollection` should return a `beam.PCollection` with the examples
-    associated with the split.
-*   Writing a unit test for your Beam dataset is the same as with other
-    datasets.
+Non-beam dataset:
+
+```python
+def _generate_examples(self, path):
+  for f in path.iterdir():
+    yield _process_example(f)
+```
+
+Beam dataset:
+
+```python
+def _generate_examples(self, path):
+  return (
+      beam.Create(path.iterdir())
+      | beam.Map(_process_example)
+  )
+```
+
+All the rest can be 100% identical, including tests.
 
 Some additional considerations:
 
@@ -161,28 +191,29 @@ Some additional considerations:
     without having to install Beam.
 *   Be careful with Python closures. When running the pipeline, the `beam.Map`
     and `beam.DoFn` functions are serialized using `pickle` and sent to all
-    workers. This can create bugs; for instance, if you are using a mutable
-    object in your functions which has been declared outside of the function,
-    you may encounter `pickle` errors or unexpected behavior. The fix is
-    typically to avoid mutating closed-over objects.
-*   Using methods on `DatasetBuilder` in the Beam pipeline is fine. However,
-    the way the class is serialized during pickle, changes done to features
-    during creation will be ignored at best.
+    workers. Do not use mutable objects inside a `beam.PTransform` if the state
+    has to be shared across workers.
+*   Due to the way `tfds.core.DatasetBuilder` is serialized with pickle,
+    mutating `tfds.core.DatasetBuilder` during data creation will be ignored on
+    the workers (e.g. it's not possible to set `self.info.metadata['offset'] =
+    123` in `_split_generators` and access it from the workers like
+    `beam.Map(lambda x: x + self.info.metadata['offset'])`)
+*   If you need to share some pipeline steps between the splits, you can add add
+    an extra `pipeline: beam.Pipeline` kwarg to `_split_generator` and control
+    the full generation pipeline. See `_generate_examples` documentation of
+    `tfds.core.GeneratorBasedBuilder`.
 
 ### Example
 
-Here is an example of a Beam dataset. For a more complicated real example, have
-a look at the
-[`Wikipedia` dataset](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/wikipedia.py).
+Here is an example of a Beam dataset.
 
 ```python
-class DummyBeamDataset(tfds.core.BeamBasedBuilder):
+class DummyBeamDataset(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
   def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
+    return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(16, 16, 1)),
             'label': tfds.features.ClassLabel(names=['dog', 'cat']),
@@ -191,18 +222,12 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     ...
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=dict(file_dir='path/to/train_data/'),
-        ),
-        splits_lib.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs=dict(file_dir='path/to/test_data/'),
-        ),
-    ]
+    return {
+        'train': self._generate_examples(file_dir='path/to/train_data/'),
+        'test': self._generate_examples(file_dir='path/to/test_data/'),
+    }
 
-  def _build_pcollection(self, pipeline, file_dir):
+  def _generate_examples(self, file_dir: str):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
@@ -214,8 +239,7 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
       }
 
     return (
-        pipeline
-        | beam.Create(tf.io.gfile.listdir(file_dir))
+        beam.Create(tf.io.gfile.listdir(file_dir))
         | beam.Map(_process_example)
     )
 
@@ -225,12 +249,31 @@ class DummyBeamDataset(tfds.core.BeamBasedBuilder):
 
 To run the pipeline, have a look at the above section.
 
-**Warning**: Do not forget to add the register checksums `--register_checksums`
-flags to the `download_and_prepare` script when running the dataset the first
-time to register the downloads.
+**Note**: Like for non-beam datasets, do not forget to register download
+checksums with `--register_checksums` (only the first time to register the
+downloads).
 
 ```sh
-python -m tensorflow_datasets.scripts.download_and_prepare \
-  --register_checksums \
-  --datasets=my_new_dataset
+tfds build my_dataset --register_checksums
 ```
+
+## Pipeline using TFDS as input
+
+If you want to create a beam pipeline which takes a TFDS dataset as source, you
+can use the `tfds.beam.ReadFromTFDS`:
+
+```python
+builder = tfds.builder('my_dataset')
+
+_ = (
+    pipeline
+    | tfds.beam.ReadFromTFDS(builder, split='train')
+    | beam.Map(tfds.as_numpy)
+    | ...
+)
+```
+
+It will process each shard of the dataset in parallel.
+
+Note: This require the dataset to be already generated. To generate datasets
+using beam, see the other sections.

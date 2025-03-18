@@ -1,0 +1,21 @@
+{
+    "test": [
+        {
+            "category": "Scientist",
+            "gem_id": "web_nlg_en-test-606",
+            "input": [
+                "Olga_Bondareva | almaMater | Leningrad_State_University",
+                "Olga_Bondareva | birthPlace | Leningrad,_USSR",
+                "Olga_Bondareva | professionalField | Economics",
+                "Olga_Bondareva | professionalField | Mathematics"
+            ],
+            "references": [
+                "Born in Leningrad, a city in the USSR, Olga Bondareva studied to become an economist at Leningrad State University, and is one of the known professionals in the field of Mathematics.",
+                "Olga Bondareva was born in Leningrad, USSR and was a student at Leningrad State University. Her professional field was in mathematics and economics.",
+                "Olga Bondareva who was born in Leningrad, USSR, graduated from Leningrad State University, is working in the field of Mathematics and Economics."
+            ],
+            "target": "Born in Leningrad, a city in the USSR, Olga Bondareva studied to become an economist at Leningrad State University, and is one of the known professionals in the field of Mathematics.",
+            "webnlg_id": "test/Scientist/4/Id607"
+        }
+    ]
+}

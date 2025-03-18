@@ -1,0 +1,2 @@
+id:wikiToxicComments	text:Buffalo Bill THE VANDAL\nYOU MY FRIEND ARE LITTLE MORE THAN A VANDAL AND AN EGOCENTRIC JERK	labels:__notok__	episode_done:True
+id:wikiToxicComments	text:Are you sure it's Kauffner who's making up a story about you being a sock puppet?	labels:__notok__	episode_done:True

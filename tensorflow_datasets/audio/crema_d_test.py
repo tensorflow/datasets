@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,12 +28,13 @@ class CremaDTest(testing.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = {
-      'summary_table':
-          'summary_table.csv',
+      'summary_table': 'summary_table.csv',
       'all_files': [
-          '1000_AA_HAP_XX.wav', '1001_AA_HAP_XX.wav',
-          '1002_AA_ANG_XX.wav', '1003_AA_FEA_XX.wav',
-      ]
+          '1000_AA_HAP_XX.wav',
+          '1001_AA_HAP_XX.wav',
+          '1002_AA_ANG_XX.wav',
+          '1003_AA_FEA_XX.wav',
+      ],
   }
 
 

@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="gap" />
   <meta itemprop="description" content="GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of &#10;(ambiguous pronoun, antecedent name), sampled from Wikipedia and released by &#10;Google AI Language for the evaluation of coreference resolution in practical &#10;applications.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;gap&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/gap" />
@@ -12,12 +11,19 @@
 
 # `gap`
 
+
 *   **Description**:
 
 GAP is a gender-balanced dataset containing 8,908 coreference-labeled pairs of
 (ambiguous pronoun, antecedent name), sampled from Wikipedia and released by
 Google AI Language for the evaluation of coreference resolution in practical
 applications.
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/gap">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://github.com/google-research-datasets/gap-coreference](https://github.com/google-research-datasets/gap-coreference)
@@ -27,15 +33,17 @@ applications.
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   `0.1.0`: Initial release.
+    *   **`0.1.1`** (default): Fixes parsing of boolean field `A-coref` and
+        `B-coref`.
 
 *   **Download size**: `2.29 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `2.96 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -45,27 +53,85 @@ Split          | Examples
 `'train'`      | 2,000
 `'validation'` | 454
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'A': Text(shape=(), dtype=tf.string),
-    'A-coref': tf.bool,
-    'A-offset': tf.int32,
-    'B': Text(shape=(), dtype=tf.string),
-    'B-coref': tf.bool,
-    'B-offset': tf.int32,
-    'ID': Text(shape=(), dtype=tf.string),
-    'Pronoun': Text(shape=(), dtype=tf.string),
-    'Pronoun-offset': tf.int32,
-    'Text': Text(shape=(), dtype=tf.string),
-    'URL': Text(shape=(), dtype=tf.string),
+    'A': Text(shape=(), dtype=string),
+    'A-coref': bool,
+    'A-offset': int32,
+    'B': Text(shape=(), dtype=string),
+    'B-coref': bool,
+    'B-offset': int32,
+    'ID': Text(shape=(), dtype=string),
+    'Pronoun': Text(shape=(), dtype=string),
+    'Pronoun-offset': int32,
+    'Text': Text(shape=(), dtype=string),
+    'URL': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+A              | Text         |       | string |
+A-coref        | Tensor       |       | bool   |
+A-offset       | Tensor       |       | int32  |
+B              | Text         |       | string |
+B-coref        | Tensor       |       | bool   |
+B-offset       | Tensor       |       | int32  |
+ID             | Text         |       | string |
+Pronoun        | Text         |       | string |
+Pronoun-offset | Tensor       |       | int32  |
+Text           | Text         |       | string |
+URL            | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/gap-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -88,6 +154,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

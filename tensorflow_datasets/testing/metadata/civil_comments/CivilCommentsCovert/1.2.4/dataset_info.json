@@ -1,0 +1,59 @@
+{
+  "citation": "@inproceedings{lees-etal-2021-capturing,\n    title = \"Capturing Covertly Toxic Speech via Crowdsourcing\",\n    author = \"Lees, Alyssa  and\n      Borkan, Daniel  and\n      Kivlichan, Ian  and\n      Nario, Jorge  and\n      Goyal, Tesh\",\n    booktitle = \"Proceedings of the First Workshop on Bridging Human{--}Computer Interaction and Natural Language Processing\",\n    month = apr,\n    year = \"2021\",\n    address = \"Online\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://www.aclweb.org/anthology/2021.hcinlp-1.3\",\n    pages = \"14--20\"\n}",
+  "configDescription": "\nWARNING: there's a potential data quality issue with CivilCommentsCovert that\nwe're actively working on fixing (06/28/22); the underlying data may change!\n\nThe CivilCommentsCovert set is a subset of CivilCommentsIdentities with ~20% of\nthe train and test splits further annotated for covert offensiveness, in\naddition to the toxicity and identity labels. Raters were asked to categorize\ncomments as one of explicitly, implicitly, not, or not sure if offensive, as\nwell as whether it contained different types of covert offensiveness. The full\nannotation procedure is detailed in a forthcoming paper at\nhttps://sites.google.com/corp/view/hciandnlp/accepted-papers.\n",
+  "configName": "CivilCommentsCovert",
+  "description": "This version of the CivilComments Dataset provides access to the primary\nseven labels that were annotated by crowd workers, the toxicity and other\ntags are a value between 0 and 1 indicating the fraction of annotators that\nassigned these attributes to the comment text.\n\nThe other tags are only available for a fraction of the input examples. They\nare currently ignored for the main dataset; the CivilCommentsIdentities set\nincludes those labels, but only consists of the subset of the data with them.\nThe other attributes that were part of the original CivilComments release are\nincluded only in the raw data. See the Kaggle documentation for more details\nabout the available features.\n\nThe comments in this dataset come from an archive of the Civil Comments\nplatform, a commenting plugin for independent news sites. These public comments\nwere created from 2015 - 2017 and appeared on approximately 50 English-language\nnews sites across the world. When Civil Comments shut down in 2017, they chose\nto make the public comments available in a lasting open archive to enable future\nresearch. The original data, published on figshare, includes the public comment\ntext, some associated metadata such as article IDs, publication IDs, timestamps\nand commenter-generated \"civility\" labels, but does not include user ids. Jigsaw\nextended this dataset by adding additional labels for toxicity, identity\nmentions, as well as covert offensiveness. This data set is an exact replica of\nthe data released for the Jigsaw Unintended Bias in Toxicity Classification\nKaggle challenge. This dataset is released under CC0, as is the underlying\ncomment text.\n\nFor comments that have a parent_id also in the civil comments data, the\ntext of the previous comment is provided as the \"parent_text\" feature. Note\nthat the splits were made without regard to this information, so using previous\ncomments may leak some information. The annotators did not have access to the\nparent text when making the labels.",
+  "downloadSize": "448174578",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification/data"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.text.civil_comments",
+  "name": "civil_comments",
+  "releaseNotes": {
+    "1.0.0": "Initial full release.",
+    "1.0.1": "Added a unique id for each comment.",
+    "1.1.0": "Added CivilCommentsCovert config.",
+    "1.1.1": "Added CivilCommentsCovert config with correct checksum.",
+    "1.1.2": "Added separate citation for CivilCommentsCovert dataset.",
+    "1.1.3": "Corrected id types from float to string.",
+    "1.2.0": "Add toxic spans, context, and parent comment text features.",
+    "1.2.1": "Fix incorrect formatting in context splits.",
+    "1.2.2": "Update to reflect context only having a train split.",
+    "1.2.3": "Add warning to CivilCommentsCovert as we fix a data issue.",
+    "1.2.4": "Add publication IDs and comment timestamps."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "98187553",
+      "shardLengths": [
+        "48074"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "4399427",
+      "shardLengths": [
+        "2455"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "text"
+        },
+        {
+          "featureKey": "toxicity"
+        }
+      ]
+    }
+  },
+  "version": "1.2.4"
+}

@@ -1,0 +1,43 @@
+{
+  "citation": "@inproceedings{DBLP:conf/nips/HuFZDRLCL20,\n  author    = {Weihua Hu and\n               Matthias Fey and\n               Marinka Zitnik and\n               Yuxiao Dong and\n               Hongyu Ren and\n               Bowen Liu and\n               Michele Catasta and\n               Jure Leskovec},\n  editor    = {Hugo Larochelle and\n               Marc'Aurelio Ranzato and\n               Raia Hadsell and\n               Maria{-}Florina Balcan and\n               Hsuan{-}Tien Lin},\n  title     = {Open Graph Benchmark: Datasets for Machine Learning on Graphs},\n  booktitle = {Advances in Neural Information Processing Systems 33: Annual Conference\n               on Neural Information Processing Systems 2020, NeurIPS 2020, December\n               6-12, 2020, virtual},\n  year      = {2020},\n  url       = {https://proceedings.neurips.cc/paper/2020/hash/fb60d411a5c5b72b2e7d3527cfc84fd0-Abstract.html},\n  timestamp = {Tue, 19 Jan 2021 15:57:06 +0100},\n  biburl    = {https://dblp.org/rec/conf/nips/HuFZDRLCL20.bib},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "description": "'ogbg-molpcba' is a molecular dataset sampled from PubChem BioAssay.\nIt is a graph prediction dataset from the Open Graph Benchmark (OGB).\n\nThis dataset is experimental, and the API is subject to change in\nfuture releases.\n\nThe below description of the dataset is adapted from the OGB paper:\n\n## Input Format\nAll the molecules are pre-processed using RDKit ([1]).\n* Each graph represents a molecule, where nodes are atoms, and edges are\n  chemical bonds.\n* Input node features are 9-dimensional, containing atomic number and chirality,\n  as well as other additional atom features such as formal charge and\n  whether the atom is in the ring.\n* Input edge features are 3-dimensional, containing bond type,\n  bond stereochemistry, as well as an additional bond feature indicating\n  whether the bond is conjugated.\n\n## Prediction\nThe task is to predict 128 different biological activities (inactive/active).\nSee [2] for more description about these targets.\nNot all targets apply to each molecule: missing targets are indicated by NaNs.\n\n[1]: Greg Landrum, et al. 'RDKit: Open-source cheminformatics'.\n     URL: https://github.com/rdkit/rdkit\n[2]: Bharath Ramsundar, Steven Kearnes, Patrick Riley, Dale Webster,\n     David Konerding and Vijay Pande. 'Massively Multitask Networks for\n     Drug Discovery'.\n     URL: https://arxiv.org/pdf/1502.02072.pdf",
+  "downloadSize": "39533472",
+  "location": {
+    "urls": [
+      "https://ogb.stanford.edu/docs/graphprop"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.graphs.ogbg_molpcba.ogbg_molpcba",
+  "name": "ogbg_molpcba",
+  "splits": [
+    {
+      "name": "train",
+      "numBytes": "677525350",
+      "shardLengths": [
+        "43793",
+        "43793",
+        "43793",
+        "43793",
+        "43792",
+        "43793",
+        "43793",
+        "43793"
+      ]
+    },
+    {
+      "name": "validation",
+      "numBytes": "88037048",
+      "shardLengths": [
+        "43793"
+      ]
+    },
+    {
+      "name": "test",
+      "numBytes": "88167073",
+      "shardLengths": [
+        "43793"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

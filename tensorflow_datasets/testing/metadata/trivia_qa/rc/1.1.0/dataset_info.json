@@ -1,157 +1,198 @@
 {
-  "citation": "\n@article{2017arXivtriviaqa,\n       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},\n                 Daniel and {Zettlemoyer}, Luke},\n        title = \"{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}\",\n      journal = {arXiv e-prints},\n         year = 2017,\n          eid = {arXiv:1705.03551},\n        pages = {arXiv:1705.03551},\narchivePrefix = {arXiv},\n       eprint = {1705.03551},\n}\n",
-  "description": "TriviaqQA is a reading comprehension dataset containing over 650K\nquestion-answer-evidence triples. TriviaqQA includes 95K question-answer\npairs authored by trivia enthusiasts and independently gathered evidence\ndocuments, six per question on average, that provide high quality distant\nsupervision for answering the questions.\n",
+  "citation": "@article{2017arXivtriviaqa,\n       author = {{Joshi}, Mandar and {Choi}, Eunsol and {Weld},\n                 Daniel and {Zettlemoyer}, Luke},\n        title = \"{triviaqa: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension}\",\n      journal = {arXiv e-prints},\n         year = 2017,\n          eid = {arXiv:1705.03551},\n        pages = {arXiv:1705.03551},\narchivePrefix = {arXiv},\n       eprint = {1705.03551},\n}",
+  "configDescription": "Question-answer pairs where all documents for a given question contain the\nanswer string(s).\nIncludes context from Wikipedia and search results.",
+  "configName": "rc",
+  "description": "TriviaqQA is a reading comprehension dataset containing over 650K\nquestion-answer-evidence triples. TriviaqQA includes 95K question-answer\npairs authored by trivia enthusiasts and independently gathered evidence\ndocuments, six per question on average, that provide high quality distant\nsupervision for answering the questions.",
+  "downloadSize": "2665779500",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://nlp.cs.washington.edu/triviaqa/"
     ]
   },
+  "moduleName": "tensorflow_datasets.question_answering.trivia_qa",
   "name": "trivia_qa",
-  "schema": {
-    "feature": [
-      {
-        "name": "answer"
-      },
-      {
-        "name": "entity_pages"
-      },
-      {
-        "name": "question",
-        "type": "BYTES"
-      },
-      {
-        "name": "question_id",
-        "type": "BYTES"
-      },
-      {
-        "name": "question_source",
-        "type": "BYTES"
-      },
-      {
-        "name": "search_results"
-      }
-    ]
-  },
   "splits": [
     {
-      "name": "test",
-      "numBytes": "7883155",
-      "numShards": "1",
-      "shardLengths": [
-        "10832"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10832"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10832"
-              }
-            },
-            "name": "question_id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "10832"
-              }
-            },
-            "name": "question_source",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "10832"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numBytes": "104158874",
-      "numShards": "1",
+      "numBytes": "12809218182",
       "shardLengths": [
-        "87622"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "87622"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "87622"
-              }
-            },
-            "name": "question_id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "87622"
-              }
-            },
-            "name": "question_source",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "87622"
-      }
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1081",
+        "1082",
+        "1081",
+        "1081",
+        "1081",
+        "1081"
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numBytes": "13560110",
-      "numShards": "1",
+      "numBytes": "1696416383",
       "shardLengths": [
-        "11313"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "11313"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "11313"
-              }
-            },
-            "name": "question_id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "11313"
-              }
-            },
-            "name": "question_source",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "11313"
-      }
+        "1167",
+        "1167",
+        "1166",
+        "1167",
+        "1167",
+        "1167",
+        "1167",
+        "1166",
+        "1167",
+        "1167",
+        "1167",
+        "1167",
+        "1167",
+        "1166",
+        "1167",
+        "1167"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1585976997",
+      "shardLengths": [
+        "1076",
+        "1075",
+        "1076",
+        "1075",
+        "1076",
+        "1076",
+        "1075",
+        "1076",
+        "1076",
+        "1075",
+        "1076",
+        "1076",
+        "1075",
+        "1076",
+        "1075",
+        "1076"
+      ]
     }
   ],
   "version": "1.1.0"

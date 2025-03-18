@@ -1,0 +1,21 @@
+-DOCSTART- -X- -X- O
+
+LONDON NNP B-NP B-LOC
+1996-08-30 CD I-NP O
+
+Leicestershire NNP B-NP B-ORG
+22 CD I-NP O
+points NNS I-NP O
+, , O O
+Somerset NNP B-NP B-ORG
+4 CD I-NP O
+. . O O
+
+-DOCSTART- -X- -X- O
+
+CRICKET NNP B-NP O
+- : O O
+1997 CD B-NP O
+ASHES NNP I-NP B-MISC
+INTINERARY NNP I-NP O
+. . O O

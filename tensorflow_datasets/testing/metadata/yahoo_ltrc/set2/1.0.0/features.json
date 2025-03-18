@@ -1,0 +1,32 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "float_features": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "700"
+                        ]
+                    },
+                    "dtype": "float64",
+                    "encoding": "zlib"
+                }
+            },
+            "label": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "float64",
+                    "encoding": "zlib"
+                }
+            }
+        }
+    }
+}

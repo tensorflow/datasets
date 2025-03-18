@@ -1,0 +1,48 @@
+name: Unittests [Optional]
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Unittests]
+    types: [requested]
+
+# Cancel in-progress runs for the current workflow if not on the main branch
+# (as it marks the unittests as failed).
+# Conditionals to concurrent are based on the solution proposed in this link:
+# https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds.
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  activate-tests:
+    name: Check whether we should run tests or not
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - id: check
+      uses: ./.github/actions/activate-tests
+
+    outputs:
+      status: ${{ steps.check.outputs.status }}
+
+  pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+    strategy:
+      # Do not cancel in-progress jobs if any matrix job fails.
+      fail-fast: false
+      matrix:
+        tf-version: [tensorflow, tf-nightly]
+        os-version: [ubuntu-22.04, macos-latest]
+        exclude:
+          - tf-version: tensorflow
+            os-version: ubuntu-22.04
+
+    name: 'Core TFDS tests'
+    uses: ./.github/workflows/pytest-template.yml
+    with:
+      tf-version: ${{ matrix.tf-version }}
+      os-version: ${{ matrix.os-version }}

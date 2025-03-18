@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 from tensorflow_datasets.object_detection.coco import Coco
 from tensorflow_datasets.object_detection.coco_captions import CocoCaptions
 from tensorflow_datasets.object_detection.kitti import Kitti
+from tensorflow_datasets.object_detection.lvis import Lvis
 from tensorflow_datasets.object_detection.open_images import OpenImagesV4
 from tensorflow_datasets.object_detection.open_images_challenge2019 import OpenImagesChallenge2019Detection
 from tensorflow_datasets.object_detection.voc import Voc

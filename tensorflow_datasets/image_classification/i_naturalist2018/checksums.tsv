@@ -1,0 +1,5 @@
+https://ml-inat-competition-datasets.s3.amazonaws.com/2018/categories.json.tar.gz	139473	2287211e8da582419dc2ca66736005fdb079e0a89eaf38936a441d8277a8162e	categories.json.tar.gz
+https://ml-inat-competition-datasets.s3.amazonaws.com/2018/test2018.tar.gz	42093877810	cb19d5b2d755e4dc2a2396a5371a847c95b08678aa00369e61365d7f1e486706	test2018.tar.gz
+https://ml-inat-competition-datasets.s3.amazonaws.com/2018/train2018.json.tar.gz	20951917	be550dd4e2692458e508dd03e3a8d79f087453e2ad570a438a4ff198a7abc68f	train2018.json.tar.gz
+https://ml-inat-competition-datasets.s3.amazonaws.com/2018/train_val2018.tar.gz	127945569561	276522b02b65d98ee5168a17415b2b1ec971b035bd62959e37b80b1092130495	train_val2018.tar.gz
+https://ml-inat-competition-datasets.s3.amazonaws.com/2018/val2018.json.tar.gz	1276686	e23c47d61d3aa2a9095090dbc49de861445d9a8144884a78222873f11f7ef43e	val2018.json.tar.gz

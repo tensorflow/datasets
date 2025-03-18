@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cnn_dailymail" />
   <meta itemprop="description" content="CNN/DailyMail non-anonymized summarization dataset.&#10;&#10;There are two features:&#10;  - article: text of news article, used as the document to be summarized&#10;  - highlights: joined text of highlights with &lt;s&gt; and &lt;/s&gt; around each&#10;    highlight, which is the target summary&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cnn_dailymail&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cnn_dailymail" />
@@ -12,10 +11,6 @@
 
 # `cnn_dailymail`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -25,6 +20,12 @@ There are two features: - article: text of news article, used as the document to
 be summarized - highlights: joined text of highlights with <s> and </s> around
 each highlight, which is the target summary
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/cnn-daily-mail-1">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/abisee/cnn-dailymail](https://github.com/abisee/cnn-dailymail)
 
@@ -33,15 +34,25 @@ each highlight, which is the target summary
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): Using cased version.
-    *   `1.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        New split API (https://tensorflow.org/datasets/splits)
-    *   `2.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Separate target sentences with newline.
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `2.0.0`: Separate target sentences with newline. (Having the model
+        predict newline separators makes it easier to evaluate using
+        summary-level ROUGE.)
+
+    *   `3.0.0`: Using cased version.
+
+    *   `3.1.0`: Removed BuilderConfig
+
+    *   `3.2.0`: Remove extra space before added sentence period. This shouldn't
+        affect ROUGE scores because punctuation is removed.
+
+    *   `3.3.0`: Add publisher feature.
+
+    *   **`3.4.0`** (default): Add ID feature.
 
 *   **Download size**: `558.32 MiB`
+
+*   **Dataset size**: `1.29 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -55,9 +66,71 @@ Split          | Examples
 `'train'`      | 287,113
 `'validation'` | 13,368
 
+*   **Feature structure**:
+
+```python
+FeaturesDict({
+    'article': Text(shape=(), dtype=string),
+    'highlights': Text(shape=(), dtype=string),
+    'id': Text(shape=(), dtype=string),
+    'publisher': Text(shape=(), dtype=string),
+})
+```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+article    | Text         |       | string |
+highlights | Text         |       | string |
+id         | Text         |       | string |
+publisher  | Text         |       | string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('article', 'highlights')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cnn_dailymail-3.4.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -87,53 +160,3 @@ Split          | Examples
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-## cnn_dailymail/plain_text (default config)
-
-*   **Config description**: Plain text
-
-*   **Dataset size**: `1.27 GiB`
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'article': Text(shape=(), dtype=tf.string),
-    'highlights': Text(shape=(), dtype=tf.string),
-})
-```
-
-## cnn_dailymail/bytes
-
-*   **Config description**: Uses byte-level text encoding with
-    `tfds.deprecated.text.ByteTextEncoder`
-
-*   **Dataset size**: `1.28 GiB`
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-## cnn_dailymail/subwords32k
-
-*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
-    32k vocab size
-
-*   **Dataset size**: `490.99 MiB`
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'article': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32908>),
-    'highlights': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32908>),
-})
-```

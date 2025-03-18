@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
 # limitations under the License.
 
 """Tests for tensorflow_datasets.core.utils.version."""
+
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import version
 
@@ -21,6 +23,7 @@ from tensorflow_datasets.core.utils import version
 class VersionTest(testing.TestCase):
 
   def test_str_to_version(self):
+    self.assertEqual(version._str_to_version('0.0.0'), (0, 0, 0))
     self.assertEqual(version._str_to_version('1.2.3'), (1, 2, 3))
     self.assertEqual(version._str_to_version('1.2.*', True), (1, 2, '*'))
     self.assertEqual(version._str_to_version('1.*.3', True), (1, '*', 3))
@@ -38,6 +41,8 @@ class VersionTest(testing.TestCase):
     self.assertEqual(repr(v), "Version('1.3.534')")
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3.-534')
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
+      version.Version('1.3.0000534')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       version.Version('1.3')
     with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
@@ -57,11 +62,11 @@ class VersionTest(testing.TestCase):
 
   def test_invalid_comparison(self):
     v = version.Version('1.3.534')
-    with self.assertRaisesWithPredicateMatch(
-        ValueError, 'Format should be '):
+    with self.assertRaisesWithPredicateMatch(ValueError, 'Format should be '):
       unused_ = v < 'abc'
     with self.assertRaisesWithPredicateMatch(
-        AssertionError, 'cannot be compared to version'):
+        AssertionError, 'cannot be compared to version'
+    ):
       unused_ = v > 123
 
   def test_match(self):
@@ -127,6 +132,61 @@ class VersionTest(testing.TestCase):
   def test_experiment_override(self):
     v = version.Version('1.2.3', experiments={version.Experiment.DUMMY: True})
     self.assertTrue(v.implements(version.Experiment.DUMMY))
+
+  def test_hash(self):
+    self.assertIn(
+        version.Version('1.2.3'),
+        {version.Version('1.2.3'), version.Version('1.4.3')},
+    )
+
+    self.assertNotIn(
+        version.Version('1.2.3'),
+        {version.Version('1.1.3'), version.Version('1.4.3')},
+    )
+
+
+def test_str_to_version():
+  v0 = version.Version('1.2.3')
+  v1 = version.Version(v0)
+  assert v1 == v0
+
+
+@pytest.mark.parametrize('is_blocked_result', [True, False])
+def test_is_blocked_bool(is_blocked_result):
+  is_blocked = version.IsBlocked(is_blocked_result)
+  assert bool(is_blocked) == is_blocked_result
+
+
+@pytest.mark.parametrize(
+    'blocked_version, blocked_config, expected_res, expected_msg',
+    [
+        ('1.2.3', None, True, 'Version 1.2.3 is blocked.'),
+        ('1.0.0', None, False, None),
+        ('1.2.3', 'non_existing_config', True, 'Version 1.2.3 is blocked.'),
+        ('1.0.0', 'config_1', True, 'blocked_config'),
+        (
+            '1.0.0',
+            'config_2',
+            True,
+            'Config config_2 for version 1.0.0 is blocked.',
+        ),
+        ('1.1.0', 'config_1', True, 'blocked config in version 1.1.0'),
+        ('1.1.0', 'config_2', False, None),
+    ],
+)
+def test_is_blocked(
+    blocked_version, blocked_config, expected_res, expected_msg
+):
+  blocked_versions = version.BlockedVersions(
+      versions={'1.2.3': None},
+      configs={
+          '1.0.0': {'config_1': 'blocked_config', 'config_2': None},
+          '1.1.0': {'config_1': 'blocked config in version 1.1.0'},
+      },
+  )
+  is_blocked = blocked_versions.is_blocked(blocked_version, blocked_config)
+  assert is_blocked.result == expected_res
+  assert is_blocked.blocked_msg == expected_msg
 
 
 if __name__ == '__main__':

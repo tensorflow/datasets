@@ -1,0 +1,12 @@
+# sent_id = VIT-9841
+# text = non sono a disposizione invece per gli improperi".
+1	non	non	ADV	BN	PronType=Neg	4	advmod	_	_
+2	sono	essere	AUX	VA	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	4	cop	_	_
+3	a	a	ADP	E	_	4	case	_	_
+4	disposizione	disposizione	NOUN	S	Gender=Fem|Number=Sing	0	root	_	_
+5	invece	invece	ADV	B	_	4	advmod	_	_
+6	per	per	ADP	E	_	8	case	_	_
+7	gli	il	DET	RD	Definite=Def|Gender=Masc|Number=Plur|PronType=Art	8	det	_	_
+8	improperi	improperio	NOUN	S	Gender=Masc|Number=Plur	4	obl	_	SpaceAfter=No
+9	"	"	PUNCT	FB	_	4	punct	_	SpaceAfter=No
+10	.	.	PUNCT	FS	_	4	punct	_	_

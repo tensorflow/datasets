@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -47,14 +47,18 @@ Dataset URL: https://data.mendeley.com/datasets/3f83gxmv57/2
 License: http://creativecommons.org/licenses/by/4.0
 """
 
-_URL = "https://data.mendeley.com/datasets/3f83gxmv57/2/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/Citrus.zip"
+_URL = "https://data.mendeley.com/public-files/datasets/3f83gxmv57/files/53398b67-6f0e-4a67-8384-e2b574b2ebf4/file_downloaded"
 _LEAVES_LABELS = ["Black spot", "canker", "greening", "healthy"]
 
 
 class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
   """Subset of the citrus dataset with just leaves."""
 
-  VERSION = tfds.core.Version("0.1.1")
+  VERSION = tfds.core.Version("0.1.2")
+  RELEASE_NOTES = {
+      "0.1.1": "Citrus Leaves dataset",
+      "0.1.2": "Website URL update",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -63,7 +67,7 @@ class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/filename": tfds.features.Text(),
-            "label": tfds.features.ClassLabel(names=_LEAVES_LABELS)
+            "label": tfds.features.ClassLabel(names=_LEAVES_LABELS),
         }),
         supervised_keys=("image", "label"),
         homepage="https://data.mendeley.com/datasets/3f83gxmv57/2",
@@ -75,7 +79,8 @@ class CitrusLeaves(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path})
+            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path}
+        )
     ]
 
   def _generate_examples(self, datapath):

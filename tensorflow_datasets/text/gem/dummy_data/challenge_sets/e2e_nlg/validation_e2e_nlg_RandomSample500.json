@@ -1,0 +1,12 @@
+{
+    "validation": [
+        {
+            "gem_id": "e2e_nlg-validation-110",
+            "meaning_representation": "name[Aromi], eatType[coffee shop], food[Chinese], customer rating[1 out of 5], area[riverside]",
+            "references": [
+                "There is an Chinese coffee shop named Aromi near the riverside that has 1 out of 5 in the customer ranking and friendly with kid"
+            ],
+            "target": "There is an Chinese coffee shop named Aromi near the riverside that has 1 out of 5 in the customer ranking and friendly with kid"
+        }
+    ]
+}

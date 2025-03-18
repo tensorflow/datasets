@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ _CITATION = """
 }
 """
 
-_LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "fr", "hi", "ru"]
-]
+_LANGUAGE_PAIRS = [(lang, "en") for lang in ["cs", "de", "fr", "hi", "ru"]]
 
 
 class Wmt14Translate(wmt.WmtTranslate):
@@ -50,21 +48,25 @@ class Wmt14Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
+      )
+      for l1, l2 in _LANGUAGE_PAIRS
   ]
 
   @property
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "commoncrawl", "multiun",
-            "newscommentary_v9", "gigafren", "czeng_10", "yandexcorpus",
-            "wikiheadlines_hi", "wikiheadlines_ru", "hindencorp_01"
+            "europarl_v7",
+            "commoncrawl",
+            "multiun",
+            "newscommentary_v9",
+            "gigafren",
+            "czeng_10",
+            "yandexcorpus",
+            "wikiheadlines_hi",
+            "wikiheadlines_ru",
+            "hindencorp_01",
         ],
-        tfds.Split.VALIDATION: [
-            "newsdev2014", "newstest2013"
-        ],
-        tfds.Split.TEST: [
-            "newstest2014"
-        ]
+        tfds.Split.VALIDATION: ["newsdev2014", "newstest2013"],
+        tfds.Split.TEST: ["newstest2014"],
     }

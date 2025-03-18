@@ -1,0 +1,4 @@
+fr-000000001	Il peut être divisé en trois zones en fonction du relief, du climat, du peuplement et de l'économie:
+fr-000000002	En 1877, 55 communes n’avaient pour seul accès que des sentiers ou des chemins muletiers.
+fr-000000003	Généralement, il ne cause pas de dommages à la flore, mais il peut introduire des parasites dans les poumons des moutons.
+

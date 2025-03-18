@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.download import kaggle
 
@@ -28,7 +28,9 @@ class KaggleTest(testing.TestCase):
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('digit-recognizer', tmp_dir)
-        self.assertEqual(out_path, os.path.join(tmp_dir, 'digit-recognizer'))
+        self.assertEqual(
+            os.fspath(out_path), os.path.join(tmp_dir, 'digit-recognizer')
+        )
         with tf.io.gfile.GFile(os.path.join(out_path, 'output.txt')) as f:
           self.assertEqual('digit-recognizer', f.read())
 
@@ -36,7 +38,10 @@ class KaggleTest(testing.TestCase):
     with testing.mock_kaggle_api():
       with testing.tmp_dir() as tmp_dir:
         out_path = kaggle.download_kaggle_data('user/dataset', tmp_dir)
-        self.assertEqual(out_path, os.path.join(tmp_dir, 'user_dataset'))
+        self.assertIsInstance(out_path, os.PathLike)
+        self.assertEqual(
+            os.fspath(out_path), os.path.join(tmp_dir, 'user_dataset')
+        )
         with tf.io.gfile.GFile(os.path.join(out_path, 'output.txt')) as f:
           self.assertEqual('user/dataset', f.read())
 
@@ -44,7 +49,8 @@ class KaggleTest(testing.TestCase):
     with testing.mock_kaggle_api(err_msg='404 - Not found'):
       with testing.tmp_dir() as tmp_dir:
         with self.assertRaisesRegex(
-            ValueError, 'Please ensure you have spelled the name'):
+            ValueError, 'Please ensure you have spelled the name'
+        ):
           kaggle.download_kaggle_data('digit-recognize', tmp_dir)
 
   def test_kaggle_type(self):

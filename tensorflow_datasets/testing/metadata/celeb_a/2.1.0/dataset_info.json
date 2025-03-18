@@ -1,0 +1,61 @@
+{
+  "citation": "@inproceedings{conf/iccv/LiuLWT15,\n  added-at = {2018-10-09T00:00:00.000+0200},\n  author = {Liu, Ziwei and Luo, Ping and Wang, Xiaogang and Tang, Xiaoou},\n  biburl = {https://www.bibsonomy.org/bibtex/250e4959be61db325d2f02c1d8cd7bfbb/dblp},\n  booktitle = {ICCV},\n  crossref = {conf/iccv/2015},\n  ee = {http://doi.ieeecomputersociety.org/10.1109/ICCV.2015.425},\n  interhash = {3f735aaa11957e73914bbe2ca9d5e702},\n  intrahash = {50e4959be61db325d2f02c1d8cd7bfbb},\n  isbn = {978-1-4673-8391-2},\n  keywords = {dblp},\n  pages = {3730-3738},\n  publisher = {IEEE Computer Society},\n  timestamp = {2018-10-11T11:43:28.000+0200},\n  title = {Deep Learning Face Attributes in the Wild.},\n  url = {http://dblp.uni-trier.de/db/conf/iccv/iccv2015.html#LiuLWT15},\n  year = 2015\n}",
+  "description": "CelebFaces Attributes Dataset (CelebA) is a large-scale face attributes dataset\nwith more than 200K celebrity images, each with 40 attribute annotations. The\nimages in this dataset cover large pose variations and background clutter.\nCelebA has large diversities, large quantities, and rich annotations,\nincluding - 10,177 number of identities, - 202,599 number of face images, and -\n5 landmark locations, 40 binary attributes annotations per image.\n\nThe dataset can be employed as the training and test sets for the following\ncomputer vision tasks: face attribute recognition, face detection, and landmark\n(or facial part) localization.\n\nNote: CelebA dataset may contain potential bias. The fairness indicators\n[example](https://www.tensorflow.org/responsible_ai/fairness_indicators/tutorials/Fairness_Indicators_TFCO_CelebA_Case_Study)\ngoes into detail about several considerations to keep in mind while using the\nCelebA dataset.",
+  "downloadSize": "1488628763",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.celeb_a.celeb_a_dataset_builder",
+  "name": "celeb_a",
+  "releaseNotes": {
+    "2.0.1": "New split API (https://tensorflow.org/datasets/splits)",
+    "2.1.0": "Identity feature added."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1403361832",
+      "shardLengths": [
+        "10173",
+        "10173",
+        "10173",
+        "10173",
+        "10174",
+        "10173",
+        "10173",
+        "10173",
+        "10173",
+        "10173",
+        "10173",
+        "10174",
+        "10173",
+        "10173",
+        "10173",
+        "10173"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "172124057",
+      "shardLengths": [
+        "9934",
+        "9933"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "172093375",
+      "shardLengths": [
+        "9981",
+        "9981"
+      ]
+    }
+  ],
+  "version": "2.1.0"
+}

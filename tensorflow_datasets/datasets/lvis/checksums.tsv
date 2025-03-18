@@ -1,0 +1,7 @@
+http://images.cocodataset.org/zips/test2017.zip	6646970404	c7908c3c9f94ba2f3340ebbeec58c25db6be8774f18d68c2f15d0e369d95baba	test2017.zip
+http://images.cocodataset.org/zips/train2017.zip	19336861798	69a8bb58ea5f8f99d24875f21416de2e9ded3178e903f1f7603e283b9e06d929	train2017.zip
+http://images.cocodataset.org/zips/val2017.zip	815585330	4f7e2ccb2866ec5041993c9cf2a952bbed69647b115d0f74da7ce8f4bef82f05	val2017.zip
+https://dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip	384629	bbe4880cef768f3c14ea903d31dcce9db24916cf9e9f1f76d1a022120f47254b	lvis_v1_image_info_test_dev.json.zip
+https://dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip	350264821	334a4caa374030a7817cf050364525e910f7960f9b6968cef47cffbf3893f8ba	lvis_v1_train.json.zip
+https://dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip	64026968	5cae9a3c79aadb667550c2b5dcf7f4d86e059a41ec91ef690225b667e28e9ba5	lvis_v1_val.json.zip
+https://nyu.box.com/shared/static/2yk9x8az9pnlsy2v8gd95yncwn2q7vj6.zip	1587847	13b6a7121a1d9716490b1e2778c4866d640e9059b01de5ca1277fdda7f70967d	lvis_v1_minival.zip

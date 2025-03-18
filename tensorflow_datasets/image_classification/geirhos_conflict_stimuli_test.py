@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,13 +21,11 @@ import tensorflow_datasets.testing as tfds_test
 
 class GeirhosConflictStimuliTest(tfds_test.DatasetBuilderTestCase):
   DATASET_CLASS = geirhos_conflict_stimuli.GeirhosConflictStimuli
-  SPLITS = {
-      'test': 2
-  }
+  SPLITS = {'test': 2}
 
   DL_EXTRACT_RESULT = {
       'texture_vs_shape': 'texture_vs_shape',
-      'imagenet_mapping': 'mapping.txt'
+      'imagenet_mapping': 'mapping.txt',
   }
 
 

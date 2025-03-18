@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 
 """Tests for Eurosat data loading."""
 
-import six
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import eurosat
 
@@ -23,7 +22,7 @@ from tensorflow_datasets.image_classification import eurosat
 class EurosatTest(testing.DatasetBuilderTestCase):
   # TODO(mnn): Re-enable Py3 test (b/129964829)
   # None implies testing all BUILDER_CONFIGS, while [] implies no tests.
-  BUILDER_CONFIG_NAMES_TO_TEST = None if six.PY2 else []
+  BUILDER_CONFIG_NAMES_TO_TEST = []
 
 
   DATASET_CLASS = eurosat.Eurosat

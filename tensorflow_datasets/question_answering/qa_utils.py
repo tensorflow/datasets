@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,42 +14,41 @@
 # limitations under the License.
 
 """Shared utilities for QA datasets."""
+from __future__ import annotations
+
 import json
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 
-SQUADLIKE_FEATURES = tfds.features.FeaturesDict({
-    "id":
-        tf.string,
-    "title":
-        tfds.features.Text(),
-    "context":
-        tfds.features.Text(),
-    "question":
-        tfds.features.Text(),
-    "answers":
-        tfds.features.Sequence({
-            "text": tfds.features.Text(),
-            "answer_start": tf.int32,
-        }),
-})
+def squadlike_features():
+  return tfds.features.FeaturesDict({
+      "id": np.str_,
+      "title": tfds.features.Text(),
+      "context": tfds.features.Text(),
+      "question": tfds.features.Text(),
+      "answers": tfds.features.Sequence({
+          "text": tfds.features.Text(),
+          "answer_start": np.int32,
+      }),
+  })
 
 
 def generate_squadlike_examples(filepath):
-  """Parses a SQuAD-like JSON, yielding examples with `SQUADLIKE_FEATURES`."""
+  """Parses a SQuAD-like JSON, yielding examples with `squadlike_features`."""
   logging.info("generating examples from = %s", filepath)
 
   # We first re-group the answers, which may be flattened (e.g., by XTREME).
   qas = {}
-  with tf.io.gfile.GFile(filepath) as f:
+  with epath.Path(filepath).open() as f:
     squad = json.load(f)
     for article in squad["data"]:
-      title = article.get("title", "").strip()
+      title = article.get("title", "")
       for paragraph in article["paragraphs"]:
-        context = paragraph["context"].strip()
+        context = paragraph["context"]
         for qa in paragraph["qas"]:
           qa["title"] = title
           qa["context"] = context
@@ -61,11 +60,11 @@ def generate_squadlike_examples(filepath):
 
     for id_, qa in qas.items():
       answer_starts = [answer["answer_start"] for answer in qa["answers"]]
-      answers = [answer["text"].strip() for answer in qa["answers"]]
+      answers = [answer["text"] for answer in qa["answers"]]
       yield id_, {
           "title": qa["title"],
           "context": qa["context"],
-          "question": qa["question"].strip(),
+          "question": qa["question"],
           "id": id_,
           "answers": {
               "answer_start": answer_starts,

@@ -1,0 +1,39 @@
+{
+  "validation": [
+    {
+      "dialog_acts": [
+        {
+          "act": 4,
+          "slot": "has_vegetarian_options",
+          "values": [
+            "True"
+          ]
+        },
+        {
+          "act": 10,
+          "slot": "",
+          "values": []
+        }
+      ],
+      "dialog_id": "14_00063",
+      "gem_id": "schema_guided_dialog-validation-1797",
+      "prompt": "Thank you. Do they make vegetarian meals?",
+      "references": [
+        "Yes, they sure do. And the table has been booked."
+      ],
+      "target": "Yes, they sure do. And the table has been booked.",
+      "turn_id": 9,
+      "context": [
+        "Hi, I want to find a Sichuan restaurant please.",
+        "In what area?",
+        "In San Fran please.",
+        "I have 10 places for you. How about Alice's, which is in San Francisco?",
+        "Okay, I like that.",
+        "Anything else today?",
+        "Can you make a reservation for me for two at 13:00?",
+        "Confirming a table at Alice's for 2 on March 1st at 1 pm in San Francisco."
+      ],
+      "service": "Restaurants_2"
+    }
+  ]
+}

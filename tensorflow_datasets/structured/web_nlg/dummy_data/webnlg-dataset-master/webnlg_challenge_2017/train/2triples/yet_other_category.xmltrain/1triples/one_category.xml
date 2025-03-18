@@ -1,0 +1,23 @@
+<benchmark>
+  <entries>
+    <entry category="Airport" eid="Id1" size="1">
+      <originaltripleset>
+        <otriple>Aarhus_Airport | cityServed | "Aarhus, Denmark"@en</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Aarhus_Airport | cityServed | "Aarhus, Denmark"</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">The Aarhus is the airport of Aarhus, Denmark.</lex>
+      <lex comment="good" lid="Id2">Aarhus Airport serves the city of Aarhus, Denmark.</lex>
+    </entry>
+    <entry category="Airport" eid="Id2" size="1">
+      <originaltripleset>
+        <otriple>Aarhus_Airport | city | Aarhus</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Aarhus_Airport | cityServed | Aarhus</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Aarhus airport serves the city of Aarhus.</lex>
+    </entry>
+  </entries>
+</benchmark>

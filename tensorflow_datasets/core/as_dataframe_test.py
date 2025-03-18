@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,37 +18,33 @@
 import pandas
 
 import tensorflow as tf
+
+import tensorflow_datasets  # Import for registration  # pylint: disable=unused-import
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import as_dataframe
 from tensorflow_datasets.core import load
 
-# Import for registration
-# pylint: disable=unused-import,g-bad-import-order
-from tensorflow_datasets.text import anli
-# pylint: enable=unused-import,g-bad-import-order
 
-
-def _as_df(ds_name: str) -> pandas.DataFrame:
+def _as_df(ds_name: str, **kwargs) -> pandas.DataFrame:
   """Loads the dataset as `pandas.DataFrame`."""
   with testing.mock_data(num_examples=3):
-    ds, ds_info = load.load(ds_name, split='train', with_info=True)
+    ds, ds_info = load.load(ds_name, split='train', with_info=True, **kwargs)
   df = as_dataframe.as_dataframe(ds, ds_info)
   return df
 
 
 def test_as_dataframe():
   """Tests that as_dataframe works without the `tfds.core.DatasetInfo`."""
-  ds = tf.data.Dataset.from_tensor_slices(
-      {
-          'some_key': [1, 2, 3],
-          'nested': {
-              'sub1': [1.0, 2.0, 3.0],
-          },
-      }
-  )
+  ds = tf.data.Dataset.from_tensor_slices({
+      'some_key': [1, 2, 3],
+      'nested': {
+          'sub1': [1.0, 2.0, 3.0],
+      },
+  })
   df = as_dataframe.as_dataframe(ds)
   assert isinstance(df, pandas.DataFrame)
   assert df._repr_html_().startswith('<style')
+  assert list(df.columns) == ['nested/sub1', 'some_key']
 
 
 def test_text_dataset():
@@ -56,3 +52,10 @@ def test_text_dataset():
   assert isinstance(df, pandas.DataFrame)
   assert isinstance(df._repr_html_(), str)
   assert list(df.columns) == ['context', 'hypothesis', 'label', 'uid']
+
+
+def test_as_supervised():
+  df = _as_df('mnist', as_supervised=True)
+  assert isinstance(df, pandas.DataFrame)
+  assert isinstance(df._repr_html_(), str)
+  assert list(df.columns) == ['image', 'label']

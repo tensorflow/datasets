@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 
 import collections
 
@@ -47,9 +46,13 @@ class Ucf101Test(testing.DatasetBuilderTestCase):
       for features in dataset_utils.as_numpy(dataset[split_name]):
         label_name = label_feature.int2str(features['label'])
         label_frequncies[split_name][label_name] += 1
-    self.assertEqual(dict(label_frequncies),
-                     {'test': {'Archery': 1, 'Nunchucks': 1},
-                      'train': {'Archery': 1, 'Nunchucks': 2}})
+    self.assertEqual(
+        dict(label_frequncies),
+        {
+            'test': {'Archery': 1, 'Nunchucks': 1},
+            'train': {'Archery': 1, 'Nunchucks': 2},
+        },
+    )
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Horses or Humans dataset.
-"""
+"""Horses or Humans dataset."""
 
 import re
 import tensorflow_datasets.public_api as tfds
@@ -41,8 +40,10 @@ _NAME_RE = re.compile(r"^(humans|horses)(?:/|\\)[\w-]*\.png$")
 class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
   """Horses or Humans dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -50,13 +51,12 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
         description="A large set of images of horses and humans.",
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=_IMAGE_SHAPE),
-            "label": tfds.features.ClassLabel(
-                names=["horses", "humans"]),
+            "label": tfds.features.ClassLabel(names=["horses", "humans"]),
         }),
         supervised_keys=("image", "label"),
         homepage="http://laurencemoroney.com/horses-or-humans-dataset",
-        citation=_CITATION
-        )
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     train_path, test_path = dl_manager.download([_TRAIN_URL, _TEST_URL])
@@ -64,14 +64,12 @@ class HorsesOrHumans(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(train_path)
-            }),
+            gen_kwargs={"archive": dl_manager.iter_archive(train_path)},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={
-                "archive": dl_manager.iter_archive(test_path)
-            }),
+            gen_kwargs={"archive": dl_manager.iter_archive(test_path)},
+        ),
     ]
 
   def _generate_examples(self, archive):

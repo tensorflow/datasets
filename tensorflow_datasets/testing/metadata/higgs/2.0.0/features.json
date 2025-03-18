@@ -1,0 +1,239 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "jet_1_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_3_pt": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "lepton_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_2_pt": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "lepton_eta": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_3_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "missing_energy_magnitude": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_jjj": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_4_b-tag": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_4_eta": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_3_b-tag": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_wwbb": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_wbb": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_2_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "missing_energy_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_jj": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "class_label": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float32",
+                    "encoding": "none"
+                }
+            },
+            "jet_1_eta": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "lepton_pT": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_lv": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_2_eta": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_4_pt": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_2_b-tag": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_bb": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_3_eta": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "m_jlv": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_1_b-tag": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_1_pt": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            },
+            "jet_4_phi": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "shape": {},
+                    "dtype": "float64",
+                    "encoding": "none"
+                }
+            }
+        }
+    }
+}

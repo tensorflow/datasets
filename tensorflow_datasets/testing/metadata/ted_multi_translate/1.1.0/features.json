@@ -1,0 +1,79 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "translations": {
+                "pythonClassName": "tensorflow_datasets.core.features.translation_feature.TranslationVariableLanguages",
+                "translation": {
+                    "languages": [
+                        "ar",
+                        "az",
+                        "be",
+                        "bg",
+                        "bn",
+                        "bs",
+                        "calv",
+                        "cs",
+                        "da",
+                        "de",
+                        "el",
+                        "en",
+                        "eo",
+                        "es",
+                        "et",
+                        "eu",
+                        "fa",
+                        "fi",
+                        "fr",
+                        "fr-ca",
+                        "gl",
+                        "he",
+                        "hi",
+                        "hr",
+                        "hu",
+                        "hy",
+                        "id",
+                        "it",
+                        "ja",
+                        "ka",
+                        "kk",
+                        "ko",
+                        "ku",
+                        "lt",
+                        "mk",
+                        "mn",
+                        "mr",
+                        "ms",
+                        "my",
+                        "nb",
+                        "nl",
+                        "pl",
+                        "pt",
+                        "pt-br",
+                        "ro",
+                        "ru",
+                        "sk",
+                        "sl",
+                        "sq",
+                        "sr",
+                        "sv",
+                        "ta",
+                        "th",
+                        "tr",
+                        "uk",
+                        "ur",
+                        "vi",
+                        "zh",
+                        "zh-cn",
+                        "zh-tw"
+                    ],
+                    "variableLanguagesPerExample": true
+                }
+            },
+            "talk_name": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
+}

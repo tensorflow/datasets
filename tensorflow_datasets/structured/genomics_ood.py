@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import csv
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -74,40 +74,140 @@ The details of the dataset can be found in the paper supplemental.
 _DATA_URL = tfds.core.gcs_path('downloads/genomics_ood/genomics_ood.zip')
 
 _LABELS_IN = [
-    'Bacillus', 'Burkholderia', 'Clostridium', 'Escherichia', 'Mycobacterium',
-    'Pseudomonas', 'Salmonella', 'Staphylococcus', 'Streptococcus', 'Yersinia'
+    'Bacillus',
+    'Burkholderia',
+    'Clostridium',
+    'Escherichia',
+    'Mycobacterium',
+    'Pseudomonas',
+    'Salmonella',
+    'Staphylococcus',
+    'Streptococcus',
+    'Yersinia',
 ]
 _LABELS_OOD_VAL = [
-    'Actinoplanes', 'Advenella', 'Alicycliphilus', 'Altererythrobacter',
-    'Anabaena', 'Archangium', 'Bibersteinia', 'Blastochloris', 'Calothrix',
-    'Carnobacterium', 'Cedecea', 'Cellulophaga', 'Chondromyces',
-    'Chryseobacterium', 'Collimonas', 'Corallococcus', 'Cyclobacterium',
-    'Dehalobacter', 'Desulfosporosinus', 'Devosia', 'Dyella', 'Elizabethkingia',
-    'Glaciecola', 'Granulicella', 'Haliscomenobacter', 'Hymenobacter',
-    'Kibdelosporangium', 'Kutzneria', 'Labilithrix', 'Leptolyngbya',
-    'Leptospirillum', 'Lysobacter', 'Mannheimia', 'Massilia',
-    'Methanobacterium', 'Microbacterium', 'Myroides', 'Neorhizobium',
-    'Niastella', 'Oblitimonas', 'Octadecabacter', 'Oscillatoria', 'Pandoraea',
-    'Pelosinus', 'Phaeobacter', 'Piscirickettsia', 'Planococcus',
-    'Pseudonocardia', 'Pseudoxanthomonas', 'Rahnella', 'Raoultella',
-    'Rufibacter', 'Saccharothrix', 'Sandaracinus', 'Singulisphaera',
-    'Sphaerochaeta', 'Sphingobacterium', 'Spiroplasma', 'Tannerella',
-    'Terriglobus'
+    'Actinoplanes',
+    'Advenella',
+    'Alicycliphilus',
+    'Altererythrobacter',
+    'Anabaena',
+    'Archangium',
+    'Bibersteinia',
+    'Blastochloris',
+    'Calothrix',
+    'Carnobacterium',
+    'Cedecea',
+    'Cellulophaga',
+    'Chondromyces',
+    'Chryseobacterium',
+    'Collimonas',
+    'Corallococcus',
+    'Cyclobacterium',
+    'Dehalobacter',
+    'Desulfosporosinus',
+    'Devosia',
+    'Dyella',
+    'Elizabethkingia',
+    'Glaciecola',
+    'Granulicella',
+    'Haliscomenobacter',
+    'Hymenobacter',
+    'Kibdelosporangium',
+    'Kutzneria',
+    'Labilithrix',
+    'Leptolyngbya',
+    'Leptospirillum',
+    'Lysobacter',
+    'Mannheimia',
+    'Massilia',
+    'Methanobacterium',
+    'Microbacterium',
+    'Myroides',
+    'Neorhizobium',
+    'Niastella',
+    'Oblitimonas',
+    'Octadecabacter',
+    'Oscillatoria',
+    'Pandoraea',
+    'Pelosinus',
+    'Phaeobacter',
+    'Piscirickettsia',
+    'Planococcus',
+    'Pseudonocardia',
+    'Pseudoxanthomonas',
+    'Rahnella',
+    'Raoultella',
+    'Rufibacter',
+    'Saccharothrix',
+    'Sandaracinus',
+    'Singulisphaera',
+    'Sphaerochaeta',
+    'Sphingobacterium',
+    'Spiroplasma',
+    'Tannerella',
+    'Terriglobus',
 ]
 _LABELS_OOD_TEST = [
-    'Actinoalloteichus', 'Aeromicrobium', 'Agromyces', 'Aminobacter',
-    'Aneurinibacillus', 'Blastomonas', 'Blautia', 'Bosea', 'Brevibacterium',
-    'Cellulosimicrobium', 'Chryseolinea', 'Cryobacterium', 'Cystobacter',
-    'Dietzia', 'Ensifer', 'Faecalibacterium', 'Fictibacillus', 'Filimonas',
-    'Flammeovirga', 'Fuerstia', 'Gemmata', 'Granulosicoccus', 'Halioglobus',
-    'Hydrogenophaga', 'Labrenzia', 'Leclercia', 'Lelliottia', 'Lentzea',
-    'Luteitalea', 'Melittangium', 'Microbulbifer', 'Microvirga', 'Minicystis',
-    'Moorea', 'Mucilaginibacter', 'Natronolimnobius', 'Nitratireductor',
-    'Nitrospirillum', 'Nonomuraea', 'Olleya', 'Paludisphaera', 'Pannonibacter',
-    'Petrimonas', 'Planctomyces', 'Plantactinospora', 'Plesiomonas',
-    'Porphyrobacter', 'Rhizobacter', 'Rhodoplanes', 'Roseomonas', 'Roseovarius',
-    'Salinimonas', 'Shinella', 'Sphingorhabdus', 'Sporosarcina',
-    'Sulfitobacter', 'Tatumella', 'Tessaracoccus', 'Thiodictyon', 'Tumebacillus'
+    'Actinoalloteichus',
+    'Aeromicrobium',
+    'Agromyces',
+    'Aminobacter',
+    'Aneurinibacillus',
+    'Blastomonas',
+    'Blautia',
+    'Bosea',
+    'Brevibacterium',
+    'Cellulosimicrobium',
+    'Chryseolinea',
+    'Cryobacterium',
+    'Cystobacter',
+    'Dietzia',
+    'Ensifer',
+    'Faecalibacterium',
+    'Fictibacillus',
+    'Filimonas',
+    'Flammeovirga',
+    'Fuerstia',
+    'Gemmata',
+    'Granulosicoccus',
+    'Halioglobus',
+    'Hydrogenophaga',
+    'Labrenzia',
+    'Leclercia',
+    'Lelliottia',
+    'Lentzea',
+    'Luteitalea',
+    'Melittangium',
+    'Microbulbifer',
+    'Microvirga',
+    'Minicystis',
+    'Moorea',
+    'Mucilaginibacter',
+    'Natronolimnobius',
+    'Nitratireductor',
+    'Nitrospirillum',
+    'Nonomuraea',
+    'Olleya',
+    'Paludisphaera',
+    'Pannonibacter',
+    'Petrimonas',
+    'Planctomyces',
+    'Plantactinospora',
+    'Plesiomonas',
+    'Porphyrobacter',
+    'Rhizobacter',
+    'Rhodoplanes',
+    'Roseomonas',
+    'Roseovarius',
+    'Salinimonas',
+    'Shinella',
+    'Sphingorhabdus',
+    'Sporosarcina',
+    'Sulfitobacter',
+    'Tatumella',
+    'Tessaracoccus',
+    'Thiodictyon',
+    'Tumebacillus',
 ]
 _LABELS_ALL = _LABELS_IN + _LABELS_OOD_VAL + _LABELS_OOD_TEST
 
@@ -127,7 +227,7 @@ class GenomicsOod(tfds.core.GeneratorBasedBuilder):
             'seq': tfds.features.Text(),
             'label': tfds.features.ClassLabel(names=_LABELS_ALL),
             'seq_info': tfds.features.Text(),
-            'domain': tfds.features.Text()
+            'domain': tfds.features.Text(),
         }),
         # If there's a common (input, target) tuple from the features,
         # specify them here. They'll be used if as_supervised=True in
@@ -151,8 +251,9 @@ class GenomicsOod(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name='validation',
             gen_kwargs={
-                'filename':
-                    os.path.join(data_path, 'between_2011-2016_in_val.txt')
+                'filename': os.path.join(
+                    data_path, 'between_2011-2016_in_val.txt'
+                )
             },
         ),
         tfds.core.SplitGenerator(
@@ -164,8 +265,9 @@ class GenomicsOod(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name='validation_ood',
             gen_kwargs={
-                'filename':
-                    os.path.join(data_path, 'between_2011-2016_ood_val.txt')
+                'filename': os.path.join(
+                    data_path, 'between_2011-2016_ood_val.txt'
+                )
             },
         ),
         tfds.core.SplitGenerator(
@@ -178,7 +280,7 @@ class GenomicsOod(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, filename):
     """Yields examples."""
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f, delimiter='\t')
       for row_id, row in enumerate(reader):
         example = {}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,29 +13,89 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Show example util.
-"""
+"""Show example util."""
 
-from typing import Any
+from __future__ import annotations
 
-import tensorflow.compat.v2 as tf
+from collections.abc import Iterable
+import typing
+from typing import Any, Union
+
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import splits
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.visualization import graph_visualizer
 from tensorflow_datasets.core.visualization import image_visualizer
+
 from tensorflow_metadata.proto.v0 import statistics_pb2
 
+if typing.TYPE_CHECKING:
+  _Dataset = Union[
+      tf.data.Dataset,
+      Iterable,
+  ]
+else:
+  _Dataset = Any
 
 _ALL_VISUALIZERS = [
     image_visualizer.ImageGridVisualizer(),
+    graph_visualizer.GraphVisualizer(),
 ]
+
+_DEFAULT_NUM_COLS = 3
+_DEFAULT_NUM_ROWS = 3
+
+
+def _to_tf_dataset(
+    ds: _Dataset,
+    min_length: int,
+    is_batched: bool = False,
+) -> tf.data.Dataset:
+  """Converts any iterable to a small tf.data.Dataset to use visualizations.
+
+  Warning: this util function is not optimized, so it should only be used for a
+  small number of records (i.e., small `min_length`).
+
+  Args:
+    ds: Any dataset as an iterable.
+    min_length: The minimum number of examples to generate.
+    is_batched: Whether the data is batched.
+
+  Returns:
+    the tf.data.Dataset of cardinality at least `min_length`.
+  """
+  if isinstance(ds, tf.data.Dataset) and not isinstance(ds, Iterable):
+    if is_batched:
+      return ds.unbatch()
+    else:
+      return ds
+  tf_dataset = None
+  if is_batched:
+    from_tensor = tf.data.Dataset.from_tensor_slices
+  else:
+    from_tensor = tf.data.Dataset.from_tensors
+  for record in ds:
+    if tf_dataset is None:
+      tf_dataset = from_tensor(record)
+    else:
+      tf_dataset = tf_dataset.concatenate(from_tensor(record))
+    # Terminate if `tf_dataset` reached at least the expected `min_length`.
+    if tf_dataset.cardinality().numpy() >= min_length:
+      break
+  if tf_dataset is None:
+    raise ValueError(
+        'Empty dataset, could not generate a valid tf.data.Dataset.'
+    )
+  return tf_dataset
 
 
 def show_examples(
-    ds: tf.data.Dataset,
+    ds: _Dataset,
     ds_info: dataset_info.DatasetInfo,
-    **options_kwargs: Any
+    is_batched: bool = False,
+    **options_kwargs: Any,
 ):
   """Visualize images (and labels) from an image classification dataset.
 
@@ -50,41 +110,44 @@ def show_examples(
 
   Args:
     ds: `tf.data.Dataset`. The tf.data.Dataset object to visualize. Examples
-      should not be batched. Examples will be consumed in order until
-      (rows * cols) are read or the dataset is consumed.
+      should not be batched. Examples will be consumed in order until (rows *
+      cols) are read or the dataset is consumed.
     ds_info: The dataset info object to which extract the label and features
       info. Available either through `tfds.load('mnist', with_info=True)` or
       `tfds.builder('mnist').info`
+    is_batched: Whether the data is batched.
     **options_kwargs: Additional display options, specific to the dataset type
-      to visualize. Are forwarded to `tfds.visualization.Visualizer.show`.
-      See the `tfds.visualization` for a list of available visualizers.
+      to visualize. Are forwarded to `tfds.visualization.Visualizer.show`. See
+      the `tfds.visualization` for a list of available visualizers.
 
   Returns:
     fig: The `matplotlib.Figure` object
   """
+  rows = options_kwargs.pop('rows', _DEFAULT_NUM_ROWS)
+  cols = options_kwargs.pop('cols', _DEFAULT_NUM_COLS)
+  ds = _to_tf_dataset(ds, rows * cols, is_batched=is_batched)
   if not isinstance(ds_info, dataset_info.DatasetInfo):  # Arguments inverted
     # `absl.logging` does not appear on Colab by default, so uses print instead.
-    print('WARNING: For consistency with `tfds.load`, the `tfds.show_examples` '
-          'signature has been modified from (info, ds) to (ds, info).\n'
-          'The old signature is deprecated and will be removed. '
-          'Please change your call to `tfds.show_examples(ds, info)`')
+    print(
+        'WARNING: For consistency with `tfds.load`, the `tfds.show_examples` '
+        'signature has been modified from (info, ds) to (ds, info).\n'
+        'The old signature is deprecated and will be removed. '
+        'Please change your call to `tfds.show_examples(ds, info)`'
+    )
     ds, ds_info = ds_info, ds
 
   # Pack `as_supervised=True` datasets
-  if (
-      ds_info.supervised_keys
-      and isinstance(ds.element_spec, tuple)
-      and len(ds.element_spec) == 2
-  ):
-    x_key, y_key = ds_info.supervised_keys
-    ds = ds.map(lambda x, y: {x_key: x, y_key: y})
+  ds = dataset_info.pack_as_supervised_ds(ds, ds_info)
 
   for visualizer in _ALL_VISUALIZERS:
     if visualizer.match(ds_info):
-      return visualizer.show(ds, ds_info, **options_kwargs)
-    raise ValueError(
-        'Visualisation not supported for dataset `{}`'.format(ds_info.name)
-    )
+      return visualizer.show(
+          ds, ds_info, **options_kwargs, rows=rows, cols=cols
+      )
+
+  raise ValueError(
+      'Visualisation not supported for dataset `{}`'.format(ds_info.name)
+  )
 
 
 def show_statistics(
@@ -122,8 +185,8 @@ def show_statistics(
   Args:
     ds_info: The `tfds.core.DatasetInfo` object containing the statistics.
     split: Split for which generate the statistics.
-    disable_logging: `bool`, if True, disable the tfdv logs which can be
-      too verbose.
+    disable_logging: `bool`, if True, disable the tfdv logs which can be too
+      verbose.
 
   Returns:
     `None`
@@ -132,11 +195,13 @@ def show_statistics(
 
   if split not in ds_info.splits:
     raise ValueError(
-        'Invalid requested split: \'{}\'. Only {} are availables.'.format(
-            split, list(ds_info.splits)))
+        "Invalid requested split: '{}'. Only {} are availables.".format(
+            split, list(ds_info.splits)
+        )
+    )
 
   # Creates the statistics.
   statistics = statistics_pb2.DatasetFeatureStatisticsList()
-  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)
+  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)  # pytype: disable=attribute-error  # bind-properties
   with utils.disable_logging() if disable_logging else utils.nullcontext():
     return tfdv.visualize_statistics(statistics)

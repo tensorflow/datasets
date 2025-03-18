@@ -1,0 +1,435 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "attributes": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "Receding_Hairline": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "5_o_Clock_Shadow": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wavy_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wearing_Necklace": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Brown_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Attractive": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Mouth_Slightly_Open": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Goatee": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Straight_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Gray_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Sideburns": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Blond_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wearing_Necktie": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Oval_Face": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Smiling": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Mustache": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wearing_Hat": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wearing_Earrings": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Bushy_Eyebrows": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Rosy_Cheeks": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Big_Lips": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "No_Beard": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Wearing_Lipstick": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Blurry": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Double_Chin": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Eyeglasses": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "High_Cheekbones": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Arched_Eyebrows": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Bald": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Big_Nose": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Young": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Chubby": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Bangs": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Bags_Under_Eyes": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Pale_Skin": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Narrow_Eyes": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Black_Hair": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Heavy_Makeup": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Pointy_Nose": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        },
+                        "Male": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "bool",
+                                "encoding": "none"
+                            }
+                        }
+                    }
+                }
+            },
+            "image": {
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                "image": {
+                    "shape": {
+                        "dimensions": [
+                            "218",
+                            "178",
+                            "3"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "jpeg"
+                }
+            },
+            "landmarks": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "rightmouth_x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "rightmouth_y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "leftmouth_y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "nose_x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "righteye_y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "nose_y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "righteye_x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "leftmouth_x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "lefteye_y": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        },
+                        "lefteye_x": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int64",
+                                "encoding": "none"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

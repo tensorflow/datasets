@@ -1,0 +1,352 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "episode_metadata": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "file_path": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {},
+                            "description": "Path to the original data file."
+                        },
+                        "episode_id": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {},
+                            "description": "Episode ID."
+                        }
+                    }
+                }
+            },
+            "steps": {
+                "pythonClassName": "tensorflow_datasets.core.features.dataset_feature.Dataset",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                        "featuresDict": {
+                            "features": {
+                                "is_terminal": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "discount": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Discount if provided, default to 1."
+                                },
+                                "action": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "7"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Robot action, consists of [3x end effector delta target position, 3x end effector delta target orientation in axis-angle format, 1x gripper target position (mimic for two fingers)]. For delta target position, an action of -1 maps to a robot movement of -0.1m, and action of 1 maps to a movement of 0.1m. For delta target orientation, its encoded angle is mapped to a range of [-0.1rad, 0.1rad] for robot execution. For example, an action of [1, 0, 0] means rotating along the x-axis by 0.1 rad. For gripper target position, an action of -1 means close, and an action of 1 means open."
+                                },
+                                "language_instruction": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                    "text": {},
+                                    "description": "Language Instruction."
+                                },
+                                "is_first": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "is_last": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "bool",
+                                        "encoding": "none"
+                                    }
+                                },
+                                "language_embedding": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "shape": {
+                                            "dimensions": [
+                                                "512"
+                                            ]
+                                        },
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5"
+                                },
+                                "observation": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "256",
+                                                            "256",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Main camera RGB observation."
+                                            },
+                                            "main_camera_extrinsic_cv": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "4",
+                                                            "4"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Main camera extrinsic matrix in OpenCV convention."
+                                            },
+                                            "wrist_camera_intrinsic_cv": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Wrist camera intrinsic matrix in OpenCV convention."
+                                            },
+                                            "target_object_or_part_final_pose": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The final pose towards which the target object or object part needs be manipulated, consists of [x, y, z, qw, qx, qy, qz]. The pose is represented in the world frame. An episode is considered successful if the target object or object part is manipulated to this pose."
+                                            },
+                                            "base_pose": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Robot base pose in the world frame, consists of [x, y, z, qw, qx, qy, qz]. The first three dimensions represent xyz positions in meters. The last four dimensions are the quaternion representation of rotation."
+                                            },
+                                            "main_camera_intrinsic_cv": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "3",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Main camera intrinsic matrix in OpenCV convention."
+                                            },
+                                            "state": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "18"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Robot state, consists of [7x robot joint angles, 2x gripper position, 7x robot joint angle velocity, 2x gripper velocity]. Angle in radians, position in meters."
+                                            },
+                                            "main_camera_cam2world_gl": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "4",
+                                                            "4"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Transformation from the main camera frame to the world frame in OpenGL/Blender convention."
+                                            },
+                                            "target_object_or_part_final_pose_valid": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Whether each dimension of target_object_or_part_final_pose is valid in an environment. 1 = valid; 0 = invalid (in which case one should ignore the corresponding dimensions in target_object_or_part_final_pose). \"Invalid\" means that there is no success check on the final pose of target object or object part in the corresponding dimensions."
+                                            },
+                                            "wrist_depth": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "256",
+                                                            "256",
+                                                            "1"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint16",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Wrist camera Depth observation. Divide the depth value by 2**10 to get the depth in meters."
+                                            },
+                                            "wrist_camera_cam2world_gl": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "4",
+                                                            "4"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Transformation from the wrist camera frame to the world frame in OpenGL/Blender convention."
+                                            },
+                                            "wrist_image": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "256",
+                                                            "256",
+                                                            "3"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Wrist camera RGB observation."
+                                            },
+                                            "depth": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image",
+                                                "image": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "256",
+                                                            "256",
+                                                            "1"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint16",
+                                                    "encodingFormat": "png"
+                                                },
+                                                "description": "Main camera Depth observation. Divide the depth value by 2**10 to get the depth in meters."
+                                            },
+                                            "tcp_pose": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Robot tool-center-point pose in the world frame, consists of [x, y, z, qw, qx, qy, qz]. Tool-center-point is the center between the two gripper fingers."
+                                            },
+                                            "target_object_or_part_initial_pose": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "The initial pose of the target object or object part to be manipulated, consists of [x, y, z, qw, qx, qy, qz]. The pose is represented in the world frame. This variable is used to specify the target object or object part when multiple objects or object parts are present in an environment"
+                                            },
+                                            "wrist_camera_extrinsic_cv": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "4",
+                                                            "4"
+                                                        ]
+                                                    },
+                                                    "dtype": "float32",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Wrist camera extrinsic matrix in OpenCV convention."
+                                            },
+                                            "target_object_or_part_initial_pose_valid": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                "tensor": {
+                                                    "shape": {
+                                                        "dimensions": [
+                                                            "7"
+                                                        ]
+                                                    },
+                                                    "dtype": "uint8",
+                                                    "encoding": "none"
+                                                },
+                                                "description": "Whether each dimension of target_object_or_part_initial_pose is valid in an environment. 1 = valid; 0 = invalid (in which case one should ignore the corresponding dimensions in target_object_or_part_initial_pose)."
+                                            }
+                                        }
+                                    }
+                                },
+                                "reward": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.scalar.Scalar",
+                                    "tensor": {
+                                        "shape": {},
+                                        "dtype": "float32",
+                                        "encoding": "none"
+                                    },
+                                    "description": "Reward if provided, 1 on final step for demos."
+                                }
+                            }
+                        }
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    }
+}

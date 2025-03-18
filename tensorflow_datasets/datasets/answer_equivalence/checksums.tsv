@@ -1,0 +1,6 @@
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/ae_dev.jsonl	5363295	9ec7b8f1136a0363753fbbde0d73c32e5cf26551938378eda27d1c860743cd9f	ae_dev.jsonl
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/ae_test.jsonl	10469219	7470acdfae03fa662740fb453b508de4e2c4dd1ec113a49142c017d59554202f	ae_test.jsonl
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/dev_by_system/dev_bidaf.jsonl	8340645	2cfced72f1c5810b0de4b4a583a76d5a653a73caaade5bb366425765b8b95278	dev_bidaf.jsonl
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/dev_by_system/dev_luke.jsonl	5111011	c773157fcebecfd8616ad1f10652fa35c418ee73a7d396795c2c2450c44c5464	dev_luke.jsonl
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/dev_by_system/dev_xlnet.jsonl	8864080	a22406edf0f4cafe6e2b53e557fc4b139479f7731227c325cb14385107506746	dev_xlnet.jsonl
+https://raw.githubusercontent.com/google-research-datasets/answer-equivalence-dataset/main/v1/train.jsonl	9937347	431c524a00800da114685b89b0066969284f6b947383e42bde9fd724ba57f9e3	train.jsonl

@@ -1,0 +1,41 @@
+{
+  "citation": "@article{padalkar2023guided,\n  title={A guided reinforcement learning approach using shared control templates for learning manipulation skills in the real world},\n  author={Padalkar, Abhishek and Quere, Gabriel and Raffin, Antonin and Silv{\\'e}rio, Jo{\\~a}o and Stulp, Freek},\n  journal={Research square preprint rs-3289569/v1},\n  year={2023}\n}",
+  "description": "place grid clamp onto grids on table",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.researchsquare.com/article/rs-3289569/v1"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "dlr_sara_grid_clamp_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1773049053",
+      "shardLengths": [
+        "3",
+        "9",
+        "3",
+        "6",
+        "2",
+        "4",
+        "16",
+        "3",
+        "7",
+        "7",
+        "7",
+        "8",
+        "8",
+        "7",
+        "9",
+        "8"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

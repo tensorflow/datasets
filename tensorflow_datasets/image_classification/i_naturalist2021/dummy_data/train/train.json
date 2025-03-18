@@ -1,0 +1,12 @@
+{
+  "annotations": [{"id": 0, "image_id": 0, "category_id": 0}, {"id": 1, "image_id": 1, "category_id": 1}, {"id": 2, "image_id": 2, "category_id": 2}], 
+  "images": [	{"id": 0, "width": 500, "height": 500, "file_name": "train/02912_Animalia_Chordata_Actinopterygii_Siluriformes_Ictaluridae_Ameiurus_nebulosus/d615f184-8af4-4c60-b9f8-3081c1607644.jpg", "license": 0, "rights_holder": "Ken-ichi Ueda", "date": "2010-07-14 20:19:00+00:00", "latitude": 43.83486, "longitude": -71.22231, "location_uncertainty": 77}, 
+        {"id": 1, "width": 500, "height": 333, "file_name": "train/04831_Animalia_Chordata_Mammalia_Rodentia_Sciuridae_Marmota_flaviventris/4653466f-f7b5-4e6c-985e-e059c1493b8f.jpg", "license": 0, "rights_holder": "Michelle S. Koo", "date": "2010-07-06 22:17:00+00:00", "latitude": 38.86995, "longitude": -120.19326, "location_uncertainty": null}, 
+        {"id": 2, "width": 500, "height": 375, "file_name": "train/05015_Animalia_Chordata_Reptilia_Squamata_Iguanidae_Dipsosaurus_dorsalis/277c6a90-0432-4472-96b6-ed51a5cd21cf.jpg", "license": 1, "rights_holder": "105615097470186309865", "date": "2009-05-04 00:00:00+00:00", "latitude": 35.14218, "longitude": -116.10415, "location_uncertainty": null}
+        ], 
+  "categories": [
+        {"id": 0, "name": "Ameiurus nebulosus", "common_name": "Brown Bullhead Catfish", "supercategory": "Ray-finned Fishes", "kingdom": "Animalia", "phylum": "Chordata", "class": "Actinopterygii", "order": "Siluriformes", "family": "Ictaluridae", "genus": "Ameiurus", "specific_epithet": "nebulosus", "image_dir_name": "02912_Animalia_Chordata_Actinopterygii_Siluriformes_Ictaluridae_Ameiurus_nebulosus"}, 
+        {"id": 1, "name": "Marmota flaviventris", "common_name": "Yellow-bellied Marmot", "supercategory": "Mammals", "kingdom": "Animalia", "phylum": "Chordata", "class": "Mammalia", "order": "Rodentia", "family": "Sciuridae", "genus": "Marmota", "specific_epithet": "flaviventris", "image_dir_name": "04831_Animalia_Chordata_Mammalia_Rodentia_Sciuridae_Marmota_flaviventris"}, 
+        {"id": 2, "name": "Dipsosaurus dorsalis", "common_name": "Desert Iguana", "supercategory": "Reptiles", "kingdom": "Animalia", "phylum": "Chordata", "class": "Reptilia", "order": "Squamata", "family": "Iguanidae", "genus": "Dipsosaurus", "specific_epithet": "dorsalis", "image_dir_name": "05015_Animalia_Chordata_Reptilia_Squamata_Iguanidae_Dipsosaurus_dorsalis"}
+        ]
+  }

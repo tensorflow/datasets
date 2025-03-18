@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ class ListBuilderTest(tfds.testing.TestCase):
     registered_datasets = set(tfds.list_builders())
     # The tests datasets should not be present in the registered datasets
     self.assertEmpty(test_datasets & registered_datasets)
+
 
 if __name__ == "__main__":
   tfds.testing.test_main()

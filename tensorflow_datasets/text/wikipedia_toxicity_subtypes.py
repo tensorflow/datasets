@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,11 @@
 
 """WikipediaToxicitySubtypes from Jigsaw Toxic Comment Classification Challenge."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import csv
 import os
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -44,80 +41,169 @@ _CITATION = """
 }
 """
 
-_DESCRIPTION = """
-This version of the Wikipedia Toxicity Subtypes dataset provides access to the
-primary toxicity label, as well the five toxicity subtype labels annotated by
-crowd workers. The toxicity and toxicity subtype labels are binary values
-(0 or 1) indicating whether the majority of annotators assigned that
-attributes to the comment text.
+_SUBTYPES_HOMEPAGE = 'https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data'
+_MULTILINGUAL_HOMEPAGE = 'https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data'
 
-The comments in this dataset come from an archive of Wikipedia talk pages
-comments. These have been annotated by Jigsaw for toxicity, as well as a variety
-of toxicity subtypes, including severe toxicity, obscenity, threatening
-language, insulting language, and identity attacks. This dataset is a replica of
-the data released for the Jigsaw Toxic Comment Classification Challenge on
-Kaggle, with the training set unchanged, and the test dataset merged with the
-test_labels released after the end of the competition. Test data not used for
-scoring has been dropped. This dataset is released under CC0, as is the
-underlying comment text.
+_COMMON_DESCRIPTION = """
+The comments in this dataset come from an archive of Wikipedia talk page
+comments. These have been annotated by Jigsaw for toxicity, as well as (for the
+main config) a variety of toxicity subtypes, including severe toxicity,
+obscenity, threatening language, insulting language, and identity attacks. This
+dataset is a replica of the data released for the Jigsaw Toxic Comment
+Classification Challenge and Jigsaw Multilingual Toxic Comment Classification
+competition on Kaggle, with the test dataset merged with the test_labels
+released after the end of the competitions. Test data not used for scoring has
+been dropped. This dataset is released under CC0, as is the underlying comment
+text.
+"""
 
-See the Kaggle documentation or
-https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
+_SUBTYPES_DESCRIPTION = """
+The comments in the WikipediaToxicitySubtypes config are from an archive of
+English Wikipedia talk page comments which have been annotated by Jigsaw for
+toxicity, as well as five toxicity subtype labels (severe toxicity, obscene,
+threat, insult, identity_attack). The toxicity and toxicity subtype labels are
+binary values (0 or 1) indicating whether the majority of annotators assigned
+that attribute to the comment text. This config is a replica of the data
+released for the Jigsaw Toxic Comment Classification Challenge on Kaggle, with
+the test dataset joined with the test_labels released after the competition, and
+test data not used for scoring dropped.
+
+See the Kaggle documentation
+https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data
+or https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
 details.
 """
 
-_DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/wikipedia_toxicity_subtypes.zip'
+_MULTILINGUAL_DESCRIPTION = """
+The comments in the WikipediaToxicityMultilingual config here are from an
+archive of non-English Wikipedia talk page comments annotated by Jigsaw for
+toxicity, with a binary value (0 or 1) indicating whether the majority of
+annotators rated the comment text as toxic. The comments in this config are in
+multiple different languages (Turkish, Italian, Spanish, Portuguese, Russian,
+and French). This config is a replica of the data released for the Jigsaw
+Multilingual Toxic Comment Classification on Kaggle, with the test dataset
+joined with the test_labels released after the competition.
+
+See the Kaggle documentation
+https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data
+for more details.
+"""
+
+_DOWNLOAD_URL = 'https://storage.googleapis.com/jigsaw-unintended-bias-in-toxicity-classification/wikipedia_toxicity_subtypes_v0.3.zip'
+
+TOXICITY_SUBTYPES = [
+    'severe_toxicity',
+    'obscene',
+    'threat',
+    'insult',
+    'identity_attack',
+]
+
+
+class WikipediaToxicityConfig(tfds.core.BuilderConfig):
+  """Configuration for `WikipediaToxicitySubtypes`."""
+
+  def __init__(self, name: str, description: str, multilingual: bool):
+    super(WikipediaToxicityConfig, self).__init__(
+        name=name, description=description
+    )
+    self.multilingual = multilingual
 
 
 class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
-  """Classification of 220K Wikipedia talk page comments for types of toxicity.
+  """Classification of 295K Wikipedia talk page comments for types of toxicity.
 
   This version of the Wikipedia Toxicity Subtypes dataset provides access to the
-  primary toxicity label, as well the five toxicity subtype labels annotated by
-  crowd workers. The toxicity and toxicity subtype labels are binary values
-  (0 or 1) indicating whether the majority of annotators assigned that
-  attributes to the comment text.
+  primary toxicity label annotated by crowd workers, with five additional
+  toxicity subtype labels in the main config. The toxicity and toxicity subtype
+  labels are binary values (0 or 1) indicating whether the majority of
+  annotators assigned that attributes to the comment text.
 
-  See the Kaggle documentation or
-  https://figshare.com/articles/Wikipedia_Talk_Labels_Toxicity/4563973 for more
-  details.
+  While the main config is entirely in English, the
+  WikipediaToxicityMultilingual config provides validation and test splits with
+  data in several non-English languages (tr, it, es, pt, ru, fr). This config
+  provides access only to the primary toxicity label for each comment.
   """
-  VERSION = tfds.core.Version('0.2.0', 'Updated features for consistency with '
-                              'CivilComments dataset.')
+
+  BUILDER_CONFIGS = [
+      WikipediaToxicityConfig(
+          name='EnglishSubtypes',
+          description=_SUBTYPES_DESCRIPTION,
+          multilingual=False,
+      ),
+      WikipediaToxicityConfig(
+          name='Multilingual',
+          description=_MULTILINGUAL_DESCRIPTION,
+          multilingual=True,
+      ),
+  ]
+
+  VERSION = tfds.core.Version('0.3.1')
+  RELEASE_NOTES = {
+      '0.3.1': (
+          'Added a unique id for each comment. (For the Multilingual '
+          'config, these are only unique within each split.)'
+      ),
+      '0.3.0': 'Added WikipediaToxicityMultilingual config.',
+      '0.2.0': 'Updated features for consistency with CivilComments dataset.',
+  }
 
   def _info(self):
+    description = _COMMON_DESCRIPTION
+    homepage = (
+        _MULTILINGUAL_HOMEPAGE
+        if self.builder_config.multilingual
+        else _SUBTYPES_HOMEPAGE
+    )
+
+    features = {
+        'text': tfds.features.Text(),
+        'id': tfds.features.Text(),
+        'language': tfds.features.Text(),
+    }
+    labels = ['toxicity']
+    if not self.builder_config.multilingual:
+      labels += TOXICITY_SUBTYPES
+
+    for label in labels:
+      features[label] = tf.float32
+
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            'text': tfds.features.Text(),
-            'toxicity': tf.float32,
-            'severe_toxicity': tf.float32,
-            'obscene': tf.float32,
-            'threat': tf.float32,
-            'insult': tf.float32,
-            'identity_attack': tf.float32,
-        }),
+        description=description,
+        features=tfds.features.FeaturesDict(features),
         supervised_keys=('text', 'toxicity'),
-        homepage='https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data',
+        homepage=homepage,
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    return [
+    file_path_prefix = os.path.join(
+        dl_path,
+        'wikidata_' + 'multilingual_' * self.builder_config.multilingual,
+    )
+
+    split_generators = [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
-            gen_kwargs={
-                'filename': os.path.join(dl_path, 'wikidata_train.csv')
-            },
+            gen_kwargs={'filename': file_path_prefix + 'train.csv'},
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'filename': os.path.join(dl_path, 'wikidata_test.csv')},
+            gen_kwargs={'filename': file_path_prefix + 'test.csv'},
         ),
     ]
+
+    if self.builder_config.multilingual:
+      # Validation split instead of train for WikipediaToxicityMultilingual.
+      split_generators[0] = tfds.core.SplitGenerator(
+          name=tfds.Split.VALIDATION,
+          gen_kwargs={'filename': file_path_prefix + 'validation.csv'},
+      )
+
+    return split_generators
 
   def _generate_examples(self, filename):
     """Yields examples.
@@ -130,14 +216,19 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     Yields:
       A dictionary of features, all floating point except the input text.
     """
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f)
       for row in reader:
         example = {}
         example['text'] = row['comment_text']
+        example['id'] = row['id']
+        example['language'] = row['lang']
         example['toxicity'] = float(row['toxic'])
-        example['severe_toxicity'] = float(row['severe_toxic'])
-        example['identity_attack'] = float(row['identity_hate'])
-        for label in ['obscene', 'threat', 'insult']:
-          example[label] = float(row[label])
+
+        if not self.builder_config.multilingual:
+          example['severe_toxicity'] = float(row['severe_toxic'])
+          example['identity_attack'] = float(row['identity_hate'])
+          for label in ['obscene', 'threat', 'insult']:
+            example[label] = float(row[label])
+
         yield row['id'], example

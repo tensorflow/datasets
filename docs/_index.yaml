@@ -21,17 +21,17 @@ landing_page:
         To get started see the
         <a href="./overview">guide</a>
         and our
-        <a href="./catalog">list of datasets</a>.
+        <a href="./catalog/overview#all_datasets">list of datasets</a>.
     - code_block: |
         <pre class = "prettyprint">
-        import tensorflow.compat.v2 as tf
+        import tensorflow as tf
         import tensorflow_datasets as tfds
 
         # Construct a tf.data.Dataset
         ds = tfds.load('mnist', split='train', shuffle_files=True)
 
         # Build your input pipeline
-        ds = ds.shuffle(1024).batch(32).prefetch(tf.data.experimental.AUTOTUNE)
+        ds = ds.shuffle(1024).batch(32).prefetch(tf.data.AUTOTUNE)
         for example in ds.take(1):
           image, label = example["image"], example["label"]
         </pre>
@@ -53,8 +53,3 @@ landing_page:
       buttons:
       - label: View on GitHub
         path: https://github.com/tensorflow/datasets
-    - heading: "TensorFlow Datasets (TF Dev Summit '19)"
-      youtube_id: -nTe44WT0ZI
-      buttons:
-      - label: Watch the video
-        path: https://www.youtube.com/watch?v=-nTe44WT0ZI

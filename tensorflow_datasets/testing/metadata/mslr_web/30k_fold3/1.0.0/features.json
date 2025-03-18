@@ -1,0 +1,1375 @@
+{
+    "type": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "content": {
+        "covered_query_term_number_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_number_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_number_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_number_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_number_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_ratio_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_ratio_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_ratio_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_ratio_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "covered_query_term_ratio_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "stream_length_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "stream_length_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "stream_length_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "stream_length_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "stream_length_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_stream_length_normalized_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_stream_length_normalized_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_stream_length_normalized_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_stream_length_normalized_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_stream_length_normalized_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_stream_length_normalized_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_stream_length_normalized_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_stream_length_normalized_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_stream_length_normalized_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_stream_length_normalized_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_stream_length_normalized_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_stream_length_normalized_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_stream_length_normalized_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_stream_length_normalized_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_stream_length_normalized_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_stream_length_normalized_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_stream_length_normalized_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_stream_length_normalized_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_stream_length_normalized_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_stream_length_normalized_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_stream_length_normalized_term_frequency_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_stream_length_normalized_term_frequency_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_stream_length_normalized_term_frequency_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_stream_length_normalized_term_frequency_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_stream_length_normalized_term_frequency_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_tf_idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_tf_idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_tf_idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_tf_idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "sum_of_tf_idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_tf_idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_tf_idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_tf_idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_tf_idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "min_of_tf_idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_tf_idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_tf_idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_tf_idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_tf_idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "max_of_tf_idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_tf_idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_tf_idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_tf_idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_tf_idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "mean_of_tf_idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_tf_idf_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_tf_idf_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_tf_idf_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_tf_idf_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "variance_of_tf_idf_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "boolean_model_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "boolean_model_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "boolean_model_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "boolean_model_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "boolean_model_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "vector_space_model_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "vector_space_model_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "vector_space_model_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "vector_space_model_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "vector_space_model_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "bm25_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "bm25_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "bm25_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "bm25_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "bm25_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_abs_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_abs_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_abs_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_abs_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_abs_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_dir_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_dir_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_dir_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_dir_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_dir_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_jm_body": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_jm_anchor": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_jm_title": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_jm_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "lmir_jm_whole_document": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "number_of_slash_in_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "length_of_url": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "inlink_number": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "outlink_number": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "page_rank": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "site_rank": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "quality_score": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "quality_score_2": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "query_url_click_count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "url_click_count": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "url_dwell_time": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        },
+        "label": {
+            "type": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+            "content": {
+                "shape": [
+                    null
+                ],
+                "dtype": "float64",
+                "encoding": "zlib"
+            }
+        }
+    }
+}

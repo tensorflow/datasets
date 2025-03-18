@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,23 +19,26 @@ r"""Script which generates datasets dataframes HTML.
 
 import functools
 
+from absl import app
 from absl import flags
 import pandas
-
-import tensorflow as tf
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.scripts.documentation import script_utils
 
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    'datasets', None,
-    'Comma separated list of datasets to generates. None for all datasets.')
+    'datasets',
+    None,
+    'Comma separated list of datasets to generates. None for all datasets.',
+)
 flags.DEFINE_string(
-    'dst_dir', tfds.core.gcs_path('visualization/dataframe'),
-    'Destination dir to save the dataframe html.')
+    'dst_dir', None, 'Destination dir to save the dataframe html.'
+)
 flags.DEFINE_boolean(
-    'overwrite', False, 'If True, overwrite the existing visualizations.')
+    'overwrite', False, 'If True, overwrite the existing visualizations.'
+)
 
 
 def _save_html(dst_path: str, df: pandas.DataFrame) -> None:
@@ -48,18 +51,17 @@ def main(_):
   datasets = FLAGS.datasets.split(',') if FLAGS.datasets else None
   generate_and_save_dataframe_fn = functools.partial(
       script_utils.generate_and_save_artifact,
-      dst_dir=FLAGS.dst_dir,
+      dst_dir=FLAGS.dst_dir or tfds.core.gcs_path('visualization/dataframe'),
       overwrite=FLAGS.overwrite,
       file_extension='.html',
       get_artifact_fn=tfds.as_dataframe,
       save_artifact_fn=_save_html,
   )
-  script_utils.multi_process_map(
+  script_utils.multi_thread_map(
       worker_fn=generate_and_save_dataframe_fn,
       datasets=datasets,
   )
 
 
 if __name__ == '__main__':
-  flags.mark_flags_as_required(['dst_dir'])
-  script_utils.multi_process_run(main)
+  app.run(main)

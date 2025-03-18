@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@
 import os
 
 from absl import logging
-
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -54,10 +53,48 @@ _URL = "https://research.google/pubs/pub49029/"
 _DATA_DIRECTORY = tfds.core.gcs_path("downloads/wiki40b/tfrecord_prod")
 
 WIKIPEDIA_LANGUAGES = [
-    "en", "ar", "zh-cn", "zh-tw", "nl", "fr", "de", "it", "ja", "ko", "pl",
-    "pt", "ru", "es", "th", "tr", "bg", "ca", "cs", "da", "el", "et", "fa",
-    "fi", "he", "hi", "hr", "hu", "id", "lt", "lv", "ms", "no", "ro", "sk",
-    "sl", "sr", "sv", "tl", "uk", "vi"]
+    "en",
+    "ar",
+    "zh-cn",
+    "zh-tw",
+    "nl",
+    "fr",
+    "de",
+    "it",
+    "ja",
+    "ko",
+    "pl",
+    "pt",
+    "ru",
+    "es",
+    "th",
+    "tr",
+    "bg",
+    "ca",
+    "cs",
+    "da",
+    "el",
+    "et",
+    "fa",
+    "fi",
+    "he",
+    "hi",
+    "hr",
+    "hu",
+    "id",
+    "lt",
+    "lv",
+    "ms",
+    "no",
+    "ro",
+    "sk",
+    "sl",
+    "sr",
+    "sv",
+    "tl",
+    "uk",
+    "vi",
+]
 
 
 class Wiki40bConfig(tfds.core.BuilderConfig):
@@ -73,7 +110,8 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
     super(Wiki40bConfig, self).__init__(
         name=language,
         description="Wiki40B dataset for {}.".format(language),
-        **kwargs)
+        **kwargs,
+    )
     self.language = language
 
 
@@ -87,7 +125,8 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
       Wiki40bConfig(  # pylint:disable=g-complex-comprehension
           version=_VERSION,
           language=lang,
-      ) for lang in WIKIPEDIA_LANGUAGES
+      )
+      for lang in WIKIPEDIA_LANGUAGES
   ]
 
   def _info(self):
@@ -95,17 +134,14 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "wikidata_id":
-                tfds.features.Text(),
-            "text":
-                tfds.features.Text(),
-            "version_id":
-                tfds.features.Text(),
+            "wikidata_id": tfds.features.Text(),
+            "text": tfds.features.Text(),
+            "version_id": tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage=_URL,
         citation=_CITATION,
-        redistribution_info={"license": _LICENSE},
+        license=_LICENSE,
     )
 
   def _split_generators(self, dl_manager):
@@ -120,19 +156,25 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "train", "{}_examples-*".format(lang))},
+                    _DATA_DIRECTORY, "train", "{}_examples-*".format(lang)
+                )
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "dev", "{}_examples-*".format(lang))}
+                    _DATA_DIRECTORY, "dev", "{}_examples-*".format(lang)
+                )
+            },
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "filepaths": os.path.join(
-                    _DATA_DIRECTORY, "test", "{}_examples-*".format(lang))}
+                    _DATA_DIRECTORY, "test", "{}_examples-*".format(lang)
+                )
+            },
         ),
     ]
 
@@ -143,20 +185,31 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
 
     def _extract_content(example):
       """Extracts content from a TFExample."""
-      wikidata_id = example.features.feature[
-          "wikidata_id"].bytes_list.value[0].decode("utf-8")
-      text = example.features.feature[
-          "text"].bytes_list.value[0].decode("utf-8")
-      version_id = example.features.feature[
-          "version_id"].bytes_list.value[0].decode("utf-8")
+      wikidata_id = (
+          example.features.feature["wikidata_id"]
+          .bytes_list.value[0]
+          .decode("utf-8")
+      )
+      text = (
+          example.features.feature["text"].bytes_list.value[0].decode("utf-8")
+      )
+      version_id = (
+          example.features.feature["version_id"]
+          .bytes_list.value[0]
+          .decode("utf-8")
+      )
 
       # wikidata_id could be duplicated with different texts.
-      yield wikidata_id + text, {"wikidata_id": wikidata_id,
-                                 "text": text,
-                                 "version_id": version_id,}
+      yield wikidata_id + text, {
+          "wikidata_id": wikidata_id,
+          "text": text,
+          "version_id": version_id,
+      }
 
     return (
         pipeline
         | beam.io.ReadFromTFRecord(
-            filepaths, coder=beam.coders.ProtoCoder(tf.train.Example))
-        | beam.FlatMap(_extract_content))
+            filepaths, coder=beam.coders.ProtoCoder(tf.train.Example)
+        )
+        | beam.FlatMap(_extract_content)
+    )

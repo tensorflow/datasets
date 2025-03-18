@@ -1,106 +1,37 @@
 {
-  "citation": "\n@inproceedings{coates2011stl10,\n  title={{An Analysis of Single Layer Networks in Unsupervised Feature Learning}},\n  author={Coates, Adam and Ng, Andrew and Lee, Honglak},\n  booktitle={AISTATS},\n  year={2011},\n  note = {\\url{https://cs.stanford.edu/~acoates/papers/coatesleeng_aistats_2011.pdf}},\n}\n",
-  "description": "The STL-10 dataset is an image recognition dataset for developing unsupervised\nfeature learning, deep learning, self-taught learning algorithms. It is inspired\nby the CIFAR-10 dataset but with some modifications. In particular, each class\nhas fewer labeled training examples than in CIFAR-10, but a very large set of \nunlabeled examples is provided to learn image models prior to supervised\ntraining. The primary challenge is to make use of the unlabeled data (which\ncomes from a similar but different distribution from the labeled data) to build\na useful prior. All images were acquired from labeled examples on ImageNet.\n",
+  "citation": "@inproceedings{coates2011stl10,\n  title={{An Analysis of Single Layer Networks in Unsupervised Feature Learning}},\n  author={Coates, Adam and Ng, Andrew and Lee, Honglak},\n  booktitle={AISTATS},\n  year={2011},\n  note = {\\url{https://cs.stanford.edu/~acoates/papers/coatesleeng_aistats_2011.pdf}},\n}",
+  "description": "The STL-10 dataset is an image recognition dataset for developing unsupervised\nfeature learning, deep learning, self-taught learning algorithms. It is inspired\nby the CIFAR-10 dataset but with some modifications. In particular, each class\nhas fewer labeled training examples than in CIFAR-10, but a very large set of \nunlabeled examples is provided to learn image models prior to supervised\ntraining. The primary challenge is to make use of the unlabeled data (which\ncomes from a similar but different distribution from the labeled data) to build\na useful prior. All images were acquired from labeled examples on ImageNet.",
   "downloadSize": "2640397119",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://ai.stanford.edu/~acoates/stl10/"
     ]
   },
+  "moduleName": "tensorflow_datasets.image_classification.stl10",
   "name": "stl10",
-  "schema": {
-    "feature": [
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "96"
-            },
-            {
-              "size": "96"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "label",
-        "type": "INT"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "88659596",
+      "shardLengths": [
+        "5000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "141559470",
-      "numShards": "1",
       "shardLengths": [
         "4000",
         "4000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "8000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "8000"
-              },
-              "max": 9.0
-            }
-          }
-        ],
-        "numExamples": "8000"
-      }
+      ]
     },
     {
-      "name": "train",
-      "numBytes": "88659596",
-      "numShards": "1",
-      "shardLengths": [
-        "5000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "5000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "5000"
-              },
-              "max": 9.0
-            }
-          }
-        ],
-        "numExamples": "5000"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "unlabelled",
       "numBytes": "1768679989",
-      "numShards": "1",
       "shardLengths": [
         "6250",
         "6250",
@@ -118,36 +49,20 @@
         "6250",
         "6250",
         "6250"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "100000"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "name": "label",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "100000"
-              },
-              "max": -1.0,
-              "min": -1.0
-            }
-          }
-        ],
-        "numExamples": "100000"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "image",
-    "output": "label"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,63 +18,50 @@
 import contextlib
 import os
 import tempfile
+from unittest import mock
 
 from absl import logging
-from absl.testing import absltest
-import six
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.utils import gcs_utils
+from tensorflow_datasets import setup_teardown
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.testing import test_case_in_context
+from tensorflow_datasets.testing import test_utils
 
 
-GCS_ACCESS_FNS = {
-    "original_info": gcs_utils.gcs_dataset_info_files,
-    "dummy_info": lambda _: [],
-    "original_datasets": gcs_utils.is_dataset_on_gcs,
-    "dummy_datasets": lambda _: False,
-}
-
-
-class TestCase(tf.test.TestCase):
+class TestCase(test_case_in_context.TestCaseInContext, tf.test.TestCase):
   """Base TestCase to be used for all tests.
 
   `test_data` class attribute: path to the directory with test data.
   `tmp_dir` attribute: path to temp directory reset before every test.
   """
 
+  # By default, tests globally applied fixture to disable GCS, Github API,...
+  # If set, do not apply the given global fixtures
+  DO_NOT_APPLY_FIXTURES = []
+
+  @classmethod
+  def _context_managers(cls):
+    context_managers = []
+    for fixture in setup_teardown.GLOBAL_FIXTURES:
+      if fixture in cls.DO_NOT_APPLY_FIXTURES:
+        continue
+      context_managers.append(contextlib.contextmanager(fixture)())
+    if test_utils.disable_gcs_access not in cls.DO_NOT_APPLY_FIXTURES:
+      context_managers.append(test_utils.disable_gcs_access())
+    return context_managers
+
   @classmethod
   def setUpClass(cls):
-    super(TestCase, cls).setUpClass()
+    super().setUpClass()
     cls.test_data = os.path.join(os.path.dirname(__file__), "test_data")
-    # Test must not communicate with GCS.
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
-
-  @contextlib.contextmanager
-  def gcs_access(self):
-    # Restore GCS access
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["original_info"]
-    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["original_datasets"]
-    yield
-    # Revert access
-    gcs_utils.gcs_dataset_info_files = GCS_ACCESS_FNS["dummy_info"]
-    gcs_utils.is_dataset_on_gcs = GCS_ACCESS_FNS["dummy_datasets"]
 
   def setUp(self):
-    super(TestCase, self).setUp()
+    super().setUp()
     # get_temp_dir is actually the same for all tests, so create a temp sub-dir.
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
-  def assertRaisesWithPredicateMatch(self, err_type, predicate):
-    if isinstance(predicate, six.string_types):
-      predicate_fct = lambda err: predicate in str(err)
-    else:
-      predicate_fct = predicate
-    return super(TestCase, self).assertRaisesWithPredicateMatch(
-        err_type, predicate_fct)
-
   @contextlib.contextmanager
   def assertLogs(self, text, level="info"):
-    with absltest.mock.patch.object(logging, level) as mock_log:
+    with mock.patch.object(logging, level) as mock_log:
       yield
       concat_logs = ""
       for log_call in mock_log.call_args_list:

@@ -3,14 +3,17 @@
   "configName": "two_digit_subtraction",
   "description": "Synthetic datasets for word scramble and arithmetic tasks described in the GPT3 paper.",
   "downloadSize": "2259409",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/openai/gpt-3"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.gpt3",
   "name": "gpt3",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "142216",
       "shardLengths": [
@@ -19,8 +22,16 @@
     }
   ],
   "supervisedKeys": {
-    "input": "context",
-    "output": "completion"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "context"
+        },
+        {
+          "featureKey": "completion"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

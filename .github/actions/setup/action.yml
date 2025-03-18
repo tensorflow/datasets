@@ -1,0 +1,75 @@
+name: 'Setup'
+description: 'Common setup for workflows.'
+
+inputs:
+  tf-version:
+    description: 'Tensorflow version'
+    required: false
+    default: 'skip'  # Use sentinel value to skip Tensorflow installation
+  python-version:
+    description: 'Python version'
+    required: false
+    default: '3.10'
+  extras:
+    description: 'Extra dependencies'
+    required: false
+    default: 'tests-all'
+  use-cache:
+    description: 'Use cache'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get current date
+      run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+      shell: bash
+
+    # Install protobuf-compiler for gcld3 library and graphviz for mlcroissant.
+    - if: ${{ runner.os == 'Linux' }}
+      run: |
+        sudo apt install -y --allow-downgrades libprotobuf-lite23=3.12.4-1ubuntu7 libprotobuf23=3.12.4-1ubuntu7 libprotoc23=3.12.4-1ubuntu7
+        sudo apt install -y libprotobuf-dev=3.12.4-1ubuntu7 protobuf-compiler=3.12.4-1ubuntu7
+        sudo apt install -y libgraphviz-dev
+      shell: bash
+    - if: ${{ runner.os == 'macOS' }}
+      # protobuf version must be compatible with C++11 (used by gcld3)
+      run: |
+        brew install protobuf@21
+        echo "/usr/local/opt/protobuf@21/bin" >> $GITHUB_PATH
+        echo "LDFLAGS=-L/usr/local/opt/protobuf@21/lib" >> $GITHUB_ENV
+        echo "CPPFLAGS=-I/usr/local/opt/protobuf@21/include" >> $GITHUB_ENV
+        echo "PKG_CONFIG_PATH=/usr/local/opt/protobuf@21/lib/pkgconfig" >> $GITHUB_ENV
+        brew install graphviz
+      shell: bash
+    - uses: FedericoCarboni/setup-ffmpeg@v2  # for Audio FeatureConnector tests.
+
+    # Python is cached manually to allow daily refreshes.
+    - name: Store inputs for identifying Python cache
+      run: echo "${{ env.today }}-${{ inputs.extras }}" >> python-cache-keys.txt
+      shell: bash
+    - if: ${{ inputs.use-cache == 'true' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+          setup.py
+          python-cache-keys.txt
+    - if: ${{ inputs.use-cache == 'false' }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    # Install Python deps.
+    # If Python cache is restored then we don't need to install dependencies again.
+    - if: ${{ steps.python-cache.outputs.cache-hit != 'true' }}
+      run: pip install .[${{ inputs.extras }}]
+      shell: bash
+    - if: ${{ inputs.tf-version != 'skip' }}
+      run: pip install ${{ inputs.tf-version }}
+      shell: bash
+    # Get TFDS library from the repository instead of cache.
+    - run: echo "PYTHONPATH=$(pwd)" >> $GITHUB_ENV
+      shell: bash

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,12 @@
 from tensorflow_datasets.summarization.aeslc import Aeslc
 from tensorflow_datasets.summarization.big_patent import BigPatent
 from tensorflow_datasets.summarization.billsum import Billsum
+from tensorflow_datasets.summarization.booksum import Booksum
 from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymail
-from tensorflow_datasets.summarization.cnn_dailymail import CnnDailymailConfig
 from tensorflow_datasets.summarization.covid19sum import Covid19sum
 from tensorflow_datasets.summarization.gigaword import Gigaword
+from tensorflow_datasets.summarization.gov_report import GovReport
+from tensorflow_datasets.summarization.media_sum import MediaSum
 from tensorflow_datasets.summarization.multi_news import MultiNews
 from tensorflow_datasets.summarization.newsroom import Newsroom
 from tensorflow_datasets.summarization.opinion_abstracts import OpinionAbstracts
@@ -30,5 +32,6 @@ from tensorflow_datasets.summarization.reddit import Reddit
 from tensorflow_datasets.summarization.reddit_tifu import RedditTifu
 from tensorflow_datasets.summarization.samsum import Samsum
 from tensorflow_datasets.summarization.scientific_papers import ScientificPapers
+from tensorflow_datasets.summarization.summscreen import Summscreen
 from tensorflow_datasets.summarization.wikihow import Wikihow
 from tensorflow_datasets.summarization.xsum import Xsum

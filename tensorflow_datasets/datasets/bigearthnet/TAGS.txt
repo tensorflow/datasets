@@ -1,0 +1,4 @@
+content.data-type.image
+ml.task.image-classification
+ml.task.scene-classification
+ml.task.semantic-segmentation

@@ -1,0 +1,37 @@
+{
+  "citation": "@misc{oh2023pr2utokyodatasets,\n  author={Jihoon Oh and Naoaki Kanazawa and Kento Kawaharazuka},\n  title={X-Embodiment U-Tokyo PR2 Datasets},\n  year={2023},\n  url={https://github.com/ojh6404/rlds_dataset_builder},\n}",
+  "description": "PR2 opening fridge doors",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "--"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "utokyo_pr2_opening_fridge_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "300017228",
+      "shardLengths": [
+        "18",
+        "9",
+        "14",
+        "23"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "78072946",
+      "shardLengths": [
+        "16"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

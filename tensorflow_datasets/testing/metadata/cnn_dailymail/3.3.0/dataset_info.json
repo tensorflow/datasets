@@ -1,0 +1,75 @@
+{
+  "citation": "@article{DBLP:journals/corr/SeeLM17,\n  author    = {Abigail See and\n               Peter J. Liu and\n               Christopher D. Manning},\n  title     = {Get To The Point: Summarization with Pointer-Generator Networks},\n  journal   = {CoRR},\n  volume    = {abs/1704.04368},\n  year      = {2017},\n  url       = {http://arxiv.org/abs/1704.04368},\n  archivePrefix = {arXiv},\n  eprint    = {1704.04368},\n  timestamp = {Mon, 13 Aug 2018 16:46:08 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/SeeLM17},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n\n@inproceedings{hermann2015teaching,\n  title={Teaching machines to read and comprehend},\n  author={Hermann, Karl Moritz and Kocisky, Tomas and Grefenstette, Edward and Espeholt, Lasse and Kay, Will and Suleyman, Mustafa and Blunsom, Phil},\n  booktitle={Advances in neural information processing systems},\n  pages={1693--1701},\n  year={2015}\n}",
+  "description": "CNN/DailyMail non-anonymized summarization dataset.\n\nThere are two features:\n  - article: text of news article, used as the document to be summarized\n  - highlights: joined text of highlights with <s> and </s> around each\n    highlight, which is the target summary",
+  "downloadSize": "585439472",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/abisee/cnn-dailymail"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.summarization.cnn_dailymail",
+  "name": "cnn_dailymail",
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "2.0.0": "\n      Separate target sentences with newline. (Having the model predict newline\n      separators makes it easier to evaluate using summary-level ROUGE.)\n      ",
+    "3.0.0": "Using cased version.",
+    "3.1.0": "Removed BuilderConfig",
+    "3.2.0": "\n      Remove extra space before added sentence period.\n      This shouldn't affect ROUGE scores because punctuation is removed.\n      ",
+    "3.3.0": "Add publisher feature."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "1262569097",
+      "shardLengths": [
+        "17945",
+        "17944",
+        "17945",
+        "17944",
+        "17945",
+        "17944",
+        "17945",
+        "17944",
+        "17945",
+        "17945",
+        "17944",
+        "17945",
+        "17944",
+        "17945",
+        "17944",
+        "17945"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "57823862",
+      "shardLengths": [
+        "13368"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "50005408",
+      "shardLengths": [
+        "11490"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "article"
+        },
+        {
+          "featureKey": "highlights"
+        }
+      ]
+    }
+  },
+  "version": "3.3.0"
+}

@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="cassava" />
   <meta itemprop="description" content="Cassava consists of leaf images for the cassava plant depicting healthy and&#10;four (4) disease conditions; Cassava Mosaic Disease (CMD), Cassava Bacterial&#10;Blight (CBB), Cassava Greem Mite (CGM) and Cassava Brown Streak Disease (CBSD).&#10;Dataset consists of a total of 9430 labelled images.&#10;The 9430 labelled images are split into a training set (5656), a test set(1885)&#10;and a validation set (1889). The number of images per class are unbalanced with&#10;the two disease classes CMD and CBSD having 72% of the images.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;cassava&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/cassava-0.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/cassava" />
@@ -11,6 +10,7 @@
 </div>
 
 # `cassava`
+
 
 *   **Description**:
 
@@ -34,11 +34,11 @@ CBSD having 72% of the images.
 
 *   **Download size**: `1.26 GiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `1.26 GiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -48,19 +48,70 @@ Split          | Examples
 `'train'`      | 5,656
 `'validation'` | 1,889
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=5),
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=string),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=5),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape           | Dtype  | Description
+:------------- | :----------- | :-------------- | :----- | :----------
+               | FeaturesDict |                 |        |
+image          | Image        | (None, None, 3) | uint8  |
+image/filename | Text         |                 | string |
+label          | ClassLabel   |                 | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('image', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cassava-0.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/cassava-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -75,7 +126,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/cassava-0.1.0.png" alt="Visualization" width="500px">

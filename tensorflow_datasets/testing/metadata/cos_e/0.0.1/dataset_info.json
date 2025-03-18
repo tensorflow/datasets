@@ -1,180 +1,31 @@
 {
-  "citation": "\n@inproceedings{rajani2019explain,\n     title = \"Explain Yourself! Leveraging Language models for Commonsense Reasoning\",\n    author = \"Rajani, Nazneen Fatema  and\n      McCann, Bryan  and\n      Xiong, Caiming  and\n      Socher, Richard\",\n      year=\"2019\",\n    booktitle = \"Proceedings of the 2019 Conference of the Association for Computational Linguistics (ACL2019)\",\n    url =\"https://arxiv.org/abs/1906.02361\"\n}\n",
-  "description": "\nCommon Sense Explanations (CoS-E) allows for training language models to\nautomatically generate explanations that can be used during training and\ninference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.\n",
+  "citation": "@inproceedings{rajani2019explain,\n     title = \"Explain Yourself! Leveraging Language models for Commonsense Reasoning\",\n    author = \"Rajani, Nazneen Fatema  and\n      McCann, Bryan  and\n      Xiong, Caiming  and\n      Socher, Richard\",\n      year=\"2019\",\n    booktitle = \"Proceedings of the 2019 Conference of the Association for Computational Linguistics (ACL2019)\",\n    url =\"https://arxiv.org/abs/1906.02361\"\n}",
+  "description": "Common Sense Explanations (CoS-E) allows for training language models to\nautomatically generate explanations that can be used during training and\ninference in a novel Commonsense Auto-Generated Explanation (CAGE) framework.",
+  "downloadSize": "6535534",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://github.com/salesforce/cos-e"
     ]
   },
+  "moduleName": "tensorflow_datasets.text.cos_e",
   "name": "cos_e",
-  "schema": {
-    "feature": [
-      {
-        "name": "abstractive_explanation",
-        "type": "BYTES"
-      },
-      {
-        "name": "answer",
-        "type": "BYTES"
-      },
-      {
-        "name": "choices",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "BYTES"
-      },
-      {
-        "name": "extractive_explanation",
-        "type": "BYTES"
-      },
-      {
-        "name": "id",
-        "type": "BYTES"
-      },
-      {
-        "name": "question",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "6535534",
   "splits": [
     {
-      "name": "train",
-      "numShards": "1",
-      "shardLengths": [
-        "9741"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "abstractive_explanation",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "answer",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "choices",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "extractive_explanation",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "9741"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "9741"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "446299",
       "shardLengths": [
         "1221"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "abstractive_explanation",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "answer",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "choices",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "extractive_explanation",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "id",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1221"
-              }
-            },
-            "name": "question",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "1221"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "3631690",
+      "shardLengths": [
+        "9741"
+      ]
     }
   ],
   "version": "0.0.1"

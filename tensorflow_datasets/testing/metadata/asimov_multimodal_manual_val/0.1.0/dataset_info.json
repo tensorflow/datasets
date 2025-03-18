@@ -1,0 +1,27 @@
+{
+  "citation": "@article{sermanet2025asimov,\n  author    = {Pierre Sermanet and Anirudha Majumdar and Alex Irpan and Dmitry Kalashnikov and Vikas Sindhwani},\n  title     = {Generating Robot Constitutions & Benchmarks for Semantic Safety},\n  journal   = {arXiv preprint arXiv:2503.08663},\n  url       = {https://arxiv.org/abs/2503.08663},\n  year      = {2025},\n}",
+  "description": "(Image, context, instruction) triplets manually taken and written by humans while ensuring that the instruction desirability can only be determined by looking at the image (validation set)",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://asimov-benchmark.github.io/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.asimov.asimov",
+  "name": "asimov_multimodal_manual_val",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "252402064",
+      "shardLengths": [
+        "30",
+        "29"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

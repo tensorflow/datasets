@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ from absl import flags
 import numpy as np
 import png
 import six
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 
@@ -51,27 +51,37 @@ def main(argv):
             low=0,
             high=255,
             size=(FLAGS.resolution, FLAGS.resolution, 3),
-            dtype=np.uint8), "RGB").save(png_image)
+            dtype=np.uint8,
+        ),
+        "RGB",
+    ).save(png_image)
     frame_list.append(
         tf.train.Feature(
-            bytes_list=tf.train.BytesList(value=[png_image.getvalue()])))
+            bytes_list=tf.train.BytesList(value=[png_image.getvalue()])
+        )
+    )
     png_image.close()
 
   feature_list["rgb_screen"] = tf.train.FeatureList(feature=frame_list)
 
   context_feature = {}
   context_feature["game_duration_loops"] = tf.train.Feature(
-      int64_list=tf.train.Int64List(value=[20]))
+      int64_list=tf.train.Int64List(value=[20])
+  )
   context_feature["game_duration_seconds"] = tf.train.Feature(
-      float_list=tf.train.FloatList(value=[20.0]))
+      float_list=tf.train.FloatList(value=[20.0])
+  )
   context_feature["n_steps"] = tf.train.Feature(
-      int64_list=tf.train.Int64List(value=[20]))
+      int64_list=tf.train.Int64List(value=[20])
+  )
   context_feature["screen_size"] = tf.train.Feature(
-      int64_list=tf.train.Int64List(value=[FLAGS.resolution, FLAGS.resolution]))
+      int64_list=tf.train.Int64List(value=[FLAGS.resolution, FLAGS.resolution])
+  )
 
   example = tf.train.SequenceExample(
       feature_lists=tf.train.FeatureLists(feature_list=feature_list),
-      context=tf.train.Features(feature=context_feature))
+      context=tf.train.Features(feature=context_feature),
+  )
   writer.write(example.SerializeToString())
   writer.close()
 

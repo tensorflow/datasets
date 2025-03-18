@@ -2,15 +2,15 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="aflw2k3d" />
-  <meta itemprop="description" content="AFLW2000-3D is a dataset of 2000 images that have been annotated with image-level&#10;68-point 3D facial landmarks.&#10;This dataset is typically used for evaluation of 3D facial landmark detection&#10;models. The head poses are very diverse and often hard to be detected by a &#10;cnn-based face detector.&#10;The 2D landmarks are skipped in this dataset, since some of the data are not&#10;consistent to 21 points, as the original paper mentioned.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;aflw2k3d&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/aflw2k3d-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="AFLW2000-3D is a dataset of 2000 images that have been annotated with&#10;image-level 68-point 3D facial landmarks. This dataset is typically used for&#10;evaluation of 3D facial landmark detection models. The head poses are very&#10;diverse and often hard to be detected by a cnn-based face detector. The 2D&#10;landmarks are skipped in this dataset, since some of the data are not consistent&#10;to 21 points, as the original paper mentioned.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;aflw2k3d&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/aflw2k3d-1.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/aflw2k3d" />
   <meta itemprop="sameAs" content="http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm" />
   <meta itemprop="citation" content="@article{DBLP:journals/corr/ZhuLLSL15,&#10;  author    = {Xiangyu Zhu and&#10;               Zhen Lei and&#10;               Xiaoming Liu and&#10;               Hailin Shi and&#10;               Stan Z. Li},&#10;  title     = {Face Alignment Across Large Poses: {A} 3D Solution},&#10;  journal   = {CoRR},&#10;  volume    = {abs/1511.07212},&#10;  year      = {2015},&#10;  url       = {http://arxiv.org/abs/1511.07212},&#10;  archivePrefix = {arXiv},&#10;  eprint    = {1511.07212},&#10;  timestamp = {Mon, 13 Aug 2018 16:48:23 +0200},&#10;  biburl    = {https://dblp.org/rec/bib/journals/corr/ZhuLLSL15},&#10;  bibsource = {dblp computer science bibliography, https://dblp.org}&#10;}" />
 </div>
 
 # `aflw2k3d`
+
 
 *   **Description**:
 
@@ -21,11 +21,17 @@ diverse and often hard to be detected by a cnn-based face detector. The 2D
 landmarks are skipped in this dataset, since some of the data are not consistent
 to 21 points, as the original paper mentioned.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/aflw2000-3d">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
 
 *   **Source code**:
-    [`tfds.image.Aflw2k3d`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/image/aflw2k3d.py)
+    [`tfds.datasets.aflw2k3d.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/aflw2k3d/aflw2k3d_dataset_builder.py)
 
 *   **Versions**:
 
@@ -33,11 +39,11 @@ to 21 points, as the original paper mentioned.
 
 *   **Download size**: `83.36 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `42.48 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Splits**:
 
@@ -45,19 +51,74 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 2,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(450, 450, 3), dtype=tf.uint8),
-    'landmarks_68_3d_xy_normalized': Tensor(shape=(68, 2), dtype=tf.float32),
-    'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=tf.float32),
+    'image': Image(shape=(450, 450, 3), dtype=uint8),
+    'landmarks_68_3d_xy_normalized': Tensor(shape=(68, 2), dtype=float32),
+    'landmarks_68_3d_z': Tensor(shape=(68, 1), dtype=float32),
 })
 ```
+
+*   **Feature documentation**:
+
+| Feature                       | Class        | Shape | Dtype   | Description |
+| :---------------------------- | :----------- | :---- | :------ | :---------- |
+|                               | FeaturesDict |       |         |             |
+| image                         | Image        | (450, | uint8   |             |
+:                               :              : 450,  :         :             :
+:                               :              : 3)    :         :             :
+| landmarks_68_3d_xy_normalized | Tensor       | (68,  | float32 |             |
+:                               :              : 2)    :         :             :
+| landmarks_68_3d_z             | Tensor       | (68,  | float32 |             |
+:                               :              : 1)    :         :             :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/aflw2k3d-1.0.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/aflw2k3d-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -81,7 +142,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/aflw2k3d-1.0.0.png" alt="Visualization" width="500px">

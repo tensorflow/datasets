@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,8 @@ import json
 import os
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -51,18 +52,29 @@ _DOCUMENT = "document"
 _SUMMARY = "summary"
 
 _REMOVE_LINES = set([
-    "Share this with\n", "Email\n", "Facebook\n", "Messenger\n", "Twitter\n",
-    "Pinterest\n", "WhatsApp\n", "Linkedin\n", "LinkedIn\n", "Copy this link\n",
-    "These are external links and will open in a new window\n"
+    "Share this with\n",
+    "Email\n",
+    "Facebook\n",
+    "Messenger\n",
+    "Twitter\n",
+    "Pinterest\n",
+    "WhatsApp\n",
+    "Linkedin\n",
+    "LinkedIn\n",
+    "Copy this link\n",
+    "These are external links and will open in a new window\n",
 ])
 
 
 class Xsum(tfds.core.GeneratorBasedBuilder):
   """Extreme Summarization (XSum) Dataset."""
 
-  # Version 1.1.0 removes web contents.
   VERSION = tfds.core.Version("1.1.0")
-  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0", "Dataset without cleaning.")]
+  SUPPORTED_VERSIONS = [tfds.core.Version("1.0.0")]
+  RELEASE_NOTES = {
+      "1.1.0": "Removes web contents.",
+      "1.0.0": "Dataset without cleaning.",
+  }
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   Detailed download instructions (which require running a custom script) are
@@ -80,8 +92,9 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
             _SUMMARY: tfds.features.Text(),
         }),
         supervised_keys=(_DOCUMENT, _SUMMARY),
-        homepage=
-        "https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset",
+        homepage=(
+            "https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset"
+        ),
         citation=_CITATION,
     )
 
@@ -93,8 +106,10 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
     folder_name = "xsum-extracts-from-downloads"
     extract_path = os.path.join(
         dl_manager.extract(
-            os.path.join(dl_manager.manual_dir, folder_name + ".tar.gz")),
-        folder_name)
+            os.path.join(dl_manager.manual_dir, folder_name + ".tar.gz")
+        ),
+        folder_name,
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -126,11 +141,14 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
     for i in split_ids:
       filename = os.path.join(path, i + ".data")
       if tf.io.gfile.exists(filename):
-        with tf.io.gfile.GFile(filename) as f:
-          text = "".join([
-              line for line in f.readlines()
-              if line not in _REMOVE_LINES and line.strip()
-          ])
+        with epath.Path(filename).open() as f:
+          text = "".join(
+              [
+                  line
+                  for line in f.readlines()
+                  if line not in _REMOVE_LINES and line.strip()
+              ]
+          )
           # Each file follows below format:
           # [XSUM]URL[XSUM]
           # http://somelink

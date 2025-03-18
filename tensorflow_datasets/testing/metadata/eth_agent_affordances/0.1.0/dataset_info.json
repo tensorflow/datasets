@@ -1,0 +1,79 @@
+{
+  "citation": "@inproceedings{schiavi2023learning,\n  title={Learning agent-aware affordances for closed-loop interaction with articulated objects},\n  author={Schiavi, Giulio and Wulkop, Paula and Rizzi, Giuseppe and Ott, Lionel and Siegwart, Roland and Chung, Jen Jen},\n  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)},\n  pages={5916--5922},\n  year={2023},\n  organization={IEEE}\n}",
+  "description": "Franka opening ovens -- point cloud + proprio only",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://ieeexplore.ieee.org/iel7/10160211/10160212/10160747.pdf"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "eth_agent_affordances",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "18546670748",
+      "shardLengths": [
+        "1",
+        "3",
+        "1",
+        "3",
+        "1",
+        "6",
+        "2",
+        "3",
+        "3",
+        "2",
+        "4",
+        "2",
+        "3",
+        "3",
+        "1",
+        "2",
+        "2",
+        "5",
+        "3",
+        "3",
+        "2",
+        "1",
+        "2",
+        "2",
+        "1",
+        "3",
+        "1",
+        "2",
+        "3",
+        "3",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "3",
+        "2",
+        "2",
+        "1",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "2",
+        "1",
+        "4",
+        "3",
+        "3",
+        "2",
+        "2"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

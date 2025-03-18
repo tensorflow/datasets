@@ -1,255 +1,34 @@
 {
-  "citation": "@inproceedings{modec13,\n    title={MODEC: Multimodal Decomposable Models for Human Pose Estimation},\n    author={Sapp, Benjamin and Taskar, Ben},\n    booktitle={In Proc. CVPR},\n    year={2013},\n  }\n",
-  "description": "\nFrom the paper: We collected a 5003 image dataset automatically from popular\nHollywood movies. The images were obtained by running a state-of-the-art person\ndetector on every tenth frame of 30 movies. People detected with high confidence\n(roughly 20K candidates) were then sent to the crowdsourcing marketplace Amazon\nMechanical Turk to obtain groundtruthlabeling. Each image was annotated by five\nTurkers for $0.01 each to label 10 upperbody joints. The median-of-five labeling\nwas taken in each image to be robust to outlier annotation. Finally, images were\nrejected manually by us if the person was occluded or severely non-frontal. We\nset aside 20% (1016 images) of the data for testing.\n",
+  "citation": "@inproceedings{modec13,\n    title={MODEC: Multimodal Decomposable Models for Human Pose Estimation},\n    author={Sapp, Benjamin and Taskar, Ben},\n    booktitle={In Proc. CVPR},\n    year={2013},\n  }",
+  "configDescription": "Uses 20928 examples, a superset of FLIC consisting of more difficult examples.",
+  "configName": "full",
+  "description": "From the paper: We collected a 5003 image dataset automatically from popular\nHollywood movies. The images were obtained by running a state-of-the-art person\ndetector on every tenth frame of 30 movies. People detected with high confidence\n(roughly 20K candidates) were then sent to the crowdsourcing marketplace Amazon\nMechanical Turk to obtain groundtruthlabeling. Each image was annotated by five\nTurkers for $0.01 each to label 10 upperbody joints. The median-of-five labeling\nwas taken in each image to be robust to outlier annotation. Finally, images were\nrejected manually by us if the person was occluded or severely non-frontal. We\nset aside 20% (1016 images) of the data for testing.",
+  "downloadSize": "1183926041",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "https://bensapp.github.io/flic-dataset.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.image.flic",
   "name": "flic",
-  "schema": {
-    "feature": [
-      {
-        "name": "currframe",
-        "type": "FLOAT"
-      },
-      {
-        "name": "image",
-        "shape": {
-          "dim": [
-            {
-              "size": "480"
-            },
-            {
-              "size": "720"
-            },
-            {
-              "size": "3"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "moviename",
-        "type": "BYTES"
-      },
-      {
-        "name": "poselet_hit_idx",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "INT"
-      },
-      {
-        "name": "torsobox",
-        "shape": {
-          "dim": [
-            {
-              "size": "4"
-            }
-          ]
-        },
-        "type": "FLOAT"
-      },
-      {
-        "name": "xcoords",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "FLOAT"
-      },
-      {
-        "name": "ycoords",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "FLOAT"
-      }
-    ]
-  },
-  "sizeInBytes": "1183926041",
   "splits": [
     {
-      "name": "test",
-      "numShards": "1",
-      "shardLengths": [
-        "1016"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "currframe",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": 212751.0,
-              "min": 62511.0
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              }
-            },
-            "name": "moviename",
-            "type": "BYTES"
-          },
-          {
-            "name": "poselet_hit_idx",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": 150.0,
-              "min": 1.0
-            }
-          },
-          {
-            "name": "torsobox",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": 0.9607598185539246,
-              "min": 0.039008039981126785
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "xcoords",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": "NaN",
-              "min": "NaN"
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "ycoords",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "1016"
-              },
-              "max": "NaN",
-              "min": "NaN"
-            },
-            "type": "FLOAT"
-          }
-        ],
-        "numExamples": "1016"
-      }
-    },
-    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "1",
+      "numBytes": "263790217",
       "shardLengths": [
         "1994",
         "1993"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "currframe",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": 193841.0,
-              "min": 971.0
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "image",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": 255.0
-            }
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              }
-            },
-            "name": "moviename",
-            "type": "BYTES"
-          },
-          {
-            "name": "poselet_hit_idx",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": 150.0,
-              "min": 1.0
-            }
-          },
-          {
-            "name": "torsobox",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": 0.9579635858535767,
-              "min": 0.04309431090950966
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "xcoords",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": "NaN",
-              "min": "NaN"
-            },
-            "type": "FLOAT"
-          },
-          {
-            "name": "ycoords",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "3987"
-              },
-              "max": "NaN",
-              "min": "NaN"
-            },
-            "type": "FLOAT"
-          }
-        ],
-        "numExamples": "3987"
-      }
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "69597430",
+      "shardLengths": [
+        "1016"
+      ]
     }
   ],
   "version": "2.0.0"

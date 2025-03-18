@@ -1,0 +1,3 @@
+content.data-type.image # Contains image data.
+content.language.en # Contains text in language English / en.
+content.subject.biology # Relates to biology.

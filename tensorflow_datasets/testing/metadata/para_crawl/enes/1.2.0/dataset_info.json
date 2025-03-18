@@ -1,0 +1,101 @@
+{
+  "citation": "@misc {paracrawl,\n    title  = \"ParaCrawl\",\n    year   = \"2018\",\n    url    = \"http://paracrawl.eu/download.html.\"\n}",
+  "configDescription": "Translation dataset from English to es.",
+  "configName": "enes",
+  "description": "Web-Scale Parallel Corpora for Official European Languages.",
+  "downloadSize": "1953839527",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://paracrawl.eu/releases.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.para_crawl",
+  "name": "para_crawl",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "6692064571",
+      "shardLengths": [
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343552",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343552",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343552",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551",
+        "343551"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "en"
+        },
+        {
+          "featureKey": "es"
+        }
+      ]
+    }
+  },
+  "version": "1.2.0"
+}

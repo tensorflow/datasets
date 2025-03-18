@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,13 @@
 
 """GAP is a gender-balanced text data set."""
 
+from __future__ import annotations
+
 import csv
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+import numpy as np
+from tensorflow_datasets.core.utils import bool_utils
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -58,7 +62,11 @@ class Gap(tfds.core.GeneratorBasedBuilder):
   of (ambiguous pronoun, antecedent name), sampled from Wikipedia.
   """
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
+  RELEASE_NOTES = {
+      '0.1.1': 'Fixes parsing of boolean field `A-coref` and `B-coref`.',
+      '0.1.0': 'Initial release.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -68,14 +76,14 @@ class Gap(tfds.core.GeneratorBasedBuilder):
             'ID': tfds.features.Text(),
             'Text': tfds.features.Text(),
             'Pronoun': tfds.features.Text(),
-            'Pronoun-offset': tf.int32,
+            'Pronoun-offset': np.int32,
             'A': tfds.features.Text(),
-            'A-offset': tf.int32,
-            'A-coref': tf.bool,
+            'A-offset': np.int32,
+            'A-coref': np.bool_,
             'B': tfds.features.Text(),
-            'B-offset': tf.int32,
-            'B-coref': tf.bool,
-            'URL': tfds.features.Text()
+            'B-offset': np.int32,
+            'B-coref': np.bool_,
+            'URL': tfds.features.Text(),
         }),
         supervised_keys=None,
         homepage='https://github.com/google-research-datasets/gap-coreference',
@@ -84,11 +92,9 @@ class Gap(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    directory = dl_manager.download_and_extract({
-        'train': _TRAINURL,
-        'validation': _VALIDATIONURL,
-        'test': _TESTURL
-    })
+    directory = dl_manager.download_and_extract(
+        {'train': _TRAINURL, 'validation': _VALIDATIONURL, 'test': _TESTURL}
+    )
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
@@ -101,12 +107,14 @@ class Gap(tfds.core.GeneratorBasedBuilder):
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={'filepath': directory['test']},
-        )
+        ),
     ]
 
   def _generate_examples(self, filepath):
     """Yields examples."""
-    with tf.io.gfile.GFile(filepath) as tsvfile:
+    with epath.Path(filepath).open() as tsvfile:
       reader = csv.DictReader(tsvfile, dialect='excel-tab')
       for i, row in enumerate(reader):
+        row['A-coref'] = bool_utils.parse_bool(row['A-coref'])
+        row['B-coref'] = bool_utils.parse_bool(row['B-coref'])
         yield i, row

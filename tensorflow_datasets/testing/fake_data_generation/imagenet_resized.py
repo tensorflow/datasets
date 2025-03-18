@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +22,15 @@ import zipfile
 
 from absl import app
 from absl import flags
-
 import numpy as np
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 
 FLAGS = flags.FLAGS
 
@@ -45,15 +48,21 @@ def _write_zipped(output_dir, data, tmp_name, zip_name):
 
 def _generate_data():
   """Generates training archives for both train and valiation."""
-  output_dir = os.path.join(FLAGS.tfds_dir, "testing", "test_data",
-                            "fake_examples", "imagenet_resized")
+  output_dir = os.path.join(
+      FLAGS.tfds_dir,
+      "testing",
+      "test_data",
+      "fake_examples",
+      "imagenet_resized",
+  )
 
   train = {}
   train["data"] = np.zeros(shape=[3, 8, 8, 3], dtype=np.uint8)
   train["labels"] = np.zeros(shape=[3], dtype=np.int64)
 
-  _write_zipped(output_dir, train, "Imagenet8_train.npz",
-                "Imagenet8_train_npz.zip")
+  _write_zipped(
+      output_dir, train, "Imagenet8_train.npz", "Imagenet8_train_npz.zip"
+  )
 
   valid = {}
   valid["data"] = np.ones(shape=[1, 8, 8, 3], dtype=np.uint8)

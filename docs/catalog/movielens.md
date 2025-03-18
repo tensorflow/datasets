@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="movielens" />
   <meta itemprop="description" content="This dataset contains a set of movie ratings from the MovieLens website, a movie&#10;recommendation service. This dataset was collected and maintained by [GroupLens]&#10;(https://grouplens.org/), a research group at the University of Minnesota. There&#10;are 5 versions included: &quot;25m&quot;, &quot;latest-small&quot;, &quot;100k&quot;, &quot;1m&quot;, &quot;20m&quot;. In all&#10;datasets, the movies data and ratings data are joined on &quot;movieId&quot;. The 25m&#10;dataset, latest-small dataset, and 20m dataset contain only movie data and&#10;rating data. The 1m dataset and 100k dataset contain demographic data in&#10;addition to movie and rating data.&#10;&#10;- &quot;25m&quot;: This is the latest stable version of the MovieLens dataset. It is&#10;recommended for research purposes.&#10;- &quot;latest-small&quot;: This is a small subset of the latest version of the MovieLens&#10;dataset. It is changed and updated over time by GroupLens.&#10;- &quot;100k&quot;: This is the oldest version of the MovieLens datasets. It is a small&#10;dataset with demographic data.&#10;- &quot;1m&quot;: This is the largest MovieLens dataset that contains demographic data.&#10;- &quot;20m&quot;: This is one of the most used MovieLens datasets in academic papers&#10;along with the 1m dataset.&#10;&#10;For each version, users can view either only the movies data by adding the&#10;&quot;-movies&quot; suffix (e.g. &quot;25m-movies&quot;) or the ratings data joined with the movies&#10;data (and users data in the 1m and 100k datasets) by adding the &quot;-ratings&quot;&#10;suffix (e.g. &quot;25m-ratings&quot;).&#10;&#10;The features below are included in all versions with the &quot;-ratings&quot; suffix.&#10;&#10;- &quot;movie_id&quot;: a unique identifier of the rated movie&#10;- &quot;movie_title&quot;: the title of the rated movie with the release year in&#10;parentheses&#10;- &quot;movie_genres&quot;: a sequence of genres to which the rated movie belongs&#10;- &quot;user_id&quot;: a unique identifier of the user who made the rating&#10;- &quot;user_rating&quot;: the score of the rating on a five-star scale&#10;- &quot;timestamp&quot;: the timestamp of the ratings, represented in seconds since&#10;midnight Coordinated Universal Time (UTC) of January 1, 1970&#10;&#10;The &quot;100k-ratings&quot; and &quot;1m-ratings&quot; versions in addition include the following&#10;demographic features.&#10;&#10;- &quot;user_gender&quot;: gender of the user who made the rating; a true value&#10;corresponds to male&#10;- &quot;bucketized_user_age&quot;: bucketized age values of the user who made the rating,&#10;the values and the corresponding ranges are:&#10;  - 1: &quot;Under 18&quot;&#10;  - 18: &quot;18-24&quot;&#10;  - 25: &quot;25-34&quot;&#10;  - 35: &quot;35-44&quot;&#10;  - 45: &quot;45-49&quot;&#10;  - 50: &quot;50-55&quot;&#10;  - 56: &quot;56+&quot;&#10;- &quot;user_occupation_label&quot;: the occupation of the user who made the rating&#10;represented by an integer-encoded label; labels are preprocessed to be&#10;consistent across different versions&#10;- &quot;user_occupation_text&quot;: the occupation of the user who made the rating in&#10;the original string; different versions can have different set of raw text&#10;labels&#10;- &quot;user_zip_code&quot;: the zip code of the user who made the rating&#10;&#10;In addition, the &quot;100k-ratings&quot; dataset would also have a feature &quot;raw_user_age&quot;&#10;which is the exact ages of the users who made the rating&#10;&#10;Datasets with the &quot;-movies&quot; suffix contain only &quot;movie_id&quot;, &quot;movie_title&quot;, and&#10;&quot;movie_genres&quot; features.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;movielens&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/movielens" />
@@ -12,9 +11,6 @@
 
 # `movielens`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -81,6 +77,12 @@ which is the exact ages of the users who made the rating
 Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 "movie_genres" features.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/movielens">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://grouplens.org/datasets/movielens/](https://grouplens.org/datasets/movielens/)
 
@@ -89,11 +91,15 @@ Datasets with the "-movies" suffix contain only "movie_id", "movie_title", and
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.1.1`** (default): No release notes.
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 *   **Citation**:
 
@@ -118,9 +124,6 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## movielens/25m-ratings (default config)
 
@@ -147,18 +150,67 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 25,000,095
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
-    'timestamp': tf.int64,
-    'user_id': tf.string,
-    'user_rating': tf.float32,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
+    'timestamp': int64,
+    'user_id': string,
+    'user_rating': float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype   | Description
+:----------- | :------------------- | :------ | :------ | :----------
+             | FeaturesDict         |         |         |
+movie_genres | Sequence(ClassLabel) | (None,) | int64   |
+movie_id     | Tensor               |         | string  |
+movie_title  | Tensor               |         | string  |
+timestamp    | Tensor               |         | int64   |
+user_id      | Tensor               |         | string  |
+user_rating  | Tensor               |         | float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-ratings-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/25m-movies
 
@@ -179,15 +231,61 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 62,423
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype  | Description
+:----------- | :------------------- | :------ | :----- | :----------
+             | FeaturesDict         |         |        |
+movie_genres | Sequence(ClassLabel) | (None,) | int64  |
+movie_id     | Tensor               |         | string |
+movie_title  | Tensor               |         | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-25m-movies-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/latest-small-ratings
 
@@ -214,18 +312,67 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,836
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
-    'timestamp': tf.int64,
-    'user_id': tf.string,
-    'user_rating': tf.float32,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
+    'timestamp': int64,
+    'user_id': string,
+    'user_rating': float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype   | Description
+:----------- | :------------------- | :------ | :------ | :----------
+             | FeaturesDict         |         |         |
+movie_genres | Sequence(ClassLabel) | (None,) | int64   |
+movie_id     | Tensor               |         | string  |
+movie_title  | Tensor               |         | string  |
+timestamp    | Tensor               |         | int64   |
+user_id      | Tensor               |         | string  |
+user_rating  | Tensor               |         | float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-ratings-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/latest-small-movies
 
@@ -246,15 +393,61 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 9,742
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype  | Description
+:----------- | :------------------- | :------ | :----- | :----------
+             | FeaturesDict         |         |        |
+movie_genres | Sequence(ClassLabel) | (None,) | int64  |
+movie_id     | Tensor               |         | string |
+movie_title  | Tensor               |         | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-latest-small-movies-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/100k-ratings
 
@@ -280,24 +473,79 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 100,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'bucketized_user_age': tf.float32,
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
-    'raw_user_age': tf.float32,
-    'timestamp': tf.int64,
-    'user_gender': tf.bool,
-    'user_id': tf.string,
-    'user_occupation_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=22),
-    'user_occupation_text': tf.string,
-    'user_rating': tf.float32,
-    'user_zip_code': tf.string,
+    'bucketized_user_age': float32,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
+    'raw_user_age': float32,
+    'timestamp': int64,
+    'user_gender': bool,
+    'user_id': string,
+    'user_occupation_label': ClassLabel(shape=(), dtype=int64, num_classes=22),
+    'user_occupation_text': string,
+    'user_rating': float32,
+    'user_zip_code': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype   | Description
+:-------------------- | :------------------- | :------ | :------ | :----------
+                      | FeaturesDict         |         |         |
+bucketized_user_age   | Tensor               |         | float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | int64   |
+movie_id              | Tensor               |         | string  |
+movie_title           | Tensor               |         | string  |
+raw_user_age          | Tensor               |         | float32 |
+timestamp             | Tensor               |         | int64   |
+user_gender           | Tensor               |         | bool    |
+user_id               | Tensor               |         | string  |
+user_occupation_label | ClassLabel           |         | int64   |
+user_occupation_text  | Tensor               |         | string  |
+user_rating           | Tensor               |         | float32 |
+user_zip_code         | Tensor               |         | string  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-ratings-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/100k-movies
 
@@ -318,15 +566,61 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 1,682
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype  | Description
+:----------- | :------------------- | :------ | :----- | :----------
+             | FeaturesDict         |         |        |
+movie_genres | Sequence(ClassLabel) | (None,) | int64  |
+movie_id     | Tensor               |         | string |
+movie_title  | Tensor               |         | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-100k-movies-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/1m-ratings
 
@@ -353,23 +647,77 @@ Split     | Examples
 :-------- | --------:
 `'train'` | 1,000,209
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'bucketized_user_age': tf.float32,
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
-    'timestamp': tf.int64,
-    'user_gender': tf.bool,
-    'user_id': tf.string,
-    'user_occupation_label': ClassLabel(shape=(), dtype=tf.int64, num_classes=22),
-    'user_occupation_text': tf.string,
-    'user_rating': tf.float32,
-    'user_zip_code': tf.string,
+    'bucketized_user_age': float32,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
+    'timestamp': int64,
+    'user_gender': bool,
+    'user_id': string,
+    'user_occupation_label': ClassLabel(shape=(), dtype=int64, num_classes=22),
+    'user_occupation_text': string,
+    'user_rating': float32,
+    'user_zip_code': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature               | Class                | Shape   | Dtype   | Description
+:-------------------- | :------------------- | :------ | :------ | :----------
+                      | FeaturesDict         |         |         |
+bucketized_user_age   | Tensor               |         | float32 |
+movie_genres          | Sequence(ClassLabel) | (None,) | int64   |
+movie_id              | Tensor               |         | string  |
+movie_title           | Tensor               |         | string  |
+timestamp             | Tensor               |         | int64   |
+user_gender           | Tensor               |         | bool    |
+user_id               | Tensor               |         | string  |
+user_occupation_label | ClassLabel           |         | int64   |
+user_occupation_text  | Tensor               |         | string  |
+user_rating           | Tensor               |         | float32 |
+user_zip_code         | Tensor               |         | string  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-ratings-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/1m-movies
 
@@ -390,15 +738,61 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 3,883
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype  | Description
+:----------- | :------------------- | :------ | :----- | :----------
+             | FeaturesDict         |         |        |
+movie_genres | Sequence(ClassLabel) | (None,) | int64  |
+movie_id     | Tensor               |         | string |
+movie_title  | Tensor               |         | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-1m-movies-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/20m-ratings
 
@@ -423,18 +817,67 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 20,000,263
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
-    'timestamp': tf.int64,
-    'user_id': tf.string,
-    'user_rating': tf.float32,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
+    'timestamp': int64,
+    'user_id': string,
+    'user_rating': float32,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype   | Description
+:----------- | :------------------- | :------ | :------ | :----------
+             | FeaturesDict         |         |         |
+movie_genres | Sequence(ClassLabel) | (None,) | int64   |
+movie_id     | Tensor               |         | string  |
+movie_title  | Tensor               |         | string  |
+timestamp    | Tensor               |         | int64   |
+user_id      | Tensor               |         | string  |
+user_rating  | Tensor               |         | float32 |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-ratings-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## movielens/20m-movies
 
@@ -455,12 +898,58 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 27,278
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'movie_genres': Sequence(ClassLabel(shape=(), dtype=tf.int64, num_classes=21)),
-    'movie_id': tf.string,
-    'movie_title': tf.string,
+    'movie_genres': Sequence(ClassLabel(shape=(), dtype=int64, num_classes=21)),
+    'movie_id': string,
+    'movie_title': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature      | Class                | Shape   | Dtype  | Description
+:----------- | :------------------- | :------ | :----- | :----------
+             | FeaturesDict         |         |        |
+movie_genres | Sequence(ClassLabel) | (None,) | int64  |
+movie_id     | Tensor               |         | string |
+movie_title  | Tensor               |         | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/movielens-20m-movies-0.1.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

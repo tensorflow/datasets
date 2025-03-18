@@ -1,0 +1,1 @@
+Aprende el vocabulario especializado para la construcción de escaleras. Mide las dimensiones de tus escaleras. Calcula el número de escaleras que necesitarás. Determina la altura y profundidad de tu escalón. Determina la longitud de tus zancas.

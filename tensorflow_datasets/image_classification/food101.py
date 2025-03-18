@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz"
@@ -29,7 +29,8 @@ _DESCRIPTION = (
     " training images. On purpose, the training images were not cleaned, and "
     "thus still contain some amount of noise. This comes mostly in the form of"
     " intense colors and sometimes wrong labels. All images were rescaled to "
-    "have a maximum side length of 512 pixels.")
+    "have a maximum side length of 512 pixels."
+)
 
 _LABELS_FNAME = "image_classification/food-101_classes.txt"
 
@@ -50,14 +51,15 @@ class Food101(tfds.core.GeneratorBasedBuilder):
   SUPPORTED_VERSIONS = [
       tfds.core.Version(
           "1.0.0",
-          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55"),
+          tfds_version_to_prepare="8cea22f06d74d5848608fe7ac6d6faac7bc05b55",
+      ),
       tfds.core.Version("2.1.0"),
   ]
 
   def _info(self):
     """Define Dataset Info."""
 
-    names_file = tfds.core.get_tfds_path(_LABELS_FNAME)
+    names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features_dict = {
         "image": tfds.features.Image(),
         "label": tfds.features.ClassLabel(names_file=names_file),
@@ -69,8 +71,9 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=("image", "label"),
-        homepage="https://www.vision.ee.ethz.ch/datasets_extra/food-101/",
-        citation=_CITATION)
+        homepage="https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/",
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     """Define Splits."""
@@ -84,22 +87,21 @@ class Food101(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "train.json"),
-                "image_dir_path": image_dir_path
+                "image_dir_path": image_dir_path,
             },
         ),
-
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "test.json"),
-                "image_dir_path": image_dir_path
+                "image_dir_path": image_dir_path,
             },
         ),
     ]
 
   def _generate_examples(self, json_file_path, image_dir_path):
     """Generate images and labels for splits."""
-    with tf.io.gfile.GFile(json_file_path) as f:
+    with epath.Path(json_file_path).open() as f:
       data = json.loads(f.read())
     for label, images in data.items():
       for image_name in images:

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ class Cars196Test(tfds_test.DatasetBuilderTestCase):
       'train': 'train',
       'test': 'test',
       'extra': 'extra',
-      'test_annos': 'cars_test_annos_withlabels.mat'
+      'test_annos': 'cars_test_annos_withlabels.mat',
   }
 
 

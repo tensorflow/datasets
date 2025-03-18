@@ -1,0 +1,30 @@
+{
+    "name": "image-search noisy labels",
+    "version": "1.0",
+    "data": [
+        [
+            {
+                "image/uri": "https://thisistheimgurl.com/dummyimage1.jpg",
+                "image/id": "noisy1",
+                "image/class/label": 0,
+                "image/class/label/is_clean": 0
+            }
+        ],
+        [
+            {
+                "image/uri": "https://thisistheimgurl.com/dummyimage2.jpg",
+                "image/id": "noisy2",
+                "image/class/label": 1,
+                "image/class/label/is_clean": 0
+            }
+        ],
+        [
+            {
+                "image/uri": "https://thisistheimgurl.com/dummyimage3.jpg",
+                "image/id": "noisy3",
+                "image/class/label": 2,
+                "image/class/label/is_clean": 0
+            }
+        ]
+    ]
+}

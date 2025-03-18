@@ -1,58 +1,26 @@
 {
-  "citation": "@article{DBLP:journals/corr/SrivastavaMS15,\n  author    = {Nitish Srivastava and\n               Elman Mansimov and\n               Ruslan Salakhutdinov},\n  title     = {Unsupervised Learning of Video Representations using LSTMs},\n  journal   = {CoRR},\n  volume    = {abs/1502.04681},\n  year      = {2015},\n  url       = {http://arxiv.org/abs/1502.04681},\n  archivePrefix = {arXiv},\n  eprint    = {1502.04681},\n  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}\n",
-  "description": "Moving variant of MNIST database of handwritten digits. This is the\ndata used by the authors for reporting model performance. See\n`tfds.video.moving_mnist.image_as_moving_sequence`\nfor generating training/validation data from the MNIST dataset.\n",
+  "citation": "@article{DBLP:journals/corr/SrivastavaMS15,\n  author    = {Nitish Srivastava and\n               Elman Mansimov and\n               Ruslan Salakhutdinov},\n  title     = {Unsupervised Learning of Video Representations using LSTMs},\n  journal   = {CoRR},\n  volume    = {abs/1502.04681},\n  year      = {2015},\n  url       = {http://arxiv.org/abs/1502.04681},\n  archivePrefix = {arXiv},\n  eprint    = {1502.04681},\n  timestamp = {Mon, 13 Aug 2018 16:47:05 +0200},\n  biburl    = {https://dblp.org/rec/bib/journals/corr/SrivastavaMS15},\n  bibsource = {dblp computer science bibliography, https://dblp.org}\n}",
+  "description": "Moving variant of MNIST database of handwritten digits. This is the\ndata used by the authors for reporting model performance. See\n`tfds.video.moving_mnist.image_as_moving_sequence`\nfor generating training/validation data from the MNIST dataset.",
+  "downloadSize": "819200096",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.cs.toronto.edu/~nitish/unsupervised_video/"
     ]
   },
+  "moduleName": "tensorflow_datasets.video.moving_mnist",
   "name": "moving_mnist",
-  "schema": {
-    "feature": [
-      {
-        "name": "image_sequence",
-        "shape": {
-          "dim": [
-            {
-              "size": "20"
-            },
-            {
-              "size": "64"
-            },
-            {
-              "size": "64"
-            },
-            {
-              "size": "1"
-            }
-          ]
-        },
-        "type": "INT"
-      }
-    ]
+  "releaseNotes": {
+    "1.0.0": "New split API (https://tensorflow.org/datasets/splits)"
   },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "test",
       "numBytes": "96151357",
-      "numShards": "1",
       "shardLengths": [
         "10000"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "name": "image_sequence",
-            "numStats": {
-              "commonStats": {
-                "numNonMissing": "10000"
-              },
-              "max": 255.0
-            }
-          }
-        ],
-        "numExamples": "10000"
-      }
+      ]
     }
   ],
   "version": "1.0.0"

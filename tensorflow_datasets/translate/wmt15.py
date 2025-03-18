@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,9 +33,7 @@ _CITATION = """
 }
 """
 
-_LANGUAGE_PAIRS = [
-    (lang, "en") for lang in ["cs", "de", "fi", "fr", "ru"]
-]
+_LANGUAGE_PAIRS = [(lang, "en") for lang in ["cs", "de", "fi", "fr", "ru"]]
 
 
 class Wmt15Translate(wmt.WmtTranslate):
@@ -48,21 +46,7 @@ class Wmt15Translate(wmt.WmtTranslate):
           citation=_CITATION,
           language_pair=(l1, l2),
           version=tfds.core.Version("1.0.0"),
-      ) for l1, l2 in _LANGUAGE_PAIRS
-  ] + [
-      wmt.WmtConfig(  # pylint:disable=g-complex-comprehension
-          description=(
-              "WMT 2015 %s-%s translation task dataset with subword encoding."
-              % (l1, l2)),
-          url=_URL,
-          citation=_CITATION,
-          language_pair=(l1, l2),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              name="subwords8k",
-              vocab_size=2**13),
-          version=tfds.core.Version("1.0.0"),
-          )
+      )
       for l1, l2 in _LANGUAGE_PAIRS
   ]
 
@@ -70,13 +54,24 @@ class Wmt15Translate(wmt.WmtTranslate):
   def _subsets(self):
     return {
         tfds.Split.TRAIN: [
-            "europarl_v7", "europarl_v8_16", "commoncrawl", "multiun",
-            "newscommentary_v10", "gigafren", "czeng_10", "yandexcorpus",
-            "wikiheadlines_fi", "wikiheadlines_ru"],
+            "europarl_v7",
+            "europarl_v8_16",
+            "commoncrawl",
+            "multiun",
+            "newscommentary_v10",
+            "gigafren",
+            "czeng_10",
+            "yandexcorpus",
+            "wikiheadlines_fi",
+            "wikiheadlines_ru",
+        ],
         tfds.Split.VALIDATION: [
-            "newsdev2015", "newsdiscussdev2015", "newstest2014"
+            "newsdev2015",
+            "newsdiscussdev2015",
+            "newstest2014",
         ],
         tfds.Split.TEST: [
-            "newstest2015", "newsdiscusstest2015",
-        ]
+            "newstest2015",
+            "newsdiscusstest2015",
+        ],
     }

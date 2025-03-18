@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -72,10 +72,9 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            _DOCUMENT: tfds.features.Text(),
-            _SUMMARY: tfds.features.Text()
-        }),
+        features=tfds.features.FeaturesDict(
+            {_DOCUMENT: tfds.features.Text(), _SUMMARY: tfds.features.Text()}
+        ),
         supervised_keys=(_DOCUMENT, _SUMMARY),
         homepage="https://github.com/harvardnlp/sent-summary",
         citation=_CITATION,
@@ -119,7 +118,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
         if replace_unk:
           yield i, {
               _DOCUMENT: doc_text.strip().replace("<unk>", "UNK"),
-              _SUMMARY: sum_text.strip().replace("<unk>", "UNK")
+              _SUMMARY: sum_text.strip().replace("<unk>", "UNK"),
           }
         else:
           yield i, {_DOCUMENT: doc_text.strip(), _SUMMARY: sum_text.strip()}

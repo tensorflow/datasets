@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,285 +16,398 @@
 """Util to generate the dataset documentation content.
 
 Used by tensorflow_datasets/scripts/documentation/build_catalog.py
-
 """
 
-import collections
 from concurrent import futures
-import os
-from typing import Dict, List, Optional, Tuple, Union, Set
+import dataclasses
+import functools
+from typing import Any, Iterator, List, Optional, Set, Type
 
-import mako.lookup
-import tensorflow.compat.v2 as tf
+from absl import logging
 import tensorflow_datasets as tfds
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.scripts.documentation import collection_markdown_builder
 from tensorflow_datasets.scripts.documentation import dataset_markdown_builder
+from tensorflow_datasets.scripts.documentation import doc_utils
+import tqdm
 
-WORKER_COUNT_DATASETS = 200
-WORKER_COUNT_CONFIGS = 50
+_WORKER_COUNT_DATASETS = 50
+_WORKER_COUNT_CONFIGS = 20
 
-BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets'
+# In the section headers we have different spellings of the same word. This
+# mapping is used to convert to a single spelling.
+_SECTION_WORD_MAPPING = {'modelling': 'modeling'}
 
 # WmtTranslate: The raw wmt can only be instantiated with the config kwargs
-# TODO(tfds): Document image_label_folder datasets in a separate section
-BUILDER_BLACKLIST = ['wmt_translate']
+_BUILDER_BLACKLIST = [
+    'wmt_translate',
+]
+
+# pylint: disable=logging-format-interpolation
 
 
-# Dict of `full_names_dict['dataset']['config']['version']`
-FullNamesDict = Dict[str, Dict[str, Set[str]]]
-# Same as `FullNamesDict`, but contains `True` for nightly datasets:
-# * New dataset: nightly_dict['dataset'] is True
-# * New config: nightly_dict['dataset']['config'] is True
-# * New version: nightly_dict['dataset']['config']['version'] is True
-NightlyDict = Dict[str, Union[bool, Dict[str, Union[bool, Dict[str, bool]]]]]
+def _format_section(section: str) -> str:
+  section = section.replace('_', ' ').replace('-', ' ').lower()
+  for orig_word, new_word in _SECTION_WORD_MAPPING.items():
+    section = section.replace(orig_word, new_word)
+  return section.capitalize()
 
 
-class VisualizationDocUtil(object):
-  """Small util which generate the path/urls for the visualizations."""
-  # Url used to display images
-  BASE_PATH = tfds.core.gcs_path('visualization/fig/')
-  BASE_URL = 'https://storage.googleapis.com/tfds-data/visualization/fig/'
+@dataclasses.dataclass(eq=False)
+class BuilderToDocument:
+  """Structure containing metadata."""
 
-  def _get_name(self, builder):
-    return builder.info.full_name.replace('/', '-') + '.png'
+  sections: Set[str]
+  namespace: Optional[str]
+  builder: tfds.core.DatasetBuilder
+  config_builders: List[tfds.core.DatasetBuilder]
 
-  def get_url(self, builder):
-    return self.BASE_URL + self._get_name(builder)
-
-  def get_html_tag(self, builder: tfds.core.DatasetBuilder) -> str:
-    """Returns the <img> html tag."""
-    url = self.get_url(builder)
-    return f'<img src="{url}" alt="Visualization" width="500px">'
-
-  def has_visualization(self, builder):
-    filepath = os.path.join(self.BASE_PATH, self._get_name(builder))
-    return tf.io.gfile.exists(filepath)
+  def __post_init__(self):
+    # Make sure section names are formatted correctly.
+    self.sections = {_format_section(section) for section in self.sections}
 
 
-def _split_full_name(full_name: str) -> Tuple[str, str, str]:
-  """Extracts the `(ds name, config, version)` from the full_name."""
-  if not tfds.core.load.is_full_name(full_name):
-    raise ValueError(
-        f'Parsing builder name string {full_name} failed.'
-        'The builder name string must be of the following format:'
-        '`dataset_name[/config_name]/version`')
-  ds_name, *optional_config, version = full_name.split('/')
-  assert len(optional_config) <= 1
-  config = next(iter(optional_config)) if optional_config else ''
-  return ds_name, config, version
+@dataclasses.dataclass(eq=False)
+class BuilderDocumentation:
+  """Documentation output of a single builder.
+
+  Attributes:
+    name: Documentation page name (e.g. `mnist`, `kaggle:mnist`)
+    filestem: Documentation page name without suffix (e.g. `mnist`,
+      `kaggle_mnist`)
+    content: Documentation content
+    sections: Documentation sections (e.g `text`, `image`,...)
+    namespace: Dataset namespace
+    is_manual: Whether the dataset require manual download
+    is_nightly: Whether the dataset was recently added in `tfds-nightly`
+  """
+
+  name: str
+  filestem: str
+  content: str
+  sections: Set[str]
+  is_manual: bool
+  is_nightly: bool
+
+  def __post_init__(self):
+    # Make sure section names are formatted correctly.
+    self.sections = {_format_section(section) for section in self.sections}
 
 
-def _full_names_to_dict(full_names: List[str]) -> FullNamesDict:
-  """Creates the dict `d['dataset']['config']['version']`."""
-  full_names_dict = collections.defaultdict(
-      lambda: collections.defaultdict(set))
-  for full_name in full_names:
-    ds_name, config, version = _split_full_name(full_name)
-    full_names_dict[ds_name][config].add(version)
-  return full_names_dict
+@dataclasses.dataclass(eq=False, frozen=True)
+class CollectionDocumentation:
+  """Documentation output of a single builder.
+
+  Attributes:
+    name: Documentation page name (e.g. `xtreme`)
+    content: Documentation content
+    is_nightly: Whether the dataset was recently added in `tfds-nightly`
+  """
+
+  name: str
+  content: str
+  is_nightly: bool
 
 
-def _build_nightly_dict(
-    registered_ds: FullNamesDict,
-    stable_version_ds: FullNamesDict,
-) -> NightlyDict:
-  """Computes the nightly dict from the registered and stable dict."""
-  nightly_ds = collections.defaultdict(
-      lambda: collections.defaultdict(  # pylint: disable=g-long-lambda
-          lambda: collections.defaultdict(bool)))
-  for dataset in registered_ds:
-    if dataset in stable_version_ds:
-      for config in registered_ds[dataset]:
-        if config in stable_version_ds[dataset]:
-          for version in registered_ds[dataset][config]:
-            if version in stable_version_ds[dataset][config]:
-              # (dataset, config, version) already exists
-              # We add it to the nightly dict to make sure the
-              # key exists
-              nightly_ds[dataset][config][version] = False
-            else:
-              # New version only present in tfds-nightly
-              nightly_ds[dataset][config][version] = True
-        else:
-          # New config only present in tfds-nightly
-          nightly_ds[dataset][config] = True
-    else:
-      # New dataset only present in tfds-nightly
-      nightly_ds[dataset] = True
-  return nightly_ds
-
-
-@tfds.core.utils.memoize()
-def _load_nightly_dict() -> NightlyDict:
-  """Loads (and caches) the nightly dict."""
-  version_path = tfds.core.utils.get_tfds_path('stable_versions.txt')
-  with tf.io.gfile.GFile(version_path, 'r') as f:
-    stable_versions = f.read().splitlines()
-
-  # Build the `full_names_dict['dataset']['config']['version']` for both
-  # nightly and stable version
-  registered_ds = _full_names_to_dict(
-      tfds.core.load.list_full_names())
-  stable_version_ds = _full_names_to_dict(stable_versions)
-
-  # Nightly versions are `registered - stable`
-  return _build_nightly_dict(registered_ds, stable_version_ds)
-
-
-class NightlyDocUtil(object):
-  """Small util to format the doc."""
-
-  def __init__(self):
-    self._nightly_dict: NightlyDict = _load_nightly_dict()
-
-  def is_builder_nightly(
-      self,
-      builder: Union[tfds.core.DatasetBuilder, str],
-  ) -> bool:
-    """Returns `True` if the builder is new."""
-    if isinstance(builder, tfds.core.DatasetBuilder):
-      builder_name = builder.name
-    else:
-      builder_name = builder
-    return self._nightly_dict[builder_name] is True  # pylint: disable=g-bool-id-comparison
-
-  def is_config_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
-    """Returns `True` if the config is new."""
-    ds_name, config, _ = _split_full_name(builder.info.full_name)
-    if self.is_builder_nightly(builder):
-      return False
-    return self._nightly_dict[ds_name][config] is True  # pylint: disable=g-bool-id-comparison
-
-  def is_version_nightly(
-      self,
-      builder: tfds.core.DatasetBuilder,
-      version: str,
-  ) -> bool:
-    """Returns `True` if the version is new."""
-    ds_name, config, _ = _split_full_name(builder.info.full_name)
-    if self.is_builder_nightly(builder) or self.is_config_nightly(builder):
-      return False
-    return self._nightly_dict[ds_name][config][version] is True  # pylint: disable=g-bool-id-comparison
-
-  def has_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
-    """Returns True if any of the builder/config/version is new."""
-    def reduce(value):
-      if isinstance(value, bool):
-        return value
-      elif isinstance(value, dict):
-        return any(reduce(x) for x in value.values())
-      else:
-        raise AssertionError(f'Invalid nightly_dict value: {value}')
-
-    return reduce(self._nightly_dict[builder.name])
-
-  icon = (
-      '<span class="material-icons" '
-      'title="Available only in the tfds-nightly package">nights_stay</span>')
-
-
-@tfds.core.utils.memoize()
-def get_mako_template(tmpl_name):
-  """Returns mako.lookup.Template object to use to render documentation.
+def _load_builder(
+    name: str,
+) -> Optional[BuilderToDocument]:
+  """Load the builder to document.
 
   Args:
-    tmpl_name: string, name of template to load.
+    name: Builder to load
 
   Returns:
-    mako 'Template' instance that can be rendered.
+    BuilderToDocument or None.
   """
-  tmpl_path = tfds.core.utils.get_tfds_path(
-      'scripts/documentation/templates/%s.mako.md' % tmpl_name)
-  with tf.io.gfile.GFile(tmpl_path, 'r') as tmpl_f:
-    tmpl_content = tmpl_f.read()
-  return mako.lookup.Template(tmpl_content, default_filters=['str', 'trim'])
+  try:
+    dataset_name = tfds.core.naming.DatasetName(name)
+  except ValueError as e:
+    logging.warning('Could not parse dataset with name %s', name, exc_info=e)
+    return None
+  if dataset_name.namespace:  # Community dataset
+    return _load_builder_from_location(name=name, dataset_name=dataset_name)
+  else:  # Code dataset
+    return _load_builder_from_code(name)
 
 
-def document_single_builder(builder):
-  """Doc string for a single builder, with or without configs."""
-  print('Document builder %s...' % builder.name)
-  get_config_builder = lambda config: tfds.builder(builder.name, config=config)
-  config_builders = []
-  if builder.builder_configs:
-    with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_CONFIGS) as tpool:
-      config_builders = list(
-          tpool.map(get_config_builder, builder.BUILDER_CONFIGS))
-  visu_doc_util = VisualizationDocUtil()
-  out_str = dataset_markdown_builder.get_markdown_string(
+def _load_builder_from_location(
+    name: str,
+    dataset_name: tfds.core.naming.DatasetName,
+) -> Optional[BuilderToDocument]:
+  """Load the builder, config,... to document."""
+  logging.info('Loading builder %s from location', dataset_name)
+  try:
+    builder = tfds.builder(name)
+    logging.debug('Loaded builder from location: %s', builder)
+  except tfds.core.DatasetNotFoundError as e:
+    logging.info(
+        'Dataset %s not found, will now try to load from sub-folder',
+        dataset_name,
+        exc_info=e,
+    )
+    # If tfds.core.DatasetNotFoundError, it might be the default
+    # config isn't found. Should try to load a sub-folder (to check).
+    builder = _maybe_load_config(name)
+    if not builder:
+      logging.error('Dataset %s not found', dataset_name, exc_info=e)
+      return None
+  except (OSError, tf.errors.PermissionDeniedError) as e:
+    logging.error('Permission denied for %s', dataset_name, exc_info=e)
+    tqdm.tqdm.write(f'Warning: Skip dataset {name} due to permission error')
+    return None
+  except Exception as e:  # pylint: disable=broad-except
+    logging.error('CorruptedDatasetError: %s', repr(name), exc_info=e)
+    return None
+  if builder.builder_config:
+    config_builders = _load_all_configs(name, builder)
+  else:
+    config_builders = []
+  return BuilderToDocument(
+      sections={dataset_name.namespace},
+      namespace=dataset_name.namespace,
       builder=builder,
       config_builders=config_builders,
-      visu_doc_util=visu_doc_util,
-      nightly_doc_util=NightlyDocUtil(),
   )
-  schema_org_tmpl = get_mako_template('schema_org')
-  schema_org_out_str = schema_org_tmpl.render_unicode(
-      builder=builder,
-      config_builders=config_builders,
-      visu_doc_util=visu_doc_util,
-  ).strip()
-  out_str = schema_org_out_str + '\n' + out_str
-  return out_str
 
 
-def make_category_to_builders_dict(
-    datasets: Optional[List[str]] = None,
-) -> Dict[str, List[tfds.core.DatasetBuilder]]:
-  """Returns the `Dict[dataset_type, List[Builder]]`."""
-  if not datasets:
-    datasets = [
-        name for name in tfds.list_builders() if name not in BUILDER_BLACKLIST
+def _maybe_load_config(name: str) -> Optional[tfds.core.DatasetBuilder]:
+  del name  # unused
+  return None
+
+
+def _load_all_configs(
+    name: str,
+    builder: tfds.core.DatasetBuilder,
+) -> List[tfds.core.DatasetBuilder]:
+  """Load all builder configs."""
+  # `data_dir/name/config/version/` -> `data_dir/name/`
+  common_dir = builder.data_path.parent.parent
+  filtered_dirs = {builder.builder_config.name, '.config'}
+
+  def get_config_builder(path):
+    if path.name in filtered_dirs:
+      return None  # Default config is already loaded
+    try:
+      builder_conf = tfds.builder(f'{name}/{path.name}')
+    except tfds.core.DatasetNotFoundError:
+      return None
+    if not builder_conf.builder_config:
+      # Unexpected sub-config with wrong metadata.
+      # This can happen if the user manually messed up with the directories.
+      return None
+    return builder_conf
+
+  with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
+    config_names = sorted(common_dir.iterdir())
+    config_builders = [
+        config_builder
+        for config_builder in tpool.map(get_config_builder, config_names)
+        if config_builder is not None  # Filter invalid configs
     ]
-  print('Creating the vanilla builders for %s datasets...' % len(datasets))
-  with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
-    builders = tpool.map(tfds.builder, datasets)
-  print('Vanilla builders built, constructing module_to_builder dict...')
 
-  # Dict[dataset_type, List[Builder]]
-  category_to_builders = collections.defaultdict(list)
+  return [builder] + config_builders
 
-  for builder in builders:
-    module = type(builder).__module__
-    if not module.startswith('tensorflow_datasets.'):
-      raise AssertionError(f'Unexpected builder {type(builder)}: module')
 
-    module_parts = module.split('.')
+def _load_builder_from_code(
+    name: str,
+) -> BuilderToDocument:
+  """Load the builder, config,... to document."""
+  builder_cls = tfds.builder_cls(name)
+  sections = _get_sections(builder_cls)
 
-    if 'testing' in module_parts:
+  if builder_cls.BUILDER_CONFIGS:  # Builder with configs
+
+    def get_config_builder(config) -> tfds.core.DatasetBuilder:
+      return tfds.builder(builder_cls.name, config=config)
+
+    with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_CONFIGS) as tpool:
+      config_builders = list(
+          tpool.map(get_config_builder, builder_cls.BUILDER_CONFIGS),
+      )
+    return BuilderToDocument(
+        sections=sections,
+        namespace=None,
+        builder=config_builders[0],
+        config_builders=config_builders,
+    )
+  else:  # Builder without configs
+    return BuilderToDocument(
+        sections=sections,
+        namespace=None,
+        builder=builder_cls(),  # pytype: disable=not-instantiable
+        config_builders=[],
+    )
+
+
+def _get_sections(builder_cls: Type[tfds.core.DatasetBuilder]) -> Set[str]:
+  """Returns the sections associated with the builder."""
+  module_parts = builder_cls.__module__.split('.')
+  if module_parts[0] != 'tensorflow_datasets':
+    raise AssertionError(f'Unexpected builder {builder_cls}: module')
+  # Legacy datasets: a single section, inferred from module path.
+  _, category, *_ = module_parts  # tfds.<category>.xyz
+  if category != 'datasets':
+    return {category}
+  # Sections are inferred from tags.
+  ds_metadata = builder_cls.get_metadata()
+  if ds_metadata.tags:
+    sections = set()
+    for tag in ds_metadata.tags:
+      # Ignore languages until we have a better way to display them.
+      if tag.startswith('content.language'):
+        continue
+      section = tag.rsplit('.')[-1]
+      sections.add(section)
+    return sections
+  return {'uncategorized'}
+
+
+def _document_single_collection(
+    name: str,
+) -> CollectionDocumentation:
+  """Returns the documentation for a single dataset collection."""
+  logging.info('Documenting dataset collection %s', name)
+  collection = tfds.dataset_collection(name=name)
+  out_str = collection_markdown_builder.get_collection_markdown_string(
+      collection=collection
+  )
+  return CollectionDocumentation(
+      name=name,
+      content=out_str,
+      # TODO(tfds): Add support for display of nightly icon when necessary.
+      is_nightly=False,
+  )
+
+
+def _document_single_builder(
+    name: str,
+    **kwargs: Any,
+) -> Optional[BuilderDocumentation]:
+  """Doc string for a single builder, with or without configs."""
+  with tfds.core.utils.try_reraise(f'Error for `{name}`: '):
+    return _document_single_builder_inner(name, **kwargs)
+
+
+def _document_single_builder_inner(
+    name: str,
+    nightly_doc_util: doc_utils.NightlyDocUtil,
+    **kwargs: Any,
+) -> Optional[BuilderDocumentation]:
+  """Doc string for a single builder, with or without configs."""
+  tqdm.tqdm.write(f'Document builder {name}...')
+  doc_info = _load_builder(name)
+  if doc_info is None:
+    logging.warning(
+        'No doc info was found for document builder %s. Skipping.', name
+    )
+    return None
+
+  out_str = dataset_markdown_builder.get_markdown_string(
+      namespace=doc_info.namespace,
+      builder=doc_info.builder,
+      config_builders=doc_info.config_builders,
+      nightly_doc_util=nightly_doc_util,
+      **kwargs,
+  )
+  is_nightly = bool(
+      nightly_doc_util and nightly_doc_util.is_builder_nightly(name)
+  )
+  return BuilderDocumentation(
+      name=name,
+      filestem=name.replace(':', '_'),
+      content=out_str,
+      sections=doc_info.sections,
+      is_manual=bool(doc_info.builder.MANUAL_DOWNLOAD_INSTRUCTIONS),
+      is_nightly=is_nightly,
+  )
+
+
+def _all_tfds_datasets() -> List[str]:
+  """Returns all "official" TFDS dataset names."""
+  datasets = []
+  for name in tfds.list_builders(with_community_datasets=True):
+    if name in _BUILDER_BLACKLIST:
       continue
-    _, category, *_ = module_parts  # tfds.<category>.xyz
+    try:
+      _ = tfds.core.naming.parse_builder_name_kwargs(name=name)
+      datasets.append(name)
+    except ValueError as e:
+      logging.error('Could not parse dataset with name `%s`!', name, exc_info=e)
+  return sorted(datasets)
 
-    category_to_builders[category].append(builder)
-  return category_to_builders
+
+def iter_collections_documentation(
+    collection_names: Optional[List[str]] = None,
+) -> Iterator[CollectionDocumentation]:
+  logging.info('Retrieving dataset collection names...')
+  collection_names = collection_names or sorted(tfds.list_dataset_collections())
+  for collection_name in collection_names:
+    yield _document_single_collection(name=collection_name)
+  print('All collections documentations generated!')
 
 
-def dataset_docs_str(datasets=None):
-  """Create dataset documentation string for given datasets.
+def iter_documentation_builders(
+    datasets: Optional[List[str]] = None,
+    *,
+    doc_util_paths: Optional[doc_utils.DocUtilPaths] = None,
+) -> Iterator[BuilderDocumentation]:
+  """Creates dataset documentation string for given datasets.
 
   Args:
-    datasets: list of datasets for which to create documentation.
-              If None, then all available datasets will be used.
+    datasets: list of datasets for which to create documentation. If None, then
+      all available datasets will be used.
+    doc_util_paths: Additional path for visualization, nightly info,...
 
-  Returns:
-    - overview document
-    - a dictionary of sections. Each dataset in a section is represented by a
-    tuple (dataset_name, is_manual_dataset, string describing the datasets
-    (in the MarkDown format))
+  Yields:
+    builder_documetation: The documentation information for each builder
   """
-
   print('Retrieving the list of builders...')
-  category_to_builders = make_category_to_builders_dict(datasets)
-  sections = sorted(list(category_to_builders.keys()))
-  section_docs = collections.defaultdict(list)
+  datasets = datasets or _all_tfds_datasets()
 
-  for section in sections:
-    builders = category_to_builders[section]
-    builders = sorted(builders, key=lambda b: b.name)
-    with futures.ThreadPoolExecutor(max_workers=WORKER_COUNT_DATASETS) as tpool:
-      builder_docs = tpool.map(document_single_builder, builders)
-    builder_docs = [
-        (builder.name, builder.MANUAL_DOWNLOAD_INSTRUCTIONS, builder_doc)
-        for (builder, builder_doc) in zip(builders, builder_docs)
+  # pytype: disable=attribute-error
+  if doc_util_paths.fig_base_path:
+    visu_doc_util = doc_utils.VisualizationDocUtil(
+        base_path=doc_util_paths.fig_base_path,
+        base_url=doc_util_paths.fig_base_url,
+    )
+  else:
+    visu_doc_util = None
+
+  if doc_util_paths.df_base_path:
+    df_doc_util = doc_utils.DataframeDocUtil(
+        base_path=doc_util_paths.df_base_path,
+        base_url=doc_util_paths.df_base_url,
+    )
+  else:
+    df_doc_util = None
+
+  if doc_util_paths.fig_base_path:
+    nightly_doc_util = doc_utils.NightlyDocUtil(
+        path=doc_util_paths.nightly_path,
+    )
+  else:
+    nightly_doc_util = None
+  # pytype: enable=attribute-error
+
+  document_single_builder_fn = functools.partial(
+      _document_single_builder,
+      visu_doc_util=visu_doc_util,
+      df_doc_util=df_doc_util,
+      nightly_doc_util=nightly_doc_util,
+  )
+
+  # Document all builders
+  print(f'Document {len(datasets)} builders...')
+  with futures.ThreadPoolExecutor(max_workers=_WORKER_COUNT_DATASETS) as tpool:
+    tasks = [
+        tpool.submit(document_single_builder_fn, name) for name in datasets
     ]
-    section_docs[section] = builder_docs
-  tmpl = get_mako_template('catalog_overview')
-  catalog_overview = tmpl.render_unicode().lstrip()
-  return [catalog_overview, section_docs]
+    for future in tqdm.tqdm(futures.as_completed(tasks), total=len(tasks)):
+      builder_doc = future.result()
+      if builder_doc is None:  # Builder filtered
+        continue
+      else:
+        tqdm.tqdm.write(f'Documentation generated for {builder_doc.name}...')
+        yield builder_doc
+  print('All builder documentations generated!')

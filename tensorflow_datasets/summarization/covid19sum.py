@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,14 @@
 
 """Summarizing abstract from covid19 publications."""
 
+from __future__ import annotations
+
 import json
 import os
-from typing import Any, Dict, Iterator, List, Text, Tuple
+from typing import Any, Dict, Iterator, List, Optional, Text, Tuple
 
-import tensorflow.compat.v2 as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -32,7 +35,9 @@ _CITATION = """
 }
 """
 
-_HOMEPAGE = "https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge"
+_HOMEPAGE = (
+    "https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge"
+)
 
 _DESCRIPTION = """
 CORD-19 is a resource of over 45,000 scholarly articles, including over 33,000
@@ -53,8 +58,34 @@ _SECTION = "section"
 _TEXT = "text"
 _SHA = "sha"
 _ADDITIONAL_FEATURES = [
-    _SHA, "source_x", "title", "doi", "license", "authors", "publish_time",
-    "journal", "url"
+    _SHA,
+    "source_x",
+    "title",
+    "doi",
+    "license",
+    "authors",
+    "publish_time",
+    "journal",
+    "url",
+]
+_ALL_COLUMNS = [
+    "cord_uid",
+    "sha",
+    "source_x",
+    "title",
+    "doi",
+    "pmcid",
+    "pubmed_id",
+    "license",
+    "abstract",
+    "publish_time",
+    "authors",
+    "journal",
+    "Microsoft Academic Paper ID",
+    "WHO #Covidence",
+    "has_full_text",
+    "full_text_file",
+    "url",
 ]
 
 
@@ -72,10 +103,8 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     features = {k: tf.string for k in _ADDITIONAL_FEATURES + [_ABSTRACT]}
     features[_BODY_TEXT] = tfds.features.Sequence(
-        tfds.features.FeaturesDict({
-            _SECTION: tf.string,
-            _TEXT: tf.string
-        }))
+        tfds.features.FeaturesDict({_SECTION: np.str_, _TEXT: np.str_})
+    )
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -90,16 +119,22 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     extracted_path = dl_manager.extract(
-        os.path.join(dl_manager.manual_dir, "CORD-19-research-challenge.zip"))
+        os.path.join(dl_manager.manual_dir, "CORD-19-research-challenge.zip")
+    )
     pd = tfds.core.lazy_imports.pandas
-    df = pd.read_csv(os.path.join(extracted_path, "metadata.csv")).fillna("")
+    df = pd.read_csv(
+        os.path.join(extracted_path, "metadata.csv"),
+        header=0,
+        names=_ALL_COLUMNS,
+    ).fillna("")
     data_paths = []
     for _, row in df.iterrows():
       file_dir = row["full_text_file"]
       if row["has_full_text"] and _has_abstract(row) and file_dir:
         d = {k: row[k] for k in _ADDITIONAL_FEATURES + [_ABSTRACT]}
-        d["path"] = os.path.join(extracted_path, file_dir, file_dir,
-                                 row[_SHA] + ".json")
+        d["path"] = os.path.join(
+            extracted_path, file_dir, file_dir, row[_SHA] + ".json"
+        )
         data_paths.append(d)
     return [
         tfds.core.SplitGenerator(
@@ -109,8 +144,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(
-      self,
-      data_paths: List[Dict[Text, Any]] = None
+      self, data_paths: Optional[List[Dict[Text, Any]]] = None
   ) -> Iterator[Tuple[Any, Dict[Text, Any]]]:
     """Yields examples."""
     for d in data_paths:

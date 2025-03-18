@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,9 +21,8 @@ import re
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """\
 The CBIS-DDSM (Curated Breast Imaging Subset of DDSM) is an updated and
@@ -33,20 +32,9 @@ It contains normal, benign, and malignant cases with verified pathology
 information.
 
 The default config is made of patches extracted from the original mammograms,
-following the description from http://arxiv.org/abs/1708.09427, in order to
+following the description from (http://arxiv.org/abs/1708.09427), in order to
 frame the task to solve in a traditional image classification setting.
 
-Because special software and libraries are needed to download and read the
-images contained in the dataset, TFDS assumes that the user has downloaded the
-original DCIM files and converted them to PNG.
-
-The following commands (or equivalent) should be used to generate the PNG files,
-in order to guarantee reproducible results:
-
-```
-  find $DATASET_DCIM_DIR -name '*.dcm' | \\
-  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
-```
 """
 
 _CITATION = """\
@@ -118,8 +106,14 @@ class CuratedBreastImagingDDSMConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CuratedBreastImagingDDSM."""
 
   def __init__(self, image_size=None, patch_size=None, **kwargs):
-    kwargs['version'] = tfds.core.Version(
-        '2.0.1', 'New split API (https://tensorflow.org/datasets/splits)')
+    kwargs['version'] = tfds.core.Version('3.0.0')
+    kwargs['release_notes'] = {
+        '3.0.0': """
+        Better cropping sampling
+        (https://github.com/tensorflow/datasets/pull/2502)
+        """,
+        '2.0.1': 'New split API (https://tensorflow.org/datasets/splits)',
+    }
     super(CuratedBreastImagingDDSMConfig, self).__init__(**kwargs)
     self.image_size = image_size
     self.patch_size = patch_size
@@ -131,45 +125,71 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
   MANUAL_DOWNLOAD_INSTRUCTIONS = """\
   You can download the images from
   https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM
-  Please look at the source file (cbis_ddsm.py) to see the instructions
-  on how to convert them into png (using dcmj2pnm).
+
+  Because special software and libraries are needed to download and read the
+  images contained in the dataset, TFDS assumes that the user has downloaded the
+  original DCIM files and converted them to PNG.
+
+  The following commands (or equivalent) should be used to generate the PNG
+  files, in order to guarantee reproducible results:
+
+  ```sh
+  find $DATASET_DCIM_DIR -name '*.dcm' | \\
+  xargs -n1 -P8 -I{} bash -c 'f={}; dcmj2pnm $f | convert - ${f/.dcm/.png}'
+  ```
+
+  Resulting images should be put in `manual_dir`, like:
+  `<manual_dir>/Mass-Training_P_01981_RIGHT_MLO_1/1.3.6.../000000.png`.
   """
 
   BUILDER_CONFIGS = [
       CuratedBreastImagingDDSMConfig(
           name='patches',
-          description=('Patches containing both calsification and mass cases, '
-                       'plus pathces with no abnormalities. Designed as a '
-                       'traditional 5-class classification task.'),
+          description=(
+              'Patches containing both calsification and mass cases, '
+              'plus pathces with no abnormalities. Designed as a '
+              'traditional 5-class classification task.'
+          ),
           image_size=(1152, 896),  # Note: (height, width).
-          patch_size=(224, 224)),
+          patch_size=(224, 224),
+      ),
       CuratedBreastImagingDDSMConfig(
           name='original-calc',
-          description=('Original images of the calcification cases compressed '
-                       'in lossless PNG.')),
+          description=(
+              'Original images of the calcification cases compressed '
+              'in lossless PNG.'
+          ),
+      ),
       CuratedBreastImagingDDSMConfig(
           name='original-mass',
-          description=('Original images of the mass cases compressed in '
-                       'lossless PNG.')),
+          description=(
+              'Original images of the mass cases compressed in lossless PNG.'
+          ),
+      ),
   ]
 
   def _info(self):
     features_fn_map = {
         'original-calc': self._get_features_original_calc,
         'original-mass': self._get_features_original_mass,
-        'patches': self._get_features_patches
+        'patches': self._get_features_patches,
     }
     if self.builder_config.name not in features_fn_map:
-      raise ValueError('Builder config named {} not supported!'.format(
-          self.builder_config.name))
+      raise ValueError(
+          'Builder config named {} not supported!'.format(
+              self.builder_config.name
+          )
+      )
 
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=features_fn_map[self.builder_config.name](),
-        homepage=
-        'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM',
-        citation=_CITATION)
+        homepage=(
+            'https://wiki.cancerimagingarchive.net/display/Public/CBIS-DDSM'
+        ),
+        citation=_CITATION,
+    )
 
   def _get_features_original_base(self):
     return {
@@ -179,68 +199,80 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'view': tfds.features.ClassLabel(names=_IMAGE_VIEW_LABELS),
         'patient': tfds.features.Text(),
         'abnormalities': {
-            'id': tfds.features.Tensor(shape=(), dtype=tf.int32),
+            'id': tfds.features.Tensor(shape=(), dtype=np.int32),
             'mask': tfds.features.Image(shape=(None, None, 1)),
-            'assessment':
-                tfds.features.ClassLabel(num_classes=_ASSESSMENT_NUM_CLASSES),
+            'assessment': tfds.features.ClassLabel(
+                num_classes=_ASSESSMENT_NUM_CLASSES
+            ),
             'pathology': tfds.features.ClassLabel(names=_PATHOLOGY_LABELS),
-            'subtlety':
-                tfds.features.ClassLabel(num_classes=_SUBTELTY_NUM_CLASSES),
+            'subtlety': tfds.features.ClassLabel(
+                num_classes=_SUBTELTY_NUM_CLASSES
+            ),
             # TODO(jpuigcerver): Include original crops when TFDS allows it.
             # The problem seems to be in the compute statistics steps, since
             # a given example may have crops of different sizes and this is
             # not handled properly.
             # 'crop': tfds.features.Image(shape=(None, None, 1)),
-        }
+        },
     }
 
   def _get_features_original_calc(self):
     features = self._get_features_original_base()
     features['abnormalities'].update({
-        'calc_type':
-            tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_calc_types.txt'))),
-        'calc_distribution':
-            tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        'image_classification',
-                        'cbis_ddsm_calc_distributions.txt'))),
+        'calc_type': tfds.features.ClassLabel(
+            names_file=tfds.core.tfds_path(
+                os.path.join('image_classification', 'cbis_ddsm_calc_types.txt')
+            )
+        ),
+        'calc_distribution': tfds.features.ClassLabel(
+            names_file=tfds.core.tfds_path(
+                os.path.join(
+                    'image_classification', 'cbis_ddsm_calc_distributions.txt'
+                )
+            )
+        ),
     })
     features['abnormalities'] = tfds.features.Sequence(
-        tfds.features.FeaturesDict(features['abnormalities']))
+        tfds.features.FeaturesDict(features['abnormalities'])
+    )
     return tfds.features.FeaturesDict(features)
 
   def _get_features_original_mass(self):
     features = self._get_features_original_base()
     features['abnormalities'].update({
-        'mass_shape':
-            tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_mass_shapes.txt'))),
-        'mass_margins':
-            tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_mass_margins.txt'))),
+        'mass_shape': tfds.features.ClassLabel(
+            names_file=tfds.core.tfds_path(
+                os.path.join(
+                    'image_classification', 'cbis_ddsm_mass_shapes.txt'
+                )
+            )
+        ),
+        'mass_margins': tfds.features.ClassLabel(
+            names_file=tfds.core.tfds_path(
+                os.path.join(
+                    'image_classification', 'cbis_ddsm_mass_margins.txt'
+                )
+            )
+        ),
     })
     features['abnormalities'] = tfds.features.Sequence(
-        tfds.features.FeaturesDict(features['abnormalities']))
+        tfds.features.FeaturesDict(features['abnormalities'])
+    )
     return tfds.features.FeaturesDict(features)
 
   def _get_features_patches(self):
     return tfds.features.FeaturesDict({
         'id': tfds.features.Text(),
-        'image':
-            tfds.features.Image(shape=(None, None, 1), encoding_format='jpeg'),
-        'label':
-            tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
-                    os.path.join(
-                        'image_classification', 'cbis_ddsm_patch_labels.txt'))),
+        'image': tfds.features.Image(
+            shape=(None, None, 1), encoding_format='jpeg'
+        ),
+        'label': tfds.features.ClassLabel(
+            names_file=tfds.core.tfds_path(
+                os.path.join(
+                    'image_classification', 'cbis_ddsm_patch_labels.txt'
+                )
+            )
+        ),
     })
 
   def _split_generators(self, dl_manager):
@@ -249,8 +281,11 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.name == 'patches':
       return self._split_generators_patches(dl_manager)
     else:
-      raise ValueError('Builder config named {} not supported!'.format(
-          self.builder_config.name))
+      raise ValueError(
+          'Builder config named {} not supported!'.format(
+              self.builder_config.name
+          )
+      )
 
   def _split_generators_original(self, dl_manager):
     if self.builder_config.name == 'original-calc':
@@ -260,8 +295,11 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
       test_url = _MASS_TEST_CSV_URL
       train_url = _MASS_TRAIN_CSV_URL
     else:
-      raise ValueError('Builder config named {} not supported!'.format(
-          self.builder_config.name))
+      raise ValueError(
+          'Builder config named {} not supported!'.format(
+              self.builder_config.name
+          )
+      )
 
     resources = {'test': test_url, 'train': train_url}
     resource_paths = dl_manager.download_and_extract(resources)
@@ -291,14 +329,9 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'calc-test': _CALC_TEST_CSV_URL,
         'calc-train': _CALC_TRAIN_CSV_URL,
         'mass-test': _MASS_TEST_CSV_URL,
-        'mass-train': _MASS_TRAIN_CSV_URL
+        'mass-train': _MASS_TRAIN_CSV_URL,
     }
-    resources = {
-        key: tfds.download.Resource(
-            url=url, extract_method=tfds.download.ExtractMethod.NO_EXTRACT)
-        for key, url in resources_urls.items()
-    }
-    resource_paths = dl_manager.download_and_extract(resources)
+    resource_paths = dl_manager.download_and_extract(resources_urls)
     patients_data = _load_csv_files(dl_manager.manual_dir, resource_paths)
 
     # Statistics about the resulting splits.
@@ -319,7 +352,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     #   Num mamographies: 267, of which have malignant abnormalities: 46.4%
     #   Num abnormalities: 308, of which are malignant: 41.2%
     patients_test, patients_train, patients_valid = _split_patients(
-        patients_data)
+        patients_data
+    )
     patients_data_test = _select_patients_data(patients_data, patients_test)
     patients_data_train = _select_patients_data(patients_data, patients_train)
     patients_data_valid = _select_patients_data(patients_data, patients_valid)
@@ -359,7 +393,6 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     return generate_fn(**kwargs)
 
   def _generate_examples_original(self, patients_data, yield_from_train_csv):
-
     def _include_example_in_split(example):
       if yield_from_train_csv:
         return example['csv_key'] == 'train'
@@ -376,19 +409,22 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
               'view': example['view'],
               'breast': example['breast'],
               # pylint: disable=g-complex-comprehension
-              'abnormalities': [{
-                  k: v for k, v in abnormality.items() if k not in ['type']
-              } for abnormality in example['abnormalities']],
+              'abnormalities': [
+                  {k: v for k, v in abnormality.items() if k not in ['type']}
+                  for abnormality in example['abnormalities']
+              ],
               # pylint: enable=g-complex-comprehension
           }
           yield example['id'], record
 
-  def _generate_examples_patches(self,
-                                 patients_data,
-                                 image_size=(1152, 896),
-                                 patch_size=(224, 224),
-                                 num_positive_patches_per_abnormality=10,
-                                 num_background_patches_per_image=10):
+  def _generate_examples_patches(
+      self,
+      patients_data,
+      image_size=(1152, 896),
+      patch_size=(224, 224),
+      num_positive_patches_per_abnormality=10,
+      num_background_patches_per_image=10,
+  ):
     # Set random seed so that we always get the same patches in each split.
     np.random.seed(0x12345 + len(patients_data))
 
@@ -403,7 +439,8 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         abnormalities_areas = [np.sum(mask > 0) for mask in abnormalities_masks]
         # Sample positive (abnormal) patches from the given mammography.
         for abnormality, abnormality_mask, abnormality_area in zip(
-            example['abnormalities'], abnormalities_masks, abnormalities_areas):
+            example['abnormalities'], abnormalities_masks, abnormalities_areas
+        ):
           # Determine label for the given abnormality.
           if abnormality['pathology'].startswith('MALIGNANT'):
             benign_or_malignant = 'MALIGNANT'
@@ -414,16 +451,25 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
           elif abnormality['type'] == 'mass':
             label = benign_or_malignant + '_MASS'
           else:
-            raise ValueError('Unknown abnormality type: %r' %
-                             abnormality['type'])
+            raise ValueError(
+                'Unknown abnormality type: %r' % abnormality['type']
+            )
           # Sample positive patches from the given abnormality.
           for k, patch in enumerate(
-              _sample_positive_patches(image, abnormality['mask'],
-                                       abnormality_mask, abnormality_area,
-                                       patch_size,
-                                       num_positive_patches_per_abnormality)):
-            patch_id = ('%s/abnorm_%s/patch_%d' %
-                        (example['id'], abnormality['id'], k))
+              _sample_positive_patches(
+                  image,
+                  abnormality['mask'],
+                  abnormality_mask,
+                  abnormality_area,
+                  patch_size,
+                  num_positive_patches_per_abnormality,
+              )
+          ):
+            patch_id = '%s/abnorm_%s/patch_%d' % (
+                example['id'],
+                abnormality['id'],
+                k,
+            )
             record = {
                 'id': patch_id,
                 # Note: TFDS needs the shape to be (?, ?, 1).
@@ -434,10 +480,15 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
 
         # Sample background patches from the given mammography.
         for k, patch in enumerate(
-            _sample_negative_patches(image, example['image'],
-                                     abnormalities_masks, abnormalities_areas,
-                                     patch_size,
-                                     num_background_patches_per_image)):
+            _sample_negative_patches(
+                image,
+                example['image'],
+                abnormalities_masks,
+                abnormalities_areas,
+                patch_size,
+                num_background_patches_per_image,
+            )
+        ):
           id_ = '%s/background_%d' % (example['id'], k)
           record = {
               'id': id_,
@@ -467,18 +518,22 @@ def _load_csv_files(manual_dir, dictionary_of_csv_files):
       for i, row in enumerate(csv_reader, 2):
         row = {k: v.strip() for k, v in row.items()}  # Strip all cells.
         # Construct example ID from the study and series IDs.
-        example_id = _DCIM_REGEX.sub(r'\g<study>/\g<series>',
-                                     row['image file path'])
+        example_id = _DCIM_REGEX.sub(
+            r'\g<study>/\g<series>', row['image file path']
+        )
         # Get path to the
         for key in [
-            'image file path', 'ROI mask file path', 'cropped image file path'
+            'image file path',
+            'ROI mask file path',
+            'cropped image file path',
         ]:
           row[key] = row[key].replace('.dcm', '.png')
           row[key] = os.path.join(manual_dir, *row[key].split('/'))
           if not tf.io.gfile.exists(row[key]):
-            raise ValueError('Error processing line %d from csv file %s: '
-                             'Image %r does not exist!' %
-                             (i, csv_path, row[key]))
+            raise ValueError(
+                'Error processing line %d from csv file %s: '
+                'Image %r does not exist!' % (i, csv_path, row[key])
+            )
 
         mask_file_path = row['ROI mask file path']
         crop_file_path = row['cropped image file path']
@@ -495,10 +550,16 @@ def _load_csv_files(manual_dir, dictionary_of_csv_files):
           # TODO(jpuigcerver): Contact the owners of the dataset to ask about
           # this problem.
           logging.error(
-              'Error processing line %d from csv file %s: No suitable mask for '
-              'the given image (expected size: %r, candidate sizes: %r). '
-              'This abnormality will NOT be included in the dataset.', i,
-              csv_path, full_image.shape, [mask_image.shape, crop_image.shape])
+              (
+                  'Error processing line %d from csv file %s: No suitable mask'
+                  ' for the given image (expected size: %r, candidate sizes:'
+                  ' %r). This abnormality will NOT be included in the dataset.'
+              ),
+              i,
+              csv_path,
+              full_image.shape,
+              [mask_image.shape, crop_image.shape],
+          )
           continue
 
         abnormality = {
@@ -546,17 +607,17 @@ def _append_example_to_data(data, example):
       assert example['image'] == data[patient_id][example_id]['image']
       assert example['view'] == data[patient_id][example_id]['view']
       data[patient_id][example_id]['abnormalities'].extend(
-          example['abnormalities'])
+          example['abnormalities']
+      )
     else:
       data[example['patient']][example['id']] = example
   else:
     data[example['patient']] = {example['id']: example}
 
 
-def _split_patients(data,
-                    test_fraction=0.15,
-                    train_fraction=0.765,
-                    valid_fraction=0.085):
+def _split_patients(
+    data, test_fraction=0.15, train_fraction=0.765, valid_fraction=0.085
+):
   """Split the patients in the data dictionary into test, train and valid sets."""
   assert test_fraction > 0 and train_fraction > 0 and valid_fraction > 0
   assert np.abs(test_fraction + train_fraction + valid_fraction - 1.0) < 1e-9
@@ -580,7 +641,8 @@ def _read_image(filepath, image_size=None):
   cv2 = tfds.core.lazy_imports.cv2
   with tf.io.gfile.GFile(filepath, 'rb') as f:
     image = cv2.imdecode(
-        np.fromstring(f.read(), dtype=np.uint8), flags=cv2.IMREAD_GRAYSCALE)
+        np.frombuffer(f.read(), dtype=np.uint8), flags=cv2.IMREAD_GRAYSCALE
+    )
     if image_size:
       # Note: cv2.resize actually expects (width, size).
       image = cv2.resize(image, (image_size[1], image_size[0]))
@@ -610,8 +672,12 @@ def _get_breast_mask(image, min_breast_color_threshold=0.05):
   contours_areas = [cv2.contourArea(cont) for cont in contours]
   biggest_contour_idx = np.argmax(contours_areas)
   return cv2.drawContours(
-      np.zeros_like(image_binary), contours, biggest_contour_idx, 255,
-      cv2.FILLED)
+      np.zeros_like(image_binary),
+      contours,
+      biggest_contour_idx,
+      255,
+      cv2.FILLED,
+  )
 
 
 def _get_roi_from_mask(mask):
@@ -622,10 +688,14 @@ def _get_roi_from_mask(mask):
   return contours[biggest_contour_idx]
 
 
-def _patch_overlaps_any_abnormality_above_threshold(y, x, patch_size,
-                                                    abnormalities_masks,
-                                                    abnormalities_areas,
-                                                    min_overlap_threshold):
+def _patch_overlaps_any_abnormality_above_threshold(
+    y,
+    x,
+    patch_size,
+    abnormalities_masks,
+    abnormalities_areas,
+    min_overlap_threshold,
+):
   """Return True if the given patch overlaps significantly with any abnormality.
 
   Given a patch and a single abnormality, the overlap between the two is
@@ -649,23 +719,28 @@ def _patch_overlaps_any_abnormality_above_threshold(y, x, patch_size,
   patch_area = patch_size[0] * patch_size[1]
   for abnorm_mask, abnorm_area in zip(abnormalities_masks, abnormalities_areas):
     abnorm_in_patch_area = np.sum(
-        abnorm_mask[y:(y + patch_size[0]), x:(x + patch_size[1])] > 0)
+        abnorm_mask[y : (y + patch_size[0]), x : (x + patch_size[1])] > 0
+    )
     abnorm_in_patch_wrt_patch = abnorm_in_patch_area / patch_area
     abnorm_in_patch_wrt_abnorm = abnorm_in_patch_area / abnorm_area
-    if (abnorm_in_patch_wrt_patch > min_overlap_threshold or
-        abnorm_in_patch_wrt_abnorm > min_overlap_threshold):
+    if (
+        abnorm_in_patch_wrt_patch > min_overlap_threshold
+        or abnorm_in_patch_wrt_abnorm > min_overlap_threshold
+    ):
       return True
   return False
 
 
-def _sample_positive_patches(image,
-                             abnormality_filepath,
-                             abnormality_mask,
-                             abnormality_area,
-                             patch_size,
-                             number_of_patches=10,
-                             min_overlap_threshold=0.90,
-                             max_number_of_trials_per_threshold=100):
+def _sample_positive_patches(
+    image,
+    abnormality_filepath,
+    abnormality_mask,
+    abnormality_area,
+    patch_size,
+    number_of_patches=10,
+    min_overlap_threshold=0.90,
+    max_number_of_trials_per_threshold=100,
+):
   """Sample random patches from the image overlapping with the given abnormality.
 
   The abnormal area of the patch with respect to either (a) the total area of
@@ -714,8 +789,8 @@ def _sample_positive_patches(image,
     # Determine the region where random samples should be sampled from.
     max_h, min_h = max(abnorm_h, patch_size[0]), min(abnorm_h, patch_size[0])
     max_w, min_w = max(abnorm_w, patch_size[1]), min(abnorm_w, patch_size[1])
-    min_y = abnorm_y - int((1.0 - min_overlap_threshold) * max_h)
-    min_x = abnorm_x - int((1.0 - min_overlap_threshold) * max_w)
+    min_y = abnorm_y - max_h + min_overlap_threshold * min_h
+    min_x = abnorm_x - max_w + min_overlap_threshold * min_w
     max_y = abnorm_y + abnorm_h - int(min_overlap_threshold * min_h)
     max_x = abnorm_x + abnorm_w - int(min_overlap_threshold * min_w)
     # Ensure that all sampled batches are within the image.
@@ -727,22 +802,34 @@ def _sample_positive_patches(image,
     effective_range_size = max_number_of_trials_per_threshold
     if (max_y - min_y + 1) * (max_x - min_x + 1) < effective_range_size:
       logging.debug(
-          'The sampling region for patches of size %r with '
-          'min_overlap_threshold=%f contains less possible patches than '
-          'max_number_of_trials_per_threshold=%d, in abnormality %s',
-          patch_size, min_overlap_threshold, max_number_of_trials_per_threshold,
-          abnormality_filepath)
+          (
+              'The sampling region for patches of size %r with '
+              'min_overlap_threshold=%f contains less possible patches than '
+              'max_number_of_trials_per_threshold=%d, in abnormality %s'
+          ),
+          patch_size,
+          min_overlap_threshold,
+          max_number_of_trials_per_threshold,
+          abnormality_filepath,
+      )
       effective_range_size = (max_y - min_y + 1) * (max_x - min_x + 1)
 
     for _ in range(effective_range_size):
       patch_y = np.random.randint(min_y, max_y + 1)
       patch_x = np.random.randint(min_x, max_x + 1)
       if _patch_overlaps_any_abnormality_above_threshold(
-          patch_y, patch_x, patch_size, [abnormality_mask],
-          [abnormality_area], min_overlap_threshold):
+          patch_y,
+          patch_x,
+          patch_size,
+          [abnormality_mask],
+          [abnormality_area],
+          min_overlap_threshold,
+      ):
         number_of_yielded_patches += 1
-        yield image[patch_y:(patch_y + patch_size[0]), patch_x:(patch_x +
-                                                                patch_size[1])]
+        yield image[
+            patch_y : (patch_y + patch_size[0]),
+            patch_x : (patch_x + patch_size[1]),
+        ]
       # If we have yielded all requested patches return.
       if number_of_yielded_patches >= number_of_patches:
         return
@@ -750,27 +837,39 @@ def _sample_positive_patches(image,
     # Reduce those requirements and try again.
     min_overlap_threshold = min_overlap_threshold * 0.95
     logging.debug(
-        'Overlapping constraints relaxed to min_overlap_threshold=%f while '
-        'sampling positive patches for the abnormality %s',
-        min_overlap_threshold, abnormality_filepath)
+        (
+            'Overlapping constraints relaxed to min_overlap_threshold=%f while '
+            'sampling positive patches for the abnormality %s'
+        ),
+        min_overlap_threshold,
+        abnormality_filepath,
+    )
 
   # This should not happen ever.
   raise ValueError(
       'Only %d positive patches of size %r could be sampled satisfying the '
       'current conditions (min. relative overlapping area = %f) for the '
-      'abnormality %s' % (number_of_yielded_patches, patch_size,
-                          min_overlap_threshold, abnormality_filepath))
+      'abnormality %s'
+      % (
+          number_of_yielded_patches,
+          patch_size,
+          min_overlap_threshold,
+          abnormality_filepath,
+      )
+  )
 
 
-def _sample_negative_patches(image,
-                             image_filepath,
-                             abnormalities_masks,
-                             abnormalities_areas,
-                             patch_size,
-                             number_of_patches=10,
-                             min_breast_overlap_threshold=0.75,
-                             max_abnorm_overlap_threshold=0.35,
-                             max_number_of_trials_per_threshold=100):
+def _sample_negative_patches(
+    image,
+    image_filepath,
+    abnormalities_masks,
+    abnormalities_areas,
+    patch_size,
+    number_of_patches=10,
+    min_breast_overlap_threshold=0.75,
+    max_abnorm_overlap_threshold=0.35,
+    max_number_of_trials_per_threshold=100,
+):
   """Sample background patches from the image.
 
   The relative area of breast tissue in the patch must be, at least,
@@ -809,15 +908,20 @@ def _sample_negative_patches(image,
 
   def patch_overlapping_breast_is_feasible(y, x):
     """Return True if the patch contains enough breast pixels."""
-    breast_in_patch = breast_mask[y:(y + patch_size[0]), x:(x + patch_size[1])]
-    return (np.sum(breast_in_patch > 0) /
-            (patch_size[0] * patch_size[1]) > min_breast_overlap_threshold)
+    breast_in_patch = breast_mask[
+        y : (y + patch_size[0]), x : (x + patch_size[1])
+    ]
+    return (
+        np.sum(breast_in_patch > 0) / (patch_size[0] * patch_size[1])
+        > min_breast_overlap_threshold
+    )
 
   breast_roi = _get_roi_from_mask(breast_mask)
   breast_x, breast_y, breast_w, breast_h = cv2.boundingRect(breast_roi)
   number_of_yielded_patches = 0
-  while (min_breast_overlap_threshold > 0.1 and
-         max_abnorm_overlap_threshold < 0.9):
+  while (
+      min_breast_overlap_threshold > 0.1 and max_abnorm_overlap_threshold < 0.9
+  ):
     # Determine the region where random samples should be sampled from.
     max_h, min_h = max(breast_h, patch_size[0]), min(breast_h, patch_size[0])
     max_w, min_w = max(breast_w, patch_size[1]), min(breast_w, patch_size[1])
@@ -834,22 +938,35 @@ def _sample_negative_patches(image,
     effective_range_size = max_number_of_trials_per_threshold
     if (max_y - min_y + 1) * (max_x - min_x + 1) < effective_range_size:
       logging.debug(
-          'The sampling region for negative patches of size %r with '
-          'min_breast_overlap_threshold=%f contains less possible patches '
-          'than max_number_of_trials_per_threshold=%d, in mammography %s',
-          patch_size, min_breast_overlap_threshold,
-          max_number_of_trials_per_threshold, image_filepath)
+          (
+              'The sampling region for negative patches of size %r with '
+              'min_breast_overlap_threshold=%f contains less possible patches '
+              'than max_number_of_trials_per_threshold=%d, in mammography %s'
+          ),
+          patch_size,
+          min_breast_overlap_threshold,
+          max_number_of_trials_per_threshold,
+          image_filepath,
+      )
       effective_range_size = (max_y - min_y + 1) * (max_x - min_x + 1)
     for _ in range(effective_range_size):
       patch_y = np.random.randint(min_y, max_y + 1)
       patch_x = np.random.randint(min_x, max_x + 1)
-      if (patch_overlapping_breast_is_feasible(patch_y, patch_x) and
-          not _patch_overlaps_any_abnormality_above_threshold(
-              patch_y, patch_x, patch_size, abnormalities_masks,
-              abnormalities_areas, max_abnorm_overlap_threshold)):
+      if patch_overlapping_breast_is_feasible(
+          patch_y, patch_x
+      ) and not _patch_overlaps_any_abnormality_above_threshold(
+          patch_y,
+          patch_x,
+          patch_size,
+          abnormalities_masks,
+          abnormalities_areas,
+          max_abnorm_overlap_threshold,
+      ):
         number_of_yielded_patches += 1
-        yield image[patch_y:(patch_y + patch_size[0]), patch_x:(patch_x +
-                                                                patch_size[1])]
+        yield image[
+            patch_y : (patch_y + patch_size[0]),
+            patch_x : (patch_x + patch_size[1]),
+        ]
       # If we have yielded all requested patches return.
       if number_of_yielded_patches >= number_of_patches:
         return
@@ -858,17 +975,27 @@ def _sample_negative_patches(image,
     min_breast_overlap_threshold = min_breast_overlap_threshold * 0.95
     max_abnorm_overlap_threshold = max_abnorm_overlap_threshold * 1.05
     logging.debug(
-        'Overlapping constraints relaxed to min_breast_overlap_threshold=%f '
-        'and max_abnorm_overlap_threshold=%f while sampling negative '
-        'patches for the mammography %s', min_breast_overlap_threshold,
+        (
+            'Overlapping constraints relaxed to min_breast_overlap_threshold=%f'
+            ' and max_abnorm_overlap_threshold=%f while sampling negative'
+            ' patches for the mammography %s'
+        ),
+        min_breast_overlap_threshold,
         max_abnorm_overlap_threshold,
-        image_filepath)  # Filepath to the abnormality mask image.
+        image_filepath,
+    )  # Filepath to the abnormality mask image.
 
   # This should not happen ever.
   raise ValueError(
       'Only %d negative patches of size %r could be sampled satisfying the '
       'current conditions (min. relative overlapping area with breast = %f, '
       'max. relative overlapping area with abnormalities = %f) for the '
-      'mammography %s' %
-      (number_of_yielded_patches, patch_size, min_breast_overlap_threshold,
-       max_abnorm_overlap_threshold, image_filepath))
+      'mammography %s'
+      % (
+          number_of_yielded_patches,
+          patch_size,
+          min_breast_overlap_threshold,
+          max_abnorm_overlap_threshold,
+          image_filepath,
+      )
+  )

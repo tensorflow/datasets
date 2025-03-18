@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="ted_multi_translate" />
   <meta itemprop="description" content="Massively multilingual (60 language) data set derived from TED Talk transcripts.&#10;Each record consists of parallel arrays of language and text. Missing and&#10;incomplete translations will be filtered out.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;ted_multi_translate&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/ted_multi_translate" />
@@ -12,10 +11,6 @@
 
 # `ted_multi_translate`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -27,7 +22,7 @@ incomplete translations will be filtered out.
     [https://github.com/neulab/word-embeddings-for-nmt](https://github.com/neulab/word-embeddings-for-nmt)
 
 *   **Source code**:
-    [`tfds.translate.TedMultiTranslate`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/translate/ted_multi.py)
+    [`tfds.datasets.ted_multi_translate.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/ted_multi_translate/ted_multi_translate_dataset_builder.py)
 
 *   **Versions**:
 
@@ -49,21 +44,72 @@ Split          | Examples
 `'train'`      | 258,098
 `'validation'` | 6,049
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'talk_name': Text(shape=(), dtype=tf.string),
+    'talk_name': Text(shape=(), dtype=string),
     'translations': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string),
-        'translation': Text(shape=(), dtype=tf.string),
+        'language': Text(shape=(), dtype=string),
+        'translation': Text(shape=(), dtype=string),
     }),
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                  | Class                        | Shape | Dtype  | Description
+:----------------------- | :--------------------------- | :---- | :----- | :----------
+                         | FeaturesDict                 |       |        |
+talk_name                | Text                         |       | string |
+translations             | TranslationVariableLanguages |       |        |
+translations/language    | Text                         |       | string |
+translations/translation | Text                         |       | string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/ted_multi_translate-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -82,6 +128,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

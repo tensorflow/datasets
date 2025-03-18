@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="salient_span_wikipedia" />
   <meta itemprop="description" content="Wikipedia sentences with labeled salient spans.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;salient_span_wikipedia&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia" />
@@ -12,9 +11,6 @@
 
 # `salient_span_wikipedia`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -24,7 +20,7 @@ Wikipedia sentences with labeled salient spans.
     [https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia](https://www.tensorflow.org/datasets/catalog/salient_span_wikipedia)
 
 *   **Source code**:
-    [`tfds.text.SalientSpanWikipedia`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/salient_span_wikipedia.py)
+    [`tfds.datasets.salient_span_wikipedia.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/salient_span_wikipedia/salient_span_wikipedia_dataset_builder.py)
 
 *   **Versions**:
 
@@ -40,6 +36,10 @@ Wikipedia sentences with labeled salient spans.
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
 *   **Citation**:
 
 ```
@@ -53,9 +53,6 @@ Wikipedia sentences with labeled salient spans.
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## salient_span_wikipedia/sentences (default config)
 
@@ -70,19 +67,68 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 82,291,706
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'spans': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
-        'type': tf.string,
+        'limit': int32,
+        'start': int32,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature     | Class        | Shape | Dtype  | Description
+:---------- | :----------- | :---- | :----- | :----------
+            | FeaturesDict |       |        |
+spans       | Sequence     |       |        |
+spans/limit | Tensor       |       | int32  |
+spans/start | Tensor       |       | int32  |
+spans/type  | Tensor       |       | string |
+text        | Text         |       | string |
+title       | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/salient_span_wikipedia-sentences-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## salient_span_wikipedia/documents
 
@@ -96,20 +142,72 @@ Split     | Examples
 :-------- | ---------:
 `'train'` | 13,353,718
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'sentences': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
+        'limit': int32,
+        'start': int32,
     }),
     'spans': Sequence({
-        'limit': tf.int32,
-        'start': tf.int32,
-        'type': tf.string,
+        'limit': int32,
+        'start': int32,
+        'type': string,
     }),
-    'text': Text(shape=(), dtype=tf.string),
-    'title': Text(shape=(), dtype=tf.string),
+    'text': Text(shape=(), dtype=string),
+    'title': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature         | Class        | Shape | Dtype  | Description
+:-------------- | :----------- | :---- | :----- | :----------
+                | FeaturesDict |       |        |
+sentences       | Sequence     |       |        |
+sentences/limit | Tensor       |       | int32  |
+sentences/start | Tensor       |       | int32  |
+spans           | Sequence     |       |        |
+spans/limit     | Tensor       |       | int32  |
+spans/start     | Tensor       |       | int32  |
+spans/type      | Tensor       |       | string |
+text            | Text         |       | string |
+title           | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/salient_span_wikipedia-documents-1.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="coco_captions" />
   <meta itemprop="description" content="COCO is a large-scale object detection, segmentation, and&#10;captioning dataset. This version contains images, bounding boxes, labels, and&#10;captions from COCO 2014, split into the subsets defined by Karpathy and Li&#10;(2015). This effectively divides the original COCO 2014 validation data into&#10;new 5000-image validation and test sets, plus a &quot;restval&quot; set containing the&#10;remaining ~30k images. All splits have caption annotations.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;coco_captions&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/coco_captions" />
@@ -12,9 +11,6 @@
 
 # `coco_captions`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -25,16 +21,14 @@ divides the original COCO 2014 validation data into new 5000-image validation
 and test sets, plus a "restval" set containing the remaining ~30k images. All
 splits have caption annotations.
 
-*   **Config description**: COCO is a large-scale object detection,
-    segmentation, and captioning dataset. This version contains images, bounding
-    boxes " and labels for the 2014 version. Note:
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/coco-captions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
-    *   Some images from the train and validation sets don't have annotations.
-    *   Coco 2014 and 2017 uses the same images, but different train/val/test
-        splits
-    *   The test split don't have any annotations (only images).
-    *   Coco defines 91 classes but the data only uses 80 classes.
-    *   Panotptic annotations defines defines 200 classes but only uses 133.
+*   **Config description**: This version contains images, bounding boxes and
+    labels for the 2014 version.
 
 *   **Homepage**: [http://cocodataset.org/#home](http://cocodataset.org/#home)
 
@@ -62,30 +56,90 @@ Split       | Examples
 `'train'`   | 82,783
 `'val'`     | 5,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'captions': Sequence({
-        'id': tf.int64,
-        'text': tf.string,
+        'id': int64,
+        'text': string,
     }),
-    'image': Image(shape=(None, None, 3), dtype=tf.uint8),
-    'image/filename': Text(shape=(), dtype=tf.string),
-    'image/id': tf.int64,
+    'image': Image(shape=(None, None, 3), dtype=uint8),
+    'image/filename': Text(shape=(), dtype=string),
+    'image/id': int64,
     'objects': Sequence({
-        'area': tf.int64,
-        'bbox': BBoxFeature(shape=(4,), dtype=tf.float32),
-        'id': tf.int64,
-        'is_crowd': tf.bool,
-        'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=80),
+        'area': int64,
+        'bbox': BBoxFeature(shape=(4,), dtype=float32),
+        'id': int64,
+        'is_crowd': bool,
+        'label': ClassLabel(shape=(), dtype=int64, num_classes=80),
     }),
 })
 ```
 
+*   **Feature documentation**:
+
+Feature          | Class        | Shape           | Dtype   | Description
+:--------------- | :----------- | :-------------- | :------ | :----------
+                 | FeaturesDict |                 |         |
+captions         | Sequence     |                 |         |
+captions/id      | Tensor       |                 | int64   |
+captions/text    | Tensor       |                 | string  |
+image            | Image        | (None, None, 3) | uint8   |
+image/filename   | Text         |                 | string  |
+image/id         | Tensor       |                 | int64   |
+objects          | Sequence     |                 |         |
+objects/area     | Tensor       |                 | int64   |
+objects/bbox     | BBoxFeature  | (4,)            | float32 |
+objects/id       | Tensor       |                 | int64   |
+objects/is_crowd | Tensor       |                 | bool    |
+objects/label    | ClassLabel   |                 | int64   |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/coco_captions-2014-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -129,9 +183,5 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/coco_captions-2014-1.1.0.png" alt="Visualization" width="500px">
 
 ## coco_captions/2014 (default config)

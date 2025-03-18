@@ -1,0 +1,10 @@
+{
+    "train": [
+        {
+            "gem_id": "e2e_nlg-train-7382",
+            "meaning_representation": "name[The Plough], eatType[pub], food[Fast food], priceRange[moderate], familyFriendly[yes], near[Caf\u00e9 Rouge]",
+            "references": [],
+            "target": "The Plough is a child friendly, fast food pub with moderate prices located near Caf\u00e9 Rouge."
+        }
+    ]
+}

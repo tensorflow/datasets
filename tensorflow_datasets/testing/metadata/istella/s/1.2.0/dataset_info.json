@@ -1,0 +1,48 @@
+{
+  "citation": "@article{10.1145/2987380,\n  author = {Dato, Domenico and Lucchese, Claudio and Nardini, Franco Maria and Orlando, Salvatore and Perego, Raffaele and Tonellotto, Nicola and Venturini, Rossano},\n  title = {Fast Ranking with Additive Ensembles of Oblivious and Non-Oblivious Regression Trees},\n  year = {2016},\n  publisher = {ACM},\n  address = {New York, NY, USA},\n  volume = {35},\n  number = {2},\n  issn = {1046-8188},\n  url = {https://doi.org/10.1145/2987380},\n  doi = {10.1145/2987380},\n  journal = {ACM Transactions on Information Systems},\n  articleno = {15},\n  numpages = {31},\n}",
+  "configName": "s",
+  "description": "The Istella datasets are three large-scale Learning-to-Rank datasets released by\nIstella. Each dataset consists of query-document pairs represented as feature\nvectors and corresponding relevance judgment labels.\n\nThe dataset contains three versions:\n\n * `main` (\"Istella LETOR\"): Containing 10,454,629 query-document pairs.\n * `s` (\"Istella-S LETOR\"): Containing 3,408,630 query-document pairs.\n * `x` (\"Istella-X LETOR\"): Containing 26,791,447 query-document pairs.\n\nYou can specify whether to use the `main`, `s` or `x` version of the dataset as\nfollows:\n\n```python\nds = tfds.load(\"istella/main\")\nds = tfds.load(\"istella/s\")\nds = tfds.load(\"istella/x\")\n```\n\nIf only `istella` is specified, the `istella/main` option is selected by\ndefault:\n\n```python\n# This is the same as `tfds.load(\"istella/main\")`\nds = tfds.load(\"istella\")\n```",
+  "downloadSize": "472129615",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "http://quickrank.isti.cnr.it/istella-dataset/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.ranking.istella.istella",
+  "name": "istella",
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "1.0.1": "Fix serialization to support float64.",
+    "1.1.0": "Bundle features into a single 'float_features' feature.",
+    "1.2.0": "Add query and document identifiers."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "263811222",
+      "shardLengths": [
+        "9622",
+        "9623"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "88596457",
+      "shardLengths": [
+        "6562"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "vali",
+      "numBytes": "89969857",
+      "shardLengths": [
+        "7211"
+      ]
+    }
+  ],
+  "version": "1.2.0"
+}

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,12 +19,44 @@ from tensorflow_datasets import testing
 from tensorflow_datasets.text import civil_comments
 
 
-class CivilCommentsTest(testing.DatasetBuilderTestCase):
+class CivilCommentsNoCovertTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = [
+      "CivilComments",
+      "CivilCommentsIdentities",
+  ]
+  SPLITS = {
+      "train": 3,  # Number of fake train examples
+      "test": 1,  # Number of fake test examples
+      "validation": 1,  # Number of fake validation examples
+  }
+
+
+class CivilCommentsToxicSpans(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsToxicSpans"]
   SPLITS = {
       "train": 2,  # Number of fake train examples
       "test": 1,  # Number of fake test examples
       "validation": 1,  # Number of fake validation examples
+  }
+
+
+class CivilCommentsInContext(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsInContext"]
+  SPLITS = {
+      "train": 2,  # Number of fake train examples
+  }
+
+
+# Separate test for CivilCommentsCovert without validation split.
+class CivilCommentsCovertTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = civil_comments.CivilComments
+  BUILDER_CONFIG_NAMES_TO_TEST = ["CivilCommentsCovert"]
+  SPLITS = {
+      "train": 3,  # Number of fake train examples
+      "test": 1,  # Number of fake test examples
   }
 
 

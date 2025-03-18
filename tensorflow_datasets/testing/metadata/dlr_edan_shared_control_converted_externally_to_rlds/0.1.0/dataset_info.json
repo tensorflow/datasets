@@ -1,0 +1,55 @@
+{
+  "citation": "@inproceedings{vogel_edan_2020,\n\ttitle = {EDAN - an EMG-Controlled Daily Assistant to Help People with Physical Disabilities},\n\tlanguage = {en},\n\tbooktitle = {2020 {IEEE}/{RSJ} {International} {Conference} on {Intelligent} {Robots} and {Systems} ({IROS})},\n\tauthor = {Vogel, J\u00f6rn and Hagengruber, Annette and Iskandar, Maged and Quere, Gabriel and Leipscher, Ulrike and Bustamante, Samuel and Dietrich, Alexander and Hoeppner, Hannes and Leidner, Daniel and Albu-Sch\u00e4ffer, Alin},\n\tyear = {2020}\n}\n@inproceedings{quere_shared_2020,\n\taddress = {Paris, France},\n\ttitle = {Shared {Control} {Templates} for {Assistive} {Robotics}},\n\tlanguage = {en},\n\tbooktitle = {2020 {IEEE} {International} {Conference} on {Robotics} and {Automation} ({ICRA})},\n\tauthor = {Quere, Gabriel and Hagengruber, Annette and Iskandar, Maged and Bustamante, Samuel and Leidner, Daniel and Stulp, Freek and Vogel, Joern},\n\tyear = {2020},\n\tpages = {7},\n}",
+  "description": "wheelchair with arm performing shelf pick tasks",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://ieeexplore.ieee.org/document/9341156"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.rtx.rtx",
+  "name": "dlr_edan_shared_control_converted_externally_to_rlds",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "3316378421",
+      "shardLengths": [
+        "2",
+        "3",
+        "3",
+        "6",
+        "5",
+        "1",
+        "3",
+        "3",
+        "7",
+        "4",
+        "3",
+        "4",
+        "4",
+        "2",
+        "3",
+        "3",
+        "3",
+        "2",
+        "2",
+        "4",
+        "11",
+        "3",
+        "3",
+        "3",
+        "2",
+        "3",
+        "2",
+        "2",
+        "4",
+        "4"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}

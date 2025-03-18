@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import os
 
 from absl import logging
 import numpy as np
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 beam = tfds.core.lazy_imports.apache_beam
@@ -37,7 +37,8 @@ class ReadZipFn(beam.DoFn):
 
   def process(self, zip_filepath):
     for filename, file in tfds.download.iter_archive(
-        zip_filepath, tfds.download.ExtractMethod.ZIP):
+        zip_filepath, tfds.download.ExtractMethod.ZIP
+    ):
       if filename.endswith(".jpg"):
         yield filename, file.read()
 
@@ -53,7 +54,7 @@ class ProcessImageFn(beam.DoFn):
   def process(self, element):
     filename, content = element
     try:
-      image = cv2.imdecode(np.fromstring(content, dtype=np.uint8), flags=3)
+      image = cv2.imdecode(np.frombuffer(content, dtype=np.uint8), flags=3)
     except:
       logging.info("Exception raised while decoding image %s", filename)
       raise
@@ -74,14 +75,19 @@ class ProcessImageFn(beam.DoFn):
         image = cv2.resize(image, dsize=None, fx=factor, fy=factor)
       # Encode the image with quality=72 and store it in a BytesIO object.
       _, buff = cv2.imencode(".jpg", image, self._jpeg_quality)
-      yield filename, io.BytesIO(buff.tostring())
+      yield filename, io.BytesIO(buff.tobytes())
 
 
 class CreateDetectionExampleFn(beam.DoFn):
   """Creates TFDS examples for the Detection track."""
 
-  def __init__(self, image_labels_filepath, box_labels_filepath,
-               hierarchy_filepath, classes_filepath):
+  def __init__(
+      self,
+      image_labels_filepath,
+      box_labels_filepath,
+      hierarchy_filepath,
+      classes_filepath,
+  ):
     self._image_labels_filepath = image_labels_filepath
     self._box_labels_filepath = box_labels_filepath
     self._hierarchy_filepath = hierarchy_filepath

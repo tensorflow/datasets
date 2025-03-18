@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from tensorflow_datasets.image_classification import caltech_birds
 import tensorflow_datasets.testing as tfds_test
 
 
 class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = caltech_birds.CaltechBirds2010
 
   SPLITS = {  # No. of train and test samples
@@ -31,7 +29,6 @@ class CaltechBirdsTest(tfds_test.DatasetBuilderTestCase):
 
 
 class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
-
   DATASET_CLASS = caltech_birds.CaltechBirds2011
 
   SPLITS = {  # No. of train and test samples
@@ -40,12 +37,11 @@ class CaltechBirds2011Test(tfds_test.DatasetBuilderTestCase):
   }
 
   DL_EXTRACT_RESULT = [
-      'extracted/TAR_GZ.CUB_200_2011.tar.gz', 'extracted/segmentations.tgz'
+      'extracted/TAR_GZ.CUB_200_2011.tar.gz',
+      'extracted/segmentations.tgz',
   ]
 
-  DL_DOWNLOAD_RESULT = [
-      'CUB_200_2011.tar.gz'
-  ]
+  DL_DOWNLOAD_RESULT = ['CUB_200_2011.tar.gz']
 
 
 if __name__ == '__main__':

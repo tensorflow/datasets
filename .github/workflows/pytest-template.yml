@@ -1,0 +1,88 @@
+on:
+  workflow_call:
+    inputs:
+      os-version:
+        required: true
+        type: string
+      tf-version:
+        required: true
+        type: string
+
+env:
+  PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
+
+jobs:
+  shards-job:
+    name: Generate shards
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Create variables
+        id: create-vars
+        run: |
+          echo "num-shards=$(jq -n -c '[${{ env.PYTEST_NUM_SHARDS }}]')" >> $GITHUB_OUTPUT
+          echo "shard-ids=$(jq -n -c '[range(1;${{ env.PYTEST_NUM_SHARDS }}+1)]')" >> $GITHUB_OUTPUT
+
+    outputs:
+      num-shards: ${{ steps.create-vars.outputs.num-shards }}
+      shard-ids: ${{ steps.create-vars.outputs.shard-ids }}
+
+  pytest-job:
+    needs: shards-job
+    strategy:
+      # Do not cancel in-progress jobs if any matrix job fails.
+      fail-fast: false
+      matrix:
+        # Can't reference env variables in matrix
+        num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
+        shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
+        # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
+        python-version: ['3.10', '3.11', '3.12']
+    timeout-minutes: 30
+
+    name: '[Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}]'
+    runs-on: ${{ inputs.os-version }}
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: ${{ inputs.tf-version }}
+        python-version: ${{ matrix.python-version }}
+
+    # Run tests
+    # Ignores:
+    # * Nsynth is run in isolation due to dependency conflict (crepe).
+    # * Lsun tests is disabled because the tensorflow_io used in open-source
+    #   is linked to static libraries compiled again specific TF version, which
+    #   makes test fails with linking error (libtensorflow_io_golang.so).
+    # * imagenet2012_corrupted requires imagemagick binary.
+    # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
+    # * github_api is run separately to not overuse API quota.
+    # * wmt is run separately to avoid worker hanging.
+    # * Huggingface requires `datasets` library.
+    # * version_test loads datasets that fail in OSS (e.g. smart_buildings).
+    - name: Run core tests
+      run: |
+        pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ matrix.num-shards }} \
+          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
+          --ignore="tensorflow_datasets/import_without_tf_test.py" \
+          --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
+          --ignore="tensorflow_datasets/translate/wmt19_test.py" \
+          --ignore="tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py" \
+          --ignore="tensorflow_datasets/core/utils/huggingface_utils_test.py" \
+          --ignore="tensorflow_datasets/testing/version_test.py"
+
+    # Run tests without any pytest plugins. The tests should be triggered for a single shard only.
+    - name: Run leftover tests
+      if: ${{ matrix.shard-id == 1 }}
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 1
+        max_attempts: 2
+        retry_on: timeout
+        command: |
+          pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py

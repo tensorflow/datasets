@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,8 @@
 
 """German Credit (numeric) dataset."""
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 
 URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data-numeric"
@@ -48,10 +49,8 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "features":
-                tfds.features.Tensor(shape=(24,), dtype=tf.int32),
-            "label":
-                tfds.features.ClassLabel(names=["Bad", "Good"]),
+            "features": tfds.features.Tensor(shape=(24,), dtype=np.int32),
+            "label": tfds.features.ClassLabel(names=["Bad", "Good"]),
         }),
         supervised_keys=("features", "label"),
         homepage="https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)",
@@ -61,14 +60,14 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     data_file = dl_manager.download(URL)
-    with tf.io.gfile.GFile(data_file) as f:
+    with epath.Path(data_file).open() as f:
       all_lines = f.read().split("\n")
     records = [l for l in all_lines if l]  # get rid of empty lines
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"records": records}),
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}
+        ),
     ]
 
   def _generate_examples(self, records):

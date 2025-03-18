@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -50,50 +50,21 @@ basis for the shared task of the RepEval 2017 Workshop at EMNLP in Copenhagen.
 """
 
 
-class MultiNLIConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for MultiNLI."""
-
-  def __init__(self, *, text_encoder_config=None, **kwargs):
-    """BuilderConfig for MultiNLI.
-
-    Args:
-      text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-        configuration for the `tfds.deprecated.text.TextEncoder` used for the
-        features feature.
-      **kwargs: keyword arguments forwarded to super.
-    """
-    super(MultiNLIConfig, self).__init__(
-        version=tfds.core.Version(
-            "1.0.0", "New split API (https://tensorflow.org/datasets/splits)"),
-        **kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
-
-
 class MultiNLI(tfds.core.GeneratorBasedBuilder):
   """MultiNLI: The Stanford Question Answering Dataset. Version 1.1."""
 
-  BUILDER_CONFIGS = [
-      MultiNLIConfig(
-          name="plain_text",
-          description="Plain text",
-      ),
-  ]
+  VERSION = tfds.core.Version("1.1.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "premise":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "hypothesis":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "label":
-                tfds.features.ClassLabel(
-                    names=["entailment", "neutral", "contradiction"]),
+            "premise": tfds.features.Text(),
+            "hypothesis": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(
+                names=["entailment", "neutral", "contradiction"]
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -102,40 +73,31 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, filepath):
-    for _, ex in self._generate_examples(filepath):
-      yield " ".join([ex["premise"], ex["hypothesis"]])
-
   def _split_generators(self, dl_manager):
-
     downloaded_dir = dl_manager.download_and_extract(
-        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip")
+        "https://cims.nyu.edu/~sbowman/multinli/multinli_1.0.zip"
+    )
     mnli_path = os.path.join(downloaded_dir, "multinli_1.0")
     train_path = os.path.join(mnli_path, "multinli_1.0_train.txt")
-    matched_validation_path = os.path.join(mnli_path,
-                                           "multinli_1.0_dev_matched.txt")
+    matched_validation_path = os.path.join(
+        mnli_path, "multinli_1.0_dev_matched.txt"
+    )
     mismatched_validation_path = os.path.join(
-        mnli_path, "multinli_1.0_dev_mismatched.txt")
-    # Generate shared vocabulary
-    # maybe_build_from_corpus uses SubwordTextEncoder if that's configured
-    self.info.features["premise"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_path))
-    encoder = self.info.features["premise"].encoder
-    # Use maybe_set_encoder because the encoder may have been restored from
-    # package data.
-    self.info.features["premise"].maybe_set_encoder(encoder)
-    self.info.features["hypothesis"].maybe_set_encoder(encoder)
+        mnli_path, "multinli_1.0_dev_mismatched.txt"
+    )
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": train_path}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_path}
+        ),
         tfds.core.SplitGenerator(
             name="validation_matched",
-            gen_kwargs={"filepath": matched_validation_path}),
+            gen_kwargs={"filepath": matched_validation_path},
+        ),
         tfds.core.SplitGenerator(
             name="validation_mismatched",
-            gen_kwargs={"filepath": mismatched_validation_path}),
+            gen_kwargs={"filepath": mismatched_validation_path},
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -160,5 +122,5 @@ class MultiNLI(tfds.core.GeneratorBasedBuilder):
       yield idx, {
           "premise": split_line[5],
           "hypothesis": split_line[6],
-          "label": split_line[0]
+          "label": split_line[0],
       }

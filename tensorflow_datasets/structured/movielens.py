@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,14 @@
 
 """MovieLens dataset."""
 
+from __future__ import annotations
+
 import os
 import textwrap
 from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 from absl import logging
-import tensorflow.compat.v2 as tf
+import numpy as np
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.structured import movielens_parsing
 
@@ -122,19 +124,21 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       format_version: Optional[str] = None,
       table_option: Optional[str] = None,
       download_url: Optional[str] = None,
-      parsing_fn: Optional[Callable[
-          [str],
-          Iterator[Tuple[int, Dict[str, Any]]],
-      ]] = None,
-      **kwargs
+      parsing_fn: Optional[
+          Callable[
+              [str],
+              Iterator[Tuple[int, Dict[str, Any]]],
+          ]
+      ] = None,
+      **kwargs,
   ) -> None:
     """Constructs a MovieLensConfig.
 
     Args:
       format_version: a string to identify the format of the dataset, one of
-          '_FORMAT_VERSIONS'.
+        '_FORMAT_VERSIONS'.
       table_option: a string to identify the table to expose, one of
-          '_TABLE_OPTIONS'.
+        '_TABLE_OPTIONS'.
       download_url: a string url for downloading the dataset.
       parsing_fn: a callable for parsing the data.
       **kwargs: keyword arguments forwarded to super.
@@ -143,9 +147,9 @@ class MovieLensConfig(tfds.core.BuilderConfig):
       ValueError: if format_version is not one of '_FORMAT_VERSIONS' or if
           table_option is not one of '_TABLE_OPTIONS'.
     """
-    if format_version not in _FORMAT_VERSIONS:
+    if not format_version or format_version not in _FORMAT_VERSIONS:
       raise ValueError('format_version must be one of %s.' % _FORMAT_VERSIONS)
-    if table_option not in _TABLE_OPTIONS:
+    if not table_option or table_option not in _TABLE_OPTIONS:
       raise ValueError('table_option must be one of %s.' % _TABLE_OPTIONS)
     super(MovieLensConfig, self).__init__(**kwargs)
     self._format_version = format_version
@@ -162,14 +166,13 @@ class MovieLensConfig(tfds.core.BuilderConfig):
     return self._table_option
 
   @property
-  def download_url(self) -> str:
+  def download_url(self) -> Optional[str]:
     return self._download_url
 
   @property
-  def parsing_fn(self) -> Optional[Callable[
-      [str],
-      Iterator[Tuple[int, Dict[str, Any]]],
-  ]]:
+  def parsing_fn(
+      self,
+  ) -> Optional[Callable[[str], Iterator[Tuple[int, Dict[str, Any]]],]]:
     return self._parsing_fn
 
 
@@ -179,7 +182,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       MovieLensConfig(
           name='25m-ratings',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains 25,000,095 ratings across 62,423 movies,
               created by 162,541 users between January 09, 1995 and November 21,
               2019. This dataset is the latest stable version of the MovieLens
@@ -187,27 +191,28 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
 
               Each user has rated at least 20 movies. The ratings are in
               half-star increments. This dataset does not include demographic
-              data."""),
-          version='0.1.0',
+              data."""
+          ),
+          version='0.1.1',
           format_version='25m',
           table_option='ratings',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-25m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-25m.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='25m-movies',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains data of 62,423 movies rated in the 25m
-              dataset."""),
-          version='0.1.0',
+              dataset."""
+          ),
+          version='0.1.1',
           format_version='25m',
           table_option='movies',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-25m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-25m.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
@@ -215,7 +220,8 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
       # updating in the future.
       MovieLensConfig(
           name='latest-small-ratings',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains 100,836 ratings across 9,742 movies, created
               by 610 users between March 29, 1996 and September 24, 2018. This
               dataset is generated on September 26, 2018 and is the a subset of
@@ -224,66 +230,72 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
 
               Each user has rated at least 20 movies. The ratings are in
               half-star increments. This dataset does not include demographic
-              data."""),
-          version='0.1.0',
+              data."""
+          ),
+          version='0.1.1',
           format_version='latest-small',
           table_option='ratings',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
+              'https://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='latest-small-movies',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains data of 9,742 movies rated in the
-              latest-small dataset."""),
-          version='0.1.0',
+              latest-small dataset."""
+          ),
+          version='0.1.1',
           format_version='latest-small',
           table_option='movies',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
+              'https://files.grouplens.org/datasets/movielens/'
               'ml-latest-small.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
       MovieLensConfig(
           name='100k-ratings',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains 100,000 ratings from 943 users on 1,682
               movies. This dataset is the oldest version of the MovieLens
               dataset.
 
               Each user has rated at least 20 movies. Ratings are in whole-star
               increments. This dataset contains demographic data of users in
-              addition to data on movies and ratings."""),
-          version='0.1.0',
+              addition to data on movies and ratings."""
+          ),
+          version='0.1.1',
           format_version='100k',
           table_option='ratings',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-100k.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-100k.zip'
           ),
           parsing_fn=movielens_parsing.parse_100k_ratings_data,
       ),
       MovieLensConfig(
           name='100k-movies',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains data of 1,682 movies rated in the 100k
-              dataset."""),
-          version='0.1.0',
+              dataset."""
+          ),
+          version='0.1.1',
           format_version='100k',
           table_option='movies',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-100k.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-100k.zip'
           ),
           parsing_fn=movielens_parsing.parse_100k_movies_data,
       ),
       MovieLensConfig(
           name='1m-ratings',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains 1,000,209 anonymous ratings of approximately
               3,900 movies made by 6,040 MovieLens users who joined MovieLens in
               2000. This dataset is the largest dataset that includes
@@ -292,99 +304,139 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
               Each user has rated at least 20 movies. Ratings are in whole-star
               increments. In demographic data, age values are divided into
               ranges and the lowest age value for each range is used in the data
-              instead of the actual values."""),
-          version='0.1.0',
+              instead of the actual values."""
+          ),
+          version='0.1.1',
           format_version='1m',
           table_option='ratings',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-1m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-1m.zip'
           ),
           parsing_fn=movielens_parsing.parse_1m_ratings_data,
       ),
       MovieLensConfig(
           name='1m-movies',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains data of approximately 3,900 movies rated in
-              the 1m dataset."""),
-          version='0.1.0',
+              the 1m dataset."""
+          ),
+          version='0.1.1',
           format_version='1m',
           table_option='movies',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-1m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-1m.zip'
           ),
           parsing_fn=movielens_parsing.parse_1m_movies_data,
       ),
       MovieLensConfig(
           name='20m-ratings',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains 20,000,263 ratings across 27,278
               movies, created by 138,493 users between January 09, 1995 and
               March 31, 2015. This dataset was generated on October 17, 2016.
 
               Each user has rated at least 20 movies. Ratings are in half-star
-              increments. This dataset does not contain demographic data."""),
-          version='0.1.0',
+              increments. This dataset does not contain demographic data."""
+          ),
+          version='0.1.1',
           format_version='20m',
           table_option='ratings',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-20m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-20m.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_ratings_data,
       ),
       MovieLensConfig(
           name='20m-movies',
-          description=textwrap.dedent("""\
+          description=textwrap.dedent(
+              """\
               This dataset contains data of 27,278 movies rated in the 20m
-              dataset"""),
-          version='0.1.0',
+              dataset"""
+          ),
+          version='0.1.1',
           format_version='20m',
           table_option='movies',
           download_url=(
-              'http://files.grouplens.org/datasets/movielens/'
-              'ml-20m.zip'
+              'https://files.grouplens.org/datasets/movielens/ml-20m.zip'
           ),
           parsing_fn=movielens_parsing.parse_current_movies_data,
       ),
   ]
 
-  VERSION = tfds.core.Version('0.1.0')
+  VERSION = tfds.core.Version('0.1.1')
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns DatasetInfo according to self.builder_config."""
     movie_features_dict = {
-        'movie_id': tf.string,
-        'movie_title': tf.string,
+        'movie_id': np.str_,
+        'movie_title': np.str_,
         'movie_genres': tfds.features.Sequence(
-            tfds.features.ClassLabel(names=[
-                'Action', 'Adventure', 'Animation', 'Children', 'Comedy',
-                'Crime', 'Documentary', 'Drama', 'Fantasy', 'Film-Noir',
-                'Horror', 'IMAX', 'Musical', 'Mystery', 'Romance', 'Sci-Fi',
-                'Thriller', 'Unknown', 'War', 'Western', '(no genres listed)',
-            ]),
+            tfds.features.ClassLabel(
+                names=[
+                    'Action',
+                    'Adventure',
+                    'Animation',
+                    'Children',
+                    'Comedy',
+                    'Crime',
+                    'Documentary',
+                    'Drama',
+                    'Fantasy',
+                    'Film-Noir',
+                    'Horror',
+                    'IMAX',
+                    'Musical',
+                    'Mystery',
+                    'Romance',
+                    'Sci-Fi',
+                    'Thriller',
+                    'Unknown',
+                    'War',
+                    'Western',
+                    '(no genres listed)',
+                ]
+            ),
         ),
     }
     rating_features_dict = {
-        'user_id': tf.string,
-        'user_rating': tf.float32,
+        'user_id': np.str_,
+        'user_rating': np.float32,
         # Using int64 since tfds currently does not support float64.
-        'timestamp': tf.int64,
+        'timestamp': np.int64,
     }
     demographic_features_dict = {
-        'user_gender': tf.bool,
-        'bucketized_user_age': tf.float32,
-        'user_occupation_label': tfds.features.ClassLabel(names=[
-            'academic/educator', 'artist', 'clerical/admin', 'customer service',
-            'doctor/health care', 'entertainment', 'executive/managerial',
-            'farmer', 'homemaker', 'lawyer', 'librarian', 'other/not specified',
-            'programmer', 'retired', 'sales/marketing', 'scientist',
-            'self-employed', 'student', 'technician/engineer',
-            'tradesman/craftsman', 'unemployed', 'writer',
-        ]),
-        'user_occupation_text': tf.string,
-        'user_zip_code': tf.string,
+        'user_gender': np.bool_,
+        'bucketized_user_age': np.float32,
+        'user_occupation_label': tfds.features.ClassLabel(
+            names=[
+                'academic/educator',
+                'artist',
+                'clerical/admin',
+                'customer service',
+                'doctor/health care',
+                'entertainment',
+                'executive/managerial',
+                'farmer',
+                'homemaker',
+                'lawyer',
+                'librarian',
+                'other/not specified',
+                'programmer',
+                'retired',
+                'sales/marketing',
+                'scientist',
+                'self-employed',
+                'student',
+                'technician/engineer',
+                'tradesman/craftsman',
+                'unemployed',
+                'writer',
+            ]
+        ),
+        'user_occupation_text': np.str_,
+        'user_zip_code': np.str_,
     }
 
     features_dict = {}
@@ -402,7 +454,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
       features_dict.update(movie_features_dict)
       features_dict.update(rating_features_dict)
       features_dict.update(demographic_features_dict)
-      features_dict.update(raw_user_age=tf.float32)
+      features_dict.update(raw_user_age=np.float32)
     else:
       features_dict.update(movie_features_dict)
       features_dict.update(rating_features_dict)
@@ -416,8 +468,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(
-      self,
-      dl_manager: tfds.download.DownloadManager
+      self, dl_manager: tfds.download.DownloadManager
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     extracted_path = dl_manager.download_and_extract(
@@ -435,8 +486,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
     ]
 
   def _generate_examples(
-      self,
-      dir_path: Optional[str] = None
+      self, dir_path: Optional[str] = None
   ) -> Iterator[Tuple[int, Dict[str, Any]]]:
     """Yields examples by calling the corresponding parsing function."""
     for ex in self.builder_config.parsing_fn(dir_path):
@@ -449,5 +499,6 @@ class MovieLens(Movielens):
   def __init__(self, **kwargs):
     logging.warning(
         'The handle "movie_lens" for the MovieLens dataset is deprecated. '
-        'Prefer using "movielens" instead.')
+        'Prefer using "movielens" instead.'
+    )
     super(MovieLens, self).__init__(**kwargs)

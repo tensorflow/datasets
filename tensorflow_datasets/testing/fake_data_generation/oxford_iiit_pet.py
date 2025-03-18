@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,14 +22,15 @@ import tempfile
 
 from absl import app
 from absl import flags
-
-import tensorflow.compat.v2 as tf
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir',
+    os.fspath(utils.tfds_write_path()),
+    'Path to tensorflow_datasets directory',
+)
 FLAGS = flags.FLAGS
 
 _TRAIN_IMAGES_NUMBER = 5
@@ -37,8 +38,9 @@ _TEST_IMAGES_NUMBER = 5
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'oxford_iiit_pet')
+  return os.path.join(
+      FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples', 'oxford_iiit_pet'
+  )
 
 
 def _generate_data():
@@ -50,9 +52,11 @@ def _generate_data():
     tf.io.gfile.makedirs(images_dir)
   for i in range(_TRAIN_IMAGES_NUMBER + _TEST_IMAGES_NUMBER):
     image_name = 'image{:03d}.jpg'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_jpeg(),
-                     os.path.join(images_dir, image_name),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fake_data_utils.get_random_jpeg(),
+        os.path.join(images_dir, image_name),
+        overwrite=True,
+    )
 
   # Generate annotations
   annotations_dir = os.path.join(_output_dir(), 'annotations')
@@ -67,22 +71,27 @@ def _generate_data():
     tf.io.gfile.makedirs(trimaps_dir)
 
   global_count = 0
-  for filename, num_examples in [('trainval.txt', _TRAIN_IMAGES_NUMBER),
-                                 ('test.txt', _TEST_IMAGES_NUMBER)]:
+  for filename, num_examples in [
+      ('trainval.txt', _TRAIN_IMAGES_NUMBER),
+      ('test.txt', _TEST_IMAGES_NUMBER),
+  ]:
     fobj = tempfile.NamedTemporaryFile(delete=False, mode='w')
     with fobj:
       for i in range(num_examples):
         fobj.write('image{:03d} {} 0 0\n'.format(global_count, i % 37))
         global_count += 1
-    tf.io.gfile.copy(fobj.name, os.path.join(annotations_dir, filename),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fobj.name, os.path.join(annotations_dir, filename), overwrite=True
+    )
 
   # Create trimaps
   for i in range(_TRAIN_IMAGES_NUMBER + _TEST_IMAGES_NUMBER):
     trimap_name = 'image{:03d}.png'.format(i)
-    tf.io.gfile.copy(fake_data_utils.get_random_png(channels=1),
-                     os.path.join(trimaps_dir, trimap_name),
-                     overwrite=True)
+    tf.io.gfile.copy(
+        fake_data_utils.get_random_png(channels=1),
+        os.path.join(trimaps_dir, trimap_name),
+        overwrite=True,
+    )
 
 
 def main(argv):

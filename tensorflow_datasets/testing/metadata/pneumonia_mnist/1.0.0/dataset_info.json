@@ -1,0 +1,54 @@
+{
+  "citation": "@article{yang2023medmnist,\n  title={Medmnist v2-a large-scale lightweight benchmark for 2d and 3d biomedical image classification},\n  author={Yang, Jiancheng and Shi, Rui and Wei, Donglai and Liu, Zequan and Zhao, Lin and Ke, Bilian and Pfister, Hanspeter and Ni, Bingbing},\n  journal={Scientific Data},\n  volume={10},\n  number={1},\n  pages={41},\n  year={2023},\n  publisher={Nature Publishing Group UK London}\n}",
+  "description": "# MedMNIST Pneumonia Dataset\n\nThe PneumoniaMNIST is based on a prior dataset of 5,856 pediatric chest X-Ray\nimages. The task is binary-class classification of pneumonia against normal. The\nsource training set is split with a ratio of 9:1 into training and validation\nset, and use its source validation set as the test set. The source images are\ngray-scale, and their sizes are (384\u20132,916) \u00d7 (127\u20132,713). The images are\ncenter-cropped with a window size of length of the short edge and resized into 1\n\u00d7 28 \u00d7 28.",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://medmnist.com//"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.pneumonia_mnist.pneumonia_mnist_dataset_builder",
+  "name": "pneumonia_mnist",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "3079723",
+      "shardLengths": [
+        "4708"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "343481",
+      "shardLengths": [
+        "524"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "412886",
+      "shardLengths": [
+        "624"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "1.0.0"
+}

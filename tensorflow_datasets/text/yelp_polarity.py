@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,8 @@
 """Yelp Polarity Reviews dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
+
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -69,101 +70,47 @@ _CITATION = """\
 
 """
 
-_DOWNLOAD_URL = "https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz"
-
-
-class YelpPolarityReviewsConfig(tfds.core.BuilderConfig):
-  """BuilderConfig for YelpPolarityReviews."""
-
-  def __init__(self, *, text_encoder_config=None, **kwargs):
-    """BuilderConfig for YelpPolarityReviews.
-
-    Args:
-        text_encoder_config: `tfds.deprecated.text.TextEncoderConfig`,
-          configuration for the `tfds.deprecated.text.TextEncoder` used for the
-          Yelp `"text"` feature.
-        **kwargs: keyword arguments forwarded to super.
-    """
-    super(YelpPolarityReviewsConfig, self).__init__(**kwargs)
-    self.text_encoder_config = (
-        text_encoder_config or tfds.deprecated.text.TextEncoderConfig())
+_DOWNLOAD_URL = (
+    "https://s3.amazonaws.com/fast-ai-nlp/yelp_review_polarity_csv.tgz"
+)
 
 
 class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
   """Yelp Polarity reviews dataset."""
-  BUILDER_CONFIGS = [
-      YelpPolarityReviewsConfig(
-          name="plain_text",
-          version="0.1.0",
-          description="Plain text",
-      ),
-      YelpPolarityReviewsConfig(
-          name="bytes",
-          version="0.1.0",
-          description=("Uses byte-level text encoding with "
-                       "`tfds.deprecated.text.ByteTextEncoder`"),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder=tfds.deprecated.text.ByteTextEncoder()),
-      ),
-      YelpPolarityReviewsConfig(
-          name="subwords8k",
-          version="0.1.0",
-          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with 8k "
-                       "vocab size"),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**13),
-      ),
-      YelpPolarityReviewsConfig(
-          name="subwords32k",
-          version="0.1.0",
-          description=("Uses `tfds.deprecated.text.SubwordTextEncoder` with "
-                       "32k vocab size"),
-          text_encoder_config=tfds.deprecated.text.TextEncoderConfig(
-              encoder_cls=tfds.deprecated.text.SubwordTextEncoder,
-              vocab_size=2**15),
-      ),
-  ]
+
+  VERSION = tfds.core.Version("0.2.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "text":
-                tfds.features.Text(
-                    encoder_config=self.builder_config.text_encoder_config),
-            "label":
-                tfds.features.ClassLabel(names=["1", "2"]),
+            "text": tfds.features.Text(),
+            "label": tfds.features.ClassLabel(names=["1", "2"]),
         }),
         supervised_keys=("text", "label"),
         homepage="https://course.fast.ai/datasets",
         citation=_CITATION,
     )
 
-  def _vocab_text_gen(self, train_file):
-    for _, ex in self._generate_examples(train_file):
-      yield ex["text"]
-
   def _split_generators(self, dl_manager):
     arch_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    train_file = os.path.join(arch_path, "yelp_review_polarity_csv",
-                              "train.csv")
+    train_file = os.path.join(
+        arch_path, "yelp_review_polarity_csv", "train.csv"
+    )
     test_file = os.path.join(arch_path, "yelp_review_polarity_csv", "test.csv")
-    self.info.features["text"].maybe_build_from_corpus(
-        self._vocab_text_gen(train_file))
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": train_file}),
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_file}
+        ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={"filepath": test_file}),
+            name=tfds.Split.TEST, gen_kwargs={"filepath": test_file}
+        ),
     ]
 
   def _generate_examples(self, filepath):
     """Generate Yelp examples."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for line_id, line in enumerate(f):
         # The format of the line is:
         # "1", "The text of the review."

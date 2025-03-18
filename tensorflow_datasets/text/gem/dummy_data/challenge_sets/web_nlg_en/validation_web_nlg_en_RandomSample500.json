@@ -1,0 +1,18 @@
+{
+    "validation": [
+        {
+            "category": "Airport",
+            "gem_id": "web_nlg_en-validation-5",
+            "input": [
+                "Adolfo_Su\u00e1rez_Madrid\u2013Barajas_Airport | runwayName | \"14L/32R\""
+            ],
+            "references": [
+                "Adolfo Su\u00e1rez Madrid-Barajas Airport runway name is 14L/32R.",
+                "The Adolfo Su\u00e1rez Madrid\u2013Barajas Airport runway name is 14L/32R.",
+                "14L/32R is the runway name of Adolfo Su\u00e1rez Madrid-Barajas Airport."
+            ],
+            "target": "Adolfo Su\u00e1rez Madrid-Barajas Airport runway name is 14L/32R.",
+            "webnlg_id": "dev/Airport/1/Id6"
+        }
+    ]
+}

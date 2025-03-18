@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,10 @@ from tensorflow_datasets.image_classification import cifar10_corrupted
 
 
 class Cifar10CorruptedTest(testing.DatasetBuilderTestCase):
-
   BUILDER_CONFIG_NAMES_TO_TEST = [
-      "elastic_1", "elastic_4", "elastic_5",
+      "elastic_1",
+      "elastic_4",
+      "elastic_5",
   ]
 
   DATASET_CLASS = cifar10_corrupted.Cifar10Corrupted

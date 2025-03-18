@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,11 +34,12 @@ from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
+from tensorflow_datasets.image.pass_dataset import PASS
+from tensorflow_datasets.image.s3o4d import S3o4d
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150
 from tensorflow_datasets.image.shapes3d import Shapes3d
+from tensorflow_datasets.image.symmetric_solids import SymmetricSolids
 from tensorflow_datasets.image.the300w_lp import The300wLp
-
-# Legacy aliases
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet
 from tensorflow_datasets.image_classification.binary_alpha_digits import BinaryAlphaDigits
@@ -100,5 +101,4 @@ from tensorflow_datasets.image_classification.stanford_online_products import St
 from tensorflow_datasets.image_classification.sun import Sun397
 from tensorflow_datasets.image_classification.svhn import SvhnCropped
 from tensorflow_datasets.image_classification.uc_merced import UcMerced
-from tensorflow_datasets.image_classification.vgg_face2 import VggFace2
 from tensorflow_datasets.image_classification.visual_domain_decathlon import VisualDomainDecathlon

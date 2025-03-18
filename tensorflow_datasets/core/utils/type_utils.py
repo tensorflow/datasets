@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,21 +15,53 @@
 
 """Typing annotation utils."""
 
-import os
-from typing import Dict, List, Tuple, TypeVar, Union
+import typing
+from typing import Any, Type, TypeVar
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
-# Accept both `str` and `pathlib.Path`-like
-PathLike = Union[str, os.PathLike]
+_symbols_to_exclude = set(globals().keys())
 
 T = TypeVar('T')
-TreeDict = Union[T, Dict[str, 'TreeDict']]  # pytype: disable=not-supported-yet
-Tree = Union[T, List['Tree'], Tuple['Tree'], Dict[str, 'Tree']]  # pytype: disable=not-supported-yet
 
-Tensor = Union[tf.Tensor, tf.SparseTensor, tf.RaggedTensor]
+# Note: `TupleOrList` avoid abiguity from `Sequence` (`str` is `Sequence[str]`,
+# `bytes` is `Sequence[int]`).
+TupleOrList = tuple[T, ...] | list[T]
+ListOrElem = T | list[T]
 
-JsonValue = Union[
-    str, bool, int, float, None, List['JsonValue'], Dict[str, 'JsonValue'],  # pytype: disable=not-supported-yet
-]
-Json = Dict[str, JsonValue]
+TreeDict = T | dict[str, 'TreeDict']
+Tree = T | Any
+ListOrTreeOrElem = T | TreeDict[T] | list[T]
+NpArrayOrScalar = bytes | float | int | np.ndarray | str
+
+if typing.TYPE_CHECKING:
+  Tensor = tf.Tensor | tf.SparseTensor | tf.RaggedTensor
+  TfdsDType = np.dtype | Type[np.generic] | tf.DType | tf.dtypes.DType
+else:
+  Tensor = Any
+  TfdsDType = Any
+
+# Nested dict of tensor
+TensorDict = TreeDict[Tensor]
+NpArrayOrScalarDict = TreeDict[NpArrayOrScalar]
+
+Dim = int | None
+Shape = TupleOrList[Dim]
+
+JsonValue = (
+    str | bool | int | float | None | list['JsonValue'] | dict[str, 'JsonValue']
+)
+Json = dict[str, JsonValue]
+
+# Types for the tfrecord example construction.
+
+Key = int | str | bytes
+KeySerializedExample = tuple[Key, bytes]  # `(key, serialized_proto)`
+
+
+__all__ = sorted(
+    k
+    for k in globals()
+    if k not in _symbols_to_exclude and not k.startswith('_')
+)

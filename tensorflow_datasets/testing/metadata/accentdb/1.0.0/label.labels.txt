@@ -1,0 +1,9 @@
+american
+australian
+bangla
+british
+indian
+malayalam
+odiya
+telugu
+welsh

@@ -1,0 +1,32 @@
+name: Publish tfds-nightly to PyPI
+
+on:
+  # Event triggered daily at 00:30 am UTC
+  schedule:
+    - cron:  '30 0 * * *'
+
+  # Event manually triggered (in the Github UI)
+  workflow_dispatch:
+    inputs:
+      git-ref:
+        description: Git ref (e.g. SHA or tag) (Optional)
+        default: ""
+        required: false
+
+jobs:
+  publish-job:
+    # Prevents action from running on forks.
+    if: github.repository == 'tensorflow/datasets'
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Set nightly build variables
+      run: echo "TFDS_NIGHTLY_TIMESTAMP=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
+
+    - name: Publish the package
+      uses: etils-actions/pypi-auto-publish@v1
+      with:
+        pypi-token: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
+        parse-changelog: true
+        pkg-name: tfds-nightly
+        git-ref: ${{ github.event.inputs.git-ref }}

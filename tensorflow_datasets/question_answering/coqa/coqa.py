@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
 
 """A Conversational Question Answering Challenge."""
 
+from __future__ import annotations
+
 import json
 
-import tensorflow as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -46,23 +49,18 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("1.0.0")
 
   def _info(self):
-
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "source":
-                tfds.features.Text(),
-            "story":
-                tfds.features.Text(),
-            "questions":
-                tfds.features.Sequence(tfds.features.Text()),
-            "answers":
-                tfds.features.Sequence({
-                    "input_text": tfds.features.Text(),
-                    "answer_start": tf.int32,
-                    "answer_end": tf.int32,
-                }),
+            "source": tfds.features.Text(),
+            "story": tfds.features.Text(),
+            "questions": tfds.features.Sequence(tfds.features.Text()),
+            "answers": tfds.features.Sequence({
+                "input_text": tfds.features.Text(),
+                "answer_start": np.int32,
+                "answer_end": np.int32,
+            }),
         }),
         supervised_keys=None,
         homepage=_HOMEPAGE_URL,
@@ -79,12 +77,14 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "filepath": downloaded_files["train"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "filepath": downloaded_files["test"],
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, filepath):
@@ -106,6 +106,6 @@ class Coqa(tfds.core.GeneratorBasedBuilder):
             "answers": {
                 "input_text": answers,
                 "answer_start": answers_start,
-                "answer_end": answers_end
+                "answer_end": answers_end,
             },
         }

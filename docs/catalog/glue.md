@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="glue" />
   <meta itemprop="description" content="GLUE, the General Language Understanding Evaluation benchmark&#10;(https://gluebenchmark.com/) is a collection of resources for training,&#10;evaluating, and analyzing natural language understanding systems.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;glue&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/glue" />
@@ -12,33 +11,40 @@
 
 # `glue`
 
+
 *   **Description**:
 
 GLUE, the General Language Understanding Evaluation benchmark
 (https://gluebenchmark.com/) is a collection of resources for training,
 evaluating, and analyzing natural language understanding systems.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/glue">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Source code**:
     [`tfds.text.Glue`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/text/glue.py)
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
-
-*   **Dataset size**: `Unknown size`
+    *   `1.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   `1.0.1`: Update dead URL links.
+    *   **`2.0.0`** (default): Update data source for glue/qqp.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    Yes
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
 
-*   **Visualization**
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
     Not supported.
+
 
 ## glue/cola (default config)
 
@@ -52,6 +58,8 @@ evaluating, and analyzing natural language understanding systems.
 
 *   **Download size**: `368.14 KiB`
 
+*   **Dataset size**: `965.49 KiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -60,15 +68,61 @@ Split          | Examples
 `'train'`      | 8,551
 `'validation'` | 1,043
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+sentence | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-cola-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -102,6 +156,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `7.09 MiB`
 
+*   **Dataset size**: `7.22 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -110,15 +166,61 @@ Split          | Examples
 `'train'`      | 67,349
 `'validation'` | 872
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+sentence | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-sst2-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -153,6 +255,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `1.43 MiB`
 
+*   **Dataset size**: `1.74 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -161,16 +265,63 @@ Split          | Examples
 `'train'`      | 3,668
 `'validation'` | 408
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=string),
+    'sentence2': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | string |
+sentence2 | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mrpc-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -201,26 +352,75 @@ the correct citation for each contained dataset.
 *   **Homepage**:
     [https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs](https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs)
 
-*   **Download size**: `57.73 MiB`
+*   **Download size**: `39.76 MiB`
+
+*   **Dataset size**: `150.37 MiB`
 
 *   **Splits**:
 
 Split          | Examples
 :------------- | -------:
 `'test'`       | 390,965
-`'train'`      | 363,849
+`'train'`      | 363,846
 `'validation'` | 40,430
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question1': Text(shape=(), dtype=tf.string),
-    'question2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'question1': Text(shape=(), dtype=string),
+    'question2': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+question1 | Text         |       | string |
+question2 | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qqp-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -248,12 +448,14 @@ the correct citation for each contained dataset.
 *   **Config description**: The Semantic Textual Similarity Benchmark (Cer et
     al., 2017) is a collection of sentence pairs drawn from news headlines,
     video and image captions, and natural language inference data. Each pair is
-    human-annotated with a similarity score from 1 to 5.
+    human-annotated with a similarity score from 0 to 5.
 
 *   **Homepage**:
     [http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark](http://ixa2.si.ehu.es/stswiki/index.php/STSbenchmark)
 
 *   **Download size**: `784.05 KiB`
+
+*   **Dataset size**: `1.58 MiB`
 
 *   **Splits**:
 
@@ -263,16 +465,63 @@ Split          | Examples
 `'train'`      | 5,749
 `'validation'` | 1,500
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': tf.float32,
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': float32,
+    'sentence1': Text(shape=(), dtype=string),
+    'sentence2': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype   | Description
+:-------- | :----------- | :---- | :------ | :----------
+          | FeaturesDict |       |         |
+idx       | Tensor       |       | int32   |
+label     | Tensor       |       | float32 |
+sentence1 | Text         |       | string  |
+sentence2 | Text         |       | string  |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-stsb-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -313,6 +562,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `298.29 MiB`
 
+*   **Dataset size**: `100.56 MiB`
+
 *   **Splits**:
 
 Split                     | Examples
@@ -323,16 +574,63 @@ Split                     | Examples
 `'validation_matched'`    | 9,815
 `'validation_mismatched'` | 9,832
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | string |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -381,6 +679,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `298.29 MiB`
 
+*   **Dataset size**: `4.79 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -388,16 +688,63 @@ Split          | Examples
 `'test'`       | 9,847
 `'validation'` | 9,832
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | string |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_mismatched-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -446,6 +793,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `298.29 MiB`
 
+*   **Dataset size**: `4.58 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -453,16 +802,63 @@ Split          | Examples
 `'test'`       | 9,796
 `'validation'` | 9,815
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | string |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-mnli_matched-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -521,6 +917,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `10.14 MiB`
 
+*   **Dataset size**: `32.99 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -529,16 +927,63 @@ Split          | Examples
 `'train'`      | 104,743
 `'validation'` | 5,463
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'question': Text(shape=(), dtype=tf.string),
-    'sentence': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'question': Text(shape=(), dtype=string),
+    'sentence': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+idx      | Tensor       |       | int32  |
+label    | ClassLabel   |       | int64  |
+question | Text         |       | string |
+sentence | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-qnli-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -575,6 +1020,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `680.81 KiB`
 
+*   **Dataset size**: `2.15 MiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -583,16 +1030,63 @@ Split          | Examples
 `'train'`      | 2,490
 `'validation'` | 277
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=string),
+    'sentence2': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | string |
+sentence2 | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-rte-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -668,6 +1162,8 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `28.32 KiB`
 
+*   **Dataset size**: `198.88 KiB`
+
 *   **Splits**:
 
 Split          | Examples
@@ -676,16 +1172,63 @@ Split          | Examples
 `'train'`      | 635
 `'validation'` | 71
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'sentence1': Text(shape=(), dtype=tf.string),
-    'sentence2': Text(shape=(), dtype=tf.string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'sentence1': Text(shape=(), dtype=string),
+    'sentence2': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature   | Class        | Shape | Dtype  | Description
+:-------- | :----------- | :---- | :----- | :----------
+          | FeaturesDict |       |        |
+idx       | Tensor       |       | int32  |
+label     | ClassLabel   |       | int64  |
+sentence1 | Text         |       | string |
+sentence2 | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-wnli-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -720,22 +1263,71 @@ the correct citation for each contained dataset.
 
 *   **Download size**: `217.05 KiB`
 
+*   **Dataset size**: `299.16 KiB`
+
 *   **Splits**:
 
 Split    | Examples
 :------- | -------:
 `'test'` | 1,104
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'hypothesis': Text(shape=(), dtype=tf.string),
-    'idx': tf.int32,
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
-    'premise': Text(shape=(), dtype=tf.string),
+    'hypothesis': Text(shape=(), dtype=string),
+    'idx': int32,
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
+    'premise': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape | Dtype  | Description
+:--------- | :----------- | :---- | :----- | :----------
+           | FeaturesDict |       |        |
+hypothesis | Text         |       | string |
+idx        | Tensor       |       | int32  |
+label      | ClassLabel   |       | int64  |
+premise    | Text         |       | string |
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/glue-ax-2.0.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 

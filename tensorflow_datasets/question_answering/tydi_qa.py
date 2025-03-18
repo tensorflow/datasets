@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,14 +39,28 @@ each language expresses -- such that we expect models performing well on this \
 set to generalize across a large number of the languages in the world. It \
 contains language phenomena that would not be found in English-only corpora. \
 To provide a realistic information-seeking task and avoid priming effects, \
-questions are written by people who want to know the answer, but don’t know \
+questions are written by people who want to know the answer, but don't know \
 the answer yet, (unlike SQuAD and its descendents) and the data is collected \
 directly in each language without the use of translation (unlike MLQA and \
 XQuAD).
 
-For now, only the Gold passage (GoldP) task is available in TFDS.
-"""
+IMPORTANT:  Please choose your training split carefully.
 
+Training splits:
+
+'train': This is the GoldP task from the original TyDi QA paper \
+[https://arxiv.org/abs/2003.05002] that has original-language labeled \
+training data.
+
+'translate-train-*': These splits are the automatic translations from English \
+to each target language used in the translate-train baselines in the XTREME \
+paper [https://arxiv.org/abs/2003.11080]. This purposefully ignores the \
+non-English TyDiQA-GoldP training data to simulate the transfer learning \
+scenario where original-language data is not available and system builders \
+must rely on labeled English data plus existing machine translation systems.
+
+Typically, you should use EITHER the train or translate-train split, but not both.
+"""
 
 LANGUAGES = {
     "ar": "arabic",
@@ -60,7 +74,10 @@ LANGUAGES = {
     "te": "telugu",
 }
 
-_GOLD_URL_PREFIX = "https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-"
+_GOLD_URL_PREFIX = (
+    "https://storage.googleapis.com/tydiqa/v1.1/tydiqa-goldp-v1.1-"
+)
+_GOLD_TRANSLATE_URL_FORMAT = "https://storage.googleapis.com/xtreme_translations/TyDiQA-GoldP/translate-train/tydiqa.translate.train.en-{lang_iso}.json"
 
 
 class TydiQAConfig(tfds.core.BuilderConfig):
@@ -73,16 +90,27 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [
       TydiQAConfig(
           name="goldp",
-          description="Gold passage (GoldP) task (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline).",
-          version=tfds.core.Version("2.0.0"),
+          description=(
+              "Gold passage (GoldP) task"
+              " (https://github.com/google-research-datasets/tydiqa/tree/master/gold_passage_baseline)."
+          ),
       ),
   ]
+
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": (
+          "Fixes issue with a number of examples where answer spans are "
+          "misaligned due to context white-space removal. This change impacts "
+          "roughly 25% of train and dev examples."
+      )
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=qa_utils.SQUADLIKE_FEATURES,
+        features=qa_utils.squadlike_features(),
         # No default supervised_keys (as we have to pass both question
         # and context as input).
         supervised_keys=None,
@@ -96,25 +124,48 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
         "validation": _GOLD_URL_PREFIX + "dev.json",
         "lang-validation": _GOLD_URL_PREFIX + "dev.tgz",
     }
+    for lang_iso in LANGUAGES:
+      if lang_iso == "en":
+        continue
+      urls_to_download[f"translate-train-{lang_iso}"] = (
+          _GOLD_TRANSLATE_URL_FORMAT.format(lang_iso=lang_iso)
+      )
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"filepath": downloaded_files["train"]}),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={"filepath": downloaded_files["validation"]}),
-    ] + [
-        tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
-            name=f"validation-{lang_iso}",
-            gen_kwargs={
-                "filepath":
-                os.path.join(downloaded_files["lang-validation"],
-                             f"tydiqa-goldp-v1.1-dev/tydiqa-goldp-dev-{lang_name}.json")
-            })
-        for lang_iso, lang_name in LANGUAGES.items()
-    ]
+    return (
+        [
+            tfds.core.SplitGenerator(
+                name=tfds.Split.TRAIN,
+                gen_kwargs={"filepath": downloaded_files["train"]},
+            ),
+            tfds.core.SplitGenerator(
+                name=tfds.Split.VALIDATION,
+                gen_kwargs={"filepath": downloaded_files["validation"]},
+            ),
+        ]
+        + [
+            tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
+                name=f"validation-{lang_iso}",
+                gen_kwargs={
+                    "filepath": os.path.join(
+                        downloaded_files["lang-validation"],
+                        f"tydiqa-goldp-v1.1-dev/tydiqa-goldp-dev-{lang_name}.json",
+                    )
+                },
+            )
+            for lang_iso, lang_name in LANGUAGES.items()
+        ]
+        + [
+            tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
+                name=f"translate-train-{lang_iso}",
+                gen_kwargs={
+                    "filepath": downloaded_files[f"translate-train-{lang_iso}"]
+                },
+            )
+            for lang_iso, lang_name in LANGUAGES.items()
+            if lang_iso != "en"
+        ]
+    )
 
   def _generate_examples(self, filepath):
     return qa_utils.generate_squadlike_examples(filepath)

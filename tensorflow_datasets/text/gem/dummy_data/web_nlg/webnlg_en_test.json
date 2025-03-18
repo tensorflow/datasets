@@ -1,0 +1,21 @@
+{
+  "language": "en",
+  "values": [
+      {
+          "input": [
+              "Estádio_Municipal_Coaracy_da_Mata_Fonseca | location | Arapiraca",
+              "Agremiação_Sportiva_Arapiraquense | league | Campeonato_Brasileiro_Série_C",
+              "Campeonato_Brasileiro_Série_C | country | Brazil",
+              "Agremiação_Sportiva_Arapiraquense | nickname | \"''Alvinegro\"",
+              "Agremiação_Sportiva_Arapiraquense | ground | Estádio_Municipal_Coaracy_da_Mata_Fonseca"
+          ],
+          "target": [
+              "Estádio Municipal Coaracy da Mata Fonseca is the name of the ground of Agremiação Sportiva Arapiraquense in Arapiraca. Agremiação Sportiva Arapiraquense, nicknamed \"Alvinegro\", lay in the Campeonato Brasileiro Série C league from Brazil.",
+              "Estádio Municipal Coaracy da Mata Fonseca is the name of the ground of Agremiação Sportiva Arapiraquense in Arapiraca. Alvinegro, the nickname of Agremiação Sportiva Arapiraquense, play in the Campeonato Brasileiro Série C league from Brazil."
+          ],
+          "category": "SportsTeam",
+          "id": 0,
+          "webnlg-id": "test/SportsTeam/5/Id1"
+      }
+    ]
+  }

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,16 @@
 
 """Community dataset API."""
 
+from tensorflow_datasets.core.community.config import NamespaceConfig
+from tensorflow_datasets.core.community.huggingface_wrapper import mock_builtin_to_use_gfile
+from tensorflow_datasets.core.community.huggingface_wrapper import mock_huggingface_import
 from tensorflow_datasets.core.community.load import builder_cls_from_module
-
+from tensorflow_datasets.core.community.registry import community_register
 
 __all__ = [
     'builder_cls_from_module',
+    'community_register',
+    'mock_builtin_to_use_gfile',
+    'mock_huggingface_import',
+    'NamespaceConfig',
 ]

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,22 +15,31 @@
 
 """Utilities for dealing with tf.data.Dataset."""
 
+from __future__ import annotations
+
 import collections.abc
 import functools
+import typing
 from typing import Any, Callable, Iterable, Iterator, Union
 
+from etils import enp
+from etils.etree import nest as etree
 import numpy as np
-
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core import tf_compat
+from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils import type_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 Tree = type_utils.Tree
 Tensor = type_utils.Tensor
 
-TensorflowElem = Union[Tensor, tf.data.Dataset]
-NumpyValue = Union[tf.RaggedTensor, np.ndarray, np.generic, bytes]
+if typing.TYPE_CHECKING:
+  TensorflowElem = Union[None, Tensor, tf.data.Dataset]
+  NumpyValue = Union[None, tf.RaggedTensor, np.ndarray, np.generic, bytes]
+else:
+  TensorflowElem = Any
+  NumpyValue = Any
 NumpyElem = Union[NumpyValue, Iterable[NumpyValue]]
 
 
@@ -40,24 +49,38 @@ class _IterableDataset(collections.abc.Iterable):
   def __init__(
       self,
       make_iterator_fn: Callable[..., Iterator[NumpyElem]],
+      ds: Union[tf.data.Dataset, Any],
       *args: Any,
       **kwargs: Any,
   ):
+    self._ds = ds
     self._make_iterator_fn = functools.partial(
-        make_iterator_fn, *args, **kwargs
+        make_iterator_fn, ds, *args, **kwargs
     )
 
-  def __iter__(self) ->  Iterator[NumpyElem]:
+  def __len__(self) -> int:
+    """Dataset length."""
+    if isinstance(self._ds, tf.data.Dataset):
+      return len(self._ds)
+    else:
+      raise TypeError(
+          '__len__() is not supported for `tfds.as_numpy` datasets '
+          'created in graph mode.'
+      )
+
+  def __iter__(self) -> Iterator[NumpyElem]:
     """Calling `iter(ds)` multiple times recreates a new iterator."""
     return self._make_iterator_fn()
+
+  @property
+  def element_spec(self) -> Tree[enp.ArraySpec]:
+    """Numpy version of element-spec."""
+    return etree.spec_like(self._ds.element_spec)
 
 
 def _eager_dataset_iterator(ds: tf.data.Dataset) -> Iterator[NumpyElem]:
   for elem in ds:
-    yield tf.nest.map_structure(
-        lambda t: t if isinstance(t, tf.RaggedTensor) else t.numpy(),
-        elem
-    )
+    yield tree.map_structure(_elem_to_numpy_eager, elem)
 
 
 def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
@@ -66,6 +89,7 @@ def _graph_dataset_iterator(ds_iter, graph: tf.Graph) -> Iterator[NumpyElem]:
     init = ds_iter.initializer
     ds_item = ds_iter.get_next()
     with utils.nogpu_session() as sess:
+      sess.run(tf.compat.v1.tables_initializer())
       sess.run(init)
       while True:
         try:
@@ -79,23 +103,27 @@ def _assert_ds_types(nested_ds: Tree[TensorflowElem]) -> None:
   for el in tf.nest.flatten(nested_ds):
     if not (
         isinstance(el, (tf.Tensor, tf.RaggedTensor))
-        or tf_compat.is_dataset(el)
+        or isinstance(el, tf.data.Dataset)
     ):
-      nested_types = tf.nest.map_structure(type, nested_ds)
+      nested_types = tree.map_structure(type, nested_ds)
       raise TypeError(
           'Arguments to as_numpy must be tf.Tensors or tf.data.Datasets. '
           f'Got: {nested_types}.'
       )
 
 
-def _elem_to_numpy_eager(tf_el: TensorflowElem) -> NumpyElem:
+def _elem_to_numpy_eager(
+    tf_el: TensorflowElem,
+) -> Union[NumpyElem, Iterable[NumpyElem]]:
   """Converts a single element from tf to numpy."""
   if isinstance(tf_el, tf.Tensor):
-    return tf_el.numpy()
+    return tf_el._numpy()  # pytype: disable=attribute-error  # pylint: disable=protected-access
   elif isinstance(tf_el, tf.RaggedTensor):
     return tf_el
-  elif tf_compat.is_dataset(tf_el):
+  elif isinstance(tf_el, tf.data.Dataset):
     return _IterableDataset(_eager_dataset_iterator, tf_el)
+  elif tf_el is None:
+    return None
   else:
     raise AssertionError(f'Unexpected element: {type(tf_el)}: {tf_el}')
 
@@ -107,7 +135,7 @@ def _nested_to_numpy_graph(ds_nested: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   flat_ds = tf.nest.flatten(ds_nested)
   for elem in flat_ds:
     # Create an iterator for all datasets
-    if tf_compat.is_dataset(elem):
+    if isinstance(elem, tf.data.Dataset):
       # Capture the current graph, so calling `iter(ds)` twice will reuse the
       # graph in which `as_numpy` was created.
       graph = tf.compat.v1.get_default_graph()
@@ -124,12 +152,18 @@ def _nested_to_numpy_graph(ds_nested: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   # Merge the dataset iterators and np arrays
   iter_ds = iter(all_ds)
   iter_array = iter(all_arrays)
-  return tf.nest.pack_sequence_as(ds_nested, [
-      next(iter_ds) if tf_compat.is_dataset(ds_el) else next(iter_array)
-      for ds_el in flat_ds
-  ])
+  return tf.nest.pack_sequence_as(
+      ds_nested,
+      [
+          next(iter_ds)
+          if isinstance(ds_el, tf.data.Dataset)
+          else next(iter_array)
+          for ds_el in flat_ds
+      ],
+  )
 
 
+@tfds_logging.as_numpy
 def as_numpy(dataset: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   """Converts a `tf.data.Dataset` to an iterable of NumPy arrays.
 
@@ -163,16 +197,6 @@ def as_numpy(dataset: Tree[TensorflowElem]) -> Tree[NumpyElem]:
   """
   _assert_ds_types(dataset)
   if tf.executing_eagerly():
-    return tf.nest.map_structure(_elem_to_numpy_eager, dataset)
+    return tree.map_structure(_elem_to_numpy_eager, dataset)
   else:
     return _nested_to_numpy_graph(dataset)
-
-
-def dataset_shape_is_fully_defined(ds):
-  output_shapes = tf.compat.v1.data.get_output_shapes(ds)
-  return all([ts.is_fully_defined() for ts in tf.nest.flatten(output_shapes)])
-
-
-def features_shape_is_fully_defined(features):
-  return all([tf.TensorShape(info.shape).is_fully_defined() for info in
-              tf.nest.flatten(features.get_tensor_info())])

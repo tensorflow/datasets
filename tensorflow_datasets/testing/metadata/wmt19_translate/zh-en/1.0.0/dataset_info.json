@@ -1,29 +1,22 @@
 {
-  "citation": "\n@ONLINE {wmt19translate,\n    author = \"Wikimedia Foundation\",\n    title  = \"ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News\",\n    url    = \"http://www.statmt.org/wmt19/translation-task.html\"\n}\n",
-  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```\n\n",
+  "citation": "@ONLINE {wmt19translate,\n    author = \"Wikimedia Foundation\",\n    title  = \"ACL 2019 Fourth Conference on Machine Translation (WMT19), Shared Task: Machine Translation of News\",\n    url    = \"http://www.statmt.org/wmt19/translation-task.html\"\n}",
+  "configDescription": "WMT 2019 zh-en translation task dataset.",
+  "configName": "zh-en",
+  "description": "Translate dataset based on the data from statmt.org.\n\nVersions exists for the different years using a combination of multiple data\nsources. The base `wmt_translate` allows you to create your own config to choose\nyour own data/language pair by creating a custom `tfds.translate.wmt.WmtConfig`.\n\n```\nconfig = tfds.translate.wmt.WmtConfig(\n    version=\"0.0.1\",\n    language_pair=(\"fr\", \"de\"),\n    subsets={\n        tfds.Split.TRAIN: [\"commoncrawl_frde\"],\n        tfds.Split.VALIDATION: [\"euelections_dev2019\"],\n    },\n)\nbuilder = tfds.builder(\"wmt_translate\", config=config)\n```",
+  "downloadSize": "808357147",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://www.statmt.org/wmt19/translation-task.html"
     ]
   },
+  "moduleName": "tensorflow_datasets.translate.wmt19",
   "name": "wmt19_translate",
-  "schema": {
-    "feature": [
-      {
-        "name": "en",
-        "type": "BYTES"
-      },
-      {
-        "name": "zh",
-        "type": "BYTES"
-      }
-    ]
-  },
-  "sizeInBytes": "2195042850",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
-      "numShards": "10",
+      "numBytes": "6969093175",
       "shardLengths": [
         "406038",
         "406038",
@@ -89,65 +82,28 @@
         "406038",
         "406038",
         "406038"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "25986436"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "25986436"
-              }
-            },
-            "name": "zh",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "25986436"
-      }
+      ]
     },
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "validation",
-      "numShards": "1",
+      "numBytes": "1198354",
       "shardLengths": [
         "3981"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3981"
-              }
-            },
-            "name": "en",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "3981"
-              }
-            },
-            "name": "zh",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "3981"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "zh",
-    "output": "en"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "zh"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

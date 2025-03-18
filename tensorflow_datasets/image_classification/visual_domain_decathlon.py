@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@
 import json
 import os
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
-
 
 _DESCRIPTION = """\
 This contains the 10 datasets used in the Visual Domain Decathlon, part of
@@ -48,7 +47,8 @@ _URL_PREFIX_VGG = 'http://www.robots.ox.ac.uk/~vgg/share/'
 _URL_PREFIX_IMAGENET = 'http://www.image-net.org/image/decathlon/'
 _CONFIG_DESCRIPTION_PATTERN = (
     'Data based on "{}", with images resized isotropically to have a shorter '
-    'size of 72 pixels.')
+    'size of 72 pixels.'
+)
 
 
 class VisualDomainDecathlonConfig(tfds.core.BuilderConfig):
@@ -76,9 +76,11 @@ def _get_builder_configs():
       ('vgg-flowers', 'VGG-Flowers', 102),
   ]:
     description = _CONFIG_DESCRIPTION_PATTERN.format(full_name)
-    configs.append(VisualDomainDecathlonConfig(name=short_name,
-                                               num_classes=num_classes,
-                                               description=description))
+    configs.append(
+        VisualDomainDecathlonConfig(
+            name=short_name, num_classes=num_classes, description=description
+        )
+    )
   return configs
 
 
@@ -94,8 +96,9 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
             'name': tfds.features.Text(),
-            'image': tfds.features.Image(shape=(None, None, 3),
-                                         encoding_format='jpeg'),
+            'image': tfds.features.Image(
+                shape=(None, None, 3), encoding_format='jpeg'
+            ),
             'label': tfds.features.ClassLabel(num_classes=num_classes),
         }),
         supervised_keys=('image', 'label'),
@@ -109,15 +112,17 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',
           tfds.download.Resource(
               url=_URL_PREFIX_IMAGENET + 'decathlon-1.0-data-imagenet.tar',
-              extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
+              extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+          ),
       ])
     else:
       devkit_path, data_path = dl_manager.download_and_extract([
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',
           _URL_PREFIX_VGG + 'decathlon-1.0-data.tar.gz',
       ])
-      images_archive = os.path.join(data_path,
-                                    self.builder_config.name + '.tar')
+      images_archive = os.path.join(
+          data_path, self.builder_config.name + '.tar'
+      )
     annotations_path = os.path.join(devkit_path, 'decathlon-1.0', 'annotations')
     return [
         tfds.core.SplitGenerator(
@@ -125,21 +130,24 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
-                split='train'),
+                split='train',
+            ),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
-                split='test'),
+                split='test',
+            ),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
-                split='val'),
+                split='val',
+            ),
         ),
     ]
 
@@ -148,9 +156,11 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     filename_to_label = _get_filename_to_label_map(
         annotations_path=annotations_path,
         dataset_name=self.builder_config.name,
-        split=split)
+        split=split,
+    )
     for image_fname, image_fobj in tfds.download.iter_archive(
-        path=images_archive, method=tfds.download.ExtractMethod.TAR_STREAM):
+        path=images_archive, method=tfds.download.ExtractMethod.TAR_STREAM
+    ):
       image_fname = image_fname.replace('\\', '/')  # For windows compatibility
       if image_fname in filename_to_label:
         label = filename_to_label[image_fname]
@@ -166,8 +176,9 @@ def _get_filename_to_label_map(annotations_path, dataset_name, split):
   """Returns a mapping from image filenames to labels, for the given split."""
   filename_to_label = {}
   if split == 'test':
-    filepath = os.path.join(annotations_path,
-                            dataset_name + '_test_stripped.json')
+    filepath = os.path.join(
+        annotations_path, dataset_name + '_test_stripped.json'
+    )
   else:
     filepath = os.path.join(annotations_path, dataset_name + '_%s.json' % split)
   prefix = 'data/'
@@ -177,7 +188,7 @@ def _get_filename_to_label_map(annotations_path, dataset_name, split):
       # For test, labels are unknown.
       for example_info in annotations['images']:
         image_filename = example_info['file_name']
-        image_filename = image_filename[len(prefix):]
+        image_filename = image_filename[len(prefix) :]
         filename_to_label[image_filename] = -1
     else:
       # Load a map from category ID to label index.
@@ -191,7 +202,7 @@ def _get_filename_to_label_map(annotations_path, dataset_name, split):
       # Load the map from image filename to label.
       for example_info in annotations['annotations']:
         image_filename = image_id_to_filename[example_info['image_id']]
-        image_filename = image_filename[len(prefix):]
+        image_filename = image_filename[len(prefix) :]
         label = category_id_to_label[example_info['category_id']]
         filename_to_label[image_filename] = label
   return filename_to_label

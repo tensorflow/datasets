@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 
 """Tests for tensorflow_datasets.core.features.top_level_feature."""
 
-import tensorflow.compat.v2 as tf
+import numpy as np
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core.features import top_level_feature
@@ -24,36 +24,40 @@ from tensorflow_datasets.core.features import top_level_feature
 class FeaturesManagerTest(testing.TestCase):
 
   def test_sequence_rank(self):
-
-    self.assertEqual(1, top_level_feature._get_sequence_rank({
-        'a': features_lib.TensorInfo(
-            shape=(None, 3), dtype=tf.int32, sequence_rank=1),
-        'b': features_lib.TensorInfo(
-            shape=(None,), dtype=tf.int32, sequence_rank=1),
-    }))
+    self.assertEqual(
+        1,
+        top_level_feature._get_sequence_rank({
+            'a': features_lib.TensorInfo(
+                shape=(None, 3), dtype=np.int32, sequence_rank=1
+            ),
+            'b': features_lib.TensorInfo(
+                shape=(None,), dtype=np.int32, sequence_rank=1
+            ),
+        }),
+    )
 
     with self.assertRaisesWithPredicateMatch(
-        NotImplementedError, 'mixing sequence and context'):
+        NotImplementedError, 'mixing sequence and context'
+    ):
       top_level_feature._get_sequence_rank({
-          'a': features_lib.TensorInfo(
-              shape=(), dtype=tf.int32),
+          'a': features_lib.TensorInfo(shape=(), dtype=np.int32),
           'b': features_lib.TensorInfo(
-              shape=(None,), dtype=tf.int32, sequence_rank=1),
+              shape=(None,), dtype=np.int32, sequence_rank=1
+          ),
       })
 
   def test_flatten_nested(self):
-
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
             'c': {
-                'd': tf.int32,
-                'e': tf.int32,
+                'd': np.int32,
+                'e': np.int32,
             },
         },
         'f': features_lib.Sequence({
-            'g': features_lib.Sequence(tf.int32),
-            'h': tf.int32,
+            'g': features_lib.Sequence(np.int32),
+            'h': np.int32,
         }),
     })
 
@@ -68,55 +72,68 @@ class FeaturesManagerTest(testing.TestCase):
             'g': 'g',
         },
     })
-    self.assertEqual(flat1, [
-        'a',
-        {'d': 123},
-        None,  # 'e'
-        'g',
-        None,  # h
-    ])
-    self.assertEqual(f._nest(flat1), {
-        'a': 'a',
-        'b': {
-            'c': {
-                'd': {'d': 123},
-                'e': None,
+    self.assertEqual(
+        flat1,
+        [
+            'a',
+            {'d': 123},
+            None,  # 'e'
+            'g',
+            None,  # h
+        ],
+    )
+    self.assertEqual(
+        f._nest(flat1),
+        {
+            'a': 'a',
+            'b': {
+                'c': {
+                    'd': {'d': 123},
+                    'e': None,
+                },
+            },
+            'f': {
+                'g': 'g',
+                'h': None,
             },
         },
-        'f': {
-            'g': 'g',
-            'h': None,
-        },
-    })
+    )
 
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
-            'c': tf.int32,
+            'c': np.int32,
         },
     })
     with self.assertRaisesWithPredicateMatch(ValueError, 'received a non dict'):
       f._flatten({'b': 123})
 
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'Unrecognized keys: [\'d\']'):
+        ValueError, "Unrecognized keys: ['d']"
+    ):
       f._flatten({'b': {'c': 123, 'd': 123}})
 
     with self.assertRaisesWithPredicateMatch(
-        ValueError, 'Expected length 2 does not match input length 3'):
+        ValueError, 'Expected length 2 does not match input length 3'
+    ):
       f._nest([None, None, None])
 
   def test_top_level(self):
-
     f = features_lib.FeaturesDict({
-        'a': tf.int32,
+        'a': np.int32,
         'b': {
-            'c': tf.int32,
+            'c': np.int32,
         },
     })
 
     # Only top level can be decoded
     f.decode_example({
+        'a': 1,
+        'b': {
+            'c': 2,
+        },
+    })
+    f.decode_example_np({
         'a': 1,
         'b': {
             'c': 2,

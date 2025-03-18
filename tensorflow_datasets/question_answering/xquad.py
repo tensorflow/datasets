@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -47,7 +47,6 @@ splits for each non-English language from XTREME (Hu et al., 2020). These can \
 be used to run XQuAD in the "translate-train" or "translate-test" settings.
 """
 
-
 LANGUAGES = ["ar", "de", "el", "en", "es", "hi", "ru", "th", "tr", "vi", "zh"]
 
 _URL_FORMAT = "https://github.com/deepmind/xquad/raw/master/xquad.{lang}.json"
@@ -65,8 +64,7 @@ class XquadConfig(tfds.core.BuilderConfig):
       language: string, a valid language code.
       **kwargs: keyword arguments forwarded to super.
     """
-    super(XquadConfig, self).__init__(
-        version=tfds.core.Version("2.0.0"), **kwargs)
+    super(XquadConfig, self).__init__(**kwargs)
     self.language = language
 
 
@@ -77,10 +75,14 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
       XquadConfig(  # pylint:disable=g-complex-comprehension
           name=lang,
           language=lang,
-          description=("XQuAD '{}' test split, with machine-translated "
-                       "translate-train/translate-dev/translate-test splits "
-                       "from XTREME (Hu et al., 2020).").format(lang),
-      ) for lang in LANGUAGES if lang != "en"
+          description=(
+              "XQuAD '{}' test split, with machine-translated "
+              "translate-train/translate-dev/translate-test splits "
+              "from XTREME (Hu et al., 2020)."
+          ).format(lang),
+      )
+      for lang in LANGUAGES
+      if lang != "en"
   ] + [
       XquadConfig(  # pylint:disable=g-complex-comprehension
           name="en",
@@ -89,11 +91,20 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
       )
   ]
 
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": (
+          "Fixes issue with a number of examples where answer spans are "
+          "misaligned due to context white-space removal. This change impacts "
+          "roughly  14% of test examples."
+      )
+  }
+
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=qa_utils.SQUADLIKE_FEATURES,
+        features=qa_utils.squadlike_features(),
         # No default supervised_keys (as we have to pass both question
         # and context as input).
         supervised_keys=None,
@@ -111,21 +122,21 @@ class Xquad(tfds.core.GeneratorBasedBuilder):
           }
       )
     else:
-      filepaths = dl_manager.download_and_extract(
-          {
-              "test": _URL_FORMAT.format(lang=lang),
-              "translate-train": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="train", lang=lang),
-              "translate-dev": _XTREME_SQUAD_URL_FORMAT.format(
-                  split="dev", lang=lang),
-              "translate-test": _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
-          }
-      )
+      filepaths = dl_manager.download_and_extract({
+          "test": _URL_FORMAT.format(lang=lang),
+          "translate-train": _XTREME_SQUAD_URL_FORMAT.format(
+              split="train", lang=lang
+          ),
+          "translate-dev": _XTREME_SQUAD_URL_FORMAT.format(
+              split="dev", lang=lang
+          ),
+          "translate-test": _XTREME_XQUAD_URL_FORMAT.format(lang=lang),
+      })
 
     return [
         tfds.core.SplitGenerator(  # pylint:disable=g-complex-comprehension
-            name=split,
-            gen_kwargs={"filepath": path})
+            name=split, gen_kwargs={"filepath": path}
+        )
         for split, path in filepaths.items()
     ]
 

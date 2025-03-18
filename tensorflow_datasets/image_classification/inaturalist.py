@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import json
 import os
 
 import six.moves.urllib as urllib
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DESCRIPTION = """\
@@ -62,57 +62,67 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             "id": tfds.features.Text(),
             "image": tfds.features.Image(),
             "label": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
-                        "image_classification", "inaturalist_labels.txt"))),
+                        "image_classification", "inaturalist_labels.txt"
+                    )
+                )
+            ),
             "supercategory": tfds.features.ClassLabel(
-                names_file=tfds.core.get_tfds_path(
+                names_file=tfds.core.tfds_path(
                     os.path.join(
                         "image_classification",
-                        "inaturalist_supercategories.txt"))),
+                        "inaturalist_supercategories.txt",
+                    )
+                )
+            ),
         }),
         supervised_keys=("image", "label"),
         homepage="https://github.com/visipedia/inat_comp/tree/master/2017",
-        citation=_CITATION)
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager):
     output_files = dl_manager.download_and_extract({
-        "trainval_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "train_val_images.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-        "trainval_annos":
-            urllib.parse.urljoin(_URL, "train_val2017.zip"),
-        "test_images":
-            tfds.download.Resource(
-                url=urllib.parse.urljoin(_URL, "test2017.tar.gz"),
-                extract_method=tfds.download.ExtractMethod.NO_EXTRACT),
-
+        "trainval_images": tfds.download.Resource(
+            url=urllib.parse.urljoin(_URL, "train_val_images.tar.gz"),
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+        ),
+        "trainval_annos": urllib.parse.urljoin(_URL, "train_val2017.zip"),
+        "test_images": tfds.download.Resource(
+            url=urllib.parse.urljoin(_URL, "test2017.tar.gz"),
+            extract_method=tfds.download.ExtractMethod.NO_EXTRACT,
+        ),
     })
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TRAIN,
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
-                    output_files["trainval_images"]),
-                annon_file=os.path.join(output_files["trainval_annos"],
-                                        "train2017.json"),
+                    output_files["trainval_images"]
+                ),
+                annon_file=os.path.join(
+                    output_files["trainval_annos"], "train2017.json"
+                ),
             ),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
-                    output_files["trainval_images"]),
-                annon_file=os.path.join(output_files["trainval_annos"],
-                                        "val2017.json"),
+                    output_files["trainval_images"]
+                ),
+                annon_file=os.path.join(
+                    output_files["trainval_annos"], "val2017.json"
+                ),
             ),
         ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
-                    output_files["test_images"]),
+                    output_files["test_images"]
+                ),
                 annon_file=None,
             ),
         ),

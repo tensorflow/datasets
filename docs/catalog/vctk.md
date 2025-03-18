@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="vctk" />
   <meta itemprop="description" content="This CSTR VCTK Corpus includes speech data uttered by 110 English speakers with&#10;various accents. Each speaker reads out about 400 sentences, which were selected&#10;from a newspaper, the rainbow passage and an elicitation paragraph used for the&#10;speech accent archive.&#10;&#10;Note that the &#x27;p315&#x27; text was lost due to a hard disk error.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;vctk&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/vctk" />
@@ -11,6 +10,7 @@
 </div>
 
 # `vctk`
+
 
 *   **Description**:
 
@@ -21,6 +21,12 @@ speech accent archive.
 
 Note that the 'p315' text was lost due to a hard disk error.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/vctk">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://doi.org/10.7488/ds/2645](https://doi.org/10.7488/ds/2645)
 
@@ -29,7 +35,8 @@ Note that the 'p315' text was lost due to a hard disk error.
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): VCTK release 0.92.0.
+    *   `1.0.0`: VCTK release 0.92.0.
+    *   **`1.0.1`** (default): Fix speech data type with dtype=tf.int16.
 
 *   **Download size**: `10.94 GiB`
 
@@ -37,22 +44,38 @@ Note that the 'p315' text was lost due to a hard disk error.
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
     No
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'accent': ClassLabel(shape=(), dtype=tf.int64, num_classes=13),
-    'gender': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'id': tf.string,
-    'speaker': ClassLabel(shape=(), dtype=tf.int64, num_classes=110),
-    'speech': Audio(shape=(None,), dtype=tf.int64),
-    'text': Text(shape=(), dtype=tf.string),
+    'accent': ClassLabel(shape=(), dtype=int64, num_classes=13),
+    'gender': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'id': string,
+    'speaker': ClassLabel(shape=(), dtype=int64, num_classes=110),
+    'speech': Audio(shape=(None,), dtype=int16),
+    'text': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape   | Dtype  | Description
+:------ | :----------- | :------ | :----- | :----------
+        | FeaturesDict |         |        |
+accent  | ClassLabel   |         | int64  |
+gender  | ClassLabel   |         | int64  |
+id      | Tensor       |         | string |
+speaker | ClassLabel   |         | int64  |
+speech  | Audio        | (None,) | int16  |
+text    | Text         |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'speech')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
 
 *   **Citation**:
 
@@ -66,9 +89,6 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
 
 ## vctk/mic1 (default config)
 
@@ -88,6 +108,43 @@ Split     | Examples
 :-------- | -------:
 `'train'` | 44,455
 
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vctk-mic1-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
+
 ## vctk/mic2
 
 *   **Config description**: Audio recorded using a small diaphragm condenser
@@ -105,3 +162,40 @@ Split     | Examples
 Split     | Examples
 :-------- | -------:
 `'train'` | 43,873
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/vctk-mic2-1.0.1.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

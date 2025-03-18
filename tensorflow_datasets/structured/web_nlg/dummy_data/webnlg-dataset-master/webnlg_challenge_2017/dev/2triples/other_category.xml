@@ -1,0 +1,21 @@
+<benchmark>
+  <entries>
+    <entry category="Airport" eid="Id1" size="2">
+      <originaltripleset>
+        <otriple>Abilene_Regional_Airport | cityServed | Abilene,_Texas</otriple>
+        <otriple>Abilene,_Texas | isPartOf | Texas</otriple>
+      </originaltripleset>
+      <originaltripleset>
+        <otriple>Abilene,_Texas | isPartOf | Texas</otriple>
+        <otriple>Abilene_Regional_Airport | city | Abilene,_Texas</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Abilene_Regional_Airport | cityServed | Abilene,_Texas</mtriple>
+        <mtriple>Abilene,_Texas | isPartOf | Texas</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">Abilene is in Texas and is served by the Abilene regional airport.</lex>
+      <lex comment="good" lid="Id2">Abilene, part of Texas, is served by the Abilene regional airport.</lex>
+      <lex comment="good" lid="Id3">Abilene regional airport serves the city of Abilene which is in Texas.</lex>
+    </entry>
+  </entries>
+</benchmark>

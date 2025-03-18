@@ -1,0 +1,53 @@
+{
+  "citation": "@InProceedings{parkhi12a,\n  author       = \"Parkhi, O. M. and Vedaldi, A. and Zisserman, A. and Jawahar, C.~V.\",\n  title        = \"Cats and Dogs\",\n  booktitle    = \"IEEE Conference on Computer Vision and Pattern Recognition\",\n  year         = \"2012\",\n}",
+  "description": "The Oxford-IIIT pet dataset is a 37 category pet image dataset with roughly 200\nimages for each class. The images have large variations in scale, pose and\nlighting. All images have an associated ground truth annotation of breed and\nspecies. Additionally, head bounding boxes are provided for the training split,\nallowing using this dataset for simple object detection tasks. In the test\nsplit, the bounding boxes are empty.",
+  "downloadSize": "811092049",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "http://www.robots.ox.ac.uk/~vgg/data/pets/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.oxford_iiit_pet.oxford_iiit_pet_dataset_builder",
+  "name": "oxford_iiit_pet",
+  "releaseNotes": {
+    "4.0.0": "Add head bounding boxes. Fix corrupt images. Update dataset URL."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "387408912",
+      "shardLengths": [
+        "920",
+        "920",
+        "920",
+        "920"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "423853746",
+      "shardLengths": [
+        "917",
+        "917",
+        "918",
+        "917"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "4.0.0"
+}

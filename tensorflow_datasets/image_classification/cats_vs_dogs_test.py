@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@ cats_vs_dogs._NUM_CORRUPT_IMAGES = 0  # pylint: disable=protected-access
 class CatsVsDogsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = cats_vs_dogs.CatsVsDogs
 
-  SPLITS = {
-      'train': 4
-  }
+  SPLITS = {'train': 4}
   DL_EXTRACT_RESULT = 'cats_vs_dogs.zip'
 
 

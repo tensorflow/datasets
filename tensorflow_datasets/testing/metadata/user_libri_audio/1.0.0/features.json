@@ -1,0 +1,46 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "user_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The user that this utterance belongs to (unique speaker and book)"
+            },
+            "audio": {
+                "pythonClassName": "tensorflow_datasets.core.features.audio_feature.Audio",
+                "audio": {
+                    "shape": {
+                        "dimensions": [
+                            "-1"
+                        ]
+                    },
+                    "dtype": "int64",
+                    "sampleRate": "16000",
+                    "encoding": "NONE"
+                },
+                "description": "The audio clip containing a snippet from a book read aloud"
+            },
+            "book_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The book that this utterance is read from"
+            },
+            "speaker_id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The speaker who read this utterance"
+            },
+            "transcript": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The text that the speaker read to produce the audio"
+            },
+            "id": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {},
+                "description": "The id of this unique utterance"
+            }
+        }
+    }
+}

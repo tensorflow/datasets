@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@
 import io
 import os
 
-import tensorflow.compat.v2 as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -45,8 +46,16 @@ URL: https://github.com/phelber/eurosat
 """
 
 _LABELS = [
-    'AnnualCrop', 'Forest', 'HerbaceousVegetation', 'Highway', 'Industrial',
-    'Pasture', 'PermanentCrop', 'Residential', 'River', 'SeaLake'
+    'AnnualCrop',
+    'Forest',
+    'HerbaceousVegetation',
+    'Highway',
+    'Industrial',
+    'Pasture',
+    'PermanentCrop',
+    'Residential',
+    'River',
+    'SeaLake',
 ]
 
 _URL = 'https://github.com/phelber/eurosat'
@@ -69,8 +78,9 @@ class EurosatConfig(tfds.core.BuilderConfig):
     if selection not in _DATA_OPTIONS:
       raise ValueError('selection must be one of %s' % _DATA_OPTIONS)
 
-    super(EurosatConfig, self).__init__(version=tfds.core.Version('2.0.0'),
-                                        **kwargs)
+    super(EurosatConfig, self).__init__(
+        version=tfds.core.Version('2.0.0'), **kwargs
+    )
     self.selection = selection
     self.download_url = download_url
     self.subdir = subdir
@@ -85,13 +95,15 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
           name='rgb',
           download_url='http://madm.dfki.de/files/sentinel/EuroSAT.zip',
           subdir='2750',
-          description='Sentinel-2 RGB channels'),
+          description='Sentinel-2 RGB channels',
+      ),
       EurosatConfig(
           selection='all',
           name='all',
           download_url='http://madm.dfki.de/files/sentinel/EuroSATallBands.zip',
           subdir='ds/images/remote_sensing/otherDatasets/sentinel_2/tif',
-          description='13 Sentinel-2 channels'),
+          description='13 Sentinel-2 channels',
+      ),
   ]
 
   def _info(self):
@@ -104,12 +116,11 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
       supervised_keys = ('image', 'label')
     elif self.builder_config.selection == 'all':
       features = tfds.features.FeaturesDict({
-          'sentinel2':
-              tfds.features.Tensor(shape=[64, 64, 13], dtype=tf.float32),
-          'label':
-              tfds.features.ClassLabel(names=_LABELS),
-          'filename':
-              tfds.features.Text(),
+          'sentinel2': tfds.features.Tensor(
+              shape=[64, 64, 13], dtype=np.float32
+          ),
+          'label': tfds.features.ClassLabel(names=_LABELS),
+          'filename': tfds.features.Text(),
       })
       supervised_keys = ('sentinel2', 'label')
 
@@ -131,7 +142,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 'path': path,
-                'selection': self.builder_config.selection
+                'selection': self.builder_config.selection,
             },
         ),
     ]
@@ -144,21 +155,20 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
         record = {
             'image': filename,
             'label': label,
-            'filename': os.path.basename(filename)
+            'filename': os.path.basename(filename),
         }
       else:
         record = {
             'sentinel2': _extract_channels(filename),
             'label': label,
-            'filename': os.path.basename(filename)
+            'filename': os.path.basename(filename),
         }
-      yield filename, record
+      yield f'{label}_{os.path.basename(filename)}', record
 
 
 def _extract_channels(filename):
   with tf.io.gfile.GFile(filename, 'rb') as f:
-    arr = tfds.core.lazy_imports.skimage.external.tifffile.imread(
-        io.BytesIO(f.read()))
+    arr = tfds.core.lazy_imports.tifffile.imread(io.BytesIO(f.read()))
 
   arr = arr.astype('float32')
   return arr

@@ -1,0 +1,35 @@
+{
+  "citation": "@inproceedings{wei2022learning,\n  title={Learning with Noisy Labels Revisited: A Study Using Real-World Human \n  Annotations},\n  author={Jiaheng Wei and Zhaowei Zhu and Hao Cheng and Tongliang Liu and Gang \n  Niu and Yang Liu},\n  booktitle={International Conference on Learning Representations},\n  year={2022},\n  url={https://openreview.net/forum?id=TBWA6PLJZQm}\n}",
+  "description": "A re-labeled version of CIFAR-100 with real human annotation errors. For every \npair (image, label) in the original CIFAR-100 train set, it provides an \nadditional label given by a real human annotator.",
+  "downloadSize": "168513733",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://www.cs.toronto.edu/~kriz/cifar.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.cifar100_n.cifar100_n",
+  "name": "cifar100_n",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "118734082",
+      "shardLengths": [
+        "50000"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "23961198",
+      "shardLengths": [
+        "10000"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

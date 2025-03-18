@@ -1,0 +1,26 @@
+{
+    "featuresDict": {
+        "features": {
+            "image": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "28",
+                            "28",
+                            "1"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "label": {
+                "classLabel": {
+                    "numClasses": "10"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

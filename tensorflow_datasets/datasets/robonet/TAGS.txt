@@ -1,0 +1,2 @@
+content.data-type.text
+content.data-type.video

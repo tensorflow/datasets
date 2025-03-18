@@ -1,0 +1,37 @@
+{
+  "citation": "@TechReport{LFWTech,\n    author = {Gary B. Huang and Manu Ramesh and Tamara Berg and Erik Learned-Miller},\n    title = {Labeled Faces in the Wild: A Database for Studying Face Recognition in Unconstrained Environments},\n    institution = {University of Massachusetts, Amherst},\n    year = 2007,\n    number = {07-49},\n    month = {October}\n}",
+  "description": "Labeled Faces in the Wild: A Database for Studying Face Recognition in\nUnconstrained Environments",
+  "downloadSize": "180566744",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "http://vis-www.cs.umass.edu/lfw"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.lfw.lfw_dataset_builder",
+  "name": "lfw",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "189032328",
+      "shardLengths": [
+        "6616",
+        "6617"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "label"
+        },
+        {
+          "featureKey": "image"
+        }
+      ]
+    }
+  },
+  "version": "0.1.1"
+}

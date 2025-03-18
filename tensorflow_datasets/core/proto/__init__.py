@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,5 +16,6 @@
 """Public API of the proto package."""
 
 from tensorflow_datasets.core.proto import dataset_info_generated_pb2 as dataset_info_pb2  # pylint: disable=line-too-long
+from tensorflow_datasets.core.proto import feature_generated_pb2 as feature_pb2  # pylint: disable=line-too-long
 
 SplitInfo = dataset_info_pb2.SplitInfo

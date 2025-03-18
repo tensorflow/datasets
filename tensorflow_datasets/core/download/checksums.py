@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,59 +13,76 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Methods to retrieve and store size/checksums associated to URLs.
+"""Methods to retrieve and store size/checksums associated to URLs."""
 
-"""
+from collections.abc import Iterable
+import dataclasses
+import hashlib
+import io
+from typing import Any
 
-import os
-from typing import Any, Dict, Iterable, List
-
-import tensorflow.compat.v2 as tf
-
+from absl import logging
+from etils import epath
 from tensorflow_datasets.core import utils
 
-
-_ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(__file__), '../..'))
-
-_CHECKSUM_DIRS = [
-    os.path.join(_ROOT_DIR, 'url_checksums'),
-]
+_CUSTOM_CHECKSUM_DIRS = []
 _CHECKSUM_SUFFIX = '.txt'
 
 
-class UrlInfo(object):  # TODO(tfds): Use dataclasses
+@utils.memoize(maxsize=1)
+def _default_checksum_dirs() -> list[epath.Path]:
+  return [
+      utils.tfds_path() / 'url_checksums',
+  ]
+
+
+def sha256(str_: str) -> str:
+  return hashlib.sha256(str_.encode()).hexdigest()
+
+
+@dataclasses.dataclass(eq=True)
+class UrlInfo:
   """Small wrapper around the url metadata (checksum, size).
 
   Attributes:
     size: Download size of the file
     checksum: Checksum of the file
+    filename: Name of the file
   """
 
-  def __init__(self, size: int, checksum: str):
-    self.size = size
-    self.checksum = checksum
+  size: utils.Size
+  checksum: str
+  # We exclude the filename from `__eq__` for backward compatibility
+  # Two checksums are equals even if filename is unknown or different.
+  filename: str | None = dataclasses.field(compare=False)
 
-  def asdict(self) -> Dict[str, Any]:
+  def asdict(self) -> dict[str, Any]:
     """Returns the dict representation of the dataclass."""
-    # TODO(tfds): Replace by `dataclasses.asdict(self)`
-    return {
-        'size': self.size,
-        'checksum': self.checksum,
-    }
+    return dataclasses.asdict(self)
 
-  def __eq__(self, other) -> bool:
-    return (
-        type(self) == type(other) and  # pylint: disable=unidiomatic-typecheck
-        self.size == other.size and
-        self.checksum == other.checksum
-    )
 
-  def __ne__(self, other) -> bool:  # Required in Py2
-    return not self == other
+def compute_url_info(
+    path: epath.PathLike,
+    checksum_cls=hashlib.sha256,
+) -> UrlInfo:
+  """Locally compute size, checksums of the given file."""
+  path = epath.Path(path)
 
-  def __repr__(self) -> str:
-    return '{}(size={}, checksum={})'.format(
-        type(self).__name__, self.size, self.checksum)
+  checksum = checksum_cls()
+  size = 0
+  with path.open('rb') as f:
+    while True:
+      block = f.read(io.DEFAULT_BUFFER_SIZE)
+      size += len(block)
+      if not block:
+        break
+      checksum.update(block)
+
+  return UrlInfo(
+      checksum=checksum.hexdigest(),  # base64 digest would have been better.
+      size=utils.Size(size),
+      filename=path.name,
+  )
 
 
 def add_checksums_dir(checksums_dir: str) -> None:
@@ -93,90 +110,89 @@ def add_checksums_dir(checksums_dir: str) -> None:
   Args:
     checksums_dir: `str`, checksums dir to add to the registry
   """
-  if checksums_dir in _CHECKSUM_DIRS:  # Avoid duplicate
+  logging.warning(
+      '`tfds.core.add_checksums_dir` is deprecated. Refactor dataset in '
+      'self-contained folders (`my_dataset/` folder containing '
+      'my_dataset.py, my_dataset_test.py, dummy_data/, checksums.tsv). '
+      'The checksum file will be automatically detected. More info at: '
+      'https://www.tensorflow.org/datasets/add_dataset'
+  )
+  if (
+      checksums_dir in _CUSTOM_CHECKSUM_DIRS
+      or checksums_dir in _default_checksum_dirs()
+  ):  # Avoid duplicates
     return
-  _CHECKSUM_DIRS.append(checksums_dir)
-
-
-def _list_dir(path: str) -> List[str]:
-  return tf.io.gfile.listdir(path)
-
-
+  _CUSTOM_CHECKSUM_DIRS.append(checksums_dir)
 
 
 @utils.memoize()
-def _checksum_paths() -> Dict[str, str]:
+def _checksum_paths() -> dict[str, epath.Path]:
   """Returns dict {'dataset_name': 'path/to/checksums/file'}."""
   dataset2path = {}
-  for dir_path in _CHECKSUM_DIRS:
-    for fname in _list_dir(dir_path):
-      if not fname.endswith(_CHECKSUM_SUFFIX):
+  for dir_path in _CUSTOM_CHECKSUM_DIRS + _default_checksum_dirs():
+    if isinstance(dir_path, str):
+      dir_path = epath.Path(dir_path)
+    if not dir_path.exists():
+      pass
+    for file_path in dir_path.iterdir():
+      if not file_path.name.endswith(_CHECKSUM_SUFFIX):
         continue
-      fpath = os.path.join(dir_path, fname)
-      dataset_name = fname[:-len(_CHECKSUM_SUFFIX)]
-      dataset2path[dataset_name] = fpath
+      dataset_name = file_path.name[: -len(_CHECKSUM_SUFFIX)]
+      dataset2path[dataset_name] = file_path
   return dataset2path
 
 
-def _get_path(dataset_name: str) -> str:
-  """Returns path to where checksums are stored for a given dataset."""
-  path = _checksum_paths().get(dataset_name, None)
-  if path:
-    return path
-  msg = (
-      'No checksums file could be find for dataset {}. Please '
-      'create one in one of:\n{}'
-      'If you are developing your own dataset outsite tfds, you can register '
-      'your own checksums_dir with `tfds.download.add_checksums_dir('
-      'checksums_dir)` or pass it to the download_and_prepare script with '
-      '`--checksums_dir=`'
-  ).format(
-      dataset_name,
-      ''.join(['* {}\n'.format(c) for c in _CHECKSUM_DIRS]))
-  raise AssertionError(msg)
-
-
-def _get_url_infos(checksums_path: str) -> Dict[str, UrlInfo]:
-  """Returns {URL: (size, checksum)}s stored within file at given path."""
-  with tf.io.gfile.GFile(checksums_path) as f:
-    content = f.read()
-  return _parse_url_infos(content.splitlines())
-
-
-def _parse_url_infos(checksums_file: Iterable[str]) -> Dict[str, UrlInfo]:
+def _parse_url_infos(checksums_file: Iterable[str]) -> dict[str, UrlInfo]:
   """Returns {URL: (size, checksum)}s stored within given file."""
   url_infos = {}
   for line in checksums_file:
     line = line.strip()  # Remove the trailing '\r' on Windows OS.
     if not line or line.startswith('#'):
       continue
-    # URL might have spaces inside, but size and checksum will not.
-    url, size, checksum = line.rsplit(' ', 2)
-    url_infos[url] = UrlInfo(size=int(size), checksum=checksum)
+    values = line.split('\t')
+    if len(values) == 1:  # not enough values to unpack (legacy files)
+      # URL might have spaces inside, but size and checksum will not.
+      values = line.rsplit(' ', 2)
+    if len(values) == 4:
+      url, size, checksum, filename = values
+    elif len(values) == 3:
+      url, size, checksum = values
+      filename = None
+    else:
+      raise AssertionError(f'Error parsing checksums: {values}')
+    url_infos[url] = UrlInfo(
+        size=utils.Size(size),
+        checksum=checksum,
+        filename=filename,
+    )
   return url_infos
 
 
-def url_infos_from_path(checksums_path: str) -> Dict[str, UrlInfo]:
-  with tf.io.gfile.GFile(checksums_path) as f:
-    return _parse_url_infos(f.read().splitlines())
-
-
 @utils.memoize()
-def get_all_url_infos() -> Dict[str, UrlInfo]:
-  """Returns dict associating URL to (size, sha256)."""
+def get_all_url_infos() -> dict[str, UrlInfo]:
+  """Returns dict associating URL to UrlInfo."""
   url_infos = {}
   for path in _checksum_paths().values():
-    dataset_url_infos = _get_url_infos(path)
+    dataset_url_infos = load_url_infos(path)
     for url, url_info in dataset_url_infos.items():
       if url_infos.get(url, url_info) != url_info:
         raise AssertionError(
             'URL {} is registered with 2+ distinct size/checksum tuples. '
-            '{} vs {}'.format(url, url_info, url_infos[url]))
+            '{} vs {}'.format(url, url_info, url_infos[url])
+        )
     url_infos.update(dataset_url_infos)
   return url_infos
 
 
-def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
+def load_url_infos(path: epath.PathLike) -> dict[str, UrlInfo]:
+  """Loads the checksums."""
+  return _parse_url_infos(epath.Path(path).read_text().splitlines())
+
+
+def save_url_infos(
+    path: epath.Path,
+    url_infos: dict[str, UrlInfo],
+) -> None:
   """Store given checksums and sizes for specific dataset.
 
   Content of file is never disgarded, only updated. This is to ensure that if
@@ -190,15 +206,45 @@ def store_checksums(dataset_name: str, url_infos: Dict[str, UrlInfo]) -> None:
   and checksums must be given at every call.
 
   Args:
-    dataset_name: string.
+    path: Path to the resources.
     url_infos: dict, {url: (size_in_bytes, checksum)}.
   """
-  path = _get_path(dataset_name)
-  original_data = _get_url_infos(path)
+  original_data = load_url_infos(path) if path.exists() else {}
   new_data = original_data.copy()
   new_data.update(url_infos)
-  if original_data == new_data:
+  # Compare filenames separately, as filename field is eq=False
+  if original_data == new_data and _filenames_equal(original_data, new_data):
     return
-  with tf.io.gfile.GFile(path, 'w') as f:
-    for url, url_info in sorted(new_data.items()):
-      f.write('{} {} {}\n'.format(url, url_info.size, url_info.checksum))
+  lines = [
+      f'{url}\t{int(url_info.size)}\t{url_info.checksum}\t'
+      f'{url_info.filename or ""}\n'
+      for url, url_info in sorted(new_data.items())
+  ]
+  path.parent.mkdir(parents=True, exist_ok=True)
+  path.write_text(''.join(lines), encoding='UTF-8')
+
+
+def _filenames_equal(
+    left: dict[str, UrlInfo],
+    right: dict[str, UrlInfo],
+) -> bool:
+  """Compare filenames."""
+  return all(
+      l.filename == r.filename for _, (l, r) in utils.zip_dict(left, right)
+  )
+
+
+def validate_checksums_path(checksums_path: epath.PathLike):
+  """Validates the checksums path.
+
+  This function creates the file if it doesn't exist, and writes to it to make
+  sure the user has write access before downloading any files.
+
+  Args:
+    checksums_path: Path to the checksums file.
+  """
+  checksums_path = epath.Path(checksums_path)
+  if not checksums_path.exists():
+    checksums_path.touch()
+  else:
+    checksums_path.write_text(checksums_path.read_text())

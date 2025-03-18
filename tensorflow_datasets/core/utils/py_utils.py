@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,41 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Some python utils function and classes.
+"""Some python utils function and classes."""
 
-"""
+from __future__ import annotations
 
 import base64
+from collections.abc import Iterator, Sequence
 import contextlib
 import functools
-import hashlib
 import io
 import itertools
 import logging
 import os
-import random
+import re
 import shutil
-import string
 import sys
 import textwrap
 import threading
-import types
-from typing import Any, Callable, Iterator, List, NoReturn, TypeVar, Union
+import typing
+from typing import Any, Callable, NoReturn, Type, TypeVar
 import uuid
 
-from six.moves import urllib
-import tensorflow.compat.v2 as tf
+from absl import logging as absl_logging
+from etils import epath
 from tensorflow_datasets.core import constants
+from tensorflow_datasets.core.utils import type_utils
 
 
-# pylint: disable=g-import-not-at-top
-if sys.version_info >= (3, 9):
-  import importlib.resources as importlib_resources
-else:
-  import importlib_resources
-
-# pylint: enable=g-import-not-at-top
-
+Tree = type_utils.Tree
 
 # NOTE: When used on an instance method, the cache is shared across all
 # instances and IS NOT per-instance.
@@ -56,23 +49,46 @@ else:
 # For @property methods, use @memoized_property below.
 memoize = functools.lru_cache
 
-
 T = TypeVar('T')
+U = TypeVar('U')
 
 Fn = TypeVar('Fn', bound=Callable[..., Any])
+# Regular expression to match strings that are not valid Python/TFDS names:
+_INVALID_TFDS_NAME_CHARACTER = re.compile(r'[^a-zA-Z0-9_]')
 
 
-def is_notebook():
-  """Returns True if running in a notebook (Colab, Jupyter) environement."""
-  # Inspired from the tfdm autonotebook code
+def is_notebook() -> bool:
+  """Returns True if running in a notebook (Colab, Jupyter) environment."""
+  # Inspired from the tqdm autonotebook code
   try:
-    import IPython  # pytype: disable=import-error  # pylint: disable=import-outside-toplevel,g-import-not-at-top
+    # Use sys.module as we do not want to trigger import
+    IPython = sys.modules['IPython']  # pylint: disable=invalid-name
     if 'IPKernelApp' not in IPython.get_ipython().config:
       return False  # Run in a IPython terminal
   except:  # pylint: disable=bare-except
     return False
   else:
     return True
+
+
+# TODO(tfds): Should likely have a `logging_utils` wrapper around `absl.logging`
+# so logging messages are displayed on Colab.
+
+
+def print_notebook(*args: Any) -> None:
+  """Like `print`/`logging.info`. Colab do not print stderr by default."""
+  msg = ' '.join([str(x) for x in args])
+  if is_notebook():
+    print(msg)
+  else:
+    absl_logging.info(msg)
+
+
+def warning(text: str) -> None:
+  if is_notebook():
+    print(text)
+  else:
+    absl_logging.warning(text)
 
 
 @contextlib.contextmanager
@@ -105,12 +121,11 @@ def disable_logging():
     logger.disabled = logger_disabled
 
 
-class NonMutableDict(dict):
+class NonMutableDict(dict[T, U]):
   """Dict where keys can only be added but not modified.
 
-  Will raise an error if the user try to overwrite one key. The error message
-  can be customized during construction. It will be formatted using {key} for
-  the overwritten key.
+  Raises an error if a key is overwritten. The error message can be customized
+  during construction. It will be formatted using {key} for the overwritten key.
   """
 
   def __init__(self, *args, **kwargs):
@@ -123,12 +138,12 @@ class NonMutableDict(dict):
     super(NonMutableDict, self).__init__(*args, **kwargs)
 
   def __setitem__(self, key, value):
-    if key in self:
+    if key in self.keys():
       raise ValueError(self._error_msg.format(key=key))
-    return super(NonMutableDict, self). __setitem__(key, value)
+    return super(NonMutableDict, self).__setitem__(key, value)
 
-  def update(self, other):
-    if any(k in self for k in other):
+  def update(self, other):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
+    if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
 
@@ -140,28 +155,14 @@ class classproperty(property):  # pylint: disable=invalid-name
     return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
 
 
-class memoized_property(property):  # pylint: disable=invalid-name
-  """Descriptor that mimics @property but caches output in member variable."""
+if typing.TYPE_CHECKING:
+  # TODO(b/171883689): There is likely a better way to annotate descriptors
 
-  def __get__(self, obj, objtype=None):
-    # See https://docs.python.org/3/howto/descriptor.html#properties
-    if obj is None:
-      return self
-    if self.fget is None:  # pytype: disable=attribute-error
-      raise AttributeError('unreadable attribute')
-    attr = '__cached_' + self.fget.__name__  # pytype: disable=attribute-error
-    cached = getattr(obj, attr, None)
-    if cached is None:
-      cached = self.fget(obj)  # pytype: disable=attribute-error
-      setattr(obj, attr, cached)
-    return cached
+  def classproperty(fn: Callable[[Type[Any]], T]) -> T:  # pylint: disable=function-redefined
+    return fn(type(None))
 
-
-def resource_path(
-    package: Union[str, types.ModuleType]
-) -> importlib_resources.abc.Traversable:  # pytype: disable=module-attr
-  """Returns `importlib.resources.files`."""
-  return importlib_resources.files(package)  # pytype: disable=module-attr
+  def memoized_property(fn: Callable[[Any], T]) -> T:  # pylint: disable=function-redefined
+    return fn(None)
 
 
 def map_nested(function, data_struct, dict_only=False, map_tuple=False):
@@ -178,8 +179,9 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
     if map_tuple:
       types_.append(tuple)
     if isinstance(data_struct, tuple(types_)):
-      mapped = [map_nested(function, v, dict_only, map_tuple)
-                for v in data_struct]
+      mapped = [
+          map_nested(function, v, dict_only, map_tuple) for v in data_struct
+      ]
       if isinstance(data_struct, list):
         return mapped
       else:
@@ -206,18 +208,54 @@ def zip_nested(arg0, *args, **kwargs):
   return (arg0,) + args
 
 
-def flatten_nest_dict(d):
+def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
   """Return the dict with all nested keys flattened joined with '/'."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
   for k, v in d.items():
     if isinstance(v, dict):
-      flat_dict.update({
-          '{}/{}'.format(k, k2): v2 for k2, v2 in flatten_nest_dict(v).items()
-      })
+      for k2, v2 in flatten_nest_dict(v).items():
+        flat_dict[f'{k}/{k2}'] = v2
+    elif isinstance(v, list) and v and isinstance(v[0], dict):
+      for k2 in v[0]:
+        flat_dict[f'{k}/{k2}'] = [v[i][k2] for i in range(len(v))]
     else:
       flat_dict[k] = v
   return flat_dict
+
+
+# Note: Could use `tree.flatten_with_path` instead, but makes it harder for
+# users to compile from source.
+def flatten_with_path(
+    structure: Tree[T],
+) -> Iterator[tuple[tuple[str | int, ...], T]]:  # pytype: disable=invalid-annotation
+  """Convert a TreeDict into a flat list of paths and their values.
+
+  ```py
+  flatten_with_path({'a': {'b': v}}) == [(('a', 'b'), v)]
+  ```
+
+  Args:
+    structure: Nested input structure
+
+  Yields:
+    The `(path, value)` tuple. With path being the tuple of `dict` keys and
+      `list` indexes
+  """
+  if isinstance(structure, dict):
+    key_struct_generator = sorted(structure.items())
+  elif isinstance(structure, (list, tuple)):
+    key_struct_generator = enumerate(structure)
+  else:
+    key_struct_generator = None  # End of recursion
+
+  if key_struct_generator is not None:
+    for key, sub_structure in key_struct_generator:
+      # Recurse into sub-structures
+      for sub_path, sub_value in flatten_with_path(sub_structure):
+        yield (key,) + sub_path, sub_value
+  else:
+    yield (), structure  # Leaf, yield value
 
 
 def dedent(text):
@@ -236,17 +274,27 @@ def pack_as_nest_dict(flat_d, nest_d):
   for k, v in nest_d.items():
     if isinstance(v, dict):
       v_flat = flatten_nest_dict(v)
-      sub_d = {
-          k2: flat_d.pop('{}/{}'.format(k, k2)) for k2, _ in v_flat.items()
-      }
-      # Recursivelly pack the dictionary
+      sub_d = {k2: flat_d.pop(f'{k}/{k2}', None) for k2, _ in v_flat.items()}
+      # Recursively pack the dictionary
       nest_out_d[k] = pack_as_nest_dict(sub_d, v)
+    elif isinstance(v, list) and v and isinstance(v[0], dict):
+      first_inner_key = list(v[0].keys())[0]
+      list_size = len(flat_d[f'{k}/{first_inner_key}'])
+      nest_out_d[k] = [{} for _ in range(list_size)]
+      for k2 in v[0].keys():
+        subvals = flat_d.pop(f'{k}/{k2}', [])
+        assert (
+            len(subvals) == len(v) == list_size
+        ), f'{subvals}, {v}, {list_size}'
+        for i in range(list_size):
+          nest_out_d[k][i][k2] = subvals[i]
     else:
-      nest_out_d[k] = flat_d.pop(k)
+      nest_out_d[k] = flat_d.pop(k, None)
   if flat_d:  # At the end, flat_d should be empty
     raise ValueError(
         'Flat dict strucure do not match the nested dict. Extra keys: '
-        '{}'.format(list(flat_d.keys())))
+        f'{list(flat_d.keys())}'
+    )
   return nest_out_d
 
 
@@ -256,151 +304,83 @@ def nullcontext(enter_result: T = None) -> Iterator[T]:
   yield enter_result
 
 
-def as_proto_cls(proto_cls):
-  """Simulate proto inheritance.
+def _tmp_file_prefix() -> str:
+  return f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}'
 
-  By default, protobuf do not support direct inheritance, so this decorator
-  simulates inheritance to the class to which it is applied.
 
-  Example:
-
-  ```
-  @as_proto_class(proto.MyProto)
-  class A(object):
-    def custom_method(self):
-      return self.proto_field * 10
-
-  p = proto.MyProto(proto_field=123)
-
-  a = A()
-  a.CopyFrom(p)  # a is like a proto object
-  assert a.proto_field == 123
-  a.custom_method()  # But has additional methods
-
-  ```
+def _tmp_file_name(
+    path: epath.PathLike,
+    subfolder: str | None = None,
+) -> epath.Path:
+  """Returns the temporary file name for the given path.
 
   Args:
-    proto_cls: The protobuf class to inherit from
-
-  Returns:
-    decorated_cls: The decorated class
+    path: The path to the file.
+    subfolder: The subfolder to use. If None, then the parent of the path will
+      be used.
   """
-
-  def decorator(cls):
-    """Decorator applied to the class."""
-
-    class ProtoCls(object):
-      """Base class simulating the protobuf."""
-
-      def __init__(self, *args, **kwargs):
-        super(ProtoCls, self).__setattr__(
-            '_ProtoCls__proto',
-            proto_cls(*args, **kwargs),
-        )
-
-      def __getattr__(self, attr_name):
-        return getattr(self.__proto, attr_name)
-
-      def __setattr__(self, attr_name, new_value):
-        try:
-          if isinstance(new_value, list):
-            self.ClearField(attr_name)
-            getattr(self.__proto, attr_name).extend(new_value)
-          else:
-            return setattr(self.__proto, attr_name, new_value)
-        except AttributeError:
-          return super(ProtoCls, self).__setattr__(attr_name, new_value)
-
-      def __eq__(self, other):
-        return self.__proto, other.get_proto()
-
-      def get_proto(self):
-        return self.__proto
-
-      def __repr__(self):
-        return '<{cls_name}\n{proto_repr}\n>'.format(
-            cls_name=cls.__name__, proto_repr=repr(self.__proto))
-
-    decorator_cls = type(cls.__name__, (cls, ProtoCls), {
-        '__doc__': cls.__doc__,
-    })
-    return decorator_cls
-  return decorator
-
-
-def _get_incomplete_path(filename):
-  """Returns a temporary filename based on filename."""
-  random_suffix = ''.join(
-      random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-  return filename + '.incomplete' + random_suffix
+  path = epath.Path(path)
+  file_name = f'{_tmp_file_prefix()}.{path.name}'
+  if subfolder:
+    return path.parent / subfolder / file_name
+  else:
+    return path.parent / file_name
 
 
 @contextlib.contextmanager
-def incomplete_dir(dirname):
-  """Create temporary dir for dirname and rename on exit."""
-  tmp_dir = _get_incomplete_path(dirname)
-  tf.io.gfile.makedirs(tmp_dir)
-  try:
-    yield tmp_dir
-    tf.io.gfile.rename(tmp_dir, dirname)
-  finally:
-    if tf.io.gfile.exists(tmp_dir):
-      tf.io.gfile.rmtree(tmp_dir)
-
-
-def tfds_dir() -> str:
-  """Path to tensorflow_datasets directory.
-
-  The difference with `tfds.core.get_tfds_path` is that this function can be
-  used for write access while `tfds.core.get_tfds_path` should be used for
-  read-only.
-
-  Returns:
-    tfds_dir: The root TFDS path.
-  """
-  return os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-
-
-@contextlib.contextmanager
-def atomic_write(path, mode):
+def incomplete_file(
+    path: epath.Path,
+    subfolder: str | None = None,
+) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = '%s%s_%s' % (path, constants.INCOMPLETE_SUFFIX, uuid.uuid4().hex)
-  with tf.io.gfile.GFile(tmp_path, mode) as file_:
+  tmp_path = _tmp_file_name(path, subfolder=subfolder)
+  tmp_path.parent.mkdir(exist_ok=True)
+  try:
+    yield tmp_path
+    tmp_path.replace(path)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    tmp_path.unlink(missing_ok=True)
+
+
+@contextlib.contextmanager
+def incomplete_files(
+    path: epath.Path,
+) -> Iterator[epath.Path]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_file_prefix = _tmp_file_prefix()
+  tmp_path = path.parent / f'{tmp_file_prefix}.{path.name}'
+  try:
+    yield tmp_path
+    # Rename all tmp files to their final name.
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      file_name = tmp_file.name.removeprefix(tmp_file_prefix + '.')
+      tmp_file.replace(path.parent / file_name)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      tmp_file.unlink(missing_ok=True)
+
+
+def is_incomplete_file(path: epath.Path) -> bool:
+  """Returns whether the given filename suggests that it's incomplete."""
+  regex = rf'{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+'
+  return bool(re.search(rf'^{regex}$', path.name))
+
+
+@contextlib.contextmanager
+def atomic_write(path: epath.PathLike, mode: str):
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = _tmp_file_name(path)
+  with tmp_path.open(mode=mode) as file_:
     yield file_
-  tf.io.gfile.rename(tmp_path, path, overwrite=True)
-
-
-def get_tfds_path(relative_path):
-  """Returns absolute path to file given path relative to tfds root."""
-  path = os.path.join(tfds_dir(), relative_path)
-  return path
-
-
-def get_resource_path(path) -> str:
-  """Get the read-only resource path."""
-  # For compatibility with `zip` archives, we should replace this by a pathlike
-  # abstraction, which uses `importlib.resource.files()`
-  return str(path)
-
-
-def read_checksum_digest(path, checksum_cls=hashlib.sha256):
-  """Given a hash constructor, returns checksum digest and size of file."""
-  checksum = checksum_cls()
-  size = 0
-  with tf.io.gfile.GFile(path, 'rb') as f:
-    while True:
-      block = f.read(io.DEFAULT_BUFFER_SIZE)
-      size += len(block)
-      if not block:
-        break
-      checksum.update(block)
-  return checksum.hexdigest(), size
+  tmp_path.replace(path)
 
 
 def reraise(
     e: Exception,
-    prefix: str = None,
-    suffix: str = None,
+    prefix: str | None = None,
+    suffix: str | None = None,
 ) -> NoReturn:
   """Reraise an exception with an additional message."""
   prefix = prefix or ''
@@ -421,9 +401,10 @@ def reraise(
     # `type(type(e).__name__, (ReraisedError, type(e)), {})`, but should be
     # carefull when nesting `reraise` as well as compatibility with external
     # code.
-    # Special case ModuleNotFoundError, ImportError which can be re-raised
-    # with the same type.
-    if isinstance(e, ImportError):
+    # Some base exception class (ImportError, OSError) and subclasses (
+    # ModuleNotFoundError, FileNotFoundError) have custom `__str__` error
+    # message. We re-raise those with same type to allow except in caller code.
+    if isinstance(e, (ImportError, OSError)):
       exception = type(e)(msg)
     else:
       exception = RuntimeError(f'{type(e).__name__}: {msg}')
@@ -436,8 +417,7 @@ def reraise(
   # If there is more than 1 args, concatenate the message with other args
   else:
     e.args = tuple(
-        p for p in (prefix,) + e.args + (suffix,)
-        if not isinstance(p, str) or p
+        p for p in (prefix,) + e.args + (suffix,) if not isinstance(p, str) or p
     )
     raise  # pylint: disable=misplaced-bare-raise
 
@@ -466,8 +446,10 @@ def try_reraise(*args, **kwargs):
 
 def rgetattr(obj, attr, *args):
   """Get attr that handles dots in attr name."""
+
   def _getattr(obj, attr):
     return getattr(obj, attr, *args)
+
   return functools.reduce(_getattr, [obj] + attr.split('.'))
 
 
@@ -485,7 +467,7 @@ def get_class_path(cls, use_tfds_prefix=True):
     cls = cls.__class__
   module_path = cls.__module__
   if use_tfds_prefix and module_path.startswith('tensorflow_datasets'):
-    module_path = 'tfds' + module_path[len('tensorflow_datasets'):]
+    module_path = 'tfds' + module_path[len('tensorflow_datasets') :]
   return '.'.join([module_path, cls.__name__])
 
 
@@ -518,7 +500,6 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
   lock = threading.Lock()
 
   def lock_decorator(fn: Fn) -> Fn:
-
     @functools.wraps(fn)
     def lock_decorated(*args, **kwargs):
       with lock:
@@ -529,24 +510,52 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
   return lock_decorator
 
 
-def basename_from_url(url: str) -> str:
-  """Returns file name of file at given url."""
-  return os.path.basename(urllib.parse.urlparse(url).path) or 'unknown_name'
-
-
-def list_info_files(dir_path: str) -> List[str]:
+def list_info_files(dir_path: epath.PathLike) -> Sequence[str]:
   """Returns name of info files within dir_path."""
-  # TODO(tfds): Is there a better filtering scheme which would be more
-  # resistant to future modifications (ex: tfrecord => other format)
-  return [
-      fname for fname in tf.io.gfile.listdir(dir_path)
-      if '.tfrecord' not in fname and
-      not tf.io.gfile.isdir(os.path.join(dir_path, fname))
-  ]
+  path = epath.Path(dir_path)
+  info_files = []
+  for file_path in path.glob('*.json'):
+    info_files.append(file_path.name)
+  return info_files
 
 
-def get_base64(write_fn: Callable[[io.BytesIO], None]) -> str:
+def get_base64(
+    write_fn: bytes | Callable[[io.BytesIO], None],
+) -> str:
   """Extracts the base64 string of an object by writing into a tmp buffer."""
-  buffer = io.BytesIO()
-  write_fn(buffer)
-  return base64.b64encode(buffer.getvalue()).decode('ascii')  # pytype: disable=bad-return-type
+  if isinstance(write_fn, bytes):  # Value already encoded
+    bytes_value = write_fn
+  else:
+    buffer = io.BytesIO()
+    write_fn(buffer)
+    bytes_value = buffer.getvalue()
+  return base64.b64encode(bytes_value).decode('ascii')  # pytype: disable=bad-return-type
+
+
+@contextlib.contextmanager
+def add_sys_path(path: epath.PathLike) -> Iterator[None]:
+  """Temporary add given path to `sys.path`."""
+  path = os.fspath(path)
+  try:
+    sys.path.insert(0, path)
+    yield
+  finally:
+    sys.path.remove(path)
+
+
+def make_valid_name(name: str) -> str:
+  """Sanitizes a string to follow the Python lexical definitions.
+
+  The function removes all forbidden characters outside of A-Za-z0-9_ and
+  replaces them with an underscore.
+
+  Warning: if you want to convert a name to a valid TFDS name, prefer
+  `conversion_utils.to_tfds_name` instead.
+
+  Args:
+    name: The input string to sanitize.
+
+  Returns:
+    The sanitized string.
+  """
+  return re.sub(_INVALID_TFDS_NAME_CHARACTER, '_', name)

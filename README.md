@@ -2,8 +2,9 @@
 
 TensorFlow Datasets provides many public datasets as `tf.data.Datasets`.
 
-[![Kokoro](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.svg)](https://storage.googleapis.com/tfds-kokoro-public/kokoro-build.html)
+[![Unittests](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml/badge.svg)](https://github.com/tensorflow/datasets/actions/workflows/pytest.yml)
 [![PyPI version](https://badge.fury.io/py/tensorflow-datasets.svg)](https://badge.fury.io/py/tensorflow-datasets)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Tutorial](https://img.shields.io/badge/doc-tutorial-blue.svg)](https://www.tensorflow.org/datasets/overview)
 [![API](https://img.shields.io/badge/doc-api-blue.svg)](https://www.tensorflow.org/datasets/api_docs/python/tfds)
 [![Catalog](https://img.shields.io/badge/doc-datasets-blue.svg)](https://www.tensorflow.org/datasets/catalog/overview#all_datasets)
@@ -35,10 +36,25 @@ for image, label in ds:
   pass
 ```
 
+## TFDS core values
+
+TFDS has been built with these principles in mind:
+
+* **Simplicity**: Standard use-cases should work out-of-the box
+* **Performance**: TFDS follows
+  [best practices](https://www.tensorflow.org/guide/data_performance)
+  and can achieve state-of-the-art speed
+* **Determinism/reproducibility**: All users get the same examples in the same
+  order
+* **Customisability**: Advanced users can have fine-grained control
+
+If those use cases are not satisfied, please send us
+[feedback](https://github.com/tensorflow/datasets/issues).
+
 ## Want a certain dataset?
 
 Adding a dataset is really straightforward by following
-[our guide](https://github.com/tensorflow/datasets/tree/master/docs/add_dataset.md).
+[our guide](https://www.tensorflow.org/datasets/add_dataset).
 
 Request a dataset by opening a
 [Dataset request GitHub issue](https://github.com/tensorflow/datasets/issues/new?assignees=&labels=dataset+request&template=dataset-request.md&title=%5Bdata+request%5D+%3Cdataset+name%3E).
@@ -47,13 +63,12 @@ And vote on the current
 [set of requests](https://github.com/tensorflow/datasets/labels/dataset%20request)
 by adding a thumbs-up reaction to the issue.
 
-
 ### Citation
 
 Please include the following citation when using `tensorflow-datasets` for a
 paper, in addition to any citation specific to the used datasets.
 
-```
+```bibtex
 @misc{TFDS,
   title = {{TensorFlow Datasets}, A collection of ready-to-use datasets},
   howpublished = {\url{https://www.tensorflow.org/datasets}},
@@ -77,4 +92,4 @@ paper, in addition to any citation specific to the used datasets.
 *fairness, please see Google AI's [Responsible AI Practices](https://ai.google/education/responsible-ai-practices).*
 
 *`tensorflow/datasets` is Apache 2.0 licensed. See the
-[`LICENSE`](LICENSE) file.*
+[`LICENSE`](https://github.com/tensorflow/datasets/blob/master/LICENSE) file.*

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ class CuratedBreastImagingDDSMOriginalCalcTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ['original-calc']
   SPLITS = {
       'train': 3,  # Abnormalities: 7
-      'test': 2,   # Abnormalities: 4
+      'test': 2,  # Abnormalities: 4
   }
   DL_EXTRACT_RESULT = {
       'test': 'calc_case_description_test_set.csv',
@@ -36,7 +36,7 @@ class CuratedBreastImagingDDSMOriginalMassTest(testing.DatasetBuilderTestCase):
   BUILDER_CONFIG_NAMES_TO_TEST = ['original-mass']
   SPLITS = {
       'train': 3,  # Abnormalities: 10
-      'test': 2,   # Abnormalities: 4
+      'test': 2,  # Abnormalities: 4
   }
   DL_EXTRACT_RESULT = {
       'test': 'mass_case_description_test_set.csv',

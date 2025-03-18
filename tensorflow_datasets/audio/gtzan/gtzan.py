@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -63,7 +63,7 @@ _CLASS_LABELS = [
     "metal",
     "pop",
     "reggae",
-    "rock"
+    "rock",
 ]
 
 
@@ -77,13 +77,9 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "audio":
-                tfds.features.Audio(
-                    file_format="wav",
-                    sample_rate=22050),
+            "audio": tfds.features.Audio(file_format="wav", sample_rate=22050),
             "label": tfds.features.ClassLabel(names=_CLASS_LABELS),
-            "audio/filename":
-                tfds.features.Text(),
+            "audio/filename": tfds.features.Text(),
         }),
         supervised_keys=("audio", "label"),
         homepage=_HOMEPAGE_URL,
@@ -97,10 +93,8 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={
-                "path": path
-            }),
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+        ),
     ]
 
   def _generate_examples(self, path):

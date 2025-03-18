@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 """Audio datasets."""
 
 from tensorflow_datasets.audio.audioset import AudioSet
+from tensorflow_datasets.audio.accentdb import Accentdb
 from tensorflow_datasets.audio.commonvoice import CommonVoice
 from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
 from tensorflow_datasets.audio.crema_d import CremaD
@@ -25,7 +26,6 @@ from tensorflow_datasets.audio.groove import Groove
 from tensorflow_datasets.audio.gtzan import GTZAN
 from tensorflow_datasets.audio.gtzan_music_speech import GTZANMusicSpeech
 from tensorflow_datasets.audio.librispeech import Librispeech
-from tensorflow_datasets.audio.librispeech import LibrispeechConfig
 from tensorflow_datasets.audio.libritts import Libritts
 from tensorflow_datasets.audio.ljspeech import Ljspeech
 from tensorflow_datasets.audio.nsynth import Nsynth
@@ -33,7 +33,9 @@ from tensorflow_datasets.audio.savee import Savee
 from tensorflow_datasets.audio.speech_commands import SpeechCommands
 from tensorflow_datasets.audio.spoken_digit import SpokenDigit
 from tensorflow_datasets.audio.tedlium import Tedlium
+from tensorflow_datasets.audio.userlibri_audio_data import UserLibriAudio
 from tensorflow_datasets.audio.vctk import Vctk
 from tensorflow_datasets.audio.voxceleb import Voxceleb
 from tensorflow_datasets.audio.voxforge import Voxforge
+from tensorflow_datasets.audio.xtreme_s import XtremeS
 from tensorflow_datasets.audio.yesno import YesNo

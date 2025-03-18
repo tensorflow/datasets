@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entailment-corpus>
+  <pair entailment="None" id="0" similarity="3.8">
+    <t>O cachorro caramelo está assistindo um cachorro castanho que está nadando em uma lagoa</t>
+    <h>Um cachorro de estimação está de pé no banco e está olhando outro cachorro, que é castanho, na lagoa</h>
+  </pair>
+  <pair entailment="Entailment" id="1" similarity="3.75">
+    <t>O cara está fazendo exercícios no chão</t>
+    <h>Um cara está fazendo exercícios</h>
+  </pair>
+  <pair entailment="Entailment" id="2" similarity="4.4">
+    <t>Um cachorro grande e um cachorro pequenino estão parados ao lado do balcão da cozinha e estão investigando</t>
+    <h>Um cachorro grande e um cachorro pequenino estão de pé no balcão da cozinha e investigam</h>
+  </pair>
+  <pair entailment="None" id="3" similarity="3.8">
+    <t>Um menino jovem vestindo um traje de banho vermelho está pulando em uma piscina de crianças azul</t>
+    <h>Um menino jovem está vestindo um maiô vermelho e pulando para fora de uma piscina de criança</h>
+  </pair>
+  <pair entailment="Entailment" id="4" similarity="4.75">
+    <t>Um cara velho com uma barba que é cinza está andando de bicicleta</t>
+    <h>Um cara velho com uma barba grisalha está andando de bicicleta</h>
+  </pair>
+</entailment-corpus>

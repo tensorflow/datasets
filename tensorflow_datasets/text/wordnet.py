@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _LICENSE = """WordNet Release 3.0 This software and database is being provided
@@ -118,7 +118,7 @@ _RELATIONS = [
 
 def _make_wn18_metadata(synset_definitions_path):
   synsets = {}
-  with tf.io.gfile.GFile(synset_definitions_path) as f:
+  with epath.Path(synset_definitions_path).open() as f:
     for line in f:
       synset_id, name, definition = line.strip().split('\t')
       synsets[synset_id] = dict(name=name, definition=definition)
@@ -132,7 +132,8 @@ class WordnetConfig(tfds.core.BuilderConfig):
     self._citation = citation
     self._path_prefix = path_prefix
     super(WordnetConfig, self).__init__(
-        name=name, description=description, version=version)
+        name=name, description=description, version=version
+    )
 
   @property
   def citation(self):
@@ -140,9 +141,11 @@ class WordnetConfig(tfds.core.BuilderConfig):
 
   def get_paths(self, dl_paths):
     root_dir = dl_paths[self.name]
-    return (os.path.join(root_dir, self._path_prefix + 'train.txt'),
-            os.path.join(root_dir, self._path_prefix + 'valid.txt'),
-            os.path.join(root_dir, self._path_prefix + 'test.txt'))
+    return (
+        os.path.join(root_dir, self._path_prefix + 'train.txt'),
+        os.path.join(root_dir, self._path_prefix + 'valid.txt'),
+        os.path.join(root_dir, self._path_prefix + 'test.txt'),
+    )
 
 
 class Wordnet(tfds.core.GeneratorBasedBuilder):
@@ -154,13 +157,15 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
           path_prefix=os.path.join('wordnet-mlj12', 'wordnet-mlj12-'),
           description=_WN18_DESCRIPTION,
           citation=_WN18_CITATION,
-          version=tfds.core.Version('0.1.0')),
+          version=tfds.core.Version('0.1.0'),
+      ),
       WordnetConfig(
           name='WN18RR',
           path_prefix='',
           description=_WN18RR_DESCRIPTION,
           citation=_WN18RR_CITATION,
-          version=tfds.core.Version('0.1.0')),
+          version=tfds.core.Version('0.1.0'),
+      ),
   ]
 
   def _info(self):
@@ -175,20 +180,21 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
         homepage='https://wordnet.princeton.edu/',
         citation=self.builder_config.citation,
         metadata=tfds.core.MetadataDict(),
-        redistribution_info=dict(license=_LICENSE),
+        license=_LICENSE,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract({
-        'WN18':
-            'https://everest.hds.utc.fr/lib/exe/fetch.php?media=en:wordnet-mlj12.tar.gz',
-        'WN18RR':
-            'https://github.com/TimDettmers/ConvE/raw/master/WN18RR.tar.gz',
+        'WN18': 'https://everest.hds.utc.fr/lib/exe/fetch.php?media=en:wordnet-mlj12.tar.gz',
+        'WN18RR': (
+            'https://github.com/TimDettmers/ConvE/raw/master/WN18RR.tar.gz'
+        ),
     })
     # Metadata is at the configuration level and is the same for all splits.
-    synset_definitions_path = os.path.join(dl_paths['WN18'], 'wordnet-mlj12',
-                                           'wordnet-mlj12-definitions.txt')
+    synset_definitions_path = os.path.join(
+        dl_paths['WN18'], 'wordnet-mlj12', 'wordnet-mlj12-definitions.txt'
+    )
     self.info.metadata.update(_make_wn18_metadata(synset_definitions_path))
     # Locate and output splits.
     train_path, val_path, test_path = self.builder_config.get_paths(dl_paths)
@@ -209,7 +215,7 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, triplets_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(triplets_path) as f:
+    with epath.Path(triplets_path).open() as f:
       for i, line in enumerate(f):
         lhs, relation, rhs = line.strip().split('\t')
         yield i, {'lhs': lhs, 'relation': relation, 'rhs': rhs}

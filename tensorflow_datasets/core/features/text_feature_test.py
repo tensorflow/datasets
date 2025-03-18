@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,51 +16,53 @@
 # coding=utf-8
 """Tests for tensorflow_datasets.core.deprecated.text_feature."""
 
-import tensorflow.compat.v2 as tf
+import numpy as np
+import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core.deprecated.text import text_encoder
-
-tf.enable_v2_behavior()
 
 
 class TextFeatureTest(testing.FeatureExpectationsTestCase):
 
   def test_text(self):
     nonunicode_text = 'hello world'
-    unicode_text = u'你好'
+    unicode_text = '你好'
 
     self.assertFeature(
         feature=features.Text(),
         shape=(),
-        dtype=tf.string,
+        dtype=np.str_,
         tests=[
             # Non-unicode
             testing.FeatureExpectationItem(
                 value=nonunicode_text,
-                expected=tf.compat.as_bytes(nonunicode_text),
+                expected=b'hello world',
+                expected_np=b'hello world',
             ),
             # Unicode
             testing.FeatureExpectationItem(
                 value=unicode_text,
-                expected=tf.compat.as_bytes(unicode_text),
+                expected=b'\xe4\xbd\xa0\xe5\xa5\xbd',  # 你好 in bytes
+                expected_np=b'\xe4\xbd\xa0\xe5\xa5\xbd',  # 你好 in bytes
             ),
             # Empty string
             testing.FeatureExpectationItem(
                 value='',
-                expected=tf.compat.as_bytes(''),
+                expected=b'',
+                expected_np=b'',
             ),
         ],
     )
 
   def test_text_encoded(self):
-    unicode_text = u'你好'
+    unicode_text = '你好'
 
     # Unicode integer-encoded by byte
     self.assertFeature(
         feature=features.Text(encoder=text_encoder.ByteTextEncoder()),
         shape=(None,),
-        dtype=tf.int64,
+        dtype=np.int64,
         tests=[
             testing.FeatureExpectationItem(
                 value=unicode_text,
@@ -72,18 +74,18 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
                 expected=[],
             ),
         ],
-        skip_feature_tests=True
+        skip_feature_tests=True,
     )
 
   def test_text_conversion(self):
     text_f = features.Text(encoder=text_encoder.ByteTextEncoder())
-    text = u'你好'
+    text = '你好'
     self.assertEqual(text, text_f.ints2str(text_f.str2ints(text)))
 
   def test_save_load_metadata(self):
-    text_f = features.Text(
-        encoder=text_encoder.ByteTextEncoder(additional_tokens=['HI']))
-    text = u'HI 你好'
+    encoder = text_encoder.ByteTextEncoder(additional_tokens=['HI'])
+    text_f = features.Text(encoder=encoder)
+    text = 'HI 你好'
     ids = text_f.str2ints(text)
     self.assertEqual(1, ids[0])
 
@@ -91,9 +93,17 @@ class TextFeatureTest(testing.FeatureExpectationsTestCase):
       feature_name = 'dummy'
       text_f.save_metadata(data_dir, feature_name)
 
-      new_f = features.Text()
+      # Test loading it from a newly instantiated feature.
+      new_f = features.Text(encoder=encoder)
       new_f.load_metadata(data_dir, feature_name)
-      self.assertEqual(ids, text_f.str2ints(text))
+      self.assertEqual(ids, new_f.str2ints(text))
+
+      # Test that loading it without an encoder results in an error.
+      with pytest.raises(
+          ValueError, match='Text feature files found for feature.+'
+      ):
+        new_f_no_encoder = features.Text()
+        new_f_no_encoder.load_metadata(data_dir, feature_name)
 
 
 if __name__ == '__main__':

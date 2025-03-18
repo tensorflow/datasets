@@ -1,0 +1,61 @@
+{
+  "info": {
+    "contributor": "Agrim Gupta, Piotr Dollar, Ross Girshick",
+    "version": "1",
+    "year": 2020,
+    "url": "http://lvisdataset.org",
+    "description": "LVIS 2020 Dataset"
+  },
+  "licenes": [
+    {
+      "id": 1,
+      "name": "Attribution-NonCommercial-ShareAlike License",
+      "url": "http://creativecommons.org/licenses/by-nc-sa/2.0/"
+    },
+    {
+      "id": 2,
+      "name": "Attribution-NonCommercial License",
+      "url": "http://creativecommons.org/licenses/by-nc/2.0/"
+    }
+  ],
+  "categories": [
+    {
+      "name": "category1",
+      "instance_count": 2,
+      "def": "first category",
+      "synonyms": [
+        "category_one",
+        "catogory_eins"
+      ],
+      "image_count": 1,
+      "id": 1,
+      "frequency": "c",
+      "synset": "category1.02"
+    },
+    {
+      "name": "category2",
+      "instance_count": 1,
+      "def": "second category",
+      "synonyms": [
+        "category_two"
+      ],
+      "image_count": 1,
+      "id": 2,
+      "frequency": "f",
+      "synset": "category2.01"
+    }
+  ],
+  "images": [
+    {
+      "flickr_url": "http://farm9.staticflickr.com/abc.jpg",
+      "id": 5,
+      "neg_category_ids": [],
+      "not_exhaustive_category_ids": [],
+      "width": 11,
+      "license": 1,
+      "coco_url": "http://images.cocodataset.org/train2017/005.jpg",
+      "date_captured": "2013-11-14 11:18:45",
+      "height": 13
+    }
+  ]
+}

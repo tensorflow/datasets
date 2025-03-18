@@ -15,6 +15,10 @@ upper_tabs:
       skip_translation: true
       contents:
       - include: /datasets/catalog/_toc.yaml
+    - name: Community Catalog
+      skip_translation: true
+      contents:
+      - include: /datasets/community_catalog/_toc.yaml
     - name: Guide
       contents:
       - heading: "Get started"
@@ -22,30 +26,50 @@ upper_tabs:
         path: /datasets/overview
       - title: End-to-end Keras example
         path: /datasets/keras_example
+      - title: Dataset collections
+        path: /datasets/dataset_collections
 
       - heading: "Features & performances"
+      - title: TFDS CLI
+        path: /datasets/cli
       - title: Splits and slicing API
         path: /datasets/splits
       - title: Performance tips
         path: /datasets/performances
+      - title: Determinism
+        path: /datasets/determinism
+      - title: Feature connectors
+        path: /datasets/features
       - title: Feature decoding
         path: /datasets/decode
       - title: Versioning
         path: /datasets/datasets_versioning
       - title: Store your dataset on GCS
         path: /datasets/gcs
+      - title: TFDS for Jax and PyTorch
+        path: /datasets/data_source
 
-      - heading: "Add your dataset"
-      - title: Add a dataset
+      - heading: "Add a dataset"
+      - title: Create your dataset
         path: /datasets/add_dataset
-      - title: Add huge datasets (Apache Beam)
+      - title: Huge datasets (Apache Beam)
         path: /datasets/beam_datasets
+      - title: Format-specific builders
+        path: /datasets/format_specific_dataset_builders
+      - title: Add a dataset collection
+        path: /datasets/add_dataset_collection
+      - title: Contribute to TFDS
+        path: /datasets/contribute
+      - title: Common gotchas
+        path: /datasets/common_gotchas
+      - title: External tfrecord with TFDS
+        path: /datasets/external_tfrecord
 
     - name: API
       skip_translation: true
       contents:
       - title: All Symbols
-        path: /datasets/api_docs/python/
-      - include: /datasets/api_docs/python/_toc.yaml
+        path: /datasets/api_docs/python/tfds/all_symbols
+      - include: /datasets/api_docs/python/tfds/_toc.yaml
 
 - include: /_upper_tabs_right.yaml

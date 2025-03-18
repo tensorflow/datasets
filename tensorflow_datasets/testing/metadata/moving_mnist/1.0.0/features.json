@@ -1,0 +1,22 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "image_sequence": {
+                "pythonClassName": "tensorflow_datasets.core.features.video_feature.Video",
+                "video": {
+                    "shape": {
+                        "dimensions": [
+                            "20",
+                            "64",
+                            "64",
+                            "1"
+                        ]
+                    },
+                    "dtype": "uint8",
+                    "encodingFormat": "png"
+                }
+            }
+        }
+    }
+}

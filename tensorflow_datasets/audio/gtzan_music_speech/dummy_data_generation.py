@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,30 +21,30 @@ import os
 
 from absl import app
 from absl import flags
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-# In TF 2.0, eager execution is enabled by default
-tf.compat.v1.disable_eager_execution()
-
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, "audio", "gtzan_music_speech",
-                      "dummy_data")
+  return os.path.join(
+      FLAGS.tfds_dir, "audio", "gtzan_music_speech", "dummy_data"
+  )
 
 
 def _generate_data():
   """Generate data examples."""
   wav_file = fake_data_utils.get_random_wav_c1(duration=1, sample=22050)
-  filepath = os.path.join(_output_dir(),
-                          "music_speech",
-                          "speech_wav",
-                          "{}.wav".format("test"))
+  filepath = os.path.join(
+      _output_dir(), "music_speech", "speech_wav", "{}.wav".format("test")
+  )
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)

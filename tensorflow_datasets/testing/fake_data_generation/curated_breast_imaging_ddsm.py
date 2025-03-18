@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,18 +22,19 @@ import os
 
 from absl import app
 from absl import flags
-
 import numpy as np
-import tensorflow.compat.v2 as tf
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir',
+    os.fspath(utils.tfds_write_path()),
+    'Path to tensorflow_datasets directory',
+)
 FLAGS = flags.FLAGS
 
-MAMMOGRAPHY_HEIGHT = 100    # Note: Much smaller than original images.
+MAMMOGRAPHY_HEIGHT = 100  # Note: Much smaller than original images.
 MAMMOGRAPHY_WIDTH = 80
 ABNORMALITY_SIZE_MIN = 10
 ABNORMALITY_SIZE_MAX = 20
@@ -56,20 +57,24 @@ def write_png(filepath, img):
 
 def _yield_mammography_with_abnormalities():
   """Generate a fake mammography image containing a set of abnormalities."""
-  mammography = np.zeros((MAMMOGRAPHY_HEIGHT, MAMMOGRAPHY_WIDTH),
-                         dtype=np.uint8)
+  mammography = np.zeros(
+      (MAMMOGRAPHY_HEIGHT, MAMMOGRAPHY_WIDTH), dtype=np.uint8
+  )
   # Draw a rectangle representing the breast region.
   breast_h = np.random.randint(
-      int(MAMMOGRAPHY_HEIGHT * 0.7), int(MAMMOGRAPHY_HEIGHT * 0.9) + 1)
+      int(MAMMOGRAPHY_HEIGHT * 0.7), int(MAMMOGRAPHY_HEIGHT * 0.9) + 1
+  )
   breast_w = np.random.randint(
-      int(MAMMOGRAPHY_WIDTH * 0.7), int(MAMMOGRAPHY_WIDTH * 0.9) + 1)
+      int(MAMMOGRAPHY_WIDTH * 0.7), int(MAMMOGRAPHY_WIDTH * 0.9) + 1
+  )
   breast_y = np.random.randint(0, MAMMOGRAPHY_HEIGHT - breast_h)
   breast_x = np.random.randint(0, MAMMOGRAPHY_WIDTH - breast_w)
-  breast_intensity = np.random.randint(BREAST_INTENSITY_MIN,
-                                       BREAST_INTENSITY_MAX + 1)
+  breast_intensity = np.random.randint(
+      BREAST_INTENSITY_MIN, BREAST_INTENSITY_MAX + 1
+  )
   mammography[
-      breast_y:(breast_y + breast_h),
-      breast_x:(breast_x + breast_w)] = breast_intensity
+      breast_y : (breast_y + breast_h), breast_x : (breast_x + breast_w)
+  ] = breast_intensity
 
   abnormalities = []  # Note: pairs of (mask, crop).
   for _ in range(np.random.randint(1, NUM_ABNORMALITIES_MAX + 1)):
@@ -82,12 +87,13 @@ def _yield_mammography_with_abnormalities():
       abnorm_intensity = np.random.randint(int(BREAST_INTENSITY_MIN * 1.2), 256)
     # Draw abnormality in the mammography.
     mammography[
-        abnorm_y:(abnorm_y + abnorm_h),
-        abnorm_x:(abnorm_x + abnorm_w)] = abnorm_intensity
+        abnorm_y : (abnorm_y + abnorm_h), abnorm_x : (abnorm_x + abnorm_w)
+    ] = abnorm_intensity
     # Abnormality mask w.r.t the full mammography.
     abnorm_mask = np.zeros_like(mammography)
     abnorm_mask[
-        abnorm_y:(abnorm_y + abnorm_h), abnorm_x:(abnorm_x + abnorm_w)] = 255
+        abnorm_y : (abnorm_y + abnorm_h), abnorm_x : (abnorm_x + abnorm_w)
+    ] = 255
     # Abnormality crop.
     abnorm_crop = np.ones((abnorm_h, abnorm_w)) * abnorm_intensity
     abnormalities.append((abnorm_mask, abnorm_crop))
@@ -102,25 +108,24 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
   breast_density = np.random.randint(1, 5)
   left_or_right_breast = np.random.choice(['LEFT', 'RIGHT'])
   image_view = np.random.choice(['CC', 'MLO'])
-  study_id = tuple(np.random.randint(0, 999999999+1, size=2))
+  study_id = tuple(np.random.randint(0, 999999999 + 1, size=2))
   study_id = '1.3.6.1.4.1.9590.100.1.2.%010d.%010d' % study_id
-  series_id = tuple(np.random.randint(0, 999999999+1, size=2))
+  series_id = tuple(np.random.randint(0, 999999999 + 1, size=2))
   series_id = '1.3.6.1.4.1.9590.100.1.2.%010d.%010d' % series_id
   remake_dirs(os.path.join(output_dir, '%s/%s' % (study_id, series_id)))
   # Write mammography image.
   mammography_basename = '%s/%s/000000' % (study_id, series_id)
   write_png(
-      os.path.join(output_dir, mammography_basename + '.png'), mammography)
+      os.path.join(output_dir, mammography_basename + '.png'), mammography
+  )
 
   for abnormality_id, abnormality in enumerate(abnormalities, 1):
     # Write abnormality crop image.
     crop_basename = '%s/%s/%06d' % (study_id, series_id, abnormality_id * 2 - 1)
-    write_png(
-        os.path.join(output_dir, crop_basename + '.png'), abnormality[1])
+    write_png(os.path.join(output_dir, crop_basename + '.png'), abnormality[1])
     # Write abnormality mask image.
     mask_basename = '%s/%s/%06d' % (study_id, series_id, abnormality_id * 2)
-    write_png(
-        os.path.join(output_dir, mask_basename + '.png'), abnormality[0])
+    write_png(os.path.join(output_dir, mask_basename + '.png'), abnormality[0])
     row = {
         'patient_id': patient_id,
         'breast density': breast_density,
@@ -130,7 +135,8 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
         'abnormality type': 'calcification',
         'assessment': np.random.randint(1, 5),
         'pathology': np.random.choice(
-            ['BENIGN', 'BENIGN_WITHOUT_CALLBACK', 'MALIGNANT']),
+            ['BENIGN', 'BENIGN_WITHOUT_CALLBACK', 'MALIGNANT']
+        ),
         'subtlety': np.random.randint(1, 5),
         'image file path': mammography_basename + '.dcm',
         'cropped image file path': crop_basename + '.dcm',
@@ -142,6 +148,7 @@ def _yield_csv_rows_base(output_dir, row_extra_info_gen_fn):
 
 def _yield_csv_rows_calc(output_dir, calc_types, calc_distributions):
   """Generate a row for the calcification abnormalities."""
+
   def _row_extra_info_gen_fn():
     return {
         'calc type': np.random.choice(calc_types),
@@ -153,6 +160,7 @@ def _yield_csv_rows_calc(output_dir, calc_types, calc_distributions):
 
 def _yield_csv_rows_mass(output_dir, mass_shapes, mass_margins):
   """Generate a row for the mass abnormalities."""
+
   def _row_extra_info_gen_fn():
     return {
         'mass shape': np.random.choice(mass_shapes),
@@ -177,43 +185,60 @@ def _generate_csv(csv_filepath, row_yielder, number_of_mammograms):
 def _generate_data_calc(output_dir, number_of_mammograms):
   """Generate train/test CSV and images of calcification abnormalities."""
   calc_types = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
-          os.path.join('image', 'cbis_ddsm_calc_types.txt'))).names
+      names_file=tfds.core.tfds_path(
+          os.path.join('image', 'cbis_ddsm_calc_types.txt')
+      )
+  ).names
   calc_distributions = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
-          os.path.join('image', 'cbis_ddsm_calc_distributions.txt'))).names
+      names_file=tfds.core.tfds_path(
+          os.path.join('image', 'cbis_ddsm_calc_distributions.txt')
+      )
+  ).names
   _generate_csv(
       os.path.join(output_dir, 'calc_case_description_train_set.csv'),
       lambda: _yield_csv_rows_calc(output_dir, calc_types, calc_distributions),
-      number_of_mammograms[0])
+      number_of_mammograms[0],
+  )
   _generate_csv(
       os.path.join(output_dir, 'calc_case_description_test_set.csv'),
       lambda: _yield_csv_rows_calc(output_dir, calc_types, calc_distributions),
-      number_of_mammograms[1])
+      number_of_mammograms[1],
+  )
 
 
 def _generate_data_mass(output_dir, number_of_mammograms):
   """Generate train/test CSV and images of mass abnormalities."""
   mass_shapes = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
-          os.path.join('image', 'cbis_ddsm_mass_shapes.txt'))).names
+      names_file=tfds.core.tfds_path(
+          os.path.join('image', 'cbis_ddsm_mass_shapes.txt')
+      )
+  ).names
   mass_margins = tfds.features.ClassLabel(
-      names_file=tfds.core.get_tfds_path(
-          os.path.join('image', 'cbis_ddsm_mass_margins.txt'))).names
+      names_file=tfds.core.tfds_path(
+          os.path.join('image', 'cbis_ddsm_mass_margins.txt')
+      )
+  ).names
 
   _generate_csv(
       os.path.join(output_dir, 'mass_case_description_train_set.csv'),
       lambda: _yield_csv_rows_mass(output_dir, mass_shapes, mass_margins),
-      number_of_mammograms[0])
+      number_of_mammograms[0],
+  )
   _generate_csv(
       os.path.join(output_dir, 'mass_case_description_test_set.csv'),
       lambda: _yield_csv_rows_mass(output_dir, mass_shapes, mass_margins),
-      number_of_mammograms[1])
+      number_of_mammograms[1],
+  )
 
 
 def main(_):
-  output_dir = os.path.join(FLAGS.tfds_dir, 'testing', 'test_data',
-                            'fake_examples', 'curated_breast_imaging_ddsm')
+  output_dir = os.path.join(
+      FLAGS.tfds_dir,
+      'testing',
+      'test_data',
+      'fake_examples',
+      'curated_breast_imaging_ddsm',
+  )
   np.random.seed(0x12345)
   _generate_data_calc(output_dir, (3, 2))
   _generate_data_mass(output_dir, (3, 2))

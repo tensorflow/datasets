@@ -1,0 +1,20 @@
+[
+    {
+        "da": "inform(food=Indian,good_for_meal='lunch or dinner',name='Kočár z Vídně')",
+        "delex_da": "inform(food=X-food,good_for_meal=X-good_for_meal,name=X-name)",
+        "text": "Kočár z Vídně podává indické pokrmy a dá se zde dobře naobědvat i navečeřet .",
+        "delex_text": "X-name podává X-food pokrmy a dá se zde dobře X-good_for_meal ."
+    },
+    {
+        "da": "inform(area=Karlín,food=French,name='Green Spirit')",
+        "delex_da": "inform(area=X-area,food=X-food,name=X-name)",
+        "text": "Green Spirit sídlí na Karlíně a vaří francouzská jídla .",
+        "delex_text": "X-name sídlí na X-area a vaří X-food jídla ."
+    },
+    {
+        "da": "goodbye()",
+        "delex_da": "goodbye()",
+        "text": "Tak na shledanou !",
+        "delex_text": "Tak na shledanou !"
+    }
+]

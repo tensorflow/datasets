@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="goemotions" />
   <meta itemprop="description" content="The GoEmotions dataset contains 58k carefully curated Reddit comments labeled&#10;for 27 emotion categories or Neutral. The emotion categories are admiration,&#10;amusement, anger, annoyance, approval, caring, confusion, curiosity, desire,&#10;disappointment, disapproval, disgust, embarrassment, excitement, fear,&#10;gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief,&#10;remorse, sadness, surprise.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;goemotions&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/goemotions" />
@@ -12,9 +11,6 @@
 
 # `goemotions`
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
 
 *   **Description**:
 
@@ -24,6 +20,12 @@ amusement, anger, annoyance, approval, caring, confusion, curiosity, desire,
 disappointment, disapproval, disgust, embarrassment, excitement, fear,
 gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief,
 remorse, sadness, surprise.
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/goemotions">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://github.com/google-research/google-research/tree/master/goemotions](https://github.com/google-research/google-research/tree/master/goemotions)
@@ -51,45 +53,121 @@ Split          | Examples
 `'train'`      | 43,410
 `'validation'` | 5,426
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'admiration': tf.bool,
-    'amusement': tf.bool,
-    'anger': tf.bool,
-    'annoyance': tf.bool,
-    'approval': tf.bool,
-    'caring': tf.bool,
-    'comment_text': Text(shape=(), dtype=tf.string),
-    'confusion': tf.bool,
-    'curiosity': tf.bool,
-    'desire': tf.bool,
-    'disappointment': tf.bool,
-    'disapproval': tf.bool,
-    'disgust': tf.bool,
-    'embarrassment': tf.bool,
-    'excitement': tf.bool,
-    'fear': tf.bool,
-    'gratitude': tf.bool,
-    'grief': tf.bool,
-    'joy': tf.bool,
-    'love': tf.bool,
-    'nervousness': tf.bool,
-    'neutral': tf.bool,
-    'optimism': tf.bool,
-    'pride': tf.bool,
-    'realization': tf.bool,
-    'relief': tf.bool,
-    'remorse': tf.bool,
-    'sadness': tf.bool,
-    'surprise': tf.bool,
+    'admiration': bool,
+    'amusement': bool,
+    'anger': bool,
+    'annoyance': bool,
+    'approval': bool,
+    'caring': bool,
+    'comment_text': Text(shape=(), dtype=string),
+    'confusion': bool,
+    'curiosity': bool,
+    'desire': bool,
+    'disappointment': bool,
+    'disapproval': bool,
+    'disgust': bool,
+    'embarrassment': bool,
+    'excitement': bool,
+    'fear': bool,
+    'gratitude': bool,
+    'grief': bool,
+    'joy': bool,
+    'love': bool,
+    'nervousness': bool,
+    'neutral': bool,
+    'optimism': bool,
+    'pride': bool,
+    'realization': bool,
+    'relief': bool,
+    'remorse': bool,
+    'sadness': bool,
+    'surprise': bool,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature        | Class        | Shape | Dtype  | Description
+:------------- | :----------- | :---- | :----- | :----------
+               | FeaturesDict |       |        |
+admiration     | Tensor       |       | bool   |
+amusement      | Tensor       |       | bool   |
+anger          | Tensor       |       | bool   |
+annoyance      | Tensor       |       | bool   |
+approval       | Tensor       |       | bool   |
+caring         | Tensor       |       | bool   |
+comment_text   | Text         |       | string |
+confusion      | Tensor       |       | bool   |
+curiosity      | Tensor       |       | bool   |
+desire         | Tensor       |       | bool   |
+disappointment | Tensor       |       | bool   |
+disapproval    | Tensor       |       | bool   |
+disgust        | Tensor       |       | bool   |
+embarrassment  | Tensor       |       | bool   |
+excitement     | Tensor       |       | bool   |
+fear           | Tensor       |       | bool   |
+gratitude      | Tensor       |       | bool   |
+grief          | Tensor       |       | bool   |
+joy            | Tensor       |       | bool   |
+love           | Tensor       |       | bool   |
+nervousness    | Tensor       |       | bool   |
+neutral        | Tensor       |       | bool   |
+optimism       | Tensor       |       | bool   |
+pride          | Tensor       |       | bool   |
+realization    | Tensor       |       | bool   |
+relief         | Tensor       |       | bool   |
+remorse        | Tensor       |       | bool   |
+sadness        | Tensor       |       | bool   |
+surprise       | Tensor       |       | bool   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/goemotions-0.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -112,6 +190,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

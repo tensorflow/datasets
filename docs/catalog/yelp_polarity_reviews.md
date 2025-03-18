@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="yelp_polarity_reviews" />
   <meta itemprop="description" content="Large Yelp Review Dataset.&#10;This is a dataset for binary sentiment classification. We provide a set of 560,000 highly polar yelp reviews for training, and 38,000 for testing. &#10;ORIGIN&#10;The Yelp reviews dataset consists of reviews from Yelp. It is extracted&#10;from the Yelp Dataset Challenge 2015 data. For more information, please&#10;refer to http://www.yelp.com/dataset&#10;&#10;The Yelp reviews polarity dataset is constructed by&#10;Xiang Zhang (xiang.zhang@nyu.edu) from the above dataset.&#10;It is first used as a text classification benchmark in the following paper:&#10;Xiang Zhang, Junbo Zhao, Yann LeCun. Character-level Convolutional Networks&#10;for Text Classification. Advances in Neural Information Processing Systems 28&#10;(NIPS 2015).&#10;&#10;&#10;DESCRIPTION&#10;&#10;The Yelp reviews polarity dataset is constructed by considering stars 1 and 2&#10;negative, and 3 and 4 positive. For each polarity 280,000 training samples and&#10;19,000 testing samples are take randomly. In total there are 560,000 trainig&#10;samples and 38,000 testing samples. Negative polarity is class 1,&#10;and positive class 2.&#10;&#10;The files train.csv and test.csv contain all the training samples as&#10;comma-sparated values. There are 2 columns in them, corresponding to class&#10;index (1 and 2) and review text. The review texts are escaped using double&#10;quotes (&quot;), and any internal double quote is escaped by 2 double quotes (&quot;&quot;).&#10;New lines are escaped by a backslash followed with an &quot;n&quot; character,&#10;that is &quot;&#10;&quot;.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;yelp_polarity_reviews&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/yelp_polarity_reviews" />
@@ -11,6 +10,7 @@
 </div>
 
 # `yelp_polarity_reviews`
+
 
 *   **Description**:
 
@@ -48,9 +48,15 @@ escaped by a backslash followed with an "n" character, that is " ".
 
 *   **Versions**:
 
-    *   **`0.1.0`** (default): No release notes.
+    *   **`0.2.0`** (default): No release notes.
 
-*   **Download size**: `Unknown size`
+*   **Download size**: `158.67 MiB`
+
+*   **Dataset size**: `435.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
@@ -59,9 +65,67 @@ Split     | Examples
 `'test'`  | 38,000
 `'train'` | 560,000
 
+*   **Feature structure**:
+
+```python
+FeaturesDict({
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=2),
+    'text': Text(shape=(), dtype=string),
+})
+```
+
+*   **Feature documentation**:
+
+Feature | Class        | Shape | Dtype  | Description
+:------ | :----------- | :---- | :----- | :----------
+        | FeaturesDict |       |        |
+label   | ClassLabel   |       | int64  |
+text    | Text         |       | string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('text', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/yelp_polarity_reviews-0.2.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -80,85 +144,3 @@ Split     | Examples
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.
-
-## yelp_polarity_reviews/plain_text (default config)
-
-*   **Config description**: Plain text
-
-*   **Dataset size**: `435.14 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(), dtype=tf.string),
-})
-```
-
-## yelp_polarity_reviews/bytes
-
-*   **Config description**: Uses byte-level text encoding with
-    `tfds.deprecated.text.ByteTextEncoder`
-
-*   **Dataset size**: `435.14 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    No
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<ByteTextEncoder vocab_size=257>),
-})
-```
-
-## yelp_polarity_reviews/subwords8k
-
-*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
-    8k vocab size
-
-*   **Dataset size**: `182.89 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test), Only when `shuffle_files=False` (train)
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=8176>),
-})
-```
-
-## yelp_polarity_reviews/subwords32k
-
-*   **Config description**: Uses `tfds.deprecated.text.SubwordTextEncoder` with
-    32k vocab size
-
-*   **Dataset size**: `173.65 MiB`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Yes (test), Only when `shuffle_files=False` (train)
-
-*   **Features**:
-
-```python
-FeaturesDict({
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=2),
-    'text': Text(shape=(None,), dtype=tf.int64, encoder=<SubwordTextEncoder vocab_size=32765>),
-})
-```

@@ -1,13 +1,16 @@
 {
   "citation": "@article{guu2020realm,\n    title={REALM: Retrieval-Augmented Language Model Pre-Training},\n    author={Kelvin Guu and Kenton Lee and Zora Tung and Panupong Pasupat and Ming-Wei Chang},\n    year={2020},\n    journal = {arXiv e-prints},\n    archivePrefix = {arXiv},\n    eprint={2002.08909},\n}",
+  "configDescription": "Examples are individual sentences containing entities.",
   "configName": "sentences",
   "description": "Wikipedia sentences with labeled salient spans.",
+  "fileFormat": "array_record",
+  "moduleName": "tensorflow_datasets.text.salient_span_wikipedia",
   "name": "salient_span_wikipedia",
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "22082479470",
-      "numShards": "256",
       "shardLengths": [
         "321452",
         "321452",

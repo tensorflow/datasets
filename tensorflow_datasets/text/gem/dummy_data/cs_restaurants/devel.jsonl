@@ -1,0 +1,8 @@
+[
+    {
+        "da": "inform(food=Indian,good_for_meal='lunch or dinner',name='Kočár z Vídně')",
+        "delex_da": "inform(food=X-food,good_for_meal=X-good_for_meal,name=X-name)",
+        "text": "Kočár z Vídně podává indické pokrmy a dá se zde dobře naobědvat i navečeřet .",
+        "delex_text": "X-name podává X-food pokrmy a dá se zde dobře X-good_for_meal ."
+    }
+]

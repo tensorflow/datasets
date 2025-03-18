@@ -2,12 +2,14 @@
 // splits.
 
 syntax = "proto3";
-option cc_enable_arenas = true;
 
 package tensorflow_datasets;
 
-import "tensorflow_metadata/proto/v0/statistics.proto";
+import "feature.proto";
 import "tensorflow_metadata/proto/v0/schema.proto";
+import "tensorflow_metadata/proto/v0/statistics.proto";
+
+option cc_enable_arenas = true;
 
 // Message to represent location of a dataset, for now just has a url field, but
 // can internally have folders etc.
@@ -34,20 +36,126 @@ message SplitInfo {
   // The concrete statistics about this split.
   tensorflow.metadata.v0.DatasetFeatureStatistics statistics = 3;
 
-  // Next available: 6.
+  // Template where the files for this split can be found, relative to the main
+  // builder folder of this dataset. Variables can be used that will be
+  // automatically filled in. Some examples:
+  //
+  // {DATASET}_{SPLIT}.{FILEFORMAT}-{SHARD_INDEX}-of-{NUM_SHARDS}
+  // This is the default TFDS filename template. Example of filenames:
+  //   mnist_train.tfrecord-00000-of-00005
+  //
+  // my_data/{SPLIT}/{FILEFORMAT}_{SHARD_INDEX}
+  // The data is in the subfolder 'my_data' in which there's another folder with
+  // the name of the split. Files are named by the file format and use a
+  // different shard template. Example filenames:
+  //   my_data/train/tfrecord_00000
+  //   my_data/train/tfrecord_00001
+  //   my_data/test/tfrecord_00000
+  //
+  // Supported variables:
+  // - {DATASET}: the name of the dataset.
+  // - {SPLIT}: the split.
+  // - {FILEFORMAT}: the fileformat used in the filename, e.g. tfrecord.
+  // - {SHARD_INDEX}: the index of the current shard (starts with 0).
+  // - {NUM_SHARDS}: total number of shards.
+  // - {SHARD_X_OF_Y}: shard in xxxxx-of-yyyyy format.
+  string filepath_template = 6;
+
+  // Next available: 7.
 }
 
 // This message indicates which feature in the dataset schema is the input and
 // which one is the output.
 message SupervisedKeys {
-  string input = 1;
-  string output = 2;
+  // Historical: Used before 2021-08-23
+  // `input` and `output` are no longer used, but can still be loaded.
+  // now everything goes in `tuple`
+  string input = 1 [deprecated = true];
+  string output = 2 [deprecated = true];
+
+  Tuple tuple = 3;
+
+  message Tuple {
+    repeated Nest items = 1;
+  }
+
+  message Dict {
+    map<string, Nest> dict = 1;
+  }
+
+  message Nest {
+    oneof nest {
+      string feature_key = 1;
+      Tuple tuple = 2;
+      Dict dict = 3;
+    }
+  }
 }
 
 // This message includes information for redistribution of the dataset.
 message RedistributionInfo {
   // Text to be included in LICENSE file.
   string license = 1;
+}
+
+message DataSourceAccess {
+  // The time when the data was accessed in milli seconds since unix epoch.
+  int64 access_timestamp_ms = 1;
+
+  oneof source {
+    FileSystem file_system = 2;
+    SqlQuery sql_query = 3;
+    TfdsDatasetReference tfds_dataset = 4;
+  }
+
+  // URL referring to the data being used.
+  // If provided together with a source, the url should correspond to the source
+  // or part of the source.
+  Url url = 5;
+}
+
+message FileSystem {
+  // The path of the files that were read to generate the data. Can contain
+  // wildcards, e.g. data-tfrecord-*.
+  string path = 1;
+}
+
+message Url {
+  // The URL of the resource that was accessed.
+  string url = 1;
+
+  // Optional checksum of the file that was downloaded.
+  string checksum = 2;
+}
+
+message SqlQuery {
+  // The SQL query that was executed to get the source data for the dataset.
+  string sql_query = 1;
+}
+
+// A reference to a TFDS dataset.
+message TfdsDatasetReference {
+  // Name of the dataset, e.g. mnist.
+  string name = 1;
+
+  // The config of the variant.
+  string config = 2;
+
+  // The version of the dataset.
+  string version = 3;
+
+  // The root data dir that contains the dataset.
+  string data_dir = 4;
+
+  // The namespace of the dataset, e.g. huggingface. Note that we prefix by ds_
+  // to avoid conflicts with reserved in keywords in languages like C++.
+  string ds_namespace = 5;
+
+  // The split of the dataset. Since the dataset reference is used to refer to
+  // the dataset as a whole, this is usually an empty string, but it can be
+  // set to a specific split if the dataset reference is used to refer to a
+  // specific split.
+  string split = 6;
 }
 
 // This is a serialization of tensorflow_datasets.core.DatasetInfo.
@@ -58,15 +166,27 @@ message DatasetInfo {
   // Version string of the dataset (ex: '1.0.5')
   string version = 9;
 
+  // Release notes of the dataset
+  map<string, string> release_notes = 18;
+
   // Config name of the dataset
   string config_name = 13;
+
+  // Config description of the dataset
+  string config_description = 14;
+
+  // Config tags of the dataset
+  repeated string config_tags = 21;
+
+  // The structure and characteristics of the features of this dataset.
+  Feature features = 19;
 
   // A citation string if one exists for this dataset.
   string citation = 3;
 
   // DEPRECATED
   // *Approximate* size in bytes of this dataset on disk.
-  int64 size_in_bytes = 4 [deprecated=true];
+  int64 size_in_bytes = 4 [deprecated = true];
 
   // Size in bytes of downloaded files.
   int64 download_size = 12;
@@ -76,7 +196,7 @@ message DatasetInfo {
 
   // DEPRECATED
   // Checksums of resources: URL to checksum of resource at URL.
-  map<string, string> download_checksums = 10 [deprecated=true];
+  map<string, string> download_checksums = 10 [deprecated = true];
 
   // The schema of the dataset.
   tensorflow.metadata.v0.Schema schema = 6;
@@ -90,5 +210,34 @@ message DatasetInfo {
 
   RedistributionInfo redistribution_info = 11;
 
-  // Next available: 14
+  // Original module location of the dataset.
+  // Allow to point to the original dataset source code in the documentation
+  // even for datasets read from.
+  string module_name = 15;
+
+  // Specifies whether examples should be shuffled.
+  bool disable_shuffling = 16;
+
+  // Default file format to use. Note that alternative file formats may be
+  // available too and that depending on how the dataset is loaded, the default
+  // file format may be ignored.
+  string file_format = 17;
+
+  // Alternative file formats available for this dataset. Note that the number
+  // of shards and the number of examples per shard must be the same for all
+  // file formats.
+  repeated string alternative_file_formats = 22;
+
+  // The data that was used to generate this dataset.
+  repeated DataSourceAccess data_source_accesses = 20;
+
+  // A message explaining why the dataset is blocked. If empty, it means that
+  // the dataset is not blocked.
+  string is_blocked = 23;
+
+  // If True, it will not assure deterministic order when writing examples to
+  // disk. This might result in quicker dataset preparation.
+  bool nondeterministic_order = 24;
+
+  // Next available: 25
 }

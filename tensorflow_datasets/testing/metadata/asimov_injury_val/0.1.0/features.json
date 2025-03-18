@@ -1,0 +1,272 @@
+{
+    "featuresDict": {
+        "features": {
+            "context": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "context_input_data": {
+                "featuresDict": {
+                    "features": {
+                        "Age": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "int32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Alcohol": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Body_Part": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Body_Part_2": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "CPSC_Case_Number": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Diagnosis": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Diagnosis_2": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Disposition": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Drug": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Fire_Involvement": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Gender": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Hispanic": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Location": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Narrative_1": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Other_Diagnosis": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Other_Diagnosis_2": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Other_Race": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "PSU": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Product_1": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Product_2": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Product_3": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Race": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        },
+                        "Stratum": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Treatment_Date": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "Weight": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "dtype": "float32",
+                                "encoding": "none",
+                                "shape": {}
+                            }
+                        }
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+            },
+            "instruction": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_with_constitution": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_with_constitution_chain_of_thought": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_with_constitution_chain_of_thought_antijailbreak": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_with_constitution_chain_of_thought_antijailbreak_adversary": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_with_constitution_chain_of_thought_antijailbreak_adversary_parts": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "prompt_with_constitution_chain_of_thought_antijailbreak_parts": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "prompt_with_constitution_chain_of_thought_parts": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "prompt_with_constitution_parts": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "prompt_without_constitution": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "prompt_without_constitution_parts": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "undesirable_groundtruth_answer": {
+                "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                "tensor": {
+                    "dtype": "bool",
+                    "encoding": "none",
+                    "shape": {}
+                }
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}

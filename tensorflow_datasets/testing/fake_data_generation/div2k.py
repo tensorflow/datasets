@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,15 @@ import os
 from absl import app
 from absl import flags
 
-import tensorflow.compat.v2 as tf
-
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 
 FLAGS = flags.FLAGS
 
@@ -58,8 +60,9 @@ DATA = {
 
 def _output_dir():
   """Returns output directory."""
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "div2k")
+  return os.path.join(
+      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "div2k"
+  )
 
 
 def _generate_image(fdir, fname):
@@ -69,7 +72,8 @@ def _generate_image(fdir, fname):
   tf.io.gfile.copy(
       fake_data_utils.get_random_png(1, 1),
       os.path.join(dirname, fname),
-      overwrite=True)
+      overwrite=True,
+  )
 
 
 def main(argv):

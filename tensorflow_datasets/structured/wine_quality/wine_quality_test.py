@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,9 +26,7 @@ class WineQualityWhiteTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 2,
   }
-  DL_EXTRACT_RESULT = {
-      "train": "winequality-white.csv"
-  }
+  DL_EXTRACT_RESULT = {"train": "winequality-white.csv"}
 
 
 class WineQualityRedTest(testing.DatasetBuilderTestCase):
@@ -38,9 +36,7 @@ class WineQualityRedTest(testing.DatasetBuilderTestCase):
   SPLITS = {
       "train": 2,
   }
-  DL_EXTRACT_RESULT = {
-      "train": "winequality-red.csv"
-  }
+  DL_EXTRACT_RESULT = {"train": "winequality-red.csv"}
 
 
 if __name__ == "__main__":

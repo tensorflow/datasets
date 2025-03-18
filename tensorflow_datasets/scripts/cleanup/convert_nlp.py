@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ import re
 
 from absl import app
 from absl.flags import argparse_flags
-from tensorflow_datasets.core.utils import py_utils
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.scripts.cli import new
 
 TO_CONVERT = [
@@ -45,19 +45,28 @@ TO_CONVERT = [
     (r"from\s__future__\simport\sdivision.*", r""),
     (r"from\s__future__\simport\sprint_function.*", r""),
     (r"import\slogging", r"from absl import logging\n"),
-    (r"import\snlp",
-     r"import tensorflow as tf\nimport tensorflow_datasets.public_api as tfds\n"
+    (
+        r"import\snlp",
+        (
+            r"from tensorflow_datasets.core.utils.lazy_imports_utils import"
+            r" tensorflow as tf\nimport tensorflow_datasets.public_api as"
+            r" tfds\n"
+        ),
     ),
     (r"with\sopen", r"with tf.io.gfile.GFile"),
     (r"encoding=\"utf-8\"", r"'r'"),
-    (r"return\snlp\.DatasetInfo\(",
-     r"    return tfds.core.DatasetInfo(\n        builder=self,\n"),
+    (
+        r"return\snlp\.DatasetInfo\(",
+        r"    return tfds.core.DatasetInfo(\n        builder=self,\n",
+    ),
     (r"nlp\.ClassLabel", r"tfds.features.ClassLabel"),
     (r"nlp\.Value\(\"string\"\)", r"tfds.features.Text()"),
     (r"nlp\.Value\(\"([\w\d]+)\"\)", r"tf.\1"),
     (r"nlp\.features", "tfds.features"),
-    (r"features\s*=\s*nlp\.Features\(",
-     r"features=tfds.features.FeaturesDict("),
+    (
+        r"features\s*=\s*nlp\.Features\(",
+        r"features=tfds.features.FeaturesDict(",
+    ),
     (r"dict\(", r"tfds.features.FeaturesDict("),
     (r"nlp.SplitGenerator", r"tfds.core.SplitGenerator"),
     (r"self\.config\.data_dir", r"dl_manager.manual_dir"),
@@ -74,9 +83,7 @@ def _parse_flags(_) -> argparse.Namespace:
       description="Tool to add hugging face datasets",
   )
   parser.add_argument(
-      "--nlp_path",
-      type=pathlib.Path,
-      help="Path of the nlp directory"
+      "--nlp_path", type=pathlib.Path, help="Path of the nlp directory"
   )
   parser.add_argument(
       "--dataset_name",
@@ -92,7 +99,6 @@ def _parse_flags(_) -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace):
-
   create_dataset_files(
       nlp_path=args.nlp_path,
       dataset_name=args.dataset_name,
@@ -107,14 +113,13 @@ def create_dataset_files(
 ) -> None:
   """Create template files."""
   #  Path of the converted dataset directory
-  tfds_root_path = pathlib.Path(py_utils.tfds_dir())
+  tfds_root_path = tfds.core.utils.tfds_write_path()
   dataset_dir = tfds_root_path / dataset_type
   if not dataset_dir.is_dir():
     raise ValueError(f"Invalid Dataset Type {dataset_type}")
 
   #  Create dataset timeplate files from new.py
-  new.create_dataset_files(dataset_name=dataset_name,
-                           dataset_dir=dataset_dir)
+  new.create_dataset_files(dataset_name=dataset_name, dataset_dir=dataset_dir)  # pytype: disable=wrong-arg-types  # gen-stub-imports
 
   #  Path of the dataset file
   nlp_datasets_path = nlp_path.expanduser() / "datasets"

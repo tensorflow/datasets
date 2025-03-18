@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,8 @@
 import collections
 import csv
 import os
-import six
 
-import tensorflow.compat.v2 as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -50,8 +49,23 @@ labels).
 
 _DATA_URL = 'https://cims.nyu.edu/~sbowman/xnli/XNLI-1.0.zip'
 
-_LANGUAGES = ('ar', 'bg', 'de', 'el', 'en', 'es', 'fr', 'hi', 'ru', 'sw', 'th',
-              'tr', 'ur', 'vi', 'zh')
+_LANGUAGES = (
+    'ar',
+    'bg',
+    'de',
+    'el',
+    'en',
+    'es',
+    'fr',
+    'hi',
+    'ru',
+    'sw',
+    'th',
+    'tr',
+    'ur',
+    'vi',
+    'zh',
+)
 
 
 class Xnli(tfds.core.GeneratorBasedBuilder):
@@ -64,15 +78,15 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'premise':
-                tfds.features.Translation(
-                    languages=_LANGUAGES,),
-            'hypothesis':
-                tfds.features.TranslationVariableLanguages(
-                    languages=_LANGUAGES,),
-            'label':
-                tfds.features.ClassLabel(
-                    names=['entailment', 'neutral', 'contradiction']),
+            'premise': tfds.features.Translation(
+                languages=_LANGUAGES,
+            ),
+            'hypothesis': tfds.features.TranslationVariableLanguages(
+                languages=_LANGUAGES,
+            ),
+            'label': tfds.features.ClassLabel(
+                names=['entailment', 'neutral', 'contradiction']
+            ),
         }),
         # No default supervised_keys (as we have to pass both premise
         # and hypothesis as input).
@@ -87,22 +101,24 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')},
+        ),
     ]
 
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
     rows_per_pair_id = collections.defaultdict(list)
 
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       reader = csv.DictReader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
       for row in reader:
         rows_per_pair_id[row['pairID']].append(row)
 
-    for rows in six.itervalues(rows_per_pair_id):
+    for rows in rows_per_pair_id.values():
       premise = {row['language']: row['sentence1'] for row in rows}
       hypothesis = {row['language']: row['sentence2'] for row in rows}
       yield rows[0]['pairID'], {

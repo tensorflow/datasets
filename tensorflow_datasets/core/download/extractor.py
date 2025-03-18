@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,29 +15,26 @@
 
 """Module to use to extract archives. No business logic."""
 
+import bz2
 import concurrent.futures
 import contextlib
 import gzip
-import io
+import multiprocessing
 import os
 import tarfile
+import typing
+from typing import Iterator, Tuple, Union
 import uuid
 import zipfile
 
 from absl import logging
+from etils import epath
 import promise
-import six
-import tensorflow.compat.v2 as tf
-
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.download import resource as resource_lib
-
-if six.PY3:
-  import bz2  # pylint:disable=g-import-not-at-top
-else:
-  # py2's built-in bz2 package does not support reading from file objects.
-  import bz2file as bz2  # pylint:disable=g-import-not-at-top
+from tensorflow_datasets.core.utils import file_utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 @utils.memoize()
@@ -56,84 +53,116 @@ class UnsafeArchiveError(Exception):
 class _Extractor(object):
   """Singleton (use `get_extractor()` module fct) to extract archives."""
 
-  def __init__(self, max_workers=12):
+  def __init__(self, max_workers=None):
+    max_workers = max_workers or multiprocessing.cpu_count()
     self._executor = concurrent.futures.ThreadPoolExecutor(
-        max_workers=max_workers)
+        max_workers=max_workers * 4
+    )
     self._pbar_path = None
 
   @contextlib.contextmanager
   def tqdm(self):
     """Add a progression bar for the current extraction."""
     with utils.async_tqdm(
-        total=0, desc='Extraction completed...', unit=' file') as pbar_path:
+        total=0, desc='Extraction completed...', unit=' file', mininterval=1.0
+    ) as pbar_path:
       self._pbar_path = pbar_path
       yield
 
-  def extract(self, path, extract_method, to_path):
+  def extract(
+      self,
+      path: epath.PathLike,
+      extract_method: resource_lib.ExtractMethod,
+      to_path: epath.PathLike,
+  ) -> promise.Promise:
     """Returns `promise.Promise` => to_path."""
-    self._pbar_path.update_total(1)
+    path = epath.Path(path)
+    to_path = epath.Path(to_path)
     if extract_method not in _EXTRACT_METHODS:
       raise ValueError('Unknown extraction method "%s".' % extract_method)
-    future = self._executor.submit(self._sync_extract,
-                                   path, extract_method, to_path)
+    future = self._executor.submit(
+        self._extract, from_path=path, method=extract_method, to_path=to_path
+    )
     return promise.Promise.resolve(future)
 
-  def _sync_extract(self, from_path, method, to_path):
+  def _extract(
+      self,
+      from_path: epath.Path,
+      method: resource_lib.ExtractMethod,
+      to_path: epath.Path,
+  ) -> epath.Path:
     """Returns `to_path` once resource has been extracted there."""
-    to_path_tmp = '%s%s_%s' % (to_path, constants.INCOMPLETE_SUFFIX,
-                               uuid.uuid4().hex)
-    path = None
-    dst_path = None  # To avoid undefined variable if exception is raised
+    tmp_file_name = '%s%s_%s' % (
+        constants.INCOMPLETE_PREFIX,
+        uuid.uuid4().hex,
+        to_path.name,
+    )
+    to_path_tmp = os.fspath(to_path.parent / tmp_file_name)
+    max_length_dst_path = 0
+    futures = []
+    if self._pbar_path is None:
+      raise ValueError("'_pbar_path' is not initialized")
     try:
       for path, handle in iter_archive(from_path, method):
         path = tf.compat.as_text(path)
         dst_path = path and os.path.join(to_path_tmp, path) or to_path_tmp
-        _copy(handle, dst_path)
+        max_length_dst_path = max(max_length_dst_path, len(dst_path))
+        file_utils.makedirs_cached(os.path.dirname(dst_path))
+        future = self._executor.submit(_copy, handle.read(), dst_path)
+        futures.append(future)
+        self._pbar_path.update_total(1)
+
+      # Wait until all copies have completed.
+      for future in concurrent.futures.as_completed(futures):
+        future.result()
+        self._pbar_path.update(1)
     except BaseException as err:
-      msg = 'Error while extracting {} to {} (file: {}) : {}'.format(
-          from_path, to_path, path, err)
+      msg = f'Error while extracting {from_path} to {to_path}: {err}'
       # Check if running on windows
-      if os.name == 'nt' and dst_path and len(dst_path) > 250:
+      if os.name == 'nt' and max_length_dst_path > 250:
         msg += (
-            '\n'
-            'On windows, path lengths greater than 260 characters may '
-            'result in an error. See the doc to remove the limitation: '
+            '\nOn windows, path lengths greater than 260 characters may result'
+            ' in an error. See the doc to remove the limitation: '
             'https://docs.python.org/3/using/windows.html#removing-the-max-path-limitation'
         )
-      raise ExtractError(msg)
+      raise ExtractError(msg) from err
+
     # `tf.io.gfile.Rename(overwrite=True)` doesn't work for non empty
     # directories, so delete destination first, if it already exists.
-    if tf.io.gfile.exists(to_path):
-      tf.io.gfile.rmtree(to_path)
-    tf.io.gfile.rename(to_path_tmp, to_path)
-    self._pbar_path.update(1)
+    to_path = epath.Path(to_path)
+    if to_path.exists():
+      # `rename` is atomic, but not `rmtree`.
+      # When 2 builder scripts (for each config) extract the same file, one can
+      # `rename` while the other is still running `rmtree`, leading to corrupted
+      # archive dir.
+      path_to_delete = epath.Path(to_path_tmp + '.todelete')
+      to_path.rename(path_to_delete)
+      path_to_delete.rmtree()
+    epath.Path(to_path_tmp).rename(to_path)
     return to_path
 
 
-def _copy(src_file, dest_path):
-  """Copy data read from src file obj to new file in dest_path."""
-  tf.io.gfile.makedirs(os.path.dirname(dest_path))
+def _copy(src_data, dest_path):
+  """Copy data read from src data to new file in dest_path."""
   with tf.io.gfile.GFile(dest_path, 'wb') as dest_file:
-    while True:
-      data = src_file.read(io.DEFAULT_BUFFER_SIZE)
-      if not data:
-        break
-      dest_file.write(data)
+    dest_file.write(src_data)
 
 
 def _normpath(path):
   path = os.path.normpath(path)
-  if (path.startswith('.')
+  if (
+      path.startswith('.')
       or os.path.isabs(path)
       or path.endswith('~')
-      or os.path.basename(path).startswith('.')):
+      or os.path.basename(path).startswith('.')
+  ):
     return None
   return path
 
 
 @contextlib.contextmanager
 def _open_or_pass(path_or_fobj):
-  if isinstance(path_or_fobj, six.string_types):
+  if isinstance(path_or_fobj, epath.PathLikeCls):
     with tf.io.gfile.GFile(path_or_fobj, 'rb') as f_obj:
       yield f_obj
   else:
@@ -161,12 +190,26 @@ def iter_tar(arch_f, stream=False):
         # Links cannot be dereferenced in stream mode.
         logging.warning('Skipping link during extraction: %s', member.name)
         continue
-      extract_file = tar.extractfile(member)
+
+      try:
+        extract_file = tar.extractfile(member)
+      except KeyError:
+        if not (member.islnk() or member.issym()):
+          raise  # Forward exception non-link files which couldn't be extracted
+        # The link could not be extracted, which likely indicates a corrupted
+        # archive.
+        logging.warning(
+            'Skipping extraction of invalid link: %s -> %s',
+            member.name,
+            member.linkname,
+        )
+        continue
+
       if extract_file:  # File with data (not directory):
         path = _normpath(member.path)  # pytype: disable=attribute-error
         if not path:
           continue
-        yield [path, extract_file]
+        yield (path, extract_file)
 
 
 def iter_tar_stream(arch_f):
@@ -190,13 +233,13 @@ def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
-      extract_file = z.open(member)
       if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
         continue
+      extract_file = z.open(member)
       path = _normpath(member.filename)
       if not path:
         continue
-      yield [path, extract_file]
+      yield (path, extract_file)
 
 
 _EXTRACT_METHODS = {
@@ -210,7 +253,10 @@ _EXTRACT_METHODS = {
 }
 
 
-def iter_archive(path, method):
+def iter_archive(
+    path: Union[epath.PathLike, typing.BinaryIO],
+    method: resource_lib.ExtractMethod,
+) -> Iterator[Tuple[str, typing.BinaryIO]]:
   """Iterate over an archive.
 
   Args:
@@ -220,4 +266,8 @@ def iter_archive(path, method):
   Returns:
     An iterator of `(path_in_archive, f_obj)`
   """
-  return _EXTRACT_METHODS[method](path)
+  if method == resource_lib.ExtractMethod.NO_EXTRACT:
+    raise ValueError(
+        f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
+    )
+  return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type

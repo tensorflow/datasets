@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,17 @@
 
 """Translation datasets."""
 
+from tensorflow_datasets.translate.bucc import Bucc
 from tensorflow_datasets.translate.flores import Flores
 from tensorflow_datasets.translate.flores import FloresConfig
+from tensorflow_datasets.translate.mtnt import Mtnt
 from tensorflow_datasets.translate.opus import Opus
 from tensorflow_datasets.translate.para_crawl import ParaCrawl
-from tensorflow_datasets.translate.para_crawl import ParaCrawlConfig
+from tensorflow_datasets.translate.tatoeba import Tatoeba
 from tensorflow_datasets.translate.ted_hrlr import TedHrlrTranslate
 from tensorflow_datasets.translate.ted_multi import TedMultiTranslate
 from tensorflow_datasets.translate.wmt import WmtConfig
+from tensorflow_datasets.translate.wmt13 import Wmt13Translate
 from tensorflow_datasets.translate.wmt14 import Wmt14Translate
 from tensorflow_datasets.translate.wmt15 import Wmt15Translate
 from tensorflow_datasets.translate.wmt16 import Wmt16Translate

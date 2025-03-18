@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 """CMATERdb dataset."""
 
 import numpy as np
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 # CMATERdb constants
@@ -25,10 +25,12 @@ _CMATERDB_IMAGE_SHAPE = (_CMATERDB_IMAGE_SIZE, _CMATERDB_IMAGE_SIZE, 3)
 # GitHub npz mirror of https://code.google.com/archive/p/cmaterdb/
 _CMATERDB_TRAINING_URL = (
     "https://raw.githubusercontent.com/prabhuomkar/CMATERdb/master/"
-    "datasets/{type}-numerals/training-images.npz")
+    "datasets/{type}-numerals/training-images.npz"
+)
 _CMATERDB_TESTING_URL = (
     "https://raw.githubusercontent.com/prabhuomkar/CMATERdb/master/"
-    "datasets/{type}-numerals/testing-images.npz")
+    "datasets/{type}-numerals/testing-images.npz"
+)
 
 _CITATION = """\
 @article{Das:2012:GAB:2161007.2161320,

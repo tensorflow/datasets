@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="voxforge" />
   <meta itemprop="description" content="VoxForge is a language classification dataset. It consists of user submitted&#10;audio clips submitted to the website. In this release, data from 6 languages&#10;is collected - English, Spanish, French, German, Russian, and Italian.&#10;Since the website is constantly updated, and for the sake of reproducibility,&#10;this release contains only recordings submitted prior to 2020-01-01.&#10;The samples are splitted between train, validation and testing so that samples&#10;from each speaker belongs to exactly one split.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;voxforge&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/voxforge" />
@@ -11,6 +10,7 @@
 </div>
 
 # `voxforge`
+
 
 Warning: Manual download required. See instructions below.
 
@@ -23,6 +23,12 @@ website is constantly updated, and for the sake of reproducibility, this release
 contains only recordings submitted prior to 2020-01-01. The samples are splitted
 between train, validation and testing so that samples from each speaker belongs
 to exactly one split.
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/voxforge">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**: [http://www.voxforge.org/](http://www.voxforge.org/)
 
@@ -55,19 +61,36 @@ to exactly one split.
 Split | Examples
 :---- | -------:
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'audio': Audio(shape=(None,), dtype=tf.int64),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=6),
-    'speaker_id': tf.string,
+    'audio': Audio(shape=(None,), dtype=int64),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=6),
+    'speaker_id': string,
 })
 ```
+
+*   **Feature documentation**:
+
+Feature    | Class        | Shape   | Dtype  | Description
+:--------- | :----------- | :------ | :----- | :----------
+           | FeaturesDict |         |        |
+audio      | Audio        | (None,) | int64  |
+label      | ClassLabel   |         | int64  |
+speaker_id | Tensor       |         | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('audio', 'label')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+    Missing.
 
 *   **Citation**:
 
@@ -80,6 +103,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

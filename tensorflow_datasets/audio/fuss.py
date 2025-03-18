@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,14 @@
 
 """FUSS dataset."""
 
+from __future__ import annotations
+
 import os
+
 from absl import logging
-import tensorflow.compat.v2 as tf
+from etils import epath
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""\
@@ -25,13 +30,14 @@ _CITATION = r"""\
   title = {What's All the {FUSS} About Free Universal Sound Separation Data?},
   author = {Scott Wisdom and Hakan Erdogan and Daniel P. W. Ellis and Romain Serizel and Nicolas Turpault and Eduardo Fonseca and Justin Salamon and Prem Seetharaman and John R. Hershey},
   year = {2020},
+  url = {https://arxiv.org/abs/2011.00803},
 }
 
 @inproceedings{fonseca2020fsd50k,
   author = {Eduardo Fonseca and Xavier Favory and Jordi Pons and Frederic Font Corbera and Xavier Serra},
   title = {{FSD}50k: an open dataset of human-labeled sound events},
   year = {2020},
-}
+  url = {https://arxiv.org/abs/2010.00475},
 }
 """
 
@@ -62,12 +68,14 @@ impulse responses, and the original source audio.
 
 _URL = "https://github.com/google-research/sound-separation/blob/master/datasets/fuss/FUSS_license_doc/README.md"
 _DL_METADATA = {
-    "reverberant":
-        ("https://zenodo.org/record/3743844/files/FUSS_ssdata_reverb.tar.gz",
-         "ssdata_reverb"),
-    "unprocessed":
-        ("https://zenodo.org/record/3743844/files/FUSS_ssdata.tar.gz", "ssdata"
-        ),
+    "reverberant": (
+        "https://zenodo.org/record/3743844/files/FUSS_ssdata_reverb.tar.gz",
+        "ssdata_reverb",
+    ),
+    "unprocessed": (
+        "https://zenodo.org/record/3743844/files/FUSS_ssdata.tar.gz",
+        "ssdata",
+    ),
 }
 
 
@@ -78,11 +86,13 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
       tfds.core.BuilderConfig(
           name="reverberant",
           description="Default reverberated audio.",
-          version=tfds.core.Version("1.2.0")),
+          version=tfds.core.Version("1.2.0"),
+      ),
       tfds.core.BuilderConfig(
           name="unprocessed",
           description="Unprocessed audio without additional reverberation.",
-          version=tfds.core.Version("1.2.0")),
+          version=tfds.core.Version("1.2.0"),
+      ),
   ]
 
   def _info(self):
@@ -91,33 +101,28 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "mixture_audio":
-                tfds.features.Audio(
+            "mixture_audio": tfds.features.Audio(
+                file_format="wav",
+                shape=(160000,),
+                sample_rate=16000,
+                dtype=np.int16,
+            ),
+            "sources": tfds.features.Sequence({
+                "audio": tfds.features.Audio(
                     file_format="wav",
                     shape=(160000,),
                     sample_rate=16000,
-                    dtype=tf.int16),
-            "sources":
-                tfds.features.Sequence({
-                    "audio":
-                        tfds.features.Audio(
-                            file_format="wav",
-                            shape=(160000,),
-                            sample_rate=16000,
-                            dtype=tf.int16),
-                    "label":
-                        tfds.features.ClassLabel(names=source_labels),
-                }),
-            "segments":
-                tfds.features.Sequence({
-                    "start_time_seconds": tf.float32,
-                    "end_time_seconds": tf.float32,
-                    "label": tf.string
-                }),
-            "jams":
-                tf.string,
-            "id":
-                tf.string,
+                    dtype=np.int16,
+                ),
+                "label": tfds.features.ClassLabel(names=source_labels),
+            }),
+            "segments": tfds.features.Sequence({
+                "start_time_seconds": np.float32,
+                "end_time_seconds": np.float32,
+                "label": np.str_,
+            }),
+            "jams": np.str_,
+            "id": np.str_,
         }),
         supervised_keys=("mixture_audio", "sources"),
         homepage=_URL,
@@ -128,16 +133,20 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     url, extracted_dirname = _DL_METADATA[self.builder_config.name]
     base_dir = dl_manager.download_and_extract(url)
     splits = []
-    for split_name, split_dir in [(tfds.Split.TRAIN, "train"),
-                                  (tfds.Split.VALIDATION, "validation"),
-                                  (tfds.Split.TEST, "eval")]:
+    for split_name, split_dir in [
+        (tfds.Split.TRAIN, "train"),
+        (tfds.Split.VALIDATION, "validation"),
+        (tfds.Split.TEST, "eval"),
+    ]:
       splits.append(
           tfds.core.SplitGenerator(
               name=split_name,
               gen_kwargs={
                   "base_dir": os.path.join(base_dir, extracted_dirname),
                   "split": split_dir,
-              }))
+              },
+          )
+      )
     return splits
 
   def _parse_segments(self, path):
@@ -146,7 +155,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
       # Some segments files are missing in the "unprocessed" set.
       logging.info("Missing segments file: %s", path)
       return segments
-    with tf.io.gfile.GFile(path) as f:
+    with epath.Path(path).open() as f:
       for l in f:
         try:
           start, end, label = l.split()
@@ -155,7 +164,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
         segments.append({
             "start_time_seconds": float(start),
             "end_time_seconds": float(end),
-            "label": label
+            "label": label,
         })
     return segments
 
@@ -163,7 +172,7 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     """Generates examples for the given split."""
     path = os.path.join(base_dir, "%s_example_list.txt" % split)
     split_dir = os.path.join(base_dir, split)
-    with tf.io.gfile.GFile(path) as example_list:
+    with epath.Path(path).open() as example_list:
       for line in example_list:
         paths = line.split()
         key = _basename_without_ext(paths[0])
@@ -174,8 +183,9 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
               "label": _basename_without_ext(p).split("_")[0],
           })
         segments = self._parse_segments(os.path.join(split_dir, "%s.txt" % key))
-        jams = tf.io.gfile.GFile(os.path.join(split_dir,
-                                              "%s.jams" % key)).read()
+        jams = tf.io.gfile.GFile(
+            os.path.join(split_dir, "%s.jams" % key)
+        ).read()
         example = {
             "mixture_audio": os.path.join(base_dir, paths[0]),
             "sources": sources,

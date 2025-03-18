@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,58 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""The rockyou dataset."""
+"""Dataset definition for rock_you.
 
-import tensorflow.compat.v2 as tf
-import tensorflow_datasets.public_api as tfds
-
-_CITATION = """\
+DEPRECATED!
+If you want to use the RockYou dataset builder class, use:
+tfds.builder_cls('rock_you')
 """
 
-_DESCRIPTION = """\
-This dataset contains 14,344,391 passwords that were leaked or stolen from from various sites. The author of this dataset states that "I'm hosting them because it seems like nobody else does (hopefully it isn't because hosting them is illegal :)). Naturally, I'm not the one who stole these; I simply found them online, removed any names/email addresses/etc.". This dataset is used to train Machine Learning models for password guessing and cracking.
-"""
+from tensorflow_datasets.core import lazy_builder_import
 
-_DOWNLOAD_URL = "https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt"
-
-
-class RockYou(tfds.core.GeneratorBasedBuilder):
-  """This dataset contains passwords that were leaked or stolen from from various sites."""
-
-  VERSION = tfds.core.Version("0.1.0")
-
-  def _info(self):
-    return tfds.core.DatasetInfo(
-        builder=self,
-        description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
-            "password":
-                tfds.features.Text(
-                    encoder=tfds.deprecated.text.ByteTextEncoder()
-                ),
-        }),
-        supervised_keys=None,
-        homepage="https://wiki.skullsecurity.org/Passwords",
-        citation=_CITATION,
-    )
-
-  def _split_generators(self, dl_manager):
-    dl_path = dl_manager.download(_DOWNLOAD_URL)
-    return [
-        tfds.core.SplitGenerator(
-            name="train",
-            gen_kwargs={
-                "path": dl_path,
-            },
-        )
-    ]
-
-  def _generate_examples(self, path):
-
-    with tf.io.gfile.GFile(path, "rb") as f:
-      blines = f.readlines()
-
-    for i, bline in enumerate(blines):
-      yield i, {
-          "password": bline.strip(),
-      }
+RockYou = lazy_builder_import.LazyBuilderImport('rock_you')

@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,12 +31,15 @@ python lsun.py --input_files=test_data/lsun_examples/1.webp,
 from absl import app
 from absl import flags
 import lmdb  # pytype: disable=import-error
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_files", None,
-                    "Comma separated list of files to put into the database.")
+flags.DEFINE_string(
+    "input_files",
+    None,
+    "Comma separated list of files to put into the database.",
+)
 flags.DEFINE_string("output_file", None, "Path to the output file.")
 
 

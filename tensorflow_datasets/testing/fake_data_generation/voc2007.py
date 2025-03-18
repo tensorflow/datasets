@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,15 +22,17 @@ import random
 
 from absl import app
 from absl import flags
-
-import tensorflow.compat.v2 as tf
-from tensorflow_datasets.core.utils import py_utils
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.object_detection import voc
 import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string("tfds_dir", py_utils.tfds_dir(),
-                    "Path to tensorflow_datasets directory")
+flags.DEFINE_string(
+    "tfds_dir",
+    os.fspath(utils.tfds_write_path()),
+    "Path to tensorflow_datasets directory",
+)
 FLAGS = flags.FLAGS
 
 MIN_HEIGHT_WIDTH = 10
@@ -42,8 +44,9 @@ MAX_NUM_OBJECTS = 3
 
 
 def _voc2007_output_dir():
-  return os.path.join(FLAGS.tfds_dir, "testing", "test_data", "fake_examples",
-                      "voc2007")
+  return os.path.join(
+      FLAGS.tfds_dir, "testing", "test_data", "fake_examples", "voc2007"
+  )
 
 
 def _write_text_file(filepath, content):
@@ -58,8 +61,10 @@ def _write_text_file(filepath, content):
 def _generate_jpeg(example_id, height, width):
   """Generate a fake jpeg image for the given example id."""
   jpeg = fake_data_utils.get_random_jpeg(height=height, width=width)
-  filepath = os.path.join(_voc2007_output_dir(),
-                          "VOCdevkit/VOC2007/JPEGImages/%06d.jpg" % example_id)
+  filepath = os.path.join(
+      _voc2007_output_dir(),
+      "VOCdevkit/VOC2007/JPEGImages/%06d.jpg" % example_id,
+  )
   dirname = os.path.dirname(filepath)
   if not tf.io.gfile.exists(dirname):
     tf.io.gfile.makedirs(dirname)
@@ -99,8 +104,10 @@ def _generate_annotation(example_id, height, width):
     annotation += "</object>\n"
   annotation += "</annotation>\n"
   # Add annotation XML to the tar file.
-  filepath = os.path.join(_voc2007_output_dir(),
-                          "VOCdevkit/VOC2007/Annotations/%06d.xml" % example_id)
+  filepath = os.path.join(
+      _voc2007_output_dir(),
+      "VOCdevkit/VOC2007/Annotations/%06d.xml" % example_id,
+  )
   _write_text_file(filepath, annotation)
 
 
@@ -113,13 +120,21 @@ def _generate_data_for_set(set_name, example_start, num_examples):
     _generate_jpeg(example_id, height, width)
     _generate_annotation(example_id, height, width)
   # Add all example ids to the TXT file with all examples in the set.
-  filepath = os.path.join(_voc2007_output_dir(),
-                          "VOCdevkit/VOC2007/ImageSets/Main/%s.txt" % set_name)
+  filepath = os.path.join(
+      _voc2007_output_dir(),
+      "VOCdevkit/VOC2007/ImageSets/Main/%s.txt" % set_name,
+  )
   _write_text_file(
-      filepath, "".join([
-          "%06d\n" % example_id
-          for example_id in range(example_start, example_start + num_examples)
-      ]))
+      filepath,
+      "".join(
+          [
+              "%06d\n" % example_id
+              for example_id in range(
+                  example_start, example_start + num_examples
+              )
+          ]
+      ),
+  )
 
 
 def _generate_trainval_archive():

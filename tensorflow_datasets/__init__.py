@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,25 +30,62 @@ Documentation:
 
 * These API docs
 * [Available datasets](https://www.tensorflow.org/datasets/catalog/overview)
-* [Colab tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
+* [Colab
+tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/master/docs/overview.ipynb)
 * [Add a dataset](https://www.tensorflow.org/datasets/add_dataset)
 """
+# pylint: enable=line-too-long
+# pylint: disable=g-import-not-at-top,g-bad-import-order,wrong-import-position,unused-import
 
-import sys
+from __future__ import annotations
 
-# pylint: disable=g-import-not-at-top
+from absl import logging
+from etils import epy as _epy
 
-# TODO(py2): Cleanup once Py2 support is dropped entirely
-if sys.version_info[0] < 3:
-  print("""
-  ************************************************
-  *   WARNING: TFDS IS UNSUPORTED FOR PYTHON 2   *
-  ************************************************
-  """)
-  from tensorflow_datasets import __init__py2 as api
-  from tensorflow_datasets.__init__py2 import *
-else:
-  from tensorflow_datasets import __init__py3 as api
-  from tensorflow_datasets.__init__py3 import *
 
-__all__ = api.__all__
+try:
+  # pylint: disable=g-import-not-at-top
+  # pytype: disable=import-error
+  # For builds that don't include all dataset builders, we don't want to fail on
+  # import errors of dataset builders.
+  with _epy.lazy_imports(
+      error_callback='Could not import TFDS dataset builders.'
+  ):
+    from tensorflow_datasets import audio
+    from tensorflow_datasets import graphs
+    from tensorflow_datasets import image
+    from tensorflow_datasets import image_classification
+    from tensorflow_datasets import object_detection
+    from tensorflow_datasets import nearest_neighbors
+    from tensorflow_datasets import question_answering
+    from tensorflow_datasets import d4rl
+    from tensorflow_datasets import ranking
+    from tensorflow_datasets import recommendation
+    from tensorflow_datasets import rl_unplugged
+    from tensorflow_datasets.rlds import datasets
+    from tensorflow_datasets import robotics
+    from tensorflow_datasets import robomimic
+    from tensorflow_datasets import structured
+    from tensorflow_datasets import summarization
+    from tensorflow_datasets import text
+    from tensorflow_datasets import text_simplification
+    from tensorflow_datasets import time_series
+    from tensorflow_datasets import translate
+    from tensorflow_datasets import video
+    from tensorflow_datasets import vision_language
+
+  # pytype: enable=import-error
+
+  from tensorflow_datasets import rlds  # pylint: disable=g-bad-import-order
+
+  # Public API to create and generate a dataset
+  from tensorflow_datasets.public_api import *  # pylint: disable=wildcard-import
+  from tensorflow_datasets import public_api  # pylint: disable=g-bad-import-order
+  # pylint: enable=g-import-not-at-top
+  # __all__ for import * as well as documentation
+  __all__ = public_api.__all__
+
+except Exception as exception:  # pylint: disable=broad-except
+  logging.exception(exception)
+
+del _epy

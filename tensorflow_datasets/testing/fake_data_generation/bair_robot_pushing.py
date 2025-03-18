@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ mkdir train/
 from absl import app
 from absl import flags
 import numpy as np
-import tensorflow.compat.v2 as tf
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 FLAGS = flags.FLAGS
 
@@ -42,13 +42,17 @@ def main(argv):
 
   for frame in range(30):
     feature["%d/action" % frame] = tf.train.Feature(
-        float_list=tf.train.FloatList(value=np.random.uniform(size=(4))))
+        float_list=tf.train.FloatList(value=np.random.uniform(size=(4)))
+    )
     feature["%d/endeffector_pos" % frame] = tf.train.Feature(
-        float_list=tf.train.FloatList(value=np.random.uniform(size=(3))))
+        float_list=tf.train.FloatList(value=np.random.uniform(size=(3)))
+    )
     feature["%d/image_aux1/encoded" % frame] = tf.train.Feature(
-        bytes_list=tf.train.BytesList(value=["\x00\xff\x00" * 64 * 64]))
+        bytes_list=tf.train.BytesList(value=["\x00\xff\x00" * 64 * 64])
+    )
     feature["%d/image_main/encoded" % frame] = tf.train.Feature(
-        bytes_list=tf.train.BytesList(value=["\x00\x00\xff" * 64 * 64]))
+        bytes_list=tf.train.BytesList(value=["\x00\x00\xff" * 64 * 64])
+    )
   example = tf.train.Example(features=tf.train.Features(feature=feature))
   writer.write(example.SerializeToString())
   writer.close()

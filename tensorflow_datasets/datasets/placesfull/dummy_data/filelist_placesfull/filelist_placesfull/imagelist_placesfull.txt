@@ -1,0 +1,3 @@
+/a/airfield/dummy_1.jpg 0
+/a/airfield/dummy_2.jpg 0
+/a/airfield/dummy_3.jpg 0

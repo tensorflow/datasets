@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,42 +15,106 @@
 
 """Testing utilities."""
 
-from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
-from tensorflow_datasets.testing.mocking import mock_data
-from tensorflow_datasets.testing.test_case import TestCase
-from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
-from tensorflow_datasets.testing.test_utils import DummyMnist
-from tensorflow_datasets.testing.test_utils import DummyParser
-from tensorflow_datasets.testing.test_utils import DummySerializer
-from tensorflow_datasets.testing.test_utils import fake_examples_dir
-from tensorflow_datasets.testing.test_utils import FeatureExpectationItem
-from tensorflow_datasets.testing.test_utils import FeatureExpectationsTestCase
-from tensorflow_datasets.testing.test_utils import make_tmp_dir
-from tensorflow_datasets.testing.test_utils import mock_kaggle_api
-from tensorflow_datasets.testing.test_utils import MockFs
-from tensorflow_datasets.testing.test_utils import RaggedConstant
-from tensorflow_datasets.testing.test_utils import rm_tmp_dir
-from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
-from tensorflow_datasets.testing.test_utils import SubTestCase
-from tensorflow_datasets.testing.test_utils import test_main
-from tensorflow_datasets.testing.test_utils import tmp_dir
+import importlib
+import typing
+from typing import Any, List
 
-__all__ = [
-    "DatasetBuilderTestCase",
-    "DummyDatasetSharedGenerator",
-    "DummyMnist",
-    "fake_examples_dir",
-    "FeatureExpectationItem",
-    "FeatureExpectationsTestCase",
-    "SubTestCase",
-    "TestCase",
-    "RaggedConstant",
-    "run_in_graph_and_eager_modes",
-    "test_main",
-    "tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
-    "make_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
-    "mock_kaggle_api",
-    "mock_data",
-    "MockFs",
-    "rm_tmp_dir",  # TODO(afrozm): rm from here and add as methods to TestCase
-]
+from tensorflow_datasets.core import registered
+
+# pylint: disable=g-import-not-at-top,g-importing-member
+if typing.TYPE_CHECKING:
+  # We import testing namespace but without registering the tests datasets
+  # (e.g. DummyMnist,...).
+  # LINT.IfChange(pydeps)
+  from tensorflow_datasets.testing.dataset_builder_testing import DatasetBuilderTestCase
+  from tensorflow_datasets.testing.feature_test_case import FeatureExpectationItem
+  from tensorflow_datasets.testing.feature_test_case import FeatureExpectationsTestCase
+  from tensorflow_datasets.testing.feature_test_case import RaggedConstant
+  from tensorflow_datasets.testing.feature_test_case import SubTestCase
+  from tensorflow_datasets.testing.feature_test_case import TestValue
+  from tensorflow_datasets.testing.mocking import mock_data
+  from tensorflow_datasets.testing.mocking import MockPolicy
+  from tensorflow_datasets.testing.mocking import PickableDataSourceMock
+  from tensorflow_datasets.testing.test_case import TestCase
+  from tensorflow_datasets.testing.test_case_in_context import TestCaseInContext
+  from tensorflow_datasets.testing.test_utils import assert_features_equal
+  from tensorflow_datasets.testing.test_utils import disable_gcs_access
+  from tensorflow_datasets.testing.test_utils import dummy_croissant_file
+  from tensorflow_datasets.testing.test_utils import DummyBeamDataset
+  from tensorflow_datasets.testing.test_utils import DummyDataset
+  from tensorflow_datasets.testing.test_utils import DummyDatasetCollection
+  from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
+  from tensorflow_datasets.testing.test_utils import DummyMnist
+  from tensorflow_datasets.testing.test_utils import DummyParser
+  from tensorflow_datasets.testing.test_utils import DummySerializer
+  from tensorflow_datasets.testing.test_utils import enable_gcs_access
+  from tensorflow_datasets.testing.test_utils import fake_examples_dir
+  from tensorflow_datasets.testing.test_utils import make_tmp_dir
+  from tensorflow_datasets.testing.test_utils import mock_kaggle_api
+  from tensorflow_datasets.testing.test_utils import MockFs
+  from tensorflow_datasets.testing.test_utils import rm_tmp_dir
+  from tensorflow_datasets.testing.test_utils import run_in_graph_and_eager_modes
+  from tensorflow_datasets.testing.test_utils import set_current_datetime
+  from tensorflow_datasets.testing.test_utils import test_main
+  from tensorflow_datasets.testing.test_utils import tmp_dir
+  # LINT.ThenChange(:deps)
+# pylint: enable=g-import-not-at-top,g-importing-member
+
+_API = {
+    # LINT.IfChange(deps)
+    "assert_features_equal": "tensorflow_datasets.testing.test_utils",
+    "DatasetBuilderTestCase": (
+        "tensorflow_datasets.testing.dataset_builder_testing"
+    ),
+    "disable_gcs_access": "tensorflow_datasets.testing.test_utils",
+    "dummy_croissant_file": "tensorflow_datasets.testing.test_utils",
+    "DummyBeamDataset": "tensorflow_datasets.testing.test_utils",
+    "DummyDataset": "tensorflow_datasets.testing.test_utils",
+    "DummyDatasetCollection": "tensorflow_datasets.testing.test_utils",
+    "DummyDatasetSharedGenerator": "tensorflow_datasets.testing.test_utils",
+    "DummyMnist": "tensorflow_datasets.testing.test_utils",
+    "DummyParser": "tensorflow_datasets.testing.test_utils",
+    "DummySerializer": "tensorflow_datasets.testing.test_utils",
+    "enable_gcs_access": "tensorflow_datasets.testing.test_utils",
+    "fake_examples_dir": "tensorflow_datasets.testing.test_utils",
+    "FeatureExpectationItem": "tensorflow_datasets.testing.feature_test_case",
+    "FeatureExpectationsTestCase": (
+        "tensorflow_datasets.testing.feature_test_case"
+    ),
+    # TODO(afrozm): rm from here and add as methods to TestCase
+    "make_tmp_dir": "tensorflow_datasets.testing.test_utils",
+    "mock_data": "tensorflow_datasets.testing.mocking",
+    "mock_kaggle_api": "tensorflow_datasets.testing.test_utils",
+    "MockFs": "tensorflow_datasets.testing.test_utils",
+    "MockPolicy": "tensorflow_datasets.testing.mocking",
+    "PickableDataSourceMock": "tensorflow_datasets.testing.mocking",
+    "RaggedConstant": "tensorflow_datasets.testing.feature_test_case",
+    # TODO(afrozm): rm from here and add as methods to TestCase
+    "rm_tmp_dir": "tensorflow_datasets.testing.test_utils",
+    "run_in_graph_and_eager_modes": "tensorflow_datasets.testing.test_utils",
+    "set_current_datetime": "tensorflow_datasets.testing.test_utils",
+    "SubTestCase": "tensorflow_datasets.testing.feature_test_case",
+    "test_main": "tensorflow_datasets.testing.test_utils",
+    "TestCase": "tensorflow_datasets.testing.test_case",
+    "TestCaseInContext": "tensorflow_datasets.testing.test_case_in_context",
+    "TestValue": "tensorflow_datasets.testing.feature_test_case",
+    # TODO(afrozm): rm from here and add as methods to TestCase
+    "tmp_dir": "tensorflow_datasets.testing.test_utils",
+    # LINT.ThenChange(:pydeps)
+}
+
+__all__ = list(_API)
+
+
+def __dir__() -> List[str]:  # pylint: disable=invalid-name
+  return __all__
+
+
+def __getattr__(name: str) -> Any:  # pylint: disable=invalid-name
+  if name in _API:
+    module_name = _API[name]
+    with registered.skip_registration():
+      module = importlib.import_module(module_name)
+    return getattr(module, name)
+  else:
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")

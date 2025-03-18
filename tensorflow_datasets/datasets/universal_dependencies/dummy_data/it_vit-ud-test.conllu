@@ -1,0 +1,17 @@
+# sent_id = VIT-9845
+# text = No, direi che tra Nord e Sud non c'è una differenza culturale.
+1	No	no	INTJ	I	Polarity=Neg	3	discourse	_	SpaceAfter=No
+2	,	,	PUNCT	FF	_	3	punct	_	_
+3	direi	dire	VERB	V	Mood=Cnd|Number=Sing|Person=1|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	che	che	SCONJ	CS	_	11	mark	_	_
+5	tra	tra	ADP	E	_	6	case	_	_
+6	Nord	Nord	PROPN	SP	_	11	nmod	_	_
+7	e	e	CCONJ	CC	_	8	cc	_	_
+8	Sud	Sud	PROPN	SP	_	6	conj	_	_
+9	non	non	ADV	BN	PronType=Neg	11	advmod	_	_
+10	c'	ci	PRON	PC	Clitic=Yes|Number=Plur|Person=1|PronType=Prs	11	expl	_	SpaceAfter=No
+11	è	essere	VERB	V	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	3	ccomp	_	_
+12	una	uno	DET	RI	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	13	det	_	_
+13	differenza	differenza	NOUN	S	Gender=Fem|Number=Sing	11	nsubj	_	_
+14	culturale	culturale	ADJ	A	Number=Sing	13	amod	_	SpaceAfter=No
+15	.	.	PUNCT	FS	_	3	punct	_	_

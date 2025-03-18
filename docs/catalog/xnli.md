@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="xnli" />
   <meta itemprop="description" content="XNLI is a subset of a few thousand examples from MNLI which has been translated&#10;into a 14 different languages (some low-ish resource). As with MNLI, the goal is&#10;to predict textual entailment (does sentence A imply/contradict/neither sentence&#10;B) and is a classification task (given two sentences, predict one of three&#10;labels).&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xnli&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xnli" />
@@ -12,10 +11,6 @@
 
 # `xnli`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 *   **Description**:
 
@@ -24,6 +19,12 @@ into a 14 different languages (some low-ish resource). As with MNLI, the goal is
 to predict textual entailment (does sentence A imply/contradict/neither sentence
 B) and is a classification task (given two sentences, predict one of three
 labels).
+
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/xnli">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
 
 *   **Homepage**:
     [https://www.nyu.edu/projects/bowman/xnli/](https://www.nyu.edu/projects/bowman/xnli/)
@@ -50,38 +51,105 @@ Split          | Examples
 `'test'`       | 5,010
 `'validation'` | 2,490
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
     'hypothesis': TranslationVariableLanguages({
-        'language': Text(shape=(), dtype=tf.string),
-        'translation': Text(shape=(), dtype=tf.string),
+        'language': Text(shape=(), dtype=string),
+        'translation': Text(shape=(), dtype=string),
     }),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=3),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=3),
     'premise': Translation({
-        'ar': Text(shape=(), dtype=tf.string),
-        'bg': Text(shape=(), dtype=tf.string),
-        'de': Text(shape=(), dtype=tf.string),
-        'el': Text(shape=(), dtype=tf.string),
-        'en': Text(shape=(), dtype=tf.string),
-        'es': Text(shape=(), dtype=tf.string),
-        'fr': Text(shape=(), dtype=tf.string),
-        'hi': Text(shape=(), dtype=tf.string),
-        'ru': Text(shape=(), dtype=tf.string),
-        'sw': Text(shape=(), dtype=tf.string),
-        'th': Text(shape=(), dtype=tf.string),
-        'tr': Text(shape=(), dtype=tf.string),
-        'ur': Text(shape=(), dtype=tf.string),
-        'vi': Text(shape=(), dtype=tf.string),
-        'zh': Text(shape=(), dtype=tf.string),
+        'ar': Text(shape=(), dtype=string),
+        'bg': Text(shape=(), dtype=string),
+        'de': Text(shape=(), dtype=string),
+        'el': Text(shape=(), dtype=string),
+        'en': Text(shape=(), dtype=string),
+        'es': Text(shape=(), dtype=string),
+        'fr': Text(shape=(), dtype=string),
+        'hi': Text(shape=(), dtype=string),
+        'ru': Text(shape=(), dtype=string),
+        'sw': Text(shape=(), dtype=string),
+        'th': Text(shape=(), dtype=string),
+        'tr': Text(shape=(), dtype=string),
+        'ur': Text(shape=(), dtype=string),
+        'vi': Text(shape=(), dtype=string),
+        'zh': Text(shape=(), dtype=string),
     }),
 })
 ```
 
+*   **Feature documentation**:
+
+Feature                | Class                        | Shape | Dtype  | Description
+:--------------------- | :--------------------------- | :---- | :----- | :----------
+                       | FeaturesDict                 |       |        |
+hypothesis             | TranslationVariableLanguages |       |        |
+hypothesis/language    | Text                         |       | string |
+hypothesis/translation | Text                         |       | string |
+label                  | ClassLabel                   |       | int64  |
+premise                | Translation                  |       |        |
+premise/ar             | Text                         |       | string |
+premise/bg             | Text                         |       | string |
+premise/de             | Text                         |       | string |
+premise/el             | Text                         |       | string |
+premise/en             | Text                         |       | string |
+premise/es             | Text                         |       | string |
+premise/fr             | Text                         |       | string |
+premise/hi             | Text                         |       | string |
+premise/ru             | Text                         |       | string |
+premise/sw             | Text                         |       | string |
+premise/th             | Text                         |       | string |
+premise/tr             | Text                         |       | string |
+premise/ur             | Text                         |       | string |
+premise/vi             | Text                         |       | string |
+premise/zh             | Text                         |       | string |
+
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `None`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xnli-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -103,6 +171,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

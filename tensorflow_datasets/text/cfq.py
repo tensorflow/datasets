@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +18,9 @@
 import json
 import os
 import re
+
 from absl import logging
-import tensorflow.compat.v2 as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -58,20 +59,30 @@ data = tfds.load('cfq/mcd1')
 _DATA_URL = 'https://storage.googleapis.com/cfq_dataset/cfq.tar.gz'
 
 _RANDOM_SEEDS = [
-    '4_0', '4_42', '4.5_0', '4.5_45', '5_50', '5_50', '5.5_0', '5.5_55', '6_0'
+    '4_0',
+    '4_42',
+    '4.5_0',
+    '4.5_45',
+    '5_50',
+    '5_50',
+    '5.5_0',
+    '5.5_55',
+    '6_0',
 ]
 
 
 class CFQConfig(tfds.core.BuilderConfig):
   """BuilderConfig for CFQ splits."""
 
-  def __init__(self,
-               *,
-               name=None,
-               directory=None,
-               compound_divergence=None,
-               random_seed=None,
-               **kwargs):
+  def __init__(
+      self,
+      *,
+      name=None,
+      directory=None,
+      compound_divergence=None,
+      random_seed=None,
+      **kwargs,
+  ):
     """BuilderConfig for CFQ.
 
     Can be constucted in two ways:
@@ -98,17 +109,17 @@ class CFQConfig(tfds.core.BuilderConfig):
       else:
         raise ValueError('Invalid random seed: %s' % random_seed)
       directory = 'splits/all_divergence_splits'
-      split_name = 'divergence_split_s0.4_d%s_r%s' % (compound_divergence,
-                                                      random_seed)
+      split_name = 'divergence_split_s0.4_d%s_r%s' % (
+          compound_divergence,
+          random_seed,
+      )
       name = 'cd%s_r%s' % (compound_divergence, random_seed_index)
     else:
       directory = 'splits'
       split_name = name
     super(CFQConfig, self).__init__(
-        name=name,
-        version=tfds.core.Version('1.2.0'),
-        description=_DESCRIPTION,
-        **kwargs)
+        name=name, version=tfds.core.Version('1.2.0'), **kwargs
+    )
     self.split_file = os.path.join(directory, split_name + '.json')
 
 
@@ -125,7 +136,9 @@ def _generate_compound_divergence_builder_configs():
     for random_seed in range(1, 10):
       configs.append(
           CFQConfig(
-              compound_divergence=compound_divergence, random_seed=random_seed))
+              compound_divergence=compound_divergence, random_seed=random_seed
+          )
+      )
   return configs
 
 
@@ -152,7 +165,9 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
             _QUERY: tfds.features.Text(),
         }),
         supervised_keys=(_QUESTION, _QUERY),
-        homepage='https://github.com/google-research/google-research/tree/master/cfq',
+        homepage=(
+            'https://github.com/google-research/google-research/tree/master/cfq'
+        ),
         citation=_CITATION,
     )
 
@@ -166,22 +181,25 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
             gen_kwargs={
                 'base_directory': data_dir,
                 'splits_file': self.builder_config.split_file,
-                'split_id': 'trainIdxs'
-            }),
+                'split_id': 'trainIdxs',
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
             gen_kwargs={
                 'base_directory': data_dir,
                 'splits_file': self.builder_config.split_file,
-                'split_id': 'devIdxs'
-            }),
+                'split_id': 'devIdxs',
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 'base_directory': data_dir,
                 'splits_file': self.builder_config.split_file,
-                'split_id': 'testIdxs'
-            })
+                'split_id': 'testIdxs',
+            },
+        ),
     ]
 
   def _scrub_json(self, content):
@@ -193,19 +211,27 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     # the content to only what is needed. This takes 1min to execute but
     # afterwards loading requires only 500MB or RAM and is done in 2s.
     regex = re.compile(
-        r'("%s":\s*"[^"]*").*?("%s":\s*"[^"]*")' %
-        (_QUESTION_FIELD, _QUERY_FIELD), re.DOTALL)
-    return '[' + ','.join([
-        '{' + m.group(1) + ',' + m.group(2) + '}'
-        for m in regex.finditer(content)
-    ]) + ']'
+        r'("%s":\s*"[^"]*").*?("%s":\s*"[^"]*")'
+        % (_QUESTION_FIELD, _QUERY_FIELD),
+        re.DOTALL,
+    )
+    return (
+        '['
+        + ','.join(
+            [
+                '{' + m.group(1) + ',' + m.group(2) + '}'
+                for m in regex.finditer(content)
+            ]
+        )
+        + ']'
+    )
 
   def _generate_examples(self, base_directory, splits_file, split_id):
     """Yields examples."""
     samples_path = os.path.join(base_directory, 'dataset.json')
     splits_path = os.path.join(base_directory, splits_file)
-    with tf.io.gfile.GFile(samples_path) as samples_file:
-      with tf.io.gfile.GFile(splits_path) as splits_file:
+    with epath.Path(samples_path).open() as samples_file:
+      with epath.Path(splits_path).open() as splits_file:
         logging.info('Reading json from %s into memory...', samples_path)
         samples = json.loads(self._scrub_json(samples_file.read()))
         logging.info('%d samples loaded', len(samples))
@@ -215,5 +241,5 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
           sample = samples[idx]
           yield idx, {
               _QUESTION: sample[_QUESTION_FIELD],
-              _QUERY: sample[_QUERY_FIELD]
+              _QUERY: sample[_QUERY_FIELD],
           }

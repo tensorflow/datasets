@@ -1,0 +1,185 @@
+// Copyright 2022 Google LLC
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//     https://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// Defines messages for computing the RL reward for each timestep.
+//
+// This message structure assumes a building with:
+//   (a) multiple zones that have ventiation and air temperature setpoints,
+//   (b) one or more air handlers with fans and air conditioners, and
+//   (c) one or more natural gas boilers with heating water recirculaion.
+//
+// All units are in fundamental metric units: Kelvin, Watts (Joules/sec),
+// and meters.
+//
+// Energy rate is divided into electricity and natural gas because
+// of varying levels of carbon emission. It assumes that all electricity
+// consumed is from the same source and has the same amount of carbon emission.
+//
+// The reward function is based on the following equation:
+//     r = s(setpoint) - u x f(energy_cost) - w x g(carbon_emission)
+// where:
+//   r: the total reward for the timestep,
+//   s(setpoint): reward function for maintiaining setpoint,
+//   f(energy_cost): total cost in energy for the period,
+//   g(carbon_emission): total cost associated with carbon emissions, and
+//   u, w are importance weights defined by the energy policy.
+//
+// These messages define the variables needed to compute the reward for a
+// specific timestep.
+
+syntax = "proto3";
+
+package smart_buildings.smart_control.proto;
+
+import "google/protobuf/timestamp.proto";
+
+// Top-level message that defines the variables needed to compute the reward for
+// a specific timestep.
+message RewardInfo {
+  // Information about each zone in the time step for computing reward.
+  message ZoneRewardInfo {
+    // Heating setpoint of the zone at the timestep in K.
+    float heating_setpoint_temperature = 1;
+
+    // Cooling setpoint of the zone at the timestep in K.
+    float cooling_setpoint_temperature = 2;
+
+    // Average zone air temperature measured in the zone in K.
+    float zone_air_temperature = 3;
+
+    // Setpoint for air flow ventilation in the zone in m^3/s.
+    float air_flow_rate_setpoint = 4;
+
+    // Actual ventilation air flow in the zone in m^3/s.
+    float air_flow_rate = 5;
+
+    // Average occupancy in the zone over the time step in number of
+    // people in the zone.
+    float average_occupancy = 6;
+  }
+
+  // Information about the air handler energy consumption for computing reward.
+  message AirHandlerRewardInfo {
+    // Cumulative electrical power in W applied to blowers.
+    float blower_electrical_energy_rate = 1;
+
+    // Cumulative electrical energy rate applied in W for air condioning. This
+    // represents the total power applied for running a refrigeration or
+    // heat pump cycles (includes running a compressor and pumps to
+    // recirculate refrgerant.).
+    float air_conditioning_electrical_energy_rate = 2;
+  }
+
+  // Information about the boiler that provides heated water for VAVs.
+  message BoilerRewardInfo {
+    // Energy rate consumed in W by natural gas for heating water.
+    float natural_gas_heating_energy_rate = 1;
+    // Cumularive electrical power in W for water recirculation pumps.
+    float pump_electrical_energy_rate = 2;
+  }
+
+  // Start and end timestamps bound the timestep of the reward information.
+  google.protobuf.Timestamp start_timestamp = 1;
+  google.protobuf.Timestamp end_timestamp = 2;
+
+  // Unique ID of the agent (controller). This should reflect the
+  // attributes of the RL models, including the type of algo and its
+  // parameters.
+  string agent_id = 3;
+
+  // Unique ID of the scenario being executed. This should reflect the details
+  // of the scenario. In simulation, it should identify the canonical scenario.
+  // In real world, it should define the building and start date/time.
+  string scenario_id = 4;
+
+  // Map with zone_id and zone reward info for all zones in the building
+  // under control of the agent. The zone_id could be a unique room number,
+  // or the specific zone coordinates: (i.e., 'z_i,z_j') from the simulation.
+  map<string, ZoneRewardInfo> zone_reward_infos = 5;
+
+  // Information about the air handlers' energy consumption required to
+  // calculate the reward.
+  map<string, AirHandlerRewardInfo> air_handler_reward_infos = 6;
+
+  // Information about the boilers' energy consumption required to compute the
+  // reward.
+  map<string, BoilerRewardInfo> boiler_reward_infos = 7;
+}
+
+// The return reward signal from the reward function. While the principal
+// signal is the agent reward and should be returned to the RL agent, the
+// other fields provide useful information for tracking and monitoring.
+// One EnergyRewardResponse is associated with each EnergyRewardInfo.
+message RewardResponse {
+  // Complete reward signal to be returned to the agent, unit is in
+  // USD, associated with the EnergyRewardInfo.
+  float agent_reward_value = 1;
+
+  // Cumulative productivity is measured in USD, and represents the total
+  // estimated productivity of the building.
+  float productivity_reward = 2;
+
+  // Total electrical energy cost estimate in USD.
+  float electricity_energy_cost = 3;
+
+  // Total natural gas energy cost in USD.
+  float natural_gas_energy_cost = 4;
+
+  // Estimated carbon emitted in kg.
+  float carbon_emitted = 5;
+
+  // Estimated carbon cost in USD.
+  float carbon_cost = 6;
+
+  // Productivity weight parameter.
+  float productivity_weight = 7;
+
+  // Energy Cost Weight parameter.
+  float energy_cost_weight = 8;
+
+  // Carbon emission weight parameter.
+  float carbon_emission_weight = 9;
+
+  // Productivity factor (avg labor value of one person-hour).
+  float person_productivity = 10;
+
+  // Total average occupancy across all zones.
+  float total_occupancy = 11;
+
+  // Reward scale for normalizing the reward
+  float reward_scale = 12;
+
+  // Reward shift for normalizing the reward
+  float reward_shift = 13;
+
+  // Total productivity regret = max productivity - actual productivity
+  float productivity_regret = 14;
+
+  // Normalized productivity regret
+  float normalized_productivity_regret = 15;
+
+  // Normalized energy cost =
+  //  combined_energy_cost /
+  //  (max_electricity_energy_cost + max_natural_gas_energy_cost)
+  float normalized_energy_cost = 16;
+
+  // Normalized carbon emission =
+  //  combined_carbon_emission /
+  //  (max_electricity_carbon_emission + max_natural_gas_carbon_emission)
+  float normalized_carbon_emission = 17;
+
+  // Start and end timestamps bound the timestep of the reward information.
+  google.protobuf.Timestamp start_timestamp = 18;
+  google.protobuf.Timestamp end_timestamp = 19;
+}

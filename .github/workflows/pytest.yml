@@ -1,0 +1,130 @@
+name: Unittests
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  push:
+    branches:
+      - master
+    # Do not trigger tests for documentation or markdown docs.
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+  schedule:
+    # Trigger tests every day at 02:00 UTC to refresh cache.
+    - cron: '0 2 * * *'
+
+# Cancel in-progress runs for the current workflow if not on the main branch
+# (as it marks the unittests as failed).
+# Conditionals to concurrent are based on the solution proposed in this link:
+# https://github.community/t/concurrency-cancel-in-progress-but-not-when-ref-is-master/194707
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel only PR intermediate builds.
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+
+jobs:
+  activate-tests:
+    name: Check whether we should run tests or not
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - id: check
+      uses: ./.github/actions/activate-tests
+
+    outputs:
+      status: ${{ steps.check.outputs.status }}
+
+  pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Core TFDS tests'
+    uses: ./.github/workflows/pytest-template.yml
+    with:
+      tf-version: tensorflow
+      os-version: ubuntu-22.04
+
+  huggingface-pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    # HuggingFace tests need to be run separately because they're disabled without installed
+    # `datasets` library.
+    name: 'HuggingFace Python 3.10 tests'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tensorflow
+        python-version: '3.10'
+        extras: huggingface
+
+    - name: Run HuggingFace tests
+      run: |
+        pytest -vv -n auto \
+          tensorflow_datasets/core/dataset_builders/huggingface_dataset_builder_test.py \
+          tensorflow_datasets/core/utils/huggingface_utils_test.py
+
+  githubapi-pytest-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Github API tests'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tensorflow
+
+    - name: Run Github API tests
+      run: pytest --durations=100 -vv -n auto tensorflow_datasets/core/github_api/github_path_test.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  notebook-test-job:
+    needs: activate-tests
+    if: ${{ needs.activate-tests.outputs.status }}
+
+    name: 'Notebook tests'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./.github/actions/setup
+      with:
+        tf-version: tensorflow
+        use-cache: false
+
+    # Test each notebook sequentially.
+    - name: Run notebooks sequentially
+      run: |
+        ipython kernel install --user --name tfds-notebook
+        for notebook in docs/*ipynb
+          do
+            # These notebooks time out because they rely on loading huge datasets.
+            if [[ "$notebook" != "docs/determinism.ipynb" ]] && \
+               [[ "$notebook" != "docs/dataset_collections.ipynb" ]]
+            then
+              jupyter nbconvert \
+                --ExecutePreprocessor.timeout=600 \
+                --ExecutePreprocessor.kernel_name=tfds-notebook \
+                --to notebook \
+                --execute $notebook && \
+              pip install tensorflow  # reinstall tensorflow if it was uninstalled
+            fi
+          done

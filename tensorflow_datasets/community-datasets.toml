@@ -1,0 +1,23 @@
+# You can add your own datasets here to register them in TFDS. See details
+# at: https://www.tensorflow.org/datasets/community_catalog/overview
+
+[huggingface]
+info = """
+Namespace to load datasets on HuggingFace. See https://huggingface.co/datasets
+for available datasets.
+
+Example:
+```
+ds = tfds.load('huggingface:acronym_identification', split='train')
+```
+"""
+paths = ["github://huggingface/datasets/tree/master/datasets"]
+
+[kubric]
+info = "https://github.com/google-research/kubric"
+paths = ["gs://kubric-public/tfds"]
+
+[robotics]
+info = "https://research.google/research-areas/robotics"
+paths = ["gs://gresearch/robotics"]
+

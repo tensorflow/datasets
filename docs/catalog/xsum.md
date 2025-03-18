@@ -2,7 +2,6 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="xsum" />
   <meta itemprop="description" content="Extreme Summarization (XSum) Dataset.&#10;&#10;There are two features:&#10;  - document: Input news article.&#10;  - summary: One sentence summary of the article.&#10;&#10;This data need to manaully downloaded and extracted as described in&#10;https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md.&#10;The folder &#x27;xsum-extracts-from-downloads&#x27; need to be compressed as&#10;&#x27;xsum-extracts-from-downloads.tar.gz&#x27; and put in manually downloaded folder.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;xsum&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/xsum" />
@@ -12,10 +11,6 @@
 
 # `xsum`
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
 
 Warning: Manual download required. See instructions below.
 
@@ -31,6 +26,12 @@ https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md. The
 folder 'xsum-extracts-from-downloads' need to be compressed as
 'xsum-extracts-from-downloads.tar.gz' and put in manually downloaded folder.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/xsum">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset](https://github.com/EdinburghNLP/XSum/tree/master/XSum-Dataset)
 
@@ -39,14 +40,12 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Versions**:
 
-    *   **`1.1.0`** (default): No release notes.
-    *   `1.0.0`
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Dataset without cleaning.
+    *   `1.0.0`: Dataset without cleaning.
+    *   **`1.1.0`** (default): Removes web contents.
 
 *   **Download size**: `2.59 MiB`
 
-*   **Dataset size**: `Unknown size`
+*   **Dataset size**: `512.03 MiB`
 
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
@@ -58,7 +57,7 @@ folder 'xsum-extracts-from-downloads' need to be compressed as
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
+    No
 
 *   **Splits**:
 
@@ -68,18 +67,67 @@ Split          | Examples
 `'train'`      | 203,577
 `'validation'` | 11,305
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'document': Text(shape=(), dtype=tf.string),
-    'summary': Text(shape=(), dtype=tf.string),
+    'document': Text(shape=(), dtype=string),
+    'summary': Text(shape=(), dtype=string),
 })
 ```
+
+*   **Feature documentation**:
+
+Feature  | Class        | Shape | Dtype  | Description
+:------- | :----------- | :---- | :----- | :----------
+         | FeaturesDict |       |        |
+document | Text         |       | string |
+summary  | Text         |       | string |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
     `('document', 'summary')`
+
+*   **Figure**
+    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
+    Not supported.
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/xsum-1.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 *   **Citation**:
 
@@ -93,6 +141,3 @@ FeaturesDict({
 }
 ```
 
-*   **Visualization**
-    ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
-    Not supported.

@@ -1,0 +1,50 @@
+{
+  "citation": "@misc{jin2023large,\n      title={Can Large Language Models Infer Causation from Correlation?}, \n      author={Zhijing Jin and Jiarui Liu and Zhiheng Lyu and Spencer Poff and Mrinmaya Sachan and Rada Mihalcea and Mona Diab and Bernhard Sch\u00f6lkopf},\n      year={2023},\n      eprint={2306.05836},\n      archivePrefix={arXiv},\n      primaryClass={cs.CL}\n}",
+  "description": "# Corr2cause\n\nCausal inference is one of the hallmarks of human intelligence.\n\nCorr2cause is a large-scale dataset of more than 400K samples, on which\nseventeen existing LLMs are evaluated in the related paper.\n\nOverall, Corr2cause contains 415,944 samples, with 18.57% in valid samples.\nThe average length of the premise is 424.11 tokens, and hypothesis 10.83 tokens.\nThe data is split into 411,452 training samples, 2,246 development and test\nsamples, respectively. Since the main purpose of the dataset is to benchmark the\nperformance of LLMs, the test and development sets have been prioritized to have\na comprehensive coverage over all sizes of graphs.",
+  "downloadSize": "762542325",
+  "fileFormat": "tfrecord",
+  "location": {
+    "urls": [
+      "https://github.com/causalNLP/corr2cause/tree/main"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.corr2cause.corr2cause_dataset_builder",
+  "name": "corr2cause",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "770530290",
+      "shardLengths": [
+        "51432",
+        "51431",
+        "51431",
+        "51432",
+        "51432",
+        "51431",
+        "51431",
+        "51432"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "dev",
+      "numBytes": "3025637",
+      "shardLengths": [
+        "2246"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "2301061",
+      "shardLengths": [
+        "2246"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

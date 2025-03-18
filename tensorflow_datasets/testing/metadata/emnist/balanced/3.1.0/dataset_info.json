@@ -1,0 +1,50 @@
+{
+  "citation": "@article{cohen_afshar_tapson_schaik_2017,\n    title={EMNIST: Extending MNIST to handwritten letters},\n    DOI={10.1109/ijcnn.2017.7966217},\n    journal={2017 International Joint Conference on Neural Networks (IJCNN)},\n    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},\n    year={2017}\n}",
+  "configDescription": "EMNIST Balanced",
+  "configName": "balanced",
+  "description": "The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.\n\nNote: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.",
+  "downloadSize": "561753746",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.nist.gov/itl/products-and-services/emnist-dataset"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.mnist",
+  "name": "emnist",
+  "releaseNotes": {
+    "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+    "3.1.0": "Updated broken download URL"
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "50886106",
+      "shardLengths": [
+        "112800"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "8497150",
+      "shardLengths": [
+        "18800"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "3.1.0"
+}

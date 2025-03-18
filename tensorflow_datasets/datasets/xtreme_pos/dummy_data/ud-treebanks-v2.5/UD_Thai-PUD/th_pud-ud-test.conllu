@@ -1,0 +1,33 @@
+# sent_id = n01003007
+# text = 5,000 ดอลลาร์ต่อคน สูงสุดตามที่ได้รับอนุญาต
+# text_en = $5,000 per person, the maximum allowed.
+1	5,000	_	NUM	CD	_	2	nummod	_	_
+2	ดอลลาร์	_	NOUN	NNB	_	0	root	_	SpaceAfter=No
+3	ต่อ	_	ADP	IN	_	4	case	_	SpaceAfter=No
+4	คน	_	NOUN	NN	_	2	nmod	_	_
+5	สูง	_	ADJ	JJ	_	2	conj	_	SpaceAfter=No
+6	สุด	_	ADV	RB	_	5	advmod	_	SpaceAfter=No
+7	ตาม	_	ADP	IN	_	10	case	_	SpaceAfter=No
+8	ที่	_	DET	WDT	_	10	nsubj	_	SpaceAfter=No
+9	ได้รับ	_	VERB	MD	Voice=Pass	10	aux	_	SpaceAfter=No
+10	อนุญาต	_	VERB	VV	_	5	xcomp	_	_
+
+# sent_id = w01139090
+# text = แก่นเรื่องอีกอย่างในนิยายสกายลาร์กเกี่ยวข้องกับต้นกำเนิดของเทคโนโลยีสารสนเทศยุคใหม่
+# text_en = Another theme of the Skylark novels involves precursors of modern information technology.
+1	แก่น	_	NOUN	NN	_	8	nsubj	_	SpaceAfter=No
+2	เรื่อง	_	NOUN	NN	_	1	compound	_	SpaceAfter=No
+3	อีก	_	DET	DT	_	4	det	_	SpaceAfter=No
+4	อย่าง	_	NOUN	NNB	_	1	clf	_	SpaceAfter=No
+5	ใน	_	ADP	IN	_	6	case	_	SpaceAfter=No
+6	นิยาย	_	NOUN	NN	_	1	nmod	_	SpaceAfter=No
+7	สกายลาร์ก	_	PROPN	NNP	_	6	compound	_	SpaceAfter=No
+8	เกี่ยวข้อง	_	VERB	VV	_	0	root	_	SpaceAfter=No
+9	กับ	_	ADP	IN	_	10	case	_	SpaceAfter=No
+10	ต้น	_	NOUN	NN	_	8	obl	_	SpaceAfter=No
+11	กำเนิด	_	VERB	VV	_	10	acl	_	SpaceAfter=No
+12	ของ	_	ADP	IN	_	13	case	_	SpaceAfter=No
+13	เทคโนโลยี	_	NOUN	NN	_	10	nmod:poss	_	SpaceAfter=No
+14	สารสนเทศ	_	NOUN	NN	_	13	compound	_	SpaceAfter=No
+15	ยุค	_	NOUN	NN	_	13	obl:tmod	_	SpaceAfter=No
+16	ใหม่	_	ADJ	JJ	_	15	amod	_	_

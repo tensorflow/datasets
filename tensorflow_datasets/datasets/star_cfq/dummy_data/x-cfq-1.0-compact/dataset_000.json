@@ -1,0 +1,4 @@
+[
+{"questionPatternModEntities":"Was a person a Spanish screenwriter that M2 and M3 played","sparqlPatternModEntities":"SELECT count(*) WHERE {\n?x0 a ns:film.writer .\n?x0 a ns:people.person .\n?x0 ns:film.film_character.portrayed_in_films/ns:film.performance.actor M2 .\n?x0 ns:film.film_character.portrayed_in_films/ns:film.performance.actor M3 .\n?x0 ns:people.person.nationality ns:m.06mkj\n}"},
+{"questionPatternModEntities":"Was M0 's prequel 's prequel 's sequel 's editor and writer M1","sparqlPatternModEntities":"SELECT count(*) WHERE {\n?x0 ns:film.film.prequel ?x1 .\n?x1 ns:film.film.sequel ?x2 .\n?x2 ns:film.film.sequel M0 .\nM1 ns:film.editor.film ?x0 .\nM1 ns:film.writer.film|ns:tv.tv_writer.tv_programs/ns:tv.tv_program_writer_relationship.tv_program ?x0\n}"}
+]

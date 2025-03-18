@@ -1,0 +1,4 @@
+fully visible
+partly occluded
+largely occluded
+unknown

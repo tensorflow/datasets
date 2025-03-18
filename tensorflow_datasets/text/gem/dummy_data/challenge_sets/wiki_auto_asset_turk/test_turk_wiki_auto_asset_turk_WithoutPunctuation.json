@@ -1,0 +1,18 @@
+[
+    {
+        "gem_id": "wiki_auto_asset_turk-test-0",
+        "references": [
+            "One side of the armed conflicts is composed mainly of the Sudanese military and the Janjaweed , a Sudanese militia group recruited mostly from the Afro-Arab Abbala tribes of the northern Rizeigat regime in Sudan .",
+            "One side of the armed conflicts is made up mostly of the Sudanese military and the Janjaweed , a Sudanese militia group whose recruits mostly come from the Afro-Arab Abbala tribes from the northern Rizeigat region in Sudan .",
+            "One side of the armed conflicts is composed mainly of the Sudanese military and the Janjaweed , a Sudanese militia group recruited mostly from the Afro-Arab Abbala tribes in Sudan .",
+            "One side of the armed conflicts is composed mainly of the Sudanese military and the Janjaweed , a Sudanese militia group recruited mostly from the Afro-Arab Abbala tribes of the northern Rizeigat region in Sudan .",
+            "One side of the armed conflicts consist of the Sudanese military and the Sudanese militia group Janjaweed .",
+            "The Sudanese military and the Janjaweed make up one of the armed conflicts , mostly from the Afro-Arab Abbal tribes in Sudan .",
+            "One side of the armed conflicts is mainly Sudanese military and the Janjaweed , which recruited from the Afro-Arab Abbala tribes ."
+        ],
+        "source": "One side of the armed conflicts is made of Sudanese military and the Janjaweed , a Sudanese militia recruited from the Afro-Arab Abbala tribes of the northern Rizeigat region in Sudan",
+        "source_id": "",
+        "target": "One side of the armed conflicts is composed mainly of the Sudanese military and the Janjaweed , a Sudanese militia group recruited mostly from the Afro-Arab Abbala tribes of the northern Rizeigat regime in Sudan .",
+        "target_id": ""
+    }
+]

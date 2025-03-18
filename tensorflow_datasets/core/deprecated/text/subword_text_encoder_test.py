@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,13 @@ from __future__ import unicode_literals
 import os
 
 from absl.testing import parameterized
-import tensorflow.compat.v2 as tf
+import tensorflow as tf
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.deprecated.text import subword_text_encoder
 from tensorflow_datasets.core.deprecated.text import text_encoder
-from tensorflow_datasets.core.utils import py_utils
 
-TEST_DATA_DIR = os.path.join(py_utils.tfds_dir(), 'testing', 'test_data')
+TEST_DATA_DIR = os.path.join(utils.tfds_path(), 'testing', 'test_data')
 
 
 class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):
@@ -37,7 +37,8 @@ class SubwordTextEncoderTest(parameterized.TestCase, testing.TestCase):
     #                  1       2       3      4      5
     self.vocab_list = ['foo_', 'bar_', 'foo', 'bar', '<EOS>']
     self.encoder = subword_text_encoder.SubwordTextEncoder(
-        vocab_list=self.vocab_list)
+        vocab_list=self.vocab_list
+    )
 
   def test_vocab_size(self):
     # Bytes + pad + subwords

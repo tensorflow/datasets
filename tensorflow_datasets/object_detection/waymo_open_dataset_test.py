@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class WaymoOpenDatasetTest(testing.DatasetBuilderTestCase):
     """Set up Waymo Open Dataset tests."""
     super(WaymoOpenDatasetTest, self).setUp()
     for config in waymo_open_dataset.WaymoOpenDataset.BUILDER_CONFIGS:
-      config.cloud_bucket = self.example_dir
+      config.cloud_bucket = self.dummy_data
 
 
 if __name__ == "__main__":

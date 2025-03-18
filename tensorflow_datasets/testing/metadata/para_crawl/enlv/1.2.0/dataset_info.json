@@ -1,0 +1,39 @@
+{
+  "citation": "@misc {paracrawl,\n    title  = \"ParaCrawl\",\n    year   = \"2018\",\n    url    = \"http://paracrawl.eu/download.html.\"\n}",
+  "configDescription": "Translation dataset from English to lv.",
+  "configName": "enlv",
+  "description": "Web-Scale Parallel Corpora for Official European Languages.",
+  "downloadSize": "47368967",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://paracrawl.eu/releases.html"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.para_crawl",
+  "name": "para_crawl",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "154236685",
+      "shardLengths": [
+        "276530",
+        "276530"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "en"
+        },
+        {
+          "featureKey": "lv"
+        }
+      ]
+    }
+  },
+  "version": "1.2.0"
+}

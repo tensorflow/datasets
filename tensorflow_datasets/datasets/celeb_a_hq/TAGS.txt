@@ -1,0 +1,5 @@
+content.data-type.image
+ml.task.density-estimation
+ml.task.image-generation
+ml.task.image-super-resolution
+ml.task.image-to-image-translation

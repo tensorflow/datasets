@@ -2,15 +2,15 @@
   <div itemscope itemprop="includedInDataCatalog" itemtype="http://schema.org/DataCatalog">
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
-
   <meta itemprop="name" content="emnist" />
-  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;emnist&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/emnist-byclass-3.0.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
+  <meta itemprop="description" content="The EMNIST dataset is a set of handwritten character digits derived from the NIST Special Database 19 and converted to a 28x28 pixel image format and dataset structure that directly matches the MNIST dataset.&#10;&#10;Note: Like the original EMNIST data, images provided here are inverted horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within `ds.map` to convert the images to a human-friendlier format.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;emnist&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;&lt;img src=&quot;https://storage.googleapis.com/tfds-data/visualization/fig/emnist-byclass-3.1.0.png&quot; alt=&quot;Visualization&quot; width=&quot;500px&quot;&gt;&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/emnist" />
   <meta itemprop="sameAs" content="https://www.nist.gov/itl/products-and-services/emnist-dataset" />
   <meta itemprop="citation" content="@article{cohen_afshar_tapson_schaik_2017,&#10;    title={EMNIST: Extending MNIST to handwritten letters},&#10;    DOI={10.1109/ijcnn.2017.7966217},&#10;    journal={2017 International Joint Conference on Neural Networks (IJCNN)},&#10;    author={Cohen, Gregory and Afshar, Saeed and Tapson, Jonathan and Schaik, Andre Van},&#10;    year={2017}&#10;}" />
 </div>
 
 # `emnist`
+
 
 *   **Description**:
 
@@ -22,6 +22,12 @@ Note: Like the original EMNIST data, images provided here are inverted
 horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 `ds.map` to convert the images to a human-friendlier format.
 
+*   **Additional Documentation**:
+    <a class="button button-with-icon" href="https://paperswithcode.com/dataset/emnist">
+    Explore on Papers With Code
+    <span class="material-icons icon-after" aria-hidden="true"> north_east
+    </span> </a>
+
 *   **Homepage**:
     [https://www.nist.gov/itl/products-and-services/emnist-dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
@@ -30,16 +36,10 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 
 *   **Versions**:
 
-    *   **`3.0.0`** (default): New split API
-        (https://tensorflow.org/datasets/splits)
+    *   `3.0.0`: New split API (https://tensorflow.org/datasets/splits)
+    *   **`3.1.0`** (default): Updated broken download URL
 
 *   **Download size**: `535.73 MiB`
-
-*   **Dataset size**: `Unknown size`
-
-*   **Auto-cached**
-    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
-    Unknown
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
@@ -57,9 +57,16 @@ horizontally and rotated 90 anti-clockwise. You can use `tf.transpose` within
 }
 ```
 
+
 ## emnist/byclass (default config)
 
 *   **Config description**: EMNIST ByClass
+
+*   **Dataset size**: `349.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
 
 *   **Splits**:
 
@@ -68,24 +75,75 @@ Split     | Examples
 `'test'`  | 116,323
 `'train'` | 697,932
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=62),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=62),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-byclass-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-byclass-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-byclass-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## emnist/bymerge
 
 *   **Config description**: EMNIST ByMerge
 
+*   **Dataset size**: `349.16 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    No
+
 *   **Splits**:
 
 Split     | Examples
@@ -93,23 +151,74 @@ Split     | Examples
 `'test'`  | 116,323
 `'train'` | 697,932
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=47),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-bymerge-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-bymerge-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-bymerge-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## emnist/balanced
 
 *   **Config description**: EMNIST Balanced
+
+*   **Dataset size**: `56.63 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -118,23 +227,74 @@ Split     | Examples
 `'test'`  | 18,800
 `'train'` | 112,800
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=47),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=47),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-balanced-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-balanced-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-balanced-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## emnist/letters
 
 *   **Config description**: EMNIST Letters
+
+*   **Dataset size**: `44.14 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -143,23 +303,74 @@ Split     | Examples
 `'test'`  | 14,800
 `'train'` | 88,800
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=37),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=37),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-letters-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-letters-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-letters-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## emnist/digits
 
 *   **Config description**: EMNIST Digits
+
+*   **Dataset size**: `120.32 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -168,23 +379,74 @@ Split     | Examples
 `'test'`  | 40,000
 `'train'` | 240,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-digits-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-digits-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-digits-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->
 
 ## emnist/mnist
 
 *   **Config description**: EMNIST MNIST
+
+*   **Dataset size**: `30.09 MiB`
+
+*   **Auto-cached**
+    ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
+    Yes
 
 *   **Splits**:
 
@@ -193,16 +455,61 @@ Split     | Examples
 `'test'`  | 10,000
 `'train'` | 60,000
 
-*   **Features**:
+*   **Feature structure**:
 
 ```python
 FeaturesDict({
-    'image': Image(shape=(28, 28, 1), dtype=tf.uint8),
-    'label': ClassLabel(shape=(), dtype=tf.int64, num_classes=10),
+    'image': Image(shape=(28, 28, 1), dtype=uint8),
+    'label': ClassLabel(shape=(), dtype=int64, num_classes=10),
 })
 ```
 
-*   **Visualization**
+*   **Feature documentation**:
+
+Feature | Class        | Shape       | Dtype | Description
+:------ | :----------- | :---------- | :---- | :----------
+        | FeaturesDict |             |       |
+image   | Image        | (28, 28, 1) | uint8 |
+label   | ClassLabel   |             | int64 |
+
+*   **Figure**
     ([tfds.show_examples](https://www.tensorflow.org/datasets/api_docs/python/tfds/visualization/show_examples)):
 
-<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-mnist-3.0.0.png" alt="Visualization" width="500px">
+<img src="https://storage.googleapis.com/tfds-data/visualization/fig/emnist-mnist-3.1.0.png" alt="Visualization" width="500px">
+
+*   **Examples**
+    ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
+
+<!-- mdformat off(HTML should not be auto-formatted) -->
+
+{% framebox %}
+
+<button id="displaydataframe">Display examples...</button>
+<div id="dataframecontent" style="overflow-x:auto"></div>
+<script>
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/emnist-mnist-3.1.0.html";
+const dataButton = document.getElementById('displaydataframe');
+dataButton.addEventListener('click', async () => {
+  // Disable the button after clicking (dataframe loaded only once).
+  dataButton.disabled = true;
+
+  const contentPane = document.getElementById('dataframecontent');
+  try {
+    const response = await fetch(url);
+    // Error response codes don't throw an error, so force an error to show
+    // the error message.
+    if (!response.ok) throw Error(response.statusText);
+
+    const data = await response.text();
+    contentPane.innerHTML = data;
+  } catch (e) {
+    contentPane.innerHTML =
+        'Error loading examples. If the error persist, please open '
+        + 'a new issue.';
+  }
+});
+</script>
+
+{% endframebox %}
+
+<!-- mdformat on -->

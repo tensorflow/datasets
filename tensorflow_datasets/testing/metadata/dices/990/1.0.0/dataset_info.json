@@ -1,0 +1,30 @@
+{
+  "citation": "@article{aroyo2024dices,\n  title={{DICES} dataset: Diversity in conversational {AI} evaluation for safety},\n  author={Aroyo, Lora and Taylor, Alex and Diaz, Mark and Homan, Christopher and Parrish, Alicia and Serapio-Garc{\\'\\i}a, Gregory and Prabhakaran, Vinodkumar and Wang, Ding},\n  journal={Advances in Neural Information Processing Systems},\n  volume={36},\n  year={2024}\n}",
+  "configDescription": "Dataset 990 contains 990 conversations rated by a diverse rater pool of 173 unique raters. Each conversation is rated with three safety top-level categories and one overall conversation comprehension question. Raters were recruited so that the number of raters for each conversation was balanced by gender (Man, Woman) and locale (US, India). Each rater rated only a sample of the conversation. Each conversation has 60-70 unique ratings. Total number of rows in this dataset is 72103.",
+  "configName": "990",
+  "description": "# The Diversity in Conversational AI Evaluation for Safety (**DICES**) dataset\n\nMachine learning approaches are often trained and evaluated with datasets that\nrequire a clear separation between positive and negative examples. This approach\noverly simplifies the natural subjectivity present in many tasks and content\nitems. It also obscures the inherent diversity in human perceptions and\nopinions. Often tasks that attempt to preserve the variance in content and\ndiversity in humans are quite expensive and laborious. To fill in this gap and\nfacilitate more in-depth model performance analyses we propose the DICES dataset\n- a unique dataset with diverse perspectives on safety of AI generated\nconversations. We focus on the task of safety evaluation of conversational AI\nsystems. The DICES dataset contains detailed demographics information about each\nrater, extremely high replication of unique ratings per conversation to ensure\nstatistical significance of further analyses and encodes rater votes as\ndistributions across different demographics to allow for in-depth explorations\nof different rating aggregation strategies.\n\nThis dataset is well suited to observe and measure variance, ambiguity and\ndiversity in the context of safety of conversational AI. The dataset is\naccompanied by a paper describing a set of metrics that show how rater diversity\ninfluences the safety perception of raters from different geographic regions,\nethnicity groups, age groups and genders. The goal of the DICES dataset is to be\nused as a shared benchmark for safety evaluation of conversational AI systems.\n\n**CONTENT WARNING**: This dataset contains adversarial examples of conversations\nthat may be offensive.",
+  "downloadSize": "50399432",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/google-research-datasets/dices-dataset"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.dices.dices_dataset_builder",
+  "name": "dices",
+  "releaseNotes": {
+    "1.0.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "157689306",
+      "shardLengths": [
+        "36052",
+        "36051"
+      ]
+    }
+  ],
+  "version": "1.0.0"
+}

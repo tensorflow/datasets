@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ from __future__ import print_function
 import json
 import os
 
-import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -46,7 +46,10 @@ _DATA_URL = 'https://storage.googleapis.com/ai2-mosaic/public/winogrande/winogra
 class Winogrande(tfds.core.GeneratorBasedBuilder):
   """The Winogrande challenge."""
 
-  VERSION = tfds.core.Version('1.1.0')
+  VERSION = tfds.core.Version('1.2.0')
+  RELEASE_NOTES = {
+      '1.2.0': 'Updated source file with more data and new checksums.',
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -78,21 +81,26 @@ class Winogrande(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split('train_{}'.format(size)),
               gen_kwargs={
-                  'filepath':
-                      os.path.join(data_dir, 'train_{}.jsonl'.format(size))
-              }))
+                  'filepath': os.path.join(
+                      data_dir, 'train_{}.jsonl'.format(size)
+                  )
+              },
+          )
+      )
     return train_splits + [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'test.jsonl')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'test.jsonl')},
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.VALIDATION,
-            gen_kwargs={'filepath': os.path.join(data_dir, 'dev.jsonl')}),
+            gen_kwargs={'filepath': os.path.join(data_dir, 'dev.jsonl')},
+        ),
     ]
 
   def _generate_examples(self, filepath):
     """This function returns the examples in the raw (text) form."""
-    with tf.io.gfile.GFile(filepath) as f:
+    with epath.Path(filepath).open() as f:
       for row in f:
         row_fields = json.loads(row)
         yield row_fields['qID'], {

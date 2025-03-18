@@ -1,0 +1,46 @@
+{
+  "citation": "@misc{guzmn2019new,\n    title={Two New Evaluation Datasets for Low-Resource Machine Translation: Nepali-English and Sinhala-English},\n    author={Francisco Guzman and Peng-Jen Chen and Myle Ott and Juan Pino and Guillaume Lample and Philipp Koehn and Vishrav Chaudhary and Marc'Aurelio Ranzato},\n    year={2019},\n    eprint={1902.01382},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "configDescription": "Translation dataset from ne to en.",
+  "configName": "neen",
+  "description": "Evaluation datasets for low-resource machine translation: Nepali-English and Sinhala-English.",
+  "downloadSize": "1542781",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/facebookresearch/flores/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.translate.flores",
+  "name": "flores",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "909949",
+      "shardLengths": [
+        "2559"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "1066714",
+      "shardLengths": [
+        "2835"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "ne"
+        },
+        {
+          "featureKey": "en"
+        }
+      ]
+    }
+  },
+  "version": "1.2.0"
+}

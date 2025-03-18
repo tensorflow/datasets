@@ -1,0 +1,5 @@
+content.data-type.text
+content.monolingual
+ml.task.anomaly-detection
+ml.task.natural-language-understanding
+ml.task.text-classification

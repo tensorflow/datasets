@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,25 +24,19 @@ python tensorflow_datasets/scripts/freeze_dataset_version.py
 
 """
 
-import os
-
 from absl import app
-from absl import flags
 
-import tensorflow.compat.v2 as tf
 import tensorflow_datasets as tfds
-
-FLAGS = flags.FLAGS
-
-flags.DEFINE_string('tfds_dir', tfds.core.utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
 
 
 def main(_):
-  version_path = os.path.join(FLAGS.tfds_dir, 'stable_versions.txt')
+  tfds.core.visibility.set_availables([
+      tfds.core.visibility.DatasetType.TFDS_PUBLIC,
+  ])
+
   registered_names = tfds.core.load.list_full_names()
-  with tf.io.gfile.GFile(version_path, 'w') as f:
-    f.write('\n'.join(registered_names))
+  version_path = tfds.core.utils.tfds_write_path() / 'stable_versions.txt'
+  version_path.write_text('\n'.join(registered_names))
   print(f'{len(registered_names)} datasets versions written.')
 
 

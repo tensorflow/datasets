@@ -1,0 +1,32 @@
+[
+  {
+    "tripleset": [
+      [
+        "Abel Caballero",
+        "BIRTH_PLACE",
+        "Ponteareas"
+      ],
+      [
+        "Abel Caballero",
+        "OFFICE_(WORKED_AT,_WORKED_AS)",
+        "\"Member of the Congress of Deputies\""
+      ],
+      [
+        "Abel Caballero",
+        "BIRTH_PLACE",
+        "Galicia (Spain)"
+      ]
+    ],
+    "subtree_was_extended": false,
+    "annotations": [
+      {
+        "source": "webnlg",
+        "text": "Abel Caballero was born in Ponteareas in Galicia, Spain and worked as a Member of the Congress of Deputies."
+      },
+      {
+        "source": "webnlg",
+        "text": "Abel Caballero, born in Ponteareas, Galicia, Spain, worked as a Member of the Congress of Deputies."
+      }
+    ]
+  }
+]

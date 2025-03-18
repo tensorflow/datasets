@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 
 import csv
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -54,11 +55,34 @@ _URL_TEST = 'https://github.com/google-research/google-research/raw/master/goemo
 
 _TEXT_LABEL = 'comment_text'
 _EMOTION_LABELS = [
-    'admiration', 'amusement', 'anger', 'annoyance', 'approval', 'caring',
-    'confusion', 'curiosity', 'desire', 'disappointment', 'disapproval',
-    'disgust', 'embarrassment', 'excitement', 'fear', 'gratitude', 'grief',
-    'joy', 'love', 'nervousness', 'optimism', 'pride', 'realization', 'relief',
-    'remorse', 'sadness', 'surprise', 'neutral'
+    'admiration',
+    'amusement',
+    'anger',
+    'annoyance',
+    'approval',
+    'caring',
+    'confusion',
+    'curiosity',
+    'desire',
+    'disappointment',
+    'disapproval',
+    'disgust',
+    'embarrassment',
+    'excitement',
+    'fear',
+    'gratitude',
+    'grief',
+    'joy',
+    'love',
+    'nervousness',
+    'optimism',
+    'pride',
+    'realization',
+    'relief',
+    'remorse',
+    'sadness',
+    'surprise',
+    'neutral',
 ]
 
 
@@ -148,7 +172,7 @@ class Goemotions(tfds.core.GeneratorBasedBuilder):
       emotions label, 0/1 depending on whether is it a label for the input.
     """
     fieldnames = ['comment_text', 'emotion_ids', 'comment_id']
-    with tf.io.gfile.GFile(filename) as f:
+    with epath.Path(filename).open() as f:
       reader = csv.DictReader(f, fieldnames=fieldnames, delimiter='\t')
       for row in reader:
         example = self._parse_row_as_example(row)

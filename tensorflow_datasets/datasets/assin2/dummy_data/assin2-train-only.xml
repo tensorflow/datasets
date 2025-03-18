@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entailment-corpus>
+         <pair entailment="Entailment" id="1" similarity="4.5">
+             <t>Uma criança risonha está segurando uma pistola de água e sendo espirrada com água</t>
+             <h>Uma criança está segurando uma pistola de água</h>
+         </pair>
+         <pair entailment="Entailment" id="2" similarity="4.5">
+             <t>Os homens estão cuidadosamente colocando as malas no porta-malas de um carro</t>
+             <h>Os homens estão colocando bagagens dentro do porta-malas de um carro</h>
+         </pair>
+         <pair entailment="Entailment" id="3" similarity="4.7">
+             <t>Uma pessoa tem cabelo loiro e esvoaçante e está tocando violão</t>
+             <h>Um guitarrista tem cabelo loiro e esvoaçante</h>
+         </pair>
+         <pair entailment="Entailment" id="4" similarity="4.7">
+             <t>Batatas estão sendo fatiadas por um homem</t>
+             <h>O homem está fatiando a batata</h>
+         </pair>
+         <pair entailment="Entailment" id="5" similarity="4.9">
+             <t>Um caminhão está descendo rapidamente um morro</t>
+             <h>Um caminhão está rapidamente descendo o morro</h>
+         </pair>
+</entailment-corpus>

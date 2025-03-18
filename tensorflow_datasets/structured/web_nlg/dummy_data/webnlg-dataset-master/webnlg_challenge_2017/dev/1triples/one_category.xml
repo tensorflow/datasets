@@ -1,0 +1,13 @@
+<benchmark>
+  <entries>
+    <entry category="Airport" eid="Id1" size="1">
+      <originaltripleset>
+        <otriple>Aarhus | leaderName | Jacob_Bundsgaard</otriple>
+      </originaltripleset>
+      <modifiedtripleset>
+        <mtriple>Aarhus | leaderName | Jacob_Bundsgaard</mtriple>
+      </modifiedtripleset>
+      <lex comment="good" lid="Id1">The leader of Aarhus is Jacob Bundsgaard.</lex>
+    </entry>
+  </entries>
+</benchmark>

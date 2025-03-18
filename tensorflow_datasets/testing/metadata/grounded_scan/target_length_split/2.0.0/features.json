@@ -1,0 +1,227 @@
+{
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+    "featuresDict": {
+        "features": {
+            "referred_target": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "target_commands": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "situation": {
+                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                "featuresDict": {
+                    "features": {
+                        "target_object": {
+                            "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                            "featuresDict": {
+                                "features": {
+                                    "position": {
+                                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                        "featuresDict": {
+                                            "features": {
+                                                "column": {
+                                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                    "tensor": {
+                                                        "shape": {},
+                                                        "dtype": "int32",
+                                                        "encoding": "none"
+                                                    }
+                                                },
+                                                "row": {
+                                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                    "tensor": {
+                                                        "shape": {},
+                                                        "dtype": "int32",
+                                                        "encoding": "none"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "vector": {
+                                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                        "text": {}
+                                    },
+                                    "object": {
+                                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                        "featuresDict": {
+                                            "features": {
+                                                "shape": {
+                                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                    "text": {}
+                                                },
+                                                "color": {
+                                                    "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                    "text": {}
+                                                },
+                                                "size": {
+                                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                    "tensor": {
+                                                        "shape": {},
+                                                        "dtype": "int32",
+                                                        "encoding": "none"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "agent_direction": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int32",
+                                "encoding": "none"
+                            }
+                        },
+                        "placed_objects": {
+                            "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                            "sequence": {
+                                "feature": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                    "featuresDict": {
+                                        "features": {
+                                            "vector": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                "text": {}
+                                            },
+                                            "object": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                                "featuresDict": {
+                                                    "features": {
+                                                        "shape": {
+                                                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                            "text": {}
+                                                        },
+                                                        "color": {
+                                                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                                                            "text": {}
+                                                        },
+                                                        "size": {
+                                                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                            "tensor": {
+                                                                "shape": {},
+                                                                "dtype": "int32",
+                                                                "encoding": "none"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "position": {
+                                                "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                                                "featuresDict": {
+                                                    "features": {
+                                                        "column": {
+                                                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                            "tensor": {
+                                                                "shape": {},
+                                                                "dtype": "int32",
+                                                                "encoding": "none"
+                                                            }
+                                                        },
+                                                        "row": {
+                                                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                                            "tensor": {
+                                                                "shape": {},
+                                                                "dtype": "int32",
+                                                                "encoding": "none"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "length": "-1"
+                            }
+                        },
+                        "agent_position": {
+                            "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict",
+                            "featuresDict": {
+                                "features": {
+                                    "row": {
+                                        "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                        "tensor": {
+                                            "shape": {},
+                                            "dtype": "int32",
+                                            "encoding": "none"
+                                        }
+                                    },
+                                    "column": {
+                                        "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                        "tensor": {
+                                            "shape": {},
+                                            "dtype": "int32",
+                                            "encoding": "none"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "direction_to_target": {
+                            "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                            "text": {}
+                        },
+                        "grid_size": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int32",
+                                "encoding": "none"
+                            }
+                        },
+                        "distance_to_target": {
+                            "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                            "tensor": {
+                                "shape": {},
+                                "dtype": "int32",
+                                "encoding": "none"
+                            }
+                        }
+                    }
+                }
+            },
+            "verb_in_command": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "command": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "meaning": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                        "text": {}
+                    },
+                    "length": "-1"
+                }
+            },
+            "manner": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            }
+        }
+    }
+}

@@ -1,68 +1,36 @@
 {
-  "citation": "\n@inproceedings{ganesan2010opinosis,\n  title={Opinosis: a graph-based approach to abstractive summarization of highly redundant opinions},\n  author={Ganesan, Kavita and Zhai, ChengXiang and Han, Jiawei},\n  booktitle={Proceedings of the 23rd International Conference on Computational Linguistics},\n  pages={340--348},\n  year={2010},\n  organization={Association for Computational Linguistics}\n}\n",
-  "description": "\nThe Opinosis Opinion Dataset consists of sentences extracted from reviews for 51 topics.\nTopics and opinions are obtained from Tripadvisor, Edmunds.com and Amazon.com.\n",
+  "citation": "@inproceedings{ganesan2010opinosis,\n  title={Opinosis: a graph-based approach to abstractive summarization of highly redundant opinions},\n  author={Ganesan, Kavita and Zhai, ChengXiang and Han, Jiawei},\n  booktitle={Proceedings of the 23rd International Conference on Computational Linguistics},\n  pages={340--348},\n  year={2010},\n  organization={Association for Computational Linguistics}\n}",
+  "description": "The Opinosis Opinion Dataset consists of sentences extracted from reviews for 51 topics.\nTopics and opinions are obtained from Tripadvisor, Edmunds.com and Amazon.com.",
   "downloadSize": "757398",
+  "fileFormat": "array_record",
   "location": {
     "urls": [
       "http://kavita-ganesan.com/opinosis/"
     ]
   },
+  "moduleName": "tensorflow_datasets.summarization.opinosis",
   "name": "opinosis",
-  "schema": {
-    "feature": [
-      {
-        "name": "review_sents",
-        "type": "BYTES"
-      },
-      {
-        "name": "summaries",
-        "shape": {
-          "dim": [
-            {
-              "size": "-1"
-            }
-          ]
-        },
-        "type": "BYTES"
-      }
-    ]
-  },
   "splits": [
     {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
       "name": "train",
       "numBytes": "742862",
-      "numShards": "1",
       "shardLengths": [
         "51"
-      ],
-      "statistics": {
-        "features": [
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "51"
-              }
-            },
-            "name": "review_sents",
-            "type": "BYTES"
-          },
-          {
-            "bytesStats": {
-              "commonStats": {
-                "numNonMissing": "51"
-              }
-            },
-            "name": "summaries",
-            "type": "BYTES"
-          }
-        ],
-        "numExamples": "51"
-      }
+      ]
     }
   ],
   "supervisedKeys": {
-    "input": "review_sents",
-    "output": "summaries"
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "review_sents"
+        },
+        {
+          "featureKey": "summaries"
+        }
+      ]
+    }
   },
   "version": "1.0.0"
 }

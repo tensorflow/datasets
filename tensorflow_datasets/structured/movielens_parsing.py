@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,15 +20,16 @@ import csv
 import os
 from typing import Any, Dict, Iterator, Tuple
 
-import tensorflow.compat.v2 as tf
+from etils import epath
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def parse_current_movies_data(
-    dir_path: str
+    dir_path: str,
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the movies data in current format (20m, 25m, and latest-small)."""
   movies_file_path = os.path.join(dir_path, 'movies.csv')
-  with tf.io.gfile.GFile(movies_file_path) as movies_file:
+  with epath.Path(movies_file_path).open() as movies_file:
     movies_reader = csv.DictReader(movies_file)
     for row_num, row in enumerate(movies_reader):
       yield row_num, {
@@ -39,7 +40,7 @@ def parse_current_movies_data(
 
 
 def parse_current_ratings_data(
-    dir_path: str
+    dir_path: str,
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the ratings data in current format (20m, 25m, and latest-small)."""
   movie_info_map = {}
@@ -47,7 +48,7 @@ def parse_current_ratings_data(
     movie_info_map[movie_example['movie_id']] = movie_example
 
   ratings_file_path = os.path.join(dir_path, 'ratings.csv')
-  with tf.io.gfile.GFile(ratings_file_path) as ratings_file:
+  with epath.Path(ratings_file_path).open() as ratings_file:
     ratings_reader = csv.DictReader(ratings_file)
     for row_num, row in enumerate(ratings_reader):
       ex = {
@@ -59,9 +60,7 @@ def parse_current_ratings_data(
       yield row_num, ex
 
 
-def parse_1m_movies_data(
-    dir_path: str
-) -> Iterator[Tuple[int, Dict[str, Any]]]:
+def parse_1m_movies_data(dir_path: str) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the 1m movies data."""
   movies_file_path = os.path.join(dir_path, 'movies.dat')
   with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
@@ -73,7 +72,7 @@ def parse_1m_movies_data(
       # 1m dataset labels "Children" genre as "Children's".
       # However "Children" and "Children's" should represent the same genre.
       for idx, genre in enumerate(genre_list):
-        if genre == 'Children\'s':
+        if genre == "Children's":
           genre_list[idx] = 'Children'
       yield row_num, {
           'movie_id': movie_id,
@@ -83,7 +82,7 @@ def parse_1m_movies_data(
 
 
 def parse_1m_ratings_data(
-    dir_path: str
+    dir_path: str,
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the 1m ratings data."""
   movie_info_map = {}
@@ -94,12 +93,27 @@ def parse_1m_ratings_data(
   # A list for converting occupation index to occupation string for 1M
   # dataset.
   occupation_index_to_label = [
-      'other/not specified', 'academic/educator', 'artist', 'clerical/admin',
-      'college/grad student', 'customer service', 'doctor/health care',
-      'executive/managerial', 'farmer', 'homemaker', 'K-12 student', 'lawyer',
-      'programmer', 'retired', 'sales/marketing', 'scientist',
-      'self-employed', 'technician/engineer', 'tradesman/craftsman',
-      'unemployed', 'writer',
+      'other/not specified',
+      'academic/educator',
+      'artist',
+      'clerical/admin',
+      'college/grad student',
+      'customer service',
+      'doctor/health care',
+      'executive/managerial',
+      'farmer',
+      'homemaker',
+      'K-12 student',
+      'lawyer',
+      'programmer',
+      'retired',
+      'sales/marketing',
+      'scientist',
+      'self-employed',
+      'technician/engineer',
+      'tradesman/craftsman',
+      'unemployed',
+      'writer',
   ]
   user_info_map = {}
   with tf.io.gfile.GFile(users_file_path, mode='rb') as users_file:
@@ -138,16 +152,32 @@ def parse_1m_ratings_data(
 
 
 def parse_100k_movies_data(
-    dir_path: str
+    dir_path: str,
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the 100k movies data."""
   movies_file_path = os.path.join(dir_path, 'u.item')
   # A list for converting genre index to genre label for 100K dataset.
   # "Children's" changed to "Children" in the list for consistency.
   all_genre_list = [
-      'Unknown', 'Action', 'Adventure', 'Animation', 'Children', 'Comedy',
-      'Crime', 'Documentary', 'Drama', 'Fantasy', 'Film-Noir', 'Horror',
-      'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Thriller', 'War', 'Western',
+      'Unknown',
+      'Action',
+      'Adventure',
+      'Animation',
+      'Children',
+      'Comedy',
+      'Crime',
+      'Documentary',
+      'Drama',
+      'Fantasy',
+      'Film-Noir',
+      'Horror',
+      'Musical',
+      'Mystery',
+      'Romance',
+      'Sci-Fi',
+      'Thriller',
+      'War',
+      'Western',
   ]
   with tf.io.gfile.GFile(movies_file_path, mode='rb') as movies_file:
     for row_num, line in enumerate(movies_file):
@@ -171,7 +201,7 @@ def parse_100k_movies_data(
 
 
 def parse_100k_ratings_data(
-    dir_path: str
+    dir_path: str,
 ) -> Iterator[Tuple[int, Dict[str, Any]]]:
   """Parses the 100k ratings data."""
   movie_info_map = {}
@@ -223,8 +253,9 @@ def parse_100k_ratings_data(
           'user_gender': gender_str == 'M',
           'bucketized_user_age': bucketized_age,
           'raw_user_age': raw_age,
-          'user_occupation_label':
-              occupation_label_conversion_map[occupation_str],
+          'user_occupation_label': occupation_label_conversion_map[
+              occupation_str
+          ],
           'user_occupation_text': occupation_str,
           'user_zip_code': zip_code,
       }

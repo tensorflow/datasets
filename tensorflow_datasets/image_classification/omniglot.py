@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 """Omniglot dataset."""
 
 import os
-import tensorflow.compat.v2 as tf
 
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """\
@@ -54,22 +55,22 @@ _NUM_ALPHABETS = 50
 class Omniglot(tfds.core.GeneratorBasedBuilder):
   """Omniglot dataset."""
 
-  VERSION = tfds.core.Version(
-      "3.0.0", "New split API (https://tensorflow.org/datasets/splits)")
+  VERSION = tfds.core.Version("3.0.0")
+  RELEASE_NOTES = {
+      "3.0.0": "New split API (https://tensorflow.org/datasets/splits)",
+  }
 
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "image":
-                tfds.features.Image(shape=(105, 105, 3), encoding_format="png"),
-            "alphabet":
-                tfds.features.ClassLabel(num_classes=_NUM_ALPHABETS),
-            "alphabet_char_id":
-                tf.int64,
-            "label":
-                tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
+            "image": tfds.features.Image(
+                shape=(105, 105, 3), encoding_format="png"
+            ),
+            "alphabet": tfds.features.ClassLabel(num_classes=_NUM_ALPHABETS),
+            "alphabet_char_id": np.int64,
+            "label": tfds.features.ClassLabel(num_classes=_NUM_CLASSES),
         }),
         supervised_keys=("image", "label"),
         homepage=_BASE_URL,
@@ -89,22 +90,26 @@ class Omniglot(tfds.core.GeneratorBasedBuilder):
             name=tfds.Split.TRAIN,
             gen_kwargs={
                 "directory": extracted_dirs["train"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
             gen_kwargs={
                 "directory": extracted_dirs["eval"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name="small1",
             gen_kwargs={
                 "directory": extracted_dirs["small1"],
-            }),
+            },
+        ),
         tfds.core.SplitGenerator(
             name="small2",
             gen_kwargs={
                 "directory": extracted_dirs["small2"],
-            }),
+            },
+        ),
     ]
 
   def _generate_examples(self, directory):
@@ -127,7 +132,7 @@ def _walk_omniglot_dir(directory):
     alphabet_dir = os.path.join(directory, alphabet)
     characters = sorted(tf.io.gfile.listdir(alphabet_dir))
     for character in characters:
-      character_id = int(character[len("character"):]) - 1
+      character_id = int(character[len("character") :]) - 1
       character_dir = os.path.join(alphabet_dir, character)
       images = tf.io.gfile.listdir(character_dir)
       for image in images:

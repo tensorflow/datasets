@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,19 +24,23 @@ import tarfile
 from absl import app
 from absl import flags
 
+from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.features import ClassLabel
-from tensorflow_datasets.core.utils import py_utils
 from tensorflow_datasets.object_detection import open_images
 from tensorflow_datasets.testing import fake_data_utils
 
-flags.DEFINE_string('tfds_dir', py_utils.tfds_dir(),
-                    'Path to tensorflow_datasets directory')
+flags.DEFINE_string(
+    'tfds_dir',
+    os.fspath(utils.tfds_write_path()),
+    'Path to tensorflow_datasets directory',
+)
 FLAGS = flags.FLAGS
 
 
 def _output_dir():
-  return os.path.join(FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples',
-                      'open_images_v4')
+  return os.path.join(
+      FLAGS.tfds_dir, 'testing', 'test_data', 'fake_examples', 'open_images_v4'
+  )
 
 
 def _get_image_ids(images_number, prefix=None):
@@ -70,10 +74,16 @@ def _write_tar(path, split_name, image_ids, prefix=None):
 def _write_image_level_labels(fname, image_ids, machine=False):
   """Writes CSV with 0-10 labels per image."""
   lines = ['ImageID,Source,LabelName,Condidence']
-  all_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
-      os.path.join('object_detection', 'open_images_classes_all.txt')))
-  trainable_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
-      os.path.join('object_detection', 'open_images_classes_trainable.txt')))
+  all_class_label = ClassLabel(
+      names_file=utils.tfds_write_path(
+          os.path.join('object_detection', 'open_images_classes_all.txt')
+      )
+  )
+  trainable_class_label = ClassLabel(
+      names_file=utils.tfds_write_path(
+          os.path.join('object_detection', 'open_images_classes_trainable.txt')
+      )
+  )
   for i, image_id in enumerate(image_ids):
     if i < 1:
       # Ensure that at least some image contains trainable classes.
@@ -84,7 +94,7 @@ def _write_image_level_labels(fname, image_ids, machine=False):
       source = random.choice(open_images.IMAGE_LEVEL_SOURCES)
       confidence = random.choice((0, 1))
       if machine:
-        confidence = '%.1f' % (random.randint(0, 10) / 10.)
+        confidence = '%.1f' % (random.randint(0, 10) / 10.0)
       else:
         confidence = random.choice((0, 1))
       lines.append('%s,%s,%s,%s' % (image_id, source, label, confidence))
@@ -95,10 +105,15 @@ def _write_image_level_labels(fname, image_ids, machine=False):
 
 def _write_bbox_labels(fname, image_ids):
   """Writes CSV with 0-10 labels per image."""
-  lines = ['ImageID,Source,LabelName,Confidence,XMin,XMax,YMin,YMax,IsOccluded,'
-           'IsTruncated,IsGroupOf,IsDepiction,IsInside']
-  boxable_class_label = ClassLabel(names_file=py_utils.get_tfds_path(
-      os.path.join('object_detection', 'open_images_classes_boxable.txt')))
+  lines = [
+      'ImageID,Source,LabelName,Confidence,XMin,XMax,YMin,YMax,IsOccluded,'
+      'IsTruncated,IsGroupOf,IsDepiction,IsInside'
+  ]
+  boxable_class_label = ClassLabel(
+      names_file=utils.tfds_write_path(
+          os.path.join('object_detection', 'open_images_classes_boxable.txt')
+      )
+  )
   for image_id in image_ids:
     labels = random.sample(boxable_class_label.names, random.randint(0, 10))
     for label in labels:
@@ -108,8 +123,23 @@ def _write_bbox_labels(fname, image_ids):
       ymin = random.uniform(0, 1)
       ymax = random.uniform(ymin, 1)
       p1, p2, p3, p4, p5 = [random.randint(-1, 1) for unused_i in range(5)]
-      lines.append('%s,%s,%s,1,%.6f,%.6f,%.6f,%.6f,%s,%s,%s,%s,%s' % (
-          image_id, source, label, xmin, xmax, ymin, ymax, p1, p2, p3, p4, p5))
+      lines.append(
+          '%s,%s,%s,1,%.6f,%.6f,%.6f,%.6f,%s,%s,%s,%s,%s'
+          % (
+              image_id,
+              source,
+              label,
+              xmin,
+              xmax,
+              ymin,
+              ymax,
+              p1,
+              p2,
+              p3,
+              p4,
+              p5,
+          )
+      )
   path = os.path.join(_output_dir(), fname)
   with open(path, 'w') as csv_f:
     csv_f.write('\n'.join(lines))
@@ -124,8 +154,9 @@ def _generate_train_files():
     all_image_ids.extend(image_ids)
     _write_tar(path, 'train', image_ids, prefix)
   _write_image_level_labels('train-human-labels.csv', all_image_ids)
-  _write_image_level_labels('train-machine-labels.csv', all_image_ids,
-                            machine=True)
+  _write_image_level_labels(
+      'train-machine-labels.csv', all_image_ids, machine=True
+  )
   _write_bbox_labels('train-annotations-bbox.csv', all_image_ids)
 
 
@@ -145,8 +176,9 @@ def _generate_validation_files():
   image_ids = _get_image_ids(images_number=12)
   _write_tar(path, 'test', image_ids)
   _write_image_level_labels('validation-human-labels.csv', image_ids)
-  _write_image_level_labels('validation-machine-labels.csv', image_ids,
-                            machine=True)
+  _write_image_level_labels(
+      'validation-machine-labels.csv', image_ids, machine=True
+  )
   _write_bbox_labels('validation-annotations-bbox.csv', image_ids)
 
 

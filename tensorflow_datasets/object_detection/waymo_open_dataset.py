@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,13 @@
 
 """The Waymo Open Dataset. See waymo.com/open."""
 
-import io
+from __future__ import annotations
+
 import os
+
 from absl import logging
-import tensorflow.compat.v2 as tf
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.proto import waymo_dataset_pb2 as open_dataset
 import tensorflow_datasets.public_api as tfds
 
@@ -55,8 +58,11 @@ data_dir='gs://waymo_open_dataset_{}_individual_files/tensorflow_datasets')
 
 _HOMEPAGE_URL = "http://www.waymo.com/open/"
 _OBJECT_LABELS = [
-    "TYPE_UNKNOWN", "TYPE_VEHICLE", "TYPE_PEDESTRIAN", "TYPE_SIGN",
-    "TYPE_CYCLIST"
+    "TYPE_UNKNOWN",
+    "TYPE_VEHICLE",
+    "TYPE_PEDESTRIAN",
+    "TYPE_SIGN",
+    "TYPE_CYCLIST",
 ]
 
 
@@ -81,9 +87,9 @@ class WaymoOpenDatasetConfig(tfds.core.BuilderConfig):
         name=name,
         version=tfds.core.Version("0.2.0"),
         description=description,
-        **kwargs
+        **kwargs,
     )
-    self.cloud_bucket = tfds.core.gcs_path(
+    self.cloud_bucket = tfds.core.Path(
         f"gs://waymo_open_dataset_{version_str}_individual_files/"
     )
 
@@ -121,44 +127,37 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            "context": {
-                "name": tfds.features.Text()
-            },
-            "timestamp_micros": tf.int64,
+            "context": {"name": tfds.features.Text()},
+            "timestamp_micros": np.int64,
             "camera_FRONT": {
-                "image":
-                    tfds.features.Image(
-                        shape=(1280, 1920, 3), encoding_format="jpeg"),
-                "labels":
-                    tfds.features.Sequence(annotations)
+                "image": tfds.features.Image(
+                    shape=(1280, 1920, 3), encoding_format="jpeg"
+                ),
+                "labels": tfds.features.Sequence(annotations),
             },
             "camera_FRONT_LEFT": {
-                "image":
-                    tfds.features.Image(
-                        shape=(1280, 1920, 3), encoding_format="jpeg"),
-                "labels":
-                    tfds.features.Sequence(annotations)
+                "image": tfds.features.Image(
+                    shape=(1280, 1920, 3), encoding_format="jpeg"
+                ),
+                "labels": tfds.features.Sequence(annotations),
             },
             "camera_SIDE_LEFT": {
-                "image":
-                    tfds.features.Image(
-                        shape=(886, 1920, 3), encoding_format="jpeg"),
-                "labels":
-                    tfds.features.Sequence(annotations)
+                "image": tfds.features.Image(
+                    shape=(886, 1920, 3), encoding_format="jpeg"
+                ),
+                "labels": tfds.features.Sequence(annotations),
             },
             "camera_FRONT_RIGHT": {
-                "image":
-                    tfds.features.Image(
-                        shape=(1280, 1920, 3), encoding_format="jpeg"),
-                "labels":
-                    tfds.features.Sequence(annotations)
+                "image": tfds.features.Image(
+                    shape=(1280, 1920, 3), encoding_format="jpeg"
+                ),
+                "labels": tfds.features.Sequence(annotations),
             },
             "camera_SIDE_RIGHT": {
-                "image":
-                    tfds.features.Image(
-                        shape=(886, 1920, 3), encoding_format="jpeg"),
-                "labels":
-                    tfds.features.Sequence(annotations)
+                "image": tfds.features.Image(
+                    shape=(886, 1920, 3), encoding_format="jpeg"
+                ),
+                "labels": tfds.features.Sequence(annotations),
             },
         }),
         homepage=_HOMEPAGE_URL,
@@ -176,13 +175,19 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     """
 
     # Training set
-    train_files = tf.io.gfile.glob(os.path.join(
-        self.builder_config.cloud_bucket, "training/segment*camera*"))
+    train_files = tf.io.gfile.glob(
+        os.path.join(
+            self.builder_config.cloud_bucket, "training/segment*camera*"
+        )
+    )
     logging.info("Train files: %s", train_files)
 
     # Validation set
-    validation_files = tf.io.gfile.glob(os.path.join(
-        self.builder_config.cloud_bucket, "validation/segment*camera*"))
+    validation_files = tf.io.gfile.glob(
+        os.path.join(
+            self.builder_config.cloud_bucket, "validation/segment*camera*"
+        )
+    )
     logging.info("Validation files: %s", validation_files)
 
     split_generators = [
@@ -203,8 +208,10 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     # Testing set (Only available in Waymo Open Dataset v1.2)
     if self.builder_config.name == "v_1_2":
       test_files = tf.io.gfile.glob(
-          os.path.join(self.builder_config.cloud_bucket,
-                       "testing/segment*camera*"))
+          os.path.join(
+              self.builder_config.cloud_bucket, "testing/segment*camera*"
+          )
+      )
       logging.info("Testing files: %s", test_files)
 
       split_generators.append(
@@ -232,14 +239,17 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
 
     def _process_example(tf_record_file):
       for image_and_annotation in _generate_images_and_annotations(
-          tf_record_file):
-        key = "%s:%s" % (image_and_annotation["context"]["name"],
-                         image_and_annotation["timestamp_micros"])
+          tf_record_file
+      ):
+        key = "%s:%s" % (
+            image_and_annotation["context"]["name"],
+            image_and_annotation["timestamp_micros"],
+        )
         yield key, image_and_annotation
 
-    return (pipeline
-            | beam.Create(tf_record_files)
-            | beam.FlatMap(_process_example))
+    return (
+        pipeline | beam.Create(tf_record_files) | beam.FlatMap(_process_example)
+    )
 
 
 def _generate_images_and_annotations(tf_record_file):
@@ -255,13 +265,11 @@ def _generate_images_and_annotations(tf_record_file):
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
   for data in dataset:
     frame = open_dataset.Frame()
-    frame.ParseFromString(bytearray(data.numpy()))  # pytype: disable=wrong-arg-types
+    frame.ParseFromString(data.numpy())
 
     image_and_annotation = {
-        "context": {
-            "name": frame.context.name
-        },
-        "timestamp_micros": frame.timestamp_micros
+        "context": {"name": frame.context.name},
+        "timestamp_micros": frame.timestamp_micros,
     }
 
     camera_calibration = {
@@ -276,13 +284,14 @@ def _generate_images_and_annotations(tf_record_file):
       if frame_image.name in camera_labels:
         image_height = camera_calibration[frame_image.name].height
         image_width = camera_calibration[frame_image.name].width
-        labels = _convert_labels(camera_labels[frame_image.name], image_width,
-                                 image_height)
+        labels = _convert_labels(
+            camera_labels[frame_image.name], image_width, image_height
+        )
 
       camera_name = open_dataset.CameraName.Name.Name(frame_image.name)
       image_and_annotation["camera_" + camera_name] = {
-          "image": io.BytesIO(frame_image.image),
-          "labels": labels
+          "image": frame_image.image,
+          "labels": labels,
       }
 
     yield image_and_annotation
@@ -299,10 +308,13 @@ def _convert_labels(raw_labels, image_width, image_height):
   Returns:
     List of dicts with the label type and the corresponding bounding boxes.
   """
-  return [{  # pylint: disable=g-complex-comprehension
-      "type": raw_label.type,
-      "bbox": _build_bounding_box(raw_label.box, image_width, image_height)
-  } for raw_label in raw_labels.labels]
+  return [
+      {  # pylint: disable=g-complex-comprehension
+          "type": raw_label.type,
+          "bbox": _build_bounding_box(raw_label.box, image_width, image_height),
+      }
+      for raw_label in raw_labels.labels
+  ]
 
 
 def _build_bounding_box(open_dataset_box, image_width, image_height):

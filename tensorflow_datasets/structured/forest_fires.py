@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2020 The TensorFlow Datasets Authors.
+# Copyright 2024 The TensorFlow Datasets Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,14 @@
 
 """Forest fires dataset."""
 
+from __future__ import annotations
+
 import collections
 import csv
-import tensorflow.compat.v2 as tf
+
+from etils import epath
+import numpy as np
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = r"""
@@ -88,28 +93,40 @@ sense to model with the logarithm transform).
 """
 
 _MONTHS = [
-    'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov',
-    'dec'
+    'jan',
+    'feb',
+    'mar',
+    'apr',
+    'may',
+    'jun',
+    'jul',
+    'aug',
+    'sep',
+    'oct',
+    'nov',
+    'dec',
 ]
 
 _DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
 _URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv'
 
-FEATURES = collections.OrderedDict([
-    ('X', tf.uint8),
-    ('Y', tf.uint8),
-    ('month', tfds.features.ClassLabel(names=_MONTHS)),
-    ('day', tfds.features.ClassLabel(names=_DAYS)),
-    ('FFMC', tf.float32),
-    ('DMC', tf.float32),
-    ('DC', tf.float32),
-    ('ISI', tf.float32),
-    ('temp', tf.float32),
-    ('RH', tf.float32),
-    ('wind', tf.float32),
-    ('rain', tf.float32),
-])
+
+def features():
+  return collections.OrderedDict([
+      ('X', tf.uint8),
+      ('Y', tf.uint8),
+      ('month', tfds.features.ClassLabel(names=_MONTHS)),
+      ('day', tfds.features.ClassLabel(names=_DAYS)),
+      ('FFMC', tf.float32),
+      ('DMC', tf.float32),
+      ('DC', tf.float32),
+      ('ISI', tf.float32),
+      ('temp', tf.float32),
+      ('RH', tf.float32),
+      ('wind', tf.float32),
+      ('rain', tf.float32),
+  ])
 
 
 class ForestFires(tfds.core.GeneratorBasedBuilder):
@@ -122,8 +139,8 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict({
-            'area': tf.float32,
-            'features': {name: dtype for name, dtype in FEATURES.items()}
+            'area': np.float32,
+            'features': {name: dtype for name, dtype in features().items()},
         }),
         supervised_keys=('area', 'features'),
         homepage='https://archive.ics.uci.edu/ml/datasets/Forest+Fires',
@@ -144,7 +161,7 @@ class ForestFires(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     """Yields examples."""
-    with tf.io.gfile.GFile(file_path) as f:
+    with epath.Path(file_path).open() as f:
       raw_data = csv.DictReader(f)
       for i, row in enumerate(raw_data):
         yield i, {

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="FakeWSExample.xsl"?>
+
+<collection>
+
+
+<schema>
+<text>
+<txt1>
+The umbrella covers the table perfectly because</txt1>
+<pron> it </pron>
+<txt2> is very large.
+</txt2>
+</text>
+<quote>
+<quote1></quote1>
+<pron>it </pron>
+<quote2>is very large</quote2>
+</quote>
+<answers>
+<answer>The umbrella </answer>
+<answer>The table</answer>
+</answers>
+<correctAnswer> A  </correctAnswer>
+<source> Fake example 1 </source>
+</schema>
+
+<schema>
+<text>
+<txt1>
+The umbrella covers the table perfectly because</txt1>
+<pron> it </pron>
+<txt2> is very small.
+</txt2>
+</text>
+<quote>
+<quote1></quote1>
+<pron>it </pron>
+<quote2>is very small</quote2>
+</quote>
+<answers>
+<answer>The umbrella </answer>
+<answer>The table</answer>
+</answers>
+<correctAnswer> B  </correctAnswer>
+<source> Fake example 2 </source>
+</schema>
+
+</collection>
