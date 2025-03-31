@@ -102,6 +102,14 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
         ),
         (
             mlc.Field(
+                data_types=mlc.DataType.UINT16, description="Uint16 feature"
+            ),
+            np.uint16,
+            None,
+            np.uint16,
+        ),
+        (
+            mlc.Field(
                 data_types=mlc.DataType.BOOL, description="Boolean feature"
             ),
             np.bool_,
