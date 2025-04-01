@@ -844,7 +844,7 @@ def dummy_croissant_file(
               id='raw_data',
               name='raw_data',
               description='Files with the data.',
-              encoding_format='application/jsonlines',
+              encoding_formats=['application/jsonlines'],
               includes=f'data/{file_name}*.{extension}',
           ),
       ]
@@ -859,7 +859,7 @@ def dummy_croissant_file(
               id='raw_data',
               name='raw_data',
               description='File with the data.',
-              encoding_format='application/jsonlines',
+              encoding_formats=['application/jsonlines'],
               content_url=f'data/{raw_data_filename}',
               sha256=sha256,
           ),
