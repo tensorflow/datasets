@@ -1,0 +1,2 @@
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv 14675 cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/features/features.tar.gz 2588881044 cd95d500ab2422d4233cb822e25cf73033633e2068eab64d39024e85125cb760
