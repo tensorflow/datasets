@@ -15,6 +15,7 @@
 
 """Audio datasets."""
 
+from tensorflow_datasets.audio.audioset import AudioSet
 from tensorflow_datasets.audio.accentdb import Accentdb
 from tensorflow_datasets.audio.commonvoice import CommonVoice
 from tensorflow_datasets.audio.commonvoice import CommonVoiceConfig
