@@ -282,9 +282,11 @@ class MultiSplitInfo(SplitInfo):
   This should only be used to read data and not when producing data.
   """
 
-  split_infos: list[SplitInfo] = dataclasses.field(default_factory=list)
+  split_infos: list[SplitInfo | SubSplitInfo] = dataclasses.field(
+      default_factory=list
+  )
 
-  def __init__(self, name: str, split_infos: list[SplitInfo]):
+  def __init__(self, name: str, split_infos: list[SplitInfo | SubSplitInfo]):
     if not split_infos:
       raise ValueError('Need to pass a non-empty list of SplitInfos')
     object.__setattr__(self, 'split_infos', split_infos)
@@ -314,6 +316,16 @@ class MultiSplitInfo(SplitInfo):
         f'name={self.name!r}, '
         f'split_infos={self.split_infos!r})'
     )
+
+  @property
+  def examples_in_shards(self) -> list[int]:
+    result = []
+    for split_info in self.split_infos:
+      if isinstance(split_info, (SubSplitInfo, MultiSplitInfo)):
+        result.extend(split_info.examples_in_shards)
+      else:
+        result.extend(split_info.shard_lengths)
+    return result
 
   @property
   def file_instructions(self) -> list[shard_utils.FileInstruction]:
@@ -360,6 +372,10 @@ class SubSplitInfo:
   @property
   def shard_lengths(self) -> list[int]:
     return [f.take for f in self.file_instructions]
+
+  @property
+  def examples_in_shards(self) -> list[int]:
+    return [f.examples_in_shard for f in self.file_instructions]
 
   @property
   def num_examples(self) -> int:
@@ -526,7 +542,7 @@ def _make_absolute_instructions(
 
 def _file_instructions_for_split(
     instruction: _AbsoluteInstruction,
-    split_info: SplitInfo,
+    split_info: SplitInfo | SubSplitInfo,
 ) -> list[shard_utils.FileInstruction]:
   """Returns the file instructions from the given instruction applied to the given split info."""
   if not split_info.num_examples:
@@ -537,9 +553,7 @@ def _file_instructions_for_split(
     return []
   to = split_info.num_examples if instruction.to is None else instruction.to
   if isinstance(split_info, (SubSplitInfo, MultiSplitInfo)):
-    examples_in_shards = [
-        f.examples_in_shard for f in split_info.file_instructions
-    ]
+    examples_in_shards = split_info.examples_in_shards
   else:
     examples_in_shards = None
   return shard_utils.get_file_instructions(

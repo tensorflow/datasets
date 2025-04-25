@@ -255,6 +255,43 @@ class SplitDictTest(testing.TestCase):
     self.assertEqual(file_instruction.take, 2)
     self.assertEqual(file_instruction.examples_in_shard, 10)
 
+  def test_multi_split_empty_shard(self):
+    split_info = splits.MultiSplitInfo(
+        name='train',
+        split_infos=[
+            splits.SplitInfo(
+                name='train',
+                shard_lengths=[5, 0, 5],
+                num_bytes=0,
+                filename_template=_filename_template(
+                    split='train', data_dir='/abc'
+                ),
+            ),
+        ],
+    )
+    split_dict = splits.SplitDict([split_info])
+    sub_split = split_dict['train[:90%]']
+    self.assertEqual(sub_split.name, 'train[:90%]')
+    self.assertEqual(sub_split.num_examples, 9)
+    self.assertEqual(sub_split.shard_lengths, [5, 4])
+    self.assertEqual(
+        sub_split.file_instructions,
+        [
+            shard_utils.FileInstruction(
+                filename='/abc/ds_name-train.tfrecord-00000-of-00003',
+                skip=0,
+                take=5,
+                examples_in_shard=5,
+            ),
+            shard_utils.FileInstruction(
+                filename='/abc/ds_name-train.tfrecord-00002-of-00003',
+                skip=0,
+                take=4,
+                examples_in_shard=5,
+            ),
+        ],
+    )
+
 
 class SplitsTest(testing.TestCase):
 
