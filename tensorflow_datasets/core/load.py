@@ -379,7 +379,7 @@ class DatasetCollectionLoader:
       raise RuntimeError(
           f'Unsupported return type {type(load_output)} of `load` function.'
       )
-    return loaded_datasets
+    return loaded_datasets  # pytype: disable=bad-return-type
 
   def load_datasets(
       self,

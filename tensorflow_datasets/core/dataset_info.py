@@ -419,7 +419,7 @@ class DatasetInfo:
   def homepage(self) -> str:
     urls = self.as_proto.location.urls
     tfds_homepage = f"https://www.tensorflow.org/datasets/catalog/{self.name}"
-    return urls and urls[0] or tfds_homepage
+    return urls and urls[0] or tfds_homepage  # pytype: disable=bad-return-type
 
   @property
   def citation(self) -> str:
