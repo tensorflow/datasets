@@ -1,0 +1,26 @@
+{
+  "citation": "@inproceedings{matton-etal-2024-leakage,\n    title = \"On Leakage of Code Generation Evaluation Datasets\",\n    author = \"Matton, Alexandre  and\n      Sherborne, Tom  and\n      Aumiller, Dennis  and\n      Tommasone, Elena  and\n      Alizadeh, Milad  and\n      He, Jingyi  and\n      Ma, Raymond  and\n      Voisin, Maxime  and\n      Gilsenan-McMahon, Ellen  and\n      Gall{\\'e}, Matthias\",\n    editor = \"Al-Onaizan, Yaser  and\n      Bansal, Mohit  and\n      Chen, Yun-Nung\",\n    booktitle = \"Findings of the Association for Computational Linguistics: EMNLP 2024\",\n    month = nov,\n    year = \"2024\",\n    address = \"Miami, Florida, USA\",\n    publisher = \"Association for Computational Linguistics\",\n    url = \"https://aclanthology.org/2024.findings-emnlp.772/\",\n    doi = \"10.18653/v1/2024.findings-emnlp.772\",\n    pages = \"13215--13223\",\n}",
+  "configDescription": "Java LBPP",
+  "configName": "java",
+  "description": "*Less Basic Python Programming* is a collection of 161 programming problems\nwith accompanying unit tests.\nThey were created with the aim of being fresh (not leaked at the time of\ncreation) and more difficult than similar datasets (e.g., HumanEval and MBPP).\nIt can serve as a drop-in replacement or enrichment of those datasets as they\nare structured in an equivalent way.",
+  "downloadSize": "346012",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://aclanthology.org/2024.findings-emnlp.772/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.lbpp.lbpp_dataset_builder",
+  "name": "lbpp",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "908697",
+      "shardLengths": [
+        "158"
+      ]
+    }
+  ],
+  "version": "2.0.0"
+}

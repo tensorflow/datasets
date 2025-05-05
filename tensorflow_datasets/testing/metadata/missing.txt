@@ -28,16 +28,6 @@ glue/wnli/1.0.1
 imagenet_pi/1.0.0
 laion400m/embeddings/1.0.0
 laion400m/images/1.0.0
-lbpp/all/2.0.0
-lbpp/cpp/2.0.0
-lbpp/default/2.0.0
-lbpp/go/2.0.0
-lbpp/java/2.0.0
-lbpp/javascript/2.0.0
-lbpp/js/2.0.0
-lbpp/multilingual/2.0.0
-lbpp/python/2.0.0
-lbpp/rust/2.0.0
 natural_questions/default/0.0.2
 natural_questions/longt5/0.0.2
 reddit_disentanglement/2.0.0
