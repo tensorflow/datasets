@@ -54,7 +54,7 @@ _VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Original site, it is down very often.
 # _VOC_DATA_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Data mirror:
-_VOC_DATA_URL = "http://pjreddie.com/media/files/"
+_VOC_DATA_URL = "https://data.brainchip.com/dataset-mirror/voc/"
 _VOC_LABELS = (
     "aeroplane",
     "bicycle",
