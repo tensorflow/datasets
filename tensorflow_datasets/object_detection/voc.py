@@ -54,7 +54,7 @@ _VOC_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Original site, it is down very often.
 # _VOC_DATA_URL = "http://host.robots.ox.ac.uk/pascal/VOC/voc{year}/"
 # Data mirror:
-_VOC_DATA_URL = "http://pjreddie.com/media/files/"
+_VOC_DATA_URL = "https://data.brainchip.com/dataset-mirror/voc/"
 _VOC_LABELS = (
     "aeroplane",
     "bicycle",
@@ -134,10 +134,11 @@ class VocConfig(tfds.core.BuilderConfig):
     super(VocConfig, self).__init__(
         name=year,
         # Version history:
+        # 5.0.0: Added new download links and updated checksums.
         # 4.0.0: Added BuildConfig and 2012 version support, deprecate Voc2007.
         # 3.0.0: S3 with new hashing function (different shuffle).
         # 2.0.0: S3 (new shuffling, sharding and slicing mechanism).
-        version=tfds.core.Version("4.0.0"),
+        version=tfds.core.Version("5.0.0"),
         **kwargs,
     )
 
@@ -196,12 +197,10 @@ class Voc(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    paths = dl_manager.download_and_extract(
-        {
-            k: os.path.join(_VOC_DATA_URL, v)
-            for k, v in self.builder_config.filenames.items()
-        }
-    )
+    paths = dl_manager.download_and_extract({
+        k: os.path.join(_VOC_DATA_URL, v)
+        for k, v in self.builder_config.filenames.items()
+    })
     return [
         tfds.core.SplitGenerator(
             name=tfds.Split.TEST,
