@@ -3585,8 +3585,8 @@ visual_domain_decathlon/omniglot/1.2.0
 visual_domain_decathlon/svhn/1.2.0
 visual_domain_decathlon/ucf101/1.2.0
 visual_domain_decathlon/vgg-flowers/1.2.0
-voc/2007/4.0.0
-voc/2012/4.0.0
+voc/2007/5.0.0
+voc/2012/5.0.0
 voxceleb/1.2.1
 wake_vision/1.0.0
 waymo_open_dataset/v1.0/0.2.0

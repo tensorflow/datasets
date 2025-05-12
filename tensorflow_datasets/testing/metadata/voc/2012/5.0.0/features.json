@@ -1,0 +1,101 @@
+{
+    "featuresDict": {
+        "features": {
+            "image": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "3"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "image/filename": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "labels": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "classLabel": {
+                            "numClasses": "20"
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+                    },
+                    "length": "-1"
+                }
+            },
+            "labels_no_difficult": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "classLabel": {
+                            "numClasses": "20"
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+                    },
+                    "length": "-1"
+                }
+            },
+            "objects": {
+                "pythonClassName": "tensorflow_datasets.core.features.sequence_feature.Sequence",
+                "sequence": {
+                    "feature": {
+                        "featuresDict": {
+                            "features": {
+                                "bbox": {
+                                    "boundingBox": {
+                                        "bboxFormat": "REL_YXYX",
+                                        "dtype": "float32",
+                                        "shape": {
+                                            "dimensions": [
+                                                "4"
+                                            ]
+                                        }
+                                    },
+                                    "pythonClassName": "tensorflow_datasets.core.features.bounding_boxes.BBoxFeature"
+                                },
+                                "is_difficult": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "dtype": "bool",
+                                        "encoding": "none",
+                                        "shape": {}
+                                    }
+                                },
+                                "is_truncated": {
+                                    "pythonClassName": "tensorflow_datasets.core.features.tensor_feature.Tensor",
+                                    "tensor": {
+                                        "dtype": "bool",
+                                        "encoding": "none",
+                                        "shape": {}
+                                    }
+                                },
+                                "label": {
+                                    "classLabel": {
+                                        "numClasses": "20"
+                                    },
+                                    "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+                                },
+                                "pose": {
+                                    "classLabel": {
+                                        "numClasses": "5"
+                                    },
+                                    "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+                                }
+                            }
+                        },
+                        "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+                    },
+                    "length": "-1"
+                }
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}
