@@ -38,12 +38,13 @@ from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core import features as features_lib
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
+from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core import utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
-
 
 _GCS_ACCESS_FNS = {
     'original_info': utils.gcs_utils.gcs_dataset_info_files,
