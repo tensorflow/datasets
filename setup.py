@@ -81,7 +81,8 @@ TESTS_DEPENDENCIES = [
     'pytest-shard',
     'pytest-xdist',
     # Lazy-deps required by core
-    'apache-beam',
+    # TODO(b/418761065): Update to 2.65.0 once the bug is fixed.
+    'apache-beam<2.65.0',
     'conllu',
     'mlcroissant>=1.0.9',
     'pandas',
@@ -141,17 +142,17 @@ DATASET_FILES = [
 DATASET_EXTRAS = {
     # In alphabetical order
     'aflw2k3d': ['scipy'],
-    'beir': ['apache-beam'],
+    'beir': ['apache-beam<2.65.0'],
     'ble_wind_field': ['gcsfs', 'zarr<3.0.0'],
     'c4': [
-        'apache-beam',
+        'apache-beam<2.65.0',
         'gcld3',
         'langdetect',
         # nltk==3.8.2 is broken: https://github.com/nltk/nltk/issues/3293
         'nltk==3.8.1',
         'tldextract',
     ],
-    'c4_wsrs': ['apache-beam'],
+    'c4_wsrs': ['apache-beam<2.65.0'],
     'cats_vs_dogs': ['matplotlib'],
     'colorectal_histology': ['Pillow'],
     'common_voice': ['pydub'],  # and ffmpeg installed
@@ -188,8 +189,8 @@ DATASET_EXTRAS = {
     'the300w_lp': ['scipy'],
     'wake_vision': ['pandas'],
     'wider_face': ['Pillow'],
-    'wiki_dialog': ['apache-beam'],
-    'wikipedia': ['apache-beam', 'mwparserfromhell', 'mwxml'],
+    'wiki_dialog': ['apache-beam<2.65.0'],
+    'wikipedia': ['apache-beam<2.65.0', 'mwparserfromhell', 'mwxml'],
     'wsc273': ['bs4', 'lxml'],
     'youtube_vis': ['pycocotools'],
 }
