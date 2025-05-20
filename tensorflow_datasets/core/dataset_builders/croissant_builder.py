@@ -270,6 +270,9 @@ class CroissantBuilder(
         the values should be the values to filter by. If a record matches all
         the filters, it will be included in the dataset.
       **kwargs: kwargs to pass to GeneratorBasedBuilder directly.
+
+    Raises:
+      ValueError: If no record sets are found in the Croissant JSON-LD.
     """
     if mapping is None:
       mapping = {}
@@ -293,6 +296,12 @@ class CroissantBuilder(
         conversion_utils.to_tfds_name(record_set_id)
         for record_set_id in record_set_ids
     ]
+    if not config_names:
+      raise ValueError(
+          'No record sets found in the Croissant JSON-LD. At least one record'
+          ' set is required to be able to download and prepare the dataset.'
+      )
+
     self.BUILDER_CONFIGS: list[dataset_builder.BuilderConfig] = [  # pylint: disable=invalid-name
         dataset_builder.BuilderConfig(name=config_name)
         for config_name in config_names
