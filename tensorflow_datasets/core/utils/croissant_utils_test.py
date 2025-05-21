@@ -36,6 +36,22 @@ def test_get_tfds_dataset_name(croissant_name, croissant_url, tfds_name):
   assert croissant_utils.get_tfds_dataset_name(dataset) == tfds_name
 
 
+@pytest.mark.parametrize(
+    'croissant_version,tfds_version',
+    [
+        ('1.0', '1.0.0'),
+        ('1.2', '1.2.0'),
+        ('1.2.3', '1.2.3'),
+        ('1.2.3.4', '1.2.3.4'),
+        (None, None),
+    ],
+)
+def test_get_croissant_version(croissant_version, tfds_version):
+  assert (
+      croissant_utils.get_croissant_version(croissant_version) == tfds_version
+  )
+
+
 def test_get_record_set_ids():
   metadata = mlc.Metadata(
       name='dummy_dataset',

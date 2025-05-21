@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import dataclasses
+import re
 import typing
 
 from tensorflow_datasets.core.utils import conversion_utils
@@ -28,6 +29,7 @@ if typing.TYPE_CHECKING:
   import mlcroissant as mlc
 
 _HUGGINGFACE_URL_PREFIX = "https://huggingface.co/datasets/"
+_VERSION_REGEX_WITHOUT_PATCH = re.compile(r"^(?P<major>\d+)\.(?P<minor>\d+)$")
 
 
 @dataclasses.dataclass(frozen=True)
@@ -38,6 +40,27 @@ class SplitReference:
   split_record_set: mlc.RecordSet
   # A field from another record set that references split_record_set.
   reference_field: mlc.Field
+
+
+def get_croissant_version(version: str | None) -> str | None:
+  """Returns the possibly corrected Croissant version in TFDS format.
+
+  TFDS expects versions to follow the Semantic versioning 2.0.0 syntax, but
+  Croissant is more lax and accepts also {major.minor}. To avoid raising errors
+  in these cases, we add a `0` as a patch version to the Croissant-provided
+  version.
+
+  Args:
+    version: The Croissant version.
+
+  Returns:
+    The Croissant version in TFDS format.
+  """
+  if not version:
+    return None
+  if _VERSION_REGEX_WITHOUT_PATCH.match(version):
+    return f"{version}.0"
+  return version
 
 
 def get_dataset_name(dataset: mlc.Dataset) -> str:

@@ -282,11 +282,17 @@ class CroissantBuilder(
     self.name = croissant_utils.get_tfds_dataset_name(dataset)
     self.metadata = dataset.metadata
 
-    # In TFDS, version is a mandatory attribute, while in Croissant it is only a
-    # recommended attribute. If the version is unspecified in Croissant, we set
-    # it to `1.0.0` in TFDS.
+    # The dataset version is determined using the following precedence:
+    # * overwrite_version (if provided).
+    # * The version from Croissant metadata (self.metadata.version),
+    # automatically converting major.minor formats to major.minor.0 (e.g., "1.2"
+    # becomes "1.2.0"). See croissant_utils.get_croissant_version for details.
+    # * Defaults to '1.0.0' if no version is specified (version is optional in
+    # Croissant, but mandatory in TFDS).
     self.VERSION = version_lib.Version(  # pylint: disable=invalid-name
-        overwrite_version or self.metadata.version or '1.0.0'
+        overwrite_version
+        or croissant_utils.get_croissant_version(self.metadata.version)
+        or '1.0.0'
     )
     self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
 

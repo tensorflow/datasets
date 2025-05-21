@@ -249,6 +249,17 @@ def test_sequence_feature_datatype_converter():
   assert isinstance(actual_feature.feature, text_feature.Text)
 
 
+def test_version_converter(tmp_path):
+  with testing.dummy_croissant_file(version="1.0") as croissant_file:
+    builder = croissant_builder.CroissantBuilder(
+        jsonld=croissant_file,
+        file_format=FileFormat.ARRAY_RECORD,
+        disable_shuffling=True,
+        data_dir=tmp_path,
+    )
+    assert builder.version == "1.0.0"
+
+
 @pytest.fixture(name="crs_builder")
 def mock_croissant_dataset_builder(tmp_path, request):
   dataset_name = request.param["dataset_name"]
