@@ -42,6 +42,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_utils import dummy_croissant_file
   from tensorflow_datasets.testing.test_utils import DummyBeamDataset
   from tensorflow_datasets.testing.test_utils import DummyDataset
+  from tensorflow_datasets.testing.test_utils import DummyDatasetWithConfigBuilder
   from tensorflow_datasets.testing.test_utils import DummyDatasetCollection
   from tensorflow_datasets.testing.test_utils import DummyDatasetSharedGenerator
   from tensorflow_datasets.testing.test_utils import DummyMnist
@@ -70,6 +71,7 @@ _API = {
     "dummy_croissant_file": "tensorflow_datasets.testing.test_utils",
     "DummyBeamDataset": "tensorflow_datasets.testing.test_utils",
     "DummyDataset": "tensorflow_datasets.testing.test_utils",
+    "DummyDatasetWithConfigBuilder": "tensorflow_datasets.testing.test_utils",
     "DummyDatasetCollection": "tensorflow_datasets.testing.test_utils",
     "DummyDatasetSharedGenerator": "tensorflow_datasets.testing.test_utils",
     "DummyMnist": "tensorflow_datasets.testing.test_utils",
