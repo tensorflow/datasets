@@ -20,6 +20,29 @@ and this project adheres to
 
 ### Security
 
+## [4.9.9] - 2025-05-28
+
+### Added
+
+- [LBPP dataset](https://www.tensorflow.org/datasets/catalog/lbpp).
+
+### Changed
+
+- `apache-beam` version is pinned at `<2.65.0` until related tests are fixed,
+  see issue [11055](https://github.com/tensorflow/datasets/issues/11055).
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+- CroissantBuilder now supports Croissant files without patch version (i.e. only
+  {major.minor} are provided).
+- Various small bug fixes.
+
+### Security
+
 ## [4.9.8] - 2025-03-13
 
 ### Added
