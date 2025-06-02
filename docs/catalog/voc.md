@@ -12,11 +12,6 @@
 # `voc`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 This dataset contains the data from the PASCAL Visual Object Classes Challenge,
@@ -38,9 +33,7 @@ the official dataset, the test set of VOC2012 does not contain annotations.
 
 *   **Versions**:
 
-    *   **`5.0.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        No release notes.
+    *   **`5.0.0`** (default): No release notes.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

@@ -1793,7 +1793,6 @@ toc:
   - path: /datasets/catalog/duke_ultrasound
     title: duke_ultrasound
   - path: /datasets/catalog/lbpp
-    status: nightly
     title: lbpp
   - path: /datasets/catalog/qm9
     title: qm9

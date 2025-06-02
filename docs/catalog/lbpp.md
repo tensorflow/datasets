@@ -12,10 +12,6 @@
 # `lbpp`
 
 
-Note: This dataset was added recently and is only available in our
-`tfds-nightly` package
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>.
-
 *   **Description**:
 
 *Less Basic Python Programming* is a collection of 161 programming problems with
