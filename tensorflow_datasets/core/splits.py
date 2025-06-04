@@ -36,6 +36,7 @@ from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import proto as proto_lib
 from tensorflow_datasets.core import units
 from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.utils import retry
 from tensorflow_datasets.core.utils import shard_utils
 
 from tensorflow_metadata.proto.v0 import statistics_pb2
@@ -149,7 +150,7 @@ class SplitInfo:
         pattern = filename_template.glob_pattern(num_shards=self.num_shards)
       else:
         pattern = filename_template.sharded_filepaths_pattern(num_shards=None)
-      return list(data_dir.glob(pattern))
+      return list(retry.retry(data_dir.glob, pattern))
     else:
       raise ValueError(f'Filename template for split {self.name} is empty.')
 

@@ -61,6 +61,7 @@ with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   from tensorflow_datasets.core.utils import file_utils
   from tensorflow_datasets.core.utils import gcs_utils
+  from tensorflow_datasets.core.utils import retry
 
   from google.protobuf import json_format
   # pylint: enable=g-import-not-at-top
@@ -1123,7 +1124,7 @@ def read_from_json(path: epath.PathLike) -> dataset_info_pb2.DatasetInfo:
     DatasetInfoFileError: If the dataset info file cannot be read.
   """
   try:
-    json_str = epath.Path(path).read_text()
+    json_str = retry.retry(epath.Path(path).read_text)
   except OSError as e:
     raise DatasetInfoFileError(
         f"Could not read dataset info from {path}"

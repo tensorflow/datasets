@@ -49,3 +49,28 @@ CHECKSUMS_FILENAME = 'checksums.tsv'
 # Filepath for mapping between TFDS datasets and PapersWithCode entries.
 PWC_FILENAME = 'tfds_to_pwc_links.json'
 PWC_LINKS_PATH = f'scripts/documentation/{PWC_FILENAME}'
+
+# Retry parameters. Delays are in seconds.
+TFDS_RETRY_TRIES = int(os.environ.get('TFDS_RETRY_TRIES', 3))
+TFDS_RETRY_INITIAL_DELAY = int(os.environ.get('TFDS_RETRY_INITIAL_DELAY', 1))
+# How much to multiply the delay by for each subsequent try
+TFDS_RETRY_DELAY_MULTIPLIER = int(
+    os.environ.get('TFDS_RETRY_DELAY_MULTIPLIER', 2)
+)
+# Random noise to add to the delay (random pick between 0 and noise).
+TFDS_RETRY_NOISE = float(os.environ.get('TFDS_RETRY_NOISE', 0.5))
+# If the error message contains any of these substrings, retry.
+TFDS_RETRY_MSG_SUBSTRINGS = os.environ.get(
+    'TFDS_RETRY_MSG_SUBSTRINGS',
+    (
+        'deadline_exceeded,'
+        '408 Request Timeout,'
+        '429 Too Many Requests,'
+        '500 Internal Server Error,'
+        '502 Bad Gateway,'
+        '503 Service Unavailable,'
+        '504 Gateway Timeout,'
+        '509 Bandwidth Limit Exceeded,'
+        '599 Gateway Error'
+    ),
+).split(',')
