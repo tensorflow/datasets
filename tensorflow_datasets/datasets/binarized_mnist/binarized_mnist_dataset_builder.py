@@ -85,8 +85,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       Generator yielding the next examples
     """
     with tf.io.gfile.GFile(data_path, "rb") as f:
-      images = np.loadtxt(f, delimiter=" ", dtype=np.uint8).reshape(
-          (-1,) + mnist.MNIST_IMAGE_SHAPE
+      images = (
+          np.loadtxt(f, delimiter=" ")
+          .astype(np.uint8)
+          .reshape((-1,) + mnist.MNIST_IMAGE_SHAPE)
       )
     for index, image in enumerate(images):
       yield index, {"image": image}
