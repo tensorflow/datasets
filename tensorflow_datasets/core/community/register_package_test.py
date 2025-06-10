@@ -105,7 +105,7 @@ def test_builder_cls(dummy_register: register_package.PackageRegister):  # pylin
   builder_cls = dummy_register.builder_cls(ds_name)
   assert builder_cls.name == 'dummy_dataset'
 
-  clshash = 'd66db99e4dbd05066b84b97ff9528f404fc71e61d556add952a67416e70a1786'
+  clshash = '6806575195fd56423450330f62bc81f053bb46f7505eeb537e32f599673876fe'
   assert installed_path / f'{clshash}/dummy_dataset.py' == builder_cls.code_path
   assert 'kaggle' in builder_cls.code_path.parts
   assert issubclass(builder_cls, dataset_builder.DatasetBuilder)
