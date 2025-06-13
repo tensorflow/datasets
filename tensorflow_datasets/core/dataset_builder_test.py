@@ -20,6 +20,7 @@ import os
 import tempfile
 from unittest import mock
 
+from absl.testing import flagsaver
 from absl.testing import parameterized
 import dill
 from etils import epath
