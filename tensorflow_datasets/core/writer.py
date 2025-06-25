@@ -817,7 +817,7 @@ class NoShuffleBeamWriter:
     # We don't know the number of shards, the length of each shard, nor the
     # total size, so we compute them here.
     prefix = epath.Path(self._filename_template.filepath_prefix())
-    shards = self._filename_template.data_dir.glob(f"{prefix.name}*")
+    shards = self._filename_template.data_dir.glob(f"{prefix.name}.*")
 
     def _get_length_and_size(shard: epath.Path) -> tuple[epath.Path, int, int]:
       length = self._file_adapter.num_examples(shard)
