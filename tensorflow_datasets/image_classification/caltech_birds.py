@@ -233,9 +233,10 @@ class CaltechBirds2011(CaltechBirds2010):
   def _caltech_birds_info(self):
     return CaltechBirdsInfo(
         name=self.name,
-        images_url="https://drive.google.com/uc?export=download&id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45",
-        split_url=None,
-        annotations_url="https://drive.google.com/uc?export=download&id=1EamOKGLoTuZdtcVYbHMWNpkn3iAVj8TP",
+        combined_url="https://data.caltech.edu/records/65de6-vp158/files/CUB_200_2011.tgz?download=1",
+        # images_url="https://drive.google.com/uc?export=download&id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45",
+        # split_url=None,
+        # annotations_url="https://drive.google.com/uc?export=download&id=1EamOKGLoTuZdtcVYbHMWNpkn3iAVj8TP",
     )
 
   def _info(self):
@@ -369,3 +370,4 @@ class CaltechBirdsInfo(
       split_url (str): train/test split file URL.
       annotations_url (str): annotation folder URL.
   """
+
