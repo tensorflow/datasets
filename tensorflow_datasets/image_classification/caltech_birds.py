@@ -231,9 +231,9 @@ class CaltechBirds2011(CaltechBirds2010):
 
   @property
   def _caltech_birds_info(self):
-    return CaltechBirdsInfo(
+    return CaltechBirdsInfo2011(
         name=self.name,
-        combined_url="https://data.caltech.edu/records/65de6-vp158/files/CUB_200_2011.tgz?download=1",
+        combined_url="https://data.caltech.edu/records/65de6-vp158/files/CUB_200_2011.tgz?download=1"
         # images_url="https://drive.google.com/uc?export=download&id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45",
         # split_url=None,
         # annotations_url="https://drive.google.com/uc?export=download&id=1EamOKGLoTuZdtcVYbHMWNpkn3iAVj8TP",
@@ -371,3 +371,16 @@ class CaltechBirdsInfo(
       annotations_url (str): annotation folder URL.
   """
 
+
+class CaltechBirdsInfo2011(
+    collections.namedtuple(
+        "_CaltechBirdsInfo2011",
+        ["name", "combined_url"],
+    )
+):
+  """Contains the information necessary to generate a Caltech Birds 2011 dataset.
+
+  Args:
+      name (str): name of dataset.
+      combined_url (str): URL containing images and attributes.
+  """
