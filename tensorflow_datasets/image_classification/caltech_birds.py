@@ -261,12 +261,13 @@ class CaltechBirds2011(CaltechBirds2010):
   def _split_generators(self, dl_manager):
     download_path = dl_manager.download(
         [
-            self._caltech_birds_info.combined_url,
+            self._caltech_birds_info.images_url,
         ]
     )
 
     extracted_path = dl_manager.download_and_extract([
-        self._caltech_birds_info.combined_url,
+        self._caltech_birds_info.images_url,
+        self._caltech_birds_info.segmentations_url
     ])
 
     image_names_path = os.path.join(
