@@ -20,8 +20,8 @@ import urllib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_URL = 'http://ai.stanford.edu/~jkrause/car196/'
-_EXTRA_URL = 'https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz'
+_URL = 'https://web.archive.org/web/20221212053154/http://ai.stanford.edu/~jkrause/car196/'
+_EXTRA_URL = 'https://web.archive.org/web/20230323151230/https://ai.stanford.edu/~jkrause/cars/car_devkit.tgz'
 
 _DESCRIPTION = (
     'The Cars dataset contains 16,185 images of 196 classes of cars. The data '
@@ -271,7 +271,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
         description=(_DESCRIPTION),
         features=tfds.features.FeaturesDict(features_dict),
         supervised_keys=('image', 'label'),
-        homepage='https://ai.stanford.edu/~jkrause/cars/car_dataset.html',
+        homepage='https://web.archive.org/web/20230323151220/https://ai.stanford.edu/~jkrause/cars/car_dataset.html',
         citation=_CITATION,
     )
 
