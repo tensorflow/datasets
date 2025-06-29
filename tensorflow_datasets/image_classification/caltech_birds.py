@@ -384,3 +384,4 @@ class CaltechBirdsInfo2011(
       images_url (str): URL containing images
       segmentations_url (str): URL containing segmentations.
   """
+
