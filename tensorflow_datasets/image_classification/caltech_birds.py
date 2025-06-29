@@ -376,13 +376,13 @@ class CaltechBirdsInfo(
 class CaltechBirdsInfo2011(
     collections.namedtuple(
         "_CaltechBirdsInfo2011",
-        ["name", "images_urls", "segmentations_url"],
+        ["name", "images_url", "segmentations_url"],
     )
 ):
   """Contains the information necessary to generate a Caltech Birds 2011 dataset.
 
   Args:
       name (str): name of dataset.
-      images_urls (str): URL containing images
+      images_url (str): URL containing images
       segmentations_url (str): URL containing segmentations.
   """
