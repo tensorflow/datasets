@@ -257,7 +257,7 @@ caltech101/3.0.2
 caltech_birds2010/0.1.1
 caltech_birds2011/0.1.1
 cardiotox/1.0.0
-cars196/2.1.0
+cars196/2.2.0
 cassava/0.1.0
 cats_vs_dogs/4.0.1
 celeb_a/2.1.0
