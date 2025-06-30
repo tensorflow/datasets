@@ -227,15 +227,14 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 class CaltechBirds2011(CaltechBirds2010):
   """Caltech Birds 2011 dataset."""
 
-  VERSION = tfds.core.Version("0.1.1")
+  VERSION = tfds.core.Version("0.2.0")
 
   @property
   def _caltech_birds_info(self):
-    return CaltechBirdsInfo(
+    return CaltechBirdsInfo2011(
         name=self.name,
-        images_url="https://drive.google.com/uc?export=download&id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45",
-        split_url=None,
-        annotations_url="https://drive.google.com/uc?export=download&id=1EamOKGLoTuZdtcVYbHMWNpkn3iAVj8TP",
+        images_url="https://data.caltech.edu/records/65de6-vp158/files/CUB_200_2011.tgz?download=1",
+        segmentations_url="https://data.caltech.edu/records/w9d68-gec53/files/segmentations.tgz?download=1",
     )
 
   def _info(self):
@@ -257,15 +256,13 @@ class CaltechBirds2011(CaltechBirds2010):
     )
 
   def _split_generators(self, dl_manager):
-    download_path = dl_manager.download(
-        [
-            self._caltech_birds_info.images_url,
-        ]
-    )
+    download_path = dl_manager.download([
+        self._caltech_birds_info.images_url,
+    ])
 
     extracted_path = dl_manager.download_and_extract([
         self._caltech_birds_info.images_url,
-        self._caltech_birds_info.annotations_url,
+        self._caltech_birds_info.segmentations_url,
     ])
 
     image_names_path = os.path.join(
@@ -368,4 +365,19 @@ class CaltechBirdsInfo(
       images_url (str): images URL.
       split_url (str): train/test split file URL.
       annotations_url (str): annotation folder URL.
+  """
+
+
+class CaltechBirdsInfo2011(
+    collections.namedtuple(
+        "_CaltechBirdsInfo2011",
+        ["name", "images_url", "segmentations_url"],
+    )
+):
+  """Contains the information necessary to generate a Caltech Birds 2011 dataset.
+
+  Attributes:
+      name (str): name of dataset.
+      images_url (str): URL containing images
+      segmentations_url (str): URL containing segmentations.
   """
