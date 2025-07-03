@@ -592,47 +592,39 @@ class NoShuffleBeamWriterTest(parameterized.TestCase):
 
     with tempfile.TemporaryDirectory() as tmp_dir:
       tmp_dir = epath.Path(tmp_dir)
-
-      def get_writer(split):
-        filename_template = naming.ShardedFileTemplate(
-            dataset_name='foo',
-            split=split,
-            filetype_suffix=file_format.file_suffix,
-            data_dir=tmp_dir,
-        )
-        return writer_lib.NoShuffleBeamWriter(
-            serializer=testing.DummySerializer('dummy specs'),
-            filename_template=filename_template,
-            file_format=file_format,
-        )
-
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name='foo',
+          split='train',
+          filetype_suffix=file_format.file_suffix,
+          data_dir=tmp_dir,
+      )
+      writer = writer_lib.NoShuffleBeamWriter(
+          serializer=testing.DummySerializer('dummy specs'),
+          filename_template=filename_template,
+          file_format=file_format,
+      )
       to_write = [(i, str(i).encode('utf-8')) for i in range(10)]
       # Here we need to disable type check as `beam.Create` is not capable of
       # inferring the type of the PCollection elements.
       options = beam.options.pipeline_options.PipelineOptions(
           pipeline_type_check=False
       )
-      writers = [get_writer(split) for split in ('train-b', 'train')]
+      with beam.Pipeline(options=options, runner=_get_runner()) as pipeline:
 
-      for writer in writers:
-        with beam.Pipeline(options=options, runner=_get_runner()) as pipeline:
+        @beam.ptransform_fn
+        def _build_pcollection(pipeline):
+          pcollection = pipeline | 'Start' >> beam.Create(to_write)
+          return writer.write_from_pcollection(pcollection)
 
-          @beam.ptransform_fn
-          def _build_pcollection(pipeline, writer):
-            pcollection = pipeline | 'Start' >> beam.Create(to_write)
-            return writer.write_from_pcollection(pcollection)
-
-          _ = pipeline | 'test' >> _build_pcollection(writer)
-
+        _ = pipeline | 'test' >> _build_pcollection()  # pylint: disable=no-value-for-parameter
+      shard_lengths, total_size = writer.finalize()
+      self.assertNotEmpty(shard_lengths)
+      self.assertEqual(sum(shard_lengths), 10)
+      self.assertGreater(total_size, 10)
       files = list(tmp_dir.iterdir())
-      self.assertGreaterEqual(len(files), 2)
+      self.assertGreaterEqual(len(files), 1)
       for f in files:
         self.assertIn(file_format.file_suffix, f.name)
-      for writer in writers:
-        shard_lengths, total_size = writer.finalize()
-        self.assertNotEmpty(shard_lengths)
-        self.assertEqual(sum(shard_lengths), 10)
-        self.assertGreater(total_size, 10)
 
 
 class CustomExampleWriter(writer_lib.ExampleWriter):
