@@ -620,7 +620,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       RuntimeError: when the config cannot be found.
       DatasetBlockedError: if the given version, or combination of version and
         config, has been marked as blocked in the builder's BLOCKED_VERSIONS.
-    """
+    """  # fmt: skip
     self.assert_is_not_blocked()
 
 
