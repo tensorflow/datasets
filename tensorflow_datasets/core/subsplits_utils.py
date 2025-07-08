@@ -119,7 +119,7 @@ def even_splits(
       not evenly divisible by `n`. If `False`, examples are distributed evenly
       across subsplits, starting by the first. For example, if there is 11
       examples with `n=3`, splits will contain `[4, 4, 3]` examples
-      respectivelly.
+      respectively.
 
   Returns:
     The list of subsplits. Those splits can be combined together (with
@@ -169,7 +169,7 @@ def split_for_jax_process(
       not evenly divisible by `n`. If `False`, examples are distributed evenly
       across subsplits, starting by the first. For example, if there is 11
       examples with `n=3`, splits will contain `[4, 4, 3]` examples
-      respectivelly.
+      respectively.
 
   Returns:
     subsplit: The sub-split of the given `split` for the current
