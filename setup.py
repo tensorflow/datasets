@@ -89,7 +89,6 @@ TESTS_DEPENDENCIES = [
     'pydub',
     # Required by scripts/documentation/
     'pyyaml',
-    'tensorflow-io[tensorflow];python_version<"3.12"',
 ]
 
 # Additional deps for formatting
