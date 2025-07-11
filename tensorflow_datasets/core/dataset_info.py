@@ -784,7 +784,7 @@ class DatasetInfo:
       # Otherwise, we restore the dataset_info.json value
       if field.type == field.TYPE_MESSAGE:
         field_value.MergeFrom(field_value_restored)
-      elif field.label == field.LABEL_REPEATED:
+      elif field.is_repeated:
         del field_value[:]
         field_value.extend(field_value_restored)
       else:
