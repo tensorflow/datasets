@@ -48,6 +48,7 @@ from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
+from tensorflow_datasets.core.features import audio_feature
 from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
@@ -176,6 +177,10 @@ def datatype_converter(
     # TFDS uses REL_YXYX by default, but Hugging Face doesn't enforce a format.
     feature = bounding_boxes.BBoxFeature(
         doc=field.description, bbox_format=None
+    )
+  elif field_data_type == mlc.DataType.AUDIO_OBJECT:
+    feature = audio_feature.Audio(
+        doc=field.description, sample_rate=field.source.sampling_rate
     )
   else:
     raise ValueError(f'Unknown data type: {field_data_type}.')

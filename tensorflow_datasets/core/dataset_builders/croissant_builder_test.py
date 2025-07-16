@@ -20,6 +20,7 @@ import pytest
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
+from tensorflow_datasets.core.features import audio_feature
 from tensorflow_datasets.core.features import bounding_boxes
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
@@ -148,6 +149,14 @@ def test_simple_datatype_converter(
                 description="Image feature",
             ),
             image_feature.Image,
+            None,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.AUDIO_OBJECT,
+                description="Audio feature",
+            ),
+            audio_feature.Audio,
             None,
         ),
         (
