@@ -93,7 +93,7 @@ class Video(sequence_feature.Sequence):
 
   def __init__(
       self,
-      shape: Sequence[Optional[int]],
+      shape: Sequence[Optional[int]] | None = None,
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
@@ -121,19 +121,22 @@ class Video(sequence_feature.Sequence):
       ValueError: If the shape is invalid
     """
     dtype = tf.dtypes.as_dtype(dtype)
-    shape = tuple(shape)
-    if len(shape) != 4:
-      raise ValueError('Video shape should be of rank 4')
+    img_shape = None
+    if shape:
+      shape = tuple(shape)
+      if len(shape) != 4:
+        raise ValueError('Video shape should be of rank 4')
+      img_shape = shape[1:]
     self._encoding_format = encoding_format
     self._extra_ffmpeg_args = list(ffmpeg_extra_args or [])
     super(Video, self).__init__(
         image_feature.Image(
-            shape=shape[1:],
+            shape=img_shape,
             dtype=dtype,
             encoding_format=encoding_format,
             use_colormap=use_colormap,
         ),
-        length=shape[0],
+        length=shape[0] if shape else None,
     )
 
   def _ffmpeg_decode(self, path_or_fobj):
