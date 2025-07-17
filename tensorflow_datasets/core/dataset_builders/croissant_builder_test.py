@@ -22,6 +22,7 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core.dataset_builders import croissant_builder
 from tensorflow_datasets.core.features import audio_feature
 from tensorflow_datasets.core.features import bounding_boxes
+from tensorflow_datasets.core.features import bounding_boxes_utils as bb_utils
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
@@ -128,6 +129,27 @@ def test_simple_datatype_converter(
       float_dtype=float_dtype or np.float32,
   )
   assert actual_feature == expected_feature
+
+
+def test_bbox_datatype_converter():
+  field = mlc.Field(
+      data_types=mlc.DataType.BOUNDING_BOX,
+      description="Bounding box feature",
+      source=mlc.Source(format="XYWH"),
+  )
+  actual_feature = croissant_builder.datatype_converter(field)
+  assert isinstance(actual_feature, bounding_boxes.BBoxFeature)
+  assert actual_feature.bbox_format == bb_utils.BBoxFormat.XYWH
+
+
+def test_bbox_datatype_converter_with_invalid_format():
+  field = mlc.Field(
+      data_types=mlc.DataType.BOUNDING_BOX,
+      description="Bounding box feature",
+      source=mlc.Source(format="InvalidFormat"),
+  )
+  with pytest.raises(ValueError, match="Unsupported bounding box format"):
+    croissant_builder.datatype_converter(field)
 
 
 @pytest.mark.parametrize(

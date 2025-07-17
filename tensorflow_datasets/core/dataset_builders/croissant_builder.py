@@ -50,6 +50,7 @@ from tensorflow_datasets.core import split_builder as split_builder_lib
 from tensorflow_datasets.core import splits as splits_lib
 from tensorflow_datasets.core.features import audio_feature
 from tensorflow_datasets.core.features import bounding_boxes
+from tensorflow_datasets.core.features import bounding_boxes_utils as bb_utils
 from tensorflow_datasets.core.features import feature as feature_lib
 from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.features import image_feature
@@ -175,8 +176,17 @@ def datatype_converter(
     feature = image_feature.Image(doc=field.description)
   elif field_data_type == mlc.DataType.BOUNDING_BOX:
     # TFDS uses REL_YXYX by default, but Hugging Face doesn't enforce a format.
+    if bbox_format := field.source.format:
+      try:
+        bbox_format = bb_utils.BBoxFormat(bbox_format)
+      except ValueError as e:
+        raise ValueError(
+            f'Unsupported bounding box format: {bbox_format}. Currently'
+            ' supported bounding box formats are: '
+            f'{[format.value for format in bb_utils.BBoxFormat]}'
+        ) from e
     feature = bounding_boxes.BBoxFeature(
-        doc=field.description, bbox_format=None
+        doc=field.description, bbox_format=bbox_format
     )
   elif field_data_type == mlc.DataType.AUDIO_OBJECT:
     feature = audio_feature.Audio(
