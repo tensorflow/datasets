@@ -166,6 +166,11 @@ def test_bbox_datatype_converter_with_invalid_format():
             None,
         ),
         (
+            mlc.Field(data_types=mlc.DataType.TIME, description="Time feature"),
+            text_feature.Text,
+            None,
+        ),
+        (
             mlc.Field(
                 data_types=mlc.DataType.IMAGE_OBJECT,
                 description="Image feature",

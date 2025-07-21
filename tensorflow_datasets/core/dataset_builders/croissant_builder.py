@@ -37,6 +37,7 @@ print(ds['default'][0])
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+import datetime
 import json
 from typing import Any
 
@@ -169,8 +170,9 @@ def datatype_converter(
     feature = dtype_mapping[field_data_type]
   elif enp.lazy.is_np_dtype(field_data_type):
     feature = field_data_type
-  # We return a text feature for mlc.DataType.DATE features.
-  elif field_data_type == pd.Timestamp:
+  # We return a text feature for mlc.DataType.DATE and mlc.DataType.TIME
+  # features.
+  elif field_data_type == pd.Timestamp or field_data_type == datetime.time:
     feature = text_feature.Text(doc=field.description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
     feature = image_feature.Image(doc=field.description)
