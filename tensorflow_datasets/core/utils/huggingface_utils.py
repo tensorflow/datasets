@@ -119,6 +119,8 @@ def convert_hf_features(hf_features) -> feature_lib.FeatureConnector:
           sample_rate=hf_features.sampling_rate,
           dtype=np.int32,
       )
+    case hf_datasets.Video():
+      return feature_lib.Video()
 
   raise TypeError(f'Type {type(hf_features)} is not supported.')
 

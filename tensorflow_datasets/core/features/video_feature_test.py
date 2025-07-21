@@ -48,6 +48,22 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
         test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]),
     )
 
+  def test_video_with_none_shape(self):
+    np_video = np.random.randint(256, size=(128, 64, 64, 3), dtype=np.uint8)
+
+    self.assertFeature(
+        feature=features.Video(shape=None),
+        shape=(None, None, None, 3),
+        dtype=tf.uint8,
+        tests=[
+            testing.FeatureExpectationItem(
+                value=np_video,
+                expected=np_video,
+            ),
+        ],
+        test_attributes=dict(_encoding_format='png', _extra_ffmpeg_args=[]),
+    )
+
   def test_video_concatenated_frames(self):
     video_shape = (None, 400, 640, 3)
     lsun_examples_path = os.path.join(self._test_data_path, 'lsun_examples')
@@ -118,7 +134,6 @@ class VideoFeatureTest(testing.FeatureExpectationsTestCase):
               ),
           ],
       )
-
 
 if __name__ == '__main__':
   testing.test_main()

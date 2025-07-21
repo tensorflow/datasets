@@ -93,7 +93,7 @@ class Video(sequence_feature.Sequence):
 
   def __init__(
       self,
-      shape: Sequence[Optional[int]],
+      shape: Sequence[Optional[int]] | None = None,
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
@@ -103,8 +103,8 @@ class Video(sequence_feature.Sequence):
     """Initializes the connector.
 
     Args:
-      shape: tuple of ints, the shape of the video (num_frames, height, width,
-        channels), where channels is 1 or 3.
+      shape: The shape of the video (num_frames, height, width, channels), where
+        channels is 1 or 3.
       encoding_format: The video is stored as a sequence of encoded images. You
         can use any encoding format supported by image_feature.Feature.
       ffmpeg_extra_args: A sequence of additional args to be passed to the
@@ -121,19 +121,22 @@ class Video(sequence_feature.Sequence):
       ValueError: If the shape is invalid
     """
     dtype = tf.dtypes.as_dtype(dtype)
-    shape = tuple(shape)
-    if len(shape) != 4:
-      raise ValueError('Video shape should be of rank 4')
+    frame_shape = None
+    if shape:
+      shape = tuple(shape)
+      if len(shape) != 4:
+        raise ValueError('Video shape should be of rank 4')
+      frame_shape = shape[1:]
     self._encoding_format = encoding_format
     self._extra_ffmpeg_args = list(ffmpeg_extra_args or [])
     super(Video, self).__init__(
         image_feature.Image(
-            shape=shape[1:],
+            shape=frame_shape,
             dtype=dtype,
             encoding_format=encoding_format,
             use_colormap=use_colormap,
         ),
-        length=shape[0],
+        length=shape[0] if shape else None,
     )
 
   def _ffmpeg_decode(self, path_or_fobj):
