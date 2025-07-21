@@ -12,6 +12,11 @@
 # `caltech_birds2011`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
 Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos of 200 bird
@@ -33,7 +38,9 @@ dataset. Annotations include bounding boxes, segmentation labels.
 
 *   **Versions**:
 
-    *   **`0.1.1`** (default): No release notes.
+    *   **`0.2.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        No release notes.
 
 *   **Download size**: `1.11 GiB`
 
@@ -93,7 +100,7 @@ segmentation_mask | Image        | (None, None, 1) | uint8   |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/caltech_birds2011-0.1.1.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/caltech_birds2011-0.2.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).
