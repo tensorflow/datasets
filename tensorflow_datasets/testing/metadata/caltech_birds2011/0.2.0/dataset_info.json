@@ -1,0 +1,58 @@
+{
+  "citation": "@techreport{WelinderEtal2010,\nAuthor = {P. Welinder and S. Branson and T. Mita and C. Wah and F. Schroff and S. Belongie and P. Perona},\nInstitution = {California Institute of Technology},\nNumber = {CNS-TR-2010-001},\nTitle = {{Caltech-UCSD Birds 200}},\nYear = {2010}\n}",
+  "description": "Caltech-UCSD Birds 200 (CUB-200) is an image dataset with photos \nof 200 bird species (mostly North American). The total number of \ncategories of birds is 200 and there are 6033 images in the 2010 \ndataset and 11,788 images in the 2011 dataset.\nAnnotations include bounding boxes, segmentation labels.",
+  "downloadSize": "1189858222",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://www.vision.caltech.edu/datasets/cub_200_2011/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.image_classification.caltech_birds",
+  "name": "caltech_birds2011",
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "607083635",
+      "shardLengths": [
+        "749",
+        "749",
+        "750",
+        "749",
+        "749",
+        "750",
+        "749",
+        "749"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "587077607",
+      "shardLengths": [
+        "724",
+        "724",
+        "725",
+        "724",
+        "724",
+        "725",
+        "724",
+        "724"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "image"
+        },
+        {
+          "featureKey": "label"
+        }
+      ]
+    }
+  },
+  "version": "0.2.0"
+}

@@ -1,0 +1,59 @@
+{
+    "featuresDict": {
+        "features": {
+            "bbox": {
+                "boundingBox": {
+                    "bboxFormat": "REL_YXYX",
+                    "dtype": "float32",
+                    "shape": {
+                        "dimensions": [
+                            "4"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.bounding_boxes.BBoxFeature"
+            },
+            "image": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "3"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            },
+            "image/filename": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "label": {
+                "classLabel": {
+                    "numClasses": "200"
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.class_label_feature.ClassLabel"
+            },
+            "label_name": {
+                "pythonClassName": "tensorflow_datasets.core.features.text_feature.Text",
+                "text": {}
+            },
+            "segmentation_mask": {
+                "image": {
+                    "dtype": "uint8",
+                    "shape": {
+                        "dimensions": [
+                            "-1",
+                            "-1",
+                            "1"
+                        ]
+                    }
+                },
+                "pythonClassName": "tensorflow_datasets.core.features.image_feature.Image"
+            }
+        }
+    },
+    "pythonClassName": "tensorflow_datasets.core.features.features_dict.FeaturesDict"
+}
