@@ -147,7 +147,7 @@ class MockFs(object):
       with self._mock() as m:
         yield m
       self._tmp_dir = None
-      # TODO(epot): recursivelly record all
+      # TODO(epot): recursively record all.
 
   def _to_tmp(self, p, *, with_state: bool = False):
     """Normalize the path by returning `tmp_path / p`."""

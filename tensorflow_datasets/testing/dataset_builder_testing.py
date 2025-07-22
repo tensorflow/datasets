@@ -191,7 +191,7 @@ class DatasetBuilderTestCase(
     # The `dl_manager.download` and `dl_manager.download_and_extract` are
     # patched to record the urls in `_download_urls`.
     # Calling `dl_manager.download_checksums` stop the url
-    # registration (as checksums are stored remotelly)
+    # registration (as checksums are stored remotely)
     # `_test_checksums` validates the recorded urls.
     self._download_urls = set()
     self._stop_record_download = False
@@ -291,7 +291,7 @@ class DatasetBuilderTestCase(
   def _add_url(self, url_or_urls):
     if self._stop_record_download:
       # Stop record the checksums if dl_manager.download_checksums has been
-      # called (as checksums may be stored remotelly)
+      # called (as checksums may be stored remotely).
       return
     if isinstance(url_or_urls, download.resource.Resource):
       self._download_urls.add(url_or_urls.url)
