@@ -134,10 +134,11 @@ def datatype_converter(
       np.float32.
 
   Returns:
-    Converted datatype for TFDS.
+    Converted datatype for TFDS, or None when a Field does not specify a type.
 
   Raises:
-    NotImplementedError
+    NotImplementedError when the feature is not supported yet, or ValueError
+    when a Field is malformed.
   """
   if field.is_enumeration:
     raise NotImplementedError('Not implemented yet.')
@@ -151,7 +152,7 @@ def datatype_converter(
   field_data_type = field.data_type
 
   if not field_data_type:
-    # Fields with sub fields are of type None
+    # Fields with sub fields are of type None.
     if field.sub_fields:
       feature = features_dict.FeaturesDict(
           {
@@ -170,8 +171,8 @@ def datatype_converter(
     feature = dtype_mapping[field_data_type]
   elif enp.lazy.is_np_dtype(field_data_type):
     feature = field_data_type
-  # We return a text feature for mlc.DataType.DATE and mlc.DataType.TIME
-  # features.
+  # We return a text feature for date-time features (mlc.DataType.DATE,
+  # mlc.DataType.DATETIME, and mlc.DataType.TIME).
   elif field_data_type == pd.Timestamp or field_data_type == datetime.time:
     feature = text_feature.Text(doc=field.description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
@@ -195,7 +196,9 @@ def datatype_converter(
         doc=field.description, sample_rate=field.source.sampling_rate
     )
   else:
-    raise ValueError(f'Unknown data type: {field_data_type}.')
+    raise ValueError(
+        f'Unknown data type: {field_data_type} for field {field.id}.'
+    )
 
   if feature and field.is_array:
     feature = array_datatype_converter(

@@ -166,6 +166,13 @@ def test_bbox_datatype_converter_with_invalid_format():
             None,
         ),
         (
+            mlc.Field(
+                data_types=mlc.DataType.DATETIME, description="DateTime feature"
+            ),
+            text_feature.Text,
+            None,
+        ),
+        (
             mlc.Field(data_types=mlc.DataType.TIME, description="Time feature"),
             text_feature.Text,
             None,
@@ -221,6 +228,13 @@ def test_complex_datatype_converter(field, feature_type, subfield_types):
       assert isinstance(
           actual_feature[feature_name], subfield_types[feature_name]
       )
+
+
+def test_datatype_converter_none():
+  field = mlc.Field(
+      name="my_field", id="my_field", description="Field with empty data type."
+  )
+  assert croissant_builder.datatype_converter(field) is None
 
 
 def test_multidimensional_datatype_converter():
