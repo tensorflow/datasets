@@ -214,7 +214,7 @@ def datatype_converter(
   return feature
 
 
-def _extract_license(license_: Any) -> str | None:
+def _extract_license(license_: Any) -> str:
   """Extracts the full terms of a license as a string.
 
   In case the license is a CreativeWork, we join the name, description and url
@@ -234,12 +234,13 @@ def _extract_license(license_: Any) -> str | None:
     fields = [field for field in possible_fields if field]
     return '[' + ']['.join(fields) + ']'
   raise ValueError(
-      f'license_ should be mlc.CreativeWork | str. Got {type(license_)}'
+      'license_ should be mlc.CreativeWork | str. Got'
+      f' {type(license_)}: {license_}.'
   )
 
 
 def _get_license(metadata: Any) -> str | None:
-  """Gets the license from the metadata."""
+  """Gets the license from the metadata (if any) else returns None."""
   if not isinstance(metadata, mlc.Metadata):
     raise ValueError(f'metadata should be mlc.Metadata. Got {type(metadata)}')
   licenses = metadata.license

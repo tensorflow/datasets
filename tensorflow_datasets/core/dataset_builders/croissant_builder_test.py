@@ -32,6 +32,8 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
 FileFormat = file_adapters.FileFormat
 
+DUMMY_DESCRIPTION = "Dummy description."
+
 
 DUMMY_ENTRIES = [
     {
@@ -51,8 +53,30 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
 ]
 
 
+def _create_mlc_field(
+    data_types: mlc.DataType | list[mlc.DataType],
+    description: str,
+    is_array: bool = False,
+    array_shape: str | None = None,
+    repeated: bool = False,
+    source: mlc.Source | None = None,
+    sub_fields: list[mlc.Field] | None = None,
+) -> mlc.Field:
+  field = mlc.Field(
+      data_types=data_types,
+      description=description,
+      is_array=is_array,
+      array_shape=array_shape,
+      repeated=repeated,
+      sub_fields=sub_fields,
+  )
+  if source is not None:
+    field.source = source
+  return field
+
+
 @pytest.mark.parametrize(
-    ["field", "expected_feature", "int_dtype", "float_dtype"],
+    ["mlc_field", "expected_feature", "int_dtype", "float_dtype"],
     [
         (
             mlc.Field(
@@ -121,18 +145,18 @@ DUMMY_ENTRIES_WITH_CONVERTED_NONE_VALUES = [
     ],
 )
 def test_simple_datatype_converter(
-    field, expected_feature, int_dtype, float_dtype
+    mlc_field, expected_feature, int_dtype, float_dtype
 ):
   actual_feature = croissant_builder.datatype_converter(
-      field,
+      mlc_field,
       int_dtype=int_dtype or np.int64,
       float_dtype=float_dtype or np.float32,
   )
   assert actual_feature == expected_feature
 
 
-def test_bbox_datatype_converter():
-  field = mlc.Field(
+def test_datatype_converter_bbox():
+  field = _create_mlc_field(
       data_types=mlc.DataType.BOUNDING_BOX,
       description="Bounding box feature",
       source=mlc.Source(format="XYWH"),
@@ -142,8 +166,8 @@ def test_bbox_datatype_converter():
   assert actual_feature.bbox_format == bb_utils.BBoxFormat.XYWH
 
 
-def test_bbox_datatype_converter_with_invalid_format():
-  field = mlc.Field(
+def test_datatype_converter_bbox_with_invalid_format():
+  field = _create_mlc_field(
       data_types=mlc.DataType.BOUNDING_BOX,
       description="Bounding box feature",
       source=mlc.Source(format="InvalidFormat"),
@@ -153,7 +177,7 @@ def test_bbox_datatype_converter_with_invalid_format():
 
 
 @pytest.mark.parametrize(
-    ["field", "feature_type", "subfield_types"],
+    ["mlc_field", "feature_type", "subfield_types"],
     [
         (
             mlc.Field(data_types=mlc.DataType.TEXT, description="Text feature"),
@@ -219,11 +243,11 @@ def test_bbox_datatype_converter_with_invalid_format():
         ),
     ],
 )
-def test_complex_datatype_converter(field, feature_type, subfield_types):
-  actual_feature = croissant_builder.datatype_converter(field)
-  assert actual_feature.doc.desc == field.description
+def test_datatype_converter_complex(mlc_field, feature_type, subfield_types):
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
+  assert actual_feature.doc.desc == mlc_field.description
   assert isinstance(actual_feature, feature_type)
-  if subfield_types:
+  if subfield_types is not None:
     for feature_name in actual_feature.keys():
       assert isinstance(
           actual_feature[feature_name], subfield_types[feature_name]
@@ -238,65 +262,132 @@ def test_datatype_converter_none():
 
 
 def test_multidimensional_datatype_converter():
-  field = mlc.Field(
+  mlc_field = _create_mlc_field(
       data_types=mlc.DataType.TEXT,
       description="Text feature",
       is_array=True,
       array_shape="2,2",
   )
-  actual_feature = croissant_builder.datatype_converter(field)
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert isinstance(actual_feature, tensor_feature.Tensor)
   assert actual_feature.shape == (2, 2)
   assert actual_feature.dtype == np.str_
 
 
 def test_multidimensional_datatype_converter_image_object():
-  field = mlc.Field(
+  mlc_field = _create_mlc_field(
       data_types=mlc.DataType.IMAGE_OBJECT,
       description="Text feature",
       is_array=True,
       array_shape="2,2",
   )
-  actual_feature = croissant_builder.datatype_converter(field)
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert isinstance(actual_feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature.feature, image_feature.Image)
 
 
 def test_multidimensional_datatype_converter_plain_list():
-  field = mlc.Field(
+  mlc_field = _create_mlc_field(
       data_types=mlc.DataType.TEXT,
       description="Text feature",
       is_array=True,
       array_shape="-1",
   )
-  actual_feature = croissant_builder.datatype_converter(field)
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert isinstance(actual_feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature, text_feature.Text)
 
 
 def test_multidimensional_datatype_converter_unknown_shape():
-  field = mlc.Field(
+  mlc_field = _create_mlc_field(
       data_types=mlc.DataType.TEXT,
       description="Text feature",
       is_array=True,
       array_shape="-1,2",
   )
-  actual_feature = croissant_builder.datatype_converter(field)
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert isinstance(actual_feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature.feature, text_feature.Text)
 
 
 def test_sequence_feature_datatype_converter():
-  field = mlc.Field(
+  mlc_field = _create_mlc_field(
       data_types=mlc.DataType.TEXT,
       description="Text feature",
       repeated=True,
   )
-  actual_feature = croissant_builder.datatype_converter(field)
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert isinstance(actual_feature, sequence_feature.Sequence)
   assert isinstance(actual_feature.feature, text_feature.Text)
+
+
+@pytest.mark.parametrize(
+    ["license_", "expected_license"],
+    [
+        ("MIT", "MIT"),
+        (
+            mlc.CreativeWork(
+                name="Creative Commons",
+                description="Attribution 4.0 International",
+                url="https://creativecommons.org/licenses/by/4.0/",
+            ),
+            (
+                "[Creative Commons][Attribution 4.0"
+                " International][https://creativecommons.org/licenses/by/4.0/]"
+            ),
+        ),
+        (
+            mlc.CreativeWork(
+                name="Creative Commons",
+            ),
+            "[Creative Commons]",
+        ),
+        (
+            mlc.CreativeWork(
+                description="Attribution 4.0 International",
+            ),
+            "[Attribution 4.0 International]",
+        ),
+        (
+            mlc.CreativeWork(
+                url="https://creativecommons.org/licenses/by/4.0/",
+            ),
+            "[https://creativecommons.org/licenses/by/4.0/]",
+        ),
+        (
+            mlc.CreativeWork(),
+            "[]",
+        ),
+    ],
+)
+def test_extract_license(license_, expected_license):
+  actual_license = croissant_builder._extract_license(license_)
+  assert actual_license == expected_license
+
+
+def test_extract_license_with_invalid_input():
+  with pytest.raises(
+      ValueError, match="^license_ should be mlc.CreativeWork | str"
+  ):
+    croissant_builder._extract_license(123)
+
+
+def test_get_license():
+  metadata = mlc.Metadata(license=["MIT", "Apache 2.0"])
+  actual_license = croissant_builder._get_license(metadata)
+  assert actual_license == "MIT, Apache 2.0"
+
+
+def test_get_license_with_invalid_input():
+  with pytest.raises(ValueError, match="metadata should be mlc.Metadata"):
+    croissant_builder._get_license(123)
+
+
+def test_get_license_with_empty_license():
+  metadata = mlc.Metadata(license=[])
+  assert croissant_builder._get_license(metadata) is None
 
 
 def test_version_converter(tmp_path):
@@ -344,7 +435,7 @@ def test_croissant_builder(crs_builder):
       crs_builder._info().citation
       == "@article{dummyarticle, title={title}, author={author}, year={2020}}"
   )
-  assert crs_builder._info().description == "Dummy description."
+  assert crs_builder._info().description == DUMMY_DESCRIPTION
   assert crs_builder._info().homepage == "https://dummy_url"
   assert crs_builder._info().redistribution_info.license == "Public"
   # One `split` and one `jsonl` recordset.
