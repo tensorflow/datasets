@@ -34,6 +34,7 @@ from tensorflow_datasets.image.flic import Flic
 from tensorflow_datasets.image.lost_and_found import LostAndFound
 from tensorflow_datasets.image.lsun import Lsun
 from tensorflow_datasets.image.nyu_depth_v2 import NyuDepthV2
+from tensorflow_datasets.image.oasbud import Oasbud
 from tensorflow_datasets.image.pass_dataset import PASS
 from tensorflow_datasets.image.s3o4d import S3o4d
 from tensorflow_datasets.image.scene_parse_150 import SceneParse150

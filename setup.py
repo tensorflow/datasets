@@ -172,6 +172,7 @@ DATASET_EXTRAS = {
     # https://github.com/scikit-learn/scikit-learn/issues/14485
     # See https://github.com/librosa/librosa/issues/1160
     'nsynth': ['crepe>=0.0.11', 'librosa', 'scikit-learn==0.20.3'],
+    'oasbud': ['scipy', 'scikit-image'],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
     'qm9': ['pandas'],
