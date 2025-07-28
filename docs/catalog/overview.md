@@ -99,6 +99,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`ai2_arc_with_ir`](ai2_arc_with_ir.md)
 *   [`arc`](arc.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`natural_questions`](natural_questions.md)
 *   [`openbookqa`](openbookqa.md)
 
@@ -210,6 +212,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`clevr`](clevr.md)
 *   [`clic`](clic.md)
 *   [`coil100`](coil100.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`div2k`](div2k.md)
 *   [`downsampled_imagenet`](downsampled_imagenet.md)
 *   [`dsprites`](dsprites.md)
@@ -439,6 +443,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`booksum`](booksum.md)
 *   [`bool_q`](bool_q.md)
 *   [`bot_adversarial_dialogue`](bot_adversarial_dialogue.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dices`](dices.md)
 *   [`dolma`](dolma.md)
 *   [`e2e_cleaned`](e2e_cleaned.md)
@@ -487,6 +493,8 @@ for ex in tfds.load('cifar10', split='train'):
 ### `Natural language inference`
 
 *   [`anli`](anli.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`dices`](dices.md)
 *   [`paws_wiki`](paws_wiki.md)
 *   [`sci_tail`](sci_tail.md)
@@ -499,6 +507,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`beir`](beir.md)
 *   [`bool_q`](bool_q.md)
 *   [`clevr`](clevr.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`databricks_dolly`](databricks_dolly.md)
 *   [`dices`](dices.md)
 *   [`imdb_reviews`](imdb_reviews.md)
@@ -535,6 +545,8 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`coco`](coco.md)
 *   [`coco_captions`](coco_captions.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`flic`](flic.md)
 *   [`kitti`](kitti.md)
 *   [`lvis`](lvis.md)
@@ -849,6 +861,8 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`conll2003`](conll2003.md)
 *   [`corr2cause`](corr2cause.md)
 *   [`cos_e`](cos_e.md)
+*   [`covr`](covr.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`databricks_dolly`](databricks_dolly.md)
 *   [`definite_pronoun_resolution`](definite_pronoun_resolution.md)
 *   [`dices`](dices.md)

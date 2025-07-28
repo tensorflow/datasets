@@ -116,6 +116,9 @@ toc:
     title: ai2_arc_with_ir
   - path: /datasets/catalog/arc
     title: arc
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/natural_questions
     title: natural_questions
   - path: /datasets/catalog/openbookqa
@@ -274,6 +277,9 @@ toc:
     title: clic
   - path: /datasets/catalog/coil100
     title: coil100
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/div2k
     title: div2k
   - path: /datasets/catalog/downsampled_imagenet
@@ -684,6 +690,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/dolma
@@ -768,6 +777,9 @@ toc:
 - section:
   - path: /datasets/catalog/anli
     title: anli
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/dices
     title: dices
   - path: /datasets/catalog/paws_wiki
@@ -788,6 +800,9 @@ toc:
     title: bool_q
   - path: /datasets/catalog/clevr
     title: clevr
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/dices
@@ -852,6 +867,9 @@ toc:
     title: coco
   - path: /datasets/catalog/coco_captions
     title: coco_captions
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/flic
     title: flic
   - path: /datasets/catalog/kitti
@@ -1380,6 +1398,9 @@ toc:
     title: corr2cause
   - path: /datasets/catalog/cos_e
     title: cos_e
+  - path: /datasets/catalog/covr
+    status: nightly
+    title: covr
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
   - path: /datasets/catalog/definite_pronoun_resolution
