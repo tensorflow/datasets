@@ -555,6 +555,7 @@ corr2cause/1.0.0
 cos_e/0.0.1
 cosmos_qa/1.0.0
 covid19/1.0.0
+covr/1.0.0
 crema_d/1.0.0
 criteo/1.0.1
 cs_restaurants/1.0.0
