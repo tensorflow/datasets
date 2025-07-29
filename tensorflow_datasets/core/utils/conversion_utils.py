@@ -128,6 +128,18 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
   match feature:
     case feature_lib.ClassLabel() | feature_lib.Scalar():
       return value
+    case feature_lib.Video():
+      match value:
+        case dict():
+          if 'path' in value and value['path']:
+            return value['path']
+          elif 'bytes' in value and value['bytes']:
+            return value['bytes']
+          else:
+            raise ValueError(
+                'Dictionary-like video features must have either a `path` or'
+                ' `bytes` key.'
+            )
     case feature_lib.FeaturesDict():
       return {
           name: to_tfds_value(value.get(name), inner_feature)

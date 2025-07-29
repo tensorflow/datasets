@@ -81,7 +81,7 @@ def test_convert_value_raises(value, feature):
 @pytest.mark.parametrize(
     'value,feature,expected_value',
     [
-        # datetime
+        # Datetime.
         (
             datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc),
             feature_lib.Scalar(dtype=np.int64),
@@ -92,14 +92,14 @@ def test_convert_value_raises(value, feature):
             feature_lib.Scalar(dtype=np.int64),
             86400,
         ),
-        # scalar
+        # Scalar.
         (42, feature_lib.Scalar(dtype=np.int64), 42),
         (42, feature_lib.Scalar(dtype=np.int32), 42),
         ('abc', feature_lib.Scalar(dtype=np.object_), 'abc'),
         (True, feature_lib.Scalar(dtype=np.bool_), True),
         (False, feature_lib.Scalar(dtype=np.bool_), False),
         (42.0, feature_lib.Scalar(dtype=np.float32), 42.0),
-        # sequence
+        # Sequence.
         ([42], feature_lib.Sequence(feature=tf.int64), [42]),
         (42, feature_lib.Sequence(feature=tf.int64), [42]),
         (None, feature_lib.Sequence(feature=tf.int64), []),
@@ -111,7 +111,7 @@ def test_convert_value_raises(value, feature):
             ),
             {'someint': [b'', 'string', b'']},
         ),
-        # image
+        # Image.
         (
             lazy_imports_lib.lazy_imports.PIL_Image.new(mode='L', size=(4, 4)),
             feature_lib.Image(),
@@ -119,7 +119,7 @@ def test_convert_value_raises(value, feature):
                 mode='RGB', size=(4, 4)
             ),
         ),
-        # dict
+        # Dict.
         (
             {
                 'de': b'Hallo Welt',
@@ -148,7 +148,18 @@ def test_convert_value_raises(value, feature):
             }),
             {'name': b'Name', 'age': 100},
         ),
-        # nan, but the feature type is not float
+        # Video.
+        (
+            {'path': 'path/to/video.avi', 'bytes': None},
+            feature_lib.Video(),
+            'path/to/video.avi',
+        ),
+        (
+            {'path': None, 'bytes': b'video_bytes'},
+            feature_lib.Video(),
+            b'video_bytes',
+        ),
+        # nan, but the feature type is not float.
         (
             np.nan,
             feature_lib.Text(),
