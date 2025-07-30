@@ -26,7 +26,7 @@ from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _FFMPEG_TIMEOUT_SECONDS = 20 * 60  # 20 minutes.
-_MAX_SECONDS_PER_VIDEO = 10  # Max allowed length for videos.
+_MAX_SECONDS_PER_VIDEO = 30  # Max allowed length for videos.
 # Max allowed size of texts. We assume max 64 words for an English average word
 # length of 5. It is important to set a limit to this to avoid stragglers in
 # t5x processing.
@@ -332,5 +332,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     logging.info('df.shape %s', df.shape)
     logging.info('Number of rows %s', df.shape)
     df = df.to_dict('records')
+    logging.info(' LAST VERSION.')
 
     return beam.Create(df) | beam.FlatMap(_process_example)
