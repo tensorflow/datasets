@@ -58,6 +58,7 @@ from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.features import video_feature
 from tensorflow_datasets.core.utils import conversion_utils
 from tensorflow_datasets.core.utils import croissant_utils
 from tensorflow_datasets.core.utils import type_utils
@@ -195,6 +196,8 @@ def datatype_converter(
     feature = audio_feature.Audio(
         doc=field.description, sample_rate=field.source.sampling_rate
     )
+  elif field_data_type == mlc.DataType.VIDEO_OBJECT:
+    feature = video_feature.Video(doc=field.description)
   else:
     raise ValueError(
         f'Unknown data type: {field_data_type} for field {field.id}.'

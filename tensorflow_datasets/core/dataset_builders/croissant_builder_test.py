@@ -28,6 +28,7 @@ from tensorflow_datasets.core.features import image_feature
 from tensorflow_datasets.core.features import sequence_feature
 from tensorflow_datasets.core.features import tensor_feature
 from tensorflow_datasets.core.features import text_feature
+from tensorflow_datasets.core.features import video_feature
 from tensorflow_datasets.core.utils.lazy_imports_utils import mlcroissant as mlc
 
 FileFormat = file_adapters.FileFormat
@@ -223,6 +224,14 @@ def test_datatype_converter_bbox_with_invalid_format():
                 description="Bounding box feature",
             ),
             bounding_boxes.BBoxFeature,
+            None,
+        ),
+        (
+            mlc.Field(
+                data_types=mlc.DataType.VIDEO_OBJECT,
+                description="Video feature",
+            ),
+            video_feature.Video,
             None,
         ),
         (
