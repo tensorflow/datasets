@@ -492,9 +492,9 @@ class DatasetBuilder(registered.RegisteredDataset):
       return None
 
   @property
-  @tfds_logging.builder_info()
   # Warning: This unbounded cache is required for correctness. See b/238762111.
   @functools.lru_cache(maxsize=None)
+  @tfds_logging.builder_info()
   def info(self) -> dataset_info.DatasetInfo:
     """`tfds.core.DatasetInfo` for this builder."""
     # Ensure .info hasn't been called before versioning is set-up
