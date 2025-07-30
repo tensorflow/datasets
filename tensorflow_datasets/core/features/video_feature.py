@@ -129,7 +129,7 @@ class Video(sequence_feature.Sequence):
       frame_shape = shape[1:]
     self._encoding_format = encoding_format
     self._extra_ffmpeg_args = list(ffmpeg_extra_args or [])
-    super(Video, self).__init__(
+    super().__init__(
         image_feature.Image(
             shape=frame_shape,
             dtype=dtype,
@@ -137,6 +137,7 @@ class Video(sequence_feature.Sequence):
             use_colormap=use_colormap,
         ),
         length=shape[0] if shape else None,
+        doc=doc,
     )
 
   def _ffmpeg_decode(self, path_or_fobj):
