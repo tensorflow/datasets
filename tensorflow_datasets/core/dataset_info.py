@@ -719,7 +719,7 @@ class DatasetInfo:
       )
 
     self._identity = DatasetIdentity.from_proto(
-        info_proto=parsed_proto, data_dir=dataset_info_dir
+        info_proto=parsed_proto, data_dir=os.fspath(dataset_info_dir)
     )
 
     # Update splits
