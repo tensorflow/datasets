@@ -75,6 +75,8 @@ def build_info(
   episode_metadata = ds_config.episode_metadata_info
   if episode_metadata is None:
     episode_metadata = {}
+  else:
+    episode_metadata = {"episode_metadata": episode_metadata}
   step_info = {
       'is_terminal': tf.bool,
       'is_first': tf.bool,
