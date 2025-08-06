@@ -28,8 +28,8 @@ from typing import List
 from absl import app
 from absl import flags
 from absl import logging
-from absl.flags import argparse_flags
 
+import simple_parsing
 import tensorflow_datasets.public_api as tfds
 
 # Import commands
@@ -46,7 +46,7 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
   argv = flag_utils.normalize_flags(argv)  # See b/174043007 for context.
 
-  parser = argparse_flags.ArgumentParser(
+  parser = simple_parsing.ArgumentParser(
       description='Tensorflow Datasets CLI tool',
       allow_abbrev=False,
   )
@@ -67,7 +67,22 @@ def _parse_flags(argv: List[str]) -> argparse.Namespace:
   new.register_subparser(subparser)
   convert_format.register_subparser(subparser)
   croissant.register_subparser(subparser)
-  return parser.parse_args(argv[1:])
+
+  namespace, remaining_argv = parser.parse_known_args(argv[1:])
+
+  # Manually parse absl flags from the remaining arguments.
+  try:
+    # FLAGS requires the program name as the first argument.
+    positionals = FLAGS(argv[:1] + remaining_argv)
+  except flags.Error as e:
+    parser.error(str(e))
+
+  # There should be no positional arguments left, as they should have been
+  # handled by the sub-commands.
+  if len(positionals) > 1:
+    parser.error(f"unrecognized arguments: {' '.join(positionals[1:])}")
+
+  return namespace
 
 
 def main(args: argparse.Namespace) -> None:

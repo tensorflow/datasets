@@ -125,16 +125,11 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
 
 def register_subparser(parsers: argparse._SubParsersAction):
   """Add subparser for `convert_format` command."""
-  orig_parser_class = parsers._parser_class  # pylint: disable=protected-access
-  try:
-    parsers._parser_class = simple_parsing.ArgumentParser  # pylint: disable=protected-access
-    parser = parsers.add_parser(
-        'build_croissant',
-        help='Prepares a croissant dataset',
-    )
-    parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  finally:
-    parsers._parser_class = orig_parser_class  # pylint: disable=protected-access
+  parser = parsers.add_parser(
+      'build_croissant',
+      help='Prepares a croissant dataset',
+  )
+  parser = typing.cast(simple_parsing.ArgumentParser, parser)
   parser.add_arguments(CmdArgs, dest='args')
   parser.set_defaults(
       subparser_fn=lambda args: prepare_croissant_builders(args.args)
