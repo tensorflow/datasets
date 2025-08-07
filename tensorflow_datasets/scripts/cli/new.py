@@ -16,12 +16,14 @@
 """`tfds new` command."""
 
 import argparse
+import dataclasses
 import os
 import pathlib
 import subprocess
 import textwrap
-from typing import Optional
+import typing
 
+import simple_parsing
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_metadata
 from tensorflow_datasets.core import naming
@@ -30,60 +32,60 @@ from tensorflow_datasets.scripts.cli import builder_templates
 from tensorflow_datasets.scripts.cli import cli_utils as utils
 
 
-def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
-  """Add subparser for `new` command."""
-  new_parser = parsers.add_parser(
-      'new', help='Creates a new dataset directory from the template.'
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class Args:
+  """CLI arguments for creating a new dataset directory.
+
+  Attributes:
+    dataset_name: Name of the dataset to be created (in snake_case).
+    data_format: Format of the input data, which is used to generate a
+      format-specific template.
+    dir: Path where the dataset directory will be created. Defaults to current
+      directory.
+  """
+
+  dataset_name: str = simple_parsing.field(
+      positional=True,
+      # Need to explicitly set metavar for command-line help.
+      metavar='dataset_name',
   )
-  new_parser.add_argument(
-      'dataset_name',  # Positional argument
-      type=str,
-      help='Name of the dataset to be created (in snake_case)',
-  )
-  new_parser.add_argument(
-      '--data_format',  # Optional argument
-      type=str,
+  data_format: str = simple_parsing.choice(
+      builder_templates.STANDARD,
+      builder_templates.CONLL,
+      builder_templates.CONLLU,
       default=builder_templates.STANDARD,
-      choices=[
-          builder_templates.STANDARD,
-          builder_templates.CONLL,
-          builder_templates.CONLLU,
-      ],
-      help=(
-          'Optional format of the input data, which is used to generate a '
-          'format-specific template.'
-      ),
   )
-  new_parser.add_argument(
-      '--dir',
-      type=pathlib.Path,
-      default=pathlib.Path.cwd(),
-      help=(
-          'Path where the dataset directory will be created. '
-          'Defaults to current directory.'
-      ),
-  )
-  new_parser.set_defaults(subparser_fn=_create_dataset_files)
+  dir: pathlib.Path = simple_parsing.field(default_factory=pathlib.Path.cwd)
 
+  def execute(self) -> None:
+    """Creates the dataset directory."""
+    if not naming.is_valid_dataset_and_class_name(self.dataset_name):
+      raise ValueError(
+          'Invalid dataset name. It should be a valid Python class name.'
+      )
 
-def _create_dataset_files(args: argparse.Namespace) -> None:
-  """Creates the dataset directory. Executed by `tfds new <name>`."""
-  if not naming.is_valid_dataset_and_class_name(args.dataset_name):
-    raise ValueError(
-        'Invalid dataset name. It should be a valid Python class name.'
+    create_dataset_files(
+        dataset_name=self.dataset_name,
+        dataset_dir=self.dir,
+        data_format=self.data_format,
     )
 
-  create_dataset_files(
-      dataset_name=args.dataset_name,
-      dataset_dir=args.dir,
-      data_format=args.data_format,
+
+def register_subparser(parsers: argparse._SubParsersAction) -> None:
+  """Add subparser for `new` command."""
+  parser = parsers.add_parser(
+      'new',
+      help='Creates a new dataset directory from the template.',
   )
+  parser = typing.cast(simple_parsing.ArgumentParser, parser)
+  parser.add_arguments(Args, dest='args')
+  parser.set_defaults(subparser_fn=lambda args: args.args.execute())
 
 
 def create_dataset_files(
     dataset_name: str,
     dataset_dir: pathlib.Path,
-    data_format: Optional[str] = None,
+    data_format: str | None = None,
 ) -> None:
   """Creates the dataset files."""
   # Creates the root directory
