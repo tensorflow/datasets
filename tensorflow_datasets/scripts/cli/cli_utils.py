@@ -19,13 +19,13 @@ import argparse
 from collections.abc import Sequence
 import dataclasses
 import itertools
-import os
 import pathlib
 
 from absl import logging
 from absl.flags import argparse_flags
 from etils import epath
 import simple_parsing
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
@@ -166,13 +166,7 @@ def add_path_argument_group(parser: argparse.ArgumentParser):
   path_group.add_argument(
       '--data_dir',
       type=epath.Path,
-      # Should match tfds.core.constant.DATA_DIR !!
-      default=epath.Path(
-          os.environ.get(
-              'TFDS_DATA_DIR',
-              os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'),
-          )
-      ),
+      default=epath.Path(constants.DATA_DIR),
       help=(
           'Where to place datasets. Default to '
           '`~/tensorflow_datasets/` or `TFDS_DATA_DIR` environement variable.'

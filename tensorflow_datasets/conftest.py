@@ -20,16 +20,21 @@ plugins (hooks and fixtures) common to all tests.
 
 See: https://docs.pytest.org/en/latest/writing_plugins.html
 """
+
 from __future__ import annotations
 
 import builtins
 import importlib
+import os
+import pathlib
 import sys
 import typing
 from typing import Iterator, Type
 
+from etils import epath
 import pytest
 from tensorflow_datasets import setup_teardown
+from tensorflow_datasets.core import constants
 
 if typing.TYPE_CHECKING:
   from tensorflow_datasets import testing
@@ -52,11 +57,9 @@ def disable_community_datasets():
   # visibility isn't automatically set.
   from tensorflow_datasets.core import visibility  # pylint: disable=g-import-not-at-top
 
-  visibility.set_availables(
-      [
-          visibility.DatasetType.TFDS_PUBLIC,
-      ]
-  )
+  visibility.set_availables([
+      visibility.DatasetType.TFDS_PUBLIC,
+  ])
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -142,5 +145,15 @@ def dummy_dataset(
   from tensorflow_datasets import testing  # pylint: disable=g-import-not-at-top
 
   return _make_dataset(tmp_path_factory, testing.DummyDataset)
+
+
+@pytest.fixture(name='default_data_dir')
+def mock_default_data_dir(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: pathlib.Path
+) -> epath.Path:
+  """Sets the default data dir to a temp dir."""
+  default_data_dir = epath.Path(tmp_path) / 'default_data_dir'
+  monkeypatch.setattr(constants, 'DATA_DIR', os.fspath(default_data_dir))
+  return default_data_dir
 
 

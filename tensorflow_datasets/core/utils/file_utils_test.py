@@ -62,16 +62,8 @@ def _assert_data_dir(
   assert data_dir == expected_data_dir
 
 
-@pytest.fixture(name='default_data_dir')
-def mock_default_data_dir(monkeypatch, tmp_path):
-  """Sets the default data dir to a temp dir."""
-  default_data_dir = tmp_path / 'default_data_dir'
-  monkeypatch.setattr(constants, 'DATA_DIR', default_data_dir)
-  return default_data_dir
-
-
 @pytest.fixture(name='other_data_dir')
-def mock_other_data_dir(default_data_dir):
+def mock_other_data_dir(default_data_dir: epath.Path):
   """Adds another data dir to the registered data dirs."""
   other_data_dir = default_data_dir.parent / 'other_data_dir'
   file_utils.add_data_dir(other_data_dir)

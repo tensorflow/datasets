@@ -13,14 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for tensorflow_datasets.scripts.cli.build."""
-
+from collections.abc import Callable, Iterator
 import contextlib
 import dataclasses
+import functools
 import multiprocessing
 import os
-import pathlib
-from typing import Dict, Iterator, List, Optional
 from unittest import mock
 
 from etils import epath
@@ -45,7 +43,7 @@ class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
 
   @utils.classproperty
   @classmethod
-  def url_infos(cls) -> Optional[Dict[str, download.checksums.UrlInfo]]:
+  def url_infos(cls) -> dict[str, download.checksums.UrlInfo] | None:
     return {
         'http://data.org/file1.zip': download.checksums.UrlInfo(
             size=42,
@@ -55,33 +53,21 @@ class DummyDatasetNoGenerate(tfds.testing.DummyDataset):
     }
 
 
-@pytest.fixture(scope='function', autouse=True)
-def mock_default_data_dir(tmp_path: pathlib.Path):
-  """Changes the default `--data_dir` to tmp_path."""
-  tmp_path = tmp_path / 'datasets'
-  default_data_dir = os.environ.get('TFDS_DATA_DIR')
-  try:
-    os.environ['TFDS_DATA_DIR'] = os.fspath(tmp_path)
-    yield tmp_path
-  finally:
-    if default_data_dir:
-      os.environ['TFDS_DATA_DIR'] = default_data_dir
-    else:
-      del os.environ['TFDS_DATA_DIR']
-
-
 @contextlib.contextmanager
 def mock_cwd(path: epath.PathLike) -> Iterator[None]:
   """Mock the current directory."""
-  path = pathlib.Path(path)
+  path = epath.Path(path)
   assert path.exists() and path.is_dir()  # Check given path is valid cwd dir
-  with mock.patch('os.getcwd', return_value=os.fspath(path)):
+  with mock.patch.object(os, 'getcwd', return_value=os.fspath(path)):
     yield
 
 
-def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
+def _build(
+    cmd_flags: str, data_dir: epath.Path, mock_download_and_prepare: bool = True
+) -> list[str]:
   """Executes `tfds build {cmd_flags}` and returns the list of generated ds."""
   # Execute the command
+  cmd_flags = f'--data_dir={data_dir} {cmd_flags}'
   args = main._parse_flags(f'tfds build {cmd_flags}'.split())
 
   original_dl_and_prepare = tfds.core.DatasetBuilder.download_and_prepare
@@ -101,9 +87,8 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
     else:
       return original_dl_and_prepare(self, *args, **kwargs)
 
-  with mock.patch(
-      'tensorflow_datasets.core.DatasetBuilder.download_and_prepare',
-      _download_and_prepare,
+  with mock.patch.object(
+      tfds.core.DatasetBuilder, 'download_and_prepare', _download_and_prepare
   ):
     main.main(args)
     queue.put(None)
@@ -115,31 +100,39 @@ def _build(cmd_flags: str, mock_download_and_prepare: bool = True) -> List[str]:
   return generated_ds_names
 
 
-def test_build_single():
-  assert _build('mnist') == ['mnist']
-  assert _build('mnist:3.0.1') == ['mnist']
+@pytest.fixture(name='build')
+def mock_build(
+    default_data_dir: epath.Path,
+) -> Callable[[str, bool], list[str]]:
+  """Returns a function to execute `tfds build`."""
+  return functools.partial(_build, data_dir=default_data_dir)
+
+
+def test_build_single(build):
+  assert build('mnist') == ['mnist']
+  assert build('mnist:3.0.1') == ['mnist']
   # Keyword arguments also possible
-  assert _build('--datasets mnist') == ['mnist']
+  assert build('--datasets mnist') == ['mnist']
 
   with pytest.raises(tfds.core.registered.DatasetNotFoundError):
-    _build('unknown_dataset')
+    build('unknown_dataset')
 
   with pytest.raises(AssertionError, match='cannot be loaded at version 1.0.0'):
-    _build('mnist:1.0.0')  # Can only built the last version
+    build('mnist:1.0.0')  # Can only built the last version
 
   with pytest.raises(ValueError, match='not have config'):
-    _build('mnist --config_idx 0')
+    build('mnist --config_idx 0')
 
 
-def test_build_multiple():
+def test_build_multiple(build):
   # Multiple datasets can be built in a single call
-  assert _build('mnist imagenet2012 cifar10') == [
+  assert build('mnist imagenet2012 cifar10') == [
       'mnist',
       'imagenet2012',
       'cifar10',
   ]
   # Keyword arguments also possible
-  assert _build('mnist --datasets imagenet2012 cifar10') == [
+  assert build('mnist --datasets imagenet2012 cifar10') == [
       'mnist',
       'imagenet2012',
       'cifar10',
@@ -147,9 +140,9 @@ def test_build_multiple():
 
 
 @pytest.mark.parametrize('num_processes', range(1, 4))
-def test_build_parallel(num_processes):
+def test_build_parallel(build, num_processes):
   # Order is not guaranteed
-  assert set(_build(f'trivia_qa --num-processes={num_processes}')) == set([
+  assert set(build(f'trivia_qa --num-processes={num_processes}')) == set([
       'trivia_qa/rc',
       'trivia_qa/rc.nocontext',
       'trivia_qa/unfiltered',
@@ -157,9 +150,9 @@ def test_build_parallel(num_processes):
   ])
 
 
-def test_build_dataset_configs():
+def test_build_dataset_configs(build):
   # By default, all configs are build
-  assert _build('trivia_qa') == [
+  assert build('trivia_qa') == [
       'trivia_qa/rc',
       'trivia_qa/rc.nocontext',
       'trivia_qa/unfiltered',
@@ -169,47 +162,47 @@ def test_build_dataset_configs():
   # If config is set, only the defined config is generated
 
   # --config_idx
-  assert _build('trivia_qa --config_idx=0') == ['trivia_qa/rc']
+  assert build('trivia_qa --config_idx=0') == ['trivia_qa/rc']
 
   # --config
-  assert _build('trivia_qa --config unfiltered.nocontext') == [
+  assert build('trivia_qa --config unfiltered.nocontext') == [
       'trivia_qa/unfiltered.nocontext',
   ]
 
   # --config Json
   config_json = '{"name":"my_config","description":"abcd"}'
-  assert _build(f'imdb_reviews --config {config_json}') == [
+  assert build(f'imdb_reviews --config {config_json}') == [
       'imdb_reviews/my_config',
   ]
 
   # name/config
-  assert _build('trivia_qa/unfiltered.nocontext') == [
+  assert build('trivia_qa/unfiltered.nocontext') == [
       'trivia_qa/unfiltered.nocontext'
   ]
 
   with pytest.raises(ValueError, match='Config should only be defined once'):
-    _build('trivia_qa/unfiltered.nocontext --config_idx=0')
+    build('trivia_qa/unfiltered.nocontext --config_idx=0')
 
   with pytest.raises(ValueError, match='greater than number of configs'):
-    _build('trivia_qa --config_idx 100')
+    build('trivia_qa --config_idx 100')
 
 
-def test_exclude_datasets():
+def test_exclude_datasets(build):
   # Exclude all datasets except 2
   all_ds = [b for b in tfds.list_builders() if b not in ('mnist', 'cifar10')]
   all_ds_str = ','.join(all_ds)
 
-  assert _build(f'--exclude_datasets {all_ds_str}') == [
+  assert build(f'--exclude_datasets {all_ds_str}') == [
       'cifar10',
       'mnist',
   ]
 
   with pytest.raises(ValueError, match="--exclude_datasets can't be used"):
-    _build('mnist --exclude_datasets cifar10')
+    build('mnist --exclude_datasets cifar10')
 
 
-def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disable=redefined-outer-name
-  data_dir = mock_default_data_dir / 'mnist/3.0.1'
+def test_build_overwrite(build, default_data_dir: epath.Path):
+  data_dir = default_data_dir / 'mnist/3.0.1'
   data_dir.mkdir(parents=True)
   metadata_path = tfds.core.tfds_path(
       'testing/test_data/dataset_info/mnist/3.0.1'
@@ -219,80 +212,82 @@ def test_build_overwrite(mock_default_data_dir: pathlib.Path):  # pylint: disabl
     data_dir.joinpath(f.name).write_text(f.read_text())
 
   # By default, will skip generation if the data already exists
-  assert _build('mnist') == ['mnist']  # Called, but no-op
+  assert build('mnist') == ['mnist']  # Called, but no-op
   assert data_dir.exists()
 
-  assert _build('mnist --overwrite') == ['mnist']
+  assert build('mnist --overwrite') == ['mnist']
   assert not data_dir.exists()  # Previous data-dir has been removed
 
 
-def test_max_examples_per_split_0(mock_default_data_dir: pathlib.Path):  # pylint: disable=redefined-outer-name
-  assert _build(
+def test_max_examples_per_split_0(build, default_data_dir: epath.Path):
+  assert build(
       'dummy_dataset_no_generate --max_examples_per_split 0',
       mock_download_and_prepare=False,
   ) == ['dummy_dataset_no_generate']
 
-  builder_path = mock_default_data_dir / 'dummy_dataset_no_generate/1.0.0'
+  builder_path = default_data_dir / 'dummy_dataset_no_generate/1.0.0'
   # Dataset has been generated
   assert builder_path.exists()
   # tf-records files have not been generated
-  assert sorted(builder_path.iterdir()) == [
-      builder_path / 'dataset_info.json',
-      builder_path / 'features.json',
+  assert sorted(p.name for p in builder_path.iterdir()) == [
+      'dataset_info.json',
+      'features.json',
   ]
 
 
-def test_build_files():
+def test_build_files(build):
   # Make sure DummyDataset isn't registered by default
   with pytest.raises(tfds.core.registered.DatasetNotFoundError):
-    _build('dummy_dataset')
+    build('dummy_dataset')
 
   with pytest.raises(FileNotFoundError, match='Could not find .* script'):
-    _build('')
+    build('')
 
   # cd .../datasets/dummy_dataset && tfds build
   with mock_cwd(_DUMMY_DATASET_PATH):
-    assert _build('') == ['dummy_dataset']
+    assert build('') == ['dummy_dataset']
 
   # cd .../datasets/dummy_dataset && tfds build dummy_dataset.py
   with mock_cwd(_DUMMY_DATASET_PATH):
-    assert _build('dummy_dataset.py') == ['dummy_dataset']
+    assert build('dummy_dataset.py') == ['dummy_dataset']
 
   # cd .../datasets/ && tfds build dummy_dataset
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
-    assert _build('dummy_dataset') == ['dummy_dataset']
+    assert build('dummy_dataset') == ['dummy_dataset']
 
   # cd .../datasets/ && tfds build dummy_dataset --imports=xxx
   # --imports is passed. so do not load dataset from file
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
     with pytest.raises(tfds.core.registered.DatasetNotFoundError):
-      assert _build('dummy_dataset --imports=os')
+      assert build('dummy_dataset --imports=os')
 
   # cd .../datasets/ && tfds build dummy_dataset/dummy_dataset
   with mock_cwd(_DUMMY_DATASET_PATH.parent):
-    assert _build('dummy_dataset/dummy_dataset') == ['dummy_dataset']
+    assert build('dummy_dataset/dummy_dataset') == ['dummy_dataset']
 
 
 # Somehow only with tf-nightly, `dummy_dataset` is already imported by
 # community/load_test.py (with `skip_registration()`). Thus import here have
 # no-effects.
 @pytest.mark.skip(reason='Conflict with `load_test.py`')
-def test_build_import():
+def test_build_import(build):
   # DummyDataset isn't registered by default
   with pytest.raises(tfds.core.registered.DatasetNotFoundError):
-    _build('dummy_dataset')
+    build('dummy_dataset')
 
   # --imports register the dataset
   ds_module = 'tensorflow_datasets.testing.dummy_dataset.dummy_dataset'
-  assert _build(f'dummy_dataset --imports {ds_module}') == ['dummy_dataset']
+  assert build(f'dummy_dataset --imports {ds_module}') == ['dummy_dataset']
 
 
-def test_download_only():
-  with mock.patch(
-      'tensorflow_datasets.download.DownloadManager.download'
+def test_download_only(build):
+  with mock.patch.object(
+      download.DownloadManager, 'download', autospec=True
   ) as mock_download:
-    assert not _build('dummy_dataset_no_generate --download_only')
-    mock_download.assert_called_with({'file0': 'http://data.org/file1.zip'})
+    assert not build('dummy_dataset_no_generate --download_only')
+    mock_download.assert_called_with(
+        mock.ANY, {'file0': 'http://data.org/file1.zip'}
+    )
 
 
 @pytest.mark.parametrize(

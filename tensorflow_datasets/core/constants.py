@@ -18,6 +18,7 @@
 # IMPORTANT: when changing values here, update docstrings.
 
 import os
+from typing import Final
 
 # Directory in which datasets are declared within TFDS sources.
 DATASETS_TFDS_SRC_DIR = 'datasets'
@@ -27,7 +28,7 @@ SRC_BASE_URL = 'https://github.com/tensorflow/datasets/tree/master/'
 
 # Directory where to store processed datasets.
 # If modifying this, should also update `scripts/cli/build.py` `--data_dir`
-DATA_DIR = os.environ.get(
+DATA_DIR: Final[str] = os.environ.get(
     'TFDS_DATA_DIR',
     os.path.join(os.path.expanduser('~'), 'tensorflow_datasets'),
 )
