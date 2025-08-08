@@ -15,11 +15,11 @@
 
 """Utility for handling flags."""
 
+from collections.abc import Sequence
 import re
-from typing import List
 
 
-def normalize_flags(argv: List[str]) -> List[str]:
+def normalize_flags(argv: Sequence[str]) -> list[str]:
   """Returns normalized explicit bolean flags for `absl.flags` compatibility.
 
   Note: Boolean flags in `absl.flags` can be specified with --bool, --nobool,

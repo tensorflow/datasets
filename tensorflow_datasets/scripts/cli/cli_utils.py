@@ -16,18 +16,65 @@
 """Utility functions for TFDS CLI."""
 
 import argparse
+from collections.abc import Sequence
 import dataclasses
 import itertools
 import os
 import pathlib
 
 from absl import logging
+from absl.flags import argparse_flags
 from etils import epath
+import simple_parsing
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import file_utils
+from tensorflow_datasets.scripts.utils import flag_utils
+
+
+class ArgumentParser(
+    argparse_flags.ArgumentParser, simple_parsing.ArgumentParser
+):
+  """An `ArgumentParser` that handles both `simple_parsing` and `absl` flags.
+
+  This class is a workaround for the fact that `simple_parsing.ArgumentParser`
+  does not natively handle `absl.flags`. Without this, `absl` flags are not
+  correctly parsed, especially when they are mixed with positional arguments,
+  leading to errors.
+
+  The `absl.flags.argparse_flags.ArgumentParser` is designed to integrate `absl`
+  flags into an `argparse` setup. It does this by dynamically adding all
+  defined `absl` flags to the parser instance upon initialization.
+
+  By inheriting from both, we get the features of both:
+  - `simple_parsing.ArgumentParser`: Allows defining arguments from typed
+    dataclasses.
+  - `argparse_flags.ArgumentParser`: Adds support for `absl` flags.
+
+  The Method Resolution Order (MRO) is:
+  `ArgumentParser` -> `argparse_flags.ArgumentParser` ->
+  `simple_parsing.ArgumentParser` -> `argparse.ArgumentParser` -> `object`.
+
+  This order is important. `argparse_flags.ArgumentParser` is first so that it
+  can intercept arguments and handle `absl` flags before they are passed to
+  `simple_parsing.ArgumentParser`.
+  """
+
+  def parse_known_args(
+      self,
+      args: Sequence[str] | None = None,
+      namespace: argparse.Namespace | None = None,
+      attempt_to_reorder: bool = False,
+  ):
+    # `argparse_flags.ArgumentParser` does not support `attempt_to_reorder` that
+    # is used by `simple_parsing.ArgumentParser`. Since we don't need it, we can
+    # just ignore it.
+    del attempt_to_reorder
+    if args:
+      args = flag_utils.normalize_flags(args)
+    return super().parse_known_args(args, namespace)
 
 
 @dataclasses.dataclass
