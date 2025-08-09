@@ -48,6 +48,7 @@ from tensorflow_datasets.text.irc_disentanglement import IrcDisentanglement
 from tensorflow_datasets.text.lambada import Lambada
 from tensorflow_datasets.text.librispeech_lm import LibrispeechLm
 from tensorflow_datasets.text.lm1b import Lm1b
+from tensorflow_datasets.text.longt5 import Longt5
 from tensorflow_datasets.text.math_dataset import MathDataset
 from tensorflow_datasets.text.math_qa import MathQa
 from tensorflow_datasets.text.movie_rationales import MovieRationales
