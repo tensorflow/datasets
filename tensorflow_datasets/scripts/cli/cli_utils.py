@@ -127,232 +127,137 @@ class DatasetInfo:
     self.ds_import = ds_import
 
 
-def add_debug_argument_group(parser: argparse.ArgumentParser):
-  """Adds debug argument group to the parser."""
-  debug_group = parser.add_argument_group(
-      'Debug & tests',
-      description=(
-          '--pdb Enter post-mortem debugging mode if an exception is raised.'
-      ),
-  )
-  debug_group.add_argument(
-      '--overwrite',
-      action='store_true',
-      help='Delete pre-existing dataset if it exists.',
-  )
-  debug_group.add_argument(
-      '--fail_if_exists',
-      action='store_true',
-      default=False,
-      help='Fails the program if there is a pre-existing dataset.',
-  )
-  debug_group.add_argument(
-      '--max_examples_per_split',
-      type=int,
-      nargs='?',
-      const=1,
-      help=(
-          'When set, only generate the first X examples (default to 1), rather'
-          ' than the full dataset.If set to 0, only execute the'
-          ' `_split_generators` (which download the original data), but skip'
-          ' `_generator_examples`'
-      ),
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class DebugOptions:
+  """Debug & tests options.
+
+  Attributes:
+    overwrite: If True, delete pre-existing dataset if it exists.
+    fail_if_exists: If True, fails the program if there is a pre-existing
+      dataset.
+    max_examples_per_split: When set, only generate the first X examples
+      (default to 1), rather than the full dataset. If set to 0, only execute
+      the `_split_generators` (which download the original data), but skip
+      `_generator_examples`.
+  """
+
+  overwrite: bool = simple_parsing.flag(default=False)
+  fail_if_exists: bool = simple_parsing.flag(default=False)
+  max_examples_per_split: int | None = simple_parsing.field(
+      default=None, nargs='?', const=1
   )
 
 
-def add_path_argument_group(parser: argparse.ArgumentParser):
-  """Adds path argument group to the parser."""
-  path_group = parser.add_argument_group('Paths')
-  path_group.add_argument(
-      '--data_dir',
-      type=epath.Path,
-      default=epath.Path(constants.DATA_DIR),
-      help=(
-          'Where to place datasets. Default to '
-          '`~/tensorflow_datasets/` or `TFDS_DATA_DIR` environement variable.'
-      ),
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class PathOptions:
+  """Path options.
+
+  Attributes:
+    data_dir: Where to place datasets. Default to `~/tensorflow_datasets/` or
+      `TFDS_DATA_DIR` environement variable.
+    download_dir: Where to place downloads. Default to `<data_dir>/downloads/`.
+    extract_dir: Where to extract files. Default to `<download_dir>/extracted/`.
+    manual_dir: Where to manually download data (required for some datasets).
+      Default to `<download_dir>/manual/`.
+    add_name_to_manual_dir: If true, append the dataset name to the `manual_dir`
+      (e.g. `<download_dir>/manual/<dataset_name>/`). Useful to avoid collisions
+      if many datasets are generated.
+  """
+
+  data_dir: epath.Path = simple_parsing.field(
+      default=epath.Path(constants.DATA_DIR)
   )
-  path_group.add_argument(
-      '--download_dir',
-      type=epath.Path,
-      help='Where to place downloads. Default to `<data_dir>/downloads/`.',
-  )
-  path_group.add_argument(
-      '--extract_dir',
-      type=epath.Path,
-      help='Where to extract files. Default to `<download_dir>/extracted/`.',
-  )
-  path_group.add_argument(
-      '--manual_dir',
-      type=epath.Path,
-      help=(
-          'Where to manually download data (required for some datasets). '
-          'Default to `<download_dir>/manual/`.'
-      ),
-  )
-  path_group.add_argument(
-      '--add_name_to_manual_dir',
-      action='store_true',
-      help=(
-          'If true, append the dataset name to the `manual_dir` (e.g. '
-          '`<download_dir>/manual/<dataset_name>/`. Useful to avoid collisions '
-          'if many datasets are generated.'
-      ),
-  )
+  download_dir: epath.Path | None = None
+  extract_dir: epath.Path | None = None
+  manual_dir: epath.Path | None = None
+  add_name_to_manual_dir: bool = simple_parsing.flag(default=False)
 
 
-def add_generation_argument_group(parser: argparse.ArgumentParser):
-  """Adds generation argument group to the parser."""
-  generation_group = parser.add_argument_group('Generation')
-  generation_group.add_argument(
-      '--download_only',
-      action='store_true',
-      help=(
-          'If True, download all files but do not prepare the dataset. Uses the'
-          ' checksum.tsv to find out what to download. Therefore, this does not'
-          ' work in combination with --register_checksums.'
-      ),
-  )
-  generation_group.add_argument(
-      '--config',
-      '-c',
-      type=str,
-      help=(
-          'Config name to build. Build all configs if not set. Can also be a'
-          ' json of the kwargs forwarded to the config `__init__` (for custom'
-          ' configs).'
-      ),
-  )
-  # We are forced to have 2 flags to avoid ambiguity when config name is
-  # a number (e.g. `voc/2017`)
-  generation_group.add_argument(
-      '--config_idx',
-      type=int,
-      help=(
-          'Config id to build (`builder_cls.BUILDER_CONFIGS[config_idx]`). '
-          'Mutually exclusive with `--config`.'
-      ),
-  )
-  generation_group.add_argument(
-      '--update_metadata_only',
-      action='store_true',
-      default=False,
-      help=(
-          'If True, existing dataset_info.json is updated with metadata defined'
-          ' in Builder class(es). Datasets must already have been prepared.'
-      ),
-  )
-  generation_group.add_argument(
-      '--download_config',
-      type=str,
-      help=(
-          'A json of the kwargs forwarded to the config `__init__` (for custom'
-          ' DownloadConfigs).'
-      ),
-  )
-  generation_group.add_argument(
-      '--imports',
-      '-i',
-      type=str,
-      help='Comma separated list of module to import to register datasets.',
-  )
-  generation_group.add_argument(
-      '--register_checksums',
-      action='store_true',
-      help='If True, store size and checksum of downloaded files.',
-  )
-  generation_group.add_argument(
-      '--force_checksums_validation',
-      action='store_true',
-      help='If True, raise an error if the checksums are not found.',
-  )
-  # For compatibility with absl.flags (which generates --foo and --nofoo).
-  generation_group.add_argument(
-      '--noforce_checksums_validation',
-      dest='force_checksums_validation',
-      action='store_false',
-      help='If specified, bypass the checks on the checksums.',
-  )
-  generation_group.add_argument(
-      '--beam_pipeline_options',
-      type=str,
-      # nargs='+',
-      help=(
-          'A (comma-separated) list of flags to pass to `PipelineOptions` when'
-          ' preparing with Apache Beam. (see:'
-          ' https://www.tensorflow.org/datasets/beam_datasets). Example:'
-          ' `--beam_pipeline_options=job_name=my-job,project=my-project`'
-      ),
-  )
-  format_values = [f.value for f in file_adapters.FileFormat]
-  generation_group.add_argument(
-      '--file_format',
-      type=str,
-      help=(
-          'File format to which generate the tf-examples. '
-          f'Available values: {format_values} (see `tfds.core.FileFormat`).'
-      ),
-  )
-  generation_group.add_argument(
-      '--max_shard_size_mb', type=int, help='The max shard size in megabytes.'
-  )
-  generation_group.add_argument(
-      '--num_shards', type=int, help='The number of shards to write to.'
-  )
-  generation_group.add_argument(
-      '--num-processes',
-      type=int,
-      default=1,
-      help='Number of parallel build processes.',
-  )
-  generation_group.add_argument(
-      '--nondeterministic_order',
-      action='store_true',
-      default=False,
-      help=(
-          'If True, it will not assure deterministic ordering when writing'
-          ' examples to disk. This might result in quicker dataset preparation.'
-      ),
-  )
-  # For compatibility with absl.flags (which generates --foo and --nofoo).
-  generation_group.add_argument(
-      '--nonondeterministic_order',
-      dest='nondeterministic_order',
-      action='store_false',
-      help=(
-          'If specified, it will assure deterministic ordering when writing'
-          ' examples to disk.'
-      ),
-  )
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class GenerationOptions:
+  """Generation options.
 
+  Attributes:
+    download_only: If True, download all files but do not prepare the dataset.
+      Uses the checksum.tsv to find out what to download. Therefore, this does
+      not work in combination with --register_checksums.
+    config: Config name to build. Build all configs if not set. Can also be a
+      json of the kwargs forwarded to the config `__init__` (for custom
+      configs).
+    config_idx: Config id to build (`builder_cls.BUILDER_CONFIGS[config_idx]`).
+      Mutually exclusive with `--config`. We are forced to have 2 flags to avoid
+      ambiguity when `config` is a number (e.g. `voc/2017`).
+    update_metadata_only: If True, existing dataset_info.json is updated with
+      metadata defined in Builder class(es). Datasets must already have been
+      prepared.
+    download_config: A json of the kwargs forwarded to the config `__init__`
+      (for custom DownloadConfigs).
+    imports: Comma separated list of module to import to register datasets.
+    register_checksums: If True, store size and checksum of downloaded files.
+    force_checksums_validation: If True, raise an error if the checksums are not
+      found. Otherwise, bypass the checks on the checksums
+    beam_pipeline_options: A (comma-separated) list of flags to pass to
+      `PipelineOptions` when preparing with Apache Beam. (see:
+      https://www.tensorflow.org/datasets/beam_datasets). Example:
+        `--beam_pipeline_options=job_name=my-job,project=my-project`
+    file_format: File format to which generate the tf-examples.
+    max_shard_size_mb: The max shard size in megabytes.
+    num_shards: The number of shards to write to.
+    num_processes: Number of parallel build processes.
+    nondeterministic_order: If True, it will not assure deterministic ordering
+      when writing examples to disk. This might result in quicker dataset
+      preparation. Otherwise, it will assure deterministic ordering when writing
+      examples to disk
+  """
 
-def add_publish_argument_group(parser: argparse.ArgumentParser):
-  """Adds publish argument group to the parser."""
-  publish_group = parser.add_argument_group(
-      'Publishing',
-      description='Options for publishing successfully created datasets.',
-  )
-  publish_group.add_argument(
-      '--publish_dir',
-      type=epath.Path,
+  download_only: bool = simple_parsing.flag(default=False)
+  config: str | None = simple_parsing.field(default=None, alias='-c')
+  config_idx: int | None = None
+  update_metadata_only: bool = simple_parsing.flag(default=False)
+  download_config: str | None = None
+  imports: str | None = simple_parsing.field(default=None, alias='-i')
+  register_checksums: bool = simple_parsing.flag(default=False)
+  force_checksums_validation: bool = simple_parsing.flag(default=False)
+  beam_pipeline_options: str | None = None
+  file_format: str | None = simple_parsing.choice(
+      *(file_format.value for file_format in file_adapters.FileFormat),
       default=None,
-      required=False,
-      help=(
-          'Where to optionally publish the dataset after it has been '
-          'generated successfully. Should be the root data dir under which'
-          'datasets are stored. '
-          'If unspecified, dataset will not be published'
-      ),
   )
-  publish_group.add_argument(
-      '--skip_if_published',
-      action='store_true',
-      default=False,
-      help=(
-          'If the dataset with the same version and config is already '
-          'published, then it will not be regenerated.'
-      ),
-  )
+  max_shard_size_mb: int | None = None
+  num_shards: int | None = None
+  num_processes: int = simple_parsing.field(default=1, alias='num-processes')
+  nondeterministic_order: bool = simple_parsing.flag(default=False)
+
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class PublishingOptions:
+  """Publishing options.
+
+  Attributes:
+    publish_dir: Where to optionally publish the dataset after it has been
+      generated successfully. Should be the root data dir under which datasets
+      are stored. If unspecified, dataset will not be published.
+    skip_if_published: If the dataset with the same version and config is
+      already published, then it will not be regenerated.
+  """
+
+  publish_dir: epath.Path | None = None
+  skip_if_published: bool = simple_parsing.flag(default=False)
+
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class AutomationOptions:
+  """Automation options.
+
+  Attributes:
+    exclude_datasets: If set, generate all datasets except the one defined here.
+      Comma separated list of datasets to exclude.
+    experimental_latest_version: Build the latest Version(experiments=...)
+      available rather than default version.
+  """
+
+  exclude_datasets: str | None = None
+  experimental_latest_version: bool = simple_parsing.flag(default=False)
 
 
 def download_and_prepare(

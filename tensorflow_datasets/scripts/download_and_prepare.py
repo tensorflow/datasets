@@ -16,12 +16,11 @@
 r"""Wrapper around `tfds build`."""
 
 import argparse
-from typing import List
 
 from absl import app
 from absl import flags
 from absl import logging
-
+from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import main as main_cli
 
 module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
@@ -33,7 +32,7 @@ builder_config_id = flags.DEFINE_integer(
 
 
 
-def _parse_flags(argv: List[str]) -> argparse.Namespace:
+def _parse_flags(argv: list[str]) -> argparse.Namespace:
   """Command lines flag parsing."""
   return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
 
@@ -46,12 +45,13 @@ def main(args: argparse.Namespace) -> None:
     logging.warning(
         '***`tfds build` should be used instead of `download_and_prepare`.***'
     )
+  cmd_args: build.Args = args.args
   if module_import.value:
-    args.imports = module_import.value
+    cmd_args.generation.imports = module_import.value
   if dataset.value:
-    args.datasets = [dataset.value]
+    cmd_args.datasets = [dataset.value]
   if builder_config_id.value is not None:
-    args.config_idx = builder_config_id.value
+    cmd_args.generation.config_idx = builder_config_id.value
   main_cli.main(args)
 
 
