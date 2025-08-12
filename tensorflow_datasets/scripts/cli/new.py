@@ -15,13 +15,11 @@
 
 """`tfds new` command."""
 
-import argparse
 import dataclasses
 import os
 import pathlib
 import subprocess
 import textwrap
-import typing
 
 import simple_parsing
 from tensorflow_datasets.core import constants
@@ -33,8 +31,8 @@ from tensorflow_datasets.scripts.cli import cli_utils as utils
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class Args:
-  """CLI arguments for creating a new dataset directory.
+class Args(utils.Args):
+  """Creates a new dataset directory from the template.
 
   Attributes:
     dataset_name: Name of the dataset to be created (in snake_case).
@@ -69,17 +67,6 @@ class Args:
         dataset_dir=self.dir,
         data_format=self.data_format,
     )
-
-
-def register_subparser(parsers: argparse._SubParsersAction) -> None:
-  """Add subparser for `new` command."""
-  parser = parsers.add_parser(
-      'new',
-      help='Creates a new dataset directory from the template.',
-  )
-  parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  parser.add_arguments(Args, dest='args')
-  parser.set_defaults(subparser_fn=lambda args: args.args.execute())
 
 
 def create_dataset_files(

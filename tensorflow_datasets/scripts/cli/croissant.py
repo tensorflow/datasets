@@ -26,11 +26,9 @@ tfds build_croissant \
 ```
 """
 
-import argparse
 import dataclasses
 import functools
 import json
-import typing
 
 from etils import epath
 import mlcroissant as mlc
@@ -43,8 +41,8 @@ from tensorflow_datasets.scripts.cli import cli_utils
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class CmdArgs(simple_parsing.helpers.FrozenSerializable):
-  """CLI arguments for preparing a Croissant dataset.
+class CmdArgs(simple_parsing.helpers.FrozenSerializable, cli_utils.Args):
+  """Prepares a Croissant dataset.
 
   Attributes:
     jsonld: Path to the JSONLD file.
@@ -122,18 +120,10 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable):
         self.overwrite_version or self.dataset.metadata.version or '1.0.0'
     )
 
-
-def register_subparser(parsers: argparse._SubParsersAction):
-  """Add subparser for `convert_format` command."""
-  parser = parsers.add_parser(
-      'build_croissant',
-      help='Prepares a croissant dataset',
-  )
-  parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  parser.add_arguments(CmdArgs, dest='args')
-  parser.set_defaults(
-      subparser_fn=lambda args: prepare_croissant_builders(args.args)
-  )
+  def execute(self) -> None:
+    """Creates Croissant Builders and prepares them."""
+    for record_set_id in self.record_set_ids:
+      prepare_croissant_builder(args=self, record_set_id=record_set_id)
 
 
 def prepare_croissant_builder(
@@ -163,14 +153,3 @@ def prepare_croissant_builder(
       beam_pipeline_options=None,
   )
   return builder
-
-
-def prepare_croissant_builders(args: CmdArgs):
-  """Creates Croissant Builders and prepares them.
-
-  Args:
-    args: CLI arguments.
-  """
-  # Generate each config sequentially.
-  for record_set_id in args.record_set_ids:
-    prepare_croissant_builder(args=args, record_set_id=record_set_id)

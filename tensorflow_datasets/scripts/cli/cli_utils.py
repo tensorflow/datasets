@@ -15,11 +15,13 @@
 
 """Utility functions for TFDS CLI."""
 
+import abc
 import argparse
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 import dataclasses
 import itertools
 import pathlib
+from typing import TypeVar
 
 from absl import logging
 from absl.flags import argparse_flags
@@ -32,6 +34,8 @@ from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core.utils import file_utils
 from tensorflow_datasets.scripts.utils import flag_utils
+
+_DataclassT = TypeVar('_DataclassT')
 
 
 class ArgumentParser(
@@ -75,6 +79,33 @@ class ArgumentParser(
     if args:
       args = flag_utils.normalize_flags(args)
     return super().parse_known_args(args, namespace)
+
+
+def make_flags_parser(
+    args_dataclass: type[_DataclassT], description: str
+) -> Callable[[list[str]], _DataclassT]:
+  """Returns a function that parses flags and returns the dataclass instance."""
+
+  def _parse_flags(argv: list[str]) -> _DataclassT:
+    """Command lines flag parsing."""
+    parser = ArgumentParser(
+        description=description,
+        allow_abbrev=False,
+    )
+    parser.add_arguments(args_dataclass, dest='args')
+    return parser.parse_args(argv[1:]).args
+
+  return _parse_flags
+
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class Args(abc.ABC):
+  """CLI arguments for TFDS CLI commands."""
+
+  @abc.abstractmethod
+  def execute(self) -> None:
+    """Execute the CLI command."""
+    ...
 
 
 @dataclasses.dataclass

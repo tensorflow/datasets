@@ -21,13 +21,13 @@ TFDS CLI to help creates and build datasets (e.g. `tfds new my_dataset`,
 See: https://www.tensorflow.org/datasets/cli
 """
 
-import argparse
+import dataclasses
 import logging as python_logging
-from typing import List
 
 from absl import app
 from absl import flags
 from absl import logging
+import simple_parsing
 
 import tensorflow_datasets.public_api as tfds
 
@@ -41,33 +41,60 @@ from tensorflow_datasets.scripts.cli import new
 FLAGS = flags.FLAGS
 
 
-def _parse_flags(argv: List[str]) -> argparse.Namespace:
-  """Command lines flag parsing."""
-  parser = cli_utils.ArgumentParser(
-      description='Tensorflow Datasets CLI tool',
-      allow_abbrev=False,
-  )
-  parser.add_argument(
-      '--version',
-      action='version',
-      version='TensorFlow Datasets: ' + tfds.__version__,
-  )
-  parser.add_argument(
-      '--dry_run',
-      action='store_true',
-      help='If True, print the parsed arguments.',
-  )
-  parser.set_defaults(subparser_fn=lambda _: parser.print_help())
-  # Register sub-commands
-  subparser = parser.add_subparsers(title='command')
-  build.register_subparser(subparser)
-  new.register_subparser(subparser)
-  convert_format.register_subparser(subparser)
-  croissant.register_subparser(subparser)
-  return parser.parse_args(argv[1:])
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class _DummyCommand:
+  """Dummy command to avoid `command is MISSING` error."""
+
+  pass
 
 
-def main(args: argparse.Namespace) -> None:
+version_field = simple_parsing.field(
+    action='version',
+    version='TensorFlow Datasets: ' + tfds.__version__,
+    help='The version of the TensorFlow Datasets package.',
+)
+
+
+@dataclasses.dataclass(frozen=True, kw_only=True)
+class Args(cli_utils.Args):
+  """Tensorflow Datasets CLI tool."""
+
+  version: str = version_field
+  """The version of the TensorFlow Datasets package."""
+
+  dry_run: bool = simple_parsing.flag(default=False)
+  """If True, print the parsed arguments and exit."""
+
+  command: build.Args | new.Args | convert_format.Args | croissant.CmdArgs = (
+      simple_parsing.subparsers(
+          {
+              'build': build.Args,
+              'new': new.Args,
+              'convert_format': convert_format.Args,
+              'build_croissant': croissant.CmdArgs,
+          },
+          default_factory=_DummyCommand,
+      )
+  )
+  """The command to execute."""
+
+  def execute(self) -> None:
+    """Run the command."""
+    if self.dry_run:
+      print(self)
+    # When no command is given, print the help message.
+    elif isinstance(self.command, _DummyCommand):
+      _parse_flags(['', '--help'])
+    else:
+      self.command.execute()
+
+
+_parse_flags = cli_utils.make_flags_parser(
+    Args, description='Tensorflow Datasets CLI tool'
+)
+
+
+def main(args: Args) -> None:
 
   # From the CLI, all datasets are visible
   tfds.core.visibility.set_availables([
@@ -98,11 +125,7 @@ def main(args: argparse.Namespace) -> None:
     new_stream = tfds.core.utils.tqdm_utils.TqdmStream()
     python_handler.setStream(new_stream)
 
-  if args.dry_run:
-    print(args)
-  else:
-    # Launch the subcommand defined in the subparser (or default to print help)
-    args.subparser_fn(args)
+  args.execute()
 
 
 def launch_cli() -> None:

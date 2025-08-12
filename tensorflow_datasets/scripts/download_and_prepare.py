@@ -15,7 +15,7 @@
 
 r"""Wrapper around `tfds build`."""
 
-import argparse
+import typing
 
 from absl import app
 from absl import flags
@@ -32,7 +32,7 @@ builder_config_id = flags.DEFINE_integer(
 
 
 
-def _parse_flags(argv: list[str]) -> argparse.Namespace:
+def _parse_flags(argv: list[str]) -> main_cli.Args:
   """Command lines flag parsing."""
   return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
 
@@ -40,12 +40,12 @@ def _parse_flags(argv: list[str]) -> argparse.Namespace:
 _display_warning = True
 
 
-def main(args: argparse.Namespace) -> None:
+def main(args: main_cli.Args) -> None:
   if _display_warning:
     logging.warning(
         '***`tfds build` should be used instead of `download_and_prepare`.***'
     )
-  cmd_args: build.Args = args.args
+  cmd_args = typing.cast(build.Args, args.command)
   if module_import.value:
     cmd_args.generation.imports = module_import.value
   if dataset.value:

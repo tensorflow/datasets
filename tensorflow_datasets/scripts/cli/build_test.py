@@ -19,6 +19,7 @@ import dataclasses
 import functools
 import multiprocessing
 import os
+import typing
 from unittest import mock
 
 from etils import epath
@@ -311,7 +312,7 @@ def test_download_only(build):
 )
 def test_make_download_config(args: str, download_config_kwargs):
   args = main._parse_flags(f'tfds build x {args}'.split())
-  cmd_args: build_lib.Args = args.args
+  cmd_args = typing.cast(build_lib.Args, args.command)
   actual = build_lib._make_download_config(cmd_args, dataset_name='x')
   # Ignore the beam runner
   actual = actual.replace(beam_runner=None)

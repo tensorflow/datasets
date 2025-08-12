@@ -15,7 +15,6 @@
 
 """`tfds build` command."""
 
-import argparse
 from collections.abc import Iterator
 import dataclasses
 import functools
@@ -24,7 +23,6 @@ import itertools
 import json
 import multiprocessing
 import os
-import typing
 from typing import Any, Type
 
 from absl import logging
@@ -34,8 +32,8 @@ from tensorflow_datasets.scripts.cli import cli_utils
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class Args:
-  """CLI arguments for building datasets.
+class Args(cli_utils.Args):
+  """Commands for downloading and preparing datasets.
 
   Attributes:
     positional_datasets: Name(s) of the dataset(s) to build. Default to current
@@ -118,16 +116,6 @@ class Args:
     else:
       with multiprocessing.Pool(self.generation.num_processes) as pool:
         pool.map(process_builder_fn, builders)
-
-
-def register_subparser(parsers: argparse._SubParsersAction) -> None:  # pylint: disable=protected-access
-  """Add subparser for `build` command."""
-  parser = parsers.add_parser(
-      'build', help='Commands for downloading and preparing datasets.'
-  )
-  parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  parser.add_arguments(Args, dest='args')
-  parser.set_defaults(subparser_fn=lambda args: args.args.execute())
 
 
 def _make_builders(

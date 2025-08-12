@@ -25,19 +25,18 @@ tfds convert_format \
 ```
 """
 
-import argparse
 import dataclasses
-import typing
 
 from etils import epath
 import simple_parsing
 from tensorflow_datasets.core import file_adapters
+from tensorflow_datasets.scripts.cli import cli_utils
 from tensorflow_datasets.scripts.cli import convert_format_utils
 
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
-class Args:
-  """CLI arguments for converting datasets from one file format to another.
+class Args(cli_utils.Args):
+  """Converts a dataset from one file format to another format.
 
   Attributes:
     root_data_dir: Root data dir that contains all datasets. All datasets and
@@ -94,14 +93,3 @@ class Args:
         num_workers=self.num_workers,
         fail_on_error=not self.only_log_errors,
     )
-
-
-def register_subparser(parsers: argparse._SubParsersAction) -> None:
-  """Add subparser for `convert_format` command."""
-  parser = parsers.add_parser(
-      'convert_format',
-      help='Converts a dataset from one file format to another format.',
-  )
-  parser = typing.cast(simple_parsing.ArgumentParser, parser)
-  parser.add_arguments(Args, dest='args')
-  parser.set_defaults(subparser_fn=lambda args: args.args.execute())
