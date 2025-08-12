@@ -16,8 +16,7 @@
 """Multi-News dataset."""
 
 import os
-
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 _CITATION = """
@@ -42,7 +41,8 @@ There are two features:
   - summary: news summary.
 """
 
-_URL = "https://drive.google.com/uc?export=download&id=1vRY2wM6rlOZrf9exGTm5pXj5ExlVwJ0C"
+_URL_PATH = "https://huggingface.co/datasets/multi_news/resolve/main/data"
+
 
 _DOCUMENT = "document"
 _SUMMARY = "summary"
@@ -51,7 +51,7 @@ _SUMMARY = "summary"
 class MultiNews(tfds.core.GeneratorBasedBuilder):
   """Multi-News dataset."""
 
-  VERSION = tfds.core.Version("1.0.0")
+  VERSION = tfds.core.Version("2.0.0")
 
   def _info(self):
     return tfds.core.DatasetInfo(
@@ -67,35 +67,35 @@ class MultiNews(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    extract_path = os.path.join(
-        dl_manager.download_and_extract(_URL), "multi-news-original"
-    )
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"path": os.path.join(extract_path, "train")},
+    data_dict = {
+        "train_src": _URL_PATH + "train.src.cleaned",
+        "train_tgt": _URL_PATH + "train.tgt",
+        "val_src": _URL_PATH + "val.src.cleaned",
+        "val_tgt": _URL_PATH + "val.tgt",
+        "test_src": _URL_PATH + "test.src.cleaned",
+        "test_tgt": _URL_PATH + "test.tgt",
+    }
+    files = dl_manager.download_and_extract(data_dict)
+    return {
+        "train": self._generate_examples(
+            files["train_src"], files["train_tgt"]
         ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
-            gen_kwargs={"path": os.path.join(extract_path, "val")},
+        "validation": self._generate_examples(
+            files["val_src"], files["val_tgt"]
         ),
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={"path": os.path.join(extract_path, "test")},
-        ),
-    ]
+        "test": self._generate_examples(files["test_src"], files["test_tgt"]),
+    }
 
-  def _generate_examples(self, path=None):
+  def _generate_examples(self, src_file, tgt_file):
     """Yields examples."""
-    with tf.io.gfile.GFile(
-        os.path.join(path + ".src")
-    ) as src_f, tf.io.gfile.GFile(os.path.join(path + ".tgt")) as tgt_f:
+    with epath.Path(src_file).open() as src_f, epath.Path(
+        tgt_file
+    ).open() as tgt_f:
       for i, (src_line, tgt_line) in enumerate(zip(src_f, tgt_f)):
         yield i, {
             # In original file, each line has one example and natural newline
             # tokens "\n" are being replaced with "NEWLINE_CHAR". Here restore
             # the natural newline token to avoid special vocab "NEWLINE_CHAR".
             _DOCUMENT: src_line.strip().replace("NEWLINE_CHAR", "\n"),
-            # Remove the starting token "- " for every target sequence.
-            _SUMMARY: tgt_line.strip().lstrip("- "),
+            _SUMMARY: tgt_line.strip().lstrip(),
         }

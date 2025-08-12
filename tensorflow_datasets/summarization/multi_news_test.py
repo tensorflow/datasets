@@ -22,12 +22,18 @@ from tensorflow_datasets.summarization import multi_news
 class MultiNewsTest(testing.DatasetBuilderTestCase):
   DATASET_CLASS = multi_news.MultiNews
   SPLITS = {
-      "train": 1,  # Number of fake train example
-      "validation": 1,  # Number of fake validation example
-      "test": 1,  # Number of fake test example
+      "train": 1,
+      "validation": 1,
+      "test": 1,
   }
-  DL_EXTRACT_RESULT = ""
-
+  DL_EXTRACT_RESULT = {
+      "train_src": "train.src.cleaned",
+      "train_tgt": "train.tgt",
+      "val_src": "val.src.cleaned",
+      "val_tgt": "val.tgt",
+      "test_src": "test.src.cleaned",
+      "test_tgt": "test.tgt",
+  }
 
 if __name__ == "__main__":
   testing.test_main()
