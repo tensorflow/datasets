@@ -13,14 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for c4_utils."""
-
 import collections
-import os
 
+from etils import epath
 import six
 from tensorflow_datasets import testing
-from tensorflow_datasets.core.lazy_imports_lib import lazy_imports
+import tensorflow_datasets.public_api as tfds
 from tensorflow_datasets.text import c4_utils
 
 EN_TEXT = """This line has enough words and ends in punctuation, Dr. Roberts!
@@ -192,7 +190,7 @@ This line should be okay."""
   def test_remove_duplicate_text(self):
     import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
 
-    beam = lazy_imports.apache_beam
+    beam = tfds.core.lazy_imports.apache_beam
     input_pages = [
         PageFeatures(
             url="url/1-0",
@@ -251,7 +249,7 @@ This line should be okay."""
     counters, counter_inc_fn = _get_counters()
     list(
         c4_utils.split_wet_file(
-            os.path.join(
+            epath.Path(
                 testing.fake_examples_dir(), "c4/c4_wet_files/cc_0.warc.wet.gz"
             ),
             counter_inc_fn=counter_inc_fn,

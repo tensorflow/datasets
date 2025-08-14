@@ -80,7 +80,7 @@ def remake_dir(d):
   tf.io.gfile.makedirs(d)
 
 
-def fake_examples_dir():
+def fake_examples_dir() -> str:
   return os.path.join(os.path.dirname(__file__), 'test_data', 'fake_examples')
 
 

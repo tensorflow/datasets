@@ -605,7 +605,7 @@ class C4(tfds.core.BeamBasedBuilder):
     """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    def download_wet_file(path, dl_dir):
+    def download_wet_file(path, dl_dir) -> epath.Path:
       url = f"{_DOWNLOAD_HOST}/{path}"
       out_path = epath.Path(dl_dir) / path
 

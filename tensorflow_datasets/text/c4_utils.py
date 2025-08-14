@@ -15,6 +15,8 @@
 
 """Utilities for generating the C4 dataset."""
 
+import codecs
+from collections.abc import Collection, Iterable, Mapping, Sequence
 import dataclasses
 import functools
 import gzip
@@ -23,11 +25,22 @@ import heapq
 import io
 import re
 import threading
-from typing import Collection, Iterable, Mapping, Optional, Sequence, Tuple
 
 from absl import logging
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
+
+
+# This is a copy of tensorflow.python.util.compat.as_text.
+def as_text(bytes_or_text: bytes | str, encoding: str = "utf-8") -> str:
+  """Converts bytes or text to text."""
+  encoding = codecs.lookup(encoding).name
+  if isinstance(bytes_or_text, str):
+    return bytes_or_text
+  if isinstance(bytes_or_text, bytes):
+    return bytes_or_text.decode(encoding)
+  raise TypeError(f"Expected binary or unicode string, got {bytes_or_text!r}")
+
 
 # WET file constants
 _PAGE_DELIMITER = "WARC/1.0"
@@ -66,7 +79,7 @@ class PageFeatures:
   timestamp: str = ""
   content_length: str = ""
   content_type: str = ""
-  language: Optional[str] = None
+  language: str | None = None
 
 
 def get_counter_inc_fn(namespace):
@@ -81,9 +94,7 @@ def get_counter_inc_fn(namespace):
 def get_hashed_url_filter_fn(predicate_fn):
   def filter_fn(page):
     url = page.normalized_url
-    val = int(
-        hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16
-    )
+    val = int(hashlib.md5(as_text(url).encode("utf-8")).hexdigest(), 16)
     return predicate_fn(val)
 
   return filter_fn
@@ -107,7 +118,7 @@ def _get_sentences(text):
   global _SENTENCE_TOKENIZER
   if not _SENTENCE_TOKENIZER:
     _SENTENCE_TOKENIZER = _load_sentence_tokenizer()
-  return list(_SENTENCE_TOKENIZER.tokenize(tf.compat.as_text(text)))
+  return list(_SENTENCE_TOKENIZER.tokenize(as_text(text)))
 
 
 # Global lock used for language detection modules that aren't threadsafe.
@@ -281,12 +292,12 @@ def clean_page(
 
 
 def _hash_text(text):
-  return hashlib.md5(tf.compat.as_text(text).encode("utf-8")).hexdigest()
+  return hashlib.md5(as_text(text).encode("utf-8")).hexdigest()
 
 
 def _emit_url_to_lines(
     page: PageFeatures, line_delimiter="\n"
-) -> Iterable[Tuple[str, str]]:
+) -> Iterable[tuple[str, str]]:
   """Emits url to all (lower-cased, hashed) lines."""
   text = page.text
   for line in text.split(line_delimiter):
@@ -377,7 +388,9 @@ def remove_duplicate_text(
   return final_docs
 
 
-def split_wet_file(wet_file_path, counter_inc_fn=None, line_delimiter="\n"):
+def split_wet_file(
+    wet_file_path: epath.Path, counter_inc_fn=None, line_delimiter="\n"
+):
   """Split a WET file into separate pages."""
   logging.info("Splitting file: %s", wet_file_path)
   if not counter_inc_fn:
@@ -397,9 +410,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None, line_delimiter="\n"):
       return True
     return False
 
-  with tf.io.gfile.GFile(wet_file_path, "rb") as f, gzip.GzipFile(
-      fileobj=f
-  ) as g:
+  with wet_file_path.open("rb") as f, gzip.GzipFile(fileobj=f) as g:
     page = PageFeatures()
     for i, line in enumerate(io.TextIOWrapper(g, encoding="utf-8")):  # pytype: disable=wrong-arg-types
       line = line.strip()
@@ -499,7 +510,7 @@ def filter_by_webtextlike(el):
 
 
 def normalize_url(url):
-  url = tf.compat.as_text(url)
+  url = as_text(url)
   url = re.sub(r"https?:\/\/(www\.)?", "", url)
   url = re.sub(r"\?(utm_|ref|feed).*", "", url)
   url = url.rstrip("/")
