@@ -243,10 +243,14 @@ class GenerationOptions:
 
   download_only: bool = simple_parsing.flag(default=False)
   config: str | None = simple_parsing.field(default=None, alias='-c')
-  config_idx: int | None = None
+  config_idx: int | None = simple_parsing.field(
+      default=None, alias='--builder_config_id'
+  )
   update_metadata_only: bool = simple_parsing.flag(default=False)
   download_config: str | None = None
-  imports: str | None = simple_parsing.field(default=None, alias='-i')
+  imports: str | None = simple_parsing.field(
+      default=None, alias=['-i', '--module_import']
+  )
   register_checksums: bool = simple_parsing.flag(default=False)
   force_checksums_validation: bool = simple_parsing.flag(default=False)
   beam_pipeline_options: str | None = None

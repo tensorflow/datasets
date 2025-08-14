@@ -33,42 +33,42 @@ from tensorflow_datasets.scripts.cli import cli_utils
 
 @dataclasses.dataclass(frozen=True, kw_only=True)
 class Args(cli_utils.Args):
-  """Commands for downloading and preparing datasets.
+  """Commands for downloading and preparing datasets."""
 
-  Attributes:
-    positional_datasets: Name(s) of the dataset(s) to build. Default to current
-      dir. See https://www.tensorflow.org/datasets/cli for accepted values.
-    datasets: Datasets can also be provided as keyword argument.
-    debug: Debug & tests options. Use --pdb to enter post-mortem debugging mode
-      if an exception is raised.
-    paths: Path options.
-    generation: Generation options.
-    publishing: Publishing options.
-    automation: Automation options.
-  """
-
-  positional_datasets: list[str] = simple_parsing.field(
+  # Name(s) of the dataset(s) to build. Default to current dir. See
+  # https://www.tensorflow.org/datasets/cli for accepted values.
+  positional_datasets: list[str] = simple_parsing.list_field(
       positional=True,
-      nargs='*',
-      default_factory=list,
       # Need to explicitly set metavar for command-line help.
       metavar='datasets',
   )
-  datasets: list[str] = simple_parsing.field(nargs='*', default_factory=list)
+
+  datasets: list[str] = simple_parsing.list_field(alias='--dataset')
+  """Datasets can also be provided as keyword argument."""
 
   debug: cli_utils.DebugOptions = cli_utils.DebugOptions()
+  """Debug & tests options. Use --pdb to enter post-mortem debugging mode if an
+  exception is raised."""
+
   paths: cli_utils.PathOptions = simple_parsing.field(
       default_factory=cli_utils.PathOptions
   )
+  """Path options."""
+
   generation: cli_utils.GenerationOptions = simple_parsing.field(
       default_factory=cli_utils.GenerationOptions
   )
+  """Generation options."""
+
   publishing: cli_utils.PublishingOptions = simple_parsing.field(
       default_factory=cli_utils.PublishingOptions
   )
+  """Publishing options."""
+
   automation: cli_utils.AutomationOptions = simple_parsing.field(
       default_factory=cli_utils.AutomationOptions
   )
+  """Automation options."""
 
   def execute(self) -> None:
     """Build the given datasets."""

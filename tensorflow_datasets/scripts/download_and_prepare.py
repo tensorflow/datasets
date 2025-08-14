@@ -15,21 +15,9 @@
 
 r"""Wrapper around `tfds build`."""
 
-import typing
-
 from absl import app
 from absl import flags
-from absl import logging
-from tensorflow_datasets.scripts.cli import build
 from tensorflow_datasets.scripts.cli import main as main_cli
-
-module_import = flags.DEFINE_string('module_import', None, '`--imports` flag.')
-dataset = flags.DEFINE_string('dataset', None, 'singleton `--datasets` flag.')
-
-builder_config_id = flags.DEFINE_integer(
-    'builder_config_id', None, '`--config_idx` flag'
-)
-
 
 
 def _parse_flags(argv: list[str]) -> main_cli.Args:
@@ -37,21 +25,11 @@ def _parse_flags(argv: list[str]) -> main_cli.Args:
   return main_cli._parse_flags([argv[0], 'build'] + argv[1:])  # pylint: disable=protected-access
 
 
-_display_warning = True
-
-
 def main(args: main_cli.Args) -> None:
-  if _display_warning:
-    logging.warning(
-        '***`tfds build` should be used instead of `download_and_prepare`.***'
-    )
-  cmd_args = typing.cast(build.Args, args.command)
-  if module_import.value:
-    cmd_args.generation.imports = module_import.value
-  if dataset.value:
-    cmd_args.datasets = [dataset.value]
-  if builder_config_id.value is not None:
-    cmd_args.generation.config_idx = builder_config_id.value
+  from absl import logging
+  logging.warning(
+      '***`tfds build` should be used instead of `download_and_prepare`.***'
+  )
   main_cli.main(args)
 
 
