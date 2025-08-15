@@ -184,12 +184,13 @@ class PathOptions:
   """Path options.
 
   Attributes:
-    data_dir: Where to place datasets. Default to `~/tensorflow_datasets/` or
+    data_dir: Where to place datasets. Defaults to `~/tensorflow_datasets/` or
       `TFDS_DATA_DIR` environement variable.
-    download_dir: Where to place downloads. Default to `<data_dir>/downloads/`.
-    extract_dir: Where to extract files. Default to `<download_dir>/extracted/`.
+    download_dir: Where to place downloads. Defaults to `<data_dir>/downloads/`.
+    extract_dir: Where to extract files. Defaults to
+      `<download_dir>/extracted/`.
     manual_dir: Where to manually download data (required for some datasets).
-      Default to `<download_dir>/manual/`.
+      Defaults to `<download_dir>/manual/`.
     add_name_to_manual_dir: If true, append the dataset name to the `manual_dir`
       (e.g. `<download_dir>/manual/<dataset_name>/`). Useful to avoid collisions
       if many datasets are generated.
@@ -324,7 +325,7 @@ def download_and_prepare(
   if nondeterministic_order:
     download_config.nondeterministic_order = True
 
-  # Add Apache Beam options to download config
+  # Add Apache Beam options to download config.
   try:
     import apache_beam as beam  # pylint: disable=g-import-not-at-top
 
@@ -342,8 +343,8 @@ def download_and_prepare(
       download_config=download_config,
   )
 
-  # Dataset generated successfully
-  logging.info('Dataset generation complete...')
+  # Dataset generated successfully.
+  logging.info('Dataset generation completed...')
 
   print()
   print(repr(builder.info))
