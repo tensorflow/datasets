@@ -13,13 +13,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Dataset definition for Multi-News.
-
-DEPRECATED!
-If you want to use the Multi-News dataset builder class, use:
-tfds.builder_cls('multi_news')
-"""
-
-from tensorflow_datasets.core import lazy_builder_import
-
-Tedlium = lazy_builder_import.LazyBuilderImport('multi_news')

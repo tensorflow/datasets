@@ -1,0 +1,6 @@
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/test.src.cleaned	133	d04c4581d52321a30c246d2caa72853ee7f28c6b7a3985ee436f54c4bc264315	test.src.cleaned
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/test.tgt	132	afba4aa26d95bb557c0eaa0cb8f7495af2104f1e43f4b5f9ef429b8752477abd	test.tgt
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/train.src.cleaned	134	75f87b786ff1982bf1bd5803c6a7377d1834b81956ac680a6955789ba047cc0b	train.src.cleaned
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/train.tgt	133	9f1e9b290a6aae1aa67bd5b361c934ee9db32486e5cd97d83184c097ef8b27e5	train.tgt
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/val.src.cleaned	133	8df3ef6bd1882094de8120fa635c3abf758e10427f81f306aaa4786df7b57861	val.src.cleaned
+https://huggingface.co/datasets/alexfabbri/multi_news/raw/main/data/val.tgt	132	9c0377a443ea92b17449f7df17f1cdfa7c7ebbfe3a45f2f8cd7b3e0ffb47b1df	val.tgt
