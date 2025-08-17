@@ -52,10 +52,7 @@ jobs:
 
     # Run tests
     # Ignores:
-    # * Nsynth is run in isolation due to dependency conflict (crepe).
-    # * Lsun tests is disabled because the tensorflow_io used in open-source
-    #   is linked to static libraries compiled again specific TF version, which
-    #   makes test fails with linking error (libtensorflow_io_golang.so).
+    # * c4, lsun, nsynth are run separately to avoid dependency conflicts.
     # * imagenet2012_corrupted requires imagemagick binary.
     # * import_without_tf_test.py, because the test relies on TensorFlow not being imported.
     # * github_api is run separately to not overuse API quota.
@@ -65,8 +62,9 @@ jobs:
     - name: Run core tests
       run: |
         pytest --durations=100 -vv -n auto --shard-id=$((${{ matrix.shard-id }} - 1)) --num-shards=${{ matrix.num-shards }} \
-          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
+          --ignore-glob="tensorflow_datasets/text/c4*_test.py" \
           --ignore="tensorflow_datasets/image/lsun_test.py" \
+          --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
           --ignore="tensorflow_datasets/import_without_tf_test.py" \
@@ -86,3 +84,27 @@ jobs:
         retry_on: timeout
         command: |
           pytest -vv -o faulthandler_timeout=10 tensorflow_datasets/translate/wmt19_test.py
+
+    # Run `c4` dataset tests separately.
+    - name: Run c4 dataset tests
+      if: ${{ matrix.shard-id == 1 }}
+      run: |
+        pip install .[c4]
+        pytest -vv -n auto \
+          tensorflow_datasets/text/c4*_test.py
+
+    # Run `lsun` dataset tests separately.
+    - name: Run lsun dataset tests
+      if: ${{ matrix.shard-id == 2 }}
+      run: |
+        pip install .[lsun]
+        pytest -vv -n auto \
+          tensorflow_datasets/image/lsun_test.py
+
+    # Run `nsynth` dataset tests separately.
+    - name: Run nsynth dataset tests
+      if: ${{ matrix.shard-id == 3 }}
+      run: |
+        pip install .[nsynth]
+        pytest -vv -n auto \
+          tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py
