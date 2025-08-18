@@ -27,7 +27,7 @@ from tensorflow_datasets.core import deprecated
 from tensorflow_datasets.core import download
 from tensorflow_datasets.core import features
 from tensorflow_datasets.core import folder_dataset
-from tensorflow_datasets.core import transform  # pylint: disable=unused-import
+from tensorflow_datasets.core import transform
 from tensorflow_datasets.core import visualization
 from tensorflow_datasets.core.as_dataframe import as_dataframe
 from tensorflow_datasets.core.dataset_utils import as_numpy
