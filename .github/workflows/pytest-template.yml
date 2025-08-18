@@ -66,7 +66,6 @@ jobs:
           --ignore="tensorflow_datasets/image/lsun_test.py" \
           --ignore="tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py" \
           --ignore="tensorflow_datasets/datasets/imagenet2012_corrupted/imagenet2012_corrupted_dataset_builder_test.py" \
-          --ignore="tensorflow_datasets/scripts/documentation/build_api_docs_test.py" \
           --ignore="tensorflow_datasets/import_without_tf_test.py" \
           --ignore="tensorflow_datasets/core/github_api/github_path_test.py" \
           --ignore="tensorflow_datasets/translate/wmt19_test.py" \

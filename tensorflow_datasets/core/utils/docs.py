@@ -29,9 +29,7 @@ class A:
 ```
 
 The functions exposed below are dummy decorators. This allows not having to load
-TensorFlow. The functions are monkey patched when needed in
-scripts/documentation/build_api_docs.py with actual TensorFlow documentation
-decorators.
+TensorFlow.
 """
 
 from typing import Any, TypeVar
