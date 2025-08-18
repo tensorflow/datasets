@@ -165,9 +165,19 @@ def _generate_examples_from_log_path(
   key_prefix = os.path.basename(log_path)
   with envlogger.Reader(log_path) as reader:
     for episode_dict in envlogger_reader.generate_episodes(reader):
+      assert "steps" in episode_dict, "steps must be in episode_dict"
+      if "episode_metadata" not in episode_dict:
+        episode_dict = {
+            "steps": episode_dict["steps"],
+            "episode_metadata": {
+                key: value
+                for key, value in episode_dict.items()
+                if key != "steps"
+            }
+        }
       # The example ID should be unique.
       episode_id = counter
-      if 'episode_id' in episode_dict:
-        episode_id = episode_dict['episode_id']
+      if 'episode_id' in episode_dict["episode_metadata"]:
+        episode_id = episode_dict["episode_metadata"]['episode_id']
       yield f'{key_prefix}/{episode_id}', episode_dict
       counter += 1
