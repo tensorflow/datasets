@@ -117,11 +117,9 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           reward_info=np.float64,
           discount_info=np.float64,
           episode_metadata_info={
-              'episode_metadata': {
-                  'agent_id': np.str_,
-                  'episode_index': np.int32,
-                  'episode_id': np.str_,
-              },
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
               'tag:placed': np.bool_,
@@ -188,11 +186,9 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           reward_info=np.float64,
           discount_info=np.float64,
           episode_metadata_info={
-              'episode_metadata': {
-                  'agent_id': np.str_,
-                  'episode_index': np.int32,
-                  'episode_id': np.str_,
-              },
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
               'tag:placed': np.bool_,
@@ -250,11 +246,9 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
           reward_info=np.float64,
           discount_info=np.float64,
           episode_metadata_info={
-              'episode_metadata': {
-                  'agent_id': np.str_,
-                  'episode_index': np.int32,
-                  'episode_id': np.str_,
-              },
+              'agent_id': np.str_,
+              'episode_index': np.int32,
+              'episode_id': np.str_,
           },
           step_metadata_info={
               'tag:placed': np.bool_,
