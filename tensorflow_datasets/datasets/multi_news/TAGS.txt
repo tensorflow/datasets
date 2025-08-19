@@ -1,0 +1,6 @@
+content.data-type.text # Contains text data.
+content.subject.news # Relates to news.
+content.language.en # Contains text in language English / en.
+ml.task.abstractive-text-summarization # Relates to Abstractive Text Summarization, a machine learning task.
+ml.task.natural-language-understanding # Relates to Natural Language Understanding, a machine learning task.
+ml.task.text-summarization # Relates to Text Summarization, a machine learning task.
