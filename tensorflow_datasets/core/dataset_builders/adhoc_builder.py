@@ -85,6 +85,7 @@ from typing import Any, Dict
 
 from absl import logging
 from etils import epath
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils

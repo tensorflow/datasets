@@ -33,6 +33,7 @@ from unittest import mock
 from etils import epath
 from etils import epy
 import numpy as np
+from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_collection_builder
 from tensorflow_datasets.core import dataset_info
@@ -884,3 +885,13 @@ def dummy_croissant_file(
     croissant_file.write_text(json.dumps(dummy_metadata.to_json(), indent=2))
 
     yield croissant_file
+
+
+@contextlib.contextmanager
+def mock_default_data_dir() -> Iterator[str]:
+  """Mocks the `constants.DATA_DIR`."""
+  with tempfile.TemporaryDirectory() as tempdir:
+    tmp_data_dir = os.path.join(tempdir, 'default_dir')
+    os.makedirs(tmp_data_dir)
+    constants.DATA_DIR = tmp_data_dir
+    yield tmp_data_dir

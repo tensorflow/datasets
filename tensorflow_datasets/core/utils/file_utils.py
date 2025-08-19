@@ -156,21 +156,9 @@ def list_data_dirs(
     else:
       return [given_data_dir]
   else:
-    default_data_dir = get_default_data_dir(given_data_dir=given_data_dir)
+    default_data_dir = Path(constants.DATA_DIR)
     all_data_dirs = _REGISTERED_DATA_DIRS | {default_data_dir}
     return sorted(d.expanduser() for d in all_data_dirs)
-
-
-def get_default_data_dir(given_data_dir: epath.PathLike | None = None) -> Path:
-  """Returns the default data_dir."""
-  if given_data_dir:
-    data_dir = os.path.expanduser(given_data_dir)
-  elif 'TFDS_DATA_DIR' in os.environ:
-    data_dir = os.environ['TFDS_DATA_DIR']
-  else:
-    data_dir = constants.DATA_DIR
-
-  return Path(data_dir)
 
 
 def get_dataset_dir(
@@ -189,11 +177,11 @@ def get_dataset_dir(
 
 
 def get_data_dir_and_dataset_dir(
-    given_data_dir: epath.PathLike | None,
+    given_data_dir: PathLike | None,
     builder_name: str,
     config_name: str | None,
     version: version_lib.Version | str | None,
-) -> tuple[epath.Path, epath.Path]:
+) -> tuple[Path, Path]:
   """Returns the data and dataset directories for the given dataset.
 
   Args:
@@ -249,7 +237,7 @@ def get_data_dir_and_dataset_dir(
     return next(iter(dataset_dir_by_data_dir.items()))
 
   # No dataset found, use default directory
-  default_data_dir = get_default_data_dir()
+  default_data_dir = Path(constants.DATA_DIR)
   dataset_dir = get_dataset_dir(
       data_dir=default_data_dir,
       builder_name=builder_name,

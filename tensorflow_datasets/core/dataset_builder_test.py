@@ -27,7 +27,6 @@ import numpy as np
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
-from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import dataset_builder
 from tensorflow_datasets.core import dataset_info
 from tensorflow_datasets.core import dataset_utils
@@ -831,32 +830,19 @@ class DatasetBuilderMultiDirTest(testing.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    super(DatasetBuilderMultiDirTest, cls).setUpClass()
+    super().setUpClass()
     cls.builder = DummyDatasetSharedGenerator()
 
   def setUp(self):
-    super(DatasetBuilderMultiDirTest, self).setUp()
+    super().setUp()
     # Sanity check to make sure that no dir is registered
     file_utils.clear_registered_data_dirs()
-    # Create a new temp dir
-    self.other_data_dir = os.path.join(self.get_temp_dir(), "other_dir")
     # Overwrite the default data_dir (as files get created)
-
-    self._original_data_dir = constants.DATA_DIR
-    constants.DATA_DIR = os.path.join(self.get_temp_dir(), "default_dir")
-    self.default_data_dir = constants.DATA_DIR
-
-  def tearDown(self):
-    super(DatasetBuilderMultiDirTest, self).tearDown()
-    # Restore to the default `_registered_data_dir`
-    file_utils._registered_data_dir = set()
-    # Clear-up existing dirs
-    if tf.io.gfile.exists(self.other_data_dir):
-      tf.io.gfile.rmtree(self.other_data_dir)
-    if tf.io.gfile.exists(self.default_data_dir):
-      tf.io.gfile.rmtree(self.default_data_dir)
-    # Restore the orgininal data dir
-    constants.DATA_DIR = self._original_data_dir
+    default_data_dir = self.enter_context(testing.mock_default_data_dir())
+    # Create a new temp dir
+    self.other_data_dir = os.path.join(
+        os.path.dirname(default_data_dir), "other_dir"
+    )
 
   def test_load_data_dir(self):
     """Ensure that `tfds.load` also supports multiple data_dir."""

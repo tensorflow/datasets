@@ -50,6 +50,7 @@ if typing.TYPE_CHECKING:
   from tensorflow_datasets.testing.test_utils import enable_gcs_access
   from tensorflow_datasets.testing.test_utils import fake_examples_dir
   from tensorflow_datasets.testing.test_utils import make_tmp_dir
+  from tensorflow_datasets.testing.test_utils import mock_default_data_dir
   from tensorflow_datasets.testing.test_utils import mock_kaggle_api
   from tensorflow_datasets.testing.test_utils import MockFs
   from tensorflow_datasets.testing.test_utils import rm_tmp_dir
@@ -84,6 +85,7 @@ _API = {
     # TODO(afrozm): rm from here and add as methods to TestCase
     "make_tmp_dir": "tensorflow_datasets.testing.test_utils",
     "mock_data": "tensorflow_datasets.testing.mocking",
+    "mock_default_data_dir": "tensorflow_datasets.testing.test_utils",
     "mock_kaggle_api": "tensorflow_datasets.testing.test_utils",
     "MockFs": "tensorflow_datasets.testing.test_utils",
     "MockPolicy": "tensorflow_datasets.testing.mocking",

@@ -33,7 +33,7 @@ _VERSION = '1.0.0'
 
 
 def test_default_data_dir():
-  data_dir = file_utils.get_default_data_dir(given_data_dir=None)
+  data_dir = constants.get_default_data_dir()
   assert data_dir
 
 

@@ -197,7 +197,7 @@ class PathOptions:
   """
 
   data_dir: epath.Path = simple_parsing.field(
-      default=epath.Path(constants.DATA_DIR)
+      default=epath.Path(constants.get_default_data_dir())
   )
   download_dir: epath.Path | None = None
   extract_dir: epath.Path | None = None
