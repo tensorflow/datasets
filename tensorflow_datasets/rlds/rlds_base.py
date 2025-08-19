@@ -182,7 +182,7 @@ def _generate_examples_from_log_path(
         }
       # The example ID should be unique.
       episode_id = counter
-      if 'episode_id' in episode_dict["episode_metadata"]:
+      if 'episode_id' in episode_dict.get("episode_metadata", {}):
         episode_id = episode_dict["episode_metadata"]['episode_id']
       yield f'{key_prefix}/{episode_id}', episode_dict
       counter += 1
