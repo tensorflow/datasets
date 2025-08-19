@@ -76,7 +76,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     zarr_array = zarr.open_array(
         store=gcsfs_store(f'{self.GCS_URL}/{self.GCS_FILENAME}'),
         mode='r',
-        synchronizer=zarr.ThreadSynchronizer(),
     )
 
     # During normal execution we don't expect `self.builder_config.num_fields`
