@@ -1,0 +1,67 @@
+{
+  "citation": "@misc{alex2019multinews,\n    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},\n    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},\n    year={2019},\n    eprint={1906.01749},\n    archivePrefix={arXiv},\n    primaryClass={cs.CL}\n}",
+  "description": "# Multi-News Dataset\n\nMulti-News consists of news articles and human-written summaries of these\narticles from the news site `newser.com`. Each summary is professionally written\nby editors and includes links to the original articles cited.\n\nThis is the first large-scale dataset for multi-document summarization on news\narticles.\n\nEach record has two features:\n\n* `document`: Texts of news articles, separated by special token \"|||||\".\n* `summary`: Summary of the news.",
+  "downloadSize": "756785627",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://github.com/Alex-Fabbri/Multi-News"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.datasets.multi_news.multi_news_dataset_builder",
+  "name": "multi_news",
+  "redistributionInfo": {
+    "license": "For non-commercial research and educational purposes only"
+  },
+  "releaseNotes": {
+    "1.0.0": "Initial release.",
+    "2.0.0": "Update the dataset with valid URLs.",
+    "2.1.0": "Update the dataset with cleaned URLs."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "train",
+      "numBytes": "560139736",
+      "shardLengths": [
+        "5622",
+        "5621",
+        "5621",
+        "5622",
+        "5622",
+        "5621",
+        "5621",
+        "5622"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "validation",
+      "numBytes": "68490592",
+      "shardLengths": [
+        "5622"
+      ]
+    },
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "test",
+      "numBytes": "70250301",
+      "shardLengths": [
+        "5622"
+      ]
+    }
+  ],
+  "supervisedKeys": {
+    "tuple": {
+      "items": [
+        {
+          "featureKey": "document"
+        },
+        {
+          "featureKey": "summary"
+        }
+      ]
+    }
+  },
+  "version": "2.1.0"
+}

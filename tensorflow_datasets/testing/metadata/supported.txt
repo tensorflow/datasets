@@ -1290,7 +1290,7 @@ mt_opt/sd/1.0.0
 mtnt/en-fr/1.0.0
 mtnt/en-ja/1.0.0
 mtnt/fr-en/1.0.0
-multi_news/1.0.0
+multi_news/2.1.0
 multi_nli/1.1.0
 multi_nli_mismatch/0.1.0
 natural_instructions/1.0.1
