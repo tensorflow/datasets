@@ -258,25 +258,25 @@ class NightlyDocUtil(object):
       builder_name = builder.name
     else:
       builder_name = builder
-    return self._nightly_dict[builder_name] is True  # pylint: disable=g-bool-id-comparison
+    return self._nightly_dict[builder_name]
 
   def is_config_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
-    """Returns `True` if the config is new."""
+    """Returns `True` if the config is new and the builder is not."""
     ds_name, config, _ = _split_full_name(builder.info.full_name)
     if self.is_builder_nightly(builder):
-      return False
-    return self._nightly_dict[ds_name][config] is True  # pylint: disable=g-bool-id-comparison
+      return False  # Config is not new if the whole builder is nightly.
+    return self._nightly_dict[ds_name][config]
 
   def is_version_nightly(
       self,
       builder: tfds.core.DatasetBuilder,
       version: str,
   ) -> bool:
-    """Returns `True` if the version is new."""
+    """Returns `True` if the version is new and the dataset/config is not."""
     ds_name, config, _ = _split_full_name(builder.info.full_name)
     if self.is_builder_nightly(builder) or self.is_config_nightly(builder):
-      return False
-    return self._nightly_dict[ds_name][config][version] is True  # pylint: disable=g-bool-id-comparison
+      return False  # Version is not new if dataset or config is new
+    return self._nightly_dict[ds_name][config][version]
 
   def has_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
     """Returns True if any of the builder/config/version is new."""

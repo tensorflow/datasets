@@ -365,30 +365,25 @@ def iter_documentation_builders(
   print('Retrieving the list of builders...')
   datasets = datasets or _all_tfds_datasets()
 
-  # pytype: disable=attribute-error
-  if doc_util_paths.fig_base_path:
+  visu_doc_util = None
+  if doc_util_paths and doc_util_paths.fig_base_path:
     visu_doc_util = doc_utils.VisualizationDocUtil(
         base_path=doc_util_paths.fig_base_path,
         base_url=doc_util_paths.fig_base_url,
     )
-  else:
-    visu_doc_util = None
 
-  if doc_util_paths.df_base_path:
+  df_doc_util = None
+  if doc_util_paths and doc_util_paths.df_base_path:
     df_doc_util = doc_utils.DataframeDocUtil(
         base_path=doc_util_paths.df_base_path,
         base_url=doc_util_paths.df_base_url,
     )
-  else:
-    df_doc_util = None
 
-  if doc_util_paths.fig_base_path:
+  nightly_doc_util = None
+  if doc_util_paths and doc_util_paths.nightly_path:
     nightly_doc_util = doc_utils.NightlyDocUtil(
         path=doc_util_paths.nightly_path,
     )
-  else:
-    nightly_doc_util = None
-  # pytype: enable=attribute-error
 
   document_single_builder_fn = functools.partial(
       _document_single_builder,

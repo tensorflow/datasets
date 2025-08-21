@@ -81,11 +81,11 @@ def _create_datasets_section_toc(
     builder_docs: List[document_datasets.BuilderDocumentation],
 ) -> str:
   """Creates the section of the overview.md table of content for datasets."""
-  heading = '\n### `%s`\n' % section
+  heading = f'\n### `{section}`\n'
   nightly_suffix = ' ' + doc_utils.NightlyDocUtil.icon
   entries = [
       f' * [`{doc.name}`]({doc.filestem}.md)'
-      + (doc.is_nightly and nightly_suffix or '')
+      + (nightly_suffix if doc.is_nightly else '')
       for doc in builder_docs
   ]
   return '\n'.join([heading] + entries)
