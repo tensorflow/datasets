@@ -15,6 +15,7 @@
 
 """Tests for croissant_builder."""
 
+from typing import Any, Dict, List, Type
 import numpy as np
 import pytest
 from tensorflow_datasets import testing
@@ -146,7 +147,10 @@ def _create_mlc_field(
     ],
 )
 def test_simple_datatype_converter(
-    mlc_field, expected_feature, int_dtype, float_dtype
+    mlc_field: mlc.Field,
+    expected_feature: type[Any],
+    int_dtype: np.dtype | None,
+    float_dtype: np.dtype | None,
 ):
   actual_feature = croissant_builder.datatype_converter(
       mlc_field,
@@ -252,7 +256,11 @@ def test_datatype_converter_bbox_with_invalid_format():
         ),
     ],
 )
-def test_datatype_converter_complex(mlc_field, feature_type, subfield_types):
+def test_datatype_converter_complex(
+    mlc_field: mlc.Field,
+    feature_type: Type[Any],
+    subfield_types: Dict[str, Type[Any]] | None,
+):
   actual_feature = croissant_builder.datatype_converter(mlc_field)
   assert actual_feature.doc.desc == mlc_field.description
   assert isinstance(actual_feature, feature_type)
@@ -411,7 +419,9 @@ def test_version_converter(tmp_path):
 
 
 @pytest.fixture(name="crs_builder")
-def mock_croissant_dataset_builder(tmp_path, request):
+def mock_croissant_dataset_builder(
+    tmp_path, request
+) -> croissant_builder.CroissantBuilder:
   dataset_name = request.param["dataset_name"]
   with testing.dummy_croissant_file(
       dataset_name=dataset_name,
@@ -477,7 +487,11 @@ def test_croissant_builder(crs_builder):
     indirect=["crs_builder"],
 )
 @pytest.mark.parametrize("split_name", ["train", "test"])
-def test_download_and_prepare(crs_builder, expected_entries, split_name):
+def test_download_and_prepare(
+    crs_builder: croissant_builder.CroissantBuilder,
+    expected_entries: List[Dict[str, Any]],
+    split_name: str,
+):
   crs_builder.download_and_prepare()
   data_source = crs_builder.as_data_source(split=split_name)
   expected_entries = [
