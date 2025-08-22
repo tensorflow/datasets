@@ -34,9 +34,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   VERSION = tfds.core.Version("2.1.0")
   RELEASE_NOTES = {
       "1.0.0": "Initial release.",
-      "2.0.0": "Update the dataset with valid URLs.",
-      "2.1.0": "Update the dataset with cleaned URLs.",
+      "2.0.0": "[Do not use] Update the dataset with valid URLs.",
+      "2.1.0": (
+          "Update the dataset with the correct URLs. The URLs in this version"
+          " come from HuggingFace's dataset repo, which is curated by the same"
+          " author: https://huggingface.co/datasets/alexfabbri/multi_news."
+      ),
   }
+  BLOCKED_VERSIONS = tfds.core.utils.BlockedVersions(
+      versions={"2.0.0": "The URLs of this version are invalid."}
+  )
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -77,9 +84,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     ).open() as tgt_f:
       for i, (src_line, tgt_line) in enumerate(zip(src_f, tgt_f)):
         yield i, {
-            # In original file, each line has one example and natural newline
-            # tokens "\n" are being replaced with "NEWLINE_CHAR". Here restore
-            # the natural newline token to avoid special vocab "NEWLINE_CHAR".
+            # In the original file, each line has one example and natural
+            # newline tokens "\n" are being replaced with "NEWLINE_CHAR"
+            # Here, we restore the natural newline token to avoid the special
+            # vocab token "NEWLINE_CHAR".
             _DOCUMENT: src_line.strip().replace("NEWLINE_CHAR", "\n"),
             _SUMMARY: tgt_line.strip().lstrip(),
         }
