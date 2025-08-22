@@ -168,7 +168,7 @@ class DatasetDocumentation:
     )
 
   def to_details_markdown(self) -> str:
-    """ "Markdown to be shown on the details page for the namespace."""
+    """Markdown to be shown on the details page for the namespace."""
     extra_links = self.format_extra_links(prefix='*   ', infix='\n')
     details = self.templates.dataset_details_template.format(
         name=self.name,
@@ -194,9 +194,6 @@ class DatasetDocumentation:
 
   def documentation(self, keep_short: bool = False) -> str:
     """Returns detailed documentation for all configs of this dataset."""
-    # TODO(weide): if e.g. the description contains markdown chars, then it
-    # messes up the page. Try escaping backticks or using code blocks.
-    # TODO(weide): how to format citation?
     header_template = '## {config_name}'
     template = textwrap.dedent("""
       Use the following command to load this dataset in TFDS:
@@ -207,9 +204,7 @@ class DatasetDocumentation:
 
       *   **Description**:
 
-      ```
       {description}
-      ```
 
       *   **License**: {license}
       *   **Version**: {version}
@@ -364,6 +359,7 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
           )
       )
 
+    version = None
     if isinstance(config['version'], dict):
       version = config['version']['version_str']
     elif isinstance(config['version'], str):

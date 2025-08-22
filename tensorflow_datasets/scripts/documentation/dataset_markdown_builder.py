@@ -222,9 +222,9 @@ class VersionSection(Section):
     all_versions = set(tfds.core.Version(v) for v in all_versions)
     for v in sorted(all_versions):  # List all available versions
       if v == builder.version:  # Highlight the default version
-        version_name = '**`{}`** (default)'.format(str(v))
+        version_name = f'**`{v}`** (default)'
       else:
-        version_name = '`{}`'.format(str(v))
+        version_name = f'`{v}`'
       if (
           v in curr_versions  # Filter versions only present in RELEASE_NOTES
           and self._nightly_doc_util
@@ -322,14 +322,14 @@ class AutocacheSection(Section):
       autocached_info_parts = []
       if always_cached:
         split_names_str = ', '.join(always_cached)
-        autocached_info_parts.append('Yes ({})'.format(split_names_str))
+        autocached_info_parts.append(f'Yes ({split_names_str})')
       if never_cached:
         split_names_str = ', '.join(never_cached)
-        autocached_info_parts.append('No ({})'.format(split_names_str))
+        autocached_info_parts.append(f'No ({split_names_str})')
       if unshuffle_cached:
         split_names_str = ', '.join(unshuffle_cached)
         autocached_info_parts.append(
-            'Only when `shuffle_files=False` ({})'.format(split_names_str)
+            f'Only when `shuffle_files=False` ({split_names_str})'
         )
       autocached_info = ', '.join(autocached_info_parts)
     return autocached_info
@@ -346,7 +346,7 @@ class SplitInfoSection(Section):
 
   def _get_num_examples(self, split_info):
     if split_info.num_examples:
-      return '{:,}'.format(split_info.num_examples)
+      return f'{split_info.num_examples:,}'
     return 'Not computed'
 
   def get_key(self, builder: tfds.core.DatasetBuilder):
