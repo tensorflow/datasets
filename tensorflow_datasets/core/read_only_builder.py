@@ -314,10 +314,11 @@ def builder_from_files(
     DatasetNotFoundError: If the dataset cannot be loaded.
   """
   # Find and load dataset builder.
-  builder_dir = _find_builder_dir(name, **builder_kwargs)
+  copy_builder_kwargs = dict(builder_kwargs)
+  builder_dir = _find_builder_dir(name, **copy_builder_kwargs)
   if builder_dir is None:
     data_dirs = file_utils.list_data_dirs(
-        given_data_dir=builder_kwargs.get('data_dir')
+        given_data_dir=copy_builder_kwargs.get('data_dir')
     )
     raise registered.DatasetNotFoundError(
         f'Could not find dataset files for: {name}. Make sure you have the'
@@ -325,7 +326,7 @@ def builder_from_files(
         f'and that it has been generated in: {data_dirs}. If the dataset has'
         ' configs, you might have to specify the config name.'
     )
-  file_format = builder_kwargs.pop('file_format', None)
+  file_format = copy_builder_kwargs.pop('file_format', None)
   return builder_from_directory(builder_dir, file_format=file_format)
 
 
