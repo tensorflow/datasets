@@ -3,7 +3,7 @@
     <meta itemprop="name" content="TensorFlow Datasets" />
   </div>
   <meta itemprop="name" content="multi_news" />
-  <meta itemprop="description" content="Multi-News, consists of news articles and human-written summaries&#10;of these articles from the site newser.com.&#10;Each summary is professionally written by editors and&#10;includes links to the original articles cited.&#10;&#10;There are two features:&#10;  - document: text of news articles seperated by special token &quot;|||||&quot;.&#10;  - summary: news summary.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;multi_news&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
+  <meta itemprop="description" content="# Multi-News Dataset&#10;&#10;Multi-News consists of news articles and human-written summaries of these&#10;articles from the news site `newser.com`. Each summary is professionally written&#10;by editors and includes links to the original articles cited.&#10;&#10;This is the first large-scale dataset for multi-document summarization on news&#10;articles.&#10;&#10;Each record has two features:&#10;&#10;* `document`: Texts of news articles, separated by special token &quot;|||||&quot;.&#10;* `summary`: Summary of the news.&#10;&#10;To use this dataset:&#10;&#10;```python&#10;import tensorflow_datasets as tfds&#10;&#10;ds = tfds.load(&#x27;multi_news&#x27;, split=&#x27;train&#x27;)&#10;for ex in ds.take(4):&#10;  print(ex)&#10;```&#10;&#10;See [the guide](https://www.tensorflow.org/datasets/overview) for more&#10;informations on [tensorflow_datasets](https://www.tensorflow.org/datasets).&#10;&#10;" />
   <meta itemprop="url" content="https://www.tensorflow.org/datasets/catalog/multi_news" />
   <meta itemprop="sameAs" content="https://github.com/Alex-Fabbri/Multi-News" />
   <meta itemprop="citation" content="@misc{alex2019multinews,&#10;    title={Multi-News: a Large-Scale Multi-Document Summarization Dataset and Abstractive Hierarchical Model},&#10;    author={Alexander R. Fabbri and Irene Li and Tianwei She and Suyi Li and Dragomir R. Radev},&#10;    year={2019},&#10;    eprint={1906.01749},&#10;    archivePrefix={arXiv},&#10;    primaryClass={cs.CL}&#10;}" />
@@ -12,14 +12,26 @@
 # `multi_news`
 
 
+Note: This dataset has been updated since the last stable release. The new
+versions and config marked with
+<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+are only available in the `tfds-nightly` package.
+
 *   **Description**:
 
-Multi-News, consists of news articles and human-written summaries of these
-articles from the site newser.com. Each summary is professionally written by
-editors and includes links to the original articles cited.
+# Multi-News Dataset
 
-There are two features: - document: text of news articles seperated by special
-token "|||||". - summary: news summary.
+Multi-News consists of news articles and human-written summaries of these
+articles from the news site `newser.com`. Each summary is professionally written
+by editors and includes links to the original articles cited.
+
+This is the first large-scale dataset for multi-document summarization on news
+articles.
+
+Each record has two features:
+
+*   `document`: Texts of news articles, separated by special token "|||||".
+*   `summary`: Summary of the news.
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multi-news">
@@ -31,15 +43,21 @@ token "|||||". - summary: news summary.
     [https://github.com/Alex-Fabbri/Multi-News](https://github.com/Alex-Fabbri/Multi-News)
 
 *   **Source code**:
-    [`tfds.summarization.MultiNews`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/summarization/multi_news.py)
+    [`tfds.datasets.multi_news.Builder`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/datasets/multi_news/multi_news_dataset_builder.py)
 
 *   **Versions**:
 
-    *   **`1.0.0`** (default): No release notes.
+    *   `1.0.0`: Initial release.
+    *   `2.0.0`: [Do not use] Update the dataset with valid URLs.
+    *   **`2.1.0`** (default)
+        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
+        Update the dataset with the correct URLs. The URLs in this version come
+        from HuggingFace's dataset repo, which is curated by the same author:
+        https://huggingface.co/datasets/alexfabbri/multi_news.
 
-*   **Download size**: `245.06 MiB`
+*   **Download size**: `721.73 MiB`
 
-*   **Dataset size**: `669.80 MiB`
+*   **Dataset size**: `666.50 MiB`
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):
@@ -88,7 +106,7 @@ summary  | Text         |       | string |
 <button id="displaydataframe">Display examples...</button>
 <div id="dataframecontent" style="overflow-x:auto"></div>
 <script>
-const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/multi_news-1.0.0.html";
+const url = "https://storage.googleapis.com/tfds-data/visualization/dataframe/multi_news-2.1.0.html";
 const dataButton = document.getElementById('displaydataframe');
 dataButton.addEventListener('click', async () => {
   // Disable the button after clicking (dataframe loaded only once).

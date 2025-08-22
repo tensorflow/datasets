@@ -40,6 +40,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`aeslc`](aeslc.md)
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
+*   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)
@@ -515,6 +516,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`math_dataset`](math_dataset.md)
 *   [`math_qa`](math_qa.md)
 *   [`mlqa`](mlqa.md)
+*   [`multi_news`](multi_news.md)
 *   [`natural_instructions`](natural_instructions.md)
 *   [`natural_questions`](natural_questions.md)
 *   [`natural_questions_open`](natural_questions_open.md)
@@ -540,6 +542,10 @@ for ex in tfds.load('cifar10', split='train'):
 
 *   [`deep1b`](deep1b.md)
 *   [`glove100_angular`](glove100_angular.md)
+
+### `News`
+
+*   [`multi_news`](multi_news.md)
 
 ### `Object detection`
 
@@ -808,7 +814,6 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`covid19sum`](covid19sum.md)
 *   [`gigaword`](gigaword.md)
 *   [`gov_report`](gov_report.md)
-*   [`multi_news`](multi_news.md)
 *   [`wikihow`](wikihow.md)
 *   [`xsum`](xsum.md)
 
@@ -900,6 +905,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`mlqa`](mlqa.md)
 *   [`movie_rationales`](movie_rationales.md)
 *   [`mrqa`](mrqa.md)
+*   [`multi_news`](multi_news.md)
 *   [`multi_nli`](multi_nli.md)
 *   [`multi_nli_mismatch`](multi_nli_mismatch.md)
 *   [`natural_instructions`](natural_instructions.md)
@@ -1046,6 +1052,7 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`billsum`](billsum.md)
 *   [`booksum`](booksum.md)
 *   [`databricks_dolly`](databricks_dolly.md)
+*   [`multi_news`](multi_news.md)
 *   [`newsroom`](newsroom.md)
 *   [`reddit`](reddit.md)
 *   [`reddit_tifu`](reddit_tifu.md)

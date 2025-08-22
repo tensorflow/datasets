@@ -22,6 +22,8 @@ toc:
     title: billsum
   - path: /datasets/catalog/booksum
     title: booksum (manual)
+  - path: /datasets/catalog/multi_news
+    title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
   - path: /datasets/catalog/reddit
@@ -815,6 +817,8 @@ toc:
     title: math_qa
   - path: /datasets/catalog/mlqa
     title: mlqa
+  - path: /datasets/catalog/multi_news
+    title: multi_news
   - path: /datasets/catalog/natural_instructions
     title: natural_instructions
   - path: /datasets/catalog/natural_questions
@@ -862,6 +866,10 @@ toc:
   - path: /datasets/catalog/glove100_angular
     title: glove100_angular
   title: Nearest neighbors
+- section:
+  - path: /datasets/catalog/multi_news
+    title: multi_news
+  title: News
 - section:
   - path: /datasets/catalog/coco
     title: coco
@@ -1304,8 +1312,6 @@ toc:
     title: gigaword
   - path: /datasets/catalog/gov_report
     title: gov_report
-  - path: /datasets/catalog/multi_news
-    title: multi_news
   - path: /datasets/catalog/wikihow
     title: wikihow (manual)
   - path: /datasets/catalog/xsum
@@ -1475,6 +1481,8 @@ toc:
     title: movie_rationales
   - path: /datasets/catalog/mrqa
     title: mrqa
+  - path: /datasets/catalog/multi_news
+    title: multi_news
   - path: /datasets/catalog/multi_nli
     title: multi_nli
   - path: /datasets/catalog/multi_nli_mismatch
@@ -1747,6 +1755,8 @@ toc:
     title: booksum (manual)
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
+  - path: /datasets/catalog/multi_news
+    title: multi_news
   - path: /datasets/catalog/newsroom
     title: newsroom (manual)
   - path: /datasets/catalog/reddit
