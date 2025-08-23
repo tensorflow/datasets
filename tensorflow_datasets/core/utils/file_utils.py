@@ -168,6 +168,14 @@ def get_dataset_dir(
     version: version_lib.Version | str | None = None,
 ) -> epath.Path:
   """Returns the data directory for the given dataset."""
+  # If the data dir is a TF Hub path, use the TF Hub dataset directory.
+  if tfhub_path.is_tfhub_filepath(str(data_dir)):
+    return tfhub_file_utils.get_tfhub_dataset_dir(
+        dataset_name=builder_name,
+        config_name=config_name,
+        version=version,
+        tfhub_env=tfhub_file_utils.TfHubEnv.PROD,
+    )
   dataset_dir = epath.Path(data_dir) / builder_name
   if config_name:
     dataset_dir /= config_name
