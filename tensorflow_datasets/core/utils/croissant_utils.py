@@ -63,16 +63,49 @@ def get_croissant_version(version: str | None) -> str | None:
   return version
 
 
-def get_dataset_name(dataset: mlc.Dataset) -> str:
-  """Returns dataset name of the given MLcroissant dataset."""
+def get_dataset_name(dataset: mlc.Dataset, language: str | None = None) -> str:
+  """Returns dataset name of the given MLcroissant dataset.
+
+  Args:
+    dataset: The MLcroissant dataset.
+    language: For datasets with multiple names in different languages, this
+      argument specifies the language to use.
+  """
   if (url := dataset.metadata.url) and url.startswith(_HUGGINGFACE_URL_PREFIX):
     return url.removeprefix(_HUGGINGFACE_URL_PREFIX)
-  return dataset.metadata.name
+  name = dataset.metadata.name
+  if isinstance(name, dict):
+    if language is None:
+      # Try a heuristic language, e.g., 'en'.
+      if "en" in name:
+        return name["en"]
+      # Otherwise, take the first language in the dict.
+      try:
+        first_lang = next(iter(name))
+        return name[first_lang]
+      except StopIteration as exc:
+        raise ValueError("Dataset name dictionary is empty.") from exc
+    elif language not in dataset.metadata.name:
+      raise ValueError(
+          f"Language {language} not found in dataset names {name}."
+      )
+    else:
+      return name[language]
+  # At this point, name is not a dict anymore.
+  return typing.cast(str, name)
 
 
-def get_tfds_dataset_name(dataset: mlc.Dataset) -> str:
-  """Returns TFDS compatible dataset name of the given MLcroissant dataset."""
-  dataset_name = get_dataset_name(dataset)
+def get_tfds_dataset_name(
+    dataset: mlc.Dataset, language: str | None = None
+) -> str:
+  """Returns TFDS compatible dataset name of the given MLcroissant dataset.
+
+  Args:
+    dataset: The MLcroissant dataset.
+    language: For datasets with multiple names in different languages, this
+      argument specifies the language to use.
+  """
+  dataset_name = get_dataset_name(dataset, language=language)
   return conversion_utils.to_tfds_name(dataset_name)
 
 
