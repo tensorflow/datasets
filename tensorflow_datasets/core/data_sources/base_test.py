@@ -94,6 +94,12 @@ def test_read_write(
   for i, element in enumerate(data_source):
     assert element == {'id': i}
 
+  # Also works on sliced splits.
+  data_source = builder.as_data_source(split='train[0:2]')
+  assert len(data_source) == 2
+  data_source = builder.as_data_source(split='train[:50%]')
+  assert len(data_source) == 2
+
 
 _FILE_INSTRUCTIONS = [
     shard_utils.FileInstruction(
