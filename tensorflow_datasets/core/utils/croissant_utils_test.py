@@ -33,7 +33,83 @@ from tensorflow_datasets.core.utils import croissant_utils
 def test_get_tfds_dataset_name(croissant_name, croissant_url, tfds_name):
   metadata = mlc.Metadata(name=croissant_name, url=croissant_url)
   dataset = mlc.Dataset.from_metadata(metadata)
-  assert croissant_utils.get_tfds_dataset_name(dataset) == tfds_name
+  assert (
+      croissant_utils.get_tfds_dataset_name(dataset) == tfds_name
+  ), f'Expected TFDS name: {tfds_name}'
+
+
+@pytest.mark.parametrize(
+    'croissant_name,language,expected_name',
+    [
+        ({'en': 'English Name', 'fr': 'Nom Français'}, None, 'English Name'),
+        (
+            {'de': 'Deutscher Name', 'fr': 'Nom Français'},
+            None,
+            'Deutscher Name',
+        ),
+        ({'en': 'English Name', 'fr': 'Nom Français'}, 'fr', 'Nom Français'),
+        ('Simple Name', None, 'Simple Name'),
+    ],
+)
+def test_get_dataset_name(croissant_name, language, expected_name):
+  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
+  metadata = mlc.Metadata(name=croissant_name, ctx=ctx, url=None)
+  dataset = mlc.Dataset.from_metadata(metadata)
+  assert (
+      croissant_utils.get_dataset_name(dataset, language=language)
+      == expected_name
+  )
+
+
+def test_get_dataset_name_url_precedence():
+  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
+  # Test that URL prefix removal works and takes precedence over name.
+  metadata = mlc.Metadata(
+      name='Should Be Ignored',
+      ctx=ctx,
+      url='https://huggingface.co/datasets/user/dataset_name',
+  )
+  dataset = mlc.Dataset.from_metadata(metadata)
+  assert croissant_utils.get_dataset_name(dataset) == 'user/dataset_name'
+
+  # Test that URL precedence also works when the name is a dict.
+  metadata_dict_name = mlc.Metadata(
+      name={'en': 'Should Be Ignored'},
+      ctx=ctx,
+      url='https://huggingface.co/datasets/another/other_dataset',
+  )
+  dataset_dict_name = mlc.Dataset.from_metadata(metadata_dict_name)
+  assert (
+      croissant_utils.get_dataset_name(dataset_dict_name)
+      == 'another/other_dataset'
+  )
+
+  # Test that non-HuggingFace URLs don't cause name to be ignored.
+  metadata_other_url = mlc.Metadata(
+      name='Not Ignored',
+      ctx=ctx,
+      url='https://example.com/dataset',
+  )
+  dataset_other_url = mlc.Dataset.from_metadata(metadata_other_url)
+  assert croissant_utils.get_dataset_name(dataset_other_url) == 'Not Ignored'
+
+
+def test_get_dataset_multilingual_name_with_language_not_found():
+  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
+  metadata_lang_not_found = mlc.Metadata(
+      name={'en': 'English Name', 'fr': 'Nom Français'}, ctx=ctx, url=None
+  )
+  dataset_lang_not_found = mlc.Dataset.from_metadata(metadata_lang_not_found)
+  with pytest.raises(ValueError, match='Language de not found'):
+    croissant_utils.get_dataset_name(dataset_lang_not_found, language='de')
+
+
+def test_get_dataset_multilingual_name_with_empty_dict():
+  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
+  metadata_empty_dict = mlc.Metadata(name={}, ctx=ctx, url=None)
+  dataset_empty_dict = mlc.Dataset.from_metadata(metadata_empty_dict)
+  with pytest.raises(ValueError, match='Dataset name dictionary is empty'):
+    croissant_utils.get_dataset_name(dataset_empty_dict, language=None)
 
 
 @pytest.mark.parametrize(
