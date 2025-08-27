@@ -262,13 +262,37 @@ def test_datatype_converter_complex(
     subfield_types: Dict[str, Type[Any]] | None,
 ):
   actual_feature = croissant_builder.datatype_converter(mlc_field)
-  assert actual_feature.doc.desc == mlc_field.description
+  expected_description = mlc_field.description
+  if isinstance(expected_description, dict):
+    expected_description = expected_description.get(
+        "en", next(iter(expected_description.values()))
+    )
+  assert actual_feature.doc.desc == expected_description
   assert isinstance(actual_feature, feature_type)
   if subfield_types is not None:
     for feature_name in actual_feature.keys():
       assert isinstance(
           actual_feature[feature_name], subfield_types[feature_name]
       )
+
+
+def test_datatype_converter_multilingual_description():
+  mlc_field = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description={"en": "English desc", "fr": "Description française"},
+  )
+  actual_feature = croissant_builder.datatype_converter(mlc_field)
+  assert actual_feature.doc.desc == "English desc"
+
+  mlc_field_no_en = mlc.Field(
+      data_types=mlc.DataType.TEXT,
+      description={
+          "de": "Deutsche Beschreibung",
+          "fr": "Description française",
+      },
+  )
+  actual_feature_no_en = croissant_builder.datatype_converter(mlc_field_no_en)
+  assert actual_feature_no_en.doc.desc == "Deutsche Beschreibung"
 
 
 def test_datatype_converter_none():

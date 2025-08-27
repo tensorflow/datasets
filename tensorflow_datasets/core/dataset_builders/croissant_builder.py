@@ -107,17 +107,21 @@ def array_datatype_converter(
   elif enp.lazy.is_np_dtype(field.data_type):
     field_dtype = field.data_type
 
+  description = croissant_utils.extract_localized_string(
+      field.description, field_name='description'
+  )
+
   if len(field.array_shape_tuple) == 1:
-    return sequence_feature.Sequence(feature, doc=field.description)
+    return sequence_feature.Sequence(feature, doc=description)
   elif (-1 in field.array_shape_tuple) or (field_dtype is None):
     for _ in range(len(field.array_shape_tuple)):
-      feature = sequence_feature.Sequence(feature, doc=field.description)
+      feature = sequence_feature.Sequence(feature, doc=description)
     return feature
   else:
     return tensor_feature.Tensor(
         shape=field.array_shape_tuple,
         dtype=field_dtype,
-        doc=field.description,
+        doc=description,
     )
 
 
@@ -151,6 +155,9 @@ def datatype_converter(
   }
 
   field_data_type = field.data_type
+  description = croissant_utils.extract_localized_string(
+      field.description, field_name='description'
+  )
 
   if not field_data_type:
     # Fields with sub fields are of type None.
@@ -162,12 +169,12 @@ def datatype_converter(
               )
               for subfield in field.sub_fields
           },
-          doc=field.description,
+          doc=description,
       )
     else:
       feature = None
   elif field_data_type == bytes:
-    feature = text_feature.Text(doc=field.description)
+    feature = text_feature.Text(doc=description)
   elif field_data_type in dtype_mapping:
     feature = dtype_mapping[field_data_type]
   elif enp.lazy.is_np_dtype(field_data_type):
@@ -175,9 +182,9 @@ def datatype_converter(
   # We return a text feature for date-time features (mlc.DataType.DATE,
   # mlc.DataType.DATETIME, and mlc.DataType.TIME).
   elif field_data_type == pd.Timestamp or field_data_type == datetime.time:
-    feature = text_feature.Text(doc=field.description)
+    feature = text_feature.Text(doc=description)
   elif field_data_type == mlc.DataType.IMAGE_OBJECT:
-    feature = image_feature.Image(doc=field.description)
+    feature = image_feature.Image(doc=description)
   elif field_data_type == mlc.DataType.BOUNDING_BOX:
     # TFDS uses REL_YXYX by default, but Hugging Face doesn't enforce a format.
     if bbox_format := field.source.format:
@@ -190,14 +197,14 @@ def datatype_converter(
             f'{[format.value for format in bb_utils.BBoxFormat]}'
         ) from e
     feature = bounding_boxes.BBoxFeature(
-        doc=field.description, bbox_format=bbox_format
+        doc=description, bbox_format=bbox_format
     )
   elif field_data_type == mlc.DataType.AUDIO_OBJECT:
     feature = audio_feature.Audio(
-        doc=field.description, sample_rate=field.source.sampling_rate
+        doc=description, sample_rate=field.source.sampling_rate
     )
   elif field_data_type == mlc.DataType.VIDEO_OBJECT:
-    feature = video_feature.Video(doc=field.description)
+    feature = video_feature.Video(doc=description)
   else:
     raise ValueError(
         f'Unknown data type: {field_data_type} for field {field.id}.'

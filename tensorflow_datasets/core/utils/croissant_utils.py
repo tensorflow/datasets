@@ -63,6 +63,65 @@ def get_croissant_version(version: str | None) -> str | None:
   return version
 
 
+def extract_localized_string(
+    attribute: str | dict[str, str] | None,
+    language: str | None = None,
+    field_name: str = "text field",
+) -> str | None:
+  """Returns the text in the specified language from a potentially localized object.
+
+  Some attributes in Croissant (e.g., `name` and `description`) can be
+  localized, meaning that they can be either simple strings, or dictionaries
+  mapping language codes to strings (e.g., `{"en": "English Name", "fr": "Nom
+  français"}`). This function extracts the text in the specified language from a
+  potentially localized object.
+
+  Args:
+    attribute: The object containing the text, which can be a simple string, a
+      dictionary mapping language codes to strings, or None.
+    language: The desired language code. If None, a heuristic is used: 'en' is
+      preferred, otherwise the first available language in the dictionary.
+    field_name: The name of the field being processed (e.g., "name",
+      "description"), used for error messages.
+
+  Returns:
+    The text string in the desired language, or None if the input is None.
+
+  Raises:
+    ValueError: If the text_object is an empty dictionary, or if the specified
+      language is not found.
+    TypeError: If attribute is not a str, dict, or None.
+  """
+  if attribute is None:
+    return None
+  if isinstance(attribute, str):
+    return attribute
+
+  if not isinstance(attribute, dict):
+    raise TypeError(
+        f"{field_name} must be a string, dictionary, or None. Got"
+        f" {type(attribute)}"
+    )
+
+  if language is None:
+    # Try a heuristic language, e.g., 'en'.
+    if "en" in attribute:
+      return attribute["en"]
+    # Otherwise, take the first language in the dict.
+    try:
+      first_lang = next(iter(attribute))
+      return attribute[first_lang]
+    except StopIteration as exc:
+      raise ValueError(f"Dataset `{field_name}` dictionary is empty.") from exc
+  elif language in attribute:
+    return attribute[language]
+  else:
+    raise ValueError(
+        f"Language '{language}' not found in {field_name} keys:"
+        f" {list(attribute.keys())}."
+    )
+
+
 def get_dataset_name(dataset: mlc.Dataset, language: str | None = None) -> str:
   """Returns dataset name of the given MLcroissant dataset.
 
@@ -73,26 +132,14 @@ def get_dataset_name(dataset: mlc.Dataset, language: str | None = None) -> str:
   """
   if (url := dataset.metadata.url) and url.startswith(_HUGGINGFACE_URL_PREFIX):
     return url.removeprefix(_HUGGINGFACE_URL_PREFIX)
-  name = dataset.metadata.name
-  if isinstance(name, dict):
-    if language is None:
-      # Try a heuristic language, e.g., 'en'.
-      if "en" in name:
-        return name["en"]
-      # Otherwise, take the first language in the dict.
-      try:
-        first_lang = next(iter(name))
-        return name[first_lang]
-      except StopIteration as exc:
-        raise ValueError("Dataset name dictionary is empty.") from exc
-    elif language not in dataset.metadata.name:
-      raise ValueError(
-          f"Language {language} not found in dataset names {name}."
-      )
-    else:
-      return name[language]
-  # At this point, name is not a dict anymore.
-  return typing.cast(str, name)
+  name = extract_localized_string(
+      dataset.metadata.name, language=language, field_name="name"
+  )
+  if name is None:
+    # This case should ideally be prevented by mlcroissant's validation
+    # ensuring metadata.name is not None.
+    raise ValueError("Dataset name is missing.")
+  return name
 
 
 def get_tfds_dataset_name(

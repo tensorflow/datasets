@@ -39,6 +39,53 @@ def test_get_tfds_dataset_name(croissant_name, croissant_url, tfds_name):
 
 
 @pytest.mark.parametrize(
+    'attribute,language,expected_text',
+    [
+        ({'en': 'English Text', 'fr': 'Texte Français'}, None, 'English Text'),
+        (
+            {'de': 'Deutscher Text', 'fr': 'Texte Français'},
+            None,
+            'Deutscher Text',
+        ),
+        (
+            {'en': 'English Text', 'fr': 'Texte Français'},
+            'fr',
+            'Texte Français',
+        ),
+        ('Simple Text', None, 'Simple Text'),
+        ('Simple Text', 'en', 'Simple Text'),
+        (None, None, None),
+    ],
+)
+def test_extract_localized_string(attribute, language, expected_text):
+  assert (
+      croissant_utils.extract_localized_string(attribute, language=language)
+      == expected_text
+  )
+
+
+def test_extract_localized_string_raises():
+  # Language not found.
+  with pytest.raises(
+      ValueError,
+      match=r"Language 'de' not found in text field keys:",
+  ):
+    croissant_utils.extract_localized_string(
+        {'en': 'English Text', 'fr': 'Texte Français'}, language='de'
+    )
+
+  # Empty dictionary.
+  with pytest.raises(
+      ValueError, match='Dataset `text field` dictionary is empty'
+  ):
+    croissant_utils.extract_localized_string({}, language=None)
+
+  # Incorrect type.
+  with pytest.raises(TypeError, match='must be a string, dictionary, or None'):
+    croissant_utils.extract_localized_string(123)
+
+
+@pytest.mark.parametrize(
     'croissant_name,language,expected_name',
     [
         ({'en': 'English Name', 'fr': 'Nom Français'}, None, 'English Name'),
@@ -59,6 +106,25 @@ def test_get_dataset_name(croissant_name, language, expected_name):
       croissant_utils.get_dataset_name(dataset, language=language)
       == expected_name
   )
+
+
+def test_get_dataset_name_raises():
+  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
+  # Test language not found in name.
+  metadata_lang_not_found = mlc.Metadata(
+      name={'en': 'English Name', 'fr': 'Nom Français'}, ctx=ctx, url=None
+  )
+  dataset_lang_not_found = mlc.Dataset.from_metadata(metadata_lang_not_found)
+  with pytest.raises(
+      ValueError, match=r"Language 'de' not found in name keys:"
+  ):
+    croissant_utils.get_dataset_name(dataset_lang_not_found, language='de')
+
+  # Test empty dictionary name.
+  metadata_empty_dict = mlc.Metadata(name={}, ctx=ctx, url=None)
+  dataset_empty_dict = mlc.Dataset.from_metadata(metadata_empty_dict)
+  with pytest.raises(ValueError, match='Dataset `name` dictionary is empty.'):
+    croissant_utils.get_dataset_name(dataset_empty_dict, language=None)
 
 
 def test_get_dataset_name_url_precedence():
@@ -92,24 +158,6 @@ def test_get_dataset_name_url_precedence():
   )
   dataset_other_url = mlc.Dataset.from_metadata(metadata_other_url)
   assert croissant_utils.get_dataset_name(dataset_other_url) == 'Not Ignored'
-
-
-def test_get_dataset_multilingual_name_with_language_not_found():
-  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
-  metadata_lang_not_found = mlc.Metadata(
-      name={'en': 'English Name', 'fr': 'Nom Français'}, ctx=ctx, url=None
-  )
-  dataset_lang_not_found = mlc.Dataset.from_metadata(metadata_lang_not_found)
-  with pytest.raises(ValueError, match='Language de not found'):
-    croissant_utils.get_dataset_name(dataset_lang_not_found, language='de')
-
-
-def test_get_dataset_multilingual_name_with_empty_dict():
-  ctx = mlc.Context(conforms_to='http://mlcommons.org/croissant/1.1')
-  metadata_empty_dict = mlc.Metadata(name={}, ctx=ctx, url=None)
-  dataset_empty_dict = mlc.Dataset.from_metadata(metadata_empty_dict)
-  with pytest.raises(ValueError, match='Dataset name dictionary is empty'):
-    croissant_utils.get_dataset_name(dataset_empty_dict, language=None)
 
 
 @pytest.mark.parametrize(
