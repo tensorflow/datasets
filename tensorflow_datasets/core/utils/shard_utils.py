@@ -57,19 +57,22 @@ class ShardConfig:
   def calculate_number_shards(
       cls,
       total_size: int,
+      max_example_size: int | Sequence[int] | None,
       num_examples: int,
       uses_precise_sharding: bool = True,
   ) -> int:
     """Returns number of shards for num_examples of total_size in bytes.
 
     Args:
-      total_size: the size of the data (serialized, not couting any overhead).
+      total_size: the size of the data (serialized, not counting any overhead).
+      max_example_size: the maximum size of a single example (serialized, not
+        counting any overhead).
       num_examples: the number of records in the data.
       uses_precise_sharding: whether a mechanism is used to exactly control how
         many examples go in each shard.
     """
-    total_size += num_examples * cls.overhead
-    max_shards_number = total_size // cls.min_shard_size
+    total_overhead = num_examples * cls.overhead
+    total_size_with_overhead = total_size + total_overhead
     if uses_precise_sharding:
       max_shard_size = cls.max_shard_size
     else:
@@ -77,7 +80,24 @@ class ShardConfig:
       # shard (called 'precise sharding' here), we use a smaller max shard size
       # so that the pipeline doesn't fail if a shard gets some more examples.
       max_shard_size = 0.9 * cls.max_shard_size
-    min_shards_number = total_size // max_shard_size
+    max_shard_size = max(1, max_shard_size)
+
+    if max_example_size is None:
+      min_shards_number = max(1, total_size_with_overhead // max_shard_size)
+      max_shards_number = max(1, total_size_with_overhead // cls.min_shard_size)
+    else:
+      if isinstance(max_example_size, Sequence):
+        if len(max_example_size) == 1:
+          max_example_size = max_example_size[0]
+        else:
+          raise ValueError(
+              'max_example_size must be a single value or None, got'
+              f' {max_example_size}'
+          )
+      pessimistic_total_size = num_examples * (max_example_size + cls.overhead)
+      min_shards_number = max(1, pessimistic_total_size // max_shard_size)
+      max_shards_number = max(1, pessimistic_total_size // cls.min_shard_size)
+
     if min_shards_number <= 1024 <= max_shards_number and num_examples >= 1024:
       return 1024
     elif min_shards_number > 1024:
@@ -96,14 +116,21 @@ class ShardConfig:
   def get_number_shards(
       self,
       total_size: int,
+      max_example_size: int | None,
       num_examples: int,
       uses_precise_sharding: bool = True,
   ) -> int:
     if self.num_shards:
       return self.num_shards
     return self.calculate_number_shards(
-        total_size, num_examples, uses_precise_sharding
+        total_size=total_size,
+        max_example_size=max_example_size,
+        num_examples=num_examples,
+        uses_precise_sharding=uses_precise_sharding,
     )
+
+  def replace(self, **kwargs: Any) -> ShardConfig:
+    return dataclasses.replace(self, **kwargs)
 
 
 def get_shard_boundaries(
