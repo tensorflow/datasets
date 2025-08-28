@@ -49,6 +49,7 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils import version as version_lib
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
+
 # pylint: disable=logging-format-interpolation
 
 Tree = type_utils.Tree
@@ -183,6 +184,7 @@ def builder(
           f' explicitly set. Wrong arguments for {get_dataset_repr()}'
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
+
   if name.namespace:
     if name.namespace == 'huggingface':
       return huggingface_dataset_builder.builder(
@@ -827,12 +829,8 @@ def data_source(
   """  # fmt:skip
   builder_kwargs = _set_file_format_for_data_source(data_dir, builder_kwargs)
   _validate_file_format_for_data_source(builder_kwargs)
-  dbuilder = _fetch_builder(
-      name,
-      data_dir,
-      builder_kwargs,
-      try_gcs,
-  )
+
+  dbuilder = _fetch_builder(name, data_dir, builder_kwargs, try_gcs)
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
   return dbuilder.as_data_source(
       split=split, decoders=decoders, deserialize_method=deserialize_method
