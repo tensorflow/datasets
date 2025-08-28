@@ -85,6 +85,7 @@ def array_datatype_converter(
     feature: type_utils.TfdsDType | feature_lib.FeatureConnector | None,
     field: mlc.Field,
     dtype_mapping: Mapping[type_utils.TfdsDType, type_utils.TfdsDType],
+    language: str | None = None,
 ):
   """Includes the given feature in a sequence or tensor feature.
 
@@ -97,6 +98,10 @@ def array_datatype_converter(
     field: The mlc.Field object.
     dtype_mapping: A mapping of dtypes to the corresponding dtypes that will be
       used in TFDS.
+    language: For Croissant jsonld which include multi-lingual descriptions, the
+      language code to use to extract the description to be used in TFDS. If
+      None, it will extract the description in English or the first available
+      language in the dictionary.
 
   Returns:
     A sequence or tensor feature including the inner feature.
@@ -108,7 +113,7 @@ def array_datatype_converter(
     field_dtype = field.data_type
 
   description = croissant_utils.extract_localized_string(
-      field.description, field_name='description'
+      field.description, language=language, field_name='description'
   )
 
   if len(field.array_shape_tuple) == 1:
@@ -129,6 +134,7 @@ def datatype_converter(
     field: mlc.Field,
     int_dtype: type_utils.TfdsDType = np.int64,
     float_dtype: type_utils.TfdsDType = np.float32,
+    language: str | None = None,
 ):
   """Converts a Croissant field to a TFDS-compatible feature.
 
@@ -137,6 +143,10 @@ def datatype_converter(
     int_dtype: The dtype to use for TFDS integer features. Defaults to np.int64.
     float_dtype: The dtype to use for TFDS float features. Defaults to
       np.float32.
+    language: For Croissant jsonld which include multi-lingual descriptions, the
+      language code to use to extract the description to be used in TFDS. If
+      None, it will extract the description in English or the first available
+      language in the dictionary.
 
   Returns:
     Converted datatype for TFDS, or None when a Field does not specify a type.
@@ -156,7 +166,7 @@ def datatype_converter(
 
   field_data_type = field.data_type
   description = croissant_utils.extract_localized_string(
-      field.description, field_name='description'
+      field.description, language=language, field_name='description'
   )
 
   if not field_data_type:
@@ -165,7 +175,10 @@ def datatype_converter(
       feature = features_dict.FeaturesDict(
           {
               subfield.id: datatype_converter(
-                  subfield, int_dtype=int_dtype, float_dtype=float_dtype
+                  subfield,
+                  int_dtype=int_dtype,
+                  float_dtype=float_dtype,
+                  language=language,
               )
               for subfield in field.sub_fields
           },
@@ -215,6 +228,7 @@ def datatype_converter(
         feature=feature,
         field=field,
         dtype_mapping=dtype_mapping,
+        language=language,
     )
   # If the field is repeated, we return a sequence feature. `field.repeated` is
   # deprecated starting from Croissant 1.1, but we still support it for
