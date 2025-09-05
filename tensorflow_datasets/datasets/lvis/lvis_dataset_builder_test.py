@@ -37,7 +37,7 @@ class LvisTest(tfds.testing.DatasetBuilderTestCase):
       'validation_images': '',
       'test_annotation': '',
       'test_images': '',
-      'minival_annotation': '',
+      'minival_annotation': 'lvis_v1_minival_inserted_image_name.json',
   }
 
 

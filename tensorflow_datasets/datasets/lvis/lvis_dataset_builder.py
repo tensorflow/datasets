@@ -25,7 +25,7 @@ from etils import epath
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_URLS = {
+_EXTRACT_URLS = {
     'train_annotation': (
         'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_train.json.zip'
     ),
@@ -34,11 +34,16 @@ _URLS = {
         'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_val.json.zip'
     ),
     'validation_images': 'http://images.cocodataset.org/zips/val2017.zip',
-    'test_annotation': 'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip',
+    'test_annotation': (
+        'https://dl.fbaipublicfiles.com/LVIS/lvis_v1_image_info_test_dev.json.zip'
+    ),
     'test_images': 'http://images.cocodataset.org/zips/test2017.zip',
-    # Minival from https://github.com/ashkamath/mdetr/blob/main/.github/lvis.md:
+}
+_URLS = {
+    # Minival from
+    #   https://gitlab.com/YuanHuan_Pro/YOLO-World/-/blob/master/docs/data.md:
     'minival_annotation': (
-        'https://nyu.box.com/shared/static/2yk9x8az9pnlsy2v8gd95yncwn2q7vj6.zip'
+        'https://huggingface.co/GLIPModel/GLIP/resolve/main/lvis_v1_minival_inserted_image_name.json'
     ),
 }
 
@@ -71,13 +76,14 @@ _NUM_CLASSES = 1203
 class Builder(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for lvis dataset."""
 
-  VERSION = tfds.core.Version('1.3.0')
+  VERSION = tfds.core.Version('1.4.0')
   RELEASE_NOTES = {
       '1.1.0': (
           'Added fields `neg_category_ids` and `not_exhaustive_category_ids`.'
       ),
       '1.2.0': 'Added class names.',
       '1.3.0': 'Added minival split.',
+      '1.4.0': 'Added segmentation masks to the minival split.',
   }
 
   def _info(self) -> tfds.core.DatasetInfo:
@@ -116,7 +122,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    paths = dl_manager.download_and_extract(_URLS)
+    paths = {
+        **dl_manager.download_and_extract(_EXTRACT_URLS),
+        **dl_manager.download(_URLS),
+    }
     image_dirs = [
         paths['train_images'] / 'train2017',
         paths['validation_images'] / 'val2017',
@@ -135,7 +144,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         ),
         'minival': self._generate_examples(
             image_dirs,
-            paths['minival_annotation'] / 'lvis_v1_minival.json',
+            paths['minival_annotation'],
         ),
     }
 
@@ -169,7 +178,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'bbox': _build_bbox(image_info, *inst['bbox']),
             'label': inst['category_id'] - 1,
             'segmentation': _build_segmentation_mask(
-                image_info, inst.get('segmentation', [])  # No segs in minival.
+                image_info, inst['segmentation']
             ),
         })
       return image_info['id'], example
