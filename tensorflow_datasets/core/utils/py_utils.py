@@ -32,7 +32,6 @@ import textwrap
 import threading
 import typing
 from typing import Any, Callable, NoReturn, Type, TypeVar
-import uuid
 
 from absl import logging as absl_logging
 from etils import epath
@@ -302,79 +301,6 @@ def pack_as_nest_dict(flat_d, nest_d):
 def nullcontext(enter_result: T = None) -> Iterator[T]:
   """Backport of `contextlib.nullcontext`."""
   yield enter_result
-
-
-def _tmp_file_prefix() -> str:
-  return f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}'
-
-
-def _tmp_file_name(
-    path: epath.PathLike,
-    subfolder: str | None = None,
-) -> epath.Path:
-  """Returns the temporary file name for the given path.
-
-  Args:
-    path: The path to the file.
-    subfolder: The subfolder to use. If None, then the parent of the path will
-      be used.
-  """
-  path = epath.Path(path)
-  file_name = f'{_tmp_file_prefix()}.{path.name}'
-  if subfolder:
-    return path.parent / subfolder / file_name
-  else:
-    return path.parent / file_name
-
-
-@contextlib.contextmanager
-def incomplete_file(
-    path: epath.Path,
-    subfolder: str | None = None,
-) -> Iterator[epath.Path]:
-  """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = _tmp_file_name(path, subfolder=subfolder)
-  tmp_path.parent.mkdir(exist_ok=True)
-  try:
-    yield tmp_path
-    tmp_path.replace(path)
-  finally:
-    # Eventually delete the tmp_path if exception was raised
-    tmp_path.unlink(missing_ok=True)
-
-
-@contextlib.contextmanager
-def incomplete_files(
-    path: epath.Path,
-) -> Iterator[epath.Path]:
-  """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_file_prefix = _tmp_file_prefix()
-  tmp_path = path.parent / f'{tmp_file_prefix}.{path.name}'
-  try:
-    yield tmp_path
-    # Rename all tmp files to their final name.
-    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
-      file_name = tmp_file.name.removeprefix(tmp_file_prefix + '.')
-      tmp_file.replace(path.parent / file_name)
-  finally:
-    # Eventually delete the tmp_path if exception was raised
-    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
-      tmp_file.unlink(missing_ok=True)
-
-
-def is_incomplete_file(path: epath.Path) -> bool:
-  """Returns whether the given filename suggests that it's incomplete."""
-  regex = rf'{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+'
-  return bool(re.search(rf'^{regex}$', path.name))
-
-
-@contextlib.contextmanager
-def atomic_write(path: epath.PathLike, mode: str):
-  """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_path = _tmp_file_name(path)
-  with tmp_path.open(mode=mode) as file_:
-    yield file_
-  tmp_path.replace(path)
 
 
 def reraise(

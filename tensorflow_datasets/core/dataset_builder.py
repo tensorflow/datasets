@@ -778,17 +778,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       self.info.update_data_dir(self.data_dir)
 
     # Clean up incomplete files from preempted workers.
-    deleted_incomplete_files = []
-    for f in self.data_path.glob(f"*{constants.INCOMPLETE_PREFIX}*"):
-      if utils.is_incomplete_file(f):
-        deleted_incomplete_files.append(os.fspath(f))
-        f.unlink()
-    if deleted_incomplete_files:
-      logging.info(
-          "Deleted %d incomplete files. A small selection: %s",
-          len(deleted_incomplete_files),
-          "\n".join(deleted_incomplete_files[:3]),
-      )
+    file_utils.clean_up_incomplete_files(self.data_path)
 
     self._log_download_done()
 

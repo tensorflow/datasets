@@ -27,6 +27,7 @@ import random
 import re
 import string
 import time
+import uuid
 
 from absl import logging
 from etils import epath
@@ -113,6 +114,94 @@ def _get_incomplete_dir(dir_name: str) -> str:
   )
   dir_name = Path(dir_name)
   return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
+
+
+def _tmp_file_prefix() -> str:
+  return f'{constants.INCOMPLETE_PREFIX}{uuid.uuid4().hex}'
+
+
+def _tmp_file_name(
+    path: epath.PathLike,
+    subfolder: str | None = None,
+) -> epath.Path:
+  """Returns the temporary file name for the given path.
+
+  Args:
+    path: The path to the file.
+    subfolder: The subfolder to use. If None, then the parent of the path will
+      be used.
+  """
+  path = epath.Path(path)
+  file_name = f'{_tmp_file_prefix()}.{path.name}'
+  if subfolder:
+    return path.parent / subfolder / file_name
+  else:
+    return path.parent / file_name
+
+
+@contextlib.contextmanager
+def atomic_write(path: epath.PathLike, mode: str):
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = _tmp_file_name(path)
+  with tmp_path.open(mode=mode) as file_:
+    yield file_
+  tmp_path.replace(path)
+
+
+def is_incomplete_file(path: epath.Path) -> bool:
+  """Returns whether the given filename suggests that it's incomplete."""
+  regex = rf'{re.escape(constants.INCOMPLETE_PREFIX)}[0-9a-fA-F]{{32}}\..+'
+  return bool(re.search(rf'^{regex}$', path.name))
+
+
+@contextlib.contextmanager
+def incomplete_file(
+    path: epath.Path,
+    subfolder: str | None = None,
+) -> Iterator[epath.Path]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_path = _tmp_file_name(path, subfolder=subfolder)
+  tmp_path.parent.mkdir(exist_ok=True)
+  try:
+    yield tmp_path
+    tmp_path.replace(path)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    tmp_path.unlink(missing_ok=True)
+
+
+@contextlib.contextmanager
+def incomplete_files(
+    path: epath.Path,
+) -> Iterator[epath.Path]:
+  """Writes to path atomically, by writing to temp file and renaming it."""
+  tmp_file_prefix = _tmp_file_prefix()
+  tmp_path = path.parent / f'{tmp_file_prefix}.{path.name}'
+  try:
+    yield tmp_path
+    # Rename all tmp files to their final name.
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      file_name = tmp_file.name.removeprefix(tmp_file_prefix + '.')
+      tmp_file.replace(path.parent / file_name)
+  finally:
+    # Eventually delete the tmp_path if exception was raised
+    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+      tmp_file.unlink(missing_ok=True)
+
+
+def clean_up_incomplete_files(path: epath.Path) -> None:
+  """Deletes all incomplete files in the given path."""
+  deleted_incomplete_files = []
+  for f in path.glob(f'*{constants.INCOMPLETE_PREFIX}*'):
+    if is_incomplete_file(f):
+      deleted_incomplete_files.append(os.fspath(f))
+      f.unlink()
+  if deleted_incomplete_files:
+    logging.info(
+        'Deleted %d incomplete files. A small selection: %s',
+        len(deleted_incomplete_files),
+        '\n'.join(deleted_incomplete_files[:3]),
+    )
 
 
 @contextlib.contextmanager

@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import os
+import pathlib
 import time
 from unittest import mock
 
@@ -35,6 +36,41 @@ _VERSION = '1.0.0'
 def test_default_data_dir():
   data_dir = constants.get_default_data_dir()
   assert data_dir
+
+
+@pytest.mark.parametrize(
+    ['path', 'subfolder', 'expected'],
+    [
+        ('/a/file.ext', None, '/a/foobar.file.ext'),
+        ('/a/file.ext', 'sub', '/a/sub/foobar.file.ext'),
+    ],
+)
+def test_tmp_file_name(path, subfolder, expected):
+  with mock.patch.object(file_utils, '_tmp_file_prefix', return_value='foobar'):
+    assert os.fspath(file_utils._tmp_file_name(path, subfolder)) == expected
+
+
+def test_incomplete_file(tmp_path: pathlib.Path):
+  tmp_path = epath.Path(tmp_path)
+  filepath = tmp_path / 'test.txt'
+  with file_utils.incomplete_file(filepath) as tmp_filepath:
+    tmp_filepath.write_text('content')
+    assert not filepath.exists()
+  assert filepath.read_text() == 'content'
+  assert not tmp_filepath.exists()  # Tmp file is deleted
+
+
+@pytest.mark.parametrize(
+    ['path', 'is_incomplete'],
+    [
+        ('/a/incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.bcd', True),
+        ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
+        ('/a/prefix.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', False),
+        ('/a/incomplete.a8c53d7beff74beb3.bcd', False),
+    ],
+)
+def test_is_incomplete_file(path: str, is_incomplete: bool):
+  assert file_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
 
 
 def _create_dataset_dir(

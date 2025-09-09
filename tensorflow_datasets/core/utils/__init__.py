@@ -17,7 +17,11 @@
 
 from tensorflow_datasets.core.units import Size
 from tensorflow_datasets.core.utils import docs
+from tensorflow_datasets.core.utils.file_utils import atomic_write
 from tensorflow_datasets.core.utils.file_utils import incomplete_dir
+from tensorflow_datasets.core.utils.file_utils import incomplete_file
+from tensorflow_datasets.core.utils.file_utils import incomplete_files
+from tensorflow_datasets.core.utils.file_utils import is_incomplete_file
 from tensorflow_datasets.core.utils.gcs_utils import gcs_path
 from tensorflow_datasets.core.utils.image_utils import apply_colormap
 from tensorflow_datasets.core.utils.image_utils import create_thumbnail
@@ -29,7 +33,6 @@ from tensorflow_datasets.core.utils.image_utils import PilImage
 from tensorflow_datasets.core.utils.image_utils import png_to_jpeg
 from tensorflow_datasets.core.utils.image_utils import THUMBNAIL_SIZE
 from tensorflow_datasets.core.utils.py_utils import add_sys_path
-from tensorflow_datasets.core.utils.py_utils import atomic_write
 from tensorflow_datasets.core.utils.py_utils import build_synchronize_decorator
 from tensorflow_datasets.core.utils.py_utils import classproperty
 from tensorflow_datasets.core.utils.py_utils import dedent
@@ -40,10 +43,7 @@ from tensorflow_datasets.core.utils.py_utils import get_base64
 from tensorflow_datasets.core.utils.py_utils import get_class_path
 from tensorflow_datasets.core.utils.py_utils import get_class_url
 from tensorflow_datasets.core.utils.py_utils import has_sufficient_disk_space
-from tensorflow_datasets.core.utils.py_utils import incomplete_file
-from tensorflow_datasets.core.utils.py_utils import incomplete_files
 from tensorflow_datasets.core.utils.py_utils import indent
-from tensorflow_datasets.core.utils.py_utils import is_incomplete_file
 from tensorflow_datasets.core.utils.py_utils import is_notebook
 from tensorflow_datasets.core.utils.py_utils import list_info_files
 from tensorflow_datasets.core.utils.py_utils import map_nested

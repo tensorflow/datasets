@@ -16,9 +16,7 @@
 import collections
 import os
 import pathlib
-from unittest import mock
 
-from etils import epath
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -337,29 +335,6 @@ def test_flatten_with_path():
   )
 
 
-def test_incomplete_file(tmp_path: pathlib.Path):
-  tmp_path = epath.Path(tmp_path)
-  filepath = tmp_path / 'test.txt'
-  with py_utils.incomplete_file(filepath) as tmp_filepath:
-    tmp_filepath.write_text('content')
-    assert not filepath.exists()
-  assert filepath.read_text() == 'content'
-  assert not tmp_filepath.exists()  # Tmp file is deleted
-
-
-@pytest.mark.parametrize(
-    ['path', 'is_incomplete'],
-    [
-        ('/a/incomplete.a8c53d7beff74b2eb31b9b86c7d046cf.bcd', True),
-        ('/a/incomplete-dataset.tfrecord-00000-of-00100', False),
-        ('/a/prefix.incomplete.a8c53d7beff74b2eb31b9b86c7d046cf', False),
-        ('/a/incomplete.a8c53d7beff74beb3.bcd', False),
-    ],
-)
-def test_is_incomplete_file(path: str, is_incomplete: bool):
-  assert py_utils.is_incomplete_file(epath.Path(path)) == is_incomplete
-
-
 @pytest.mark.parametrize(
     ['name', 'expected'],
     [
@@ -370,18 +345,6 @@ def test_is_incomplete_file(path: str, is_incomplete: bool):
 )
 def test_make_valid_name(name: str, expected: str):
   assert py_utils.make_valid_name(name) == expected
-
-
-@pytest.mark.parametrize(
-    ['path', 'subfolder', 'expected'],
-    [
-        ('/a/file.ext', None, '/a/foobar.file.ext'),
-        ('/a/file.ext', 'sub', '/a/sub/foobar.file.ext'),
-    ],
-)
-def test_tmp_file_name(path, subfolder, expected):
-  with mock.patch.object(py_utils, '_tmp_file_prefix', return_value='foobar'):
-    assert os.fspath(py_utils._tmp_file_name(path, subfolder)) == expected
 
 
 if __name__ == '__main__':
