@@ -1154,7 +1154,7 @@ lsun/sofa/3.1.0
 lsun/tower/3.1.0
 lsun/train/3.1.0
 lsun/tv-monitor/3.1.0
-lvis/1.3.0
+lvis/1.4.0
 malaria/1.0.0
 maniskill_dataset_converted_externally_to_rlds/0.1.0
 math_dataset/algebra__linear_1d/1.0.0
