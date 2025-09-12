@@ -572,12 +572,14 @@ class BeamWriter:
     shard_path = self._filename_template.sharded_filepath(
         shard_index=shard_id, num_shards=len(non_empty_shard_ids)
     )
-    with utils.incomplete_files(epath.Path(shard_path)) as tmp_path:
+    with utils.incomplete_files(shard_path, subfolder="tmp") as tmp_shard_path:
       logging.info(
-          "Writing %d examples to %s.", len(example_by_key), os.fspath(tmp_path)
+          "Writing %d examples to %s.",
+          len(example_by_key),
+          os.fspath(tmp_shard_path),
       )
       record_keys = self._example_writer.write(
-          tmp_path, sorted(example_by_key.items())
+          tmp_shard_path, sorted(example_by_key.items())
       )
     self.inc_counter(name="written_shards")
     # If there are record_keys, create index files.
