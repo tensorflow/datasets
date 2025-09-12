@@ -425,7 +425,10 @@ class DatasetBuilderTestCase(
         f"Some urls checksums are missing at: {filepath}\n{err_msg}",
     )
 
-  def _download_and_prepare_as_dataset(self, builder):
+  def _download_and_prepare_as_dataset(
+      self,
+      builder,
+  ):
     # Provide the manual dir only if builder has MANUAL_DOWNLOAD_INSTRUCTIONS
     # set.
 
@@ -461,7 +464,9 @@ class DatasetBuilderTestCase(
           beam_runner=beam_runner,
       )
       with self._test_key_not_local_path(builder):
-        builder.download_and_prepare(download_config=download_config)
+        builder.download_and_prepare(
+            download_config=download_config,
+        )
 
     with self._subTest("as_dataset"):
       self._assertAsDataset(builder)
