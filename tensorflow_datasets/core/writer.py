@@ -36,6 +36,7 @@ with epy.lazy_imports():
   from etils import epath
   from tensorflow_datasets.core import example_parser
   from tensorflow_datasets.core import example_serializer
+  from tensorflow_datasets.core import features as features_lib
   from tensorflow_datasets.core import file_adapters
   from tensorflow_datasets.core import hashing
   from tensorflow_datasets.core import naming
@@ -264,17 +265,26 @@ class ShardWriter:
 
   def __init__(
       self,
+      features: features_lib.FeatureConnector,
       serializer: example_serializer.Serializer,
       example_writer: ExampleWriter,
   ):
     """Initializes Writer.
 
     Args:
+      features: the features of the dataset.
       serializer: class that can serialize examples.
       example_writer: class that writes examples to disk or elsewhere.
     """
+    self._features = features
     self._serializer = serializer
     self._example_writer = example_writer
+
+  def _serialize_example(self, example: Example) -> Any:
+    """Encodes and serializes an example."""
+    return self._serializer.serialize_example(
+        self._features.encode_example(example)
+    )
 
   def write(
       self,
@@ -282,9 +292,7 @@ class ShardWriter:
       path: epath.Path,
   ) -> int:
     """Returns the number of examples written to the given path."""
-    serialized_examples = [
-        (k, self._serializer.serialize_example(v)) for k, v in examples
-    ]
+    serialized_examples = [(k, self._serialize_example(v)) for k, v in examples]
     self._example_writer.write(path=path, examples=serialized_examples)
 
     return len(serialized_examples)

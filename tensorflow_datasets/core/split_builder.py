@@ -184,6 +184,7 @@ class SplitBuilder:
     serializer = example_serializer.ExampleSerializer(serialized_info)
 
     shard_writer = writer_lib.ShardWriter(
+        features=self._features,
         serializer=serializer,
         example_writer=self._example_writer,
     )

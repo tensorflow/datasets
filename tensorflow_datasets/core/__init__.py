@@ -23,6 +23,7 @@ from tensorflow_datasets.core.dataset_builder import BeamBasedBuilder
 from tensorflow_datasets.core.dataset_builder import BuilderConfig
 from tensorflow_datasets.core.dataset_builder import DatasetBuilder
 from tensorflow_datasets.core.dataset_builder import GeneratorBasedBuilder
+from tensorflow_datasets.core.dataset_builder import ShardBasedBuilder
 from tensorflow_datasets.core.dataset_info import BeamMetadataDict
 from tensorflow_datasets.core.dataset_info import DatasetIdentity
 from tensorflow_datasets.core.dataset_info import DatasetInfo
