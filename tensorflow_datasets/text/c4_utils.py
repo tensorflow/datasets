@@ -240,11 +240,20 @@ def clean_page(
         return True
     return False
 
+  def line_has_truncated_word(line):
+    for word in line.split():
+      if word.endswith("-"):
+        return True
+    return False
+
   for line in lines:
     line = line.strip()
     if line_has_too_long_word(line):
       counter_inc_fn("line-filtered:too_long_word")
       continue
+    if line_has_truncated_word(line):
+      counter_inc_fn("filtered:truncated_word")
+      return
     line = citation_regex.sub("", line)
     if not line.endswith(_END_MARKS) or line.endswith(_ELLIPSIS):
       counter_inc_fn("line-filtered:no_endmark")

@@ -189,6 +189,29 @@ This line should be okay."""
     self.assertEqual(expected_clean_text, out.text)
     self.assertEqual(expected_counters, dict(counters))
 
+  def test_clean_page_truncated_word(self):
+    text_with_truncated_word = """This line looks normal and fine.
+But this line has a problematic trunc- word.
+This line is also fine and should pass.
+"""
+    clean_page, counters = self.run_clean_page(
+        PageFeatures(
+            text=text_with_truncated_word,
+            content_type=FAKE_CONTENT_TYPE,
+            content_length=FAKE_CONTENT_LENGTH,
+            timestamp=FAKE_TIMESTAMP,
+        )
+    )
+    self.assertIsNone(clean_page)
+    self.assertEqual(
+        {
+            "line-passed": 1,  # The first line passes
+            "filtered:truncated_word": 1,  # The second line triggers filter
+            # The third line is never reached because the function returns.
+        },
+        dict(counters),
+    )
+
   def test_remove_duplicate_text(self):
     import apache_beam.testing.util as beam_testing_util  # pylint:disable=g-import-not-at-top
 
