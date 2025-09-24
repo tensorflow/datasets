@@ -21,3 +21,7 @@ from tensorflow_datasets.robotics.asimov.asimov import AsimovDilemmasScifiVal
 from tensorflow_datasets.robotics.asimov.asimov import AsimovInjuryVal
 from tensorflow_datasets.robotics.asimov.asimov import AsimovMultimodalAutoVal
 from tensorflow_datasets.robotics.asimov.asimov import AsimovMultimodalManualVal
+from tensorflow_datasets.robotics.asimov.asimov_v2 import AsimovV2ConstraintsWithoutRationale
+from tensorflow_datasets.robotics.asimov.asimov_v2 import AsimovV2ConstraintsWithRationale
+from tensorflow_datasets.robotics.asimov.asimov_v2 import AsimovV2Injuries
+from tensorflow_datasets.robotics.asimov.asimov_v2 import AsimovV2Videos
