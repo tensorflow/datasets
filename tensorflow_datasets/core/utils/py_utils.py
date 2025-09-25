@@ -312,7 +312,7 @@ def _tmp_file_name(
     path: epath.PathLike,
     subfolder: str | None = None,
 ) -> epath.Path:
-  """Returns the temporary file name for the given path.
+  """Returns the temporary file path dependent on the given path and subfolder.
 
   Args:
     path: The path to the file.
@@ -322,9 +322,12 @@ def _tmp_file_name(
   path = epath.Path(path)
   file_name = f'{_tmp_file_prefix()}.{path.name}'
   if subfolder:
-    return path.parent / subfolder / file_name
+    tmp_path = path.parent / subfolder / file_name
   else:
-    return path.parent / file_name
+    tmp_path = path.parent / file_name
+  # Create the parent directory if it doesn't exist.
+  tmp_path.parent.mkdir(parents=True, exist_ok=True)
+  return tmp_path
 
 
 @contextlib.contextmanager
@@ -334,7 +337,6 @@ def incomplete_file(
 ) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
   tmp_path = _tmp_file_name(path, subfolder=subfolder)
-  tmp_path.parent.mkdir(exist_ok=True)
   try:
     yield tmp_path
     tmp_path.replace(path)
@@ -346,20 +348,24 @@ def incomplete_file(
 @contextlib.contextmanager
 def incomplete_files(
     path: epath.Path,
+    subfolder: str | None = None,
 ) -> Iterator[epath.Path]:
   """Writes to path atomically, by writing to temp file and renaming it."""
-  tmp_file_prefix = _tmp_file_prefix()
-  tmp_path = path.parent / f'{tmp_file_prefix}.{path.name}'
+  tmp_path = _tmp_file_name(path, subfolder=subfolder)
+  tmp_file_prefix = tmp_path.name.removesuffix(f'.{path.name}')
   try:
     yield tmp_path
     # Rename all tmp files to their final name.
-    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
+    for tmp_file in tmp_path.parent.glob(f'{tmp_file_prefix}.*'):
       file_name = tmp_file.name.removeprefix(tmp_file_prefix + '.')
       tmp_file.replace(path.parent / file_name)
   finally:
     # Eventually delete the tmp_path if exception was raised
-    for tmp_file in path.parent.glob(f'{tmp_file_prefix}.*'):
-      tmp_file.unlink(missing_ok=True)
+    if subfolder:
+      tmp_path.parent.unlink(missing_ok=True)
+    else:
+      for tmp_file in tmp_path.parent.glob(f'{tmp_file_prefix}.*'):
+        tmp_file.unlink(missing_ok=True)
 
 
 def is_incomplete_file(path: epath.Path) -> bool:

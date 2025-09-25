@@ -373,15 +373,23 @@ def test_make_valid_name(name: str, expected: str):
 
 
 @pytest.mark.parametrize(
-    ['path', 'subfolder', 'expected'],
+    ['file_name', 'subfolder', 'expected_tmp_file_name'],
     [
-        ('/a/file.ext', None, '/a/foobar.file.ext'),
-        ('/a/file.ext', 'sub', '/a/sub/foobar.file.ext'),
+        ('file.ext', None, 'foobar.file.ext'),
+        ('file.ext', 'sub', 'sub/foobar.file.ext'),
     ],
 )
-def test_tmp_file_name(path, subfolder, expected):
+def test_tmp_file_name(
+    tmp_path: pathlib.Path,
+    file_name: str,
+    subfolder: str | None,
+    expected_tmp_file_name: str,
+):
   with mock.patch.object(py_utils, '_tmp_file_prefix', return_value='foobar'):
-    assert os.fspath(py_utils._tmp_file_name(path, subfolder)) == expected
+    assert (
+        py_utils._tmp_file_name(tmp_path / file_name, subfolder)
+        == tmp_path / expected_tmp_file_name
+    )
 
 
 if __name__ == '__main__':
