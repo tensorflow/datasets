@@ -160,6 +160,20 @@ class DatasetInfo:
   def __init__(self, **kwargs):  # pylint: disable=redefined-builtin
     self.kwargs = kwargs
 
+class Array2D:
+    """This is a dummy class to be used in the HF wrapper to map the HF function.
+
+    It raises a custom error for the user whenever `Array2D` is used and also,
+    prompts the user to check TFDS datasets if the dataset is available locally
+    """
+
+    def __init__(self, **args):
+        """ Raise an error message whenever `Array2D()` is called. """
+        #Raising custom error message
+        exception_msg = "Array2D not supported in TFDS"
+        suffix = """ \nYou can have a look at TFDS datasets if the dataset is available locally.
+        """
+        raise AttributeError(f'{exception_msg}{suffix}')
 
 # Wrapper around the tfds.features
 
@@ -272,6 +286,7 @@ class _MockedHFDatasets(types.ModuleType):
     ClassLabel = features.ClassLabel
     Value = Value
     Translation = features.Translation
+    Array2D = Array2D
 
   class info(types.ModuleType):
     """`datasets.info` module."""
