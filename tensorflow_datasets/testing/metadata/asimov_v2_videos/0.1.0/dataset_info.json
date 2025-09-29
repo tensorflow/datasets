@@ -1,0 +1,32 @@
+{
+  "description": "Photorealistic videos involving potential physical injury scenarios.",
+  "fileFormat": "array_record",
+  "location": {
+    "urls": [
+      "https://asimov-benchmark.github.io/v2/"
+    ]
+  },
+  "moduleName": "tensorflow_datasets.robotics.asimov.asimov_v2",
+  "name": "asimov_v2_videos",
+  "releaseNotes": {
+    "0.1.0": "Initial release."
+  },
+  "splits": [
+    {
+      "filepathTemplate": "{DATASET}-{SPLIT}.{FILEFORMAT}-{SHARD_X_OF_Y}",
+      "name": "val",
+      "numBytes": "678847860",
+      "shardLengths": [
+        "37",
+        "36",
+        "36",
+        "41",
+        "34",
+        "29",
+        "38",
+        "36"
+      ]
+    }
+  ],
+  "version": "0.1.0"
+}
