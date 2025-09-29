@@ -1054,6 +1054,18 @@ toc:
     title: asimov_multimodal_auto_val
   - path: /datasets/catalog/asimov_multimodal_manual_val
     title: asimov_multimodal_manual_val
+  - path: /datasets/catalog/asimov_v2_constraints_with_rationale
+    status: nightly
+    title: asimov_v2_constraints_with_rationale
+  - path: /datasets/catalog/asimov_v2_constraints_without_rationale
+    status: nightly
+    title: asimov_v2_constraints_without_rationale
+  - path: /datasets/catalog/asimov_v2_injuries
+    status: nightly
+    title: asimov_v2_injuries
+  - path: /datasets/catalog/asimov_v2_videos
+    status: nightly
+    title: asimov_v2_videos
   - path: /datasets/catalog/asu_table_top_converted_externally_to_rlds
     title: asu_table_top_converted_externally_to_rlds
   - path: /datasets/catalog/austin_buds_dataset_converted_externally_to_rlds

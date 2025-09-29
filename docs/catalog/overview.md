@@ -667,6 +667,14 @@ for ex in tfds.load('cifar10', split='train'):
 *   [`asimov_injury_val`](asimov_injury_val.md)
 *   [`asimov_multimodal_auto_val`](asimov_multimodal_auto_val.md)
 *   [`asimov_multimodal_manual_val`](asimov_multimodal_manual_val.md)
+*   [`asimov_v2_constraints_with_rationale`](asimov_v2_constraints_with_rationale.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`asimov_v2_constraints_without_rationale`](asimov_v2_constraints_without_rationale.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`asimov_v2_injuries`](asimov_v2_injuries.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
+*   [`asimov_v2_videos`](asimov_v2_videos.md)
+    <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
 *   [`asu_table_top_converted_externally_to_rlds`](asu_table_top_converted_externally_to_rlds.md)
 *   [`austin_buds_dataset_converted_externally_to_rlds`](austin_buds_dataset_converted_externally_to_rlds.md)
 *   [`austin_sailor_dataset_converted_externally_to_rlds`](austin_sailor_dataset_converted_externally_to_rlds.md)
