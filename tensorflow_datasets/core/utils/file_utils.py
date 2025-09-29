@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import collections
-from collections.abc import Iterator, Sequence
+from collections.abc import Iterable, Iterator, Sequence
 import contextlib
 import dataclasses
 import functools

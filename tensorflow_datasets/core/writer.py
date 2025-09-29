@@ -18,7 +18,6 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Sequence
-import concurrent.futures
 import dataclasses
 import functools
 import itertools
@@ -822,23 +821,11 @@ class NoShuffleBeamWriter:
       in each shard, and size of the files (in bytes).
     """
     logging.info("Finalizing writer for %s", self._filename_template.split)
-    # We don't know the number of shards, the length of each shard, nor the
-    # total size, so we compute them here.
-    shards = self._filename_template.data_dir.glob(
-        self._filename_template.glob_pattern()
+    shard_lengths_and_sizes = self._file_adapter.shard_lengths_and_sizes(
+        self._filename_template, num_shards=self._num_shards
     )
-
-    def _get_length_and_size(shard: epath.Path) -> tuple[epath.Path, int, int]:
-      length = self._file_adapter.num_examples(shard)
-      size = shard.stat().length
-      return shard, length, size
-
-    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
-      shard_sizes = executor.map(_get_length_and_size, shards)
-
-    shard_sizes = sorted(shard_sizes, key=lambda x: x[0])
-    shard_lengths: list[int] = [x[1] for x in shard_sizes]
-    total_size_bytes: int = sum([x[2] for x in shard_sizes])
+    shard_lengths = [length for length, _ in shard_lengths_and_sizes]
+    total_size_bytes = sum(size for _, size in shard_lengths_and_sizes)
 
     logging.info(
         "Found %d shards with a total size of %d bytes.",

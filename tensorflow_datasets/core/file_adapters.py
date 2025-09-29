@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import abc
 from collections.abc import Iterable, Iterator
+import concurrent.futures
 import enum
 import itertools
 import os
@@ -186,6 +187,31 @@ class FileAdapter(abc.ABC):
     for _ in cls.make_tf_data(filename):
       n += 1
     return n
+
+  @classmethod
+  def shard_lengths_and_sizes(
+      cls,
+      filename_template: naming.ShardedFileTemplate,
+      num_shards: int | None = None,
+  ) -> list[tuple[int, int]]:
+    """Returns the number of examples in each shard."""
+    if num_shards is not None:
+      shards = filename_template.sharded_filepaths(num_shards=num_shards)
+    else:
+      shards = filename_template.data_dir.glob(filename_template.glob_pattern())
+    shards = sorted([os.fspath(s) for s in shards])
+
+    def _get_length_and_size(shard: tuple[int, str]) -> tuple[int, int, int]:
+      index, shard = shard
+      length = cls.num_examples(shard)
+      size = epath.Path(shard).stat().length
+      return index, length, size
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=16) as executor:
+      results = executor.map(_get_length_and_size, enumerate(shards))
+    # Sort results by the index and remove the index from the tuple.
+    sorted_results = sorted(results, key=lambda x: x[0])
+    return [(length, size) for _, length, size in sorted_results]
 
 
 class TfRecordFileAdapter(FileAdapter):
