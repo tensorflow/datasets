@@ -212,6 +212,7 @@ def test_get_split_recordset():
               mlc.Field(
                   id='records/split',
                   data_types=[mlc.DataType.TEXT],
+                  source=mlc.Source(field='splits/name'),
                   references=mlc.Source(field='splits/name'),
               )
           ],
@@ -258,6 +259,7 @@ def test_get_split_recordset_with_no_split_recordset():
               mlc.Field(
                   id='samples/label',
                   data_types=mlc.DataType.TEXT,
+                  source=mlc.Source(field='labels/label'),
                   references=mlc.Source(field='labels/label'),
               )
           ],
