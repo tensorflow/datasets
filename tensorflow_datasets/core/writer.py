@@ -810,7 +810,7 @@ class NoShuffleBeamWriter:
           self._num_shards
       )
     return serialized_examples | "Write" >> self._file_adapter.beam_sink(
-        filename_template=self._filename_template
+        filename_template=self._filename_template, num_shards=self._num_shards
     )
 
   def finalize(self) -> tuple[list[int], int]:
