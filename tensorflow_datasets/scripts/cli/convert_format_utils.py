@@ -42,7 +42,6 @@ with epy.lazy_imports():
   from tensorflow_datasets.core import splits as splits_lib
   from tensorflow_datasets.core.proto import dataset_info_pb2
   from tensorflow_datasets.core.utils import file_utils
-  from tensorflow_datasets.core.utils import py_utils
   from tensorflow_datasets.core.utils import type_utils
 
   # pylint: enable=g-import-not-at-top
@@ -131,7 +130,7 @@ class ShardInstruction:
           yield i, row.numpy()
 
     try:
-      with py_utils.incomplete_file(self.out_path) as tmp_file:
+      with file_utils.incomplete_file(self.out_path) as tmp_file:
         self.config.out_file_adapter.write_examples(
             path=tmp_file, iterator=read_in()
         )
@@ -476,7 +475,7 @@ def _convert_dataset(
 def _remove_incomplete_files(path: epath.Path) -> None:
   num_incomplete_files = 0
   for incomplete_file in path.glob(f'*{constants.INCOMPLETE_PREFIX}*'):
-    if py_utils.is_incomplete_file(incomplete_file):
+    if file_utils.is_incomplete_file(incomplete_file):
       incomplete_file.unlink()
       num_incomplete_files += 1
   logging.info('Removed %d incomplete files.', num_incomplete_files)
