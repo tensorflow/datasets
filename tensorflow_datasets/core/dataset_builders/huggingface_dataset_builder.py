@@ -406,6 +406,7 @@ class HuggingfaceDatasetBuilder(
     # HF split size is good enough for estimating the number of shards.
     num_shards = shard_utils.ShardConfig.calculate_number_shards(
         total_size=hf_split_info.num_bytes,
+        max_example_size=None,
         num_examples=hf_split_info.num_examples,
         uses_precise_sharding=False,
     )

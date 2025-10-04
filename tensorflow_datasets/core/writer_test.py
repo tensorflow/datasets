@@ -48,6 +48,7 @@ class GetShardSpecsTest(testing.TestCase):
             filetype_suffix='tfrecord',
         ),
         shard_config=shard_utils.ShardConfig(num_shards=6),
+        max_example_size=2,
     )
     self.assertEqual(
         specs,
@@ -134,6 +135,7 @@ class GetShardSpecsTest(testing.TestCase):
             filetype_suffix='tfrecord',
         ),
         shard_config=shard_utils.ShardConfig(num_shards=2),
+        max_example_size=2,
     )
     self.assertEqual(
         specs,
