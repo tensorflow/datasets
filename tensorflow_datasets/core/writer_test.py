@@ -32,6 +32,9 @@ from tensorflow_datasets.core import writer as writer_lib
 from tensorflow_datasets.core.utils import shard_utils
 
 
+FileFormat = file_adapters.FileFormat
+
+
 class GetShardSpecsTest(testing.TestCase):
   # Here we don't need to test all possible reading configs, as this is tested
   # by shard_utils.py.
@@ -586,35 +589,44 @@ class TfrecordsWriterBeamTest(testing.TestCase):
 class NoShuffleBeamWriterTest(parameterized.TestCase):
 
   @parameterized.named_parameters(
-      ('tfrecord', file_adapters.FileFormat.TFRECORD),
+      ('tfrecord', FileFormat.TFRECORD, 10, None),
+      ('tfrecord_1shard', FileFormat.TFRECORD, 10, 1),
+      ('tfrecord_2shards', FileFormat.TFRECORD, 10, 2),
+      ('tfrecord_more_shards_than_examples', FileFormat.TFRECORD, 10, 20),
   )
-  def test_write_beam(self, file_format: file_adapters.FileFormat):
+  def test_write_beam(
+      self,
+      file_format: FileFormat,
+      num_examples: int,
+      num_shards: int | None,
+  ):
 
     with tempfile.TemporaryDirectory() as tmp_dir:
       tmp_dir = epath.Path(tmp_dir)
+      splits = ['train-b', 'train']
+      filename_template = naming.ShardedFileTemplate(
+          dataset_name='foo',
+          filetype_suffix=file_format.file_suffix,
+          data_dir=tmp_dir,
+      )
 
       def get_writer(split):
-        filename_template = naming.ShardedFileTemplate(
-            dataset_name='foo',
-            split=split,
-            filetype_suffix=file_format.file_suffix,
-            data_dir=tmp_dir,
-        )
         return writer_lib.NoShuffleBeamWriter(
             serializer=testing.DummySerializer('dummy specs'),
-            filename_template=filename_template,
+            filename_template=filename_template.replace(split=split),
             file_format=file_format,
+            num_shards=num_shards,
         )
 
-      to_write = [(i, str(i).encode('utf-8')) for i in range(10)]
+      to_write = [(i, str(i).encode('utf-8')) for i in range(num_examples)]
       # Here we need to disable type check as `beam.Create` is not capable of
       # inferring the type of the PCollection elements.
       options = beam.options.pipeline_options.PipelineOptions(
           pipeline_type_check=False
       )
-      writers = [get_writer(split) for split in ('train-b', 'train')]
+      writers = {split: get_writer(split) for split in splits}
 
-      for writer in writers:
+      for writer in writers.values():
         with beam.Pipeline(options=options, runner=_get_runner()) as pipeline:
 
           @beam.ptransform_fn
@@ -624,21 +636,35 @@ class NoShuffleBeamWriterTest(parameterized.TestCase):
 
           _ = pipeline | 'test' >> _build_pcollection(writer)
 
-      files = list(tmp_dir.iterdir())
-      self.assertGreaterEqual(len(files), 2)
-      for f in files:
-        self.assertIn(file_format.file_suffix, f.name)
-      for writer in writers:
+      # Check all writers have the correct shard lengths and total size.
+      for split, writer in writers.items():
         shard_lengths, total_size = writer.finalize()
+        files = sorted([f.name for f in tmp_dir.iterdir()])
+
+        actual_num_shards = len(shard_lengths)
         self.assertNotEmpty(shard_lengths)
-        self.assertEqual(sum(shard_lengths), 10)
-        self.assertGreater(total_size, 10)
+        if num_shards is not None:
+          self.assertLessEqual(actual_num_shards, num_shards)
+
+        self.assertEqual(sum(shard_lengths), num_examples)
+        self.assertGreater(total_size, num_examples)
+
+        # Make sure that no shard is empty.
+        self.assertNotIn(0, shard_lengths)
+
+        # Make sure that all shards are present.
+        template = filename_template.replace(split=split)
+        shard_paths = [
+            f.name
+            for f in template.sharded_filepaths(num_shards=actual_num_shards)
+        ]
+        self.assertContainsSubset(shard_paths, files)
 
 
 class CustomExampleWriter(writer_lib.ExampleWriter):
 
   def __init__(self):
-    super().__init__(file_adapters.FileFormat.TFRECORD)
+    super().__init__(FileFormat.TFRECORD)
     self.num_examples_written = 0
 
   def write(self, path, examples) -> file_adapters.ExamplePositions | None:
@@ -650,10 +676,10 @@ class ExampleWriterTest(parameterized.TestCase):
 
   def test_multi_output_example_writer(self):
     tfrecord_writer = mock.create_autospec(writer_lib.ExampleWriter)
-    tfrecord_writer.file_format = file_adapters.FileFormat.TFRECORD
+    tfrecord_writer.file_format = FileFormat.TFRECORD
 
     riegeli_writer = mock.create_autospec(writer_lib.ExampleWriter)
-    riegeli_writer.file_format = file_adapters.FileFormat.RIEGELI
+    riegeli_writer.file_format = FileFormat.RIEGELI
 
     path = '/tmp/dataset-train.tfrecord-00000-of-00001'
     iterator = [

@@ -805,10 +805,6 @@ class NoShuffleBeamWriter:
         | "Shuffle" >> beam.Reshuffle()
         | "Serialize" >> beam.Map(self._serialize_example)
     )
-    if self._num_shards is not None:
-      serialized_examples = serialized_examples | "Reshard" >> beam.Reshuffle(
-          self._num_shards
-      )
     return serialized_examples | "Write" >> self._file_adapter.beam_sink(
         filename_template=self._filename_template, num_shards=self._num_shards
     )
@@ -833,4 +829,31 @@ class NoShuffleBeamWriter:
         total_size_bytes,
     )
 
-    return shard_lengths, total_size_bytes
+    # Empty shards may be produced by Beam. We delete them and rename the
+    # non-empty shards accordingly.
+    all_shard_paths = self._filename_template.sharded_filepaths(
+        len(shard_lengths)
+    )
+    non_empty_shards: list[epath.Path] = []
+    non_empty_shard_lengths: list[int] = []
+    empty_shards: list[epath.Path] = []
+    for length, shard_path in zip(shard_lengths, all_shard_paths):
+      if length > 0:
+        non_empty_shard_lengths.append(length)
+        non_empty_shards.append(shard_path)
+      else:
+        empty_shards.append(shard_path)
+
+    non_empty_shard_paths = self._filename_template.sharded_filepaths(
+        len(non_empty_shards)
+    )
+    if empty_shards:
+      old_paths: list[epath.Path] = []
+      new_paths: list[epath.Path] = []
+      for orig_path, new_path in zip(non_empty_shards, non_empty_shard_paths):
+        old_paths.append(orig_path)
+        new_paths.append(new_path)
+      file_utils.bulk_delete(empty_shards)
+      file_utils.bulk_rename(old_paths=old_paths, new_paths=new_paths)
+
+    return non_empty_shard_lengths, total_size_bytes

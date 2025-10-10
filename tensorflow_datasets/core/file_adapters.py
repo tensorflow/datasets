@@ -259,7 +259,10 @@ class TfRecordFileAdapter(FileAdapter):
   ) -> beam.PTransform:
     """Returns a Beam sink for writing examples in the given file format."""
     file_path_prefix = filename_template.sharded_filepaths_pattern(
-        num_shards=num_shards, use_at_notation=True
+        # num_shards cannot be both in the path and passed as an argument, so
+        # make sure it's not in the path.
+        num_shards=None,
+        use_at_notation=True,
     ).removesuffix('@*')
     return beam.io.WriteToTFRecord(
         file_path_prefix=file_path_prefix, num_shards=num_shards

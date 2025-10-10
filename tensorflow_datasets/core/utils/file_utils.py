@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import collections
 from collections.abc import Iterable, Iterator, Sequence
+import concurrent.futures  # pylint: disable=unused-import
 import contextlib
 import dataclasses
 import functools
@@ -584,3 +585,37 @@ def publish_data(
   to_data_dir.mkdir(parents=True, exist_ok=True)
   for filepath in from_data_dir.iterdir():
     filepath.copy(dst=to_data_dir / filepath.name, overwrite=overwrite)
+
+
+def bulk_rename(
+    old_paths: Sequence[epath.PathLike], new_paths: Sequence[epath.PathLike]
+) -> None:
+  """Renames a sequence of paths in bulk."""
+  if len(old_paths) != len(new_paths):
+    raise ValueError(
+        'old_paths and new_paths must have the same length, but got'
+        f' {len(old_paths)} and {len(new_paths)}'
+    )
+  for old_path, new_path in zip(old_paths, new_paths):
+    if old_path == new_path:
+      raise ValueError(
+          'old_paths and new_paths must not be the same, but got'
+          f' {old_path} and {new_path}'
+      )
+  if not old_paths:
+    return
+  def _rename(old_and_new_paths: tuple[epath.PathLike, epath.PathLike]):
+    old_path, new_path = old_and_new_paths
+    epath.Path(old_path).rename(new_path)
+  with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    executor.map(_rename, zip(old_paths, new_paths))
+
+
+def bulk_delete(paths: Sequence[epath.PathLike]) -> None:
+  """Deletes a sequence of paths in bulk."""
+  if not paths:
+    return
+  def _delete(path):
+    epath.Path(path).unlink()
+  with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    executor.map(_delete, paths)

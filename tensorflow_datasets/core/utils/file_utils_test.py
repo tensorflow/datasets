@@ -423,5 +423,43 @@ def test_publish_data(mock_fs: testing.MockFs):
   assert mock_fs.read_file(to_data_dir / filename) == content
 
 
+class BulkOperationTest(testing.TestCase):
+
+  def test_bulk_delete(self):
+    tmp_dir = epath.Path(self.tmp_dir)
+    file_1 = tmp_dir / 'a'
+    file_2 = tmp_dir / 'b'
+    file_1.touch()
+    file_2.touch()
+    file_utils.bulk_delete([file_1, file_2])
+    self.assertFalse(file_1.exists())
+    self.assertFalse(file_2.exists())
+
+  def test_bulk_rename(self):
+    tmp_dir = epath.Path(self.tmp_dir)
+    orig_files = [tmp_dir / f'src{i}' for i in range(10)]
+    dst_files = [tmp_dir / f'dst{i}' for i in range(10)]
+    for file in orig_files:
+      file.touch()
+    file_utils.bulk_rename(old_paths=orig_files, new_paths=dst_files)
+    for file in orig_files:
+      self.assertFalse(file.exists())
+    for file in dst_files:
+      self.assertTrue(file.exists())
+
+  def test_bulk_rename_with_different_number_of_files(self):
+    tmp_dir = epath.Path(self.tmp_dir)
+    orig_files = [tmp_dir / f'src{i}' for i in range(10)]
+    dst_files = [tmp_dir / f'dst{i}' for i in range(5)]
+    with self.assertRaises(ValueError):
+      file_utils.bulk_rename(old_paths=orig_files, new_paths=dst_files)
+
+  def test_bulk_rename_with_same_old_and_new_paths(self):
+    tmp_dir = epath.Path(self.tmp_dir)
+    orig_files = [tmp_dir / f'src{i}' for i in range(10)]
+    with self.assertRaises(ValueError):
+      file_utils.bulk_rename(old_paths=orig_files, new_paths=orig_files)
+
+
 if __name__ == '__main__':
   testing.test_main()
