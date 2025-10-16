@@ -291,10 +291,16 @@ class ShardWriter:
       path: epath.Path,
   ) -> int:
     """Returns the number of examples written to the given path."""
-    serialized_examples = [(k, self._serialize_example(v)) for k, v in examples]
-    self._example_writer.write(path=path, examples=serialized_examples)
+    (for_writing, for_counting) = itertools.tee(examples, 2)
 
-    return len(serialized_examples)
+    def serialize_examples() -> Iterator[type_utils.KeySerializedExample]:
+      for k, v in for_writing:
+        yield k, self._serialize_example(v)
+
+    self._example_writer.write(path=path, examples=serialize_examples())
+    num_examples = sum(1 for _ in for_counting)
+
+    return num_examples
 
   def write_with_beam(
       self,
