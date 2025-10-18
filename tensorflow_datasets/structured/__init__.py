@@ -43,3 +43,4 @@ from tensorflow_datasets.structured.wiki_bio import WikiBio
 from tensorflow_datasets.structured.wiki_table_questions import WikiTableQuestions
 from tensorflow_datasets.structured.wiki_table_text import WikiTableText
 from tensorflow_datasets.structured.wine_quality import WineQuality
+from tensorflow_datasets.structured.netflix_shows import NetflixShows
