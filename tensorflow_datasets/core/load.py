@@ -659,13 +659,13 @@ def load(
       Split-specific information is available in `ds_info.splits`.
   """  # fmt: skip
   ctx = contextlib.nullcontext()
-  with ctx:
-    dbuilder = _fetch_builder(
-        name=name,
-        data_dir=data_dir,
-        builder_kwargs=builder_kwargs,
-        try_gcs=try_gcs,
-    )
+  # with ctx:
+  dbuilder = _fetch_builder(
+      name=name,
+      data_dir=data_dir,
+      builder_kwargs=builder_kwargs,
+      try_gcs=try_gcs,
+  )
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
 
   if as_dataset_kwargs is None:
@@ -832,8 +832,8 @@ def data_source(
   _validate_file_format_for_data_source(builder_kwargs)
 
   ctx = contextlib.nullcontext()
-  with ctx:
-    dbuilder = _fetch_builder(name, data_dir, builder_kwargs, try_gcs)
+  # with ctx:
+  dbuilder = _fetch_builder(name, data_dir, builder_kwargs, try_gcs)
   _download_and_prepare_builder(dbuilder, download, download_and_prepare_kwargs)
   return dbuilder.as_data_source(
       split=split, decoders=decoders, deserialize_method=deserialize_method
