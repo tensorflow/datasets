@@ -171,10 +171,9 @@ def _postprocess_convert_rgb(img: PilImage) -> PilImage:
 def create_thumbnail(
     ex: np.ndarray, *, use_colormap: bool, default_dimensions: bool = True
 ) -> PilImage:
-  """Creates the image from the np.array input."""
-  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image  # pylint: disable=invalid-name
+  PIL_Image = lazy_imports_lib.lazy_imports.PIL_Image
 
-  if use_colormap:  # Apply the colormap first as it modify the shape/dtype
+  if use_colormap:
     ex = apply_colormap(ex)
 
   _, _, c = ex.shape
@@ -183,12 +182,16 @@ def create_thumbnail(
     ex = ex.squeeze(axis=-1)
     mode = 'L'
   elif ex.dtype == np.uint16:
-    mode = 'I;16'
-    postprocess = _postprocess_convert_rgb
+    if c in (3, 4):
+      ex = (ex / 257).astype(np.uint8)
+      mode = None
+    else:
+      mode = 'I;16'
+      postprocess = _postprocess_convert_rgb
   else:
     mode = None
   img = PIL_Image.fromarray(ex, mode=mode)
   img = postprocess(img)
   if default_dimensions:
-    img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))  # Resize the image in-place
+    img.thumbnail((THUMBNAIL_SIZE, THUMBNAIL_SIZE))
   return img
