@@ -17,37 +17,25 @@
 
 from tensorflow_datasets import testing
 from tensorflow_datasets.image_classification import spots10
-import pytest
 
-# testing/spots10.py generates fake input data
+# testing/mnist.py generates fake input data
 
 spots10._TRAIN_EXAMPLES = 2  # pylint: disable=protected-access
 spots10._TEST_EXAMPLES = 2  # pylint: disable=protected-access
 
 
 class spots10Test(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = spots10
+  DATASET_CLASS = spots10.spots10
   SPLITS = {
       "train": 2,
       "test": 2,
   }
   DL_EXTRACT_RESULT = {
-      "train_data": "train-image",
-      "train_labels": "train-label",
-      "test_data": "test-image",
-      "test_labels": "test-label",
+      "train_data": "train-images-idx3-ubyte.gz",
+      "train_labels": "train-labels-idx1-ubyte.gz",
+      "test_data": "test-images-idx3-ubyte.gz",
+      "test_labels": "test-labels-idx1-ubyte.gz",
   }
-
-
-  """
-  Skip the test_download_and_prepare_as_dataset test using 
-  @pytest.mark.skip decorator because no dummy dataset 
-  was included for spots10.
-  """
-  @pytest.mark.skip(reason="Skipping this test temporarily.")
-  def test_download_and_prepare_as_dataset(self):
-      pass
-
 
 if __name__ == "__main__":
   testing.test_main()
