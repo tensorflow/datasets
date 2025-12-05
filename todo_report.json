@@ -1,0 +1,211 @@
+[
+  {
+    "title": "Move temporary directory methods to TestCase",
+    "description": "Move `make_tmp_dir`, `rm_tmp_dir`, and `tmp_dir` from `tensorflow_datasets/testing/__init__.py` to `TestCase` class as methods.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/testing/__init__.py#L85",
+    "filePath": "tensorflow_datasets/testing/__init__.py",
+    "lineNumber": 85,
+    "confidence": 1,
+    "rationale": "The TODO explicitly states the action: 'rm from here and add as methods to TestCase'. This is a straightforward refactoring task.",
+    "context": "    \"FeatureExpectationsTestCase\": (\n        \"tensorflow_datasets.testing.feature_test_case\"\n    ),\n    # TODO(afrozm): rm from here and add as methods to TestCase\n    \"make_tmp_dir\": \"tensorflow_datasets.testing.test_utils\",\n    \"mock_data\": \"tensorflow_datasets.testing.mocking\",\n    \"mock_default_data_dir\": \"tensorflow_datasets.testing.test_utils\",",
+    "language": "python"
+  },
+  {
+    "title": "Update BuilderConfig dataclass for Python 3.10",
+    "description": "Update `BuilderConfig` to use `kw_only=True` and potentially be frozen, taking advantage of Python 3.10 features.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/dataset_builder.py#L106",
+    "filePath": "tensorflow_datasets/core/dataset_builder.py",
+    "lineNumber": 106,
+    "confidence": 1,
+    "rationale": "The TODO references Python 3.10 features (frozen, kwargs-only) for dataclasses. If the environment supports Python 3.10, this is a simple syntax update.",
+    "context": "  tags: list[str] = dataclasses.field(default_factory=list)\n\n  # TODO(py3.10): Should update dataclass to be:\n  # * Frozen (https://bugs.python.org/issue32953)\n  # * Kwargs-only (https://bugs.python.org/issue33129)\n\n  name: str",
+    "language": "python"
+  },
+  {
+    "title": "Improve type hint for Example",
+    "description": "Change the type hint for `Example` from `Any` to `TreeDict[FeatureValue]`.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/writer.py#L50",
+    "filePath": "tensorflow_datasets/core/writer.py",
+    "lineNumber": 50,
+    "confidence": 1,
+    "rationale": "The TODO suggests a specific type hint improvement (`TreeDict[FeatureValue]`) to replace `Any`. This improves code readability and type safety.",
+    "context": "  # pylint: enable=g-import-not-at-top\n\n# TODO(tfds): Should be `TreeDict[FeatureValue]`\nExample = Any\nKey = int | bytes\nKeyExample = tuple[Key, Example]",
+    "language": "python"
+  },
+  {
+    "title": "Update tfds.Split type hint",
+    "description": "Update the type hint for `tfds.Split` to be `Union[str, Split]`.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/splits.py#L413",
+    "filePath": "tensorflow_datasets/core/splits.py",
+    "lineNumber": 413,
+    "confidence": 1,
+    "rationale": "The TODO explicitly suggests the type definition change. This is a clear type hinting improvement.",
+    "context": "        statistics=None,\n    )\n\n\n# TODO(epot): `: tfds.Split` type should be `Union[str, Split]`\nclass Split(str):\n  # pylint: disable=line-too-long\n  \"\"\"`Enum` for dataset splits.",
+    "language": "python"
+  },
+  {
+    "title": "Remove deprecated dataset_name parameter",
+    "description": "Remove the deprecated `dataset_name` parameter from `SplitDict.__init__`.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/splits.py#L457",
+    "filePath": "tensorflow_datasets/core/splits.py",
+    "lineNumber": 457,
+    "confidence": 1,
+    "rationale": "The parameter is marked as deprecated and unused (except for a warning). Removing it is a standard cleanup task.",
+    "context": "  def __init__(\n      self,\n      split_infos: Iterable[SplitInfo],\n      *,\n      # TODO(b/216470058): remove this parameter\n      dataset_name: str | None = None,  # deprecated, please don't use\n  ):\n    super().__init__(\n        {split_info.name: split_info for split_info in split_infos},",
+    "language": "python"
+  },
+  {
+    "title": "Use ExceptionGroup in Python 3.11",
+    "description": "Refactor exception handling to raise an `ExceptionGroup` when running on Python 3.11 or later.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/community/register_path.py#L113",
+    "filePath": "tensorflow_datasets/core/community/register_path.py",
+    "lineNumber": 113,
+    "confidence": 1,
+    "rationale": "The TODO points to using a specific Python 3.11 feature (`ExceptionGroup`) to improve error reporting. Implementation involves checking the Python version.",
+    "context": "              data_dir,\n          )\n    if exceptions:\n      # TODO(b/299874845): py3.11 - raise an ExceptionGroup\n      # https://realpython.com/python311-exception-groups/#group-exceptions-with-exceptiongroup\n      raise exceptions[0]\n\n  def builder_cls(",
+    "language": "python"
+  },
+  {
+    "title": "Refactor to use as_dataframe._get_feature",
+    "description": "Use `as_dataframe._get_feature` in `_test_repr` to correctly compute `sequence_rank` for subclasses like `Video`.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/testing/feature_test_case.py#L480",
+    "filePath": "tensorflow_datasets/testing/feature_test_case.py",
+    "lineNumber": 480,
+    "confidence": 2,
+    "rationale": "The TODO suggests using a specific method `as_dataframe._get_feature` to improve logic. Requires verifying the availability and behavior of that method.",
+    "context": "      # Features with multi-data not supported\n      if isinstance(spec, dict):\n        continue\n      # TODO(tfds): Should use `as_dataframe._get_feature` instead, to\n      # correctly compute for `sequence_rank` for subclasses like `Video`.\n      elif spec.sequence_rank == 0:\n        text = f.repr_html(ex)",
+    "language": "python"
+  },
+  {
+    "title": "Wrap absl.logging with logging_utils",
+    "description": "Create a `logging_utils` wrapper around `absl.logging` to ensure messages are displayed correctly in environments like Colab.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/utils/py_utils.py#L74",
+    "filePath": "tensorflow_datasets/core/utils/py_utils.py",
+    "lineNumber": 74,
+    "confidence": 2,
+    "rationale": "Refactoring task to improve logging abstraction. Requires creating a new wrapper and identifying usage patterns.",
+    "context": "    return True\n\n\n# TODO(tfds): Should likely have a `logging_utils` wrapper around `absl.logging`\n# so logging messages are displayed on Colab.\n\n\ndef print_notebook(*args: Any) -> None:",
+    "language": "python"
+  },
+  {
+    "title": "Use file adapter in SequentialWriter",
+    "description": "Replace direct usage of `tf.io.TFRecordWriter` with a generic file adapter to support multiple formats.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/sequential_writer.py#L55",
+    "filePath": "tensorflow_datasets/core/sequential_writer.py",
+    "lineNumber": 55,
+    "confidence": 2,
+    "rationale": "Refactoring to use the `file_adapters` abstraction already present in the codebase. Requires checking `file_adapters` capabilities.",
+    "context": "@dataclasses.dataclass\nclass Shard(object):\n  \"\"\"Shard that is being written.\"\"\"\n\n  writer: tf.io.TFRecordWriter  # TODO(sabela): use a file adapter\n  num_examples: int = 0\n  num_bytes: int = 0\n\n  def add_example(self, serialized_example: str) -> None:",
+    "language": "python"
+  },
+  {
+    "title": "Deprecate TFGraphRunner",
+    "description": "Deprecate `TFGraphRunner` in favor of a simpler implementation for image encoding/decoding.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/features/image_feature.py#L101",
+    "filePath": "tensorflow_datasets/core/features/image_feature.py",
+    "lineNumber": 101,
+    "confidence": 2,
+    "rationale": "Suggests a simplification of the image encoding logic. Requires understanding why `TFGraphRunner` was used and how to replace it safely.",
+    "context": "    if self.encoding_format is None:\n      self.encoding_format = 'png'\n\n  # TODO(tfds): Should deprecate the TFGraph runner in favor of simpler\n  # implementation\n  @functools.cached_property\n  def _runner(self) -> utils.TFGraphRunner:\n    return utils.TFGraphRunner()",
+    "language": "python"
+  },
+  {
+    "title": "Add Encoding.AUTO for Tensor features",
+    "description": "Implement `Encoding.AUTO` for `Tensor` features to automatically choose compression based on heuristics.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/features/tensor_feature.py#L76",
+    "filePath": "tensorflow_datasets/core/features/tensor_feature.py",
+    "lineNumber": 76,
+    "confidence": 2,
+    "rationale": "Feature request to improve usability. Requires defining heuristics for when to compress tensors.",
+    "context": "      shape: utils.Shape,\n      dtype: type_utils.TfdsDType,\n      # TODO(tfds): Could add an Encoding.AUTO to automatically compress\n      # tensors using some heuristic. However, careful about backward\n      # compatibility.\n      # Would require some `DatasetInfo.api_version = 1` which would be",
+    "language": "python"
+  },
+  {
+    "title": "Support manual_data in HuggingFace wrapper",
+    "description": "Add support for `manual_data` in the HuggingFace datasets wrapper.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/community/huggingface_wrapper.py#L97",
+    "filePath": "tensorflow_datasets/core/community/huggingface_wrapper.py",
+    "lineNumber": 97,
+    "confidence": 2,
+    "rationale": "Feature gap in the HF wrapper. Requires understanding how HF handles manual data and mapping it to TFDS.",
+    "context": "  VERSION = utils.Version('1.0.0')\n\n  # TODO(tfds): Support manual_data\n  # MANUAL_DOWNLOAD_INSTRUCTIONS = 'Missing instructions.'\n\n  BUILDER_CONFIG_CLASS = dataset_builder.BuilderConfig",
+    "language": "python"
+  },
+  {
+    "title": "Display source code in documentation",
+    "description": "Implement logic to display or link to the source code of the dataset builder in the generated documentation.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/scripts/documentation/dataset_markdown_builder.py#L158",
+    "filePath": "tensorflow_datasets/scripts/documentation/dataset_markdown_builder.py",
+    "lineNumber": 158,
+    "confidence": 2,
+    "rationale": "Documentation improvement. The code already has a placeholder for it. Needs logic to locate the source file and generate a link/snippet.",
+    "context": "  def content(self, builder: tfds.core.DatasetBuilder):\n    # TODO(tfds): Display the source code\n    if isinstance(builder, tfds.core.read_only_builder.ReadOnlyBuilder):\n      return _get_read_only_builder_source_code_link(builder)\n    class_path = tfds.core.utils.get_class_path(builder).split('.')",
+    "language": "python"
+  },
+  {
+    "title": "Recursively record all in DummyBeamDataset",
+    "description": "Update `DummyBeamDataset` to recursively record all element specifications.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/testing/test_utils.py#L151",
+    "filePath": "tensorflow_datasets/testing/test_utils.py",
+    "lineNumber": 151,
+    "confidence": 2,
+    "rationale": "Likely involves traversing nested structures in `DummyBeamDataset`. Requires understanding the current limitation.",
+    "context": "      # TODO(epot): recursively record all.\n      pass",
+    "language": "python"
+  },
+  {
+    "title": "Optimize locking in read_info",
+    "description": "Use fine-grained locking (one lock per info path) instead of a global lock when reading/writing info files.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/download/resource.py#L209",
+    "filePath": "tensorflow_datasets/core/download/resource.py",
+    "lineNumber": 209,
+    "confidence": 2,
+    "rationale": "Performance improvement to reduce contention. Requires changing the locking mechanism in `resource.py`.",
+    "context": "  return json.loads(info_path.read_text()) if info_path.exists() else {}\n\n\n# TODO(pierrot): one lock per info path instead of locking everything.\nsynchronize_decorator = utils.build_synchronize_decorator()\n\n\ndef replace_info_file(src_path: epath.Path, dst_path: epath.Path) -> None:",
+    "language": "python"
+  },
+  {
+    "title": "Remove skip_feature_tests parameter",
+    "description": "Remove the `skip_feature_tests` parameter from `assertFeature` once text encoders are removed/updated.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/testing/feature_test_case.py#L239",
+    "filePath": "tensorflow_datasets/testing/feature_test_case.py",
+    "lineNumber": 239,
+    "confidence": 2,
+    "rationale": "Cleanup task conditional on another change ('text encoders are removed'). Need to verify if that condition is met.",
+    "context": "    # Test the feature again to make sure it behave correctly after restoring\n    # TODO(tfds): Remove `skip_feature_tests` after text encoders are removed\n    if not skip_feature_tests:\n      # Restored from config\n      with test_utils.tmp_dir() as config_dir:",
+    "language": "python"
+  },
+  {
+    "title": "Optimize file instruction merging",
+    "description": "Merge file instructions together to optimize dataset reading, for example combining overlapping or adjacent slices.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/splits.py#L583",
+    "filePath": "tensorflow_datasets/core/splits.py",
+    "lineNumber": 583,
+    "confidence": 2,
+    "rationale": "Optimization to reduce the number of read operations. Requires analyzing `FileInstruction` and implementing merging logic.",
+    "context": "  # TODO(epot): Should try to merge the instructions together as well as\n  # performing additional validation. For example, should raise an error\n  # if there is overlap between splits (`train[:50]+train[:25]`)\n  # If there is a single shard, `train[:25]+train[50:75]` could be optimized\n  # into a single `ds.take(25).skip(50-25).take(75-50)`\n\n  absolute_instructions = _make_absolute_instructions(",
+    "language": "python"
+  },
+  {
+    "title": "Investigate workaround for dynamic shape encoding",
+    "description": "Investigate if there is a better workaround for handling dynamic shapes in `Tensor` feature encoding.",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/core/features/tensor_feature.py#L207",
+    "filePath": "tensorflow_datasets/core/features/tensor_feature.py",
+    "lineNumber": 207,
+    "confidence": 3,
+    "rationale": "The TODO asks 'Is there a better workaround?'. This implies deep investigation and understanding of the current limitation.",
+    "context": "    if example_data is None and self._optional:\n      return None\n    # TODO(epot): Is there a better workaround ?\n    # It seems some user have non-conventional use of tfds.features.Tensor where\n    # they defined shape=(None, None) even if it wasn't supported.",
+    "language": "python"
+  },
+  {
+    "title": "Remove test_tensor_spec parameter",
+    "description": "Remove the `test_tensor_spec` parameter from `assertFeature` after fixing a specific bug (b/227584124).",
+    "deepLink": "https://github.com/tensorflow/datasets/blob/23a091126a319dd99c8d42989613f5bfb58d97e1/tensorflow_datasets/testing/feature_test_case.py#L180",
+    "filePath": "tensorflow_datasets/testing/feature_test_case.py",
+    "lineNumber": 180,
+    "confidence": 3,
+    "rationale": "This task is blocked by an external bug (b/227584124) which I cannot access or fix directly.",
+    "context": "      serialized_info=None,\n      # TODO(b/227584124): remove this parameter after fixing this bug\n      test_tensor_spec=True,\n      skip_feature_tests=False,\n      test_attributes=None,",
+    "language": "python"
+  }
+]
