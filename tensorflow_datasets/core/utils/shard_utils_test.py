@@ -155,6 +155,31 @@ class GetReadInstructionsTest(testing.TestCase, parameterized.TestCase):
     )
     self.assertEqual(res, [])
 
+  def test_get_file_instructions_with_subset_and_skip(self):
+    logical_length = 412
+    physical_length = 449
+    from_index = 156
+    to_index = 412
+
+    res = shard_utils.get_file_instructions(
+        from_=from_index,
+        to=to_index,
+        filenames=['shard_0.tfrecord'],
+        shard_lengths=[logical_length],
+        examples_in_shards=[physical_length],
+    )
+    self.assertEqual(
+        res,
+        [
+            shard_utils.FileInstruction(
+                filename='shard_0.tfrecord',
+                skip=from_index,
+                take=logical_length - from_index,
+                examples_in_shard=physical_length,
+            )
+        ],
+    )
+
   def test_split_file_instruction(self):
     filename = 'data.tfrecord'
     file_instruction = shard_utils.FileInstruction(

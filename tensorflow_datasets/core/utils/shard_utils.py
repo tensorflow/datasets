@@ -249,7 +249,7 @@ def get_file_instructions(
       if examples_in_shards is not None:
         examples_in_shard = examples_in_shards[shard_index]
         if take == -1 and examples_in_shard != length:
-          take = length
+          take = length - skip
       else:
         examples_in_shard = length
       file_instructions.append(
