@@ -45,16 +45,6 @@ class DataSource(Protocol, Generic[T]):
     """Returns the value for the given `keys`."""
 
 
-def file_instructions(
-    dataset_info: dataset_info_lib.DatasetInfo,
-    split: splits_lib.Split | None = None,
-) -> list[shard_utils.FileInstruction]:
-  """Retrieves the file instructions from the DatasetInfo."""
-  split_infos = dataset_info.splits.values()
-  split_dict = splits_lib.SplitDict(split_infos=split_infos)
-  return split_dict[split].file_instructions
-
-
 @dataclasses.dataclass
 class BaseDataSource(MappingView, Sequence):
   """Base DataSource to override all dunder methods with the deserialization.
@@ -93,6 +83,13 @@ class BaseDataSource(MappingView, Sequence):
         if features := self.dataset_info.features:
           return features.deserialize_example_np(record, decoders=self.decoders)  # pylint: disable=attribute-error
         raise ValueError('No features set, cannot decode example!')
+
+  @property
+  def split_info(self) -> splits_lib.SplitInfo | splits_lib.SubSplitInfo:
+    """Returns the SplitInfo for the split."""
+    split_infos = self.dataset_info.splits.values()
+    splits_dict = splits_lib.SplitDict(split_infos=split_infos)
+    return splits_dict[self.split]  # will raise an error if split is not found
 
   def __getitem__(self, key: SupportsIndex) -> Any:
     record = self.data_source[key.__index__()]
@@ -133,7 +130,7 @@ class BaseDataSource(MappingView, Sequence):
     )
 
   def __len__(self) -> int:
-    return self.data_source.__len__()
+    return sum(fi.take for fi in self.split_info.file_instructions)
 
   def __iter__(self):
     for i in range(self.__len__()):
