@@ -890,18 +890,22 @@ class DatasetBuilder(registered.RegisteredDataset):
         )
       chosen_format = file_format
     else:
-      chosen_format = suitable_formats.pop()
-      logging.info(
-          "Found random access formats: %s. Chose to use %s. Overriding file"
-          " format in the dataset info.",
-          ", ".join([f.name for f in suitable_formats]),
-          chosen_format,
-      )
+      if info.file_format in suitable_formats:
+        chosen_format = info.file_format
+      else:
+        chosen_format = suitable_formats.pop()
+        logging.info(
+            "Found random access formats: %s. Chose to use %s. Overriding file"
+            " format in the dataset info.",
+            ", ".join([f.name for f in suitable_formats]),
+            chosen_format,
+        )
 
-    # Change the dataset info to read from a random access format.
-    info.set_file_format(
-        chosen_format, override=True, override_if_initialized=True
-    )
+    if info.file_format != chosen_format:
+      # Change the dataset info to read from a random access format.
+      info.set_file_format(
+          chosen_format, override=True, override_if_initialized=True
+      )
 
     # Create a dataset for each of the given splits
     def build_single_data_source(split: str) -> Sequence[Any]:

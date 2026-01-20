@@ -538,6 +538,9 @@ class DatasetInfo:
       updated_split_infos = []
       for split_info in self.splits.values():
         if split_info.filename_template is None:
+          logging.warning(
+              "Split %s has no filename template, skipping.", split_info.name
+          )
           continue
         updated_split_info = split_info.replace(
             filename_template=split_info.filename_template.replace(

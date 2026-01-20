@@ -802,6 +802,31 @@ class DatasetBuilderTest(parameterized.TestCase, testing.TestCase):
     assert len(data_source) == 10
     assert data_source[0]["x"] == 28
 
+  def test_load_as_data_source_with_multi_split_info(self):
+    data_dir = self.get_temp_dir()
+    builder = DummyDatasetWithConfigs(
+        data_dir=data_dir,
+        config="plus1",
+        file_format=file_adapters.FileFormat.ARRAY_RECORD,
+    )
+    builder.download_and_prepare()
+
+    # Make it a multi-split dataset.
+    multi_split_info = splits_lib.MultiSplitInfo(
+        name="train", split_infos=[builder.info.splits["train"]]
+    )
+    builder.info.set_splits(splits_lib.SplitDict([multi_split_info]))
+
+    self.assertIsInstance(
+        builder.info.splits["train"], splits_lib.MultiSplitInfo
+    )
+    self.assertIsNone(builder.info.splits["train"].filename_template)
+
+    data_source = builder.as_data_source(split="train")
+    self.assertIsNotNone(data_source)
+    self.assertLen(data_source, 20)
+    self.assertEqual(data_source[0]["x"], 7)
+
   @parameterized.named_parameters(
       *[
           {"file_format": file_format, "testcase_name": file_format.value}
