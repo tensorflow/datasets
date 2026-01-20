@@ -44,7 +44,7 @@ jobs:
     runs-on: ${{ inputs.os-version }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - uses: ./.github/actions/setup
       with:
         tf-version: ${{ inputs.tf-version }}
