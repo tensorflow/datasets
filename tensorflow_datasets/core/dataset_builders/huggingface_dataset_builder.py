@@ -333,7 +333,7 @@ class HuggingfaceDatasetBuilder(
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
     ds_description = self._get_text_field('description')
-    ds_license = self._get_license()
+    ds_license = self._get_license() or ''
     if self._is_gated():
       ds_description = (
           f'{self._gated_text}\n{ds_description}'
