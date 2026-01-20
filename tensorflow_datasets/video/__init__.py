@@ -17,6 +17,7 @@
 
 from tensorflow_datasets.video.bair_robot_pushing import BairRobotPushingSmall
 from tensorflow_datasets.video.davis import Davis
+from tensorflow_datasets.video.minerl_navigate import MinerlNavigate
 from tensorflow_datasets.video.moving_mnist import MovingMnist
 from tensorflow_datasets.video.robonet import Robonet
 from tensorflow_datasets.video.starcraft import StarcraftVideo
