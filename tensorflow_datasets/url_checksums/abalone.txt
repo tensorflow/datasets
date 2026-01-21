@@ -1,0 +1,1 @@
+https://archive.ics.uci.edu/ml/machine-learning-databases/abalone/abalone.data 191873 de37cdcdcaaa50c309d514f248f7c2302a5f1f88c168905eba23fe2fbc78449f
