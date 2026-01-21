@@ -260,6 +260,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       data_dir: epath.PathLike | None = None,
       config: None | str | BuilderConfig = None,
       version: None | str | utils.Version = None,
+      **kwargs,
   ):
     """Constructs a DatasetBuilder.
 
