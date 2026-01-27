@@ -372,6 +372,15 @@ def test_mock_data_source():
     )
     assert isinstance(data_source[0]['image'], bytes)
 
+    # Without deserializing the examples
+    data_source = tfds.data_source(
+        'imagenet2012',
+        split='train',
+        deserialize_method=tfds.decode.DeserializeMethod.RAW_BYTES,
+    )
+    assert len(data_source) == 10
+    assert isinstance(data_source[0], bytes)
+
 
 def test_mock_multiple_data_source():
   with tfds.testing.mock_data(num_examples=10):
