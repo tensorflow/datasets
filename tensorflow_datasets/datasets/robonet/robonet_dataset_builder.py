@@ -165,28 +165,29 @@ class Builder(tfds.core.BeamBasedBuilder):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    def _process_example(filename):
-      """Converts one video from hdf5 format."""
-      h5py = tfds.core.lazy_imports.h5py
-      with h5py.File(filename) as hf:
-        video_bytes = hf['env']['cam0_video']['frames'][:].tobytes()
-        states = hf['env']['state'][:].astype(np.float32)
-        states = np.pad(
-            states, ((0, 0), (0, STATES_DIM - states.shape[1])), 'constant'
-        )
-        actions = hf['policy']['actions'][:].astype(np.float32)
-        actions = np.pad(
-            actions, ((0, 0), (0, ACTIONS_DIM - actions.shape[1])), 'constant'
-        )
-
-      basename = os.path.basename(filename)
-      features = {
-          'video': video_bytes,
-          'actions': actions,
-          'states': states,
-          'filename': basename,
-      }
-      return basename, features
-
     filenames = tf.io.gfile.glob(os.path.join(filedir, '*.hdf5'))
     return pipeline | beam.Create(filenames) | beam.Map(_process_example)
+
+
+def _process_example(filename):
+  """Converts one video from hdf5 format."""
+  h5py = tfds.core.lazy_imports.h5py
+  with h5py.File(filename) as hf:
+    video_bytes = hf['env']['cam0_video']['frames'][:].tobytes()
+    states = hf['env']['state'][:].astype(np.float32)
+    states = np.pad(
+        states, ((0, 0), (0, STATES_DIM - states.shape[1])), 'constant'
+    )
+    actions = hf['policy']['actions'][:].astype(np.float32)
+    actions = np.pad(
+        actions, ((0, 0), (0, ACTIONS_DIM - actions.shape[1])), 'constant'
+    )
+
+  basename = os.path.basename(filename)
+  features = {
+      'video': video_bytes,
+      'actions': actions,
+      'states': states,
+      'filename': basename,
+  }
+  return basename, features

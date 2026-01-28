@@ -349,6 +349,28 @@ MC4_LANGUAGES = [
 ]
 
 
+def _download_wet_file(path, dl_dir):
+  """Download WET file if it doesn't already exist."""
+  url = f"{_DOWNLOAD_HOST}/{path}"
+  out_path = epath.Path(dl_dir) / path
+  if out_path.exists():
+    c4_utils.get_counter_inc_fn("download_wet_url")("exists")
+    return out_path
+  tmp_dir = epath.Path(f"{os.fspath(out_path)}.incomplete{uuid.uuid4().hex}")
+  try:
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    downloader = tfds.download.download_manager.get_downloader()
+    with downloader.tqdm():
+      # TODO(slebedev): Investigate why pytype infers Promise[Future[...]].
+      dl_path = downloader.download(url, tmp_dir).get().path  # type: ignore
+      dl_path = epath.Path(dl_path)
+    dl_path.rename(out_path)
+  finally:
+    tmp_dir.rmtree(missing_ok=True)
+    c4_utils.get_counter_inc_fn("download_wet_url")("downloaded")
+  return out_path
+
+
 class C4Config(tfds.core.BuilderConfig):
   """BuilderConfig for C4 dataset."""
 
@@ -605,30 +627,6 @@ class C4(tfds.core.BeamBasedBuilder):
     """Build PCollection of un-split page content."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    def download_wet_file(path, dl_dir):
-      url = f"{_DOWNLOAD_HOST}/{path}"
-      out_path = epath.Path(dl_dir) / path
-
-      if out_path.exists():
-        c4_utils.get_counter_inc_fn("download_wet_url")("exists")
-        return out_path
-
-      tmp_dir = epath.Path(
-          f"{os.fspath(out_path)}.incomplete{uuid.uuid4().hex}"
-      )
-      try:
-        tmp_dir.mkdir(parents=True, exist_ok=True)
-        downloader = tfds.download.download_manager.get_downloader()
-        with downloader.tqdm():
-          # TODO(slebedev): Investigate why pytype infers Promise[Future[...]].
-          dl_path = downloader.download(url, tmp_dir).get().path  # type: ignore
-          dl_path = epath.Path(dl_path)
-        dl_path.rename(out_path)
-      finally:
-        tmp_dir.rmtree(missing_ok=True)
-        c4_utils.get_counter_inc_fn("download_wet_url")("downloaded")
-      return out_path
-
     wet_file_paths = (
         pipeline
         | "create_wet_path_urls" >> beam.Create(file_paths["wet_path_urls"])
@@ -640,7 +638,7 @@ class C4(tfds.core.BeamBasedBuilder):
         | "filter_corrupt_wet_files"
         >> beam.Filter(lambda p: p not in _KNOWN_CORRUPT_WET_FILES)
         | beam.Map(
-            download_wet_file,
+            _download_wet_file,
             dl_dir=os.path.join(dl_manager.download_dir, "c4_wet_files"),
         )
     )

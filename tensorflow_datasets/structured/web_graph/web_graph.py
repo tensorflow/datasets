@@ -82,6 +82,24 @@ _CITATION = """
 """
 
 
+def _get_int_feature(example: tf.train.Example, feature_name: str) -> List[int]:
+  return example.features.feature[feature_name].int64_list.value
+
+
+def _process_example(example: bytes, is_test=False):
+  """Process a single example."""
+  example = tf.train.Example.FromString(example)
+  row_tag = _get_int_feature(example, 'row_tag')[0]
+  col_tag = np.array(_get_int_feature(example, 'col_tag'), dtype=np.int64)
+  if is_test:
+    gt_tag = _get_int_feature(example, 'gt_tag')
+  else:
+    gt_tag = []
+  gt_tag = np.array(gt_tag, dtype=np.int64)
+  return_dict = {'row_tag': row_tag, 'col_tag': col_tag, 'gt_tag': gt_tag}
+  return row_tag, return_dict
+
+
 @dataclasses.dataclass
 class WebGraphConfig(tfds.core.BuilderConfig):
   """Palmer Penguins dataset builder config."""
@@ -224,23 +242,6 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, pipeline, files, split: str):
     """Yields examples."""
     beam = tfds.core.lazy_imports.apache_beam
-
-    def _get_int_feature(
-        example: tf.train.Example, feature_name: str
-    ) -> List[int]:
-      return example.features.feature[feature_name].int64_list.value
-
-    def _process_example(example: bytes, is_test=False):
-      example = tf.train.Example.FromString(example)
-      row_tag = _get_int_feature(example, 'row_tag')[0]
-      col_tag = np.array(_get_int_feature(example, 'col_tag'), dtype=np.int64)
-      if is_test:
-        gt_tag = _get_int_feature(example, 'gt_tag')
-      else:
-        gt_tag = []
-      gt_tag = np.array(gt_tag, dtype=np.int64)
-      return_dict = {'row_tag': row_tag, 'col_tag': col_tag, 'gt_tag': gt_tag}
-      return row_tag, return_dict
 
     return (
         pipeline

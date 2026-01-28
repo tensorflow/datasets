@@ -20,6 +20,7 @@ economy, epidemiology, geography, health, hospitalizations, mobility, government
 response, weather, and more.
 """
 
+import functools
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
@@ -46,6 +47,29 @@ _CITATION = """
 
 _N_RECORDS = 11266423  # It should be an upper bound
 _BATCH_SIZE = 10000
+
+
+def _cast_according_to_column(feature_type, v):
+  if feature_type == tf.string and isinstance(v, (float, int)):
+    return str(v)
+  return v
+
+
+def _load_shard(index: int, dl_manager, archive_path, columns, features):
+  """Load a shard of the dataset."""
+  pd = tfds.core.lazy_imports.pandas
+  # There is only one file so by using the for we guarantee that the file
+  # will be closed.
+  for _, file in dl_manager.iter_archive(archive_path):
+    df = pd.read_csv(file, skiprows=index, nrows=_BATCH_SIZE)
+    result = []
+    for i, row in df.iterrows():
+      example = {
+          k: _cast_according_to_column(features[k].dtype, v)
+          for k, v in zip(columns, row.values)
+      }
+      result.append((index + i, example))
+    return result
 
 
 class Covid19(tfds.core.GeneratorBasedBuilder):
@@ -787,31 +811,18 @@ class Covid19(tfds.core.GeneratorBasedBuilder):
     pd = tfds.core.lazy_imports.pandas
     beam = tfds.core.lazy_imports.apache_beam
 
-    def cast_according_to_column(feature_type, v):
-      if feature_type == tf.string and isinstance(v, (float, int)):
-        return str(v)
-      return v
-
     file_handles = dl_manager.iter_archive(archive_path)
     _, file = next(file_handles)
 
     columns = pd.read_csv(file, nrows=1).columns
-
-    def load_shard(index: int):
-      # There is only one file so by using the for we guarantee that the file
-      # will be closed.
-      for _, file in dl_manager.iter_archive(archive_path):
-        df = pd.read_csv(file, skiprows=index, nrows=_BATCH_SIZE)
-        features = self.info.features
-        result = []
-        for i, row in df.iterrows():
-          example = {
-              k: cast_according_to_column(features[k].dtype, v)
-              for k, v in zip(columns, row.values)
-          }
-          result.append((index + i, example))
-        return result
+    features = self.info.features
 
     return beam.Create(list(range(0, _N_RECORDS, _BATCH_SIZE))) | beam.FlatMap(
-        load_shard
+        functools.partial(
+            _load_shard,
+            dl_manager=dl_manager,
+            archive_path=archive_path,
+            columns=columns,
+            features=features,
+        )
     )

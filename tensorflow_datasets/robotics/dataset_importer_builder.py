@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import abc
+import functools
 import os
 from typing import Any
 
@@ -30,6 +31,24 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 import tree
 
+
+
+def _dataset_importer_converter_fn(example, decode_fn, keys_to_strip):
+  """Beam converter function for DatasetImporterBuilder."""
+  # Decode the RLDS Episode and transform it to numpy.
+  example_out = dict(example)
+  example_out['steps'] = tf.data.Dataset.from_tensor_slices(
+      example_out['steps']
+  ).map(decode_fn)
+  steps = list(iter(example_out['steps'].take(-1)))
+  example_out['steps'] = steps
+  example_out = dataset_utils.as_numpy(example_out)
+  example_id = example_out['tfds_id'].decode('utf-8')
+  del example_out['tfds_id']
+  for key in keys_to_strip:
+    if key in example_out:
+      del example_out[key]
+  yield example_id, example_out
 
 
 class DatasetImporterBuilder(
@@ -118,24 +137,11 @@ class DatasetImporterBuilder(
 
     decode_fn = builder.info.features['steps'].feature.decode_example
 
-    def converter_fn(example):
-      # Decode the RLDS Episode and transform it to numpy.
-      example_out = dict(example)
-      example_out['steps'] = tf.data.Dataset.from_tensor_slices(
-          example_out['steps']
-      ).map(decode_fn)
-      steps = list(iter(example_out['steps'].take(-1)))
-      example_out['steps'] = steps
-
-      example_out = dataset_utils.as_numpy(example_out)
-
-      example_id = example_out['tfds_id'].decode('utf-8')
-      del example_out['tfds_id']
-      for key in self.KEYS_TO_STRIP:
-        if key in example_out:
-          del example_out[key]
-
-      yield example_id, example_out
+    converter_fn = functools.partial(
+        _dataset_importer_converter_fn,
+        decode_fn=decode_fn,
+        keys_to_strip=self.KEYS_TO_STRIP,
+    )
 
     return f'read_tfds_dataset@{split}' >> beam_utils.ReadFromTFDS(
         builder=builder,
