@@ -79,7 +79,9 @@ def ReadFromTFDS(  # pylint: disable=invalid-name
 
   def load_shard(file_instruction: shard_utils.FileInstruction):  # pylint: disable=invalid-name
     """Loads a single shard."""
-    file_info = naming.FilenameInfo.from_str(file_instruction.filename)
+    filename_template = builder.info.splits[split].filename_template or None
+    file_info = naming.FilenameInfo.from_str(file_instruction.filename,
+                                             filename_template)
     ds = builder.as_dataset(
         split=f'{file_info.split}[{file_info.shard_index}shard]',
         **as_dataset_kwargs,
