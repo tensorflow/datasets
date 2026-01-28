@@ -1,0 +1,4 @@
+http://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test.mat.zip 121743191 2cde38ec83ee2ebfd7b901f8be5a09efb17a1bda04771f9b4905751eb945c01a
+http://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/test_batches.zip 121959509 83f829c01c021fa731e062e7671b0075a3e8de0a511fb6b5d403458528d0e0d1
+http://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/training_batches.zip 608848875 b6aa79e6d659111ff4c704c241cc86b828e468a5d6f7a1c5b888e6a3af3b3963
+http://www.cs.toronto.edu/~tijmen/affNIST/32x/transformed/validation_batches.zip 121890491 c613d7718fd93f1fb2f6a90cc18b97f6ec2b76929559374f79aa7081bdfd358c
