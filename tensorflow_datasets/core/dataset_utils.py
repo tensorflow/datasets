@@ -23,7 +23,7 @@ import typing
 from typing import Any, Callable, Iterable, Iterator, Union
 
 from etils import enp
-from etils.etree import nest as etree
+from etils.etree import nest as etree  # pylint: disable=g-importing-member
 import numpy as np
 from tensorflow_datasets.core import logging as tfds_logging
 from tensorflow_datasets.core import utils
