@@ -27,6 +27,7 @@ from tensorflow_datasets.summarization.media_sum import MediaSum
 from tensorflow_datasets.summarization.newsroom import Newsroom
 from tensorflow_datasets.summarization.opinion_abstracts import OpinionAbstracts
 from tensorflow_datasets.summarization.opinosis import Opinosis
+from tensorflow_datasets.summarization.points_of_correspondence import PointsOfCorrespondence
 from tensorflow_datasets.summarization.reddit import Reddit
 from tensorflow_datasets.summarization.reddit_tifu import RedditTifu
 from tensorflow_datasets.summarization.samsum import Samsum
