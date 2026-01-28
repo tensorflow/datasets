@@ -32,6 +32,7 @@ import functools
 import itertools
 import multiprocessing
 import os
+import time
 from typing import Any, Dict, Optional, Union
 
 from absl import logging
@@ -108,9 +109,24 @@ class _ShardInfo:
   num_exceptions: int
 
 
+def _load_dataset(
+    hf_builder: hf_datasets.DatasetBuilder,
+    split: str,
+) -> hf_datasets.Dataset:
+  """Efficiently loads a HuggingFace iterable dataset from its builder."""
+  if hf_builder.repo_id is None:
+    return hf_builder.as_dataset(split=split)
+  return hf_datasets.load_dataset(
+      hf_builder.repo_id or hf_builder.cache_dir,
+      hf_builder.config_id,
+      split=split,
+      streaming=True,
+  )
+
+
 def _write_shard(
     shard_spec: _ShardSpec,
-    hf_builder,
+    hf_builder: hf_datasets.DatasetBuilder,
     example_writer,
     features: feature_lib.FeaturesDict,
     ignore_hf_errors: bool,
@@ -136,12 +152,19 @@ def _write_shard(
   def get_serialized_examples_iter():
     nonlocal num_bytes
     nonlocal num_exceptions
-    dataset = hf_builder.as_dataset(
-        split=shard_spec.shard_split, run_post_process=False
+    dataset = _load_dataset(
+        hf_builder,
+        shard_spec.hf_split,
     )
-    for i in range(shard_spec.num_examples):
+    dataset = iter(dataset)
+    # Skipping the first `start_index` examples. `streaming=True` returns an
+    # iterable dataset, so we cannot jump to a specific index. This is not too
+    # costly because it takes <0.5 ms/element in the wikipedia dataset.
+    for _ in range(shard_spec.start_index):
+      next(dataset)
+    for _ in range(shard_spec.num_examples):
       try:
-        hf_value = dataset[i]
+        hf_value = next(dataset)
       except Exception:  # pylint: disable=broad-exception-caught
         num_exceptions += 1
         if ignore_hf_errors:
@@ -155,6 +178,7 @@ def _write_shard(
       num_bytes += len(serialized_example)
       yield serialized_example
 
+  start = time.time()
   example_writer.write(
       os.fspath(shard_spec.path),
       tqdm_utils.tqdm(
@@ -165,6 +189,11 @@ def _write_shard(
           leave=False,
           mininterval=1.0,
       ),
+  )
+  logging.info(
+      'Generated %s examples in %s seconds',
+      shard_spec.num_examples,
+      time.time() - start,
   )
 
   return _ShardInfo(
@@ -251,6 +280,7 @@ class HuggingfaceDatasetBuilder(
       self._builder_config = self._converted_builder_config
     self.generation_errors = []
     self._ignore_hf_errors = ignore_hf_errors
+    login_to_hf(self._hf_hub_token)
 
   @property
   def builder_config(self) -> Optional[Any]:
@@ -260,14 +290,6 @@ class HuggingfaceDatasetBuilder(
       self, builder_config, version
   ) -> Optional[dataset_builder.BuilderConfig]:
     return self._converted_builder_config
-
-  @functools.lru_cache(maxsize=1)
-  def _hf_download_and_prepare(self):
-    login_to_hf(self._hf_hub_token)
-    self._hf_builder.download_and_prepare(
-        num_proc=self._hf_num_proc,
-        verification_mode=self._verification_mode,
-    )
 
   @property
   def _hf_info(self) -> hf_datasets.DatasetInfo:
@@ -325,11 +347,18 @@ class HuggingfaceDatasetBuilder(
     return None
 
   def _hf_features(self) -> hf_datasets.Features:
-    if not self._hf_info.features:
-      # We need to download and prepare the data to know its features.
-      self._hf_download_and_prepare()
-
-    return self._hf_info.features
+    # Return the features from the builder info.
+    if self._hf_info.features:
+      return self._hf_info.features
+    # Return the features from the first split.
+    for split in self._hf_info.splits:
+      ds = _load_dataset(
+          self._hf_builder,
+          split,
+      )
+      if hasattr(ds, 'info') and ds.info.features:
+        return ds.info.features
+    raise ValueError('No features found in the dataset.')
 
   def _info(self) -> dataset_info_lib.DatasetInfo:
     ds_description = self._get_text_field('description')
@@ -370,7 +399,6 @@ class HuggingfaceDatasetBuilder(
   ) -> Sequence[splits_lib.SplitInfo]:
     """Prepares the dataset by writing to shards directly."""
     del dl_manager, download_config  # Unused.
-    self._hf_download_and_prepare()
 
     shard_specs_by_split: dict[str, Sequence[_ShardSpec]] = {}
     for hf_split, hf_split_info in self._hf_info.splits.items():
