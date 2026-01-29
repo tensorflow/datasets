@@ -28,7 +28,7 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-BASE_URL = 'http://www.stat.columbia.edu/~gelman/arm/examples/radon/'
+BASE_URL = 'https://sites.stat.columbia.edu/gelman/arm/examples/radon/'
 
 
 def convert_to_int(d):
