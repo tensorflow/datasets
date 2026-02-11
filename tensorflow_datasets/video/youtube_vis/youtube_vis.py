@@ -18,6 +18,7 @@
 from __future__ import annotations
 
 import collections
+import functools
 import json
 import os
 from typing import Any, Dict, List, Optional, Tuple, Union
@@ -208,6 +209,61 @@ def _build_annotations_index(
     video_id_to_annos = {v['id']: [] for v in annotations['videos']}
   videos = {v['id']: v for v in annotations['videos']}
   return video_id_to_annos, videos
+
+
+def _frame_index(frame_filename):
+  """Convert a video frame filename into a numerical index."""
+  basename = os.path.basename(os.fspath(frame_filename))
+  return int(basename.split('.')[0])
+
+
+def _process_example(
+    video_id,
+    *,
+    videos,
+    only_frames_with_labels,
+    all_frames,
+    height,
+    width,
+    video_id_to_tracks,
+    maybe_resize_video,
+):
+  """Process a single video into a data example.
+
+  Args:
+    video_id: The id of the video to process.
+    videos: A dictionary mapping video ids to video information.
+    only_frames_with_labels: Whether to include only frames with labels.
+    all_frames: The path to the directory containing all frames.
+    height: The height to resize the video to. If None, no resizing occurs.
+    width: The width to resize the video to. If None, no resizing occurs.
+    video_id_to_tracks: A dictionary mapping video ids to track annotations.
+    maybe_resize_video: A function to resize the video.
+
+  Returns:
+    A tuple containing the video name and a dictionary with the video
+    metadata, tracks, and video.
+  """
+  data_example = {}
+  video = videos[video_id]
+  if only_frames_with_labels:
+    frames_list = [all_frames / file for file in video['file_names']]
+  else:
+    video_dir = os.path.dirname(video['file_names'][0])
+    video_directory = all_frames / video_dir
+    frames_list = list(video_directory.glob('*'))
+  frames_list.sort(key=_frame_index)
+  data_example['metadata'] = _create_metadata(
+      video, height, width, len(frames_list)
+  )
+  data_example['tracks'] = []
+  track_annotations = video_id_to_tracks[video_id]
+  for track in track_annotations:
+    data_example['tracks'].append(
+        _create_per_track_annotation(video, frames_list, track, height, width)
+    )
+  data_example['video'] = maybe_resize_video(frames_list)
+  return data_example['metadata']['video_name'], data_example
 
 
 class YoutubeVisConfig(tfds.core.BuilderConfig):
@@ -508,39 +564,20 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     height = self._builder_config.height
     width = self._builder_config.width
     only_frames_with_labels = self._builder_config.only_frames_with_labels
-    data_example = {}
-
-    def _frame_index(frame_filename):
-      """Convert a video frame filename into a numerical index."""
-      basename = os.path.basename(os.fspath(frame_filename))
-      return int(basename.split('.')[0])
-
-    def _process_example(video_id):
-      """Process a single video into a data example."""
-      video = videos[video_id]
-      if only_frames_with_labels:
-        frames_list = [all_frames / file for file in video['file_names']]
-      else:
-        video_dir = os.path.dirname(video['file_names'][0])
-        video_directory = all_frames / video_dir
-        frames_list = list(video_directory.glob('*'))
-      frames_list = sorted(frames_list, key=_frame_index)
-      data_example['metadata'] = _create_metadata(
-          video, height, width, len(frames_list)
-      )
-      data_example['tracks'] = []
-      track_annotations = video_id_to_tracks[video_id]
-      for track in track_annotations:
-        data_example['tracks'].append(
-            _create_per_track_annotation(
-                video, frames_list, track, height, width
-            )
-        )
-      data_example['video'] = self._maybe_resize_video(frames_list)
-      return data_example['metadata']['video_name'], data_example
 
     video_keys = list(videos.keys())
     if video_range_to_use is not None:
       video_keys = video_keys[video_range_to_use[0] : video_range_to_use[1]]
 
-    return beam.Create(video_keys) | beam.Map(_process_example)
+    return beam.Create(video_keys) | beam.Map(
+        functools.partial(
+            _process_example,
+            videos=videos,
+            only_frames_with_labels=only_frames_with_labels,
+            all_frames=all_frames,
+            height=height,
+            width=width,
+            video_id_to_tracks=video_id_to_tracks,
+            maybe_resize_video=self._maybe_resize_video,
+        )
+    )
