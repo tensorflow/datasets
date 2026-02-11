@@ -78,15 +78,14 @@ def get_counter_inc_fn(namespace):
   return counter_inc_fn
 
 
-def get_hashed_url_filter_fn(predicate_fn):
-  def filter_fn(page):
-    url = page.normalized_url
-    val = int(
-        hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16
-    )
-    return predicate_fn(val)
+def _hashed_url_filter_fn(page, predicate_fn):
+  url = page.normalized_url
+  val = int(hashlib.md5(tf.compat.as_text(url).encode("utf-8")).hexdigest(), 16)
+  return predicate_fn(val)
 
-  return filter_fn
+
+def get_hashed_url_filter_fn(predicate_fn):
+  return functools.partial(_hashed_url_filter_fn, predicate_fn=predicate_fn)
 
 
 _nltk_lock = threading.Lock()
@@ -506,6 +505,30 @@ def normalize_url(url):
   return url
 
 
+def _badwords_predicate(hashed_val, numerator, denominator):
+  return hashed_val % denominator >= numerator
+
+
+def _badwords_filter(page, badwords_regex, keep_badword_page):
+  """Filter pages that contain bad words."""
+  lang = page.language.split("-")[0]  # remove suffix if present
+  if lang in badwords_regex:
+    text = page.text
+    badwords_found = badwords_regex[lang].search(text.lower())
+    if badwords_found is not None:
+      if keep_badword_page(page):
+        get_counter_inc_fn("badwords-filter")("soft-passed")
+        get_counter_inc_fn(f"badwords-filter-{lang}")("soft-passed")
+        return True
+      get_counter_inc_fn("badwords-filter")("filtered")
+      get_counter_inc_fn(f"badwords-filter-{lang}")("filtered")
+      return False
+    get_counter_inc_fn(f"badwords-filter-{lang}")("passed")
+
+  get_counter_inc_fn("badwords-filter")("passed")
+  return True
+
+
 def get_badwords_filter_fn(
     badwords: Mapping[str, Sequence[str]], filter_fraction: float = 1.0
 ):
@@ -521,31 +544,20 @@ def get_badwords_filter_fn(
         else re.compile(r"(?:\W|^)({})(?:\W|$)".format("|".join(words)))
     )
 
-  filter_ratio = float.as_integer_ratio(filter_fraction)
+  numerator, denominator = float.as_integer_ratio(filter_fraction)
   keep_badword_page = get_hashed_url_filter_fn(
-      lambda x: x % filter_ratio[1] >= filter_ratio[0]
+      functools.partial(
+          _badwords_predicate,
+          numerator=numerator,
+          denominator=denominator,
+      )
   )
 
-  def badwords_filter(page):
-    lang = page.language.split("-")[0]  # remove suffix if present
-
-    if lang in badwords_regex:
-      text = page.text
-      badwords_found = badwords_regex[lang].search(text.lower())
-      if badwords_found is not None:
-        if keep_badword_page(page):
-          get_counter_inc_fn("badwords-filter")("soft-passed")
-          get_counter_inc_fn("badwords-filter-%s" % lang)("soft-passed")
-          return True
-        get_counter_inc_fn("badwords-filter")("filtered")
-        get_counter_inc_fn("badwords-filter-%s" % lang)("filtered")
-        return False
-      get_counter_inc_fn("badwords-filter-%s" % lang)("passed")
-
-    get_counter_inc_fn("badwords-filter")("passed")
-    return True
-
-  return badwords_filter
+  return functools.partial(
+      _badwords_filter,
+      badwords_regex=badwords_regex,
+      keep_badword_page=keep_badword_page,
+  )
 
 
 def paragraph_filter(

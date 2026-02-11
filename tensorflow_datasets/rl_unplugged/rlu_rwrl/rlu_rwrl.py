@@ -21,7 +21,7 @@ import collections
 import dataclasses
 import functools
 import os
-from typing import Any, Dict, Generator, Optional, Sequence, Text, Tuple, Union
+from typing import Any, Iterable, Optional, Sequence, Text, Union
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -203,8 +203,8 @@ def tf_example_to_feature_description(
 
 
 def tree_deflatten_with_delimiter(
-    flat_dict: Dict[str, Any], delimiter: str = _DELIMITER
-) -> Dict[str, Any]:
+    flat_dict: dict[str, Any], delimiter: str = _DELIMITER
+) -> dict[str, Any]:
   """De-flattens a dict to its originally nested structure.
 
   Does the opposite of {combine_nested_keys(k) :v
@@ -228,7 +228,7 @@ def tree_deflatten_with_delimiter(
 
 
 def tf_feature_to_tfds_feature(
-    nested: Union[tf.io.FixedLenFeature, Dict[Text, Any]]
+    nested: Union[tf.io.FixedLenFeature, dict[Text, Any]]
 ):
   """Converts potentially nested tf features into tfds features."""
   if isinstance(nested, tf.io.FixedLenFeature):
@@ -243,6 +243,42 @@ def tf_feature_to_tfds_feature(
     return ret
   else:
     raise ValueError(f'Unsupported type {type(nested)}')
+
+
+def _generate_examples_one_file_fn(
+    path,
+    feature_description,
+    tf_example_to_step_ds_fn,
+) -> Iterable[tuple[str, dict[str, Any]]]:
+  """Yields examples from one file.
+
+  Args:
+    path: The file path to the TFRecord file.
+    feature_description: A dictionary describing the features in the tf.Example.
+    tf_example_to_step_ds_fn: A function that takes a tf.Example tensor and the
+      feature description, and returns a dictionary representing an episode.
+
+  Yields:
+    A tuple containing:
+      -   A unique key for the episode, composed of the file base name and an
+          episode index.
+      -   A dictionary containing the episode data, as returned by
+          `tf_example_to_step_ds_fn`.
+  """
+  key_prefix = os.path.basename(path)
+  # Dataset of tf.Examples containing full episodes.
+  example_ds = tf.data.TFRecordDataset(filenames=str(path))
+  # Dataset of episodes, each represented as a dataset of steps.
+  episode_ds = example_ds.map(
+      functools.partial(
+          tf_example_to_step_ds_fn,
+          feature_description=feature_description,
+      ),
+      num_parallel_calls=tf.data.experimental.AUTOTUNE,
+  )
+  episode_ds = tfds.as_numpy(episode_ds)
+  for episode_id, e in enumerate(episode_ds):
+    yield f'{key_prefix}/{episode_id}', e
 
 
 class RluRwrl(rlu_common.RLUBuilder):
@@ -322,7 +358,7 @@ class RluRwrl(rlu_common.RLUBuilder):
 
   def tf_example_to_step_ds(  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
       self, tf_example: tf.Tensor, feature_description
-  ) -> Dict[str, Any]:
+  ) -> dict[str, Any]:
     data = tf.io.parse_single_example(tf_example, feature_description)
     data = tree_deflatten_with_delimiter(data)
 
@@ -368,26 +404,8 @@ class RluRwrl(rlu_common.RLUBuilder):
 
     feature_description = tf_example_to_feature_description(example_item)
 
-    def _generate_examples_one_file(
-        path,
-    ) -> Generator[Tuple[str, Dict[str, Any]], None, None]:
-      """Yields examples from one file."""
-      counter = 0
-      key_prefix = os.path.basename(path)
-      # Dataset of tf.Examples containing full episodes.
-      example_ds = tf.data.TFRecordDataset(filenames=str(path))
-      # Dataset of episodes, each represented as a dataset of steps.
-      episode_ds = example_ds.map(
-          functools.partial(
-              self.tf_example_to_step_ds,
-              feature_description=feature_description,
-          ),
-          num_parallel_calls=tf.data.experimental.AUTOTUNE,
-      )
-      episode_ds = tfds.as_numpy(episode_ds)
-      for e in episode_ds:
-        episode_id = counter
-        yield f'{key_prefix}/{episode_id}', e
-        counter += 1
-
-    return beam.Create(file_paths) | beam.FlatMap(_generate_examples_one_file)
+    return beam.Create(file_paths) | beam.FlatMap(
+        _generate_examples_one_file_fn,
+        feature_description=feature_description,
+        tf_example_to_step_ds_fn=self.tf_example_to_step_ds,
+    )
