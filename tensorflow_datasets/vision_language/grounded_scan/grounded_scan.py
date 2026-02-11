@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import json
 import os
-from typing import List
 
 import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
@@ -76,10 +75,64 @@ _GSCAN_DATA_PATH = (
 _SPATIAL_DATA_PATH = 'https://storage.googleapis.com/gresearch/gscan/'
 
 
+def _get_position_feature(raw_position):
+  return {
+      'row': int(raw_position['row']),
+      'column': int(raw_position['column']),
+  }
+
+
+def _get_object_feature(raw_object):
+  return {
+      'vector': raw_object['vector'].strip(),
+      'position': _get_position_feature(raw_object['position']),
+      'object': {
+          'shape': raw_object['object']['shape'],
+          'color': raw_object['object']['color'],
+          'size': int(raw_object['object']['size']),
+      },
+  }
+
+
+def _parse_sparse_situation_to_feature(situation):
+  return {
+      'grid_size': int(situation['grid_size']),
+      'agent_direction': int(situation['agent_direction']),
+      'distance_to_target': int(situation['grid_size']),
+      'direction_to_target': situation['direction_to_target'],
+      'agent_position': _get_position_feature(situation['agent_position']),
+      'target_object': _get_object_feature(situation['target_object']),
+      'placed_objects': [
+          _get_object_feature(obj)
+          for obj in situation['placed_objects'].values()
+      ],
+  }
+
+
+def _preprocess(example):
+  return {
+      'command': example['command'].split(','),
+      'target_commands': example['target_commands'].split(','),
+      'meaning': example['meaning'].split(','),
+      'manner': example['manner'],
+      'verb_in_command': example['verb_in_command'],
+      'referred_target': example['referred_target'],
+      'situation': _parse_sparse_situation_to_feature(example['situation']),
+  }
+
+
+def _yield_examples(path, split_name):
+  dataset_path = os.path.join(path, 'dataset.txt')
+  with tf.io.gfile.GFile(dataset_path, 'r') as f:
+    dataset = json.load(f)
+  for i, example in enumerate(dataset['examples'][split_name]):
+    yield f'{split_name}_{i}', _preprocess(example)
+
+
 class GroundedScanConfig(tfds.core.BuilderConfig):
   """BuilderConfig for groundedSCAN."""
 
-  def __init__(self, *, data_path: str, splits_names: List[str], **kwargs):
+  def __init__(self, *, data_path: str, splits_names: list[str], **kwargs):
     """BuilderConfig for groundedSCAN.
 
     Args:
@@ -199,56 +252,8 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
 
     beam = tfds.core.lazy_imports.apache_beam
-
-    def _get_position_feature(raw_position):
-      return {
-          'row': int(raw_position['row']),
-          'column': int(raw_position['column']),
-      }
-
-    def _get_object_feature(raw_object):
-      return {
-          'vector': raw_object['vector'].strip(),
-          'position': _get_position_feature(raw_object['position']),
-          'object': {
-              'shape': raw_object['object']['shape'],
-              'color': raw_object['object']['color'],
-              'size': int(raw_object['object']['size']),
-          },
-      }
-
-    def _parse_sparse_situation_to_feature(situation):
-      return {
-          'grid_size': int(situation['grid_size']),
-          'agent_direction': int(situation['agent_direction']),
-          'distance_to_target': int(situation['grid_size']),
-          'direction_to_target': situation['direction_to_target'],
-          'agent_position': _get_position_feature(situation['agent_position']),
-          'target_object': _get_object_feature(situation['target_object']),
-          'placed_objects': [
-              _get_object_feature(obj)
-              for obj in situation['placed_objects'].values()
-          ],
-      }
-
-    def _preprocess(example):
-      return {
-          'command': example['command'].split(','),
-          'target_commands': example['target_commands'].split(','),
-          'meaning': example['meaning'].split(','),
-          'manner': example['manner'],
-          'verb_in_command': example['verb_in_command'],
-          'referred_target': example['referred_target'],
-          'situation': _parse_sparse_situation_to_feature(example['situation']),
-      }
-
-    def _yield_examples(path):
-      dataset_path = os.path.join(path, 'dataset.txt')
-      with tf.io.gfile.GFile(dataset_path, 'r') as f:
-        dataset = json.load(f)
-      for i, example in enumerate(dataset['examples'][split_name]):
-        yield f'{split_name}_{i}', _preprocess(example)
-
     return 'Create pipeline' >> beam.Create(
         [path]
-    ) | 'Process samples' >> beam.FlatMap(_yield_examples)
+    ) | 'Process samples' >> beam.FlatMap(
+        _yield_examples, split_name=split_name
+    )
