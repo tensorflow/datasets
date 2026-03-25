@@ -14,12 +14,7 @@
 # limitations under the License.
 
 """Dataset definition for bee_dataset.
-
-DEPRECATED!
-If you want to use the BeeDataset dataset builder class, use:
-tfds.builder_cls('bee_dataset')
 """
 
-from tensorflow_datasets.core import lazy_builder_import
-
-BeeDataset = lazy_builder_import.LazyBuilderImport('bee_dataset')
+import tensorflow_datasets as tfds
+BeeDataset = tfds.builder_cls('bee_dataset')
