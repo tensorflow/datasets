@@ -22,4 +22,4 @@ select 300 pixel height by loading the datset with the name
 
 License: GNU GENERAL PUBLIC LICENSE
 
-Author: Fabian Hickert <Fabian.Hickert@raspbee.de>
+Author: Fabian Hickert <Fabian.Hickert@posteo.de>
