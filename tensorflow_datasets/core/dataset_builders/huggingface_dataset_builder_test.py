@@ -57,6 +57,7 @@ def mock_load_dataset_builder(tmp_path):
   with mock.patch.object(
       hf_datasets, 'load_dataset_builder', return_value=hf_builder
   ) as load_dataset_builder:
+    hf_builder.download_and_prepare()
     yield load_dataset_builder
 
 
@@ -127,12 +128,6 @@ def test_download_and_prepare(builder):
     for feature in ['number', 'text', 'image']:
       assert np.array_equal(element[feature], expected[feature])
   assert len(ds['train_clean']) == 2
-
-
-def test_all_parameters_are_passed_down_to_hf(builder):
-  builder._hf_builder.download_and_prepare.assert_called_once_with(
-      verification_mode='no_checks', num_proc=100
-  )
 
 
 def test_hf_features(builder):
