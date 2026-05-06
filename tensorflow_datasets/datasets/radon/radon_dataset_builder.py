@@ -127,9 +127,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     df = df.drop_duplicates(subset='idnum')
     df.drop('fips', axis=1, inplace=True)
 
-    df['wave'].replace({'  .': '-1'}, inplace=True)
-    df['rep'].replace({' .': '-1'}, inplace=True)
-    df['zip'].replace({'     ': '-1'}, inplace=True)
+    df['wave'] = df['wave'].replace({'  .': '-1'})
+    df['rep'] = df['rep'].replace({' .': '-1'})
+    df['zip'] = df['zip'].replace({'     ': '-1'})
 
     for i, (_, row) in enumerate(df.iterrows()):
       radon_val = row.pop('activity')
