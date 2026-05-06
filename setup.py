@@ -29,7 +29,7 @@ import itertools
 import os
 import sys
 
-import pkg_resources
+from packaging.version import Version
 import setuptools
 
 # To enable importing version.py directly, we add its path to sys.path.
@@ -40,7 +40,7 @@ from version import __version__  # pytype: disable=import-error  # pylint: disab
 if datestring := os.environ.get('TFDS_NIGHTLY_TIMESTAMP'):
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  curr_version = pkg_resources.parse_version(__version__)
+  curr_version = Version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
 else:
   project_name = 'tensorflow-datasets'
