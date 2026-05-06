@@ -790,11 +790,11 @@ class DatasetInfo:
           "is_repeated",
           getattr(field, "label", None) == getattr(field, "LABEL_REPEATED", 3),
       )
-      if is_repeated:
-        del field_value[:]
-        field_value.extend(field_value_restored)
-      elif field.type == field.TYPE_MESSAGE:
+      if field.type == field.TYPE_MESSAGE:
         field_value.MergeFrom(field_value_restored)
+      elif is_repeated:
+        field_value[:] = []
+        field_value.extend(field_value_restored)
       else:
         setattr(self._info_proto, field_name, field_value_restored)
 
