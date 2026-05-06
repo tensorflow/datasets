@@ -78,15 +78,19 @@ _NSFW_TAGS = ('UNLIKELY', 'UNSURE', 'NSFW', _NSFW_MISSING_TAG)
 
 def _get_example_metadata(metadata_df_row):
   """Returns example metadata."""
+  pd = tfds.core.lazy_imports.pandas
   nsfw_tag = metadata_df_row['NSFW']
   if nsfw_tag not in _NSFW_TAGS:
     nsfw_tag = _NSFW_MISSING_TAG
 
+  similarity = metadata_df_row['similarity']
+  license_ = metadata_df_row['LICENSE']
+
   return {
       'caption': metadata_df_row['caption'],
       'nsfw': nsfw_tag,
-      'similarity': metadata_df_row['similarity'] or _MISSING_SIMILARITY_VALUE,
-      'license': metadata_df_row['LICENSE'] or '',
+      'similarity': _MISSING_SIMILARITY_VALUE if pd.isna(similarity) else similarity,
+      'license': '' if pd.isna(license_) else license_,
       'url': metadata_df_row['url'],
       'original_width': metadata_df_row['original_width'],
       'original_height': metadata_df_row['original_height'],
