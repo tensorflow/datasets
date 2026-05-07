@@ -133,9 +133,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     for i, (_, row) in enumerate(df.iterrows()):
       radon_val = row.pop('activity')
+      features_dict = {}
+      for name, (_, convert_fn) in features().items():
+        try:
+          features_dict[name] = convert_fn(row[name])
+        except ValueError as e:
+          raise ValueError(
+              f'Failed to convert {name} with value {row[name]!r}'
+          ) from e
       yield i, {
           'activity': float(radon_val),
-          'features': {
-              name: features()[name][1](value) for name, value in row.items()
-          },
+          'features': features_dict,
       }

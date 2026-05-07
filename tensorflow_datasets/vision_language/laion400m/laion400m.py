@@ -14,12 +14,12 @@
 # limitations under the License.
 
 """LAION-400M image dataset."""
+
 import functools
 from typing import Dict, Tuple
 
 from etils import epath
 import numpy as np
-
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -78,15 +78,21 @@ _NSFW_TAGS = ('UNLIKELY', 'UNSURE', 'NSFW', _NSFW_MISSING_TAG)
 
 def _get_example_metadata(metadata_df_row):
   """Returns example metadata."""
+  pd = tfds.core.lazy_imports.pandas
   nsfw_tag = metadata_df_row['NSFW']
   if nsfw_tag not in _NSFW_TAGS:
     nsfw_tag = _NSFW_MISSING_TAG
 
+  similarity = metadata_df_row['similarity']
+  license_ = metadata_df_row['LICENSE']
+
   return {
       'caption': metadata_df_row['caption'],
       'nsfw': nsfw_tag,
-      'similarity': metadata_df_row['similarity'] or _MISSING_SIMILARITY_VALUE,
-      'license': metadata_df_row['LICENSE'] or '',
+      'similarity': (
+          _MISSING_SIMILARITY_VALUE if pd.isna(similarity) else similarity
+      ),
+      'license': '' if pd.isna(license_) else license_,
       'url': metadata_df_row['url'],
       'original_width': metadata_df_row['original_width'],
       'original_height': metadata_df_row['original_height'],
@@ -174,11 +180,9 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
     }
 
     if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
-      features.update(
-          {
-              'image': tfds.features.Image(doc='image'),
-          }
-      )
+      features.update({
+          'image': tfds.features.Image(doc='image'),
+      })
     else:
       features.update({
           'image_embedding': tfds.features.Tensor(
