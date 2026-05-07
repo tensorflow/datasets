@@ -153,7 +153,10 @@ def _get_builder_datadir_path(builder_cls: Type[Any]) -> epath.Path:
   """
   pkg_names = builder_cls.__module__.split(".")
   # -1 to remove the xxx.py python file.
-  return epath.resource_path(pkg_names[0]).joinpath(*pkg_names[1:-1])
+  path = epath.resource_path(pkg_names[0])
+  for pkg_name in pkg_names[1:-1]:
+    path = path.joinpath(pkg_name)
+  return path
 
 
 class DatasetBuilder(registered.RegisteredDataset):
@@ -343,7 +346,9 @@ class DatasetBuilder(registered.RegisteredDataset):
             or path.parts
         ):
           modules[-1] += ".py"
-          return path.joinpath(*modules[1:])
+          for module in modules[1:]:
+            path = path.joinpath(module)
+          return path
     # Otherwise, fallback to `pathlib.Path`. For non-zipapp, it should be
     # equivalent to the above return.
     try:
