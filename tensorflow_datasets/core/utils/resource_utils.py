@@ -47,7 +47,10 @@ def tfds_path(*relative_path: epath.PathLike) -> epath.Path:
   Returns:
     path: The root TFDS path.
   """
-  return root_tfds_path().joinpath(*relative_path)
+  path = root_tfds_path()
+  for p in relative_path:
+    path = path.joinpath(p)
+  return path
 
 
 def tfds_write_path(*relative_path: epath.PathLike) -> epath.Path:
