@@ -1146,6 +1146,9 @@ toc:
     title: nyu_rot_dataset_converted_externally_to_rlds
   - path: /datasets/catalog/plex_robosuite
     title: plex_robosuite
+  - path: /datasets/catalog/robo_ai_u_r5e
+    status: nightly
+    title: robo_ai_u_r5e
   - path: /datasets/catalog/robo_set
     title: robo_set
   - path: /datasets/catalog/roboturk
