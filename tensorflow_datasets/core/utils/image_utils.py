@@ -177,16 +177,25 @@ def create_thumbnail(
   if use_colormap:  # Apply the colormap first as it modify the shape/dtype
     ex = apply_colormap(ex)
 
-  _, _, c = ex.shape
+  c = ex.shape[-1] if ex.ndim == 3 else 1
   postprocess = _postprocess_noop
   if c == 1:
     ex = ex.squeeze(axis=-1)
-    mode = 'L'
+    if ex.dtype == np.uint16:
+      mode = 'I;16'
+      postprocess = _postprocess_convert_rgb
+    else:
+      mode = 'L'
   elif ex.dtype == np.uint16:
-    mode = 'I;16'
+    # PIL.Image.fromarray doesn't support uint16 for >1 channels.
+    # https://github.com/python-pillow/Pillow/blob/11.0.0/src/PIL/Image.py#L3225
+    # Scale to 8-bit for visualization.
+    ex = (ex / 257).astype(np.uint8)
+    mode = None
     postprocess = _postprocess_convert_rgb
   else:
     mode = None
+    postprocess = _postprocess_convert_rgb
   img = PIL_Image.fromarray(ex, mode=mode)
   img = postprocess(img)
   if default_dimensions:

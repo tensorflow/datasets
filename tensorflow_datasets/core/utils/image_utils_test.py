@@ -18,6 +18,7 @@
 import os
 
 import numpy as np
+import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core.utils import image_utils
@@ -92,6 +93,27 @@ class ImageUtilsTest(testing.TestCase):
             [[71, 84, 183], [55, 126, 184]],
         ],
     )
+
+
+@pytest.mark.parametrize(
+    'dtype,fill_value,expected_mode,channels,expected_shape',
+    [
+        (np.uint8, 255, 'L', 1, (32, 32)),
+        (np.uint8, 255, 'RGB', 3, (32, 32, 3)),
+        (np.uint16, 65535, 'RGB', 1, (32, 32, 3)),
+        (np.uint16, 65535, 'RGB', 3, (32, 32, 3)),
+    ],
+)
+def test_create_thumbnail_conversion(
+    dtype, fill_value, expected_mode, channels, expected_shape
+):
+  img = np.full((32, 32, channels), fill_value=fill_value, dtype=dtype)
+  thumbnail = image_utils.create_thumbnail(
+      img, use_colormap=False, default_dimensions=True
+  )
+  assert thumbnail.mode == expected_mode
+  expected_array = np.full(expected_shape, fill_value=255, dtype=np.uint8)
+  np.testing.assert_array_equal(np.asarray(thumbnail), expected_array)
 
 
 if __name__ == '__main__':
