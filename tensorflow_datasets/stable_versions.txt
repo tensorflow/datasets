@@ -73,6 +73,10 @@ asimov_dilemmas_scifi_val/0.1.0
 asimov_injury_val/0.1.0
 asimov_multimodal_auto_val/0.1.0
 asimov_multimodal_manual_val/0.1.0
+asimov_v2_constraints_with_rationale/0.1.0
+asimov_v2_constraints_without_rationale/0.1.0
+asimov_v2_injuries/0.1.0
+asimov_v2_videos/0.1.0
 asqa/2.0.0
 asset/ratings/1.0.0
 asset/simplification/1.0.0
@@ -265,7 +269,7 @@ c4/webtextlike/3.1.0
 c4_wsrs/default/1.0.0
 caltech101/3.0.2
 caltech_birds2010/0.1.1
-caltech_birds2011/0.1.1
+caltech_birds2011/0.2.0
 cardiotox/1.0.0
 cars196/2.1.0
 cassava/0.1.0
@@ -567,6 +571,7 @@ cos_e/0.0.1
 cosmos_qa/1.0.0
 covid19/1.0.0
 covid19sum/1.0.0
+covr/1.0.0
 crema_d/1.0.0
 criteo/1.0.1
 cs_restaurants/1.0.0
@@ -1180,7 +1185,7 @@ lsun/sofa/3.1.0
 lsun/tower/3.1.0
 lsun/train/3.1.0
 lsun/tv-monitor/3.1.0
-lvis/1.3.0
+lvis/1.4.0
 malaria/1.0.0
 maniskill_dataset_converted_externally_to_rlds/0.1.0
 math_dataset/algebra__linear_1d/1.0.0
@@ -1316,7 +1321,7 @@ mt_opt/sd/1.0.0
 mtnt/en-fr/1.0.0
 mtnt/en-ja/1.0.0
 mtnt/fr-en/1.0.0
-multi_news/1.0.0
+multi_news/2.1.0
 multi_nli/1.1.0
 multi_nli_mismatch/0.1.0
 natural_instructions/1.0.1
@@ -2227,6 +2232,7 @@ rlu_rwrl/walker_walk_combined_challenge_none_1_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_20_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_40_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_5_percent/1.0.1
+robo_ai_u_r5e/0.1.0
 robo_set/0.1.0
 robomimic_mg/can_mg_image/1.0.0
 robomimic_mg/can_mg_low_dim/1.0.0
