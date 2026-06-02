@@ -29,7 +29,7 @@ _FILE_ANNOTATION_URL = "filelist_places365-standard.tar"
 
 _IMAGE_SHAPE = (256, 256, 3)
 
-_LABELS_FNAME = "image_classification/categories_places365.txt"
+_LABELS_FNAME = "datasets/places365_small/categories_places365.txt"
 
 
 class Builder(tfds.core.GeneratorBasedBuilder):

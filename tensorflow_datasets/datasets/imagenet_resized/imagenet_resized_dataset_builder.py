@@ -24,7 +24,7 @@ import itertools
 import numpy as np
 import tensorflow_datasets.public_api as tfds
 
-_LABELS_FNAME = 'image_classification/imagenet_resized_labels.txt'
+_LABELS_FNAME = 'datasets/imagenet_resized/imagenet_resized_labels.txt'
 _URL_PREFIX = 'http://www.image-net.org/data/downsample/'
 
 
