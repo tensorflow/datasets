@@ -48,7 +48,7 @@ else:
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
-    'absl-py',
+    'absl-py>=1.0.0',
     # Min version of 0.5.0 as old array_record wheel are bugged on all
     # platform except 'x86_64'. See
     # https://github.com/google/array_record/issues/71
