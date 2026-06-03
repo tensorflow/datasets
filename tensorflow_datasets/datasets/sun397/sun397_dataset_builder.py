@@ -186,13 +186,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       }
       for split, filename in tfds_split_files.items():
         tfds_split_files[split] = tfds.core.tfds_path(
-            os.path.join("image_classification", filename)
+            os.path.join("datasets", "sun397", filename)
         )
     self._tfds_split_files = tfds_split_files
 
   def _info(self):
     names_file = tfds.core.tfds_path(
-        os.path.join("image_classification", "sun397_labels.txt")
+        os.path.join("datasets", "sun397", "sun397_labels.txt")
     )
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
