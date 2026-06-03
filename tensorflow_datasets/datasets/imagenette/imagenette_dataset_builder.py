@@ -24,7 +24,7 @@ import os
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_LABELS_FNAME = "image_classification/imagenette_labels.txt"
+_LABELS_FNAME = "datasets/imagenette/imagenette_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas/"
 
 
