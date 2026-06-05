@@ -23,6 +23,7 @@ from unittest import mock
 
 import dill
 from etils import epath
+from google.protobuf import json_format
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
@@ -40,7 +41,6 @@ from tensorflow_datasets.core.features import features_dict
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils import error_utils
 from tensorflow_datasets.core.utils import file_utils
-from google.protobuf import json_format
 
 _DATA_DIR = epath.Path('path/to')
 _BUILDER_NAME = 'ds0'

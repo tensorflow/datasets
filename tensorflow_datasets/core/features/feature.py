@@ -30,6 +30,9 @@ from typing import Any, Dict, List, Mapping, Optional, Type, TypeVar, Union
 from absl import logging
 from etils import enp
 from etils import epath
+from google.protobuf import descriptor
+from google.protobuf import json_format
+from google.protobuf import message
 import numpy as np
 from tensorflow_datasets.core import constants
 from tensorflow_datasets.core import utils
@@ -43,10 +46,6 @@ from tensorflow_datasets.core.utils import type_utils
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.core.utils.lazy_imports_utils import tf_agents
 from tensorflow_datasets.core.utils.lazy_imports_utils import tree
-
-from google.protobuf import descriptor
-from google.protobuf import json_format
-from google.protobuf import message
 
 Json = type_utils.Json
 Shape = type_utils.Shape

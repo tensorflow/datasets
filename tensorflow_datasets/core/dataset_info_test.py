@@ -23,6 +23,7 @@ from typing import Union
 from unittest import mock
 
 from etils import epath
+from google.protobuf import text_format
 import numpy as np
 import pytest
 import tensorflow as tf
@@ -39,8 +40,6 @@ from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.proto import feature_pb2
 from tensorflow_datasets.image_classification import mnist
 from tensorflow_datasets.testing.dummy_config_based_datasets.dummy_ds_1 import dummy_ds_1_dataset_builder
-
-from google.protobuf import text_format
 
 
 _TFDS_DIR = utils.tfds_path()

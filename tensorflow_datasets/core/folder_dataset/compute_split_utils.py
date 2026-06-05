@@ -26,6 +26,7 @@ from typing import Optional, Type, Union, cast
 
 from etils import epath
 from etils import etree
+from google.protobuf import json_format
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import lazy_imports_lib
 from tensorflow_datasets.core import naming
@@ -33,8 +34,6 @@ from tensorflow_datasets.core import splits as split_lib
 from tensorflow_datasets.core.proto import dataset_info_pb2
 from tensorflow_datasets.core.utils.lazy_imports_utils import apache_beam as beam
 from tensorflow_datasets.core.utils.lazy_imports_utils import array_record_data_source
-
-from google.protobuf import json_format
 
 _SplitFilesDict = Mapping[str, Sequence[naming.FilenameInfo]]
 
