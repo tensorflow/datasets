@@ -43,7 +43,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   VERSION = tfds.core.Version('1.0.0')
 
-  URL = 'https://raspbee.de/BeeDataset_20201121.zip'
+  URL = 'https://github.com/BeeAlarmed/BeeDataset/raw/refs/heads/main/BeeDataset_20201121.zip'
 
   BEE_CFG_300 = BeeDatasetConfig(
       name='bee_dataset_300',
@@ -63,7 +63,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   BEE_CFG_150 = BeeDatasetConfig(
       name='bee_dataset_150',
-      description='BeeDataset images with 200 pixel height and 100 pixel width',
+      description='BeeDataset images with 150 pixel height and 75 pixel width',
       version='1.0.0',
       image_height=150,
       image_width=75,
@@ -79,8 +79,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         self.builder_config.depth,
     )
     features = tfds.features.FeaturesDict({
-        'input': tfds.features.Image(shape=t_shape),
-        'output': {
+        'image': tfds.features.Image(shape=t_shape),
+        'label': {
             'varroa_output': np.float64,
             'pollen_output': np.float64,
             'wasps_output': np.float64,
@@ -90,8 +90,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return self.dataset_info_from_configs(
         features=features,
-        supervised_keys=('input', 'output'),
-        homepage='https://raspbee.de',
+        supervised_keys=('image', 'label'),
+        homepage='https://github.com/BeeAlarmed/BeeDataset',
     )
 
   def _split_generators(self, dl_manager):
@@ -116,8 +116,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       img = path / f'images_{self.builder_config.height}' / name
 
       yield name + str(self.builder_config.height), {
-          'input': img,
-          'output': {
+          'image': img,
+          'label': {
               'varroa_output': labels[0],
               'pollen_output': labels[1],
               'wasps_output': labels[2],
