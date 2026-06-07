@@ -56,7 +56,7 @@ class ArrayRecordDataSource(base.BaseDataSource):
   length: int = dataclasses.field(init=False)
 
   def __post_init__(self):
-    file_instructions = base.file_instructions(self.dataset_info, self.split)
+    file_instructions = self.split_info.file_instructions
     self.data_source = array_record_data_source.ArrayRecordDataSource(
         file_instructions
     )

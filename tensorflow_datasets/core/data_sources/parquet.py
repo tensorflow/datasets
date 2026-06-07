@@ -57,7 +57,7 @@ class ParquetDataSource(base.BaseDataSource):
   """ParquetDataSource to read from a ParquetDataset."""
 
   def __post_init__(self):
-    file_instructions = base.file_instructions(self.dataset_info, self.split)
+    file_instructions = self.split_info.file_instructions
     filenames = [
         file_instruction.filename for file_instruction in file_instructions
     ]
