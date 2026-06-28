@@ -56,8 +56,6 @@ REQUIRED_PKGS = [
     'dm-tree',
     'etils[edc,enp,epath,epy,etree]>=1.6.0;python_version<"3.11"',
     'etils[edc,enp,epath,epy,etree]>=1.9.1;python_version>="3.11"',
-    'fsspec',
-    'gcsfs',
     'immutabledict',
     'numpy',
     'promise',
@@ -227,6 +225,7 @@ HUGGINGFACE_ALL_DEPENDENCIES = [
 ] + ['datasets']
 
 EXTRAS = {
+    'gcs_prefer_fsspec': ['fsspec', 'gcsfs'],
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
     'tf-nightly': ['tf-nightly'],
