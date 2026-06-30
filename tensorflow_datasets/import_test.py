@@ -15,6 +15,9 @@
 
 """Test import."""
 
+import os
+import subprocess
+import sys
 import tensorflow_datasets as tfds
 
 
@@ -22,6 +25,52 @@ class ImportTest(tfds.testing.TestCase):
 
   def test_import(self):
     pass
+
+  def test_gcs_prefer_fsspec_true(self):
+    env = os.environ.copy()
+    env['GCS_PREFER_FSSPEC'] = 'true'
+    env.pop('EPATH_PREFER_FSSPEC', None)
+
+    code = """
+import os
+import tensorflow_datasets as tfds
+from etils import epath
+print("EPATH_PREFER_FSSPEC:", os.environ.get('EPATH_PREFER_FSSPEC'))
+p = epath.Path('gs://dummy-bucket/file.txt')
+print("BACKEND:", type(p._backend).__name__)
+"""
+    result = subprocess.run(
+        [sys.executable, '-c', code],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    self.assertIn("EPATH_PREFER_FSSPEC: true", result.stdout)
+    self.assertIn("BACKEND: _FileSystemSpecBackend", result.stdout)
+
+  def test_gcs_prefer_fsspec_false(self):
+    env = os.environ.copy()
+    env.pop('GCS_PREFER_FSSPEC', None)
+    env.pop('EPATH_PREFER_FSSPEC', None)
+
+    code = """
+import os
+import tensorflow_datasets as tfds
+from etils import epath
+print("EPATH_PREFER_FSSPEC:", os.environ.get('EPATH_PREFER_FSSPEC'))
+p = epath.Path('gs://dummy-bucket/file.txt')
+print("BACKEND:", type(p._backend).__name__)
+"""
+    result = subprocess.run(
+        [sys.executable, '-c', code],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    self.assertIn("EPATH_PREFER_FSSPEC: None", result.stdout)
+    self.assertIn("BACKEND: _TfBackend", result.stdout)
 
 
 if __name__ == '__main__':
