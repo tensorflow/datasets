@@ -118,7 +118,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(),
             "image/file_name": tfds.features.Text(),  # E.g. "000001.png".
-            "objects": tfds.features.Sequence(annotations),
+            "objects": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
         }),
         homepage=_HOMEPAGE_URL,
     )
@@ -136,7 +136,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "images": dl_manager.iter_archive(files["images"]),
                 "annotations": dl_manager.iter_archive(files["annotations"]),
@@ -145,7 +145,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "images": dl_manager.iter_archive(files["images"]),
                 "annotations": dl_manager.iter_archive(files["annotations"]),
@@ -154,7 +154,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "images": dl_manager.iter_archive(files["images"]),
                 "annotations": dl_manager.iter_archive(files["annotations"]),

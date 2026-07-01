@@ -72,7 +72,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
                 'original_labels': imagenet_common.get_validation_labels(

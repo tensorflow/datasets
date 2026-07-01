@@ -100,15 +100,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns a SplitGenerator for the test set."""
-    variant_url = _IMAGENET_V2_URLS[self.builder_config.variant]
+    variant_url = _IMAGENET_V2_URLS[self.builder_config.variant]  # pyrefly: ignore[missing-attribute]
     imagenet_v2_root = os.path.join(
         dl_manager.download_and_extract(variant_url),
-        _TAR_TOPDIR[self.builder_config.variant],
+        _TAR_TOPDIR[self.builder_config.variant],  # pyrefly: ignore[missing-attribute]
     )
     return [
         tfds.core.SplitGenerator(
             # The dataset provides only a test split.
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'imagenet_v2_root': imagenet_v2_root},
         ),

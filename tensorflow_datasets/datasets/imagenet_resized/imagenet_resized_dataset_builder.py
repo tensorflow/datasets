@@ -64,7 +64,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     names_file = tfds.core.tfds_path(_LABELS_FNAME)
-    size = self.builder_config.size
+    size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             'image': tfds.features.Image(shape=(size, size, 3)),
@@ -75,7 +75,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    size = self.builder_config.size
+    size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
 
     if size in [8, 16, 32]:
       train_path, val_path = dl_manager.download([
@@ -96,7 +96,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': itertools.chain(
                     *[
@@ -107,7 +107,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
             },
@@ -121,7 +121,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       if content:
         fobj_mem = io.BytesIO(content)
         data = np.load(fobj_mem, allow_pickle=False)
-        size = self.builder_config.size
+        size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
         for i, (image, label) in enumerate(zip(data['data'], data['labels'])):
           record = {
               # The data is packed flat as CHW where as most image datasets

@@ -58,13 +58,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             os.path.join(path, 'train.json')
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             os.path.join(path, 'dev.json')
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             os.path.join(path, 'test.json')
         ),
     }

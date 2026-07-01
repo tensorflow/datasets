@@ -99,10 +99,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    extract_path = dl_manager.download_and_extract(self.builder_config.url)
+    extract_path = dl_manager.download_and_extract(self.builder_config.url)  # pyrefly: ignore[missing-attribute]
 
     mat_path = os.path.join(
-        extract_path, self.builder_config.dir, "examples.mat"
+        extract_path, self.builder_config.dir, "examples.mat"  # pyrefly: ignore[missing-attribute]
     )
     with tf.io.gfile.GFile(mat_path, "rb") as f:
       data = tfds.core.lazy_imports.scipy.io.loadmat(
@@ -111,7 +111,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "extract_path": extract_path,
                 "data": data,
@@ -119,7 +119,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "extract_path": extract_path,
                 "data": data,
@@ -133,7 +133,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for u_id, example in enumerate(data["examples"]):
       if example[selection_column]:
         img_path = os.path.join(
-            extract_path, self.builder_config.dir, "images", example[3]
+            extract_path, self.builder_config.dir, "images", example[3]  # pyrefly: ignore[missing-attribute]
         )
         yield u_id, {
             "image": img_path,

@@ -168,7 +168,7 @@ class Builder(imagenet2012_dataset_builder.Builder):
     splits = super(Builder, self)._split_generators(dl_manager)
 
     corruptions.FROST_FILENAMES = dl_manager.download(_FROST_FILENAMES)
-    return [s for s in splits if s.name != tfds.Split.TRAIN]
+    return [s for s in splits if s.name != tfds.Split.TRAIN]  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(
       self, archive, validation_labels=None, labels_exist=None
@@ -215,8 +215,8 @@ class Builder(imagenet2012_dataset_builder.Builder):
     Returns:
       numpy array, corrupted images.
     """
-    corruption_type = self.builder_config.corruption_type
-    severity = self.builder_config.severity
+    corruption_type = self.builder_config.corruption_type  # pyrefly: ignore[missing-attribute]
+    severity = self.builder_config.severity  # pyrefly: ignore[missing-attribute]
     x = np.clip(x, 0, 255)
 
     return {

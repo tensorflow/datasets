@@ -293,20 +293,20 @@ class Builder(tfds.core.BeamBasedBuilder):
         },
         "qualities": {quality: tf.bool for quality in _QUALITIES},
     }
-    if self.builder_config.estimate_f0_and_loudness:
+    if self.builder_config.estimate_f0_and_loudness:  # pyrefly: ignore[missing-attribute]
       f0_and_ld_shape = (_F0_AND_LOUDNESS_RATE * _NUM_SECS,)
-      features["f0"] = {
+      features["f0"] = {  # pyrefly: ignore[bad-assignment]
           "hz": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32),
           "midi": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32),
           "confidence": tfds.features.Tensor(
               shape=f0_and_ld_shape, dtype=np.float32
           ),
       }
-      features["loudness"] = {
+      features["loudness"] = {  # pyrefly: ignore[bad-assignment]
           "db": tfds.features.Tensor(shape=f0_and_ld_shape, dtype=np.float32)
       }
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict(features),
+        features=tfds.features.FeaturesDict(features),  # pyrefly: ignore[bad-argument-type]
         homepage="https://g.co/magenta/nsynth-dataset",
         metadata=tfds.core.BeamMetadataDict(
             sample_rate=_AUDIO_RATE,
@@ -322,7 +322,7 @@ class Builder(tfds.core.BeamBasedBuilder):
         for split in _SPLITS
     }
     dl_urls["instrument_labels"] = _BASE_DOWNLOAD_PATH + "instrument_labels.txt"
-    if self.builder_config.gansynth_subset:
+    if self.builder_config.gansynth_subset:  # pyrefly: ignore[missing-attribute]
       dl_urls["gansynth_splits"] = _BASE_DOWNLOAD_PATH + "gansynth_splits.csv"
     dl_paths = dl_manager.download_and_extract(dl_urls)
 
@@ -365,7 +365,7 @@ class Builder(tfds.core.BeamBasedBuilder):
         | beam.Map(_emit_base_example, split=split)
         | beam.Filter(_in_split, split_ids=ids, split=split)
     )
-    if self.builder_config.estimate_f0_and_loudness:
+    if self.builder_config.estimate_f0_and_loudness:  # pyrefly: ignore[missing-attribute]
       examples = (
           examples
           | beam.Reshuffle()

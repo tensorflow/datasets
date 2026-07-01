@@ -51,7 +51,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return [
         tfds.core.SplitGenerator(
             # The dataset provides only a test split.
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'imagenet_a_root': imagenet_a_root},
         ),
