@@ -225,6 +225,7 @@ HUGGINGFACE_ALL_DEPENDENCIES = [
 ] + ['datasets']
 
 EXTRAS = {
+    'gcs_prefer_fsspec': ['fsspec', 'gcsfs'],
     'matplotlib': ['matplotlib'],
     'tensorflow': ['tensorflow>=2.1'],
     'tf-nightly': ['tf-nightly'],
