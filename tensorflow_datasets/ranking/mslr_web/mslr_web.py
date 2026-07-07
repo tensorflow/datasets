@@ -267,8 +267,8 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    size = self.builder_config.size
-    fold = self.builder_config.fold
+    size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
+    fold = self.builder_config.fold  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(_URLS[size])
 
     return {

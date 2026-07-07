@@ -118,8 +118,8 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
     return _CITATION
 
   def get_file_prefix(self):
-    run = self.builder_config.name
-    task = self.builder_config.task
+    run = self.builder_config.name  # pyrefly: ignore[missing-attribute]
+    task = self.builder_config.task  # pyrefly: ignore[missing-attribute]
     return f'{self._INPUT_FILE_PREFIX}/{task}/{run}/tfrecord'
 
   def num_shards(self):
@@ -129,7 +129,7 @@ class DMLabDatasetBuilder(rlu_common.RLUBuilder, skip_registration=True):
       self, tf_example: tf.train.Example
   ) -> Dict[str, Any]:
     """Create an episode from a TF example."""
-    episode_length = self.builder_config.episode_length
+    episode_length = self.builder_config.episode_length  # pyrefly: ignore[missing-attribute]
 
     # Parse tf.Example.
     def sequence_feature(shape, dtype=tf.float32):

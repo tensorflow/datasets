@@ -217,21 +217,21 @@ class Cifar10N(tfds.core.GeneratorBasedBuilder):
           # Note: The human labels are provided according to default shuffling
           # of 'cifar10'. We need to invert the shuffling to assign the right
           # human label to each example.
-          annotations_index = np.where(annotations_order == index)[0][0]
+          annotations_index = np.where(annotations_order == index)[0][0]  # pyrefly: ignore[unbound-name]
 
-          record['worse_label'] = worse_label[annotations_index]
-          record['aggre_label'] = aggre_label[annotations_index]
-          record['random_label1'] = random_label1[annotations_index]
-          record['random_label2'] = random_label2[annotations_index]
-          record['random_label3'] = random_label3[annotations_index]
+          record['worse_label'] = worse_label[annotations_index]  # pyrefly: ignore[unbound-name]
+          record['aggre_label'] = aggre_label[annotations_index]  # pyrefly: ignore[unbound-name]
+          record['random_label1'] = random_label1[annotations_index]  # pyrefly: ignore[unbound-name]
+          record['random_label2'] = random_label2[annotations_index]  # pyrefly: ignore[unbound-name]
+          record['random_label3'] = random_label3[annotations_index]  # pyrefly: ignore[unbound-name]
 
           # Worker metadata is shared every 10 samples
-          record['worker1_id'] = worker1_id[index // 10]
-          record['worker1_time'] = worker1_time[index // 10]
-          record['worker2_id'] = worker2_id[index // 10]
-          record['worker2_time'] = worker2_time[index // 10]
-          record['worker3_id'] = worker3_id[index // 10]
-          record['worker3_time'] = worker3_time[index // 10]
+          record['worker1_id'] = worker1_id[index // 10]  # pyrefly: ignore[unbound-name]
+          record['worker1_time'] = worker1_time[index // 10]  # pyrefly: ignore[unbound-name]
+          record['worker2_id'] = worker2_id[index // 10]  # pyrefly: ignore[unbound-name]
+          record['worker2_time'] = worker2_time[index // 10]  # pyrefly: ignore[unbound-name]
+          record['worker3_id'] = worker3_id[index // 10]  # pyrefly: ignore[unbound-name]
+          record['worker3_time'] = worker3_time[index // 10]  # pyrefly: ignore[unbound-name]
         else:
           # There is no annotator metadata for test split
           record['worse_label'] = -1

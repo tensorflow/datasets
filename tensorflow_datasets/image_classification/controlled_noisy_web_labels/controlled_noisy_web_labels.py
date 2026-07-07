@@ -361,7 +361,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
     features = {}
     features['image'] = tfds.features.Image()
     features['label'] = tfds.features.ClassLabel(
-        num_classes=self.builder_config.num_classes
+        num_classes=self.builder_config.num_classes  # pyrefly: ignore[missing-attribute]
     )
     features['is_clean'] = tfds.features.Tensor(shape=(), dtype=np.bool_)
     features['id'] = tfds.features.Text()
@@ -421,16 +421,16 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
 
     split_to_generator = {}
 
-    split_to_generator[tfds.Split.VALIDATION] = self._generate_val_examples(
+    split_to_generator[tfds.Split.VALIDATION] = self._generate_val_examples(  # pyrefly: ignore[missing-attribute]
         val_split_file, dl_manager.iter_archive(val_path)
     )
 
     for percent in _PERCENTS:
-      split_name = tfds.Split.TRAIN + '_' + '{:02d}'.format(percent)
+      split_name = tfds.Split.TRAIN + '_' + '{:02d}'.format(percent)  # pyrefly: ignore[missing-attribute]
       split_file = os.path.join(
           noisy_split_path,
           '{}_noise_nl_{}'.format(
-              self.builder_config.color, str(percent / 100)
+              self.builder_config.color, str(percent / 100)  # pyrefly: ignore[missing-attribute]
           ),
       )
       split_to_generator[split_name] = self._generate_examples(

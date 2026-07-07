@@ -56,12 +56,12 @@ class RluAtariCheckpoints(rlu_common.RLUBuilder):
     return atari_utils.citation()
 
   def get_file_prefix(self):
-    run = self.builder_config.run
-    game = self.builder_config.game
+    run = self.builder_config.run  # pyrefly: ignore[missing-attribute]
+    game = self.builder_config.game  # pyrefly: ignore[missing-attribute]
     return atari_utils.file_prefix(self._INPUT_FILE_PREFIX, run, game)
 
   def num_shards(self):
-    return atari_utils.num_shards(self.builder_config.game, self._SHARDS)
+    return atari_utils.num_shards(self.builder_config.game, self._SHARDS)  # pyrefly: ignore[missing-attribute]
 
   def get_episode_id(self, episode):
     return atari_utils.episode_id(episode)

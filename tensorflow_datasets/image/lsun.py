@@ -119,14 +119,14 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    if self.builder_config.name in _SCENES_CATEGORIES:
+    if self.builder_config.name in _SCENES_CATEGORIES:  # pyrefly: ignore[missing-attribute]
       extracted_dirs = dl_manager.download_and_extract({
           "train": LSUN_SCENE_URL % (self.builder_config.name, "train"),
           "val": LSUN_SCENE_URL % (self.builder_config.name, "val"),
       })
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "extracted_dir": extracted_dirs["train"],
                   "file_path": "%s_%s_lmdb" % (
@@ -136,7 +136,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
               },
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
+              name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "extracted_dir": extracted_dirs["val"],
                   "file_path": "%s_%s_lmdb" % (self.builder_config.name, "val"),
@@ -151,7 +151,7 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       )
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "extracted_dir": extracted_dirs["train"],
                   "file_path": self.builder_config.name,

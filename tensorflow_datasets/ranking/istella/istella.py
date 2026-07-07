@@ -136,11 +136,11 @@ class Istella(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(_URLS[self.builder_config.name])
+    path = dl_manager.download_and_extract(_URLS[self.builder_config.name])  # pyrefly: ignore[missing-attribute]
 
     # For some dataset configs, the data is in a subdirectory.
-    if self.builder_config.subdirectory is not None:
-      path = path / self.builder_config.subdirectory
+    if self.builder_config.subdirectory is not None:  # pyrefly: ignore[missing-attribute]
+      path = path / self.builder_config.subdirectory  # pyrefly: ignore[unsupported-operation]
 
     splits = {
         "train": self._generate_examples(path / "train.txt"),
@@ -148,7 +148,7 @@ class Istella(tfds.core.GeneratorBasedBuilder):
     }
 
     # For some dataset configs, there is an additional validation split.
-    if self.builder_config.has_vali:
+    if self.builder_config.has_vali:  # pyrefly: ignore[missing-attribute]
       splits["vali"] = self._generate_examples(path / "vali.txt")
 
     return splits

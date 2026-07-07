@@ -432,10 +432,10 @@ class Domainnet(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    img_download_url = f'{self._BASE_URL}/{self.builder_config.img_url}'
+    img_download_url = f'{self._BASE_URL}/{self.builder_config.img_url}'  # pyrefly: ignore[missing-attribute]
     self.img_path = dl_manager.download_and_extract(img_download_url)
 
-    domain = self.builder_config.name
+    domain = self.builder_config.name  # pyrefly: ignore[missing-attribute]
     train_split_url = f'{self._BASE_URL}/domainnet/txt/{domain}_train.txt'
     test_split_url = f'{self._BASE_URL}/domainnet/txt/{domain}_test.txt'
 
@@ -456,7 +456,7 @@ class Domainnet(tfds.core.GeneratorBasedBuilder):
       for i, img_class_line in enumerate(split_file.read().split('\n')):
         if not img_class_line:
           continue
-        key = f'{self.builder_config.name}_{split}_{i:08d}'
+        key = f'{self.builder_config.name}_{split}_{i:08d}'  # pyrefly: ignore[missing-attribute]
 
         example_path, example_class = img_class_line.split(' ')
         example_fullpath = os.path.join(self.img_path, example_path)  # pytype: disable=attribute-error  # gen-stub-imports

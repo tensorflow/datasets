@@ -109,9 +109,9 @@ class INaturalist2021(tfds.core.GeneratorBasedBuilder):
     generate_dict = {}
     for split, split_file in _SPLIT_FILENAMES.items():
       generate_dict[split] = self._generate_examples(
-          images_archive=dl_manager.iter_archive(output_paths[f'{split}_img']),
+          images_archive=dl_manager.iter_archive(output_paths[f'{split}_img']),  # pyrefly: ignore[bad-index]
           json_file=os.path.join(
-              output_paths[f'{split}_json'], f'{split_file}.json'
+              output_paths[f'{split}_json'], f'{split_file}.json'  # pyrefly: ignore[bad-index]
           ),
       )
 
