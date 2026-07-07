@@ -16,7 +16,7 @@
 """BinarizedMNIST."""
 
 import numpy as np
-from six.moves import urllib
+from six.moves import urllib  # pyrefly: ignore[missing-source-for-stubs]
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.image_classification import mnist
 import tensorflow_datasets.public_api as tfds
@@ -56,19 +56,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 data_path=files["train_data"],
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 data_path=files["validation_data"],
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 data_path=files["test_data"],
             ),

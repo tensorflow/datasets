@@ -78,29 +78,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     dl_dir = dl_manager.download_and_extract(_URL)
     data_dir = os.path.join(dl_dir, "ARC-V1-Feb2018-2")
-    base_path = os.path.join(data_dir, self.builder_config.name)
+    base_path = os.path.join(data_dir, self.builder_config.name)  # pyrefly: ignore[missing-attribute]
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(
-                    base_path, self.builder_config.name + "-Train.jsonl"
+                    base_path, self.builder_config.name + "-Train.jsonl"  # pyrefly: ignore[missing-attribute]
                 )
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(
-                    base_path, self.builder_config.name + "-Dev.jsonl"
+                    base_path, self.builder_config.name + "-Dev.jsonl"  # pyrefly: ignore[missing-attribute]
                 )
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(
-                    base_path, self.builder_config.name + "-Test.jsonl"
+                    base_path, self.builder_config.name + "-Test.jsonl"  # pyrefly: ignore[missing-attribute]
                 )
             },
         ),

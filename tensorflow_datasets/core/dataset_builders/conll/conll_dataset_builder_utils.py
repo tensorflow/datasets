@@ -145,5 +145,5 @@ CONLL_2003_ORDERED_FEATURES = collections.OrderedDict({
 CONLL_2003_CONFIG = conll_dataset_builder.ConllBuilderConfig(
     name="conll2003",
     separator=CONLL_2002_SEPARATOR,
-    ordered_features=CONLL_2003_ORDERED_FEATURES,
+    ordered_features=CONLL_2003_ORDERED_FEATURES,  # pyrefly: ignore[bad-argument-type]
 )

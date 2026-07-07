@@ -112,15 +112,15 @@ class Builder(tfds.core.BeamBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": extract_paths["train"]},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": extract_paths["val"]},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": extract_paths["test"]},
         ),
     ]
@@ -136,7 +136,7 @@ class Builder(tfds.core.BeamBasedBuilder):
           _SUMMARY: _bigpatent_clean_abstract(json_obj[_SUMMARY]),
       }
 
-    file_pattern = os.path.join(path, self.builder_config.cpc_codes, "*")
+    file_pattern = os.path.join(path, self.builder_config.cpc_codes, "*")  # pyrefly: ignore[missing-attribute, no-matching-overload]
     return (
         pipeline
         | "ReadTextIO" >> beam.io.textio.ReadFromText(file_pattern)

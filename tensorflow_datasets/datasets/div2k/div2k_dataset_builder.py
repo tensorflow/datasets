@@ -110,14 +110,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    print("EXTRACTING", self.builder_config.download_urls)
+    print("EXTRACTING", self.builder_config.download_urls)  # pyrefly: ignore[missing-attribute]
     extracted_paths = dl_manager.download_and_extract(
-        self.builder_config.download_urls
+        self.builder_config.download_urls  # pyrefly: ignore[missing-attribute]
     )
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "lr_path": extracted_paths["train_lr_url"],
                 "hr_path": os.path.join(
@@ -126,7 +126,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "lr_path": extracted_paths["valid_lr_url"],
                 "hr_path": os.path.join(

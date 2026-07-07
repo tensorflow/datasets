@@ -166,8 +166,8 @@ class D4rlAntmaze(dataset_builder.D4RLDatasetBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    ds_dir = self.builder_config.dataset_dir
-    ds_name = self.builder_config.file_suffix + '.hdf5'
+    ds_dir = self.builder_config.dataset_dir  # pyrefly: ignore[missing-attribute]
+    ds_name = self.builder_config.file_suffix + '.hdf5'  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(
         {
             'file_path': (

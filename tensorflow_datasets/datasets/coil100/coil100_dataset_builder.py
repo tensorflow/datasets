@@ -70,7 +70,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Define Splits."""
     path = dl_manager.download_and_extract(_URL)
     return {
-        tfds.Split.TRAIN: self._generate_examples(path / "coil-100"),
+        tfds.Split.TRAIN: self._generate_examples(path / "coil-100"),  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, data_dir_path):

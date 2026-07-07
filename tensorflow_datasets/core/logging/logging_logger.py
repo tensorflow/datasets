@@ -31,7 +31,7 @@ TreeDict = type_utils.TreeDict
 class LoggingLogger(base_logger.Logger):
   """A logger that is based on the absl logging module."""
 
-  def as_dataset(
+  def as_dataset(  # pyrefly: ignore[bad-override]
       self,
       *,
       metadata: call_metadata.CallMetadata,

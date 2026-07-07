@@ -153,7 +153,7 @@ class SubwordTextEncoder(text_encoder.TextEncoder):
         ids.append(subword_id)
 
     # Update cache
-    self._token_to_ids_cache[cache_location] = (token, ids)
+    self._token_to_ids_cache[cache_location] = (token, ids)  # pyrefly: ignore[unsupported-operation]
 
     return ids
 

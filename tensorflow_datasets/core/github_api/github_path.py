@@ -167,8 +167,8 @@ class _GithubTree:
       )
       if element['type'] in {'blob', 'tree'}:
         files_per_folder.setdefault(github_element.parent_folder, set())
-        files_per_folder[github_element.parent_folder].add(github_element)
-    return _GithubTree(files_per_folder=files_per_folder)
+        files_per_folder[github_element.parent_folder].add(github_element)  # pyrefly: ignore[bad-argument-type]
+    return _GithubTree(files_per_folder=files_per_folder)  # pyrefly: ignore[bad-argument-type]
 
   @staticmethod
   @functools.lru_cache(maxsize=None)

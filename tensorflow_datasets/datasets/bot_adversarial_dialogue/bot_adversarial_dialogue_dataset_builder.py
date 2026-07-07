@@ -85,7 +85,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
-        features=_CONFIG_FEATURES[self.builder_config.name],
+        features=_CONFIG_FEATURES[self.builder_config.name],  # pyrefly: ignore[missing-attribute]
         supervised_keys=None,
         homepage="https://github.com/facebookresearch/ParlAI/tree/main/parlai/tasks/bot_adversarial_dialogue",
         license="https://github.com/facebookresearch/ParlAI/blob/main/LICENSE",
@@ -98,7 +98,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "http://parl.ai/downloads/bot_adversarial_dialogue/"
     )
 
-    if self.builder_config.name == "dialogue_datasets":
+    if self.builder_config.name == "dialogue_datasets":  # pyrefly: ignore[missing-attribute]
       path = dl_manager.download_and_extract(
           os.path.join(
               bot_adversarial_dialogue_home,
@@ -181,7 +181,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "episode_done": bool_utils.parse_bool(row_features["episode_done"]),
         }
 
-        if self.builder_config.name == "dialogue_datasets":
+        if self.builder_config.name == "dialogue_datasets":  # pyrefly: ignore[missing-attribute]
           conversation_acts = row_features["text"].split("\n")
           conversation_len = len(conversation_acts)
 

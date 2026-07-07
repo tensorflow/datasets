@@ -92,24 +92,24 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     base_path = os.path.join(dl_dir, "ARC-IR10V8")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(base_path, "train.jsonl"),
-                "split": self.builder_config.name,
+                "split": self.builder_config.name,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(base_path, "dev.jsonl"),
-                "split": self.builder_config.name,
+                "split": self.builder_config.name,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": os.path.join(base_path, "test.jsonl"),
-                "split": self.builder_config.name,
+                "split": self.builder_config.name,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]

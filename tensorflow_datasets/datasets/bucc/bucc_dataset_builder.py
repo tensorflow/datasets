@@ -70,13 +70,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     bucc_test_path = os.path.join(
         _DATA_URLS,
         'bucc2018-{}-en.training-gold.tar.bz2'.format(
-            self.builder_config.language
+            self.builder_config.language  # pyrefly: ignore[missing-attribute]
         ),
     )
     bucc_dev_path = os.path.join(
         _DATA_URLS,
         'bucc2018-{}-en.sample-gold.tar.bz2'.format(
-            self.builder_config.language
+            self.builder_config.language  # pyrefly: ignore[missing-attribute]
         ),
     )
 
@@ -89,14 +89,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             filepath=os.path.join(
                 archive['bucc_dev_dir'],
                 'bucc2018',
-                self.builder_config.language + '-en',
+                self.builder_config.language + '-en',  # pyrefly: ignore[missing-attribute]
             )
         ),
         'test': self._generate_examples(
             filepath=os.path.join(
                 archive['bucc_test_dir'],
                 'bucc2018',
-                self.builder_config.language + '-en',
+                self.builder_config.language + '-en',  # pyrefly: ignore[missing-attribute]
             )
         ),
     }

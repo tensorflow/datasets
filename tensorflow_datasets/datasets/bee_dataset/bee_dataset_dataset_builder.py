@@ -74,9 +74,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     t_shape = (
-        self.builder_config.height,
-        self.builder_config.width,
-        self.builder_config.depth,
+        self.builder_config.height,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.width,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.depth,  # pyrefly: ignore[missing-attribute]
     )
     features = tfds.features.FeaturesDict({
         'input': tfds.features.Image(shape=t_shape),
@@ -113,9 +113,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       for lbl in ['varroa', 'pollen', 'wasps', 'cooling']:
         labels.append(1.0 if entry[lbl] else 0.0)
 
-      img = path / f'images_{self.builder_config.height}' / name
+      img = path / f'images_{self.builder_config.height}' / name  # pyrefly: ignore[missing-attribute]
 
-      yield name + str(self.builder_config.height), {
+      yield name + str(self.builder_config.height), {  # pyrefly: ignore[missing-attribute]
           'input': img,
           'output': {
               'varroa_output': labels[0],

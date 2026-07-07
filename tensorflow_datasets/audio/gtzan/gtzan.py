@@ -93,7 +93,7 @@ class GTZAN(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"path": path}
+            name=tfds.Split.TRAIN, gen_kwargs={"path": path}  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

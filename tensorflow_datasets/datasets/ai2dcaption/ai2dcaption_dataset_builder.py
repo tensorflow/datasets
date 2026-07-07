@@ -118,7 +118,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return {
         split: self._generate_examples(
-            split, dl_paths[split], dl_paths['images']
+            split, dl_paths[split], dl_paths['images']  # pyrefly: ignore[bad-index]
         )
         for split in SPLITS
     }

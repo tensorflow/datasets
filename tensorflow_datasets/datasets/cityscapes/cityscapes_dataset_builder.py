@@ -167,17 +167,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         shape=(1024, 2048, 3), encoding_format='png'
     )
 
-    if self.builder_config.right_images:
+    if self.builder_config.right_images:  # pyrefly: ignore[missing-attribute]
       features['image_right'] = tfds.features.Image(
           shape=(1024, 2048, 3), encoding_format='png'
       )
 
-    if self.builder_config.segmentation_labels:
+    if self.builder_config.segmentation_labels:  # pyrefly: ignore[missing-attribute]
       features['segmentation_label'] = tfds.features.Image(
           shape=(1024, 2048, 1), encoding_format='png', use_colormap=True
       )
 
-    if self.builder_config.disparity_maps:
+    if self.builder_config.disparity_maps:  # pyrefly: ignore[missing-attribute]
       features['disparity_map'] = tfds.features.Image(
           shape=(1024, 2048, 1), encoding_format='png'
       )
@@ -189,7 +189,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     paths = {}
-    for split, (zip_file, _) in self.builder_config.zip_root.items():
+    for split, (zip_file, _) in self.builder_config.zip_root.items():  # pyrefly: ignore[missing-attribute]
       paths[split] = os.path.join(dl_manager.manual_dir, zip_file)
 
     if any(not tf.io.gfile.exists(z) for z in paths.values()):
@@ -197,12 +197,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       msg += ', '.join(paths.values())
       raise AssertionError(msg)
 
-    for split, (_, zip_root) in self.builder_config.zip_root.items():
+    for split, (_, zip_root) in self.builder_config.zip_root.items():  # pyrefly: ignore[missing-attribute]
       paths[split] = os.path.join(dl_manager.extract(paths[split]), zip_root)
 
     splits = [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 feat_dir: os.path.join(path, 'train')
                 for feat_dir, path in paths.items()
@@ -210,7 +210,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 feat_dir: os.path.join(path, 'val')
                 for feat_dir, path in paths.items()
@@ -220,10 +220,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     ]
 
     # Test split does not exist in coarse dataset
-    if not self.builder_config.train_extra_split:
+    if not self.builder_config.train_extra_split:  # pyrefly: ignore[missing-attribute]
       splits.append(
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   feat_dir: os.path.join(path, 'test')
                   for feat_dir, path in paths.items()
@@ -259,7 +259,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         left_img_path = os.path.join(left_city_root, left_img)
         image_id = _get_left_image_id(left_img)
 
-        if image_id in self.builder_config.ignored_ids:
+        if image_id in self.builder_config.ignored_ids:  # pyrefly: ignore[missing-attribute]
           continue
 
         features = {
@@ -267,19 +267,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             'image_left': left_img_path,
         }
 
-        if self.builder_config.right_images:
+        if self.builder_config.right_images:  # pyrefly: ignore[missing-attribute]
           features['image_right'] = os.path.join(
               paths_city_root['images_right'],
               '{}_rightImg8bit.png'.format(image_id),
           )
 
-        if self.builder_config.segmentation_labels:
+        if self.builder_config.segmentation_labels:  # pyrefly: ignore[missing-attribute]
           features['segmentation_label'] = os.path.join(
               paths_city_root['segmentation_labels'],
-              '{}_{}.png'.format(image_id, self.builder_config.label_suffix),
+              '{}_{}.png'.format(image_id, self.builder_config.label_suffix),  # pyrefly: ignore[missing-attribute]
           )
 
-        if self.builder_config.disparity_maps:
+        if self.builder_config.disparity_maps:  # pyrefly: ignore[missing-attribute]
           features['disparity_map'] = os.path.join(
               paths_city_root['disparity_maps'],
               '{}_disparity.png'.format(image_id),
@@ -307,4 +307,4 @@ def _get_left_image_id(left_image):
     Id of the image (see example above).
   """
   match = LEFT_IMAGE_FILE_RE.match(left_image)
-  return '{}_{}_{}'.format(*match.groups())
+  return '{}_{}_{}'.format(*match.groups())  # pyrefly: ignore[missing-attribute]

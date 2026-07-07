@@ -83,7 +83,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
 
-    if self.builder_config.name == 'simplification':
+    if self.builder_config.name == 'simplification':  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           'original': tfds.features.Text(),
           'simplifications': tfds.features.Sequence(tfds.features.Text()),
@@ -110,7 +110,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     data_dir = dl_manager.download_and_extract(_URLs)
-    if self.builder_config.name == 'simplification':
+    if self.builder_config.name == 'simplification':  # pyrefly: ignore[missing-attribute]
       return {
           'validation': self._generate_examples(
               filepaths=data_dir, split='valid'
@@ -125,7 +125,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, filepaths, split):
     """Yields examples."""
 
-    if self.builder_config.name == 'simplification':
+    if self.builder_config.name == 'simplification':  # pyrefly: ignore[missing-attribute]
       files = [tf.io.gfile.GFile(filepaths[f'asset.{split}.orig'])] + [
           tf.io.gfile.GFile(filepaths[f'asset.{split}.simp.{i}'])
           for i in range(10)
@@ -143,7 +143,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             keys = row[:]
           else:
             res = {}
-            for k, v in zip(keys, row):
+            for k, v in zip(keys, row):  # pyrefly: ignore[unbound-name]
               res[k] = v
             for k in ['original_sentence_id', 'worker_id', 'rating']:
               res[k] = int(res[k])

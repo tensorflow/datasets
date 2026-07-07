@@ -83,7 +83,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Zarr file used has a very small number of fields, so we take the minimum
     # to avoid trying to load more examples than available.
     num_fields = min(
-        self.builder_config.num_fields or zarr_array.shape[0],
+        self.builder_config.num_fields or zarr_array.shape[0],  # pyrefly: ignore[missing-attribute]
         zarr_array.shape[0],
     )
 

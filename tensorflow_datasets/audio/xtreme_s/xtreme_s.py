@@ -513,9 +513,9 @@ class XtremeS(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = [_build_config(name) for name in _ALL_CONFIGS]
 
   def _info(self):
-    languages = _ALL_DATASET_CONFIGS[self.builder_config.dataset_name]
+    languages = _ALL_DATASET_CONFIGS[self.builder_config.dataset_name]  # pyrefly: ignore[missing-attribute]
 
-    if self.builder_config.dataset_name == "fleurs":
+    if self.builder_config.dataset_name == "fleurs":  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           "id": tfds.features.Scalar(
               tf.dtypes.int32,
@@ -551,25 +551,25 @@ class XtremeS(tfds.core.GeneratorBasedBuilder):
 
       return tfds.core.DatasetInfo(
           builder=self,
-          description=self.builder_config.description + "\n" + _DESCRIPTION,
+          description=self.builder_config.description + "\n" + _DESCRIPTION,  # pyrefly: ignore[missing-attribute]
           features=features,
           supervised_keys=("audio", "transcription"),
-          homepage=self.builder_config.homepage,
-          citation=self.builder_config.citation + "\n" + _CITATION,
+          homepage=self.builder_config.homepage,  # pyrefly: ignore[missing-attribute]
+          citation=self.builder_config.citation + "\n" + _CITATION,  # pyrefly: ignore[missing-attribute]
       )
 
   def _split_generators(self, *args, **kwargs):
-    if self.builder_config.dataset_name == "fleurs":
+    if self.builder_config.dataset_name == "fleurs":  # pyrefly: ignore[missing-attribute]
       return self._fleurs_split_generators(*args, **kwargs)
 
   def _generate_examples(self, *args, **kwargs):
-    if self.builder_config.dataset_name == "fleurs":
+    if self.builder_config.dataset_name == "fleurs":  # pyrefly: ignore[missing-attribute]
       yield from self._fleurs_generate_examples(*args, **kwargs)
 
   def _fleurs_split_generators(self, dl_manager):
-    data_url_format = self.builder_config.data_urls[0]
+    data_url_format = self.builder_config.data_urls[0]  # pyrefly: ignore[missing-attribute]
 
-    if self.builder_config.lang_name == "all":
+    if self.builder_config.lang_name == "all":  # pyrefly: ignore[missing-attribute]
       data_urls = {l: data_url_format.format(l) for l in _FLEURS_LANG}
     else:
       data_urls = {
@@ -603,12 +603,12 @@ class XtremeS(tfds.core.GeneratorBasedBuilder):
 
     return [
         create_split_generator(
-            split=tfds.core.Split.TRAIN, file_prefix="train"
+            split=tfds.core.Split.TRAIN, file_prefix="train"  # pyrefly: ignore[missing-attribute]
         ),
         create_split_generator(
-            split=tfds.core.Split.VALIDATION, file_prefix="dev"
+            split=tfds.core.Split.VALIDATION, file_prefix="dev"  # pyrefly: ignore[missing-attribute]
         ),
-        create_split_generator(split=tfds.core.Split.TEST, file_prefix="test"),
+        create_split_generator(split=tfds.core.Split.TEST, file_prefix="test"),  # pyrefly: ignore[missing-attribute]
     ]
 
   def _fleurs_generate_examples(self, audio_path, text_path):

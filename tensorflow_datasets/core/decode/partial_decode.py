@@ -116,7 +116,7 @@ def _normalize_feature_dict(
   """Extract the features matching the expected_feature structure."""
   if type(feature) == features_lib.FeaturesDict:  # pylint: disable=unidiomatic-typecheck
     inner_features = {
-        k: v for k, v in expected_feature.items() if v is not False  # pylint: disable=g-bool-id-comparison
+        k: v for k, v in expected_feature.items() if v is not False  # pylint: disable=g-bool-id-comparison  # pyrefly: ignore[missing-attribute]
     }
     feature = typing.cast(features_lib.FeaturesDict, feature)
     inner_features = {  # Extract the feature subset  # pylint: disable=g-complex-comprehension

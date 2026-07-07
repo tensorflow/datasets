@@ -51,7 +51,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(
                     dl_path, "us_train_data_final_OFFICIAL.jsonl"
@@ -60,7 +60,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(
                     dl_path, "us_test_data_final_OFFICIAL.jsonl"
@@ -81,7 +81,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None, key=None):
     """Yields examples."""
-    with epath.Path(path).open() as f:
+    with epath.Path(path).open() as f:  # pyrefly: ignore[bad-argument-type]
       for line in f:
         # in us bills, json has fields:
         #   text, summary, title, bill_id, text_len, sum_len

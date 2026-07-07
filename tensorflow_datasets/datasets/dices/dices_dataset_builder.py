@@ -240,11 +240,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             doc='Numerical identifier for each rater.',
         ),
         'rater_gender': tfds.features.ClassLabel(
-            names=self.builder_config.rater_gender_names,
+            names=self.builder_config.rater_gender_names,  # pyrefly: ignore[missing-attribute]
             doc='The gender of the rater.',
         ),
         'rater_race': tfds.features.ClassLabel(
-            names=self.builder_config.rater_race_names,
+            names=self.builder_config.rater_race_names,  # pyrefly: ignore[missing-attribute]
             doc='The race/ethnicity of the rater.',
         ),
         'rater_raw_race': tfds.features.Text(
@@ -254,15 +254,15 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         'rater_age': tfds.features.ClassLabel(
-            names=self.builder_config.rater_age_names,
+            names=self.builder_config.rater_age_names,  # pyrefly: ignore[missing-attribute]
             doc='The age group of the rater.',
         ),
         'rater_education': tfds.features.ClassLabel(
-            names=self.builder_config.rater_education_names,
+            names=self.builder_config.rater_education_names,  # pyrefly: ignore[missing-attribute]
             doc='The education of the rater.',
         ),
         'phase': tfds.features.ClassLabel(
-            names=self.builder_config.phase_names,
+            names=self.builder_config.phase_names,  # pyrefly: ignore[missing-attribute]
             doc='One of three distinct time periods.',
         ),
         'item_id': tfds.features.Scalar(
@@ -276,30 +276,30 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             doc='The final chatbot response in the conversation.'
         ),
         'degree_of_harm': tfds.features.ClassLabel(
-            names=self.builder_config.degree_of_harm_names,
+            names=self.builder_config.degree_of_harm_names,  # pyrefly: ignore[missing-attribute]
             doc='Hand-annotated rating of severity of safety risk.',
         ),
         'harm_type': tfds.features.Sequence(
             tfds.features.ClassLabel(
-                names=self.builder_config.harm_type_names,
+                names=self.builder_config.harm_type_names,  # pyrefly: ignore[missing-attribute]
                 doc='Hand-annotated harm topic(s) of conversation.',
             )
         ),
         'Q1_whole_conversation_evaluation': tfds.features.ClassLabel(
-            names=self.builder_config.q1_whole_conversation_evaluation_names,
+            names=self.builder_config.q1_whole_conversation_evaluation_names,  # pyrefly: ignore[missing-attribute]
             doc='Rating about the understandability of a conversation.',
         ),
     }
 
-    if self.builder_config.rater_locale_names is not None:
+    if self.builder_config.rater_locale_names is not None:  # pyrefly: ignore[missing-attribute]
       features |= {
           'rater_locale': tfds.features.ClassLabel(
-              names=self.builder_config.rater_locale_names,
+              names=self.builder_config.rater_locale_names,  # pyrefly: ignore[bad-argument-type]
               doc='The locale of the rater.',
           )
       }
 
-    if self.builder_config.includes_time_information:
+    if self.builder_config.includes_time_information:  # pyrefly: ignore[missing-attribute]
       features |= {
           'answer_time_ms': tfds.features.Scalar(
               dtype=np.int64,
@@ -314,10 +314,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           ),
       }
 
-    if self.builder_config.safety_gold_names is not None:
+    if self.builder_config.safety_gold_names is not None:  # pyrefly: ignore[missing-attribute]
       features |= {
           'safety_gold': tfds.features.ClassLabel(
-              names=self.builder_config.safety_gold_names,
+              names=self.builder_config.safety_gold_names,  # pyrefly: ignore[bad-argument-type]
               doc='The gold standard safety label provided by experts.',
           ),
           'safety_gold_reason': tfds.features.Text(
@@ -330,7 +330,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     features |= {
         question: tfds.features.ClassLabel(names=['No', 'Yes', 'Unsure'])
-        for question in self.builder_config.questions
+        for question in self.builder_config.questions  # pyrefly: ignore[missing-attribute]
     }
 
     return self.dataset_info_from_configs(
@@ -341,7 +341,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    name = self.builder_config.name
+    name = self.builder_config.name  # pyrefly: ignore[missing-attribute]
     filename = f'diverse_safety_adversarial_dialog_{name}.csv'
     paths = dl_manager.download_and_extract(
         {filename: _BASE_URL + f'{name}/{filename}'}
@@ -364,7 +364,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         .map(lambda ts: [t.capitalize() for t in ts])
     )
 
-    if self.builder_config.safety_gold_names is not None:
+    if self.builder_config.safety_gold_names is not None:  # pyrefly: ignore[missing-attribute]
 
       def _is_parsable(s):
         try:

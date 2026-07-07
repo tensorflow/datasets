@@ -56,7 +56,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(data_dict)
 
     return {
-        split: self._generate_examples(filepath=path[split])
+        split: self._generate_examples(filepath=path[split])  # pyrefly: ignore[bad-index]
         for split in split_names
     }
 

@@ -456,7 +456,7 @@ def _get_policy_info(
         ),
     }
 
-  return policy_dict
+  return policy_dict  # pyrefly: ignore[bad-return]
 
 
 def get_features_dict(
@@ -495,7 +495,7 @@ def get_features_dict(
     )
 
   if builder_config.step_metadata_keys:
-    steps_dict['infos'] = _get_step_metadata(builder_config, ds_config)
+    steps_dict['infos'] = _get_step_metadata(builder_config, ds_config)  # pyrefly: ignore[bad-assignment]
 
   episode_metadata = {}
   if builder_config.episode_metadata_keys:
@@ -508,12 +508,12 @@ def get_features_dict(
     episode_metadata['policy'] = _get_policy_info(builder_config, ds_config)
 
   features_dict = {
-      'steps': tfds.features.Dataset(steps_dict),
+      'steps': tfds.features.Dataset(steps_dict),  # pyrefly: ignore[bad-argument-type]
   }
   if episode_metadata:
     features_dict.update(episode_metadata)
 
-  return features_dict
+  return features_dict  # pyrefly: ignore[bad-return]
 
 
 class D4RLDatasetBuilder(
@@ -528,7 +528,7 @@ class D4RLDatasetBuilder(
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     features_dict = get_features_dict(
-        builder_config=self.builder_config, ds_config=self._ds_config
+        builder_config=self.builder_config, ds_config=self._ds_config  # pyrefly: ignore[bad-argument-type]
     )
     return tfds.core.DatasetInfo(
         builder=self,
@@ -541,13 +541,13 @@ class D4RLDatasetBuilder(
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    ds_dir = self.builder_config.dataset_dir
+    ds_dir = self.builder_config.dataset_dir  # pyrefly: ignore[missing-attribute]
     name = self._ds_config.name
-    if name == 'walker2d' and self.builder_config.name == 'v0-mixed':
+    if name == 'walker2d' and self.builder_config.name == 'v0-mixed':  # pyrefly: ignore[missing-attribute]
       # There is a mismatch in the name of the original files, where one of them
       # uses walker instead of walker2d.
       name = 'walker'
-    ds_name = name + self.builder_config.file_suffix + '.hdf5'
+    ds_name = name + self.builder_config.file_suffix + '.hdf5'  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(
         {
             'file_path': (
