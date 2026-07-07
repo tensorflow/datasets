@@ -58,7 +58,7 @@ class ProtoReader(reader_lib.BaseReader):
         start_time,
         end_time,
         constants.OBSERVATION_RESPONSE_FILE_PREFIX,
-        smart_control_building_pb2.ObservationResponse.FromString,
+        smart_control_building_pb2.ObservationResponse.FromString,  # pyrefly: ignore[bad-argument-type]
     )
 
   def read_action_responses(
@@ -70,7 +70,7 @@ class ProtoReader(reader_lib.BaseReader):
         start_time,
         end_time,
         constants.ACTION_RESPONSE_FILE_PREFIX,
-        smart_control_building_pb2.ActionResponse.FromString,
+        smart_control_building_pb2.ActionResponse.FromString,  # pyrefly: ignore[bad-argument-type]
     )
 
   def read_reward_infos(
@@ -81,7 +81,7 @@ class ProtoReader(reader_lib.BaseReader):
         start_time,
         end_time,
         constants.REWARD_INFO_PREFIX,
-        smart_control_reward_pb2.RewardInfo.FromString,
+        smart_control_reward_pb2.RewardInfo.FromString,  # pyrefly: ignore[bad-argument-type]
     )
 
   def read_reward_responses(  # pytype: disable=signature-mismatch  # overriding-return-type-checks
@@ -93,14 +93,14 @@ class ProtoReader(reader_lib.BaseReader):
         start_time,
         end_time,
         constants.REWARD_RESPONSE_PREFIX,
-        smart_control_reward_pb2.RewardResponse.FromString,
+        smart_control_reward_pb2.RewardResponse.FromString,  # pyrefly: ignore[bad-argument-type]
     )
 
   def read_zone_infos(self) -> Sequence[smart_control_building_pb2.ZoneInfo]:
     """Reads the zone infos for the Building from .pbtxt."""
     filename = self._input_dir / constants.ZONE_INFO_PREFIX
     return self._read_streamed_protos(
-        filename, smart_control_building_pb2.ZoneInfo.FromString
+        filename, smart_control_building_pb2.ZoneInfo.FromString  # pyrefly: ignore[bad-argument-type]
     )
 
   def read_device_infos(
@@ -110,7 +110,7 @@ class ProtoReader(reader_lib.BaseReader):
 
     filename = self._input_dir / constants.DEVICE_INFO_PREFIX
     return self._read_streamed_protos(
-        filename, smart_control_building_pb2.DeviceInfo.FromString
+        filename, smart_control_building_pb2.DeviceInfo.FromString  # pyrefly: ignore[bad-argument-type]
     )
 
   def _read_messages(
@@ -263,7 +263,7 @@ def get_episode_data(working_dir: str) -> pd.DataFrame:
   date_extractor = operator.itemgetter(slice(-13, None))
 
   execution_times = pd.to_datetime(
-      list(map(date_extractor, episode_dirs)), format='%y%m%d_%H%M%S', utc=True
+      list(map(date_extractor, episode_dirs)), format='%y%m%d_%H%M%S', utc=True  # pyrefly: ignore[bad-argument-type]
   )
   episode_start_times = []
   episode_end_times = []
@@ -294,7 +294,7 @@ def get_episode_data(working_dir: str) -> pd.DataFrame:
       number_updates.append(len(obs_files))
       episode_datas.append(episode_dir)
       episode_execution_times.append(execution_time)
-      labels.append(episode_dir[:-14])
+      labels.append(episode_dir[:-14])  # pyrefly: ignore[bad-index]
   episodes_df = pd.DataFrame(
       {
           'execution_time': episode_execution_times,

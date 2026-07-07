@@ -116,15 +116,15 @@ def array_datatype_converter(
       field.description, language=language, field_name='description'
   )
 
-  if len(field.array_shape_tuple) == 1:
-    return sequence_feature.Sequence(feature, doc=description)
-  elif (-1 in field.array_shape_tuple) or (field_dtype is None):
-    for _ in range(len(field.array_shape_tuple)):
-      feature = sequence_feature.Sequence(feature, doc=description)
+  if len(field.array_shape_tuple) == 1:  # pyrefly: ignore[bad-argument-type]
+    return sequence_feature.Sequence(feature, doc=description)  # pyrefly: ignore[bad-argument-type]
+  elif (-1 in field.array_shape_tuple) or (field_dtype is None):  # pyrefly: ignore[not-iterable]
+    for _ in range(len(field.array_shape_tuple)):  # pyrefly: ignore[bad-argument-type]
+      feature = sequence_feature.Sequence(feature, doc=description)  # pyrefly: ignore[bad-argument-type]
     return feature
   else:
     return tensor_feature.Tensor(
-        shape=field.array_shape_tuple,
+        shape=field.array_shape_tuple,  # pyrefly: ignore[bad-argument-type]
         dtype=field_dtype,
         doc=description,
     )
@@ -227,14 +227,14 @@ def datatype_converter(
     feature = array_datatype_converter(
         feature=feature,
         field=field,
-        dtype_mapping=dtype_mapping,
+        dtype_mapping=dtype_mapping,  # pyrefly: ignore[bad-argument-type]
         language=language,
     )
   # If the field is repeated, we return a sequence feature. `field.repeated` is
   # deprecated starting from Croissant 1.1, but we still support it for
   # backwards compatibility.
   if feature and field.repeated:
-    feature = sequence_feature.Sequence(feature, doc=field.description)
+    feature = sequence_feature.Sequence(feature, doc=field.description)  # pyrefly: ignore[bad-argument-type]
   return feature
 
 
@@ -256,7 +256,7 @@ def _extract_license(license_: Any) -> str:
   elif isinstance(license_, mlc.CreativeWork):
     possible_fields = [license_.name, license_.description, license_.url]
     fields = [field for field in possible_fields if field]
-    return '[' + ']['.join(fields) + ']'
+    return '[' + ']['.join(fields) + ']'  # pyrefly: ignore[no-matching-overload]
   raise ValueError(
       'license_ should be mlc.CreativeWork | str. Got'
       f' {type(license_)}: {license_}.'
@@ -323,8 +323,8 @@ class CroissantBuilder(
       mapping = {}
     self.jsonld = jsonld
     self.mapping = mapping
-    dataset = mlc.Dataset(jsonld, mapping=mapping)
-    self.name = croissant_utils.get_tfds_dataset_name(dataset)
+    dataset = mlc.Dataset(jsonld, mapping=mapping)  # pyrefly: ignore[bad-argument-type]
+    self.name = croissant_utils.get_tfds_dataset_name(dataset)  # pyrefly: ignore[read-only]
     self.metadata = dataset.metadata
 
     # The dataset version is determined using the following precedence:
@@ -339,7 +339,7 @@ class CroissantBuilder(
         or croissant_utils.get_croissant_version(self.metadata.version)
         or '1.0.0'
     )
-    self.RELEASE_NOTES = {}  # pylint: disable=invalid-name
+    self.RELEASE_NOTES = {}  # pylint: disable=invalid-name  # pyrefly: ignore[read-only]
 
     if not record_set_ids:
       record_set_ids = croissant_utils.get_record_set_ids(self.metadata)
@@ -372,18 +372,18 @@ class CroissantBuilder(
   def builder_config(self) -> dataset_builder.BuilderConfig:
     """`tfds.core.BuilderConfig` for this builder."""
     return (
-        self._builder_config
+        self._builder_config  # pyrefly: ignore[bad-return]
     )  # pytype: disable=bad-return-type  # always-use-return-annotations
 
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
         builder=self,
-        description=self.metadata.description,
+        description=self.metadata.description,  # pyrefly: ignore[bad-argument-type]
         features=self.get_features(),
         homepage=self.metadata.url,
         citation=self.metadata.cite_as,
         license=_get_license(self.metadata),
-        disable_shuffling=self._disable_shuffling,
+        disable_shuffling=self._disable_shuffling,  # pyrefly: ignore[bad-argument-type]
     )
 
   def get_features(self) -> features_dict.FeaturesDict:
@@ -421,16 +421,16 @@ class CroissantBuilder(
       # reference field.
       split_key = split_reference.reference_field.references.field
       return {
-          split[split_key]: self._generate_examples(
+          split[split_key]: self._generate_examples(  # pyrefly: ignore[bad-index]
               filters={
                   **self._filters,
-                  split_reference.reference_field.id: split[split_key],
+                  split_reference.reference_field.id: split[split_key],  # pyrefly: ignore[bad-index]
               },
           )
-          for split in split_reference.split_record_set.data
+          for split in split_reference.split_record_set.data  # pyrefly: ignore[not-iterable]
       }
     else:
-      return {'default': self._generate_examples(filters=self._filters)}
+      return {'default': self._generate_examples(filters=self._filters)}  # pyrefly: ignore[bad-argument-type, bad-return]
 
   def _generate_examples(
       self,
@@ -449,7 +449,7 @@ class CroissantBuilder(
     record_set = croissant_utils.get_record_set(
         self.builder_config.name, metadata=self.metadata
     )
-    dataset = mlc.Dataset(self.jsonld, mapping=self.mapping)
+    dataset = mlc.Dataset(self.jsonld, mapping=self.mapping)  # pyrefly: ignore[bad-argument-type]
     records = dataset.records(record_set.id, filters=filters)
 
     def convert_to_tfds_format(

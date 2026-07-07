@@ -63,7 +63,7 @@ class DatasetPackage:
   def from_json(cls, data: utils.Json) -> 'DatasetPackage':
     """Factory which creates the cls from json."""
     return cls(
-        name=naming.DatasetName(namespace_name=data['name']),
+        name=naming.DatasetName(namespace_name=data['name']),  # pyrefly: ignore[bad-argument-type]
         source=dataset_sources_lib.DatasetSource.from_json(data['source']),
     )
 
@@ -109,11 +109,11 @@ class _InstalledPackage:
   def from_json(cls, data: utils.Json) -> '_InstalledPackage':
     """Factory which creates the cls from json."""
     return cls(
-        package=DatasetPackage.from_json(data['package']),
+        package=DatasetPackage.from_json(data['package']),  # pyrefly: ignore[bad-argument-type]
         instalation_date=datetime.datetime.fromisoformat(
-            data['instalation_date']
+            data['instalation_date']  # pyrefly: ignore[bad-argument-type]
         ),
-        hash=data['hash'],
+        hash=data['hash'],  # pyrefly: ignore[bad-argument-type]
     )
 
   def to_json(self) -> utils.Json:
@@ -408,7 +408,7 @@ def _get_last_installed_version(
 ) -> _InstalledPackage | None:
   """Checks whether the datasets is installed locally and returns it."""
   root_dir = (
-      cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name
+      cache.module_path() / _IMPORT_MODULE_NAME / name.namespace / name.name  # pyrefly: ignore[unsupported-operation]
   )
   if not root_dir.exists():  # Dataset not found
     return None

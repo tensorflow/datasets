@@ -222,7 +222,7 @@ def image_as_moving_sequence(
   trajectory = _get_linear_trajectory(start_position, velocity, t)
   trajectory = _bounce_to_bbox(trajectory)
 
-  total_padding = output_size - image_shape[:2]
+  total_padding = output_size - image_shape[:2]  # pyrefly: ignore[unsupported-operation]
 
   if not tf.executing_eagerly():
     cond = tf.compat.v1.assert_greater(total_padding, -1)

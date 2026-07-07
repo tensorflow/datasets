@@ -99,9 +99,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_DOWNLOAD_URLS)
     return {
-        'train': self._generate_examples(path['train']),
-        'validation': self._generate_examples(path['validation']),
-        'test': self._generate_examples(path['test']),
+        'train': self._generate_examples(path['train']),  # pyrefly: ignore[bad-index]
+        'validation': self._generate_examples(path['validation']),  # pyrefly: ignore[bad-index]
+        'test': self._generate_examples(path['test']),  # pyrefly: ignore[bad-index]
     }
 
   def _generate_examples(self, path):

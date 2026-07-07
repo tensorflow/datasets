@@ -43,7 +43,7 @@ class ArrayRecordDataSource(base.BaseDataSource):
   """
 
   dataset_info: dataset_info_lib.DatasetInfo
-  split: splits_lib.Split = None
+  split: splits_lib.Split = None  # pyrefly: ignore[bad-assignment]
   decoders: Optional[type_utils.TreeDict[decode.partial_decode.DecoderArg]] = (
       None
   )
@@ -58,5 +58,5 @@ class ArrayRecordDataSource(base.BaseDataSource):
   def __post_init__(self):
     file_instructions = base.file_instructions(self.dataset_info, self.split)
     self.data_source = array_record_data_source.ArrayRecordDataSource(
-        file_instructions
+        file_instructions  # pyrefly: ignore[bad-argument-type]
     )

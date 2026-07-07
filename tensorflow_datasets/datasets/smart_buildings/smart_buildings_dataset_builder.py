@@ -171,10 +171,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       self, dl_manager: tfds.download.DownloadManager, pipeline
   ):
     """Download the data and define splits."""
-    building = self.builder_config.building
+    building = self.builder_config.building  # pyrefly: ignore[missing-attribute]
     building_upper = building.upper()
 
-    path_by_year: dict[int, epath.Path] = dl_manager.download_and_extract({
+    path_by_year: dict[int, epath.Path] = dl_manager.download_and_extract({  # pyrefly: ignore[bad-assignment]
         year: f'https://storage.googleapis.com/gresearch/smart_buildings_dataset/{building_upper}/{building_upper}_{year}.zip'
         for year in YEARS
     })

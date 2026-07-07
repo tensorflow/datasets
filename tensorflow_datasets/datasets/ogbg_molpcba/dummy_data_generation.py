@@ -120,7 +120,7 @@ def combine_graph_data(graphs: Iterable[ArrayDict]) -> ArrayDict:
     for column, column_vals in graph.items():
       for val in column_vals:
         graphs_dict[column].append(val)
-  return graphs_dict
+  return graphs_dict  # pyrefly: ignore[bad-return]
 
 
 def save_to_path(path: Path, graphs: Iterable[ArrayDict], splits: ArrayDict):

@@ -91,7 +91,7 @@ class ViewConfig(dataset_builder.BuilderConfig):
   ) -> dataset_builder.DatasetBuilder:
     assert self.input_dataset, "Input dataset must be specified."
     tfds_name = self.input_dataset.tfds_name(include_version=True)
-    data_dir = self.input_dataset.data_dir or data_dir
+    data_dir = self.input_dataset.data_dir or data_dir  # pyrefly: ignore[bad-assignment]
     return load_lib.builder(name=tfds_name, data_dir=data_dir)
 
 
@@ -217,7 +217,7 @@ class ViewBuilder(
   def _src_dataset(self) -> naming.DatasetReference:
     input_dataset = self.view_config and self.view_config.input_dataset
     if input_dataset:
-      return input_dataset
+      return input_dataset  # pyrefly: ignore[bad-return]
     elif self.INPUT_DATASET is not None:
       if isinstance(self.INPUT_DATASET, str):
         return naming.DatasetReference.from_tfds_name(self.INPUT_DATASET)
@@ -242,7 +242,7 @@ class ViewBuilder(
         self.view_config and self.view_config.ex_transformations
     )
     if ex_transformations:
-      return ex_transformations
+      return ex_transformations  # pyrefly: ignore[bad-return]
     return self.EX_TRANSFORMATIONS
 
   def _data_transformations(

@@ -89,7 +89,7 @@ class ImageGridVisualizer(visualizer.Visualizer):
     image_keys = visualizer.extract_keys(ds_info.features, features_lib.Image)
     return len(image_keys) >= 1
 
-  def show(
+  def show(  # pyrefly: ignore[bad-override]
       self,
       ds: tf.data.Dataset,
       ds_info: dataset_info.DatasetInfo,

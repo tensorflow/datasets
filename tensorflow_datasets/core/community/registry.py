@@ -203,7 +203,7 @@ class DatasetRegistry(register_base.BaseRegister):
   def _get_list_builders_context(self, name: naming.DatasetName) -> str:
     """Adds relevant information to the error context."""
     # Add list of available datasets to error context.
-    all_datasets = self.list_builders_per_namespace(name.namespace)
+    all_datasets = self.list_builders_per_namespace(name.namespace)  # pyrefly: ignore[bad-argument-type]
     all_datasets_str = '\n\t- '.join([''] + list(all_datasets))
     error_msg = (
         f'Available datasets under the same namespace:{all_datasets_str}\n'
@@ -225,19 +225,19 @@ class DatasetRegistry(register_base.BaseRegister):
     Raises:
       DatasetNotFound error if the namespace is not found.
     """
-    if not self.has_namespace(name.namespace):
+    if not self.has_namespace(name.namespace):  # pyrefly: ignore[bad-argument-type]
       error_msg = f'\nNamespace {name.namespace} not found. '
       error_msg += (
           'Note that the namespace should be one of: '
           f'{sorted(self.registers_per_namespace.keys())}.\n'
       )
-      close_matches = difflib.get_close_matches(
+      close_matches = difflib.get_close_matches(  # pyrefly: ignore[no-matching-overload]
           name.namespace, self.registers_per_namespace, n=1
       )
       if close_matches:
         error_msg += f'Did you mean: {name.namespace} -> {close_matches[0]} ?\n'
       raise registered.DatasetNotFoundError(error_msg)
-    return self.registers_per_namespace[name.namespace]
+    return self.registers_per_namespace[name.namespace]  # pyrefly: ignore[bad-index]
 
   def builder_cls(
       self,
@@ -300,7 +300,7 @@ class DatasetRegistry(register_base.BaseRegister):
   ) -> Sequence[epath.Path]:
     """Returns root dir of the generated builder (without version/config)."""
     result = []
-    registers = self.registers_per_namespace[name.namespace]
+    registers = self.registers_per_namespace[name.namespace]  # pyrefly: ignore[bad-index]
     for register in registers:
       if isinstance(register, register_path.DataDirRegister):
         result.extend(register.get_builder_root_dirs(name))

@@ -193,8 +193,8 @@ def _display_dirs(
     dirs_to_delete: List[pathlib.Path],
 ) -> None:
   """Display dirs to keep and delete."""
-  dirs_to_keep = set(dirs_to_keep)
-  dirs_to_delete = set(dirs_to_delete)
+  dirs_to_keep = set(dirs_to_keep)  # pyrefly: ignore[bad-assignment]
+  dirs_to_delete = set(dirs_to_delete)  # pyrefly: ignore[bad-assignment]
 
   # Format dirs to strip prefix and keep in bold.
   def _format(d, keep: bool):
@@ -205,7 +205,7 @@ def _display_dirs(
 
   all_dirs = [
       _format(d, keep=d in dirs_to_keep)
-      for d in sorted(dirs_to_keep | dirs_to_delete)
+      for d in sorted(dirs_to_keep | dirs_to_delete)  # pyrefly: ignore[unsupported-operation]
   ]
   # Preview the dirs to delete
   print(f'The script will delete the following modifications to `{data_dir}`:')

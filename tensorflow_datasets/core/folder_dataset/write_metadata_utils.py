@@ -152,7 +152,7 @@ def write_metadata(
       version = '1.0.0'
 
   dataset_identity = dataset_info.DatasetIdentity(
-      name=filename_template.dataset_name,
+      name=filename_template.dataset_name,  # pyrefly: ignore[bad-argument-type]
       version=utils.Version(version),
       data_dir=os.fspath(filename_template.data_dir),
       module_name='',
@@ -166,7 +166,7 @@ def write_metadata(
       **ds_info_kwargs,
   )
   file_format = file_adapters.file_format_from_suffix(
-      filename_template.filetype_suffix
+      filename_template.filetype_suffix  # pyrefly: ignore[bad-argument-type]
   )
   ds_info.set_file_format(file_format)
 
@@ -202,7 +202,7 @@ def _load_splits(
     filename_template: naming.ShardedFileTemplate,
 ) -> split_lib.SplitDict:
   """Load the SplitDict which can be passed to DatasetInfo."""
-  split_names = sorted(set(f.split for f in file_infos))
+  split_names = sorted(set(f.split for f in file_infos))  # pyrefly: ignore[bad-specialization]
 
   if split_infos is None:  # Auto-compute the split-infos
     split_infos = compute_split_utils.compute_split_info(
@@ -211,7 +211,7 @@ def _load_splits(
   # Load the Sequence[SplitInfo]
   elif isinstance(split_infos, epath.PathLikeCls):
     split_infos = compute_split_utils.split_infos_from_path(
-        split_names=split_names,
+        split_names=split_names,  # pyrefly: ignore[bad-argument-type]
         filename_template=filename_template,
     )
   elif all(isinstance(s, split_lib.SplitInfo) for s in split_infos):

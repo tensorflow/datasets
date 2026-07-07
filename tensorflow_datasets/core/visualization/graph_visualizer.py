@@ -155,7 +155,7 @@ class GraphVisualizer(visualizer.Visualizer):
 def _make_edge_getter_fn(ds_info: dataset_info.DatasetInfo) -> _GraphFn:
   """Returns a function which will extract edges from each graph."""
   graph_viz_metadata = _extract_metadata_dict(ds_info.metadata)
-  edgelist_feature_name = graph_viz_metadata['edgelist_feature_name']
+  edgelist_feature_name = graph_viz_metadata['edgelist_feature_name']  # pyrefly: ignore[unsupported-operation]
 
   def get_edges_fn(graph):
     return graph[edgelist_feature_name].numpy()

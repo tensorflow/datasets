@@ -205,7 +205,7 @@ def _assert_split_is_consistent(
 
   # Check that all the file-info from the given split are consistent
   # (no missing file)
-  shard_ids = sorted(f.shard_index for f in file_infos)
+  shard_ids = sorted(f.shard_index for f in file_infos)  # pyrefly: ignore[bad-specialization]
   (num_shards,) = {f.num_shards for f in file_infos}
   if num_shards:
     assert shard_ids == list(range(num_shards)), 'Missing shard files.'
@@ -223,7 +223,7 @@ def _compute_split_statistics(
     _assert_split_is_consistent(file_infos)
     if adapter is None:
       (file_suffix,) = {f.filetype_suffix for f in file_infos}
-      file_format = file_adapters.file_format_from_suffix(file_suffix)
+      file_format = file_adapters.file_format_from_suffix(file_suffix)  # pyrefly: ignore[bad-argument-type]
       adapter = file_adapters.ADAPTER_FOR_FORMAT[file_format]
 
   # Compute all shard info in parallel
@@ -300,13 +300,13 @@ def _process_split(
 
   # Check that all the file-info from the given split are consistent
   # (no missing file)
-  shard_ids = sorted(f.shard_index for f in file_infos)
+  shard_ids = sorted(f.shard_index for f in file_infos)  # pyrefly: ignore[bad-specialization]
   (num_shards,) = {f.num_shards for f in file_infos}
-  assert shard_ids == list(range(num_shards)), 'Missing shard files.'
+  assert shard_ids == list(range(num_shards)), 'Missing shard files.'  # pyrefly: ignore[bad-argument-type]
 
   # Check that the file extension is correct.
   (file_suffix,) = {f.filetype_suffix for f in file_infos}
-  file_format = file_adapters.file_format_from_suffix(file_suffix)
+  file_format = file_adapters.file_format_from_suffix(file_suffix)  # pyrefly: ignore[bad-argument-type]
   adapter = file_adapters.ADAPTER_FOR_FORMAT[file_format]
   data_dir = epath.Path(filename_template.data_dir)
 
@@ -321,7 +321,7 @@ def _process_split(
       | beam.Map(_merge_shard_info, filename_template=filename_template)
       | beam.Map(_split_info_to_json_str)
       | beam.io.WriteToText(
-          os.fspath(out_dir / _out_filename(split_name)),
+          os.fspath(out_dir / _out_filename(split_name)),  # pyrefly: ignore[bad-argument-type]
           num_shards=1,
           shard_name_template='',
       )
@@ -366,7 +366,7 @@ def _merge_shard_info(
   shard_infos = sorted(shard_infos, key=lambda s: s.file_info.shard_index)
   filename_template = filename_template.replace(split=split_name)
   return split_lib.SplitInfo(
-      name=split_name,
+      name=split_name,  # pyrefly: ignore[bad-argument-type]
       shard_lengths=[s.num_examples for s in shard_infos],
       num_bytes=sum(s.bytes_size for s in shard_infos),
       filename_template=filename_template,
@@ -386,7 +386,7 @@ def _split_info_from_path(
     filename_template: naming.ShardedFileTemplate,
 ) -> split_lib.SplitInfo:
   """Load the split info from the path."""
-  path = filename_template.data_dir / _out_filename(filename_template.split)
+  path = filename_template.data_dir / _out_filename(filename_template.split)  # pyrefly: ignore[bad-argument-type]
   json_str = path.read_text()
   proto = json_format.Parse(json_str, dataset_info_pb2.SplitInfo())
   return split_lib.SplitInfo.from_proto(

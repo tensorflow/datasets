@@ -69,8 +69,8 @@ def parse_xml_string(xml_str: str) -> List[Pair]:
       )
     pairs.append(
         Pair(
-            text=text,
-            hypothesis=hypothesis,
+            text=text,  # pyrefly: ignore[bad-argument-type]
+            hypothesis=hypothesis,  # pyrefly: ignore[bad-argument-type]
             id=id_,
             entailment=entailment,
             similarity=similarity,

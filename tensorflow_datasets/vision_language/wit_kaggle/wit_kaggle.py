@@ -219,7 +219,7 @@ class WitKaggleConfig(tfds.core.BuilderConfig):
         ),  # A tensor of 2048 floats (if existent, else zeros).
     })
     self.features = tfds.features.FeaturesDict(
-        {**common_features, **split_specific_features}
+        {**common_features, **split_specific_features}  # pyrefly: ignore[invalid-argument]
     )
     self.split_specific_features = split_specific_features
     self.resnet_embedding_shape = resnet_embedding_shape
@@ -344,7 +344,7 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=self.builder_config.features,
+        features=self.builder_config.features,  # pyrefly: ignore[missing-attribute]
         supervised_keys=(
             "image_url",
             "caption_title_and_reference_description",
@@ -361,17 +361,17 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
                 path=dl_manager.manual_dir / filename,
                 extract_method=tfds.download.ExtractMethod.ZIP,
             )
-            for filename in self.builder_config.sample_files
+            for filename in self.builder_config.sample_files  # pyrefly: ignore[missing-attribute]
         ],
         "images": tfds.download.Resource(
-            path=dl_manager.manual_dir / self.builder_config.image_folder
+            path=dl_manager.manual_dir / self.builder_config.image_folder  # pyrefly: ignore[missing-attribute]
         ),
     }
 
     extracted_paths = dl_manager.extract(archive_path)
 
     return {
-        self.builder_config.name: self._generate_examples(
+        self.builder_config.name: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             pipeline=pipeline,
             samples_path=extracted_paths["samples"],
             image_pixels_path=extracted_paths["images"] / "image_pixels",

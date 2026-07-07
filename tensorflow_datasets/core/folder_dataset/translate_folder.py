@@ -124,7 +124,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
 
     # Build the tf.data.Dataset object
     lang_example_dict = self._split_examples[split]
-    ds = tf.data.Dataset.from_tensor_slices(lang_example_dict)
+    ds = tf.data.Dataset.from_tensor_slices(lang_example_dict)  # pyrefly: ignore[bad-argument-type]
     if shuffle_files:
       ds = ds.shuffle(len(lang_example_dict))
     return ds

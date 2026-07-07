@@ -94,7 +94,7 @@ class BaseDataSource(MappingView, Sequence):
           return features.deserialize_example_np(record, decoders=self.decoders)  # pylint: disable=attribute-error
         raise ValueError('No features set, cannot decode example!')
 
-  def __getitem__(self, key: SupportsIndex) -> Any:
+  def __getitem__(self, key: SupportsIndex) -> Any:  # pyrefly: ignore[bad-override]
     record = self.data_source[key.__index__()]
     return self._deserialize(record)
 

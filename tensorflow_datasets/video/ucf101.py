@@ -122,8 +122,8 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    if self.builder_config.width is not None:
-      if self.builder_config.height is None:
+    if self.builder_config.width is not None:  # pyrefly: ignore[missing-attribute]
+      if self.builder_config.height is None:  # pyrefly: ignore[missing-attribute]
         raise ValueError('Provide either both height and width or none.')
       ffmpeg_extra_args = (
           '-vf',
@@ -136,14 +136,14 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
 
     video_shape = (
         None,
-        self.builder_config.height,
+        self.builder_config.height,  # pyrefly: ignore[missing-attribute]
         self.builder_config.width,
         3,
     )
     labels_names_file = tfds.core.tfds_path(_LABELS_FNAME)
     features = tfds.features.FeaturesDict({
         'video': tfds.features.Video(
-            video_shape,
+            video_shape,  # pyrefly: ignore[bad-argument-type]
             ffmpeg_extra_args=ffmpeg_extra_args,
             encoding_format='jpeg',
         ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
@@ -168,22 +168,22 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'videos_dir': downloaded_urls['videos'],
                 'splits_dir': downloaded_urls['splits'],
                 'data_list': '{}/trainlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number
+                    splits_folder, self.builder_config.split_number  # pyrefly: ignore[missing-attribute]
                 ),
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'videos_dir': downloaded_urls['videos'],
                 'splits_dir': downloaded_urls['splits'],
                 'data_list': '{}/testlist{:02d}.txt'.format(
-                    splits_folder, self.builder_config.split_number
+                    splits_folder, self.builder_config.split_number  # pyrefly: ignore[missing-attribute]
                 ),
             },
         ),

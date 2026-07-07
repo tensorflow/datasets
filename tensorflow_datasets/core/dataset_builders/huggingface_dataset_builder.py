@@ -147,7 +147,7 @@ def _write_shard(
         'run_post_process'
         in inspect.signature(hf_builder.as_dataset).parameters
     ):
-      as_dataset_kwargs['run_post_process'] = False
+      as_dataset_kwargs['run_post_process'] = False  # pyrefly: ignore[bad-assignment]
     dataset = hf_builder.as_dataset(**as_dataset_kwargs)
     for i in range(shard_spec.num_examples):
       try:
@@ -235,7 +235,7 @@ class HuggingfaceDatasetBuilder(
         or '1.0.0'
     )
     self.VERSION = version_lib.Version(version)  # pylint: disable=invalid-name
-    self.name = conversion_utils.to_tfds_name(hf_repo_id)
+    self.name = conversion_utils.to_tfds_name(hf_repo_id)  # pyrefly: ignore[read-only]
     self.homepage = f'https://huggingface.co/datasets/{hf_repo_id}'
     self._hf_hub_token = hf_hub_token
     self._hf_num_proc = hf_num_proc
@@ -246,9 +246,9 @@ class HuggingfaceDatasetBuilder(
     if self._hf_config:
       description = self._get_text_field('description')
       if self._is_gated():
-        description = self._gated_text + '\n' + description
+        description = self._gated_text + '\n' + description  # pyrefly: ignore[unsupported-operation]
       self._converted_builder_config = dataset_builder.BuilderConfig(
-          name=tfds_config,
+          name=tfds_config,  # pyrefly: ignore[bad-argument-type]
           version=self.VERSION,
           description=description,
       )
