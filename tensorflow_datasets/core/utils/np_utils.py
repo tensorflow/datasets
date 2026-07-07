@@ -25,7 +25,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 
 @py_utils.memoize()
 def to_np_shape(shape: type_utils.Shape, replace_int=-1) -> Tuple[int]:
-  return tuple(dim if dim is not None else replace_int for dim in shape)
+  return tuple(dim if dim is not None else replace_int for dim in shape)  # pyrefly: ignore[bad-return]
 
 
 def _dict_to_list(dict_of_lists: dict[str, Any]) -> list[Any]:

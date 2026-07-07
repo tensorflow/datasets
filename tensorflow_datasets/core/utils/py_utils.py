@@ -177,7 +177,7 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
   elif not dict_only:
     types_ = [list]
     if map_tuple:
-      types_.append(tuple)
+      types_.append(tuple)  # pyrefly: ignore[bad-argument-type]
     if isinstance(data_struct, tuple(types_)):
       mapped = [
           map_nested(function, v, dict_only, map_tuple) for v in data_struct
@@ -212,7 +212,7 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
   """Return the dict with all nested keys flattened joined with '/'."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
-  for k, v in d.items():
+  for k, v in d.items():  # pyrefly: ignore[missing-attribute]
     if isinstance(v, dict):
       for k2, v2 in flatten_nest_dict(v).items():
         flat_dict[f'{k}/{k2}'] = v2
@@ -505,7 +505,7 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
       with lock:
         return fn(*args, **kwargs)
 
-    return lock_decorated
+    return lock_decorated  # pyrefly: ignore[bad-return]
 
   return lock_decorator
 

@@ -97,12 +97,12 @@ class Flores(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair
+            languages=self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
         ),
         supervised_keys=(source, target),
         homepage="https://github.com/facebookresearch/flores/",
@@ -112,7 +112,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
 
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     non_en = source if target == "en" else target
     path_tmpl = (
         "{dl_dir}/wikipedia_en_ne_si_test_sets/wikipedia.{split}.{non_en}-en."
@@ -132,10 +132,10 @@ class Flores(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION, gen_kwargs=files["dev"]
+            name=tfds.Split.VALIDATION, gen_kwargs=files["dev"]  # pyrefly: ignore[missing-attribute]
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=files["devtest"]
+            name=tfds.Split.TEST, gen_kwargs=files["devtest"]  # pyrefly: ignore[missing-attribute]
         ),
     ]
 
@@ -155,7 +155,7 @@ class Flores(tfds.core.GeneratorBasedBuilder):
         target_file,
     )
 
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.

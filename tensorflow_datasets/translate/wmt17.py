@@ -55,7 +55,7 @@ class Wmt17Translate(wmt.WmtTranslate):
   @property
   def _subsets(self):
     return {
-        tfds.Split.TRAIN: [
+        tfds.Split.TRAIN: [  # pyrefly: ignore[missing-attribute]
             "europarl_v7",
             "europarl_v8_16",
             "commoncrawl",
@@ -71,6 +71,6 @@ class Wmt17Translate(wmt.WmtTranslate):
             "dcep_v1",
             "onlinebooks_v1",
         ] + wmt.CWMT_SUBSET_NAMES,
-        tfds.Split.VALIDATION: ["newsdev2017", "newstest2016", "newstestB2016"],
-        tfds.Split.TEST: ["newstest2017", "newstestB2017"],
+        tfds.Split.VALIDATION: ["newsdev2017", "newstest2016", "newstestB2016"],  # pyrefly: ignore[missing-attribute]
+        tfds.Split.TEST: ["newstest2017", "newstestB2017"],  # pyrefly: ignore[missing-attribute]
     }

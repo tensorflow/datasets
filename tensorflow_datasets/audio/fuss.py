@@ -130,13 +130,13 @@ class Fuss(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    url, extracted_dirname = _DL_METADATA[self.builder_config.name]
+    url, extracted_dirname = _DL_METADATA[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
     base_dir = dl_manager.download_and_extract(url)
     splits = []
     for split_name, split_dir in [
-        (tfds.Split.TRAIN, "train"),
-        (tfds.Split.VALIDATION, "validation"),
-        (tfds.Split.TEST, "eval"),
+        (tfds.Split.TRAIN, "train"),  # pyrefly: ignore[missing-attribute]
+        (tfds.Split.VALIDATION, "validation"),  # pyrefly: ignore[missing-attribute]
+        (tfds.Split.TEST, "eval"),  # pyrefly: ignore[missing-attribute]
     ]:
       splits.append(
           tfds.core.SplitGenerator(

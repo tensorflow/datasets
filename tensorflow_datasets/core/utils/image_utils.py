@@ -45,7 +45,7 @@ def _allow_pil_to_load_truncated_images():
   try:
     from PIL import ImageFile  # pylint: disable=g-import-not-at-top
 
-    ImageFile.LOAD_TRUNCATED_IMAGES = True
+    ImageFile.LOAD_TRUNCATED_IMAGES = True  # pyrefly: ignore[bad-assignment]
   except ImportError:
     pass
 

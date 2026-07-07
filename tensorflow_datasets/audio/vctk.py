@@ -237,7 +237,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
     self._populate_metadata(extracted_dir)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"extracted_dir": extracted_dir},
         ),
     ]
@@ -259,7 +259,7 @@ class Vctk(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, extracted_dir):
     """Yields examples."""
     speech_dir = "wav48_silence_trimmed"
-    mic = "_%s" % self.builder_config.name
+    mic = "_%s" % self.builder_config.name  # pyrefly: ignore[missing-attribute]
     speech_glob = os.path.join(extracted_dir, speech_dir, "*", "*%s.flac" % mic)
     for speech_path in tf.io.gfile.glob(speech_glob):
       text_path = speech_path.replace(speech_dir, "txt").split(mic)[0] + ".txt"

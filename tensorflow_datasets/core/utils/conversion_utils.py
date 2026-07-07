@@ -94,13 +94,13 @@ def _get_default_value(
       # Return an empty PNG image of 1x1 pixel, black.
       return _DEFAULT_IMG
     case _:
-      if dtype_utils.is_string(feature.np_dtype):
+      if dtype_utils.is_string(feature.np_dtype):  # pyrefly: ignore[bad-argument-type]
         return b''
-      elif dtype_utils.is_integer(feature.np_dtype):
-        return np.iinfo(feature.np_dtype).min
-      elif dtype_utils.is_floating(feature.np_dtype):
-        return np.finfo(feature.np_dtype).min
-      elif dtype_utils.is_bool(feature.np_dtype):
+      elif dtype_utils.is_integer(feature.np_dtype):  # pyrefly: ignore[bad-argument-type]
+        return np.iinfo(feature.np_dtype).min  # pyrefly: ignore[no-matching-overload]
+      elif dtype_utils.is_floating(feature.np_dtype):  # pyrefly: ignore[bad-argument-type]
+        return np.finfo(feature.np_dtype).min  # pyrefly: ignore[bad-return, no-matching-overload]
+      elif dtype_utils.is_bool(feature.np_dtype):  # pyrefly: ignore[bad-argument-type]
         return False
       else:
         raise TypeError(f'Could not recognize the dtype of {feature}')
@@ -152,7 +152,7 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
           return {
               name: [
                   to_tfds_value(inner_hf_value, inner_feature)
-                  for inner_hf_value in value.get(name)
+                  for inner_hf_value in value.get(name)  # pyrefly: ignore[not-iterable]
               ]
               for name, inner_feature in feature.feature.items()
           }
@@ -170,7 +170,7 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
         # range [-2**32, 2**32-1]. Nevertheless, the mantissa size of
         # float32 is 23 bits, therefore the maximum bit depth possible is 23.
         dtype = feature.dtype
-        return (array * np.iinfo(dtype).max).astype(dtype=dtype)
+        return (array * np.iinfo(dtype).max).astype(dtype=dtype)  # pyrefly: ignore[no-matching-overload]
       elif (path := value.get('path')) and (path := epath.Path(path)).exists():
         return path
     case feature_lib.Image():
@@ -182,7 +182,7 @@ def to_tfds_value(value: Any, feature: feature_lib.FeatureConnector) -> Any:
         # In some cases, for example when loading jsonline files using pandas,
         # empty non-float values, such as strings, are converted to float nan.
         # We spot those occurrences as the feature.np_dtype is not float.
-        if np.isnan(value) and not dtype_utils.is_floating(feature.np_dtype):
+        if np.isnan(value) and not dtype_utils.is_floating(feature.np_dtype):  # pyrefly: ignore[bad-argument-type]
           return _get_default_value(feature)
       return value
 
