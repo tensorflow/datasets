@@ -31,7 +31,7 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
         conllu_lib.get_universal_morphology_config(
             language=language,
             description=ud_utils.DESCRIPTIONS[language],
-            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,
+            features=conllu_lib.UNIVERSAL_DEPENDENCIES_FEATURES,  # pyrefly: ignore[bad-argument-type]
         )
     )
 
@@ -56,12 +56,12 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
         self.builder_config.language
     ].items():
       paths[split] = ud_utils.prepare_ud_filepaths(
-          path_prefix=_DATA_URL, filepaths=split_paths
+          path_prefix=_DATA_URL, filepaths=split_paths  # pyrefly: ignore[bad-argument-type]
       )
 
     paths_per_split = dl_manager.download_and_extract(paths)
 
     return {
         split: self._generate_examples(filepaths=split_paths)
-        for split, split_paths in paths_per_split.items()
+        for split, split_paths in paths_per_split.items()  # pyrefly: ignore[missing-attribute]
     }

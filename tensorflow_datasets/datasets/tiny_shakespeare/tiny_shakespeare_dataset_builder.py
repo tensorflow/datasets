@@ -57,19 +57,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'split_key': 'train', 'split_text': train_text},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'split_key': 'validation',
                 'split_text': validation_text,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'split_key': 'test', 'split_text': test_text},
         ),
     ]

@@ -139,9 +139,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     cfg = self.builder_config
     download_urls = dict()
-    if not (cfg.unfiltered and cfg.exclude_context):
+    if not (cfg.unfiltered and cfg.exclude_context):  # pyrefly: ignore[missing-attribute]
       download_urls["rc"] = _DOWNLOAD_URL_TMPL.format("rc")
-    if cfg.unfiltered:
+    if cfg.unfiltered:  # pyrefly: ignore[missing-attribute]
       download_urls["unfiltered"] = _DOWNLOAD_URL_TMPL.format("unfiltered")
     file_paths = dl_manager.download_and_extract(download_urls)
 
@@ -156,7 +156,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
     test_files = tf.io.gfile.glob(os.path.join(qa_dir, _TEST_FILE_FORMAT))
 
-    if cfg.exclude_context:
+    if cfg.exclude_context:  # pyrefly: ignore[missing-attribute]
       web_evidence_dir = None
       wiki_evidence_dir = None
     else:
@@ -165,7 +165,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "files": train_files,
                 "web_dir": web_evidence_dir,
@@ -173,7 +173,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "files": valid_files,
                 "web_dir": web_evidence_dir,
@@ -181,7 +181,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "files": test_files,
                 "web_dir": web_evidence_dir,
@@ -225,7 +225,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "value": "<unk>",
         }
 
-      if self.builder_config.exclude_context:
+      if self.builder_config.exclude_context:  # pyrefly: ignore[missing-attribute]
         article["SearchResults"] = []
         article["EntityPages"] = []
 

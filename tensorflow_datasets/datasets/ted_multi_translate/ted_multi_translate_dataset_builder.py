@@ -108,17 +108,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_train.tsv')
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'data_file': os.path.join(dl_dir, 'all_talks_dev.tsv')},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_file': os.path.join(dl_dir, 'all_talks_test.tsv')
             },

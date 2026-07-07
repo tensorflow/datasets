@@ -218,18 +218,18 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return {
         'train_large': self._generate_examples(
-            image_paths['train_images'], metadata_paths['train_large_metadata']
+            image_paths['train_images'], metadata_paths['train_large_metadata']  # pyrefly: ignore[bad-index]
         ),
         'train_quality': self._generate_examples(
-            image_paths['train_images'],
-            metadata_paths['train_quality_metadata'],
+            image_paths['train_images'],  # pyrefly: ignore[bad-index]
+            metadata_paths['train_quality_metadata'],  # pyrefly: ignore[bad-index]
         ),
         'validation': self._generate_examples(
-            image_paths['validation_images'],
-            metadata_paths['validation_metadata'],
+            image_paths['validation_images'],  # pyrefly: ignore[bad-index]
+            metadata_paths['validation_metadata'],  # pyrefly: ignore[bad-index]
         ),
         'test': self._generate_examples(
-            image_paths['test_images'], metadata_paths['test_metadata']
+            image_paths['test_images'], metadata_paths['test_metadata']  # pyrefly: ignore[bad-index]
         ),
     }
 

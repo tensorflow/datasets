@@ -103,7 +103,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    lang = _LANGS[self.builder_config.language]
+    lang = _LANGS[self.builder_config.language]  # pyrefly: ignore[missing-attribute]
 
     tatoeba_source_path = os.path.join(
         _DATA_URLS, "tatoeba.{lang}-eng.{lang}".format(lang=lang)
@@ -138,6 +138,6 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       yield i, {
           "source_sentence": source_sentences[i],
           "target_sentence": target_sentences[i],
-          "source_language": self.builder_config.language,
+          "source_language": self.builder_config.language,  # pyrefly: ignore[missing-attribute]
           "target_language": "en",
       }

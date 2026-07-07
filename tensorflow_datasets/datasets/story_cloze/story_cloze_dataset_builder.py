@@ -61,23 +61,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    if self.builder_config.name == '2016':
+    if self.builder_config.name == '2016':  # pyrefly: ignore[missing-attribute]
       file_postfix = 'spring2016'
     elif self.builder_config.name == '2018':
       file_postfix = 'winter2018'
 
-    val_file = 'cloze_test_val__' + file_postfix + '.csv'
+    val_file = 'cloze_test_val__' + file_postfix + '.csv'  # pyrefly: ignore[unbound-name]
     test_file = 'cloze_test_test__' + file_postfix + '.csv'
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(dl_manager.manual_dir, val_file)
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(dl_manager.manual_dir, test_file)
             },

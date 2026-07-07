@@ -68,7 +68,7 @@ class Builder(tfds.dataset_builders.ConllUDatasetBuilder):
     BUILDER_CONFIGS.append(
         conllu_lib.get_universal_morphology_config(
             language=language,
-            features=conllu_lib.XTREME_POS_FEATURES,
+            features=conllu_lib.XTREME_POS_FEATURES,  # pyrefly: ignore[bad-argument-type]
             name=f"xtreme_pos_{language}",
         )
     )

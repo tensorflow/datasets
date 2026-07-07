@@ -185,7 +185,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           "va": "sun397_tfds_va.txt",
       }
       for split, filename in tfds_split_files.items():
-        tfds_split_files[split] = tfds.core.tfds_path(
+        tfds_split_files[split] = tfds.core.tfds_path(  # pyrefly: ignore[bad-assignment]
             os.path.join("datasets", "sun397", filename)
         )
     self._tfds_split_files = tfds_split_files
@@ -222,25 +222,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         path=paths["images"],
         extract_method=tfds.download.ExtractMethod.TAR_GZ_STREAM,
     )
-    if self.builder_config.name == "tfds":
+    if self.builder_config.name == "tfds":  # pyrefly: ignore[missing-attribute]
       subset_images = self._get_tfds_subsets_images()
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["tr"],
               ),
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["te"],
               ),
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
+              name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["va"],
@@ -251,14 +251,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       subset_images = self._get_partition_subsets_images(paths["partitions"])
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["tr"],
               ),
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   archive=dl_manager.iter_archive(images),
                   subset_images=subset_images["te"],
@@ -284,8 +284,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 fobj,
                 sess,
                 filename,
-                quality=self.builder_config.quality,
-                target_pixels=self.builder_config.target_pixels,
+                quality=self.builder_config.quality,  # pyrefly: ignore[missing-attribute]
+                target_pixels=self.builder_config.target_pixels,  # pyrefly: ignore[missing-attribute]
             )
             record = {
                 "file_name": filename,
@@ -307,8 +307,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       all_images.update(split_images)
     # Load the images in the training/test split of this partition.
     filenames = {
-        "tr": "Training_%02d.txt" % self.builder_config.partition,
-        "te": "Testing_%02d.txt" % self.builder_config.partition,
+        "tr": "Training_%02d.txt" % self.builder_config.partition,  # pyrefly: ignore[missing-attribute]
+        "te": "Testing_%02d.txt" % self.builder_config.partition,  # pyrefly: ignore[missing-attribute]
     }
     splits_sets = {}
     for split, filename in filenames.items():
