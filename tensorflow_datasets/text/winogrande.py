@@ -89,11 +89,11 @@ class Winogrande(tfds.core.GeneratorBasedBuilder):
       )
     return train_splits + [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': os.path.join(data_dir, 'test.jsonl')},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': os.path.join(data_dir, 'dev.jsonl')},
         ),
     ]

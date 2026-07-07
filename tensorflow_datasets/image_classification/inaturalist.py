@@ -18,7 +18,7 @@
 import json
 import os
 
-import six.moves.urllib as urllib
+import six.moves.urllib as urllib  # pyrefly: ignore[missing-source-for-stubs]
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -96,7 +96,7 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
                     output_files["trainval_images"]
@@ -107,7 +107,7 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
                     output_files["trainval_images"]
@@ -118,7 +118,7 @@ class INaturalist2017(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=dl_manager.iter_archive(
                     output_files["test_images"]

@@ -65,7 +65,7 @@ class Food101(tfds.core.GeneratorBasedBuilder):
         "label": tfds.features.ClassLabel(names_file=names_file),
     }
     if self.version > "2.0.0":
-      features_dict["id"] = tfds.features.Text()
+      features_dict["id"] = tfds.features.Text()  # pyrefly: ignore[bad-assignment]
     return tfds.core.DatasetInfo(
         builder=self,
         description=(_DESCRIPTION),
@@ -84,14 +84,14 @@ class Food101(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "train.json"),
                 "image_dir_path": image_dir_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "json_file_path": os.path.join(meta_path, "test.json"),
                 "image_dir_path": image_dir_path,

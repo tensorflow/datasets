@@ -74,7 +74,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(dl_dir, 'multirc')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
@@ -82,7 +82,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,
@@ -90,7 +90,7 @@ class EraserMultiRc(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 'data_dir': data_dir,

@@ -410,7 +410,7 @@ class C4Config(tfds.core.BuilderConfig):
     super(C4Config, self).__init__(
         name=name,
         version=_VERSION,
-        supported_versions=_SUPPORTED_VERSIONS,
+        supported_versions=_SUPPORTED_VERSIONS,  # pyrefly: ignore[bad-argument-type]
         **kwargs,
     )
 
@@ -525,13 +525,13 @@ class C4(tfds.core.BeamBasedBuilder):
   ):
     # We will automatically download the first default CC version, but others
     # need to be manually downloaded.
-    cc_versions = set(self.builder_config.cc_versions)
+    cc_versions = set(self.builder_config.cc_versions)  # pyrefly: ignore[missing-attribute]
     files_to_download = {}
     files_to_download["wet_path_urls"] = [
         _WET_PATH_URL.format(cc_version=cc_version)
         for cc_version in cc_versions
     ]
-    if self.builder_config.badwords_filter_fraction > 0.0:
+    if self.builder_config.badwords_filter_fraction > 0.0:  # pyrefly: ignore[missing-attribute]
       files_to_download["badwords"] = {
           lang: _BADWORDS_URL.format(lang=lang)
           for lang in _BADWORDS_LANGS
@@ -539,11 +539,11 @@ class C4(tfds.core.BeamBasedBuilder):
       }
       # Use older "en" file for reproducibility of the original C4.
       files_to_download["badwords"]["en"] = _EN_BADWORDS_URL
-    if self.builder_config.realnewslike:
+    if self.builder_config.realnewslike:  # pyrefly: ignore[missing-attribute]
       files_to_download["realnews_domains"] = _REALNEWS_DOMAINS_URL
     file_paths = dl_manager.download_and_extract(files_to_download)
 
-    if self.builder_config.webtextlike:
+    if self.builder_config.webtextlike:  # pyrefly: ignore[missing-attribute]
       owt_path = dl_manager.manual_dir / _OPENWEBTEXT_URLS_ZIP
       if not owt_path.exists():
         raise AssertionError(
@@ -554,7 +554,7 @@ class C4(tfds.core.BeamBasedBuilder):
                 _OPENWEBTEXT_URLS_ZIP,
             )
         )
-      file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)
+      file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)  # pyrefly: ignore[unsupported-operation]
 
     file_paths = tree.map_structure(os.fspath, file_paths)
 
@@ -570,11 +570,11 @@ class C4(tfds.core.BeamBasedBuilder):
     train_predicate_fn = lambda x: x % 1000 != 0  # 99.9%
     validation_predicate_fn = lambda x: x % 1000 == 0  # 00.1%
 
-    if len(self.builder_config.languages) == 1:
+    if len(self.builder_config.languages) == 1:  # pyrefly: ignore[missing-attribute]
       # Single-language version.
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   split="train",
                   pages=pages_pcollection,
@@ -584,7 +584,7 @@ class C4(tfds.core.BeamBasedBuilder):
               ),
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
+              name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs=dict(
                   split="validation",
                   pages=pages_pcollection,
@@ -596,7 +596,7 @@ class C4(tfds.core.BeamBasedBuilder):
       ]
 
     splits = []
-    for lang in self.builder_config.languages + [c4_utils.UNKNOWN_LANGUAGE]:
+    for lang in self.builder_config.languages + [c4_utils.UNKNOWN_LANGUAGE]:  # pyrefly: ignore[unsupported-operation]
       splits.extend([
           tfds.core.SplitGenerator(
               name=lang,
@@ -653,7 +653,7 @@ class C4(tfds.core.BeamBasedBuilder):
 
     # Optionally filter for RealNews domains.
     # Output: [PageFeatures]
-    if self.builder_config.realnewslike:
+    if self.builder_config.realnewslike:  # pyrefly: ignore[missing-attribute]
       with epath.Path(file_paths["realnews_domains"]).open() as f:
         realnews_domains = json.load(f)
       pages |= beam.Filter(c4_utils.is_realnews_domain, realnews_domains)
@@ -669,7 +669,7 @@ class C4(tfds.core.BeamBasedBuilder):
 
     # Optionally filter for WebText-like URLs.
     # Output: [PageFeatures]
-    if self.builder_config.webtextlike:
+    if self.builder_config.webtextlike:  # pyrefly: ignore[missing-attribute]
       webtextlike_urls = (
           pipeline
           | "read_webtextlike_urls"
@@ -691,13 +691,13 @@ class C4(tfds.core.BeamBasedBuilder):
           | beam.FlatMap(c4_utils.filter_by_webtextlike)
       )
 
-    if self.builder_config.paragraph_filter:
+    if self.builder_config.paragraph_filter:  # pyrefly: ignore[missing-attribute]
       pages |= beam.Filter(c4_utils.paragraph_filter)
 
-    if self.builder_config.clean:
+    if self.builder_config.clean:  # pyrefly: ignore[missing-attribute]
       pages |= "clean_pages" >> beam.FlatMap(c4_utils.get_clean_page_fn())
 
-    if self.builder_config.dedupe:
+    if self.builder_config.dedupe:  # pyrefly: ignore[missing-attribute]
       pages = (
           # Also removes documents with too few sentences after deduplication.
           c4_utils.remove_duplicate_text(pages)  # pylint:disable=g-long-ternary
@@ -708,7 +708,7 @@ class C4(tfds.core.BeamBasedBuilder):
       )
 
     # Add detected language.
-    if self.builder_config.languages == ["en"]:
+    if self.builder_config.languages == ["en"]:  # pyrefly: ignore[missing-attribute]
       # Use langdetect for reproducibility of the original C4.
       pages |= beam.FlatMap(c4_utils.detect_english)
     else:
@@ -716,7 +716,7 @@ class C4(tfds.core.BeamBasedBuilder):
           pages, valid_languages=self.builder_config.languages
       )
 
-    if self.builder_config.badwords_filter_fraction > 0.0:
+    if self.builder_config.badwords_filter_fraction > 0.0:  # pyrefly: ignore[missing-attribute]
       # Create dictionary of badwords regex for each available language.
       badwords = collections.defaultdict(set)
       for lang, path in file_paths["badwords"].items():
@@ -729,8 +729,8 @@ class C4(tfds.core.BeamBasedBuilder):
 
       pages |= beam.Filter(
           c4_utils.get_badwords_filter_fn(
-              badwords,
-              filter_fraction=self.builder_config.badwords_filter_fraction,
+              badwords,  # pyrefly: ignore[bad-argument-type]
+              filter_fraction=self.builder_config.badwords_filter_fraction,  # pyrefly: ignore[missing-attribute]
           )
       )
 

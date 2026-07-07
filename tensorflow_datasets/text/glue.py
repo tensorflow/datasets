@@ -468,29 +468,29 @@ class Glue(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     features = {
         text_feature: tfds.features.Text()
-        for text_feature in six.iterkeys(self.builder_config.text_features)
+        for text_feature in six.iterkeys(self.builder_config.text_features)  # pyrefly: ignore[missing-attribute]
     }
-    if self.builder_config.label_classes:
-      features["label"] = tfds.features.ClassLabel(
-          names=self.builder_config.label_classes
+    if self.builder_config.label_classes:  # pyrefly: ignore[missing-attribute]
+      features["label"] = tfds.features.ClassLabel(  # pyrefly: ignore[unsupported-operation]
+          names=self.builder_config.label_classes  # pyrefly: ignore[bad-argument-type]
       )
     else:
-      features["label"] = np.float32
-    features["idx"] = np.int32
+      features["label"] = np.float32  # pyrefly: ignore[unsupported-operation]
+    features["idx"] = np.int32  # pyrefly: ignore[unsupported-operation]
     return tfds.core.DatasetInfo(
         builder=self,
         description=_GLUE_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
-        homepage=self.builder_config.url,
-        citation=self.builder_config.citation + "\n" + _GLUE_CITATION,
+        homepage=self.builder_config.url,  # pyrefly: ignore[missing-attribute]
+        citation=self.builder_config.citation + "\n" + _GLUE_CITATION,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
-    if self.builder_config.name == "ax":
-      data_file = dl_manager.download(self.builder_config.data_url)
+    if self.builder_config.name == "ax":  # pyrefly: ignore[missing-attribute]
+      data_file = dl_manager.download(self.builder_config.data_url)  # pyrefly: ignore[missing-attribute]
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "data_file": data_file,
                   "split": "test",
@@ -506,11 +506,11 @@ class Glue(tfds.core.GeneratorBasedBuilder):
           "test": _MRPC_TEST,
       })
     else:
-      dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)
-      data_dir = os.path.join(dl_dir, self.builder_config.data_dir)
+      dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)  # pyrefly: ignore[missing-attribute]
+      data_dir = os.path.join(dl_dir, self.builder_config.data_dir)  # pyrefly: ignore[missing-attribute]
       mrpc_files = None
     train_split = tfds.core.SplitGenerator(
-        name=tfds.Split.TRAIN,
+        name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
         gen_kwargs={
             "data_file": os.path.join(data_dir or "", "train.tsv"),
             "split": "train",
@@ -545,7 +545,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       return [
           train_split,
           tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
+              name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "data_file": os.path.join(data_dir or "", "dev.tsv"),
                   "split": "dev",
@@ -553,7 +553,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
               },
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "data_file": os.path.join(data_dir or "", "test.tsv"),
                   "split": "test",
@@ -563,7 +563,7 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       ]
 
   def _generate_examples(self, data_file, split, mrpc_files=None):
-    if self.builder_config.name == "mrpc":
+    if self.builder_config.name == "mrpc":  # pyrefly: ignore[missing-attribute]
       # We have to prepare the MRPC dataset from the original sources ourselves.
       examples = self._generate_example_mrpc_files(
           mrpc_files=mrpc_files, split=split
@@ -571,8 +571,8 @@ class Glue(tfds.core.GeneratorBasedBuilder):
       for example in examples:
         yield example["idx"], example
     else:
-      process_label = self.builder_config.process_label
-      label_classes = self.builder_config.label_classes
+      process_label = self.builder_config.process_label  # pyrefly: ignore[missing-attribute]
+      label_classes = self.builder_config.label_classes  # pyrefly: ignore[missing-attribute]
 
       # The train and dev files for CoLA are the only tsv files without a
       # header.
@@ -592,12 +592,12 @@ class Glue(tfds.core.GeneratorBasedBuilder):
 
           example = {
               feat: row[col]
-              for feat, col in six.iteritems(self.builder_config.text_features)
+              for feat, col in six.iteritems(self.builder_config.text_features)  # pyrefly: ignore[missing-attribute]
           }
           example["idx"] = n
 
-          if self.builder_config.label_column in row:
-            label = row[self.builder_config.label_column]
+          if self.builder_config.label_column in row:  # pyrefly: ignore[missing-attribute]
+            label = row[self.builder_config.label_column]  # pyrefly: ignore[bad-index]
             # For some tasks, the label is represented as 0 and 1 in the tsv
             # files and needs to be cast to integer to work with the feature.
             if label_classes and label not in label_classes:

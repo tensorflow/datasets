@@ -109,7 +109,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_dir_path": os.path.join(
                     dl_paths["texture_vs_shape"], _DATA_DIR_PATH

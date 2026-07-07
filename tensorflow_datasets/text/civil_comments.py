@@ -329,7 +329,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    mode = self.builder_config.mode
+    mode = self.builder_config.mode  # pyrefly: ignore[missing-attribute]
     citation = {
         'base': _CITATION,
         'identity': _CITATION,
@@ -347,11 +347,11 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
         'created_date': np.str_,
     }
     if mode == 'spans':
-      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)
+      features['spans'] = tfds.features.Tensor(shape=(None,), dtype=np.int32)  # pyrefly: ignore[bad-assignment]
       supervised_value = 'spans'
     else:
       for label in _labels(mode):
-        features[label] = np.float32
+        features[label] = np.float32  # pyrefly: ignore[unsupported-operation]
       supervised_value = 'toxicity'
 
     return tfds.core.DatasetInfo(
@@ -367,12 +367,12 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
-    mode = self.builder_config.mode
+    mode = self.builder_config.mode  # pyrefly: ignore[missing-attribute]
     filename = os.path.join(dl_path, 'civil_comments.csv')
 
     splits = [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filename': filename,
                 'mode': mode,
@@ -384,7 +384,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     if mode != 'covert' and mode != 'context':
       # Covert and context do not have validation split.
       validation_split_generator = tfds.core.SplitGenerator(
-          name=tfds.Split.VALIDATION,
+          name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
           gen_kwargs={
               'filename': filename,
               'mode': mode,
@@ -396,7 +396,7 @@ class CivilComments(tfds.core.GeneratorBasedBuilder):
     if mode != 'context':
       # Context has only a train split.
       test_split_generator = tfds.core.SplitGenerator(
-          name=tfds.Split.TEST,
+          name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
           gen_kwargs={
               'filename': filename,
               'mode': mode,

@@ -90,7 +90,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
   BUILDER_CONFIGS = _get_builder_configs()
 
   def _info(self):
-    num_classes = self.builder_config.num_classes
+    num_classes = self.builder_config.num_classes  # pyrefly: ignore[missing-attribute]
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
@@ -107,7 +107,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    if self.builder_config.name == 'imagenet12':
+    if self.builder_config.name == 'imagenet12':  # pyrefly: ignore[missing-attribute]
       devkit_path, images_archive = dl_manager.download_and_extract([
           _URL_PREFIX_VGG + 'decathlon-1.0-devkit.tar.gz',
           tfds.download.Resource(
@@ -121,12 +121,12 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
           _URL_PREFIX_VGG + 'decathlon-1.0-data.tar.gz',
       ])
       images_archive = os.path.join(
-          data_path, self.builder_config.name + '.tar'
+          data_path, self.builder_config.name + '.tar'  # pyrefly: ignore[unsupported-operation]
       )
     annotations_path = os.path.join(devkit_path, 'decathlon-1.0', 'annotations')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
@@ -134,7 +134,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
@@ -142,7 +142,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 images_archive=images_archive,
                 annotations_path=annotations_path,
@@ -155,7 +155,7 @@ class VisualDomainDecathlon(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     filename_to_label = _get_filename_to_label_map(
         annotations_path=annotations_path,
-        dataset_name=self.builder_config.name,
+        dataset_name=self.builder_config.name,  # pyrefly: ignore[missing-attribute]
         split=split,
     )
     for image_fname, image_fobj in tfds.download.iter_archive(

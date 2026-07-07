@@ -446,7 +446,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   def _split_generators(self, dl_manager):
     def _base_url(lang):
       tmpl = _BASE_URL_TMPL
-      if self.builder_config.date <= "20220620":
+      if self.builder_config.date <= "20220620":  # pyrefly: ignore[missing-attribute]
         tmpl = _BASE_URL_TMPL_OLD
       return tmpl.format(
           lang=lang.replace("-", "_"), date=self._builder_config.date
@@ -480,7 +480,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     downloaded_files = dl_manager.download({"xml": xml_urls})
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(downloaded_files["xml"], lang)
+        tfds.Split.TRAIN: self._generate_examples(downloaded_files["xml"], lang)  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, filepaths, language):

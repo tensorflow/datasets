@@ -108,7 +108,7 @@ class Wiki40bConfig(tfds.core.BuilderConfig):
       **kwargs: keyword arguments forwarded to super.
     """
     super(Wiki40bConfig, self).__init__(
-        name=language,
+        name=language,  # pyrefly: ignore[bad-argument-type]
         description="Wiki40B dataset for {}.".format(language),
         **kwargs,
     )
@@ -153,7 +153,7 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepaths": os.path.join(
                     _DATA_DIRECTORY, "train", "{}_examples-*".format(lang)
@@ -161,7 +161,7 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepaths": os.path.join(
                     _DATA_DIRECTORY, "dev", "{}_examples-*".format(lang)
@@ -169,7 +169,7 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepaths": os.path.join(
                     _DATA_DIRECTORY, "test", "{}_examples-*".format(lang)

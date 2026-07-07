@@ -72,7 +72,7 @@ def _download_and_index_cqa(dl_manager):
     # Index the CQA dataset by id for joining with Cos-E.
     cqa_indexed = {}
   for d in cqa_complete:
-    cqa_indexed[d["id"]] = d
+    cqa_indexed[d["id"]] = d  # pyrefly: ignore[unbound-name]
   return cqa_indexed
 
 
@@ -131,11 +131,11 @@ class CosE(tfds.core.GeneratorBasedBuilder):
     # We use the CoS-E/CQA dev set as our validation set.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"files": files["dev"], "cqa_indexed": cqa_indexed},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"files": files["train"], "cqa_indexed": cqa_indexed},
         ),
     ]

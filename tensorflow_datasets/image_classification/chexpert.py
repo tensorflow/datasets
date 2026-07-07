@@ -73,6 +73,7 @@ _LABELS = collections.OrderedDict({
 class Chexpert(tfds.core.GeneratorBasedBuilder):
   """CheXpert 2019."""
 
+  GOOGLE_DISABLED = "Bad license"  # GOOGLE-INTERNAL  # pyrefly: ignore[bad-assignment]
 
   VERSION = tfds.core.Version("3.1.0")
 
@@ -118,14 +119,14 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "imgs_path": path,  # Relative img path is provided in csv
                 "csv_path": os.path.join(path, _TRAIN_LABELS_FNAME),
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "imgs_path": path,
                 "csv_path": os.path.join(path, _VALIDATION_LABELS_FNAME),
@@ -138,7 +139,7 @@ class Chexpert(tfds.core.GeneratorBasedBuilder):
     with epath.Path(csv_path).open() as csv_f:
       reader = csv.DictReader(csv_f)
       # Get keys for each label from csv
-      label_keys = reader.fieldnames[5:]
+      label_keys = reader.fieldnames[5:]  # pyrefly: ignore[unsupported-operation]
       for row in reader:
         # Get image based on indicated path in csv
         name = row["Path"]

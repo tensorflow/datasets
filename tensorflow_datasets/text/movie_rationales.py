@@ -69,21 +69,21 @@ class MovieRationales(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_dir': data_dir,
                 'filepath': os.path.join(data_dir, 'train.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_dir': data_dir,
                 'filepath': os.path.join(data_dir, 'val.jsonl'),
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_dir': data_dir,
                 'filepath': os.path.join(data_dir, 'test.jsonl'),

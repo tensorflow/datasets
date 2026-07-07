@@ -100,11 +100,11 @@ class Xnli(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(dl_dir, 'XNLI-1.0')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.test.tsv')},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': os.path.join(data_dir, 'xnli.dev.tsv')},
         ),
     ]

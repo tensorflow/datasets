@@ -107,7 +107,7 @@ class ColorectalHistology(tfds.core.GeneratorBasedBuilder):
     folder = dl_manager.download_and_extract(_TILES_DL_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(root_dir=folder),
         ),
     ]
@@ -154,7 +154,7 @@ class ColorectalHistologyLarge(tfds.core.GeneratorBasedBuilder):
     folder = dl_manager.download_and_extract(_LARGE_DL_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=dict(folder=folder)
+            name=tfds.Split.TEST, gen_kwargs=dict(folder=folder)  # pyrefly: ignore[missing-attribute]
         )
     ]
 

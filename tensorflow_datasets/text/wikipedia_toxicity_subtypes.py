@@ -152,7 +152,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     description = _COMMON_DESCRIPTION
     homepage = (
         _MULTILINGUAL_HOMEPAGE
-        if self.builder_config.multilingual
+        if self.builder_config.multilingual  # pyrefly: ignore[missing-attribute]
         else _SUBTYPES_HOMEPAGE
     )
 
@@ -166,7 +166,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
       labels += TOXICITY_SUBTYPES
 
     for label in labels:
-      features[label] = tf.float32
+      features[label] = tf.float32  # pyrefly: ignore[bad-assignment]
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -182,24 +182,24 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     file_path_prefix = os.path.join(
         dl_path,
-        'wikidata_' + 'multilingual_' * self.builder_config.multilingual,
+        'wikidata_' + 'multilingual_' * self.builder_config.multilingual,  # pyrefly: ignore[missing-attribute]
     )
 
     split_generators = [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filename': file_path_prefix + 'train.csv'},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filename': file_path_prefix + 'test.csv'},
         ),
     ]
 
-    if self.builder_config.multilingual:
+    if self.builder_config.multilingual:  # pyrefly: ignore[missing-attribute]
       # Validation split instead of train for WikipediaToxicityMultilingual.
       split_generators[0] = tfds.core.SplitGenerator(
-          name=tfds.Split.VALIDATION,
+          name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
           gen_kwargs={'filename': file_path_prefix + 'validation.csv'},
       )
 
@@ -225,7 +225,7 @@ class WikipediaToxicitySubtypes(tfds.core.GeneratorBasedBuilder):
         example['language'] = row['lang']
         example['toxicity'] = float(row['toxic'])
 
-        if not self.builder_config.multilingual:
+        if not self.builder_config.multilingual:  # pyrefly: ignore[missing-attribute]
           example['severe_toxicity'] = float(row['severe_toxic'])
           example['identity_attack'] = float(row['identity_hate'])
           for label in ['obscene', 'threat', 'insult']:

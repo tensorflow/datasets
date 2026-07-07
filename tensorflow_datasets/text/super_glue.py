@@ -484,84 +484,84 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     features = {
         feature: tfds.features.Text()
-        for feature in self.builder_config.features
+        for feature in self.builder_config.features  # pyrefly: ignore[missing-attribute]
     }
-    if self.builder_config.name.startswith("wsc"):
-      features["span1_index"] = tf.int32
-      features["span2_index"] = tf.int32
-    if self.builder_config.name == "wic":
-      features["start1"] = tf.int32
-      features["start2"] = tf.int32
-      features["end1"] = tf.int32
-      features["end2"] = tf.int32
+    if self.builder_config.name.startswith("wsc"):  # pyrefly: ignore[missing-attribute]
+      features["span1_index"] = tf.int32  # pyrefly: ignore[unsupported-operation]
+      features["span2_index"] = tf.int32  # pyrefly: ignore[unsupported-operation]
+    if self.builder_config.name == "wic":  # pyrefly: ignore[missing-attribute]
+      features["start1"] = tf.int32  # pyrefly: ignore[unsupported-operation]
+      features["start2"] = tf.int32  # pyrefly: ignore[unsupported-operation]
+      features["end1"] = tf.int32  # pyrefly: ignore[unsupported-operation]
+      features["end2"] = tf.int32  # pyrefly: ignore[unsupported-operation]
     if self.builder_config.name == "multirc":
-      features["idx"] = tfds.features.FeaturesDict({
+      features["idx"] = tfds.features.FeaturesDict({  # pyrefly: ignore[unsupported-operation]
           "paragraph": np.int32,
           "question": np.int32,
           "answer": np.int32,
       })
     elif self.builder_config.name == "record":
-      features["idx"] = tfds.features.FeaturesDict({
+      features["idx"] = tfds.features.FeaturesDict({  # pyrefly: ignore[unsupported-operation]
           "passage": np.int32,
           "query": np.int32,
       })
     else:
-      features["idx"] = tf.int32
+      features["idx"] = tf.int32  # pyrefly: ignore[unsupported-operation]
 
     if self.builder_config.name == "record":
       # Entities are the set of possible choices for the placeholder.
-      features["entities"] = tfds.features.Sequence(tfds.features.Text())
+      features["entities"] = tfds.features.Sequence(tfds.features.Text())  # pyrefly: ignore[unsupported-operation]
       # Answers are the subset of entities that are correct.
-      features["answers"] = tfds.features.Sequence(tfds.features.Text())
+      features["answers"] = tfds.features.Sequence(tfds.features.Text())  # pyrefly: ignore[unsupported-operation]
     else:
-      features["label"] = tfds.features.ClassLabel(
-          names=self.builder_config.label_classes
+      features["label"] = tfds.features.ClassLabel(  # pyrefly: ignore[unsupported-operation]
+          names=self.builder_config.label_classes  # pyrefly: ignore[missing-attribute]
       )
 
     return tfds.core.DatasetInfo(
         builder=self,
         description=_GLUE_DESCRIPTION,
         features=tfds.features.FeaturesDict(features),
-        homepage=self.builder_config.url,
-        citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,
+        homepage=self.builder_config.url,  # pyrefly: ignore[missing-attribute]
+        citation=self.builder_config.citation + "\n" + _SUPER_GLUE_CITATION,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
-    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""
-    task_name = _get_task_name_from_data_url(self.builder_config.data_url)
+    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url) or ""  # pyrefly: ignore[missing-attribute]
+    task_name = _get_task_name_from_data_url(self.builder_config.data_url)  # pyrefly: ignore[missing-attribute]
     dl_dir = os.path.join(dl_dir, task_name)
-    if self.builder_config.name in ["axb", "axg"]:
+    if self.builder_config.name in ["axb", "axg"]:  # pyrefly: ignore[missing-attribute]
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "data_file": os.path.join(
                       dl_dir, "{}.jsonl".format(task_name)
                   ),
-                  "split": tfds.Split.TEST,
+                  "split": tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               },
           ),
       ]
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "train.jsonl"),
-                "split": tfds.Split.TRAIN,
+                "split": tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "val.jsonl"),
-                "split": tfds.Split.VALIDATION,
+                "split": tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_file": os.path.join(dl_dir, "test.jsonl"),
-                "split": tfds.Split.TEST,
+                "split": tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]
@@ -571,7 +571,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
       for line in f:
         row = json.loads(line)
 
-        if self.builder_config.name == "multirc":
+        if self.builder_config.name == "multirc":  # pyrefly: ignore[missing-attribute]
           paragraph = row["passage"]
           for question in paragraph["questions"]:
             for answer in question["answers"]:
@@ -599,10 +599,10 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
                 "idx": {"passage": row["idx"], "query": qa["idx"]},
             }
         else:
-          if self.builder_config.name.startswith("wsc"):
+          if self.builder_config.name.startswith("wsc"):  # pyrefly: ignore[missing-attribute]
             row.update(row["target"])
           example = {
-              feature: row[feature] for feature in self.builder_config.features
+              feature: row[feature] for feature in self.builder_config.features  # pyrefly: ignore[missing-attribute]
           }
           if self.builder_config.name == "wsc.fixed":
             example = _fix_wst(example)
@@ -614,7 +614,7 @@ class SuperGlue(tfds.core.GeneratorBasedBuilder):
             else:
               example["label"] = _cast_label(row["label"])
           else:
-            assert split == tfds.Split.TEST, row
+            assert split == tfds.Split.TEST, row  # pyrefly: ignore[missing-attribute]
             example["label"] = -1
           yield example["idx"], example
 

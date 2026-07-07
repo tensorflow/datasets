@@ -112,7 +112,7 @@ class CycleGAN(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    url = _DL_URLS[self.builder_config.name]
+    url = _DL_URLS[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
     data_dirs = dl_manager.download_and_extract(url)
 
     path_to_dataset = os.path.join(data_dirs, tf.io.gfile.listdir(data_dirs)[0])
