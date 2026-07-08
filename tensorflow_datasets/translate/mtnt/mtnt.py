@@ -80,7 +80,7 @@ class Mtnt(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(URL_1_1)
 
-    pair = f'{self.builder_config.src_lang}-{self.builder_config.dst_lang}'
+    pair = f'{self.builder_config.src_lang}-{self.builder_config.dst_lang}'  # pyrefly: ignore[missing-attribute]
     return {
         'train': self._generate_examples(path / f'MTNT/train/train.{pair}.tsv'),
         'test': self._generate_examples(path / f'MTNT/test/test.{pair}.tsv'),

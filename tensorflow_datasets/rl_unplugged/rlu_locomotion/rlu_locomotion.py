@@ -137,7 +137,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/dm_locomotion_episodes/'
 
   def get_features_dict(self):
-    if 'humanoid' in self.builder_config.name:
+    if 'humanoid' in self.builder_config.name:  # pyrefly: ignore[missing-attribute]
       walker_features = {
           'joints_vel': rlu_common.float_tensor_feature(56),
           'sensors_velocimeter': rlu_common.float_tensor_feature(3),
@@ -171,7 +171,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
       action_features = tfds.features.Tensor(shape=(38,), dtype=np.float32)
 
     return tfds.features.FeaturesDict({
-        'steps': tfds.features.Dataset({
+        'steps': tfds.features.Dataset({  # pyrefly: ignore[bad-argument-type]
             'observation': {
                 'walker': walker_features,
             },
@@ -193,7 +193,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
     return _CITATION
 
   def get_file_prefix(self):
-    task = self.builder_config.name
+    task = self.builder_config.name  # pyrefly: ignore[missing-attribute]
     return f'{self._INPUT_FILE_PREFIX}/{task}/train'
 
   def num_shards(self):
@@ -203,7 +203,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
       self, tf_example: tf.train.Example
   ) -> Dict[str, Any]:
     """Create an episode from a TF example."""
-    feature_description = _feature_description(self.builder_config.name)
+    feature_description = _feature_description(self.builder_config.name)  # pyrefly: ignore[missing-attribute]
 
     data = tf.io.parse_single_example(tf_example, feature_description)
     episode_length = tf.size(data['discount'])

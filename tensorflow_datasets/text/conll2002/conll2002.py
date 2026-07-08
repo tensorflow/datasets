@@ -172,7 +172,7 @@ class Conll2002(tfds.dataset_builders.ConllDatasetBuilder):
     dl_paths = dl_manager.download(urls_to_download)
 
     return {
-        "train": self._generate_examples(dl_paths["train"]),
-        "dev": self._generate_examples(dl_paths["dev"]),
-        "test": self._generate_examples(dl_paths["test"]),
+        "train": self._generate_examples(dl_paths["train"]),  # pyrefly: ignore[bad-index]
+        "dev": self._generate_examples(dl_paths["dev"]),  # pyrefly: ignore[bad-index]
+        "test": self._generate_examples(dl_paths["test"]),  # pyrefly: ignore[bad-index]
     }

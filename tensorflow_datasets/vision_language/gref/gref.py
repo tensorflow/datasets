@@ -156,11 +156,11 @@ class Gref(tfds.core.GeneratorBasedBuilder):
     )
     # Specify the splits
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             coco_image_dir,
             gref_aligned_json_train,
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             coco_image_dir,
             gref_aligned_json_val,
         ),

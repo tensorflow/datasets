@@ -110,7 +110,7 @@ def make_builder_configs(dataset: DataSource):
   """Creates the PH build configs."""
   configs = []
   for task, details in TASKS.items():
-    if dataset in details['datasets']:
+    if dataset in details['datasets']:  # pyrefly: ignore[not-iterable]
       for observation_type in [ObservationType.IMAGE, ObservationType.LOW_DIM]:
         # pytype: disable=wrong-keyword-args
         configs.append(
@@ -216,7 +216,7 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
   """DatasetBuilder for robomimic datasets."""
 
   VERSION: tfds.core.Version
-  RELEASE_NOTES: Dict[str, str]
+  RELEASE_NOTES: Dict[str, str]  # pyrefly: ignore[bad-override]
   BUILDER_CONFIGS: List[tfds.core.BuilderConfig]
   DATASET_NAME: str
   DATASET_FILE_EXTENSION: str = ''
@@ -231,13 +231,13 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     )
 
   def _get_features(self) -> tfds.features.FeaturesDict:
-    obs_dim = TASKS[self.builder_config.task]['object']
-    states_dim = TASKS[self.builder_config.task]['states']
-    action_size = TASKS[self.builder_config.task]['action_size']
+    obs_dim = TASKS[self.builder_config.task]['object']  # pyrefly: ignore[missing-attribute]
+    states_dim = TASKS[self.builder_config.task]['states']  # pyrefly: ignore[missing-attribute]
+    action_size = TASKS[self.builder_config.task]['action_size']  # pyrefly: ignore[missing-attribute]
 
     observation = {
         'object': tensor_feature(
-            obs_dim,
+            obs_dim,  # pyrefly: ignore[bad-argument-type]
         ),
         'robot0_eef_pos': tensor_feature(3, doc='End-effector position'),
         'robot0_eef_quat': tensor_feature(4, doc='End-effector orientation'),
@@ -254,7 +254,7 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
         'robot0_joint_pos_sin': tensor_feature(7),
         'robot0_joint_vel': tensor_feature(7, doc='7DOF joint velocities'),
     }
-    if self.builder_config.task == Task.TRANSPORT:
+    if self.builder_config.task == Task.TRANSPORT:  # pyrefly: ignore[missing-attribute]
       observation['robot1_eef_pos'] = tensor_feature(
           3, doc='End-effector position'
       )
@@ -282,18 +282,18 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           7, doc='7DOF joint velocities'
       )
 
-    if self.builder_config.filename == ObservationType.IMAGE:
+    if self.builder_config.filename == ObservationType.IMAGE:  # pyrefly: ignore[missing-attribute]
       if self.builder_config.task == Task.TOOL_HANG:
-        observation['robot0_eye_in_hand_image'] = image_feature(240)
-        observation['sideview_image'] = image_feature(240)
+        observation['robot0_eye_in_hand_image'] = image_feature(240)  # pyrefly: ignore[bad-assignment]
+        observation['sideview_image'] = image_feature(240)  # pyrefly: ignore[bad-assignment]
       elif self.builder_config.task == Task.TRANSPORT:
-        observation['robot0_eye_in_hand_image'] = image_feature(84)
-        observation['robot1_eye_in_hand_image'] = image_feature(84)
-        observation['shouldercamera0_image'] = image_feature(84)
-        observation['shouldercamera1_image'] = image_feature(84)
+        observation['robot0_eye_in_hand_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
+        observation['robot1_eye_in_hand_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
+        observation['shouldercamera0_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
+        observation['shouldercamera1_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
       else:
-        observation['agentview_image'] = image_feature(84)
-        observation['robot0_eye_in_hand_image'] = image_feature(84)
+        observation['agentview_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
+        observation['robot0_eye_in_hand_image'] = image_feature(84)  # pyrefly: ignore[bad-assignment]
 
     # metadata depends on the quality type
     metadata = self._get_metadata()
@@ -301,15 +301,15 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     features = tfds.features.FeaturesDict({
         'horizon': np.int32,
         'episode_id': np.str_,
-        'steps': tfds.features.Dataset({
-            'action': tensor_feature(action_size),
+        'steps': tfds.features.Dataset({  # pyrefly: ignore[bad-argument-type]
+            'action': tensor_feature(action_size),  # pyrefly: ignore[bad-argument-type]
             'observation': observation,
             'reward': np.float64,
             'is_first': np.bool_,
             'is_last': np.bool_,
             'is_terminal': np.bool_,
             'discount': np.int32,
-            'states': tensor_feature(states_dim),
+            'states': tensor_feature(states_dim),  # pyrefly: ignore[bad-argument-type]
         }),
         **metadata,
     })
@@ -325,6 +325,7 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     # in the sparse rewards, for consistency with the other datasets.
     ext = self.DATASET_FILE_EXTENSION
     filepath = (
+        # pyrefly: ignore[missing-attribute]
         'http://downloads.cs.stanford.edu/downloads/rt_benchmark/'
         f'{self.builder_config.task}/{self.builder_config.dataset}/'
         f'{self.builder_config.filename}{ext}.hdf5'
@@ -351,7 +352,7 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           for key in data:
             yield key, {
                 'steps': build_episode(data[key]),
-                'horizon': self.builder_config.horizon,
+                'horizon': self.builder_config.horizon,  # pyrefly: ignore[missing-attribute]
                 'episode_id': key,
                 **episode_metadata(mask, key),
             }
@@ -359,6 +360,6 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
           for key in data:
             yield key, {
                 'steps': build_episode(data[key]),
-                'horizon': self.builder_config.horizon,
+                'horizon': self.builder_config.horizon,  # pyrefly: ignore[missing-attribute]
                 'episode_id': key,
             }

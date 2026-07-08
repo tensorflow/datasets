@@ -119,7 +119,7 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({
+        features=tfds.features.FeaturesDict({  # pyrefly: ignore[bad-argument-type]
             "quality": np.int32,
             "features": features_dict,
         }),
@@ -130,12 +130,12 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    file_path = dl_manager.download({"train": self.builder_config.dl_url})
+    file_path = dl_manager.download({"train": self.builder_config.dl_url})  # pyrefly: ignore[missing-attribute]
 
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"file_path": file_path["train"]},
         ),
     ]

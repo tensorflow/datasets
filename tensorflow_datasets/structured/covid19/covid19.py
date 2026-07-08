@@ -802,7 +802,7 @@ class Covid19(tfds.core.GeneratorBasedBuilder):
     archive_path = dl_manager.download(
         'https://storage.googleapis.com/covid19-open-data/v3/aggregated.csv.gz?generation=1620814656792419'
     )
-    return {tfds.Split.TRAIN: self._generate_examples(dl_manager, archive_path)}
+    return {tfds.Split.TRAIN: self._generate_examples(dl_manager, archive_path)}  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(
       self, dl_manager: tfds.download.DownloadManager, archive_path

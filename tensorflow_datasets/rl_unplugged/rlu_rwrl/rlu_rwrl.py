@@ -187,10 +187,10 @@ def tf_example_to_feature_description(
           'tf_example_to_feature_description() only works under eager mode.'
       )
     example = example.numpy()  # pytype: disable=attribute-error
-  example = tf.train.Example.FromString(example)
+  example = tf.train.Example.FromString(example)  # pyrefly: ignore[bad-argument-type, bad-assignment]
 
   ret = {}
-  for k, v in example.features.feature.items():
+  for k, v in example.features.feature.items():  # pyrefly: ignore[missing-attribute]
     l = len(v.float_list.value)
     if l % num_timesteps:
       raise ValueError(
@@ -336,10 +336,10 @@ class RluRwrl(rlu_common.RLUBuilder):
     return _CITATION
 
   def get_file_prefix(self):
-    domain = self.builder_config.domain
-    task = self.builder_config.task
-    combined_challenge = self.builder_config.combined_challenge
-    dataset_size = self.builder_config.dataset_size
+    domain = self.builder_config.domain  # pyrefly: ignore[missing-attribute]
+    task = self.builder_config.task  # pyrefly: ignore[missing-attribute]
+    combined_challenge = self.builder_config.combined_challenge  # pyrefly: ignore[missing-attribute]
+    dataset_size = self.builder_config.dataset_size  # pyrefly: ignore[missing-attribute]
     return (
         f'{self._INPUT_FILE_PREFIX}/'
         f'combined_challenge_{str(combined_challenge).lower()}/'
@@ -351,9 +351,9 @@ class RluRwrl(rlu_common.RLUBuilder):
       return self._SHARDS  # For testing.  # type: ignore
     except AttributeError:
       pass
-    domain = self.builder_config.domain
-    combined_challenge = self.builder_config.combined_challenge
-    dataset_size = self.builder_config.dataset_size
+    domain = self.builder_config.domain  # pyrefly: ignore[missing-attribute]
+    combined_challenge = self.builder_config.combined_challenge  # pyrefly: ignore[missing-attribute]
+    dataset_size = self.builder_config.dataset_size  # pyrefly: ignore[missing-attribute]
     return SHARDS_MAPPING[(combined_challenge, domain, dataset_size)]
 
   def tf_example_to_step_ds(  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks

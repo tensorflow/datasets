@@ -184,10 +184,10 @@ class RluControlSuite(rlu_common.RLUBuilder):
         'steps': tfds.features.Dataset({
             'observation': {
                 k: rlu_common.float_tensor_feature(v)
-                for k, v in self.builder_config.observation_size.items()
+                for k, v in self.builder_config.observation_size.items()  # pyrefly: ignore[missing-attribute]
             },
             'action': tfds.features.Tensor(
-                shape=(self.builder_config.action_size,), dtype=np.float32
+                shape=(self.builder_config.action_size,), dtype=np.float32  # pyrefly: ignore[missing-attribute]
             ),
             'reward': np.float32,
             'is_terminal': np.bool_,
@@ -206,7 +206,7 @@ class RluControlSuite(rlu_common.RLUBuilder):
     return _CITATION
 
   def get_file_prefix(self):
-    task = self.builder_config.name
+    task = self.builder_config.name  # pyrefly: ignore[missing-attribute]
     return f'{self._INPUT_FILE_PREFIX}/{task}/train'
 
   def num_shards(self):
@@ -215,11 +215,11 @@ class RluControlSuite(rlu_common.RLUBuilder):
   def _get_example_specs(self):
     obs_features = {
         f'observation/{k}': _sequence_feature(v)
-        for k, v in self.builder_config.observation_size.items()
+        for k, v in self.builder_config.observation_size.items()  # pyrefly: ignore[missing-attribute]
     }
     return {
         **obs_features,
-        'action': _sequence_feature(self.builder_config.action_size),
+        'action': _sequence_feature(self.builder_config.action_size),  # pyrefly: ignore[missing-attribute]
         'discount': _sequence_feature(),
         'reward': _sequence_feature(),
         'step_type': _sequence_feature(),

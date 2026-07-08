@@ -106,7 +106,7 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'list_files': get_files_in_dir(
                     os.path.join(extracted_path, 'train')
@@ -115,7 +115,7 @@ class WebNlg(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'list_files': get_files_in_dir(
                     os.path.join(extracted_path, 'dev')

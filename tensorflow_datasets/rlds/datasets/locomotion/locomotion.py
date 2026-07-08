@@ -62,8 +62,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='ant_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(111,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(8,), dtype=np.float32),
-          reward_info=np.float32,
-          discount_info=np.float32,
+          reward_info=np.float32,  # pyrefly: ignore[bad-argument-type]
+          discount_info=np.float32,  # pyrefly: ignore[bad-argument-type]
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -76,8 +76,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='hopper_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(11,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(3,), dtype=np.float32),
-          reward_info=np.float32,
-          discount_info=np.float32,
+          reward_info=np.float32,  # pyrefly: ignore[bad-argument-type]
+          discount_info=np.float32,  # pyrefly: ignore[bad-argument-type]
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -91,8 +91,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='halfcheetah_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(6,), dtype=np.float32),
-          reward_info=np.float32,
-          discount_info=np.float32,
+          reward_info=np.float32,  # pyrefly: ignore[bad-argument-type]
+          discount_info=np.float32,  # pyrefly: ignore[bad-argument-type]
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -106,8 +106,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='walker2d_sac_1M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(6,), dtype=np.float32),
-          reward_info=np.float32,
-          discount_info=np.float32,
+          reward_info=np.float32,  # pyrefly: ignore[bad-argument-type]
+          discount_info=np.float32,  # pyrefly: ignore[bad-argument-type]
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -121,8 +121,8 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
           name='humanoid_sac_15M_single_policy_stochastic',
           observation_info=tfds.features.Tensor(shape=(376,), dtype=np.float32),
           action_info=tfds.features.Tensor(shape=(17,), dtype=np.float32),
-          reward_info=np.float32,
-          discount_info=np.float32,
+          reward_info=np.float32,  # pyrefly: ignore[bad-argument-type]
+          discount_info=np.float32,  # pyrefly: ignore[bad-argument-type]
           citation=_CITATION,
           homepage=_HOMEPAGE,
           overall_description=_DESCRIPTION,
@@ -137,13 +137,13 @@ class Locomotion(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    return rlds_base.build_info(self.builder_config, self)
+    return rlds_base.build_info(self.builder_config, self)  # pyrefly: ignore[bad-argument-type]
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
         {
-            'file_path': self._DATA_PATHS[self.builder_config.name],
+            'file_path': self._DATA_PATHS[self.builder_config.name],  # pyrefly: ignore[missing-attribute]
         }
     )
     return {

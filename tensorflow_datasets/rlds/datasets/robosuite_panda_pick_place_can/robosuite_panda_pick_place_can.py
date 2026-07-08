@@ -270,13 +270,13 @@ class RobosuitePandaPickPlaceCan(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
-    return rlds_base.build_info(self.builder_config, self)
+    return rlds_base.build_info(self.builder_config, self)  # pyrefly: ignore[bad-argument-type]
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(
         {
-            'file_path': self._DATA_PATHS[self.builder_config.name],
+            'file_path': self._DATA_PATHS[self.builder_config.name],  # pyrefly: ignore[missing-attribute]
         }
     )
     return {

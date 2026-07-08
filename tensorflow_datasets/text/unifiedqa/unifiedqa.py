@@ -1958,37 +1958,37 @@ class UnifiedQA(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(self.builder_config.features),
+        features=tfds.features.FeaturesDict(self.builder_config.features),  # pyrefly: ignore[missing-attribute]
         supervised_keys=None,
         homepage=_HOMEPAGE,
-        citation=self.builder_config.citation + '\n' + _CITATION,
+        citation=self.builder_config.citation + '\n' + _CITATION,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    data_dir = dl_manager.download_and_extract(self.builder_config.data_urls)
+    data_dir = dl_manager.download_and_extract(self.builder_config.data_urls)  # pyrefly: ignore[missing-attribute]
     split_generators = {}
 
-    if 'train' in self.builder_config.data_urls:
+    if 'train' in self.builder_config.data_urls:  # pyrefly: ignore[missing-attribute]
       split_generators.update(
           {
-              tfds.Split.TRAIN: self._generate_examples(path=data_dir['train']),
+              tfds.Split.TRAIN: self._generate_examples(path=data_dir['train']),  # pyrefly: ignore[bad-index, missing-attribute]
           }
       )
 
-    if 'validation' in self.builder_config.data_urls:
+    if 'validation' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
       split_generators.update(
           {
-              tfds.Split.VALIDATION: self._generate_examples(
-                  path=data_dir['validation']
+              tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+                  path=data_dir['validation']  # pyrefly: ignore[bad-index]
               ),
           }
       )
 
-    if 'test' in self.builder_config.data_urls:
+    if 'test' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
       split_generators.update(
           {
-              tfds.Split.TEST: self._generate_examples(path=data_dir['test']),
+              tfds.Split.TEST: self._generate_examples(path=data_dir['test']),  # pyrefly: ignore[bad-index, missing-attribute]
           }
       )
     return split_generators
@@ -1998,7 +1998,7 @@ class UnifiedQA(tfds.core.GeneratorBasedBuilder):
     with epath.Path(path).open() as f:
       data = csv.reader(f, delimiter='\t')
       # Skip the header row
-      if self.builder_config.header:
+      if self.builder_config.header:  # pyrefly: ignore[missing-attribute]
         next(data)
       for id_, row in enumerate(data):
         yield id_, {'input': row[0].strip(), 'output': row[1].strip()}

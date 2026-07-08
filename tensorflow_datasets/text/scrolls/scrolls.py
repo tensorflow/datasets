@@ -229,19 +229,19 @@ class Scrolls(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return tfds.core.DatasetInfo(
         builder=self,
-        description=_SCROLLS_DESCRIPTION + self.builder_config.description,
+        description=_SCROLLS_DESCRIPTION + self.builder_config.description,  # pyrefly: ignore[missing-attribute]
         features=tfds.features.FeaturesDict(
             {feature: tfds.features.Text() for feature in _FEATURES}
         ),
         supervised_keys=(_INPUT_KEY, _OUTPUT_KEY),
-        homepage=self.builder_config.url,
-        citation=self.builder_config.citation + "\n" + _SCROLLS_CITATION,
+        homepage=self.builder_config.url,  # pyrefly: ignore[missing-attribute]
+        citation=self.builder_config.citation + "\n" + _SCROLLS_CITATION,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
-    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)
+    dl_dir = dl_manager.download_and_extract(self.builder_config.data_url)  # pyrefly: ignore[missing-attribute]
     task_name = task_name = _get_task_name_from_data_url(
-        self.builder_config.data_url
+        self.builder_config.data_url  # pyrefly: ignore[missing-attribute]
     )
 
     return {

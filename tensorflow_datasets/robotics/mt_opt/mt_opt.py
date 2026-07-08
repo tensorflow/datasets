@@ -158,7 +158,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=_name_to_features(self.builder_config.name),
+        features=_name_to_features(self.builder_config.name),  # pyrefly: ignore[missing-attribute]
         supervised_keys=None,
         homepage='https://karolhausman.github.io/mt-opt/',
         citation=_CITATION,
@@ -166,7 +166,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    ds_name = self.builder_config.name
+    ds_name = self.builder_config.name  # pyrefly: ignore[missing-attribute]
     splits = {}
     for split, shards in _NAME_TO_SPLITS[ds_name].items():
       paths = {
@@ -184,7 +184,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
     # Dataset of tf.Examples containing full episodes.
     example_ds = tf.data.TFRecordDataset(filenames=str(path))
 
-    example_features = _name_to_features_encode(self.builder_config.name)
+    example_features = _name_to_features_encode(self.builder_config.name)  # pyrefly: ignore[missing-attribute]
     example_specs = example_features.get_serialized_info()
     parser = tfds.core.example_parser.ExampleParser(example_specs)
 
@@ -192,7 +192,7 @@ class MtOpt(tfds.core.GeneratorBasedBuilder):
     decoded_examples = parsed_examples.map(example_features.decode_example)
 
     for index, example in enumerate(tfds.as_numpy(decoded_examples)):
-      if self.builder_config.name == 'rlds':
+      if self.builder_config.name == 'rlds':  # pyrefly: ignore[missing-attribute]
         id_key = 'episode_id'
       else:
         id_key = 'task_code'

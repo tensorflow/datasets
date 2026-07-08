@@ -166,25 +166,25 @@ class C4WSRS(tfds.core.GeneratorBasedBuilder):
         | 'ExtractSnippets'
         >> beam.FlatMap(
             c4_wsrs_utils.extract_snippets,
-            self.builder_config.max_sentences_per_snippet,
+            self.builder_config.max_sentences_per_snippet,  # pyrefly: ignore[missing-attribute]
             abbreviations_by_expansion,
             expansion_re,
-            self.builder_config.max_snippet_char_len,
-            self.builder_config.alpha_keep_no_rs,
-            self.builder_config.alpha_keep_rs,
+            self.builder_config.max_snippet_char_len,  # pyrefly: ignore[missing-attribute]
+            self.builder_config.alpha_keep_no_rs,  # pyrefly: ignore[missing-attribute]
+            self.builder_config.alpha_keep_rs,  # pyrefly: ignore[missing-attribute]
         )
         | 'ReshuffleSnippets1' >> beam.Reshuffle()
         | 'ReverseSubstitution'
         >> beam.FlatMap(
             c4_wsrs_utils.reverse_substitution,
-            self.builder_config.subsitution_rate,
-            self.builder_config.min_snippet_token_len,
+            self.builder_config.subsitution_rate,  # pyrefly: ignore[missing-attribute]
+            self.builder_config.min_snippet_token_len,  # pyrefly: ignore[missing-attribute]
         )
         | 'GroupByRarestSubstitution' >> beam.GroupByKey()
         | 'SampleSnippetsByRarestSubstitution'
         >> beam.FlatMap(
             c4_wsrs_utils.sample_snippets_by_substitution,
-            self.builder_config.num_snippets_per_substitution,
+            self.builder_config.num_snippets_per_substitution,  # pyrefly: ignore[missing-attribute]
         )
         | 'ReshuffleSnippets2' >> beam.Reshuffle()
         | 'ProcessExamples' >> beam.Map(_process_example)

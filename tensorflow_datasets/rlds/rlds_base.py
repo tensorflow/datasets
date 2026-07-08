@@ -82,7 +82,7 @@ def build_info(
       **step_metadata,
   }
   if ds_config.observation_info:
-    step_info['observation'] = ds_config.observation_info
+    step_info['observation'] = ds_config.observation_info  # pyrefly: ignore[unsupported-operation]
   if ds_config.action_info:
     step_info['action'] = ds_config.action_info
   if ds_config.reward_info:
@@ -95,13 +95,13 @@ def build_info(
       builder=builder,
       description=ds_config.overall_description,
       features=tfds.features.FeaturesDict({
-          'steps': tfds.features.Dataset(step_info),
+          'steps': tfds.features.Dataset(step_info),  # pyrefly: ignore[bad-argument-type]
           **episode_metadata,
       }),
-      supervised_keys=ds_config.supervised_keys,
+      supervised_keys=ds_config.supervised_keys,  # pyrefly: ignore[bad-argument-type]
       homepage=ds_config.homepage,
       citation=ds_config.citation,
-      metadata=ds_metadata,
+      metadata=ds_metadata,  # pyrefly: ignore[bad-argument-type]
   )
 
 

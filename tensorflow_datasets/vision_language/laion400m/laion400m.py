@@ -179,12 +179,12 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
         ),
     }
 
-    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
-      features.update({
+    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:  # pyrefly: ignore[missing-attribute]
+      features.update({  # pyrefly: ignore[no-matching-overload]
           'image': tfds.features.Image(doc='image'),
       })
     else:
-      features.update({
+      features.update({  # pyrefly: ignore[no-matching-overload]
           'image_embedding': tfds.features.Tensor(
               shape=_CLIP_EMBEDDING_SHAPE,
               dtype=tf.float16,
@@ -210,7 +210,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
       self, dl_manager: tfds.download.DownloadManager
   ) -> Dict[str, epath.Path]:
     """Downloads data."""
-    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
+    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:  # pyrefly: ignore[missing-attribute]
       if not dl_manager.manual_dir.exists():
         raise AssertionError(
             'LAION-400M requires manual download of the images. Please download'
@@ -220,7 +220,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
       return {}
     else:
       file_name_to_url = {}
-      for shard_idx in range(self.builder_config.num_shards):
+      for shard_idx in range(self.builder_config.num_shards):  # pyrefly: ignore[missing-attribute]
         img_emb_file_name, text_emb_file_name, metadata_file_name = (
             _get_embeddings_file_names(shard_idx)
         )
@@ -236,7 +236,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
 
       file_name_to_dl_path = dl_manager.download(file_name_to_url)
 
-      return file_name_to_dl_path
+      return file_name_to_dl_path  # pyrefly: ignore[bad-return]
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
@@ -255,7 +255,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
 
     return (
         'Generate shard indices'
-        >> beam.Create(list(range(self.builder_config.num_shards)))
+        >> beam.Create(list(range(self.builder_config.num_shards)))  # pyrefly: ignore[missing-attribute]
         | 'Generate examples from a single shard'
         >> beam.FlatMap(
             functools.partial(
@@ -279,7 +279,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
     """Yields examples from a single shard."""
     pd = tfds.core.lazy_imports.pandas
 
-    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:
+    if self.builder_config.name == LAION400M_IMAGES_CONFIG.name:  # pyrefly: ignore[missing-attribute]
       img_archive_path = dl_manager.manual_dir / f'{shard_idx:05d}.tar'
       metadata_path = dl_manager.manual_dir / f'{shard_idx:05d}.parquet'
 

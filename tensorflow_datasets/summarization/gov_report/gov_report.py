@@ -132,9 +132,9 @@ class GovReport(tfds.core.GeneratorBasedBuilder):
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.FeaturesDict(
-            {k: tfds.features.Text() for k in self.builder_config.all_keys}
+            {k: tfds.features.Text() for k in self.builder_config.all_keys}  # pyrefly: ignore[missing-attribute]
         ),
-        supervised_keys=self.builder_config.supervised_keys,
+        supervised_keys=self.builder_config.supervised_keys,  # pyrefly: ignore[missing-attribute]
         homepage=_HOMEPAGE,
         citation=_CITATION,
     )
@@ -143,19 +143,19 @@ class GovReport(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_URL)
     split_map = {
-        tfds.Split.TRAIN: "train",
-        tfds.Split.VALIDATION: "valid",
-        tfds.Split.TEST: "test",
+        tfds.Split.TRAIN: "train",  # pyrefly: ignore[missing-attribute]
+        tfds.Split.VALIDATION: "valid",  # pyrefly: ignore[missing-attribute]
+        tfds.Split.TEST: "test",  # pyrefly: ignore[missing-attribute]
     }
     path = os.path.join(path, "gov-report")
     return {k: self._generate_examples(path, v) for k, v in split_map.items()}
 
   def _generate_examples(self, path: str, split: str):
     """Yields examples."""
-    subset = self.builder_config.subset
-    style = self.builder_config.style
-    separator = self.builder_config.separator
-    report_key, summary_key = self.builder_config.supervised_keys
+    subset = self.builder_config.subset  # pyrefly: ignore[missing-attribute]
+    style = self.builder_config.style  # pyrefly: ignore[missing-attribute]
+    separator = self.builder_config.separator  # pyrefly: ignore[missing-attribute]
+    report_key, summary_key = self.builder_config.supervised_keys  # pyrefly: ignore[missing-attribute]
     split_filename = os.path.join(path, "split_ids", f"{subset}_{split}.ids")
     with epath.Path(split_filename).open() as f:
       for line in f:
@@ -191,7 +191,7 @@ class GovReport(tfds.core.GeneratorBasedBuilder):
           results.update(
               {
                   k: separator.join(d[k]) if isinstance(d[k], list) else d[k]
-                  for k in self.builder_config.other_keys
+                  for k in self.builder_config.other_keys  # pyrefly: ignore[missing-attribute]
               }
           )
           yield d[_ID_KEY], results

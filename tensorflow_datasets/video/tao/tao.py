@@ -116,7 +116,7 @@ def _maybe_prepare_manual_data(
           f'{file} inside {os.fspath(dl_manager.manual_dir)}. '
           'There should only be one file matching this pattern.'
       )
-  return dl_manager.extract(files)
+  return dl_manager.extract(files)  # pyrefly: ignore[bad-return]
 
 
 def _get_category_id_map(annotations_root) -> dict[str, int]:
@@ -291,8 +291,8 @@ class Tao(tfds.core.BeamBasedBuilder):
     names_file = tfds.core.tfds_path('video/tao/labels.txt')
     video_shape = (
         None,
-        self.builder_config.height,
-        self.builder_config.width,
+        self.builder_config.height,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.width,  # pyrefly: ignore[missing-attribute]
         3,
     )
     all_features = {
@@ -325,7 +325,7 @@ class Tao(tfds.core.BeamBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(all_features),
+        features=tfds.features.FeaturesDict(all_features),  # pyrefly: ignore[bad-argument-type]
         supervised_keys=None,
         homepage='https://taodataset.org/',
         citation=_CITATION,
@@ -347,7 +347,7 @@ class Tao(tfds.core.BeamBasedBuilder):
     id_map = _get_category_id_map(data['annotations'] / 'annotations-1.2')
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             data_path=data['train'],
             manual_path=manual_train,
             annotations_path=data['annotations']
@@ -355,7 +355,7 @@ class Tao(tfds.core.BeamBasedBuilder):
             / 'train.json',
             id_map=id_map,
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             data_path=data['val'],
             manual_path=manual_val,
             annotations_path=data['annotations']
@@ -363,7 +363,7 @@ class Tao(tfds.core.BeamBasedBuilder):
             / 'validation.json',
             id_map=id_map,
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             data_path=data['test'],
             manual_path=manual_test,
             annotations_path=data['annotations']
@@ -375,7 +375,7 @@ class Tao(tfds.core.BeamBasedBuilder):
 
   def _maybe_resize_video(self, frames_list):
     """Resizes the video depending on the build_config."""
-    if self.builder_config.height is None:
+    if self.builder_config.height is None:  # pyrefly: ignore[missing-attribute]
       return frames_list  # Don't waste compute loading and resizing.
     resized_images = []
     cv2 = tfds.core.lazy_imports.cv2
@@ -384,7 +384,7 @@ class Tao(tfds.core.BeamBasedBuilder):
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
       image = cv2.resize(
-          image, (self.builder_config.width, self.builder_config.height)
+          image, (self.builder_config.width, self.builder_config.height)  # pyrefly: ignore[missing-attribute]
       )
       resized_images.append(image)
     return resized_images
@@ -395,8 +395,8 @@ class Tao(tfds.core.BeamBasedBuilder):
     """Creates the metadata object for each video data example."""
     metadata = {}
     metadata['num_frames'] = num_frames
-    metadata['height'] = self.builder_config.height or video_ann['height']
-    metadata['width'] = self.builder_config.width or video_ann['width']
+    metadata['height'] = self.builder_config.height or video_ann['height']  # pyrefly: ignore[missing-attribute]
+    metadata['width'] = self.builder_config.width or video_ann['width']  # pyrefly: ignore[missing-attribute]
     metadata['neg_category_ids'] = video_ann['neg_category_ids']
     metadata['not_exhaustive_category_ids'] = video_ann[
         'not_exhaustive_category_ids'
@@ -452,7 +452,7 @@ class Tao(tfds.core.BeamBasedBuilder):
       if is_manual and manual_path is None:
         continue
       path = (
-          (manual_path if is_manual else data_path)
+          (manual_path if is_manual else data_path)  # pyrefly: ignore[unsupported-operation]
           / 'frames'
           / vids[video_id]['name']
       )

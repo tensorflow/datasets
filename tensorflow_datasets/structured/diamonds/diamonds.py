@@ -100,7 +100,7 @@ class Diamonds(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     data = dl_manager.download({'data': _URL})
     # There is no predefined train/val/test split for this dataset.
-    return {tfds.Split.TRAIN: self._generate_examples(file_path=data['data'])}
+    return {tfds.Split.TRAIN: self._generate_examples(file_path=data['data'])}  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(self, file_path):
     """Yields examples."""
