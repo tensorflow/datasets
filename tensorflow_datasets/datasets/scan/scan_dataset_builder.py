@@ -102,10 +102,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     data_dir = dl_manager.download_and_extract(_DATA_URL)
     data_dir = os.path.join(
-        data_dir, 'SCAN-master', self.builder_config.directory
+        data_dir, 'SCAN-master', self.builder_config.directory  # pyrefly: ignore[missing-attribute]
     )
-    split = self.builder_config.name
-    splitfile = self.builder_config.splitfile
+    split = self.builder_config.name  # pyrefly: ignore[missing-attribute]
+    splitfile = self.builder_config.splitfile  # pyrefly: ignore[missing-attribute]
     if 'mcd' in split:
       split_dir = dl_manager.download_and_extract(_MCD_SPLITS_URL)
       split_dir = os.path.join(split_dir, 'scan-splits')
@@ -128,9 +128,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       }
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=train_kwargs
+            name=tfds.Split.TRAIN, gen_kwargs=train_kwargs  # pyrefly: ignore[missing-attribute]
         ),
-        tfds.core.SplitGenerator(name=tfds.Split.TEST, gen_kwargs=test_kwargs),
+        tfds.core.SplitGenerator(name=tfds.Split.TEST, gen_kwargs=test_kwargs),  # pyrefly: ignore[missing-attribute]
     ]
 
   def _read_examples(self, datapath):

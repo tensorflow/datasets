@@ -137,8 +137,8 @@ class Builder(tfds.core.BeamBasedBuilder):
   ]
 
   def _info(self):
-    if self.builder_config.width is not None:
-      if self.builder_config.height is None:
+    if self.builder_config.width is not None:  # pyrefly: ignore[missing-attribute]
+      if self.builder_config.height is None:  # pyrefly: ignore[missing-attribute]
         raise ValueError('Provide either both height and width or none.')
       ffmpeg_extra_args = (
           '-vf',
@@ -151,7 +151,7 @@ class Builder(tfds.core.BeamBasedBuilder):
 
     video_shape = (
         None,
-        self.builder_config.height,
+        self.builder_config.height,  # pyrefly: ignore[missing-attribute]
         self.builder_config.width,
         3,
     )
@@ -159,7 +159,7 @@ class Builder(tfds.core.BeamBasedBuilder):
     features = tfds.features.FeaturesDict({
         # Video frames: uint8 [None, Time, Width, Height, Channels]
         'video': tfds.features.Video(
-            video_shape,
+            video_shape,  # pyrefly: ignore[bad-argument-type]
             ffmpeg_extra_args=ffmpeg_extra_args,
             encoding_format='png',
         ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
@@ -182,11 +182,11 @@ class Builder(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     files = dl_manager.download_and_extract(
-        DATA_URL_SAMPLE if self.builder_config.sample_dataset else DATA_URL
+        DATA_URL_SAMPLE if self.builder_config.sample_dataset else DATA_URL  # pyrefly: ignore[missing-attribute]
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filedir': os.path.join(files, 'hdf5'),
             },

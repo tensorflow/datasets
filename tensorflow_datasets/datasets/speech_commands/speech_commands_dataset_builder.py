@@ -71,21 +71,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_path),
                 'file_list': train_paths,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_path),
                 'file_list': validation_paths,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(dl_test_path),
                 'file_list': None,
@@ -160,12 +160,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         train_paths.append(path)
 
     # Original validation files did include silence - we add them manually here
-    validation_paths.append(os.path.join(BACKGROUND_NOISE, 'running_tap.wav'))
+    validation_paths.append(os.path.join(BACKGROUND_NOISE, 'running_tap.wav'))  # pyrefly: ignore[unbound-name]
 
     # The paths for the train set is just whichever paths that do not exist in
     # either the test or validation splits.
     train_paths = (
-        set(train_paths) - set(validation_paths) - set(train_test_paths)
+        set(train_paths) - set(validation_paths) - set(train_test_paths)  # pyrefly: ignore[unbound-name]
     )
 
     return train_paths, validation_paths

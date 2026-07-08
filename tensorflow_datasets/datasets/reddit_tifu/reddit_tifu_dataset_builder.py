@@ -90,13 +90,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features),
-        supervised_keys=(_DOCUMENT, self.builder_config.summary_key),
+        supervised_keys=(_DOCUMENT, self.builder_config.summary_key),  # pyrefly: ignore[missing-attribute]
         homepage="https://github.com/ctr4si/MMN",
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    if self.builder_config.name == "long_split":
+    if self.builder_config.name == "long_split":  # pyrefly: ignore[missing-attribute]
       paths = dl_manager.download_and_extract(
           {"data": _URL, "split": _LONG_SPLIT}
       )
@@ -104,7 +104,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       split_path = paths["split"]
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
@@ -112,7 +112,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               },
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
@@ -120,7 +120,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               },
           ),
           tfds.core.SplitGenerator(
-              name=tfds.Split.VALIDATION,
+              name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "path": dl_path,
                   "split_path": split_path,
@@ -132,7 +132,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       dl_path = dl_manager.download_and_extract(_URL)
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN,
+              name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={"path": dl_path},
           )
       ]
@@ -149,7 +149,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         #   'selftext','trimmed_title','selftext_without_tldr_tokenized',
         #   'id','selftext_without_tldr'
         d = json.loads(line)
-        if not split or (split and d["id"] in split_data[split]):
+        if not split or (split and d["id"] in split_data[split]):  # pyrefly: ignore[unbound-name]
           r = {
               _DOCUMENT: d["selftext_without_tldr"].strip(),
               _TITLE: d["trimmed_title"].strip(),
@@ -158,5 +158,5 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           }
           r.update({k: d[k] for k in _ADDITIONAL_FEATURES})
           # skip if document or summary is empty
-          if r[_DOCUMENT] and r[self.builder_config.summary_key]:
+          if r[_DOCUMENT] and r[self.builder_config.summary_key]:  # pyrefly: ignore[missing-attribute]
             yield i, r

@@ -81,7 +81,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerator."""
     # using rotation link only for now
-    variant = self.builder_config.variant
+    variant = self.builder_config.variant  # pyrefly: ignore[missing-attribute]
     dataset_url = "/".join((_BASE_URL, f"{variant}.zip"))
     path = dl_manager.download_and_extract(dataset_url)
     path = os.path.join(path, _VARIANT_EXPANDED_DIR_NAMES[variant])

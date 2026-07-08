@@ -88,7 +88,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(_DOWNLOAD_URL)
 
-    if self.builder_config.stripped:
+    if self.builder_config.stripped:  # pyrefly: ignore[missing-attribute]
       return {
           'train': self._generate_examples(
               path / 'QuALITY.v0.9.htmlstripped.train', 'train'

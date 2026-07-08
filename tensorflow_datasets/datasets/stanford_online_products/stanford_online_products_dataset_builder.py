@@ -22,7 +22,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
 _DOWNLOAD_LINK = "ftp://cs.stanford.edu/cs/cvgl/Stanford_Online_Products.zip"
-_SPLITS = {tfds.Split.TRAIN: "Ebay_train", tfds.Split.TEST: "Ebay_test"}
+_SPLITS = {tfds.Split.TRAIN: "Ebay_train", tfds.Split.TEST: "Ebay_test"}  # pyrefly: ignore[missing-attribute]
 
 _SUPER_CLASSES = [
     "bicycle",

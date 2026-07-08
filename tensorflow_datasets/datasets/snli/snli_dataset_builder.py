@@ -49,17 +49,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(dl_dir, 'snli_1.0')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_test.txt')
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': os.path.join(data_dir, 'snli_1.0_dev.txt')},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(data_dir, 'snli_1.0_train.txt')
             },

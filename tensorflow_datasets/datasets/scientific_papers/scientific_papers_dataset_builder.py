@@ -77,26 +77,26 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dl_paths = dl_manager.download_and_extract(_URLS)
     path = os.path.join(
         dl_paths[self.builder_config.name],
-        self.builder_config.name + "-dataset",
+        self.builder_config.name + "-dataset",  # pyrefly: ignore[missing-attribute]
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "train.txt")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "val.txt")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "test.txt")},
         ),
     ]
 
   def _generate_examples(self, path=None):
     """Yields examples."""
-    with epath.Path(path).open() as f:
+    with epath.Path(path).open() as f:  # pyrefly: ignore[bad-argument-type]
       for line in f:
         # Possible keys are:
         # "article_id": str

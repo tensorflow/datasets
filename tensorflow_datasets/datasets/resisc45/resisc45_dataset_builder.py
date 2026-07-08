@@ -103,7 +103,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'path': path},
         ),
     ]

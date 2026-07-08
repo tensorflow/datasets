@@ -218,35 +218,35 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     allowed_splits = {
         ('refcoco', 'google'): [
-            tfds.Split.TRAIN,
-            tfds.Split.VALIDATION,
-            tfds.Split.TEST,
+            tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
         ],
         ('refcoco', 'unc'): [
-            tfds.Split.TRAIN,
-            tfds.Split.VALIDATION,
+            tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             'testA',
             'testB',
         ],
         ('refcocoplus', 'unc'): [
-            tfds.Split.TRAIN,
-            tfds.Split.VALIDATION,
+            tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             'testA',
             'testB',
         ],
-        ('refcocog', 'google'): [tfds.Split.TRAIN, tfds.Split.VALIDATION],
+        ('refcocog', 'google'): [tfds.Split.TRAIN, tfds.Split.VALIDATION],  # pyrefly: ignore[missing-attribute]
         ('refcocog', 'umd'): [
-            tfds.Split.TRAIN,
-            tfds.Split.VALIDATION,
-            tfds.Split.TEST,
+            tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
+            tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
         ],
     }
     bc = self.builder_config
-    splits = allowed_splits[(bc.dataset, bc.dataset_partition)]
+    splits = allowed_splits[(bc.dataset, bc.dataset_partition)]  # pyrefly: ignore[missing-attribute]
 
     return {
         split: self._generate_examples(
-            bc.dataset, bc.dataset_partition, split, dl_manager
+            bc.dataset, bc.dataset_partition, split, dl_manager  # pyrefly: ignore[missing-attribute]
         )
         for split in splits
     }
@@ -259,7 +259,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     if dataset == 'refcocoplus':
       dataset = 'refcoco+'
-    if split == tfds.Split.VALIDATION:
+    if split == tfds.Split.VALIDATION:  # pyrefly: ignore[missing-attribute]
       split = 'val'
 
     for image_id, example in _generate_examples(

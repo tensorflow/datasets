@@ -109,8 +109,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "rgb_screen": tfds.features.Video(
                 shape=(
                     None,
-                    self.builder_config.resolution,
-                    self.builder_config.resolution,
+                    self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
+                    self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
                     3,
                 )
             ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
@@ -123,9 +123,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     url = DATA_URL_DIR + "%s_%dx%d_png/" % (
-        self.builder_config.map_name,
-        self.builder_config.resolution,
-        self.builder_config.resolution,
+        self.builder_config.map_name,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
     )
 
     urls_to_download = {
@@ -139,7 +139,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "files": [
                     download
@@ -149,11 +149,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"files": [downloaded_urls["test"]]},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"files": [downloaded_urls["valid"]]},
         ),
     ]

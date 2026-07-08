@@ -78,22 +78,22 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = os.path.join(dl_paths["scicite"], "scicite")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "train.jsonl")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "dev.jsonl")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, "test.jsonl")},
         ),
     ]
 
   def _generate_examples(self, path=None):
     """Yields examples."""
-    with epath.Path(path).open() as f:
+    with epath.Path(path).open() as f:  # pyrefly: ignore[bad-argument-type]
       unique_ids = {}
       for line in f:
         d = json.loads(line)

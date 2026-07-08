@@ -91,7 +91,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             )
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}
+              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}  # pyrefly: ignore[missing-attribute]
           )
       ]
 

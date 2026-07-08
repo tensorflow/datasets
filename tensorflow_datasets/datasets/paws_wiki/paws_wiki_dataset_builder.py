@@ -44,9 +44,9 @@ _SUBSET_SPLITS = {
     _UNLABELED_FINAL: ["train", "dev"],
 }
 _SPLIT_MAPPINGS = {
-    "train": tfds.Split.TRAIN,
-    "dev": tfds.Split.VALIDATION,
-    "test": tfds.Split.TEST,
+    "train": tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+    "dev": tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
+    "test": tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
 }
 
 _CLASS_LABELS = ["different_meaning", "paraphrase"]
@@ -101,10 +101,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_paths = dl_manager.download_and_extract(_DOWNLOAD_URLS)
-    subset = self.builder_config.subset
+    subset = self.builder_config.subset  # pyrefly: ignore[missing-attribute]
     labels_path = os.path.join(dl_paths[subset], _EXTRACTED_FOLDERS[subset])
 
-    if self.builder_config.tokenized:
+    if self.builder_config.tokenized:  # pyrefly: ignore[missing-attribute]
       mappings_path = ""
       tags2texts = {}
     else:
@@ -193,7 +193,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
           key = row["id"]
           label_str = (
               "noisy_label"
-              if self.builder_config.subset == _UNLABELED_FINAL
+              if self.builder_config.subset == _UNLABELED_FINAL  # pyrefly: ignore[missing-attribute]
               else "label"
           )
           example = {

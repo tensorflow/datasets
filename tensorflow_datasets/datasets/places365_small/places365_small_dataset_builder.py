@@ -18,7 +18,7 @@ import csv
 import os
 
 from etils import epath
-import six.moves.urllib as urllib
+import six.moves.urllib as urllib  # pyrefly: ignore[missing-source-for-stubs]
 import tensorflow_datasets.public_api as tfds
 
 _BASE_URL = "http://data.csail.mit.edu/places/places365/"

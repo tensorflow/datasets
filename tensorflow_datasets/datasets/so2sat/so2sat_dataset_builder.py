@@ -87,7 +87,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    if self.builder_config.selection == 'rgb':
+    if self.builder_config.selection == 'rgb':  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[32, 32, 3]),
           'label': tfds.features.ClassLabel(names=_LABELS),
@@ -107,8 +107,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       })
       supervised_keys = None
     return self.dataset_info_from_configs(
-        features=features,
-        supervised_keys=supervised_keys,
+        features=features,  # pyrefly: ignore[unbound-name]
+        supervised_keys=supervised_keys,  # pyrefly: ignore[unbound-name]
         homepage='http://doi.org/10.14459/2018MP1454690',
     )
 
@@ -120,17 +120,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'path': paths['train'],
-                'selection': self.builder_config.selection,
+                'selection': self.builder_config.selection,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'path': paths['val'],
-                'selection': self.builder_config.selection,
+                'selection': self.builder_config.selection,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]
@@ -155,7 +155,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               'label': np.argmax(label[i]).astype(int),
               'sample_id': i,
           }
-        yield i, record
+        yield i, record  # pyrefly: ignore[unbound-name]
 
 
 def _create_rgb(sen2_bands):

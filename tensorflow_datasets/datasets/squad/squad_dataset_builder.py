@@ -130,7 +130,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   }
 
   def _info(self):
-    if self.builder_config.name == "v1.1":
+    if self.builder_config.name == "v1.1":  # pyrefly: ignore[missing-attribute]
       features_dict = qa_utils.squadlike_features()
     elif self.builder_config.name == "v2.0":
       features_dict = _v2_features()
@@ -148,23 +148,23 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     urls_to_download = {
-        "train": os.path.join(_URL, self.builder_config.train_file),
-        "dev": os.path.join(_URL, self.builder_config.dev_file),
+        "train": os.path.join(_URL, self.builder_config.train_file),  # pyrefly: ignore[missing-attribute]
+        "dev": os.path.join(_URL, self.builder_config.dev_file),  # pyrefly: ignore[missing-attribute]
     }
     downloaded_files = dl_manager.download_and_extract(urls_to_download)
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepath": downloaded_files["train"]},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepath": downloaded_files["dev"]},
         ),
     ]
 
   def _generate_examples(self, filepath):
-    if self.builder_config.name == "v1.1":
+    if self.builder_config.name == "v1.1":  # pyrefly: ignore[missing-attribute]
       return qa_utils.generate_squadlike_examples(filepath)
     return _generate_v2_examples(filepath)
