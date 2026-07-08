@@ -88,10 +88,10 @@ class ReadOnlyBuilder(
             f' formats in the DatasetInfo: {sorted(available_formats)}.'
         )
 
-    self.name = info_proto.name
+    self.name = info_proto.name  # pyrefly: ignore[read-only]
     self.VERSION = version_lib.Version(info_proto.version)  # pylint: disable=invalid-name
-    self.RELEASE_NOTES = info_proto.release_notes or {}  # pylint: disable=invalid-name
-    self.BLOCKED_VERSIONS = self._restore_blocked_versions(info_proto)  # pylint: disable=invalid-name
+    self.RELEASE_NOTES = info_proto.release_notes or {}  # pylint: disable=invalid-name  # pyrefly: ignore[read-only]
+    self.BLOCKED_VERSIONS = self._restore_blocked_versions(info_proto)  # pylint: disable=invalid-name  # pyrefly: ignore[read-only]
 
     if info_proto.module_name:
       # Overwrite the module so documenting `ReadOnlyBuilder` point to the
@@ -135,7 +135,7 @@ class ReadOnlyBuilder(
       configs = {
           info_proto.version: {info_proto.config_name: info_proto.is_blocked}
       }
-      return version_lib.BlockedVersions(configs=configs)
+      return version_lib.BlockedVersions(configs=configs)  # pyrefly: ignore[bad-argument-type]
     return None
 
   def _create_builder_config(
@@ -160,7 +160,7 @@ class ReadOnlyBuilder(
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo.from_proto(self, self._info_proto)
 
-  def _download_and_prepare(self, **kwargs):  # pylint: disable=arguments-differ
+  def _download_and_prepare(self, **kwargs):  # pylint: disable=arguments-differ  # pyrefly: ignore[bad-override]
     # DatasetBuilder.download_and_prepare is a no-op as self.data_dir already
     # exists.
     raise AssertionError("ReadOnlyBuilder can't be generated.")
@@ -351,7 +351,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
     path: The dataset path found, or None if the dataset isn't found.
   """
   # Normalize builder kwargs
-  name, builder_kwargs = naming.parse_builder_name_kwargs(
+  name, builder_kwargs = naming.parse_builder_name_kwargs(  # pyrefly: ignore[bad-assignment]
       name, **builder_kwargs
   )
   version = builder_kwargs.pop('version', None)
@@ -366,13 +366,13 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
   # * config objects (rather than `str`)
   # * custom DatasetBuilder.__init__ kwargs
   if (
-      name.namespace
+      name.namespace  # pyrefly: ignore[missing-attribute]
       or version == 'experimental_latest'
       or isinstance(config, dataset_builder.BuilderConfig)
       or builder_kwargs
   ):
     error_msgs = ['Builder cannot be loaded from files if it uses:']
-    if name.namespace:
+    if name.namespace:  # pyrefly: ignore[missing-attribute]
       error_msgs.append(f'* namespaces (here, {name.namespace} is used)')
     if version == 'experimental_latest':
       error_msgs.append('* `experimental_latest` as requested version.')
@@ -388,7 +388,7 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
   all_data_dirs = set(file_utils.list_data_dirs(given_data_dir=data_dir))
   find_builder_fn = functools.partial(
       _find_builder_dir_single_dir,
-      builder_name=name.name,
+      builder_name=name.name,  # pyrefly: ignore[missing-attribute]
       config_name=config,
       version=version,
   )
@@ -419,10 +419,11 @@ def _find_builder_dir(name: str, **builder_kwargs: Any) -> epath.Path | None:
 
     # If the dataset root_dir exists, a common error is that the config name
     # was not specified. So we list the possible configs and display them.
-    possible_configs = _list_possible_configs(name.name, all_data_dirs)
+    possible_configs = _list_possible_configs(name.name, all_data_dirs)  # pyrefly: ignore[missing-attribute]
     if possible_configs:
       configs_str = '\n\t- '.join([''] + possible_configs)
       error_msg = (
+          # pyrefly: ignore[missing-attribute]
           f'However, a folder for "{name.name}" does exist. Is it possible that'
           ' you specified the wrong config? You can add a config by replacing'
           f' `tfds.load({name.name})` by `tfds.load("{name.name}/my_config")`.'
@@ -555,7 +556,7 @@ def _get_default_config_name(
   else:
     # If code found, return the default config
     if cls.BUILDER_CONFIGS:
-      return cls.default_builder_config.name
+      return cls.default_builder_config.name  # pyrefly: ignore[missing-attribute]
 
   # Otherwise, try to load default config from common metadata
   return dataset_builder.load_default_config_name(builder_dir)

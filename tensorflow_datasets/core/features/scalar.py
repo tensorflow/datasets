@@ -39,7 +39,7 @@ class Scalar(tensor_feature.Tensor):
     super().__init__(shape=(), dtype=dtype, doc=doc, optional=optional)
 
   @classmethod
-  def from_json_content(cls, value: feature_pb2.TensorFeature) -> 'Scalar':
+  def from_json_content(cls, value: feature_pb2.TensorFeature) -> 'Scalar':  # pyrefly: ignore[bad-override]
     return cls(
         dtype=feature_lib.dtype_from_str(value.dtype),
         optional=value.optional,

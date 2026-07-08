@@ -180,7 +180,7 @@ class TopLevelFeature(feature_lib.FeatureConnector):
   @functools.cached_property
   def _example_serializer(self):
     example_specs = self.get_serialized_info()
-    return example_serializer.ExampleSerializer(example_specs)
+    return example_serializer.ExampleSerializer(example_specs)  # pyrefly: ignore[bad-argument-type]
 
 
 def _decode_feature(

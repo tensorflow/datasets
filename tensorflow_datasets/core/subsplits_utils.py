@@ -46,7 +46,7 @@ class _EvenSplit(splits_lib.AbstractSplit):
         self._absolute_to_read_instruction_for_index(abs_inst, split_infos)
         for abs_inst in absolute_instructions
     ]
-    instuctions = functools.reduce(operator.add, read_instructions_for_index)
+    instuctions = functools.reduce(operator.add, read_instructions_for_index)  # pyrefly: ignore[incompatible-overload-residual]
     return instuctions.to_absolute(split_infos)
 
   def _absolute_to_read_instruction_for_index(

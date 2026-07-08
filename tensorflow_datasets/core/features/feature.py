@@ -180,8 +180,8 @@ class TensorInfo(object):
     dtype = self.tf_dtype
     shape = _to_tensor_shape(self.shape)
     if self.dataset_lvl > 1 or self.sequence_rank > 1:
-      return tf.RaggedTensorSpec(dtype=dtype, shape=shape)
-    return tf.TensorSpec(dtype=dtype, shape=shape)
+      return tf.RaggedTensorSpec(dtype=dtype, shape=shape)  # pyrefly: ignore[bad-argument-type, bad-return]
+    return tf.TensorSpec(dtype=dtype, shape=shape)  # pyrefly: ignore[bad-argument-type]
 
   def to_bounded_tensor_spec(self) -> tf_agents.specs.BoundedTensorSpec:
     """Converts this TensorInfo instance to a tf.BoundedTensorSpec.
@@ -456,10 +456,10 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     if 'type' in value:  # Legacy mode
       class_name = value['type']  # my_project.xyz.MyFeature
       content = value['content']
-      feature_cls = cls.cls_from_name(class_name)
+      feature_cls = cls.cls_from_name(class_name)  # pyrefly: ignore[bad-argument-type]
       proto_cls_name = value.get('proto_cls')
       if proto_cls_name:  # The content is a proto, need to reconstruct it
-        proto_cls = _name2proto_cls(proto_cls_name)
+        proto_cls = _name2proto_cls(proto_cls_name)  # pyrefly: ignore[bad-argument-type]
         if isinstance(content, str):  # Backward compatible mode
           content = json_format.Parse(content, proto_cls())
         elif isinstance(content, dict):
@@ -472,8 +472,8 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
       if isinstance(content, dict) and (
           'dtype' in content and isinstance(content['dtype'], str)
       ):
-        content['dtype'] = dtype_from_str(content['dtype'])
-      return feature_cls.from_json_content(content)
+        content['dtype'] = dtype_from_str(content['dtype'])  # pyrefly: ignore[unsupported-operation]
+      return feature_cls.from_json_content(content)  # pyrefly: ignore[bad-argument-type]
     else:
       feature_proto = json_format.ParseDict(value, feature_pb2.Feature())
       return FeatureConnector.from_proto(feature_proto)
@@ -611,7 +611,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
         python_class_name=self._fully_qualified_class_name,
         description=self._doc.desc,
         value_range=self._doc.value_range,
-        **oneof_kwarg,
+        **oneof_kwarg,  # pyrefly: ignore[bad-argument-type]
     )
 
   @classmethod
@@ -628,7 +628,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     # Not all feature classes accept the documentation as an argument.
     feature = feature_cls.from_json_content(value=feature_content)
     feature._set_doc(Documentation.from_proto(feature_proto))  # pylint: disable=protected-access
-    return feature
+    return feature  # pyrefly: ignore[bad-return]
 
   def save_config(self, root_dir: str) -> None:
     """Exports the `FeatureConnector` to a file.
@@ -695,7 +695,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     Returns:
       features: Either a dict of feature proto object, or a feature proto object
     """
-    return self.get_tensor_info()
+    return self.get_tensor_info()  # pyrefly: ignore[bad-return]
 
   @abc.abstractmethod
   def encode_example(self, example_data):
@@ -821,7 +821,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
       # `(0,)` -> `(0, None, None, 3)`.
       # Instead, we arbitrarily set unknown shape to `0`:
       # `(0,)` -> `(0, 0, 0, 3)`
-      tf_type = tf.dtypes.as_dtype(self.dtype)
+      tf_type = tf.dtypes.as_dtype(self.dtype)  # pyrefly: ignore[bad-argument-type]
       return tf.cond(
           tf.equal(tf.shape(ex)[0], 0),  # Empty sequence
           lambda: _make_empty_seq_output(shape=self.shape, dtype=tf_type),
@@ -1023,8 +1023,8 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
               name=feature_name,
               cls_name=type(self).__name__,
               tensor_info=tensor_info,
-              description=self._doc.desc,
-              value_range=self._doc.value_range,
+              description=self._doc.desc,  # pyrefly: ignore[bad-argument-type]
+              value_range=self._doc.value_range,  # pyrefly: ignore[bad-argument-type]
           )
       )
     return result

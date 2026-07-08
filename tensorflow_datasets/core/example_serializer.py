@@ -81,7 +81,7 @@ class ExampleSerializer(Serializer):
     Returns:
       The `tf.train.Example` proto
     """
-    return _dict_to_tf_example(
+    return _dict_to_tf_example(  # pyrefly: ignore[bad-return]
         utils.flatten_nest_dict(example), self._flat_example_specs
     )
 
@@ -166,7 +166,7 @@ def _is_string(item) -> bool:
 def _item_to_np_array(item, dtype: np.dtype, shape: Shape) -> np.ndarray:
   """Single item to a np.array."""
   result = np.asanyarray(item, dtype=dtype)
-  utils.assert_shape_match(result.shape, shape)
+  utils.assert_shape_match(result.shape, shape)  # pyrefly: ignore[bad-argument-type]
   if dtype_utils.is_string(dtype) and not _is_string(item):
     raise ValueError(
         f"Unsupported value: {result}\nCould not convert to bytes list."
@@ -192,16 +192,16 @@ def _item_to_tf_feature(
     v = v.view(np.int64)
   vals = v.flat  # Convert v into a 1-d array (without extra copy)
   if dtype_utils.is_integer(v.dtype):
-    return tf_feature_pb2.Feature(
-        int64_list=tf_feature_pb2.Int64List(value=vals)
+    return tf_feature_pb2.Feature(  # pyrefly: ignore[bad-return]
+        int64_list=tf_feature_pb2.Int64List(value=vals)  # pyrefly: ignore[bad-argument-type]
     )
   elif dtype_utils.is_floating(v.dtype):
-    return tf_feature_pb2.Feature(
-        float_list=tf_feature_pb2.FloatList(value=vals)
+    return tf_feature_pb2.Feature(  # pyrefly: ignore[bad-return]
+        float_list=tf_feature_pb2.FloatList(value=vals)  # pyrefly: ignore[bad-argument-type]
     )
   elif dtype_utils.is_string(tensor_info.np_dtype):
-    vals = [_as_bytes(x) for x in vals]
-    return tf_feature_pb2.Feature(
+    vals = [_as_bytes(x) for x in vals]  # pyrefly: ignore[bad-argument-type]
+    return tf_feature_pb2.Feature(  # pyrefly: ignore[bad-return]
         bytes_list=tf_feature_pb2.BytesList(value=vals)
     )
   else:
@@ -229,7 +229,7 @@ def _as_bytes(bytes_or_text: bytearray | bytes | str) -> bytes:
   """
   # Validate encoding, a LookupError will be raised if invalid.
   if isinstance(bytes_or_text, (bytearray, bytes)):
-    return bytes_or_text
+    return bytes_or_text  # pyrefly: ignore[bad-return]
   elif isinstance(bytes_or_text, str):
     return bytes_or_text.encode(encoding="utf-8")
   else:
@@ -300,11 +300,11 @@ def _add_ragged_fields(example_data, tensor_info: feature_lib.TensorInfo):
     tensor_info_length = feature_lib.TensorInfo(shape=(None,), dtype=np.int64)
     ragged_attr_dict = {
         "ragged_row_lengths_{}".format(i): (length, tensor_info_length)
-        for i, length in enumerate(nested_row_lengths)
+        for i, length in enumerate(nested_row_lengths)  # pyrefly: ignore[unbound-name]
     }
     tensor_info_flat = feature_lib.TensorInfo(
-        shape=(None,) + tensor_info.shape[tensor_info.sequence_rank :],
-        dtype=tensor_info.dtype,
+        shape=(None,) + tensor_info.shape[tensor_info.sequence_rank :],  # pyrefly: ignore[unsupported-operation]
+        dtype=tensor_info.dtype,  # pyrefly: ignore[bad-argument-type]
     )
     ragged_attr_dict["ragged_flat_values"] = (example_data, tensor_info_flat)
     return ragged_attr_dict
@@ -342,8 +342,8 @@ def _extract_ragged_attributes(
       )
   )
   if not flat_values:  # The full sequence is empty
-    flat_values = np.empty(
-        shape=(0,) + tensor_info.shape[tensor_info.sequence_rank :],
+    flat_values = np.empty(  # pyrefly: ignore[no-matching-overload]
+        shape=(0,) + tensor_info.shape[tensor_info.sequence_rank :],  # pyrefly: ignore[unsupported-operation]
         dtype=tensor_info.np_dtype,
     )
   else:  # Otherwise, merge all flat values together, some might be empty

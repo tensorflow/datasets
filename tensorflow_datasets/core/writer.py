@@ -147,7 +147,7 @@ def _get_shard_specs(
         _ShardSpec(
             shard_index=shard_index,
             path=os.fspath(shard_path),
-            index_path=index_path,
+            index_path=index_path,  # pyrefly: ignore[bad-argument-type]
             examples_number=to - from_,
             file_instructions=file_instructions,
         )
@@ -620,9 +620,9 @@ class BeamWriter:
   ) -> tuple[int, tuple[Any, bytes]]:
     """Assigns a shard id to the example."""
     key, _ = key_serialized_example
-    largest_key = largest_key[0]
+    largest_key = largest_key[0]  # pyrefly: ignore[bad-assignment]
     shard_number = shuffle.get_bucket_number(
-        hkey=key, num_buckets=num_shards, max_hkey=largest_key
+        hkey=key, num_buckets=num_shards, max_hkey=largest_key  # pyrefly: ignore[bad-argument-type]
     )
     self._get_distribution(name="ShardDistribution").update(shard_number)
     self.inc_counter(f"{self._filename_template.split}.shard_{shard_number}")

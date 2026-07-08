@@ -112,7 +112,7 @@ class Sequence(top_level_feature.TopLevelFeature):
   def _add_length_dim(self, tensor_info):
     """Add the length dimension to the given tensor_info."""
     tensor_info = feature_lib.TensorInfo.copy_from(tensor_info)
-    tensor_info.shape = (self._length,) + tensor_info.shape
+    tensor_info.shape = (self._length,) + tensor_info.shape  # pyrefly: ignore[unsupported-operation]
     tensor_info.sequence_rank += 1
     return tensor_info
 
@@ -234,15 +234,15 @@ class Sequence(top_level_feature.TopLevelFeature):
     return result
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls,
       value: Union[Json, feature_pb2.Sequence],
   ) -> 'Sequence':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(
-          feature=feature_lib.FeatureConnector.from_json(value['feature']),
-          length=value['length'],
+          feature=feature_lib.FeatureConnector.from_json(value['feature']),  # pyrefly: ignore[bad-argument-type]
+          length=value['length'],  # pyrefly: ignore[bad-argument-type]
       )
     return cls(
         feature=feature_lib.FeatureConnector.from_proto(value.feature),

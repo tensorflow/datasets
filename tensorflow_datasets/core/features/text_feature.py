@@ -130,13 +130,13 @@ class Text(tensor_feature.Tensor):
   def decode_example_np(self, example_data):
     return example_data
 
-  def save_metadata(self, data_dir, feature_name: str) -> None:
+  def save_metadata(self, data_dir, feature_name: str) -> None:  # pyrefly: ignore[bad-override]
     if not self.encoder:
       return
     fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
     self.encoder.save_to_file(fname_prefix)
 
-  def load_metadata(self, data_dir, feature_name: str) -> None:
+  def load_metadata(self, data_dir, feature_name: str) -> None:  # pyrefly: ignore[bad-override]
     if self._encoder_cls:
       fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
       self._encoder = self._encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
@@ -168,7 +168,7 @@ class Text(tensor_feature.Tensor):
     if self.encoder:
       return
 
-    vocab_size = self._encoder_config.vocab_size
+    vocab_size = self._encoder_config.vocab_size  # pyrefly: ignore[missing-attribute]
     self.encoder = text_lib.SubwordTextEncoder.build_from_corpus(
         corpus_generator=corpus_generator,
         target_vocab_size=vocab_size,
@@ -184,22 +184,22 @@ class Text(tensor_feature.Tensor):
       return {}
     return {"encoder": repr(self.encoder)}
 
-  def repr_html(self, ex: bytes) -> str:
+  def repr_html(self, ex: bytes) -> str:  # pyrefly: ignore[bad-override]
     """Text are decoded."""
     if self.encoder is not None:
       return repr(ex)
 
     try:
-      ex = ex.decode("utf-8")
+      ex = ex.decode("utf-8")  # pyrefly: ignore[bad-assignment]
     except UnicodeDecodeError:
       # Some datasets have invalid UTF-8 examples (e.g. opinosis)
       return repr(ex[:1000])
-    ex = html.escape(ex)
-    ex = textwrap.shorten(ex, width=1000)  # Truncate long text
-    return ex
+    ex = html.escape(ex)  # pyrefly: ignore[bad-argument-type, bad-assignment]
+    ex = textwrap.shorten(ex, width=1000)  # Truncate long text  # pyrefly: ignore[bad-argument-type, bad-assignment]
+    return ex  # pyrefly: ignore[bad-return]
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.TextFeature]
   ) -> "Text":
     if isinstance(value, dict) and "use_encoder" in value:

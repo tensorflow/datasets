@@ -127,7 +127,7 @@ def _make_columns(
 ) -> List[ColumnInfo]:
   """Extract the columns info of the `panda.DataFrame`."""
   return [
-      ColumnInfo.from_spec(path, ds_info)
+      ColumnInfo.from_spec(path, ds_info)  # pyrefly: ignore[bad-argument-type]
       for path, _ in py_utils.flatten_with_path(specs)
   ]
 
@@ -210,7 +210,7 @@ def as_dataframe(
 
   # Flatten the keys names, specs,... while keeping the feature key definition
   # order
-  columns = _make_columns(ds.element_spec, ds_info=ds_info)
+  columns = _make_columns(ds.element_spec, ds_info=ds_info)  # pyrefly: ignore[bad-argument-type]
   rows = [_make_row_dict(ex, columns) for ex in dataset_utils.as_numpy(ds)]
   df = StyledDataFrame(rows)
   df.current_style.format({c.name: c.format_fn for c in columns if c.format_fn})

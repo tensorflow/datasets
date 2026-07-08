@@ -136,8 +136,8 @@ class BuilderConfig:
         name=info_proto.config_name,
         description=info_proto.config_description,
         version=info_proto.version,
-        release_notes=info_proto.release_notes or {},
-        tags=info_proto.config_tags or [],
+        release_notes=info_proto.release_notes or {},  # pyrefly: ignore[bad-argument-type]
+        tags=info_proto.config_tags or [],  # pyrefly: ignore[bad-argument-type]
     )
 
 
@@ -292,7 +292,7 @@ class DatasetBuilder(registered.RegisteredDataset):
     # Extract code version (VERSION or config)
     self._version = self._pick_version(version)
     # Compute the base directory (for download) and dataset/version directory.
-    self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)
+    self._data_dir_root, self._data_dir = self._build_data_dir(data_dir)  # pyrefly: ignore[bad-argument-type]
     # If the dataset info is available, use it.
     dataset_info_path = dataset_info.dataset_info_path(self.data_path)
     if retry.retry(dataset_info_path.exists):
@@ -924,14 +924,14 @@ class DatasetBuilder(registered.RegisteredDataset):
         case file_adapters.FileFormat.ARRAY_RECORD:
           return array_record.ArrayRecordDataSource(
               info,
-              split=split,
+              split=split,  # pyrefly: ignore[bad-argument-type]
               decoders=decoders,
               deserialize_method=deserialize_method,
           )
         case file_adapters.FileFormat.PARQUET:
           return parquet.ParquetDataSource(
               info,
-              split=split,
+              split=split,  # pyrefly: ignore[bad-argument-type]
               decoders=decoders,
               deserialize_method=deserialize_method,
           )
@@ -1298,7 +1298,7 @@ class DatasetBuilder(registered.RegisteredDataset):
       # Note: Error will be raised here if user try to record checksums
       # from a `zipapp`
       try:
-        register_checksums_path = utils.to_write_path(self._checksums_path)
+        register_checksums_path = utils.to_write_path(self._checksums_path)  # pyrefly: ignore[bad-argument-type]
         download.validate_checksums_path(register_checksums_path)
       except Exception:  # pylint: disable=broad-except
         raise
@@ -1558,7 +1558,7 @@ class FileReaderBuilder(DatasetBuilder):
 
     reader = reader_lib.Reader(
         example_specs=example_specs,
-        file_format=file_format,
+        file_format=file_format,  # pyrefly: ignore[bad-argument-type]
     )
     decode_fn = functools.partial(features.decode_example, decoders=decoders)
     return reader.read(
@@ -1849,7 +1849,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
 
     return tf.data.TFRecordDataset(
         filenames=filenames,
-        compression_type=compression_type,
+        compression_type=compression_type,  # pyrefly: ignore[bad-argument-type]
         num_parallel_reads=num_parallel_reads,
     )
 
@@ -1939,7 +1939,7 @@ class ShardBasedBuilder(FileReaderBuilder):
         beam_runner=download_config.beam_runner,
         example_writer=self._example_writer(),
         # The following options are ignored by `ShardBasedBuilder`.
-        ignore_duplicates=None,
+        ignore_duplicates=None,  # pyrefly: ignore[bad-argument-type]
         max_examples_per_split=None,
         shard_config=None,
     )
@@ -2000,7 +2000,7 @@ class BeamBasedBuilder(GeneratorBasedBuilder):
   def _generate_examples(
       self, *args: Any, **kwargs: Any
   ) -> split_builder_lib.SplitGenerator:
-    return self._build_pcollection(*args, **kwargs)
+    return self._build_pcollection(*args, **kwargs)  # pyrefly: ignore[missing-attribute]
 
 
 def _check_split_names(split_names: Iterable[str]) -> None:

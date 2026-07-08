@@ -51,11 +51,11 @@ class _IdExample(NamedTuple):
 
 
 class _Instruction(NamedTuple):
-  filepath: tf.string  # e.g. '/path/to/../train.tfrecord'
-  filename: tf.string  # e.g. 'train.tfrecord'
-  tfds_id_prefix: tf.string  # e.g. 'train.tfrecord' or 'folder1/train.tfrecord'
-  skip: tf.int64
-  take: tf.int64
+  filepath: tf.string  # e.g. '/path/to/../train.tfrecord'  # pyrefly: ignore[not-a-type]
+  filename: tf.string  # e.g. 'train.tfrecord'  # pyrefly: ignore[not-a-type]
+  tfds_id_prefix: tf.string  # e.g. 'train.tfrecord' or 'folder1/train.tfrecord'  # pyrefly: ignore[not-a-type]
+  skip: tf.int64  # pyrefly: ignore[not-a-type]
+  take: tf.int64  # pyrefly: ignore[not-a-type]
 
 
 def _get_dataset_from_filename(
@@ -77,7 +77,7 @@ def _get_dataset_from_filename(
   if add_tfds_id:  # For each example, generate a unique id.
     id_ds = _make_id_dataset(
         filename=instruction.tfds_id_prefix,
-        start_index=instruction.skip if do_skip else 0,
+        start_index=instruction.skip if do_skip else 0,  # pyrefly: ignore[bad-argument-type]
     )
     ds = tf.data.Dataset.zip(_IdExample(id=id_ds, example=ds))
   return ds
@@ -253,7 +253,7 @@ def _read_files(
   if disable_shuffling:
     _verify_read_config_for_ordered_dataset(
         read_config,
-        interleave_cycle_length=cycle_length,
+        interleave_cycle_length=cycle_length,  # pyrefly: ignore[bad-argument-type]
         shuffle_files=shuffle_files,
     )
 
@@ -282,7 +282,7 @@ def _read_files(
     instruction_ds = instruction_ds.shuffle(
         len(file_instructions),
         seed=read_config.shuffle_seed,
-        reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,
+        reshuffle_each_iteration=read_config.shuffle_reshuffle_each_iteration,  # pyrefly: ignore[bad-argument-type]
     )
 
   if read_config.repeat_filenames:
@@ -309,7 +309,7 @@ def _read_files(
           add_tfds_id=read_config.add_tfds_id,
           override_buffer_size=read_config.override_buffer_size,
       ),
-      cycle_length=cycle_length,
+      cycle_length=cycle_length,  # pyrefly: ignore[bad-argument-type]
       block_length=block_length,
       num_parallel_calls=read_config.num_parallel_calls_for_interleave_files,
       deterministic=deterministic,
@@ -478,7 +478,7 @@ class Reader:
       # https://www.tensorflow.org/api_docs/python/tf/io/parse_example
       ex = self._parser.parse_example(ex)
       if decode_fn:
-        ex = decode_fn(ex)
+        ex = decode_fn(ex)  # pyrefly: ignore[bad-assignment]
       return ex
 
     # Eventually add the `tfds_id` after the decoding

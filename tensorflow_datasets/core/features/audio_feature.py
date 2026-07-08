@@ -179,11 +179,11 @@ class _LazyDecoder(_AudioDecoder):
       decoded_audio_tensor = tf.squeeze(decoded_audio_tensor)
     else:
       if self._file_format:
-        file_format_tensor = tf.experimental.Optional.from_value(
+        file_format_tensor = tf.experimental.Optional.from_value(  # pyrefly: ignore[missing-attribute]
             self._file_format
         )
       else:
-        file_format_tensor = tf.experimental.Optional.empty(
+        file_format_tensor = tf.experimental.Optional.empty(  # pyrefly: ignore[missing-attribute]
             tf.TensorSpec(shape=(), dtype=tf.string)
         )
 
@@ -206,7 +206,7 @@ class _EagerDecoder(_AudioDecoder):
   def encode_audio(
       self, fobj: BinaryIO, file_format: Optional[str]
   ) -> np.ndarray:
-    audio = _pydub_load_audio(fobj, file_format, self._channels)
+    audio = _pydub_load_audio(fobj, file_format, self._channels)  # pyrefly: ignore[bad-argument-type]
     return audio.astype(self._np_dtype)
 
   def decode_audio(self, audio_tensor: tf.Tensor) -> tf.Tensor:
@@ -336,17 +336,17 @@ class Audio(tensor_feature.Tensor):
     )
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.AudioFeature]
   ) -> 'Audio':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(
-          file_format=value['file_format'],
-          shape=tuple(value['shape']),
-          dtype=feature_lib.dtype_from_str(value['dtype']),
-          sample_rate=value['sample_rate'],
-          lazy_decode=value.get('lazy_decode', False),
+          file_format=value['file_format'],  # pyrefly: ignore[bad-argument-type]
+          shape=tuple(value['shape']),  # pyrefly: ignore[bad-argument-type]
+          dtype=feature_lib.dtype_from_str(value['dtype']),  # pyrefly: ignore[bad-argument-type]
+          sample_rate=value['sample_rate'],  # pyrefly: ignore[bad-argument-type]
+          lazy_decode=value.get('lazy_decode', False),  # pyrefly: ignore[bad-argument-type]
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
@@ -360,7 +360,7 @@ class Audio(tensor_feature.Tensor):
   def to_json_content(self) -> feature_pb2.AudioFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.AudioFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.dtype_to_str(self.dtype),
+        dtype=feature_lib.dtype_to_str(self.dtype),  # pyrefly: ignore[bad-argument-type]
         file_format=self._file_format,
         sample_rate=self._sample_rate,
         encoding=self._encoding.name,

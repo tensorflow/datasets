@@ -124,14 +124,14 @@ class _ImageEncoder:
 
   def _encode_image(self, np_image: np.ndarray) -> bytes:
     """Returns np_image encoded as jpeg or png."""
-    _validate_np_array(np_image, shape=self.shape, dtype=self.np_dtype)
+    _validate_np_array(np_image, shape=self.shape, dtype=self.np_dtype)  # pyrefly: ignore[bad-argument-type]
 
     # Should we be more strict about explicitly define the encoding (raise
     # error / warning instead) ?
     # It has created subtle issues for imagenet_corrupted: images are read as
     # JPEG images to apply some processing, but final image saved as PNG
     # (default) rather than JPEG.
-    return self._runner.run(_ENCODE_FN[self.encoding_format](), np_image)
+    return self._runner.run(_ENCODE_FN[self.encoding_format](), np_image)  # pyrefly: ignore[bad-index]
 
   def _encode_pil_image(self, pil_image) -> bytes:
     """Encode a PIL Image object to bytes.
@@ -149,7 +149,7 @@ class _ImageEncoder:
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     """Decode the jpeg or png bytes to 3d tensor."""
-    tf_dtype = tf.dtypes.as_dtype(self.dtype)
+    tf_dtype = tf.dtypes.as_dtype(self.dtype)  # pyrefly: ignore[bad-argument-type]
     img = tf.image.decode_image(img, channels=self.shape[-1], dtype=tf_dtype)
     img.set_shape(self.shape)
     return img
@@ -180,7 +180,7 @@ class _FloatImageEncoder(_ImageEncoder):
       )
     self._float_shape = shape
     super().__init__(
-        shape=shape[:2] + (4,),
+        shape=shape[:2] + (4,),  # pyrefly: ignore[unsupported-operation]
         dtype=np.uint8,
         encoding_format=encoding_format,
     )
@@ -198,8 +198,8 @@ class _FloatImageEncoder(_ImageEncoder):
     _validate_np_array(np_image, shape=self._float_shape, dtype=np.float32)
     # Bitcast 1 channel float32 -> 4 channels uint8
     np_image = np_image.view(np.uint8)
-    np_image = super()._encode_image(np_image)
-    return np_image
+    np_image = super()._encode_image(np_image)  # pyrefly: ignore[bad-assignment]
+    return np_image  # pyrefly: ignore[bad-return]
 
   def decode_image(self, img: tf.Tensor) -> tf.Tensor:
     img = super().decode_image(img)
@@ -295,7 +295,7 @@ class Image(feature_lib.FeatureConnector):
     if self._dtype == np.float32:  # Float images encoded as 4-channels uint8
       self._image_encoder = _FloatImageEncoder(
           shape=self._shape,
-          encoding_format=self._encoding_format,
+          encoding_format=self._encoding_format,  # pyrefly: ignore[bad-argument-type]
       )
     else:
       self._image_encoder = _ImageEncoder(
@@ -359,16 +359,16 @@ class Image(feature_lib.FeatureConnector):
   ) -> np.ndarray:
     """Reconstruct the image with OpenCV from bytes."""
     assert cv2, 'OpenCV is not installed. OpenCV is required for this method.'
-    example = np.frombuffer(example, dtype=np.uint8)
+    example = np.frombuffer(example, dtype=np.uint8)  # pyrefly: ignore[bad-assignment]
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
     example = example.astype(dtype, copy=False)
-    example = _reorder_opencv_channels(example)
-    example = _reshape_grayscale_image(example, num_channels)
+    example = _reorder_opencv_channels(example)  # pyrefly: ignore[bad-assignment]
+    example = _reshape_grayscale_image(example, num_channels)  # pyrefly: ignore[bad-argument-type, bad-assignment]
     # Bitcast 4 channels uint8 -> 1 channel float32.
     if self.np_dtype == np.float32:
-      return example.view(np.float32)
-    return example
+      return example.view(np.float32)  # pyrefly: ignore[missing-attribute]
+    return example  # pyrefly: ignore[bad-return]
 
   def decode_example_np_with_pil(
       self, example: bytes, num_channels: int
@@ -380,7 +380,7 @@ class Image(feature_lib.FeatureConnector):
     bytes_io = io.BytesIO(example)
     with PIL_Image.open(bytes_io) as image:
       dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
-      image = np.asarray(image, dtype=dtype)
+      image = np.asarray(image, dtype=dtype)  # pyrefly: ignore[no-matching-overload]
       image = _reshape_grayscale_image(image, num_channels)
       if self.np_dtype == np.uint8:
         return image
@@ -412,16 +412,16 @@ class Image(feature_lib.FeatureConnector):
       return make_video_repr_html(ex, use_colormap=self._use_colormap)
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.ImageFeature]
   ) -> 'Image':
     if isinstance(value, dict):
       # For backwards compatibility
       return cls(  # pytype: disable=wrong-arg-types
-          shape=tuple(value['shape']),
-          dtype=feature_lib.dtype_from_str(value['dtype']),
-          encoding_format=value['encoding_format'],
-          use_colormap=value.get('use_colormap'),
+          shape=tuple(value['shape']),  # pyrefly: ignore[bad-argument-type]
+          dtype=feature_lib.dtype_from_str(value['dtype']),  # pyrefly: ignore[bad-argument-type]
+          encoding_format=value['encoding_format'],  # pyrefly: ignore[bad-argument-type]
+          use_colormap=value.get('use_colormap'),  # pyrefly: ignore[bad-argument-type]
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
@@ -594,7 +594,7 @@ def _validate_np_array(
     raise ValueError(
         f'Image dtype should be {dtype}. Detected: {np_array.dtype}.'
     )
-  utils.assert_shape_match(np_array.shape, shape)
+  utils.assert_shape_match(np_array.shape, shape)  # pyrefly: ignore[bad-argument-type]
 
 
 def _reorder_opencv_channels(example: np.ndarray) -> np.ndarray:

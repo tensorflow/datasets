@@ -58,7 +58,7 @@ class Shard(object):
 
   def add_example(self, serialized_example: str) -> None:
     """Writes a new example."""
-    self.writer.write(serialized_example)
+    self.writer.write(serialized_example)  # pyrefly: ignore[bad-argument-type]
     self.num_examples += 1
     self.num_bytes += len(serialized_example)
 

@@ -229,7 +229,7 @@ class TfRecordFileAdapter(FileAdapter):
   ) -> tf.data.Dataset:
     """Returns TensorFlow Dataset comprising given record file."""
     buffer_size = buffer_size or cls.BUFFER_SIZE
-    return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)
+    return tf.data.TFRecordDataset(filename, buffer_size=buffer_size)  # pyrefly: ignore[bad-argument-type]
 
   @classmethod
   def write_examples(

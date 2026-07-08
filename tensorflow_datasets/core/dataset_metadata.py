@@ -88,8 +88,8 @@ def load(pkg_path: epath.Path) -> DatasetMetadata:
   raw_metadata = _read_files(pkg_path)
   tags = _get_tags(raw_metadata.get(TAGS_FILENAME, ""))
   return DatasetMetadata(
-      description=raw_metadata.get(DESCRIPTIONS_FILENAME, None),
-      citation=raw_metadata.get(CITATIONS_FILENAME, None),
+      description=raw_metadata.get(DESCRIPTIONS_FILENAME, None),  # pyrefly: ignore[bad-argument-type]
+      citation=raw_metadata.get(CITATIONS_FILENAME, None),  # pyrefly: ignore[bad-argument-type]
       tags=tags,
   )
 
@@ -108,4 +108,4 @@ def _read_files(path: epath.Path) -> dict[str, str]:
   for inode in path.iterdir():
     if inode.name in _METADATA_FILES:
       name2path[inode.name] = path.joinpath(inode.name)
-  return etree.parallel_map(lambda f: f.read_text(encoding="utf-8"), name2path)
+  return etree.parallel_map(lambda f: f.read_text(encoding="utf-8"), name2path)  # pyrefly: ignore[bad-return]

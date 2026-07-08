@@ -97,7 +97,7 @@ class Video(sequence_feature.Sequence):
       encoding_format: str = 'png',
       ffmpeg_extra_args: Sequence[str] = (),
       use_colormap: bool = False,
-      dtype: Union[np.uint8, tf.uint8, np.uint16, tf.uint16] = np.uint8,
+      dtype: Union[np.uint8, tf.uint8, np.uint16, tf.uint16] = np.uint8,  # pyrefly: ignore[not-a-type]
       doc: feature_lib.DocArg = None,
   ):
     """Initializes the connector.
@@ -120,7 +120,7 @@ class Video(sequence_feature.Sequence):
     Raises:
       ValueError: If the shape is invalid
     """
-    dtype = tf.dtypes.as_dtype(dtype)
+    dtype = tf.dtypes.as_dtype(dtype)  # pyrefly: ignore[bad-argument-type]
     frame_shape = None
     if shape:
       shape = tuple(shape)
@@ -186,23 +186,23 @@ class Video(sequence_feature.Sequence):
     return super(Video, self).encode_example(encoded_video)
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.VideoFeature]
   ) -> 'Video':
     if isinstance(value, dict):
       # For backwards compatibility
-      shape = tuple(value['shape'])
+      shape = tuple(value['shape'])  # pyrefly: ignore[bad-argument-type]
       encoding_format = value['encoding_format']
       ffmpeg_extra_args = value['ffmpeg_extra_args']
       return cls(
           shape=shape,
-          encoding_format=encoding_format,
-          ffmpeg_extra_args=ffmpeg_extra_args,
+          encoding_format=encoding_format,  # pyrefly: ignore[bad-argument-type]
+          ffmpeg_extra_args=ffmpeg_extra_args,  # pyrefly: ignore[bad-argument-type]
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
         dtype=feature_lib.dtype_from_str(value.dtype),
-        encoding_format=value.encoding_format or None,
+        encoding_format=value.encoding_format or None,  # pyrefly: ignore[bad-argument-type]
         use_colormap=value.use_colormap,
         ffmpeg_extra_args=value.ffmpeg_extra_args,
     )
@@ -210,7 +210,7 @@ class Video(sequence_feature.Sequence):
   def to_json_content(self) -> feature_pb2.VideoFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
     return feature_pb2.VideoFeature(
         shape=feature_lib.to_shape_proto(self.shape),
-        dtype=feature_lib.dtype_to_str(self.dtype),
+        dtype=feature_lib.dtype_to_str(self.dtype),  # pyrefly: ignore[bad-argument-type]
         encoding_format=self._encoding_format,
         use_colormap=self._use_colormap,
         ffmpeg_extra_args=self._extra_ffmpeg_args,

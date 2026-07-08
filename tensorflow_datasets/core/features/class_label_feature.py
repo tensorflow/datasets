@@ -88,7 +88,7 @@ class ClassLabel(tensor_feature.Tensor):
   @property
   def names(self) -> list[str]:
     if not self._int2str:
-      return [str(i) for i in range(self._num_classes)]
+      return [str(i) for i in range(self._num_classes)]  # pyrefly: ignore[bad-argument-type]
     return self._int2str
 
   @names.setter
@@ -132,7 +132,7 @@ class ClassLabel(tensor_feature.Tensor):
       int_value = int(str_value)
     except ValueError:
       failed_parse = True
-    if failed_parse or not 0 <= int_value < self._num_classes:
+    if failed_parse or not 0 <= int_value < self._num_classes:  # pyrefly: ignore[unbound-name, unsupported-operation]
       raise ValueError("Invalid string class label %s" % str_value)
     return int_value
 
@@ -146,7 +146,7 @@ class ClassLabel(tensor_feature.Tensor):
       return self._int2str[int_value]
 
     # No names provided, return str(int)
-    if not 0 <= int_value < self._num_classes:
+    if not 0 <= int_value < self._num_classes:  # pyrefly: ignore[unsupported-operation]
       raise ValueError("Invalid integer class label %d" % int_value)
     return str(int_value)
 
@@ -177,13 +177,13 @@ class ClassLabel(tensor_feature.Tensor):
     """See base class for details."""
     # Save names if defined
     if self._str2int is not None:
-      names_filepath = self.get_names_filepath(data_dir, feature_name)
+      names_filepath = self.get_names_filepath(data_dir, feature_name)  # pyrefly: ignore[bad-argument-type]
       _write_names_to_file(names_filepath, self.names)
 
   def load_metadata(self, data_dir, feature_name=None) -> Optional[list[str]]:
     """See base class for details."""
     # Restore names if defined
-    names_filepath = self.get_names_filepath(data_dir, feature_name)
+    names_filepath = self.get_names_filepath(data_dir, feature_name)  # pyrefly: ignore[bad-argument-type]
     try:
       self.names = _load_names_from_file(names_filepath)
     except OSError:
@@ -192,7 +192,7 @@ class ClassLabel(tensor_feature.Tensor):
   def _additional_repr_info(self) -> dict[str, int]:
     return {"num_classes": self.num_classes}  # pytype: disable=bad-return-type  # always-use-property-annotation
 
-  def repr_html(self, ex: int) -> str:
+  def repr_html(self, ex: int) -> str:  # pyrefly: ignore[bad-override]
     """Class labels are displayed with their name."""
     if ex == -1:
       return "-"
@@ -202,11 +202,11 @@ class ClassLabel(tensor_feature.Tensor):
       return f"{ex} ({self.int2str(ex)})"
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.ClassLabel]
   ) -> "ClassLabel":
     if isinstance(value, dict):
-      return cls(**value)
+      return cls(**value)  # pyrefly: ignore[bad-argument-type]
     return cls(num_classes=value.num_classes)
 
   def to_json_content(self) -> feature_pb2.ClassLabel:  # pytype: disable=signature-mismatch  # overriding-return-type-checks

@@ -139,18 +139,18 @@ class BBoxFeature(tensor_feature.Tensor):
     return _repr_html(ex, bbox_format=self.bbox_format)
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.BoundingBoxFeature]
   ) -> 'BBoxFeature':
     if isinstance(value, dict):
-      return cls(**value)
+      return cls(**value)  # pyrefly: ignore[bad-argument-type]
     return cls(
         bbox_format=bb_utils.BBoxFormat(value.bbox_format)
         if value.bbox_format
         else None
     )
 
-  def to_json_content(
+  def to_json_content(  # pyrefly: ignore[bad-override]
       self,
   ) -> (
       feature_pb2.BoundingBoxFeature

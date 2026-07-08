@@ -130,8 +130,8 @@ class ExampleParserNp(Parser):
   def parse_example(
       self, serialized_example: bytes | memoryview
   ) -> Mapping[str, Union[np.ndarray, list[Any]]]:
-    example = tf_example_pb2.Example.FromString(serialized_example)
-    np_example = _features_to_numpy(example.features, self._flat_example_specs)
+    example = tf_example_pb2.Example.FromString(serialized_example)  # pyrefly: ignore[bad-argument-type]
+    np_example = _features_to_numpy(example.features, self._flat_example_specs)  # pyrefly: ignore[bad-argument-type]
     return utils.pack_as_nest_dict(np_example, self.example_specs)
 
 
@@ -220,7 +220,7 @@ def _feature_to_numpy(
     return value_array.item()
   feature_name = _key_to_feature_name(key)
   row_lengths = _extract_row_lengths(features, feature_name)
-  return reshape_ragged_tensor(value_array, row_lengths, shape)
+  return reshape_ragged_tensor(value_array, row_lengths, shape)  # pyrefly: ignore[bad-argument-type]
 
 
 def _extract_row_lengths(
@@ -269,7 +269,7 @@ def reshape_ragged_tensor(
       value = values[i : i + length]
       array.append(value)
       i += length
-    values = array
+    values = array  # pyrefly: ignore[bad-assignment]
   return values
 
 
@@ -346,7 +346,7 @@ def _deserialize_single_field(
 
 def _dict_to_ragged(example_data, tensor_info):
   """Reconstruct the ragged tensor from the row ids."""
-  return tf.RaggedTensor.from_nested_row_lengths(
+  return tf.RaggedTensor.from_nested_row_lengths(  # pyrefly: ignore[missing-attribute]
       flat_values=example_data["ragged_flat_values"],
       nested_row_lengths=[
           example_data["ragged_row_lengths_{}".format(k)]
@@ -363,13 +363,13 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   # This create limitation like float64 downsampled to float32, bool converted
   # to int64 which is space ineficient, no support for complexes or quantized
   # It seems quite space inefficient to convert bool to int64
-  if dtype_utils.is_integer(tensor_info.tf_dtype) or dtype_utils.is_bool(
-      tensor_info.tf_dtype
+  if dtype_utils.is_integer(tensor_info.tf_dtype) or dtype_utils.is_bool(  # pyrefly: ignore[bad-argument-type]
+      tensor_info.tf_dtype  # pyrefly: ignore[bad-argument-type]
   ):
     dtype = tf.int64
-  elif dtype_utils.is_floating(tensor_info.tf_dtype):
+  elif dtype_utils.is_floating(tensor_info.tf_dtype):  # pyrefly: ignore[bad-argument-type]
     dtype = tf.float32
-  elif dtype_utils.is_string(tensor_info.tf_dtype):
+  elif dtype_utils.is_string(tensor_info.tf_dtype):  # pyrefly: ignore[bad-argument-type]
     dtype = tf.string
   else:
     # TFRecord only support 3 types

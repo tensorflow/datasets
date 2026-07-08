@@ -434,18 +434,18 @@ def _replace_shard_pattern(filepath: str, replacement: str) -> str:
       return f"{matchobj.group('prefix')}{replacement}"
     return f"{matchobj.group('prefix')}{replacement}{matchobj.group('suffix')}"
 
-  filepath = epath.Path(filepath)
+  filepath = epath.Path(filepath)  # pyrefly: ignore[bad-assignment]
   (new_string, num_subs) = re.subn(
       pattern=pattern,
       repl=replace_func,
-      string=filepath.name,
+      string=filepath.name,  # pyrefly: ignore[missing-attribute]
   )
   if num_subs != 1:
     raise RuntimeError(
         f'Should do 1 shard suffix substitution, but did {num_subs}! '
         f'Filepath was {filepath}'
     )
-  return os.fspath(filepath.parent / new_string)
+  return os.fspath(filepath.parent / new_string)  # pyrefly: ignore[missing-attribute]
 
 
 def _remove_extension(filepath: str) -> str:

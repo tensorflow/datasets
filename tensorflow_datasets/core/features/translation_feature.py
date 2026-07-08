@@ -113,7 +113,7 @@ class Translation(features_dict.FeaturesDict):
     return sorted(self.keys())
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.TranslationFeature]
   ) -> "Translation":
     if isinstance(value, dict):
@@ -122,7 +122,7 @@ class Translation(features_dict.FeaturesDict):
             "TFDS does not support datasets with Encoder. Please use the plain "
             "text version with `tensorflow_text`."
         )
-      return cls(**value)
+      return cls(**value)  # pyrefly: ignore[bad-argument-type]
     assert not value.variable_languages_per_example
     return cls(languages=value.languages)
 
@@ -216,10 +216,10 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     return sorted(list(self._languages)) if self._languages else None
 
   def encode_example(self, translation_dict):
-    if self.languages and set(translation_dict) - self._languages:
+    if self.languages and set(translation_dict) - self._languages:  # pyrefly: ignore[unsupported-operation]
       raise ValueError(
           "Some languages in example ({0}) are not in valid set ({1}).".format(
-              ", ".join(sorted(set(translation_dict) - self._languages)),
+              ", ".join(sorted(set(translation_dict) - self._languages)),  # pyrefly: ignore[unsupported-operation]
               ", ".join(self.languages),
           )
       )
@@ -241,11 +241,11 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     )
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.TranslationFeature]
   ) -> "TranslationVariableLanguages":
     if isinstance(value, dict):
-      return cls(**value)
+      return cls(**value)  # pyrefly: ignore[bad-argument-type]
     assert value.variable_languages_per_example
     return cls(languages=value.languages)
 

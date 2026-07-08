@@ -168,7 +168,7 @@ def builder(
   # 'kaggle:my_ds/config:1.0.0' -> (
   #     DatasetName('kaggle:my_ds'), {'version': '1.0.0', 'config': 'conf0'}
   # )
-  name, builder_kwargs = naming.parse_builder_name_kwargs(
+  name, builder_kwargs = naming.parse_builder_name_kwargs(  # pyrefly: ignore[bad-assignment]
       name, **builder_kwargs
   )
 
@@ -176,7 +176,7 @@ def builder(
     return f'dataset "{name}", builder_kwargs "{builder_kwargs}"'
 
   # `try_gcs` currently only supports non-community datasets
-  if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):
+  if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):  # pyrefly: ignore[missing-attribute]
     data_dir = builder_kwargs.get('data_dir')
     if data_dir:
       raise ValueError(
@@ -184,15 +184,15 @@ def builder(
           f' explicitly set. Wrong arguments for {get_dataset_repr()}'
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
-  if name.namespace:
+  if name.namespace:  # pyrefly: ignore[missing-attribute]
     if name.namespace == 'huggingface':
       return huggingface_dataset_builder.builder(
           name=name.name, **builder_kwargs)
     if (
         visibility.DatasetType.COMMUNITY_PUBLIC.is_available()
-        and community.community_register().has_namespace(name.namespace)
+        and community.community_register().has_namespace(name.namespace)  # pyrefly: ignore[bad-argument-type]
     ):
-      return community.community_register().builder(name=name, **builder_kwargs)
+      return community.community_register().builder(name=name, **builder_kwargs)  # pyrefly: ignore[bad-argument-type]
 
   # First check whether we can find the corresponding dataset builder code
   try:
@@ -219,7 +219,7 @@ def builder(
       return cls(**builder_kwargs)  # pytype: disable=not-instantiable
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
-  raise not_found_error
+  raise not_found_error  # pyrefly: ignore[unbound-name]
 
 
 def _try_load_from_files_first(
@@ -343,7 +343,7 @@ class DatasetCollectionLoader:
     # If `split` is defined both as argument and in `loader_kwargs`, always keep
     # the one defined as argument.
     if split:
-      loader_kwargs['split'] = dataset_reference.get_split(split)
+      loader_kwargs['split'] = dataset_reference.get_split(split)  # pyrefly: ignore[bad-argument-type]
     # Make sure we always return a dict of dicts.
     if 'split' in loader_kwargs and isinstance(loader_kwargs['split'], str):
       loader_kwargs['split'] = [loader_kwargs['split']]
