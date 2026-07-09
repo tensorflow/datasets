@@ -58,9 +58,9 @@ Corresponds to the following `tf.train.Example` specs:
 
 ```python
 {
-    'image': tf.io.FixedLenFeature(shape=(), dtype=tf.string),
+    'image': tf.io.FixedLenFeature(shape=(), dtype=tf.uint8),
     'label': tf.io.FixedLenFeature(shape=(), dtype=tf.int64),
-    'objects/camera/K': tf.io.FixedLenSequenceFeature(shape=(3,), dtype=tf.int64),
+    'objects/camera/K': tf.io.FixedLenSequenceFeature(shape=(3,), dtype=tf.float32),
 }
 ```
 
