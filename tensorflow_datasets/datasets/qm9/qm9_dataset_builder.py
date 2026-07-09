@@ -36,11 +36,11 @@ pd = tfds.core.lazy_imports.pandas
 
 _HOMEPAGE = 'https://doi.org/10.6084/m9.figshare.c.978904.v5'
 
-_ATOMREF_URL = 'https://figshare.com/ndownloader/files/3195395'
+_ATOMREF_URL = 'https://ndownloader.figshare.com/files/3195395'
 _UNCHARACTERIZED_URL = (
-    'https://springernature.figshare.com/ndownloader/files/3195404'
+    'https://ndownloader.figshare.com/files/3195404'
 )
-_MOLECULES_URL = 'https://springernature.figshare.com/ndownloader/files/3195389'
+_MOLECULES_URL = 'https://ndownloader.figshare.com/files/3195389'
 
 _SIZE = 133_885
 _CHARACTERIZED_SIZE = 130_831
@@ -287,6 +287,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         skipfooter=1,
         sep=r'\s+',
         names=['Z', 'zpve', 'U0', 'U', 'H', 'G', 'Cv'],
+        engine='python'
     ).to_dict()
 
     uncharacterized = pd.read_table(
@@ -298,6 +299,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         sep=r'\s+',
         usecols=[0],
         names=['index'],
+        engine='python'
     ).values[:, 0]
 
     molecules_dir = dl_manager.download_and_extract(
