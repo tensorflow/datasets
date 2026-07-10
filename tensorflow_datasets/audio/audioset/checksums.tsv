@@ -1,0 +1,4 @@
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv	1211931	3b83e5ff9ed72cfda37d4e36ce08250e107c1ea70f109f6ab6668ac200db5e94	balanced_train_segments.csv
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/eval_segments.csv	1143389	f7055f53935f70e74e39494a5c8c4c78f1700fce275028bd36e31186f33d45db	eval_segments.csv
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/unbalanced_train_segments.csv	101468408	bb2dfd5e4f1ced39db9480633c510f813d7899f4b7472aa83a411b4a43a12698	unbalanced_train_segments.csv
+http://storage.googleapis.com/us_audioset/youtube_corpus/v1/features/features.tar.gz	2588881044	cd95d500ab2422d4233cb822e25cf73033633e2068eab64d39024e85125cb760	features.tar.gz
