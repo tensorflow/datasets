@@ -348,7 +348,7 @@ class DownloadManager:
   def _record_url_infos(self):
     """Store in file when recorded size/checksum of downloaded files."""
     checksums.save_url_infos(
-        self._register_checksums_path,
+        self._register_checksums_path,  # pyrefly: ignore[bad-argument-type]
         self._recorded_url_infos,
     )
 
@@ -575,7 +575,7 @@ class DownloadManager:
       resource_lib.write_info_file(
           url=url,
           path=dst_path,
-          dataset_name=self._dataset_name,
+          dataset_name=self._dataset_name,  # pyrefly: ignore[bad-argument-type]
           original_fname=dl_path.name,
           url_info=dl_url_info,
       )

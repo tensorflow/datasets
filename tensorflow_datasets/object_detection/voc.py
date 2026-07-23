@@ -132,7 +132,7 @@ class VocConfig(tfds.core.BuilderConfig):
     self.filenames = filenames
     self.has_test_annotations = has_test_annotations
     super(VocConfig, self).__init__(
-        name=year,
+        name=year,  # pyrefly: ignore[bad-argument-type]
         # Version history:
         # 5.0.0: Added new download links and updated checksums.
         # 4.0.0: Added BuildConfig and 2012 version support, deprecate Voc2007.
@@ -192,26 +192,26 @@ class Voc(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_VOC_LABELS)
             ),
         }),
-        homepage=_VOC_URL.format(year=self.builder_config.year),
-        citation=_VOC_CITATION.format(year=self.builder_config.year),
+        homepage=_VOC_URL.format(year=self.builder_config.year),  # pyrefly: ignore[missing-attribute]
+        citation=_VOC_CITATION.format(year=self.builder_config.year),  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
         k: os.path.join(_VOC_DATA_URL, v)
-        for k, v in self.builder_config.filenames.items()
+        for k, v in self.builder_config.filenames.items()  # pyrefly: ignore[missing-attribute]
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["test"], set_name="test"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["trainval"], set_name="train"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["trainval"], set_name="val"),
         ),
     ]
@@ -222,12 +222,12 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/ImageSets/Main/{}.txt".format(
-                self.builder_config.year, set_name
+                self.builder_config.year, set_name  # pyrefly: ignore[missing-attribute]
             )
         ),
     )
     load_annotations = (
-        self.builder_config.has_test_annotations or set_name != "test"
+        self.builder_config.has_test_annotations or set_name != "test"  # pyrefly: ignore[missing-attribute]
     )
     with tf.io.gfile.GFile(set_filepath, "r") as f:
       for line in f:
@@ -240,7 +240,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(
-                self.builder_config.year, image_id
+                self.builder_config.year, image_id  # pyrefly: ignore[missing-attribute]
             )
         ),
     )
@@ -248,7 +248,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/Annotations/{}.xml".format(
-                self.builder_config.year, image_id
+                self.builder_config.year, image_id  # pyrefly: ignore[missing-attribute]
             )
         ),
     )

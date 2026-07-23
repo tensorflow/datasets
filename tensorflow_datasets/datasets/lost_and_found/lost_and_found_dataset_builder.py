@@ -125,9 +125,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         ),
     }
     features = {
-        feat: possible_features[feat] for feat in self.builder_config.features
+        feat: possible_features[feat] for feat in self.builder_config.features  # pyrefly: ignore[missing-attribute]
     }
-    features['image_id'] = tfds.features.Text()
+    features['image_id'] = tfds.features.Text()  # pyrefly: ignore[unsupported-operation]
     features = tfds.features.FeaturesDict(features)
     return self.dataset_info_from_configs(
         # tfds.features.FeatureConnectors
@@ -145,8 +145,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # For each feature, this is the name of the zipfile and
     # root-directory in the archive
     zip_file_names = {
-        'image_left': self.builder_config.left_image_string,
-        'image_right': self.builder_config.right_image_string,
+        'image_left': self.builder_config.left_image_string,  # pyrefly: ignore[missing-attribute]
+        'image_right': self.builder_config.right_image_string,  # pyrefly: ignore[missing-attribute]
         'segmentation_label': 'gtCoarse',
         'instance_id': 'gtCoarse',
         'disparity_map': 'disparity',
@@ -154,7 +154,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     download_urls = {
         feat: base_url.format(zip_file_names[feat])
-        for feat in self.builder_config.features
+        for feat in self.builder_config.features  # pyrefly: ignore[missing-attribute]
     }
     # Split download and extract in two functions such that mock-data can
     # replace the result of the download function and is still used as input to
@@ -163,19 +163,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 feat: path.join(dl_paths[feat], zip_file_names[feat], 'train')
-                for feat in self.builder_config.features
+                for feat in self.builder_config.features  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={
                 feat: path.join(dl_paths[feat], zip_file_names[feat], 'test')
-                for feat in self.builder_config.features
+                for feat in self.builder_config.features  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]
@@ -184,8 +184,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # different file-suffixes dependent on the feature to load
     file_suffix = {
-        'image_left': self.builder_config.left_image_string,
-        'image_right': self.builder_config.right_image_string,
+        'image_left': self.builder_config.left_image_string,  # pyrefly: ignore[missing-attribute]
+        'image_right': self.builder_config.right_image_string,  # pyrefly: ignore[missing-attribute]
         'segmentation_label': 'gtCoarse_labelIds',
         'instance_id': 'gtCoarse_instanceIds',
         'disparity_map': 'disparity',
@@ -232,4 +232,4 @@ def _get_id_from_left_image(left_image):
   Returns:
     id of the image.
   """
-  return LEFT_IMAGE_FILE_RE.match(left_image).group(1)
+  return LEFT_IMAGE_FILE_RE.match(left_image).group(1)  # pyrefly: ignore[missing-attribute]

@@ -485,7 +485,7 @@ class FeatureExpectationsTestCase(SubTestCase):
         text = f.repr_html_batch(ex)
       elif spec.sequence_rank > 1:
         text = f.repr_html_ragged(ex)
-      self.assertIsInstance(text, str)
+      self.assertIsInstance(text, str)  # pyrefly: ignore[unbound-name]
 
 
 def features_encode_decode(

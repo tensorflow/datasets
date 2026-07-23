@@ -62,7 +62,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # There is no predefined train/val/test split for this dataset.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)
+            name=tfds.Split.TRAIN, gen_kwargs=dict(filepath=filepath)  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

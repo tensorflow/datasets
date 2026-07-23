@@ -130,15 +130,15 @@ def _sanitize_url(url: str, max_length: int) -> tuple[str, str]:
   Returns:
     Sanitized and shorted url, file extension.
   """
-  url = urllib.parse.urlparse(url)
-  netloc = url.netloc
+  url = urllib.parse.urlparse(url)  # pyrefly: ignore[bad-assignment]
+  netloc = url.netloc  # pyrefly: ignore[missing-attribute]
   for prefix in _NETLOC_COMMON_PREFIXES:
     if netloc.startswith(prefix):
       netloc = netloc[len(prefix) :]
   for suffix in _NETLOC_COMMON_SUFFIXES:
     if netloc.endswith(suffix):
       netloc = netloc[: -len(suffix)]
-  url = f'{netloc}{url.path}{url.params}{url.query}'
+  url = f'{netloc}{url.path}{url.params}{url.query}'  # pyrefly: ignore[missing-attribute]
   # Get the extension:
   for ext in _KNOWN_EXTENSIONS:
     if url.endswith(ext):
@@ -184,7 +184,7 @@ def get_dl_fname(url: str, checksum: str | None = None) -> str:
   """
   if not checksum:
     checksum = checksums_lib.sha256(url)
-  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))
+  checksum = base64.urlsafe_b64encode(_decode_hex(checksum))  # pyrefly: ignore[bad-assignment]
   checksum = checksum.decode()[:-1]
   name, extension = _sanitize_url(url, max_length=46)
   return f'{name}{checksum}{extension}'

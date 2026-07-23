@@ -366,7 +366,7 @@ def _make_download_config(
   # Load the download config
   manual_dir = args.paths.manual_dir
   if args.paths.add_name_to_manual_dir:
-    manual_dir = manual_dir / dataset_name
+    manual_dir = manual_dir / dataset_name  # pyrefly: ignore[unsupported-operation]
 
   kwargs = {}
   if args.generation.max_shard_size_mb:

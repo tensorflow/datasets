@@ -147,7 +147,7 @@ class Builder(tfds.core.BeamBasedBuilder):
 
   def _info(self):
     return self.dataset_info_from_configs(
-        features=self.builder_config.features,
+        features=self.builder_config.features,  # pyrefly: ignore[missing-attribute]
         supervised_keys=None,
         homepage=_URL,
     )
@@ -159,11 +159,11 @@ class Builder(tfds.core.BeamBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepaths': files['train']},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepaths': files['validation']},
         ),
     ]
@@ -316,7 +316,7 @@ class Builder(tfds.core.BeamBasedBuilder):
     parse_example = {
         'default': self._parse_example_default,
         'longt5': self._parse_example_longt5,
-    }[self.builder_config.name]
+    }[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
 
     return (
         pipeline

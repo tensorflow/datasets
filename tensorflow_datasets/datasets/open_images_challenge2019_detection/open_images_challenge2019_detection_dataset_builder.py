@@ -97,15 +97,15 @@ class _OpenImagesChallenge2019(tfds.core.BeamBasedBuilder):  # pytype: disable=i
     paths = dl_manager.download(urls)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(paths=paths, split="train"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(paths=paths, split="test"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(paths=paths, split="validation"),
         ),
     ]
@@ -188,7 +188,7 @@ class Builder(_OpenImagesChallenge2019):
         | "ProcessImages"
         >> beam.ParDo(
             oi_beam.ProcessImageFn(
-                target_pixels=self.builder_config.target_pixels, jpeg_quality=72
+                target_pixels=self.builder_config.target_pixels, jpeg_quality=72  # pyrefly: ignore[missing-attribute]
             )
         )
         | "GenerateExamples"

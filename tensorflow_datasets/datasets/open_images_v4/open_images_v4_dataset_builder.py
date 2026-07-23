@@ -215,7 +215,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     validation_bbox = load_boxes('validation-annotations-bbox')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 archive_paths=paths['train_images'],
                 objects_getter=train_objects,
@@ -224,7 +224,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 archive_paths=[paths['test_images']],
                 objects_getter=test_objects,
@@ -232,7 +232,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 archive_paths=[paths['validation_images']],
                 objects_getter=validation_objects,
@@ -266,7 +266,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         ]
         record = {
             'image': _resize_image_if_necessary(
-                fobj, target_pixels=self.builder_config.target_pixels
+                fobj, target_pixels=self.builder_config.target_pixels  # pyrefly: ignore[missing-attribute]
             ),
             'image/filename': fname,
             'objects': image_objects,

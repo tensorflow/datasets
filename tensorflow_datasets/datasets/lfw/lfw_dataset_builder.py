@@ -49,7 +49,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # There is no train/test split predefined
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_path": path,
             },

@@ -230,8 +230,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     })
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(paths['train']),
-        tfds.Split.TEST: self._generate_examples(paths['test']),
+        tfds.Split.TRAIN: self._generate_examples(paths['train']),  # pyrefly: ignore[missing-attribute]
+        tfds.Split.TEST: self._generate_examples(paths['test']),  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, gz_path):

@@ -39,7 +39,7 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 import datetime
 import json
-from typing import Any
+from typing import Any, cast
 
 from etils import enp
 from etils import epath
@@ -110,7 +110,7 @@ def array_datatype_converter(
   if field.data_type in dtype_mapping:
     field_dtype = dtype_mapping[field.data_type]
   elif enp.lazy.is_np_dtype(field.data_type):
-    field_dtype = field.data_type
+    field_dtype = cast(type_utils.TfdsDType, field.data_type)
 
   description = croissant_utils.extract_localized_string(
       field.description, language=language, field_name='description'
@@ -191,7 +191,7 @@ def datatype_converter(
   elif field_data_type in dtype_mapping:
     feature = dtype_mapping[field_data_type]
   elif enp.lazy.is_np_dtype(field_data_type):
-    feature = field_data_type
+    feature = cast(type_utils.TfdsDType, field_data_type)
   # We return a text feature for date-time features (mlc.DataType.DATE,
   # mlc.DataType.DATETIME, and mlc.DataType.TIME).
   elif field_data_type == pd.Timestamp or field_data_type == datetime.time:

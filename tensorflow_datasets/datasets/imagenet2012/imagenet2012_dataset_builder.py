@@ -101,20 +101,20 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     splits = []
     _add_split_if_exists(
         split_list=splits,
-        split=tfds.Split.TRAIN,
+        split=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
         split_path=train_path,
         dl_manager=dl_manager,
     )
     _add_split_if_exists(
         split_list=splits,
-        split=tfds.Split.VALIDATION,
+        split=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
         split_path=val_path,
         dl_manager=dl_manager,
         validation_labels=imagenet_common.get_validation_labels(val_path),
     )
     _add_split_if_exists(
         split_list=splits,
-        split=tfds.Split.TEST,
+        split=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
         split_path=test_path,
         dl_manager=dl_manager,
         labels_exist=False,

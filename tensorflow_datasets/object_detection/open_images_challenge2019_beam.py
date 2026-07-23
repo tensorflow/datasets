@@ -116,7 +116,7 @@ class CreateDetectionExampleFn(beam.DoFn):
     if self._image2labels:
       for label, source, confidence in self._image2labels[image_id]:
         objects.append({
-            "label": self._mid2int[label],
+            "label": self._mid2int[label],  # pyrefly: ignore[unsupported-operation]
             "source": source,
             "confidence": confidence,
         })
@@ -127,7 +127,7 @@ class CreateDetectionExampleFn(beam.DoFn):
         label, xmin, xmax, ymin, ymax, is_group_of = annotation
         bbox = tfds.features.BBox(xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax)
         bobjects.append({
-            "label": self._mid2int[label],
+            "label": self._mid2int[label],  # pyrefly: ignore[unsupported-operation]
             "bbox": bbox,
             "is_group_of": is_group_of,
         })
@@ -152,7 +152,7 @@ def load_image_level_labels(filepath):
         source = "verification"
       elif len(row) == 4:
         image_id, source, label, confidence = row
-      image2labels[image_id].append((label, source, float(confidence)))
+      image2labels[image_id].append((label, source, float(confidence)))  # pyrefly: ignore[unbound-name]
   return image2labels
 
 
@@ -169,9 +169,9 @@ def load_box_level_labels(filepath):
         image_id, label = row[0], row[2]
         xmin_s, xmax_s, ymin_s, ymax_s = row[4:8]
         is_group_of_s = row[10]
-      xmin, xmax, ymin, ymax = map(float, (xmin_s, xmax_s, ymin_s, ymax_s))
-      is_group_of = bool(int(is_group_of_s))
-      image2boxes[image_id].append((label, xmin, xmax, ymin, ymax, is_group_of))
+      xmin, xmax, ymin, ymax = map(float, (xmin_s, xmax_s, ymin_s, ymax_s))  # pyrefly: ignore[unbound-name]
+      is_group_of = bool(int(is_group_of_s))  # pyrefly: ignore[unbound-name]
+      image2boxes[image_id].append((label, xmin, xmax, ymin, ymax, is_group_of))  # pyrefly: ignore[unbound-name]
   return image2boxes
 
 
