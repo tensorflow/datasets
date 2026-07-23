@@ -211,7 +211,7 @@ class DatasetBuilderTestCase(
     if cls is DatasetBuilderTestCase:  # Required for build_api_docs
       return None  # pytype: disable=bad-return-type
 
-    dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"
+    dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"  # pyrefly: ignore[missing-attribute]
     fake_example_dir = epath.Path(test_utils.fake_examples_dir())
     if cls.EXAMPLE_DIR is not None:
       dummy_data_found = epath.Path(cls.EXAMPLE_DIR)
@@ -219,7 +219,7 @@ class DatasetBuilderTestCase(
     elif dummy_data_expected.exists():
       dummy_data_found = dummy_data_expected
     else:
-      dummy_data_found = fake_example_dir / cls.DATASET_CLASS.name
+      dummy_data_found = fake_example_dir / cls.DATASET_CLASS.name  # pyrefly: ignore[missing-attribute]
 
     if not dummy_data_found.exists():
       err_msg = f"Dummy data not found in: {dummy_data_expected}"
@@ -331,7 +331,7 @@ class DatasetBuilderTestCase(
 
   def _get_dl_download_kaggle_result(self, competition_or_dataset):
     del competition_or_dataset  # Unused
-    return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)
+    return self._prepare_download_results(self.DL_DOWNLOAD_RESULT)  # pyrefly: ignore[bad-argument-type]
 
   def _download_checksums(self, url):
     del url  # Unused

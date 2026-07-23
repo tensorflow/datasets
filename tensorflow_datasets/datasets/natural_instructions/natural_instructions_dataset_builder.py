@@ -58,7 +58,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Downloads the data and defines the splits
     data_dir = dl_manager.download_and_extract(name_to_paths)
     return {
-        tfds.Split.TRAIN: self._generate_examples(path=data_dir),
+        tfds.Split.TRAIN: self._generate_examples(path=data_dir),  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, path):

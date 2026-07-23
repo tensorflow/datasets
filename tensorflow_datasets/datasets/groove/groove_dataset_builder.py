@@ -130,12 +130,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         },
         "midi": tf.string,
     }
-    if self.builder_config.include_audio:
-      features_dict["audio"] = tfds.features.Audio(
-          dtype=np.float32, sample_rate=self.builder_config.audio_rate
+    if self.builder_config.include_audio:  # pyrefly: ignore[missing-attribute]
+      features_dict["audio"] = tfds.features.Audio(  # pyrefly: ignore[bad-assignment]
+          dtype=np.float32, sample_rate=self.builder_config.audio_rate  # pyrefly: ignore[missing-attribute]
       )
     return self.dataset_info_from_configs(
-        features=tfds.features.FeaturesDict(features_dict),
+        features=tfds.features.FeaturesDict(features_dict),  # pyrefly: ignore[bad-argument-type]
         homepage="https://g.co/magenta/groove-dataset",
     )
 

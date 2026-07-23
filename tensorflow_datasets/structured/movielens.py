@@ -440,11 +440,11 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
     }
 
     features_dict = {}
-    if self.builder_config.table_option == 'movies':
+    if self.builder_config.table_option == 'movies':  # pyrefly: ignore[missing-attribute]
       features_dict.update(movie_features_dict)
     # For the other cases, self.builder_config.table_option == 'ratings'.
     # Older versions of MovieLens (1m, 100k) have demographic features.
-    elif self.builder_config.format_version == '1m':
+    elif self.builder_config.format_version == '1m':  # pyrefly: ignore[missing-attribute]
       features_dict.update(movie_features_dict)
       features_dict.update(rating_features_dict)
       features_dict.update(demographic_features_dict)
@@ -472,15 +472,15 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
   ) -> List[tfds.core.SplitGenerator]:
     """Returns SplitGenerators."""
     extracted_path = dl_manager.download_and_extract(
-        self.builder_config.download_url,
+        self.builder_config.download_url,  # pyrefly: ignore[missing-attribute]
     )
     dir_path = os.path.join(
         extracted_path,
-        'ml-%s' % self.builder_config.format_version,
+        'ml-%s' % self.builder_config.format_version,  # pyrefly: ignore[missing-attribute]
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'dir_path': dir_path},
         ),
     ]
@@ -489,7 +489,7 @@ class Movielens(tfds.core.GeneratorBasedBuilder):
       self, dir_path: Optional[str] = None
   ) -> Iterator[Tuple[int, Dict[str, Any]]]:
     """Yields examples by calling the corresponding parsing function."""
-    for ex in self.builder_config.parsing_fn(dir_path):
+    for ex in self.builder_config.parsing_fn(dir_path):  # pyrefly: ignore[missing-attribute]
       yield ex
 
 

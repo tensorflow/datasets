@@ -72,7 +72,7 @@ class Builder(imagenet2012_dataset_builder.Builder):
       )
 
     # Download and load subset file.
-    subset_file = dl_manager.download(SUBSET2FILES[self.builder_config.name])
+    subset_file = dl_manager.download(SUBSET2FILES[self.builder_config.name])  # pyrefly: ignore[missing-attribute]
     if isinstance(subset_file, list):  # it will only be a list during testing,
       subset_file = subset_file[0]  # where the first entry is 1percent.txt.
     with epath.Path(subset_file).open() as fp:
@@ -80,14 +80,14 @@ class Builder(imagenet2012_dataset_builder.Builder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(train_path),
                 'subset': subset,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(val_path),
                 'validation_labels': imagenet_common.get_validation_labels(

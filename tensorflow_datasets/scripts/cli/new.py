@@ -84,7 +84,7 @@ def create_dataset_files(
       name=dataset_name,
       in_tfds=in_tfds,
       path=dataset_dir,
-      data_format=data_format,
+      data_format=data_format,  # pyrefly: ignore[bad-argument-type]
   )
 
   _create_dataset_file(info)

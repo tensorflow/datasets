@@ -103,19 +103,19 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           description=_CONFIG_DESCRIPTION.format(year=2014),
           splits=[
               Split(
-                  name=tfds.Split.TRAIN,
+                  name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
                   images='train2014',
                   annotations='annotations_trainval2014',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
-                  name=tfds.Split.VALIDATION,
+                  name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
                   images='val2014',
                   annotations='annotations_trainval2014',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
-                  name=tfds.Split.TEST,
+                  name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
                   images='test2014',
                   annotations='image_info_test2014',
                   annotation_type=AnnotationType.NONE,
@@ -134,19 +134,19 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           description=_CONFIG_DESCRIPTION.format(year=2017),
           splits=[
               Split(
-                  name=tfds.Split.TRAIN,
+                  name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
                   images='train2017',
                   annotations='annotations_trainval2017',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
-                  name=tfds.Split.VALIDATION,
+                  name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
                   images='val2017',
                   annotations='annotations_trainval2017',
                   annotation_type=AnnotationType.BBOXES,
               ),
               Split(
-                  name=tfds.Split.TEST,
+                  name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
                   images='test2017',
                   annotations='image_info_test2017',
                   annotation_type=AnnotationType.NONE,
@@ -159,13 +159,13 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           has_panoptic=True,
           splits=[
               Split(
-                  name=tfds.Split.TRAIN,
+                  name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
                   images='train2017',
                   annotations='panoptic_annotations_trainval2017',
                   annotation_type=AnnotationType.PANOPTIC,
               ),
               Split(
-                  name=tfds.Split.VALIDATION,
+                  name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
                   images='val2017',
                   annotations='panoptic_annotations_trainval2017',
                   annotation_type=AnnotationType.PANOPTIC,
@@ -182,8 +182,8 @@ class Coco(tfds.core.GeneratorBasedBuilder):
         'image/id': tf.int64,
     }
     # Either uses panotptic or original annotations
-    if self.builder_config.has_panoptic:
-      features.update({
+    if self.builder_config.has_panoptic:  # pyrefly: ignore[missing-attribute]
+      features.update({  # pyrefly: ignore[no-matching-overload]
           'panoptic_image': tfds.features.Image(encoding_format='png'),
           'panoptic_image/filename': tfds.features.Text(),
           'panoptic_objects': tfds.features.Sequence({
@@ -199,7 +199,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           }),
       })
     else:
-      features.update(
+      features.update(  # pyrefly: ignore[no-matching-overload]
           {
               'objects': tfds.features.Sequence({
                   'id': np.int64,
@@ -233,7 +233,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
 
     # Merge urls from all splits together
     urls = {}
-    for split in self.builder_config.splits:
+    for split in self.builder_config.splits:  # pyrefly: ignore[missing-attribute]
       urls['{}_images'.format(split.name)] = 'zips/{}.zip'.format(split.images)
       urls['{}_annotations'.format(split.name)] = 'annotations/{}.zip'.format(
           split.annotations
@@ -247,10 +247,10 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     )
 
     splits = []
-    for split in self.builder_config.splits:
+    for split in self.builder_config.splits:  # pyrefly: ignore[missing-attribute]
       image_dir = extracted_paths['{}_images'.format(split.name)]
       annotations_dir = extracted_paths['{}_annotations'.format(split.name)]
-      if self.builder_config.has_panoptic:
+      if self.builder_config.has_panoptic:  # pyrefly: ignore[missing-attribute]
         panoptic_image_zip_path = os.path.join(
             annotations_dir,
             'annotations',
@@ -305,7 +305,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     instance_path = os.path.join(
         annotation_dir,
         'annotations',
-        instance_filename.format(split_name),
+        instance_filename.format(split_name),  # pyrefly: ignore[unbound-name]
     )
     coco_annotation = ANNOTATION_CLS[annotation_type](instance_path)
     # Each category is a dict:
@@ -332,7 +332,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
     # and 'supercategory' (in addition to 'name')
     # Warning: As Coco only use 80 out of the 91 labels, the c['id'] and
     # dataset names ids won't match.
-    if self.builder_config.has_panoptic:
+    if self.builder_config.has_panoptic:  # pyrefly: ignore[missing-attribute]
       objects_key = 'panoptic_objects'
     else:
       objects_key = 'objects'
@@ -410,7 +410,7 @@ class Coco(tfds.core.GeneratorBasedBuilder):
           ],
       }
       if self.builder_config.has_panoptic:
-        panoptic_filename = panoptic_annotation['file_name']
+        panoptic_filename = panoptic_annotation['file_name']  # pyrefly: ignore[unbound-name]
         panoptic_image_path = os.path.join(panoptic_dir, panoptic_filename)
         example['panoptic_image'] = panoptic_image_path
         example['panoptic_image/filename'] = panoptic_filename

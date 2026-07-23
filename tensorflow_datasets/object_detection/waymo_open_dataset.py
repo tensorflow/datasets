@@ -133,31 +133,31 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
                 "image": tfds.features.Image(
                     shape=(1280, 1920, 3), encoding_format="jpeg"
                 ),
-                "labels": tfds.features.Sequence(annotations),
+                "labels": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
             },
             "camera_FRONT_LEFT": {
                 "image": tfds.features.Image(
                     shape=(1280, 1920, 3), encoding_format="jpeg"
                 ),
-                "labels": tfds.features.Sequence(annotations),
+                "labels": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
             },
             "camera_SIDE_LEFT": {
                 "image": tfds.features.Image(
                     shape=(886, 1920, 3), encoding_format="jpeg"
                 ),
-                "labels": tfds.features.Sequence(annotations),
+                "labels": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
             },
             "camera_FRONT_RIGHT": {
                 "image": tfds.features.Image(
                     shape=(1280, 1920, 3), encoding_format="jpeg"
                 ),
-                "labels": tfds.features.Sequence(annotations),
+                "labels": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
             },
             "camera_SIDE_RIGHT": {
                 "image": tfds.features.Image(
                     shape=(886, 1920, 3), encoding_format="jpeg"
                 ),
-                "labels": tfds.features.Sequence(annotations),
+                "labels": tfds.features.Sequence(annotations),  # pyrefly: ignore[bad-argument-type]
             },
         }),
         homepage=_HOMEPAGE_URL,
@@ -177,7 +177,7 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     # Training set
     train_files = tf.io.gfile.glob(
         os.path.join(
-            self.builder_config.cloud_bucket, "training/segment*camera*"
+            self.builder_config.cloud_bucket, "training/segment*camera*"  # pyrefly: ignore[missing-attribute]
         )
     )
     logging.info("Train files: %s", train_files)
@@ -185,20 +185,20 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     # Validation set
     validation_files = tf.io.gfile.glob(
         os.path.join(
-            self.builder_config.cloud_bucket, "validation/segment*camera*"
+            self.builder_config.cloud_bucket, "validation/segment*camera*"  # pyrefly: ignore[missing-attribute]
         )
     )
     logging.info("Validation files: %s", validation_files)
 
     split_generators = [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "tf_record_files": train_files,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "tf_record_files": validation_files,
             },
@@ -206,17 +206,17 @@ class WaymoOpenDataset(tfds.core.BeamBasedBuilder):
     ]
 
     # Testing set (Only available in Waymo Open Dataset v1.2)
-    if self.builder_config.name == "v_1_2":
+    if self.builder_config.name == "v_1_2":  # pyrefly: ignore[missing-attribute]
       test_files = tf.io.gfile.glob(
           os.path.join(
-              self.builder_config.cloud_bucket, "testing/segment*camera*"
+              self.builder_config.cloud_bucket, "testing/segment*camera*"  # pyrefly: ignore[missing-attribute]
           )
       )
       logging.info("Testing files: %s", test_files)
 
       split_generators.append(
           tfds.core.SplitGenerator(
-              name=tfds.Split.TEST,
+              name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "tf_record_files": test_files,
               },
@@ -265,7 +265,7 @@ def _generate_images_and_annotations(tf_record_file):
   dataset = tf.data.TFRecordDataset(tf_record_file, compression_type="")
   for data in dataset:
     frame = open_dataset.Frame()
-    frame.ParseFromString(data.numpy())
+    frame.ParseFromString(data.numpy())  # pyrefly: ignore[bad-argument-type]
 
     image_and_annotation = {
         "context": {"name": frame.context.name},
@@ -289,7 +289,7 @@ def _generate_images_and_annotations(tf_record_file):
         )
 
       camera_name = open_dataset.CameraName.Name.Name(frame_image.name)
-      image_and_annotation["camera_" + camera_name] = {
+      image_and_annotation["camera_" + camera_name] = {  # pyrefly: ignore[unsupported-operation]
           "image": frame_image.image,
           "labels": labels,
       }
