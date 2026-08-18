@@ -114,11 +114,11 @@ def _subset_filenames(dl_paths, split):
   """Get filenames for a particular split."""
   assert isinstance(dl_paths, dict), dl_paths
   # Get filenames for a split.
-  if split == tfds.Split.TRAIN:
+  if split == tfds.Split.TRAIN:  # pyrefly: ignore[missing-attribute]
     urls = _get_url_hashes(dl_paths['train_urls'])
-  elif split == tfds.Split.VALIDATION:
+  elif split == tfds.Split.VALIDATION:  # pyrefly: ignore[missing-attribute]
     urls = _get_url_hashes(dl_paths['val_urls'])
-  elif split == tfds.Split.TEST:
+  elif split == tfds.Split.TEST:  # pyrefly: ignore[missing-attribute]
     urls = _get_url_hashes(dl_paths['test_urls'])
   else:
     logging.fatal('Unsupported split: %s', split)
@@ -239,18 +239,18 @@ class CnnDailymail(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TRAIN)},
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TRAIN)},  # pyrefly: ignore[missing-attribute]
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
-                'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)
+                'files': _subset_filenames(dl_paths, tfds.Split.VALIDATION)  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
-            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)},
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
+            gen_kwargs={'files': _subset_filenames(dl_paths, tfds.Split.TEST)},  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

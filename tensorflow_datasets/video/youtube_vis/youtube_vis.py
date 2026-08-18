@@ -96,7 +96,7 @@ def _decode_segmentation(
         interpolation=cv2.INTER_NEAREST,
     )
   segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[bad-assignment]
-  assert len(segmentation.shape) == 3
+  assert len(segmentation.shape) == 3  # pyrefly: ignore[missing-attribute]
   return segmentation
 
 
@@ -561,9 +561,9 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
     annotations = json.loads(annotations.read_text())
     video_id_to_tracks, videos = _build_annotations_index(annotations)
-    height = self._builder_config.height
-    width = self._builder_config.width
-    only_frames_with_labels = self._builder_config.only_frames_with_labels
+    height = self._builder_config.height  # pyrefly: ignore[missing-attribute]
+    width = self._builder_config.width  # pyrefly: ignore[missing-attribute]
+    only_frames_with_labels = self._builder_config.only_frames_with_labels  # pyrefly: ignore[missing-attribute]
 
     video_keys = list(videos.keys())
     if video_range_to_use is not None:

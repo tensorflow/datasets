@@ -60,7 +60,7 @@ class TestCase(test_case_in_context.TestCaseInContext, tf.test.TestCase):
     self.tmp_dir = tempfile.mkdtemp(dir=tf.compat.v1.test.get_temp_dir())
 
   @contextlib.contextmanager
-  def assertLogs(self, text, level="info"):
+  def assertLogs(self, text, level="info"):  # pyrefly: ignore[bad-override]
     with mock.patch.object(logging, level) as mock_log:
       yield
       concat_logs = ""

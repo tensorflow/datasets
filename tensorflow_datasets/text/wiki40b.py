@@ -149,7 +149,7 @@ class Wiki40b(tfds.core.BeamBasedBuilder):
 
     del dl_manager  # Unused
 
-    lang = self._builder_config.language
+    lang = self._builder_config.language  # pyrefly: ignore[missing-attribute]
 
     return [
         tfds.core.SplitGenerator(

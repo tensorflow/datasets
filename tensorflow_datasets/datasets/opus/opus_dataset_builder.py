@@ -907,26 +907,26 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   @property
   def subsets(self):
     # Return only the datasets that exist for the language pair.
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     filtered_subsets = []
-    for dataset in [DATASET_MAP[name] for name in self.builder_config.subsets]:
+    for dataset in [DATASET_MAP[name] for name in self.builder_config.subsets]:  # pyrefly: ignore[missing-attribute]
       if (source, target) in dataset.language_pairs:
         filtered_subsets.append(dataset)
 
     return filtered_subsets
 
   def _info(self):
-    src, target = self.builder_config.language_pair
+    src, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     return self.dataset_info_from_configs(
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair
+            languages=self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
         ),
         supervised_keys=(src, target),
         homepage="http://opus.nlpl.eu/",
     )
 
   def _split_generators(self, dl_manager):
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     file_ext = "%s-%s" % (source, target)
 
     subsets = []
@@ -948,12 +948,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"subsets": subsets}
+            name=tfds.Split.TRAIN, gen_kwargs={"subsets": subsets}  # pyrefly: ignore[missing-attribute]
         )
     ]
 
   def _generate_examples(self, subsets):
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
 
     for item in subsets:
       logging.info("Generating examples from: %s", item["name"])

@@ -184,7 +184,7 @@ def iter_tar(arch_f, stream=False):
   read_type = 'r' + ('|' if stream else ':') + '*'
 
   with _open_or_pass(arch_f) as fobj:
-    tar = tarfile.open(mode=read_type, fileobj=fobj)
+    tar = tarfile.open(mode=read_type, fileobj=fobj)  # pyrefly: ignore[no-matching-overload]
     for member in tar:
       if stream and (member.islnk() or member.issym()):
         # Links cannot be dereferenced in stream mode.
