@@ -245,7 +245,7 @@ def builder_from_directories(
 
   merged_split_dict = splits_lib.SplitDict.merge_multiple([
       get_split_dict(builder_dir, dataset_info_proto)
-      for builder_dir, dataset_info_proto in dataset_infos.items()
+      for builder_dir, dataset_info_proto in dataset_infos.items()  # pyrefly: ignore[missing-attribute]
   ])
 
   # We create the ReadOnlyBuilder for a random builder_dir and then update the

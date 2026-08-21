@@ -130,7 +130,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     # Map alias to actual language
     data_loading_name = _LANGUAGE_ALIAS_MAP.get(
-        self.builder_config.name, self.builder_config.name
+        self.builder_config.name, self.builder_config.name  # pyrefly: ignore[missing-attribute]
     )
     hf_url_prefix = (
         "https://huggingface.co/datasets/CohereForAI/lbpp/resolve/main/"
@@ -147,7 +147,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepaths": downloaded_files,
             },

@@ -62,7 +62,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    lang = self.builder_config.language
+    lang = self.builder_config.language  # pyrefly: ignore[missing-attribute]
     filepaths = dl_manager.download_and_extract({
         "test": _DOWNLOAD_URL,
         "validation": _DOWNLOAD_URL,

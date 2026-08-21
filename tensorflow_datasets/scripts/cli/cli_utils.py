@@ -92,7 +92,7 @@ def make_flags_parser(
         description=description,
         allow_abbrev=False,
     )
-    parser.add_arguments(args_dataclass, dest='args')
+    parser.add_arguments(args_dataclass, dest='args')  # pyrefly: ignore[no-matching-overload]
     return parser.parse_args(argv[1:]).args
 
   return _parse_flags

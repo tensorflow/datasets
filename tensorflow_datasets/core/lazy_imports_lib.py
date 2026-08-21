@@ -105,6 +105,11 @@ class LazyImporter(object):
 
   @utils.classproperty
   @classmethod
+  def lmdb(cls):
+    return _try_import("lmdb")
+
+  @utils.classproperty
+  @classmethod
   def lxml(cls):
     return _try_import("lxml")
 

@@ -1007,7 +1007,7 @@ def _nest_to_proto(nest: Nest) -> dataset_info_pb2.SupervisedKeys.Nest:
     for item in nest:
       proto.tuple.items.append(_nest_to_proto(item))
   elif nest_type is dict:
-    nest = {key: _nest_to_proto(value) for key, value in nest.items()}  # pyrefly: ignore[bad-assignment]
+    nest = {key: _nest_to_proto(value) for key, value in nest.items()}  # pyrefly: ignore[bad-assignment, missing-attribute]
     proto.dict.CopyFrom(dataset_info_pb2.SupervisedKeys.Dict(dict=nest))  # pyrefly: ignore[bad-argument-type]
   elif nest_type is str:
     proto.feature_key = nest  # pyrefly: ignore[bad-assignment]

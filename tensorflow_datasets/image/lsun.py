@@ -21,7 +21,7 @@ Large scene understanding dataset.
 import io
 import os
 
-from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
+from etils import epath
 import tensorflow_datasets.public_api as tfds
 
 LSUN_SCENE_URL = "http://dl.yf.io/lsun/scenes/%s_%s_lmdb.zip"
@@ -160,14 +160,20 @@ class Lsun(tfds.core.GeneratorBasedBuilder):
       ]
 
   def _generate_examples(self, extracted_dir, file_path):
-    with tf.Graph().as_default():
-      path = os.path.join(extracted_dir, file_path, "data.mdb")
-      if not tf.io.gfile.exists(path):
-        raise RuntimeError(f"Could not open file {path}!")
-      dataset = tfds.core.lazy_imports.tensorflow_io.IODataset.from_lmdb(path)
-      for i, (id_bytes, jpeg_image) in enumerate(tfds.as_numpy(dataset)):
-        record = {
-            "id": id_bytes.decode("utf-8"),
-            "image": io.BytesIO(jpeg_image),
-        }
-        yield i, record
+    path = epath.Path(extracted_dir) / file_path
+    if not path.exists():
+      raise RuntimeError(f"Could not open file {path}!")
+    with tfds.core.lazy_imports.lmdb.open(
+        os.fspath(path), readonly=True, lock=False, subdir=path.is_dir()
+    ) as env:
+      with env.begin() as txn:
+        for i, (id_bytes, jpeg_image) in enumerate(txn.cursor()):
+          record = {
+              "id": (
+                  id_bytes.decode("utf-8")
+                  if isinstance(id_bytes, bytes)
+                  else id_bytes
+              ),
+              "image": io.BytesIO(jpeg_image),
+          }
+          yield i, record

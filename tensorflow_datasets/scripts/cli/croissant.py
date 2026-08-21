@@ -123,7 +123,7 @@ class CmdArgs(simple_parsing.helpers.FrozenSerializable, cli_utils.Args):
   def execute(self) -> None:
     """Creates Croissant Builders and prepares them."""
     for record_set_id in self.record_set_ids:
-      prepare_croissant_builder(args=self, record_set_id=record_set_id)
+      prepare_croissant_builder(args=self, record_set_id=record_set_id)  # pyrefly: ignore[bad-argument-type]
 
 
 def prepare_croissant_builder(

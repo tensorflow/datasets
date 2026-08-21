@@ -128,7 +128,7 @@ def _get_filename(response: Response) -> str:
     if filename:
       return filename
   # Otherwise, fallback on extracting the name from the url.
-  return _basename_from_url(response.url)
+  return _basename_from_url(response.url)  # pyrefly: ignore[bad-argument-type]
 
 
 def _process_gdrive_confirmation(original_url: str, contents: str) -> str:
@@ -345,7 +345,7 @@ def _open_with_requests(
 ) -> Iterator[tuple[Response, Iterable[bytes]]]:
   """Open url with request."""
   with requests.Session() as session:
-    retries = requests.packages.urllib3.util.retry.Retry(
+    retries = requests.packages.urllib3.util.retry.Retry(  # pyrefly: ignore[missing-attribute]
         total=MAX_RETRIES,
         backoff_factor=0.2,
         status_forcelist=[500, 502, 503, 504],
