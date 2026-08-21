@@ -48,7 +48,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download(_IMAGENET_SKETCH_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive': dl_manager.iter_archive(path),
             },

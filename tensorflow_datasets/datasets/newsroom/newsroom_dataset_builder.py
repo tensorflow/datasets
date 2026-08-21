@@ -55,7 +55,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         k: tfds.features.Text()
         for k in [_DOCUMENT, _SUMMARY] + _ADDITIONAL_TEXT_FEATURES
     }
-    features.update(
+    features.update(  # pyrefly: ignore[no-matching-overload]
         {
             k: tfds.features.Tensor(shape=[], dtype=np.float32)
             for k in _ADDITIONAL_FLOAT_FEATURES
@@ -71,19 +71,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "input_file": os.path.join(dl_manager.manual_dir, "train.jsonl")
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "input_file": os.path.join(dl_manager.manual_dir, "dev.jsonl")
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "input_file": os.path.join(dl_manager.manual_dir, "test.jsonl")
             },
@@ -92,7 +92,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, input_file=None):
     """Yields examples."""
-    with epath.Path(input_file).open() as f:
+    with epath.Path(input_file).open() as f:  # pyrefly: ignore[bad-argument-type]
       for i, line in enumerate(f):
         d = json.loads(line)
         # fields are "url", "archive", "title", "date", "text",

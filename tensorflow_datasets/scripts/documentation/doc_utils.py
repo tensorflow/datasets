@@ -188,7 +188,7 @@ def _full_names_to_dict(full_names: Sequence[str]) -> FullNamesDict:
   for full_name in full_names:
     ds_name, config, version = _split_full_name(full_name)
     full_names_dict[ds_name][config][version]  # pylint: disable=pointless-statement
-  return full_names_dict
+  return full_names_dict  # pyrefly: ignore[bad-return]
 
 
 def _build_nightly_dict(
@@ -216,11 +216,11 @@ def _build_nightly_dict(
               nightly_ds[dataset][config][version] = True
         else:
           # New config only present in tfds-nightly
-          nightly_ds[dataset][config] = True
+          nightly_ds[dataset][config] = True  # pyrefly: ignore[unsupported-operation]
     else:
       # New dataset only present in tfds-nightly
-      nightly_ds[dataset] = True
-  return nightly_ds
+      nightly_ds[dataset] = True  # pyrefly: ignore[unsupported-operation]
+  return nightly_ds  # pyrefly: ignore[bad-return]
 
 
 @tfds.core.utils.memoize()
@@ -265,7 +265,7 @@ class NightlyDocUtil(object):
     ds_name, config, _ = _split_full_name(builder.info.full_name)
     if self.is_builder_nightly(builder):
       return False
-    return self._nightly_dict[ds_name][config] is True  # pylint: disable=g-bool-id-comparison
+    return self._nightly_dict[ds_name][config] is True  # pylint: disable=g-bool-id-comparison  # pyrefly: ignore[bad-index]
 
   def is_version_nightly(
       self,
@@ -276,7 +276,7 @@ class NightlyDocUtil(object):
     ds_name, config, _ = _split_full_name(builder.info.full_name)
     if self.is_builder_nightly(builder) or self.is_config_nightly(builder):
       return False
-    return self._nightly_dict[ds_name][config][version] is True  # pylint: disable=g-bool-id-comparison
+    return self._nightly_dict[ds_name][config][version] is True  # pylint: disable=g-bool-id-comparison  # pyrefly: ignore[bad-index]
 
   def has_nightly(self, builder: tfds.core.DatasetBuilder) -> bool:
     """Returns True if any of the builder/config/version is new."""

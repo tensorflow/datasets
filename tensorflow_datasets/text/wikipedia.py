@@ -449,10 +449,10 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       if self.builder_config.date <= "20220620":  # pyrefly: ignore[missing-attribute]
         tmpl = _BASE_URL_TMPL_OLD
       return tmpl.format(
-          lang=lang.replace("-", "_"), date=self._builder_config.date
+          lang=lang.replace("-", "_"), date=self._builder_config.date  # pyrefly: ignore[missing-attribute]
       )
 
-    lang = self._builder_config.language
+    lang = self._builder_config.language  # pyrefly: ignore[missing-attribute]
 
     info_url = _base_url(lang) + _INFO_FILE
     # Use dictionary since testing mock always returns the same result.

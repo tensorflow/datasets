@@ -153,6 +153,7 @@ DATASET_EXTRAS = {
         # tensorflow==2.20.0 is not compatible with gcld3 because of protobuf
         # version conflict.
         'tensorflow<2.20.0',
+        'tensorflow-metadata<1.18.0',
     ],
     'c4_wsrs': ['apache-beam<2.65.0'],
     'cats_vs_dogs': ['matplotlib'],
@@ -177,9 +178,6 @@ DATASET_EXTRAS = {
     'nsynth': [
         'crepe',
         'librosa',
-        # tensorflow==2.20.0 is not compatible with librosa because of protobuf
-        # version conflict.
-        'tensorflow<2.20.0',
     ],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],

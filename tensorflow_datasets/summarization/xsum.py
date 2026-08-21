@@ -112,21 +112,21 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "split_ids": split_ids["train"],
                 "path": extract_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "split_ids": split_ids["validation"],
                 "path": extract_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "split_ids": split_ids["test"],
                 "path": extract_path,
@@ -137,9 +137,9 @@ class Xsum(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, split_ids=None, path=None):
     """Yields examples."""
     missing = 0
-    total_num = len(split_ids)
-    for i in split_ids:
-      filename = os.path.join(path, i + ".data")
+    total_num = len(split_ids)  # pyrefly: ignore[bad-argument-type]
+    for i in split_ids:  # pyrefly: ignore[not-iterable]
+      filename = os.path.join(path, i + ".data")  # pyrefly: ignore[no-matching-overload]
       if tf.io.gfile.exists(filename):
         with epath.Path(filename).open() as f:
           text = "".join(
