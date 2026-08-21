@@ -479,7 +479,7 @@ class DummyDatasetSharedGenerator(
       '1.0.0': 'Release notes 1.0.0',
       '2.0.0': 'Release notes 2.0.0',
   }
-  SUPPORTED_VERSIONS = [
+  SUPPORTED_VERSIONS = [  # pyrefly: ignore[bad-assignment]
       '2.0.0',
       '0.0.9',
       '0.0.8',
@@ -711,7 +711,7 @@ def set_current_datetime(now_datetime: datetime.datetime) -> Iterator[None]:
   class MockDatetime(datetime.datetime):
 
     @classmethod
-    def now(cls, tz=None) -> datetime.datetime:
+    def now(cls, tz=None) -> datetime.datetime:  # pyrefly: ignore[bad-override]
       return now_datetime
 
   with mock.patch.object(datetime, 'datetime', new=MockDatetime):

@@ -177,9 +177,6 @@ DATASET_EXTRAS = {
     'nsynth': [
         'crepe',
         'librosa',
-        # tensorflow==2.20.0 is not compatible with librosa because of protobuf
-        # version conflict.
-        'tensorflow<2.20.0',
     ],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],

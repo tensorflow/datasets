@@ -77,17 +77,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'csv_path': extracted_path['train_path']},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'csv_path': extracted_path['dev_path']},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             # These kwargs will be passed to _generate_examples
             gen_kwargs={'csv_path': extracted_path['test_path']},
         ),

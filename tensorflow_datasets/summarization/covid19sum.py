@@ -102,7 +102,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
 
   def _info(self) -> tfds.core.DatasetInfo:
     features = {k: tf.string for k in _ADDITIONAL_FEATURES + [_ABSTRACT]}
-    features[_BODY_TEXT] = tfds.features.Sequence(
+    features[_BODY_TEXT] = tfds.features.Sequence(  # pyrefly: ignore[unsupported-operation]
         tfds.features.FeaturesDict({_SECTION: np.str_, _TEXT: np.str_})
     )
     return tfds.core.DatasetInfo(
@@ -138,7 +138,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
         data_paths.append(d)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"data_paths": data_paths},
         )
     ]
@@ -147,7 +147,7 @@ class Covid19sum(tfds.core.GeneratorBasedBuilder):
       self, data_paths: Optional[List[Dict[Text, Any]]] = None
   ) -> Iterator[Tuple[Any, Dict[Text, Any]]]:
     """Yields examples."""
-    for d in data_paths:
+    for d in data_paths:  # pyrefly: ignore[not-iterable]
       path = d.pop("path")
       if tf.io.gfile.exists(path):
         with tf.io.gfile.GFile(path, "rb") as f:

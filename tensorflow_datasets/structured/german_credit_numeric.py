@@ -66,7 +66,7 @@ class GermanCreditNumeric(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"records": records}
+            name=tfds.Split.TRAIN, gen_kwargs={"records": records}  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

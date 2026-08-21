@@ -61,7 +61,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
             "text": tfds.features.Text(
-                encoder_config=self.builder_config.text_encoder_config
+                encoder_config=self.builder_config.text_encoder_config  # pyrefly: ignore[missing-attribute]
             ),
             "label": tfds.features.ClassLabel(names=["neg", "pos"]),
         }),
@@ -86,14 +86,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": archive(),
                 "directory": os.path.join("aclImdb", "train"),
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": archive(),
                 "directory": os.path.join("aclImdb", "test"),

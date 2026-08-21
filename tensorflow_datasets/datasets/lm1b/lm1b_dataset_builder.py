@@ -67,10 +67,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     test_files = _test_data_filenames(lm1b_path)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}
+            name=tfds.Split.TRAIN, gen_kwargs={"files": train_files}  # pyrefly: ignore[missing-attribute]
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs={"files": test_files}
+            name=tfds.Split.TEST, gen_kwargs={"files": test_files}  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

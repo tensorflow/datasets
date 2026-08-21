@@ -86,7 +86,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
     pattern = os.path.join(dl_path, "org_data", "%s.%s.txt")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "src_path": pattern % ("train", "src"),
                 "tgt_path": pattern % ("train", "tgt"),
@@ -94,7 +94,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "src_path": pattern % ("dev", "src"),
                 "tgt_path": pattern % ("dev", "tgt"),
@@ -102,7 +102,7 @@ class Gigaword(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "src_path": pattern % ("test", "src"),
                 "tgt_path": pattern % ("test", "tgt"),

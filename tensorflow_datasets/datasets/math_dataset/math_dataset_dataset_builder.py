@@ -208,11 +208,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
 
     directory = dl_manager.download_and_extract(_DATA_URL)
-    config = self.builder_config.name + ".txt"
+    config = self.builder_config.name + ".txt"  # pyrefly: ignore[missing-attribute]
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "directory": directory,
                 "config": config,
@@ -220,7 +220,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "directory": directory,
                 "config": config,

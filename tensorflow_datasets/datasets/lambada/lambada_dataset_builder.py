@@ -52,7 +52,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(
                     dl_dir, 'lambada_development_plain_text.txt'
@@ -60,7 +60,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': os.path.join(dl_dir, 'lambada_test_plain_text.txt')
             },

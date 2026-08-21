@@ -108,7 +108,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
 
   def _info(self):
     feature_names = [_DOCUMENT, _SUMMARY, "title"]
-    if self.builder_config.name == "sep":
+    if self.builder_config.name == "sep":  # pyrefly: ignore[missing-attribute]
       feature_names.extend(["overview", "sectionLabel"])
     return tfds.core.DatasetInfo(
         builder=self,
@@ -132,28 +132,28 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(
-                    dl_manager.manual_dir, self.builder_config.filename
+                    dl_manager.manual_dir, self.builder_config.filename  # pyrefly: ignore[missing-attribute]
                 ),
                 "title_set": titles["train"],
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(
-                    dl_manager.manual_dir, self.builder_config.filename
+                    dl_manager.manual_dir, self.builder_config.filename  # pyrefly: ignore[missing-attribute]
                 ),
                 "title_set": titles["validation"],
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(
-                    dl_manager.manual_dir, self.builder_config.filename
+                    dl_manager.manual_dir, self.builder_config.filename  # pyrefly: ignore[missing-attribute]
                 ),
                 "title_set": titles["test"],
             },
@@ -162,16 +162,16 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, path=None, title_set=None):
     """Yields examples."""
-    with epath.Path(path).open() as f:
+    with epath.Path(path).open() as f:  # pyrefly: ignore[bad-argument-type]
       reader = csv.reader(f)
       headers = next(reader)
-      if self.builder_config.name == "all" and headers != [
+      if self.builder_config.name == "all" and headers != [  # pyrefly: ignore[missing-attribute]
           "headline",
           "title",
           "text",
       ]:
         raise ValueError("Mismatched header in WikiAll.txt")
-      if self.builder_config.name == "sep" and headers != [
+      if self.builder_config.name == "sep" and headers != [  # pyrefly: ignore[missing-attribute]
           "overview",
           "headline",
           "text",
@@ -187,7 +187,7 @@ class Wikihow(tfds.core.GeneratorBasedBuilder):
           document = line[key2id[_DOCUMENT]].strip()
           summary, document = _filter_and_clean(summary, document)
           if summary and document:
-            if line[key2id["title"]].strip().replace(" ", "") in title_set:
+            if line[key2id["title"]].strip().replace(" ", "") in title_set:  # pyrefly: ignore[not-iterable]
               d = {
                   k: line[v].strip()
                   for k, v in key2id.items()

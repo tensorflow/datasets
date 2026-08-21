@@ -212,7 +212,7 @@ def _save_table_of_content(
             'title': doc.name,
         }
         sec_dict['section'].append(sidebar_item)
-      toc_yaml['toc'].append(sec_dict)
+      toc_yaml['toc'].append(sec_dict)  # pyrefly: ignore[bad-argument-type]
 
       # Add `overview.md` section
       toc_overview.append(_create_collections_section_toc(collection_docs))
@@ -231,7 +231,7 @@ def _save_table_of_content(
       if doc.is_nightly:
         sidebar_item['status'] = 'nightly'
       sec_dict['section'].append(sidebar_item)
-    toc_yaml['toc'].append(sec_dict)
+    toc_yaml['toc'].append(sec_dict)  # pyrefly: ignore[bad-argument-type]
 
     # Add `overview.md` section
     toc_overview.append(_create_datasets_section_toc(section, builder_docs))
