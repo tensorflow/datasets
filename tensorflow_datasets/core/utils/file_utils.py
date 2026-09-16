@@ -354,7 +354,7 @@ def list_dataset_versions(
     version_folder = dataset_info_file.parent.name
     if version_lib.Version.is_valid(version_folder):
       found_versions.append(version_lib.Version(version_folder))
-  return sorted(found_versions)
+  return sorted(set(found_versions))
 
 
 def is_valid_variant_dir(
