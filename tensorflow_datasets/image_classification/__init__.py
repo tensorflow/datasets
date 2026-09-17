@@ -73,6 +73,7 @@ from tensorflow_datasets.image_classification.mnist import FashionMNIST
 from tensorflow_datasets.image_classification.mnist import KMNIST
 from tensorflow_datasets.image_classification.mnist import MNIST
 from tensorflow_datasets.image_classification.mnist_corrupted import MNISTCorrupted
+from tensorflow_datasets.image_classification.monkey_species import MonkeySpecies
 from tensorflow_datasets.image_classification.omniglot import Omniglot
 from tensorflow_datasets.image_classification.oxford_flowers102 import OxfordFlowers102
 from tensorflow_datasets.image_classification.oxford_iiit_pet import OxfordIIITPet
