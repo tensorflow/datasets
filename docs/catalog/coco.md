@@ -19,8 +19,8 @@ COCO is a large-scale object detection, segmentation, and captioning dataset.
 Note: * Some images from the train and validation sets don't have annotations. *
 Coco 2014 and 2017 uses the same images, but different train/val/test splits *
 The test split don't have any annotations (only images). * Coco defines 91
-classes but the data only uses 80 classes. * Panotptic annotations defines
-defines 200 classes but only uses 133.
+classes but the data only uses 80 classes. * Panoptic annotations define 200
+classes but only use 133.
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/coco">
