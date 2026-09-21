@@ -45,8 +45,8 @@ indicates it's toxic, otherwise [1, 0] non-toxic.
 ## References
 
 \[1]: V. B. Siramshetty et al. Critical Assessment of Artificial Intelligence
-Methods for Prediction of hERG Channel Inhibition in the Big Data Era. JCIM,
-2020. https://pubs.acs.org/doi/10.1021/acs.jcim.0c00884
+Methods for Prediction of hERG Channel Inhibition in the Big Data Era.
+JCIM, 2020. https://pubs.acs.org/doi/10.1021/acs.jcim.0c00884
 
 \[2]: K. Han et al. Reliable Graph Neural Networks for Drug Discovery Under
 Distributional Shift. NeurIPS DistShift Workshop 2021.

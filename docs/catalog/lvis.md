@@ -12,11 +12,6 @@
 # `lvis`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 LVIS: A dataset for large vocabulary instance segmentation.
@@ -38,9 +33,7 @@ LVIS: A dataset for large vocabulary instance segmentation.
         `not_exhaustive_category_ids`.
     *   `1.2.0`: Added class names.
     *   `1.3.0`: Added minival split.
-    *   **`1.4.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Added segmentation masks to the minival split.
+    *   **`1.4.0`** (default): Added segmentation masks to the minival split.
 
 *   **Download size**: `25.38 GiB`
 

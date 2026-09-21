@@ -119,7 +119,6 @@ toc:
   - path: /datasets/catalog/arc
     title: arc
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/natural_questions
     title: natural_questions
@@ -280,7 +279,6 @@ toc:
   - path: /datasets/catalog/coil100
     title: coil100
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/div2k
     title: div2k
@@ -693,7 +691,6 @@ toc:
   - path: /datasets/catalog/bot_adversarial_dialogue
     title: bot_adversarial_dialogue
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/dices
     title: dices
@@ -780,7 +777,6 @@ toc:
   - path: /datasets/catalog/anli
     title: anli
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/dices
     title: dices
@@ -803,7 +799,6 @@ toc:
   - path: /datasets/catalog/clevr
     title: clevr
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly
@@ -876,7 +871,6 @@ toc:
   - path: /datasets/catalog/coco_captions
     title: coco_captions
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/flic
     title: flic
@@ -1055,16 +1049,12 @@ toc:
   - path: /datasets/catalog/asimov_multimodal_manual_val
     title: asimov_multimodal_manual_val
   - path: /datasets/catalog/asimov_v2_constraints_with_rationale
-    status: nightly
     title: asimov_v2_constraints_with_rationale
   - path: /datasets/catalog/asimov_v2_constraints_without_rationale
-    status: nightly
     title: asimov_v2_constraints_without_rationale
   - path: /datasets/catalog/asimov_v2_injuries
-    status: nightly
     title: asimov_v2_injuries
   - path: /datasets/catalog/asimov_v2_videos
-    status: nightly
     title: asimov_v2_videos
   - path: /datasets/catalog/asu_table_top_converted_externally_to_rlds
     title: asu_table_top_converted_externally_to_rlds
@@ -1147,7 +1137,6 @@ toc:
   - path: /datasets/catalog/plex_robosuite
     title: plex_robosuite
   - path: /datasets/catalog/robo_ai_u_r5e
-    status: nightly
     title: robo_ai_u_r5e
   - path: /datasets/catalog/robo_set
     title: robo_set
@@ -1420,7 +1409,6 @@ toc:
   - path: /datasets/catalog/cos_e
     title: cos_e
   - path: /datasets/catalog/covr
-    status: nightly
     title: covr
   - path: /datasets/catalog/databricks_dolly
     title: databricks_dolly

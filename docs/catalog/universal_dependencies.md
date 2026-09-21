@@ -6168,9 +6168,8 @@ Split    | Examples
 ## universal_dependencies/ja_pud
 
 *   **Config description**: This is a part of the Parallel Universal
-    Dependencies (PUD) treebanks created for the [CoNLL 2017 shared task on
-    Multilingual Parsing from Raw Text to Universal
-    Dependencies](http://universaldependencies.org/conll17/).
+    Dependencies (PUD) treebanks created for the
+    [CoNLL 2017 shared task on Multilingual Parsing from Raw Text to Universal Dependencies](http://universaldependencies.org/conll17/).
 
 *   **Download size**: `6.48 MiB`
 
@@ -8058,9 +8057,8 @@ Split     | Examples
 ## universal_dependencies/es_pud
 
 *   **Config description**: This is a part of the Parallel Universal
-    Dependencies (PUD) treebanks created for the [CoNLL 2017 shared task on
-    Multilingual Parsing from Raw Text to Universal
-    Dependencies](http://universaldependencies.org/conll17/).
+    Dependencies (PUD) treebanks created for the
+    [CoNLL 2017 shared task on Multilingual Parsing from Raw Text to Universal Dependencies](http://universaldependencies.org/conll17/).
 
 *   **Download size**: `1.60 MiB`
 

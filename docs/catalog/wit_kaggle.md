@@ -63,8 +63,11 @@ contribute to an open model to improve learning for all.
         is a vector of 2048 zeros.
 
         The samples released for the competition can be loaded as:
-        `tfds.load("wit_kaggle/train_with_extended_features")
-        tfds.load("wit_kaggle/test_without_gold")`
+
+        ```
+        tfds.load("wit_kaggle/train_with_extended_features")
+        tfds.load("wit_kaggle/test_without_gold")
+        ```
 
     *   `1.0.1`: Optimize Beam pipeline to avoid strugglers, ignoring rows
         without an image URL. Also added more Beam counters.

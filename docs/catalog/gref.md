@@ -93,24 +93,23 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature                  | Class          | Shape   | Dtype   | Description |
-| :----------------------- | :------------- | :------ | :------ | :---------- |
-|                          | FeaturesDict   |         |         |             |
-| image                    | Image          | (None,  | uint8   |             |
-:                          :                : None,   :         :             :
-:                          :                : 3)      :         :             :
-| image/id                 | Tensor         |         | int64   |             |
-| objects                  | Sequence       |         |         |             |
-| objects/area             | Tensor         |         | int64   |             |
-| objects/bbox             | BBoxFeature    | (4,)    | float32 |             |
-| objects/id               | Tensor         |         | int64   |             |
-| objects/label            | Tensor         |         | int64   |             |
-| objects/label_name       | ClassLabel     |         | int64   |             |
-| objects/refexp           | Sequence       |         |         |             |
-| objects/refexp/raw       | Text           |         | string  |             |
-| objects/refexp/referent  | Text           |         | string  |             |
-| objects/refexp/refexp_id | Tensor         |         | int64   |             |
-| objects/refexp/tokens    | Sequence(Text) | (None,) | string  |             |
+| Feature                  | Class          | Shape    | Dtype   | Description |
+| :----------------------- | :------------- | :------- | :------ | :---------- |
+|                          | FeaturesDict   |          |         |             |
+| image                    | Image          | (None,   | uint8   |             |
+:                          :                : None, 3) :         :             :
+| image/id                 | Tensor         |          | int64   |             |
+| objects                  | Sequence       |          |         |             |
+| objects/area             | Tensor         |          | int64   |             |
+| objects/bbox             | BBoxFeature    | (4,)     | float32 |             |
+| objects/id               | Tensor         |          | int64   |             |
+| objects/label            | Tensor         |          | int64   |             |
+| objects/label_name       | ClassLabel     |          | int64   |             |
+| objects/refexp           | Sequence       |          |         |             |
+| objects/refexp/raw       | Text           |          | string  |             |
+| objects/refexp/referent  | Text           |          | string  |             |
+| objects/refexp/refexp_id | Tensor         |          | int64   |             |
+| objects/refexp/tokens    | Sequence(Text) | (None,)  | string  |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

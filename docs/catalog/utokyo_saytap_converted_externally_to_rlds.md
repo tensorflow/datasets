@@ -70,28 +70,36 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                           | Class        | Shape       | Dtype   | Description
-:-------------------------------- | :----------- | :---------- | :------ | :----------
-                                  | FeaturesDict |             |         |
-episode_metadata                  | FeaturesDict |             |         |
-episode_metadata/file_path        | Text         |             | string  | Path to the original data file.
-steps                             | Dataset      |             |         |
-steps/action                      | Tensor       | (12,)       | float32 | Robot action, consists of [12x joint positios].
-steps/discount                    | Scalar       |             | float32 | Discount if provided, default to 1.
-steps/is_first                    | Tensor       |             | bool    |
-steps/is_last                     | Tensor       |             | bool    |
-steps/is_terminal                 | Tensor       |             | bool    |
-steps/language_embedding          | Tensor       | (512,)      | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction        | Text         |             | string  | Language Instruction.
-steps/observation                 | FeaturesDict |             |         |
-steps/observation/desired_pattern | Tensor       | (4, 5)      | bool    | Desired foot contact pattern for the 4 legs, the 4 rows are for the front right, front left, rear right and rear left legs, the pattern length is 5 (=0.1s).
-steps/observation/desired_vel     | Tensor       | (3,)        | float32 | Desired velocites. The first 2 are linear velocities along and perpendicular to the heading direction, the 3rd is the desired angular velocity about the yaw axis.
-steps/observation/image           | Image        | (64, 64, 3) | uint8   | Dummy camera RGB observation.
-steps/observation/prev_act        | Tensor       | (12,)       | float32 | Actions applied in the previous step.
-steps/observation/proj_grav_vec   | Tensor       | (3,)        | float32 | The gravity vector [0, 0, -1] in the robot base frame.
-steps/observation/state           | Tensor       | (30,)       | float32 | Robot state, consists of [3x robot base linear velocity, 3x base angular vel, 12x joint position, 12x joint velocity].
-steps/observation/wrist_image     | Image        | (64, 64, 3) | uint8   | Dummy wrist camera RGB observation.
-steps/reward                      | Scalar       |             | float32 | Reward if provided, 1 on final step for demos.
+| Feature                           | Class        | Shape  | Dtype   | Description                                                  |
+| :-------------------------------- | :----------- | :----- | :------ | :----------------------------------------------------------- |
+|                                   | FeaturesDict |        |         |                                                              |
+| episode_metadata                  | FeaturesDict |        |         |                                                              |
+| episode_metadata/file_path        | Text         |        | string  | Path to the original data file.                              |
+| steps                             | Dataset      |        |         |                                                              |
+| steps/action                      | Tensor       | (12,)  | float32 | Robot action, consists of [12x joint positios].              |
+| steps/discount                    | Scalar       |        | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                    | Tensor       |        | bool    |                                                              |
+| steps/is_last                     | Tensor       |        | bool    |                                                              |
+| steps/is_terminal                 | Tensor       |        | bool    |                                                              |
+| steps/language_embedding          | Tensor       | (512,) | float32 | Kona language embedding. See                                 |
+:                                   :              :        :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction        | Text         |        | string  | Language Instruction.                                        |
+| steps/observation                 | FeaturesDict |        |         |                                                              |
+| steps/observation/desired_pattern | Tensor       | (4, 5) | bool    | Desired foot contact pattern for the 4 legs, the 4 rows are  |
+:                                   :              :        :         : for the front right, front left, rear right and rear left    :
+:                                   :              :        :         : legs, the pattern length is 5 (=0.1s).                       :
+| steps/observation/desired_vel     | Tensor       | (3,)   | float32 | Desired velocites. The first 2 are linear velocities along   |
+:                                   :              :        :         : and perpendicular to the heading direction, the 3rd is the   :
+:                                   :              :        :         : desired angular velocity about the yaw axis.                 :
+| steps/observation/image           | Image        | (64,   | uint8   | Dummy camera RGB observation.                                |
+:                                   :              : 64, 3) :         :                                                              :
+| steps/observation/prev_act        | Tensor       | (12,)  | float32 | Actions applied in the previous step.                        |
+| steps/observation/proj_grav_vec   | Tensor       | (3,)   | float32 | The gravity vector [0, 0, -1] in the robot base frame.       |
+| steps/observation/state           | Tensor       | (30,)  | float32 | Robot state, consists of [3x robot base linear velocity, 3x  |
+:                                   :              :        :         : base angular vel, 12x joint position, 12x joint velocity].   :
+| steps/observation/wrist_image     | Image        | (64,   | uint8   | Dummy wrist camera RGB observation.                          |
+:                                   :              : 64, 3) :         :                                                              :
+| steps/reward                      | Scalar       |        | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

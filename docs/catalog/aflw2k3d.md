@@ -63,16 +63,12 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature                       | Class        | Shape | Dtype   | Description |
-| :---------------------------- | :----------- | :---- | :------ | :---------- |
-|                               | FeaturesDict |       |         |             |
-| image                         | Image        | (450, | uint8   |             |
-:                               :              : 450,  :         :             :
-:                               :              : 3)    :         :             :
-| landmarks_68_3d_xy_normalized | Tensor       | (68,  | float32 |             |
-:                               :              : 2)    :         :             :
-| landmarks_68_3d_z             | Tensor       | (68,  | float32 |             |
-:                               :              : 1)    :         :             :
+Feature                       | Class        | Shape         | Dtype   | Description
+:---------------------------- | :----------- | :------------ | :------ | :----------
+                              | FeaturesDict |               |         |
+image                         | Image        | (450, 450, 3) | uint8   |
+landmarks_68_3d_xy_normalized | Tensor       | (68, 2)       | float32 |
+landmarks_68_3d_z             | Tensor       | (68, 1)       | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

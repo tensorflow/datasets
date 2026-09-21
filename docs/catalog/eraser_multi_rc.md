@@ -16,9 +16,12 @@
 
 Eraser Multi RC is a dataset for queries over multi-line passages, along with
 answers and a rationalte. Each example in this dataset has the following 5 parts
-1. A Mutli-line Passage 2. A Query about the passage 3. An Answer to the query
-4. A Classification as to whether the answer is right or wrong 5. An Explanation
-justifying the classification
+
+1.  A Mutli-line Passage
+2.  A Query about the passage
+3.  An Answer to the query
+4.  A Classification as to whether the answer is right or wrong
+5.  An Explanation justifying the classification
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/multirc">

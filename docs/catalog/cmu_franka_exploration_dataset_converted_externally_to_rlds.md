@@ -67,24 +67,31 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                         | Class        | Shape         | Dtype   | Description
-:------------------------------ | :----------- | :------------ | :------ | :----------
-                                | FeaturesDict |               |         |
-episode_metadata                | FeaturesDict |               |         |
-episode_metadata/file_path      | Text         |               | string  | Path to the original data file.
-steps                           | Dataset      |               |         |
-steps/action                    | Tensor       | (8,)          | float32 | Robot action, consists of [end effector position3x, end effector orientation3x, gripper action1x, episode termination1x].
-steps/discount                  | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                  | Tensor       |               | bool    |
-steps/is_last                   | Tensor       |               | bool    |
-steps/is_terminal               | Tensor       |               | bool    |
-steps/language_embedding        | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction      | Text         |               | string  | Language Instruction.
-steps/observation               | FeaturesDict |               |         |
-steps/observation/highres_image | Image        | (480, 640, 3) | uint8   | High resolution main camera observation
-steps/observation/image         | Image        | (64, 64, 3)   | uint8   | Main camera RGB observation.
-steps/reward                    | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
-steps/structured_action         | Tensor       | (8,)          | float32 | Structured action, consisting of hybrid affordance and end-effector control, described in Structured World Models from Human Videos.
+| Feature                         | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------------ | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                 | FeaturesDict |         |         |                                                              |
+| episode_metadata                | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path      | Text         |         | string  | Path to the original data file.                              |
+| steps                           | Dataset      |         |         |                                                              |
+| steps/action                    | Tensor       | (8,)    | float32 | Robot action, consists of [end effector position3x, end      |
+:                                 :              :         :         : effector orientation3x, gripper action1x, episode            :
+:                                 :              :         :         : termination1x].                                              :
+| steps/discount                  | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                  | Tensor       |         | bool    |                                                              |
+| steps/is_last                   | Tensor       |         | bool    |                                                              |
+| steps/is_terminal               | Tensor       |         | bool    |                                                              |
+| steps/language_embedding        | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                 :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction      | Text         |         | string  | Language Instruction.                                        |
+| steps/observation               | FeaturesDict |         |         |                                                              |
+| steps/observation/highres_image | Image        | (480,   | uint8   | High resolution main camera observation                      |
+:                                 :              : 640, 3) :         :                                                              :
+| steps/observation/image         | Image        | (64,    | uint8   | Main camera RGB observation.                                 |
+:                                 :              : 64, 3)  :         :                                                              :
+| steps/reward                    | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
+| steps/structured_action         | Tensor       | (8,)    | float32 | Structured action, consisting of hybrid affordance and       |
+:                                 :              :         :         : end-effector control, described in Structured World Models   :
+:                                 :              :         :         : from Human Videos.                                           :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

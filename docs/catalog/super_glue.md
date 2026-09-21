@@ -877,32 +877,33 @@ get the correct citation for each contained dataset.
 
 ## super_glue/wsc
 
-*   **Config description**: The Winograd Schema Challenge (WSC, Levesque et al.,
-    2012) is a reading comprehension task in which a system must read a sentence
-    with a pronoun and select the referent of that pronoun from a list of
-    choices. Given the difficulty of this task and the headroom still left, we
-    have included WSC in SuperGLUE and recast the dataset into its coreference
-    form. The task is cast as a binary classification problem, as opposed to
-    N-multiple choice, in order to isolate the model's ability to understand the
-    coreference links within a sentence as opposed to various other strategies
-    that may come into play in multiple choice conditions. With that in mind, we
-    create a split with 65% negative majority class in the validation set,
-    reflecting the distribution of the hidden test set, and 52% negative class
-    in the training set. The training and validation examples are drawn from the
-    original Winograd Schema dataset (Levesque et al., 2012), as well as those
-    distributed by the affiliated organization Commonsense Reasoning. The test
-    examples are derived from fiction books and have been shared with us by the
-    authors of the original dataset. Previously, a version of WSC recast as NLI
-    as included in GLUE, known as WNLI. No substantial progress was made on
-    WNLI, with many submissions opting to submit only majority class
-    predictions. WNLI was made especially difficult due to an adversarial
-    train/dev split: Premise sentences that appeared in the training set
-    sometimes appeared in the development set with a different hypothesis and a
-    flipped label. If a system memorized the training set without meaningfully
-    generalizing, which was easy due to the small size of the training set, it
-    could perform far below chance on the development set. We remove this
-    adversarial design in the SuperGLUE version of WSC by ensuring that no
-    sentences are shared between the training, validation, and test sets.
+*   **Config description**: The Winograd Schema Challenge (WSC, Levesque et
+    al., 2012) is a reading comprehension task in which a system must read a
+    sentence with a pronoun and select the referent of that pronoun from a list
+    of choices. Given the difficulty of this task and the headroom still left,
+    we have included WSC in SuperGLUE and recast the dataset into its
+    coreference form. The task is cast as a binary classification problem, as
+    opposed to N-multiple choice, in order to isolate the model's ability to
+    understand the coreference links within a sentence as opposed to various
+    other strategies that may come into play in multiple choice conditions. With
+    that in mind, we create a split with 65% negative majority class in the
+    validation set, reflecting the distribution of the hidden test set, and 52%
+    negative class in the training set. The training and validation examples are
+    drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
+    well as those distributed by the affiliated organization Commonsense
+    Reasoning. The test examples are derived from fiction books and have been
+    shared with us by the authors of the original dataset. Previously, a version
+    of WSC recast as NLI as included in GLUE, known as WNLI. No substantial
+    progress was made on WNLI, with many submissions opting to submit only
+    majority class predictions. WNLI was made especially difficult due to an
+    adversarial train/dev split: Premise sentences that appeared in the training
+    set sometimes appeared in the development set with a different hypothesis
+    and a flipped label. If a system memorized the training set without
+    meaningfully generalizing, which was easy due to the small size of the
+    training set, it could perform far below chance on the development set. We
+    remove this adversarial design in the SuperGLUE version of WSC by ensuring
+    that no sentences are shared between the training, validation, and test
+    sets.
 
 However, the validation and test sets come from different domains, with the
 validation set consisting of ambiguous examples such that changing one non-noun
@@ -1015,32 +1016,33 @@ get the correct citation for each contained dataset.
 
 ## super_glue/wsc.fixed
 
-*   **Config description**: The Winograd Schema Challenge (WSC, Levesque et al.,
-    2012) is a reading comprehension task in which a system must read a sentence
-    with a pronoun and select the referent of that pronoun from a list of
-    choices. Given the difficulty of this task and the headroom still left, we
-    have included WSC in SuperGLUE and recast the dataset into its coreference
-    form. The task is cast as a binary classification problem, as opposed to
-    N-multiple choice, in order to isolate the model's ability to understand the
-    coreference links within a sentence as opposed to various other strategies
-    that may come into play in multiple choice conditions. With that in mind, we
-    create a split with 65% negative majority class in the validation set,
-    reflecting the distribution of the hidden test set, and 52% negative class
-    in the training set. The training and validation examples are drawn from the
-    original Winograd Schema dataset (Levesque et al., 2012), as well as those
-    distributed by the affiliated organization Commonsense Reasoning. The test
-    examples are derived from fiction books and have been shared with us by the
-    authors of the original dataset. Previously, a version of WSC recast as NLI
-    as included in GLUE, known as WNLI. No substantial progress was made on
-    WNLI, with many submissions opting to submit only majority class
-    predictions. WNLI was made especially difficult due to an adversarial
-    train/dev split: Premise sentences that appeared in the training set
-    sometimes appeared in the development set with a different hypothesis and a
-    flipped label. If a system memorized the training set without meaningfully
-    generalizing, which was easy due to the small size of the training set, it
-    could perform far below chance on the development set. We remove this
-    adversarial design in the SuperGLUE version of WSC by ensuring that no
-    sentences are shared between the training, validation, and test sets.
+*   **Config description**: The Winograd Schema Challenge (WSC, Levesque et
+    al., 2012) is a reading comprehension task in which a system must read a
+    sentence with a pronoun and select the referent of that pronoun from a list
+    of choices. Given the difficulty of this task and the headroom still left,
+    we have included WSC in SuperGLUE and recast the dataset into its
+    coreference form. The task is cast as a binary classification problem, as
+    opposed to N-multiple choice, in order to isolate the model's ability to
+    understand the coreference links within a sentence as opposed to various
+    other strategies that may come into play in multiple choice conditions. With
+    that in mind, we create a split with 65% negative majority class in the
+    validation set, reflecting the distribution of the hidden test set, and 52%
+    negative class in the training set. The training and validation examples are
+    drawn from the original Winograd Schema dataset (Levesque et al., 2012), as
+    well as those distributed by the affiliated organization Commonsense
+    Reasoning. The test examples are derived from fiction books and have been
+    shared with us by the authors of the original dataset. Previously, a version
+    of WSC recast as NLI as included in GLUE, known as WNLI. No substantial
+    progress was made on WNLI, with many submissions opting to submit only
+    majority class predictions. WNLI was made especially difficult due to an
+    adversarial train/dev split: Premise sentences that appeared in the training
+    set sometimes appeared in the development set with a different hypothesis
+    and a flipped label. If a system memorized the training set without
+    meaningfully generalizing, which was easy due to the small size of the
+    training set, it could perform far below chance on the development set. We
+    remove this adversarial design in the SuperGLUE version of WSC by ensuring
+    that no sentences are shared between the training, validation, and test
+    sets.
 
 However, the validation and test sets come from different domains, with the
 validation set consisting of ambiguous examples such that changing one non-noun

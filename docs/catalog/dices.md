@@ -22,14 +22,15 @@ overly simplifies the natural subjectivity present in many tasks and content
 items. It also obscures the inherent diversity in human perceptions and
 opinions. Often tasks that attempt to preserve the variance in content and
 diversity in humans are quite expensive and laborious. To fill in this gap and
-facilitate more in-depth model performance analyses we propose the DICES
-dataset - a unique dataset with diverse perspectives on safety of AI generated
-conversations. We focus on the task of safety evaluation of conversational AI
-systems. The DICES dataset contains detailed demographics information about each
-rater, extremely high replication of unique ratings per conversation to ensure
-statistical significance of further analyses and encodes rater votes as
-distributions across different demographics to allow for in-depth explorations
-of different rating aggregation strategies.
+facilitate more in-depth model performance analyses we propose the DICES dataset
+
+-   a unique dataset with diverse perspectives on safety of AI generated
+    conversations. We focus on the task of safety evaluation of conversational
+    AI systems. The DICES dataset contains detailed demographics information
+    about each rater, extremely high replication of unique ratings per
+    conversation to ensure statistical significance of further analyses and
+    encodes rater votes as distributions across different demographics to allow
+    for in-depth explorations of different rating aggregation strategies.
 
 This dataset is well suited to observe and measure variance, ambiguity and
 diversity in the context of safety of conversational AI. The dataset is
@@ -146,50 +147,101 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                                           | Class                | Shape   | Dtype  | Description
-:---------------------------------------------------------------- | :------------------- | :------ | :----- | :----------
-                                                                  | FeaturesDict         |         |        |
-Q1_whole_conversation_evaluation                                  | ClassLabel           |         | int64  | Rating about the understandability of a conversation.
-Q2_harmful_content_dangerous_content                              | ClassLabel           |         | int64  |
-Q2_harmful_content_derogation_of_boat                             | ClassLabel           |         | int64  |
-Q2_harmful_content_insensitive                                    | ClassLabel           |         | int64  |
-Q2_harmful_content_medical_legal_financial_or_relationship_advice | ClassLabel           |         | int64  |
-Q2_harmful_content_obscene_and_profane                            | ClassLabel           |         | int64  |
-Q2_harmful_content_other                                          | ClassLabel           |         | int64  |
-Q2_harmful_content_overall                                        | ClassLabel           |         | int64  |
-Q2_harmful_content_personal_information                           | ClassLabel           |         | int64  |
-Q2_harmful_content_regulated_goods                                | ClassLabel           |         | int64  |
-Q2_harmful_content_sexually_suggestive_content                    | ClassLabel           |         | int64  |
-Q3_bias_other                                                     | ClassLabel           |         | int64  |
-Q3_bias_overall                                                   | ClassLabel           |         | int64  |
-Q3_bias_targeting_beliefs                                         | ClassLabel           |         | int64  |
-Q3_bias_targeting_gender_sexual_orientation                       | ClassLabel           |         | int64  |
-Q3_bias_targeting_inherited_attributes                            | ClassLabel           |         | int64  |
-Q3_bias_targeting_status                                          | ClassLabel           |         | int64  |
-Q4_misinformation                                                 | ClassLabel           |         | int64  |
-Q5_political_affiliation                                          | ClassLabel           |         | int64  |
-Q6_policy_guidelines_making_endorsement                           | ClassLabel           |         | int64  |
-Q6_policy_guidelines_other                                        | ClassLabel           |         | int64  |
-Q6_policy_guidelines_overall                                      | ClassLabel           |         | int64  |
-Q6_policy_guidelines_polarizing_topics                            | ClassLabel           |         | int64  |
-Q_overall                                                         | ClassLabel           |         | int64  |
-answer_time_ms                                                    | Scalar               |         | int64  | Amount of time spent by each rater on each safety annotation question.
-answer_timestamp                                                  | Scalar               |         | int64  | Time when each conversation was rated by each rater.
-context                                                           | Text                 |         | string | The conversation turns before the final chatbot response.
-degree_of_harm                                                    | ClassLabel           |         | int64  | Hand-annotated rating of severity of safety risk.
-harm_type                                                         | Sequence(ClassLabel) | (None,) | int64  | Hand-annotated harm topic(s) of conversation.
-id                                                                | Scalar               |         | int64  | Numerical identifier for each row, representing all ratings by a single rater to a single conversation.
-item_id                                                           | Scalar               |         | int64  | Numerical identifier for each conversation.
-phase                                                             | ClassLabel           |         | int64  | One of three distinct time periods.
-rater_age                                                         | ClassLabel           |         | int64  | The age group of the rater.
-rater_education                                                   | ClassLabel           |         | int64  | The education of the rater.
-rater_gender                                                      | ClassLabel           |         | int64  | The gender of the rater.
-rater_id                                                          | Scalar               |         | int64  | Numerical identifier for each rater.
-rater_race                                                        | ClassLabel           |         | int64  | The race/ethnicity of the rater.
-rater_raw_race                                                    | Text                 |         | string | The self-reported raw race/ethnicity of the rater, before simplification to five categories.
-response                                                          | Text                 |         | string | The final chatbot response in the conversation.
-safety_gold                                                       | ClassLabel           |         | int64  | The gold standard safety label provided by experts.
-safety_gold_reason                                                | Text                 |         | string | The reason(s) (if given) for the gold safety label provided by experts.
+| Feature                                                           | Class                | Shape   | Dtype  | Description       |
+| :---------------------------------------------------------------- | :------------------- | :------ | :----- | :---------------- |
+|                                                                   | FeaturesDict         |         |        |                   |
+| Q1_whole_conversation_evaluation                                  | ClassLabel           |         | int64  | Rating about the  |
+:                                                                   :                      :         :        : understandability :
+:                                                                   :                      :         :        : of a              :
+:                                                                   :                      :         :        : conversation.     :
+| Q2_harmful_content_dangerous_content                              | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_derogation_of_boat                             | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_insensitive                                    | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_medical_legal_financial_or_relationship_advice | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_obscene_and_profane                            | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_other                                          | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_overall                                        | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_personal_information                           | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_regulated_goods                                | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_sexually_suggestive_content                    | ClassLabel           |         | int64  |                   |
+| Q3_bias_other                                                     | ClassLabel           |         | int64  |                   |
+| Q3_bias_overall                                                   | ClassLabel           |         | int64  |                   |
+| Q3_bias_targeting_beliefs                                         | ClassLabel           |         | int64  |                   |
+| Q3_bias_targeting_gender_sexual_orientation                       | ClassLabel           |         | int64  |                   |
+| Q3_bias_targeting_inherited_attributes                            | ClassLabel           |         | int64  |                   |
+| Q3_bias_targeting_status                                          | ClassLabel           |         | int64  |                   |
+| Q4_misinformation                                                 | ClassLabel           |         | int64  |                   |
+| Q5_political_affiliation                                          | ClassLabel           |         | int64  |                   |
+| Q6_policy_guidelines_making_endorsement                           | ClassLabel           |         | int64  |                   |
+| Q6_policy_guidelines_other                                        | ClassLabel           |         | int64  |                   |
+| Q6_policy_guidelines_overall                                      | ClassLabel           |         | int64  |                   |
+| Q6_policy_guidelines_polarizing_topics                            | ClassLabel           |         | int64  |                   |
+| Q_overall                                                         | ClassLabel           |         | int64  |                   |
+| answer_time_ms                                                    | Scalar               |         | int64  | Amount of time    |
+:                                                                   :                      :         :        : spent by each     :
+:                                                                   :                      :         :        : rater on each     :
+:                                                                   :                      :         :        : safety annotation :
+:                                                                   :                      :         :        : question.         :
+| answer_timestamp                                                  | Scalar               |         | int64  | Time when each    |
+:                                                                   :                      :         :        : conversation was  :
+:                                                                   :                      :         :        : rated by each     :
+:                                                                   :                      :         :        : rater.            :
+| context                                                           | Text                 |         | string | The conversation  |
+:                                                                   :                      :         :        : turns before the  :
+:                                                                   :                      :         :        : final chatbot     :
+:                                                                   :                      :         :        : response.         :
+| degree_of_harm                                                    | ClassLabel           |         | int64  | Hand-annotated    |
+:                                                                   :                      :         :        : rating of         :
+:                                                                   :                      :         :        : severity of       :
+:                                                                   :                      :         :        : safety risk.      :
+| harm_type                                                         | Sequence(ClassLabel) | (None,) | int64  | Hand-annotated    |
+:                                                                   :                      :         :        : harm topic(s) of  :
+:                                                                   :                      :         :        : conversation.     :
+| id                                                                | Scalar               |         | int64  | Numerical         |
+:                                                                   :                      :         :        : identifier for    :
+:                                                                   :                      :         :        : each row,         :
+:                                                                   :                      :         :        : representing all  :
+:                                                                   :                      :         :        : ratings by a      :
+:                                                                   :                      :         :        : single rater to a :
+:                                                                   :                      :         :        : single            :
+:                                                                   :                      :         :        : conversation.     :
+| item_id                                                           | Scalar               |         | int64  | Numerical         |
+:                                                                   :                      :         :        : identifier for    :
+:                                                                   :                      :         :        : each              :
+:                                                                   :                      :         :        : conversation.     :
+| phase                                                             | ClassLabel           |         | int64  | One of three      |
+:                                                                   :                      :         :        : distinct time     :
+:                                                                   :                      :         :        : periods.          :
+| rater_age                                                         | ClassLabel           |         | int64  | The age group of  |
+:                                                                   :                      :         :        : the rater.        :
+| rater_education                                                   | ClassLabel           |         | int64  | The education of  |
+:                                                                   :                      :         :        : the rater.        :
+| rater_gender                                                      | ClassLabel           |         | int64  | The gender of the |
+:                                                                   :                      :         :        : rater.            :
+| rater_id                                                          | Scalar               |         | int64  | Numerical         |
+:                                                                   :                      :         :        : identifier for    :
+:                                                                   :                      :         :        : each rater.       :
+| rater_race                                                        | ClassLabel           |         | int64  | The               |
+:                                                                   :                      :         :        : race/ethnicity of :
+:                                                                   :                      :         :        : the rater.        :
+| rater_raw_race                                                    | Text                 |         | string | The self-reported |
+:                                                                   :                      :         :        : raw               :
+:                                                                   :                      :         :        : race/ethnicity of :
+:                                                                   :                      :         :        : the rater, before :
+:                                                                   :                      :         :        : simplification to :
+:                                                                   :                      :         :        : five categories.  :
+| response                                                          | Text                 |         | string | The final chatbot |
+:                                                                   :                      :         :        : response in the   :
+:                                                                   :                      :         :        : conversation.     :
+| safety_gold                                                       | ClassLabel           |         | int64  | The gold standard |
+:                                                                   :                      :         :        : safety label      :
+:                                                                   :                      :         :        : provided by       :
+:                                                                   :                      :         :        : experts.          :
+| safety_gold_reason                                                | Text                 |         | string | The reason(s) (if |
+:                                                                   :                      :         :        : given) for the    :
+:                                                                   :                      :         :        : gold safety label :
+:                                                                   :                      :         :        : provided by       :
+:                                                                   :                      :         :        : experts.          :
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):
@@ -304,52 +356,90 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                                                                                                        | Class                | Shape   | Dtype  | Description
-:----------------------------------------------------------------------------------------------------------------------------- | :------------------- | :------ | :----- | :----------
-                                                                                                                               | FeaturesDict         |         |        |
-Q1_whole_conversation_evaluation                                                                                               | ClassLabel           |         | int64  | Rating about the understandability of a conversation.
-Q2_harmful_content_explicitly_sexual                                                                                           | ClassLabel           |         | int64  |
-Q2_harmful_content_financial_advice                                                                                            | ClassLabel           |         | int64  |
-Q2_harmful_content_harm_to_people_or_animals                                                                                   | ClassLabel           |         | int64  |
-Q2_harmful_content_health_and_safety_claims                                                                                    | ClassLabel           |         | int64  |
-Q2_harmful_content_how_tos_about_harmful_activities                                                                            | ClassLabel           |         | int64  |
-Q2_harmful_content_obscenities_or_profanities                                                                                  | ClassLabel           |         | int64  |
-Q2_harmful_content_other                                                                                                       | ClassLabel           |         | int64  |
-Q2_harmful_content_overall                                                                                                     | ClassLabel           |         | int64  |
-Q2_harmful_content_personal_information                                                                                        | ClassLabel           |         | int64  |
-Q2_harmful_content_promotes_or_condones_use_of_harmful_regulated_goods                                                         | ClassLabel           |         | int64  |
-Q2_harmful_content_promotes_or_condones_violence                                                                               | ClassLabel           |         | int64  |
-Q2_harmful_content_violent_or_gory                                                                                             | ClassLabel           |         | int64  |
-Q3_3_Racial_religious_or_other_slurs_and_stereotypes_that_incites_or_promote_hatred_based_on_any_of_the_attributes_noted_above | ClassLabel           |         | int64  |
-Q3_bias_calling_individuals_or_groups_evil_corrupt_or_malicious                                                                | ClassLabel           |         | int64  |
-Q3_bias_incites_hatred                                                                                                         | ClassLabel           |         | int64  |
-Q3_bias_insults_about_emotional_romantic_and_or_sexual_attraction                                                              | ClassLabel           |         | int64  |
-Q3_bias_other                                                                                                                  | ClassLabel           |         | int64  |
-Q3_bias_physically_or_mentally_inferior                                                                                        | ClassLabel           |         | int64  |
-Q3_bias_subhuman_comparisons                                                                                                   | ClassLabel           |         | int64  |
-Q3_bias_superiority_or_subjugation_of_a_group                                                                                  | ClassLabel           |         | int64  |
-Q3_unfair_bias_overall                                                                                                         | ClassLabel           |         | int64  |
-Q4_misinformation_conspiracy_theories                                                                                          | ClassLabel           |         | int64  |
-Q4_misinformation_contradicts_expert_consensus                                                                                 | ClassLabel           |         | int64  |
-Q4_misinformation_false_theories                                                                                               | ClassLabel           |         | int64  |
-Q4_misinformation_other                                                                                                        | ClassLabel           |         | int64  |
-Q4_misinformation_overall                                                                                                      | ClassLabel           |         | int64  |
-Q4_misinformation_political                                                                                                    | ClassLabel           |         | int64  |
-Q_overall                                                                                                                      | ClassLabel           |         | int64  |
-context                                                                                                                        | Text                 |         | string | The conversation turns before the final chatbot response.
-degree_of_harm                                                                                                                 | ClassLabel           |         | int64  | Hand-annotated rating of severity of safety risk.
-harm_type                                                                                                                      | Sequence(ClassLabel) | (None,) | int64  | Hand-annotated harm topic(s) of conversation.
-id                                                                                                                             | Scalar               |         | int64  | Numerical identifier for each row, representing all ratings by a single rater to a single conversation.
-item_id                                                                                                                        | Scalar               |         | int64  | Numerical identifier for each conversation.
-phase                                                                                                                          | ClassLabel           |         | int64  | One of three distinct time periods.
-rater_age                                                                                                                      | ClassLabel           |         | int64  | The age group of the rater.
-rater_education                                                                                                                | ClassLabel           |         | int64  | The education of the rater.
-rater_gender                                                                                                                   | ClassLabel           |         | int64  | The gender of the rater.
-rater_id                                                                                                                       | Scalar               |         | int64  | Numerical identifier for each rater.
-rater_locale                                                                                                                   | ClassLabel           |         | int64  | The locale of the rater.
-rater_race                                                                                                                     | ClassLabel           |         | int64  | The race/ethnicity of the rater.
-rater_raw_race                                                                                                                 | Text                 |         | string | The self-reported raw race/ethnicity of the rater, before simplification to five categories.
-response                                                                                                                       | Text                 |         | string | The final chatbot response in the conversation.
+| Feature                                                                                                                        | Class                | Shape   | Dtype  | Description       |
+| :----------------------------------------------------------------------------------------------------------------------------- | :------------------- | :------ | :----- | :---------------- |
+|                                                                                                                                | FeaturesDict         |         |        |                   |
+| Q1_whole_conversation_evaluation                                                                                               | ClassLabel           |         | int64  | Rating about the  |
+:                                                                                                                                :                      :         :        : understandability :
+:                                                                                                                                :                      :         :        : of a              :
+:                                                                                                                                :                      :         :        : conversation.     :
+| Q2_harmful_content_explicitly_sexual                                                                                           | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_financial_advice                                                                                            | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_harm_to_people_or_animals                                                                                   | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_health_and_safety_claims                                                                                    | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_how_tos_about_harmful_activities                                                                            | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_obscenities_or_profanities                                                                                  | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_other                                                                                                       | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_overall                                                                                                     | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_personal_information                                                                                        | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_promotes_or_condones_use_of_harmful_regulated_goods                                                         | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_promotes_or_condones_violence                                                                               | ClassLabel           |         | int64  |                   |
+| Q2_harmful_content_violent_or_gory                                                                                             | ClassLabel           |         | int64  |                   |
+| Q3_3_Racial_religious_or_other_slurs_and_stereotypes_that_incites_or_promote_hatred_based_on_any_of_the_attributes_noted_above | ClassLabel           |         | int64  |                   |
+| Q3_bias_calling_individuals_or_groups_evil_corrupt_or_malicious                                                                | ClassLabel           |         | int64  |                   |
+| Q3_bias_incites_hatred                                                                                                         | ClassLabel           |         | int64  |                   |
+| Q3_bias_insults_about_emotional_romantic_and_or_sexual_attraction                                                              | ClassLabel           |         | int64  |                   |
+| Q3_bias_other                                                                                                                  | ClassLabel           |         | int64  |                   |
+| Q3_bias_physically_or_mentally_inferior                                                                                        | ClassLabel           |         | int64  |                   |
+| Q3_bias_subhuman_comparisons                                                                                                   | ClassLabel           |         | int64  |                   |
+| Q3_bias_superiority_or_subjugation_of_a_group                                                                                  | ClassLabel           |         | int64  |                   |
+| Q3_unfair_bias_overall                                                                                                         | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_conspiracy_theories                                                                                          | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_contradicts_expert_consensus                                                                                 | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_false_theories                                                                                               | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_other                                                                                                        | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_overall                                                                                                      | ClassLabel           |         | int64  |                   |
+| Q4_misinformation_political                                                                                                    | ClassLabel           |         | int64  |                   |
+| Q_overall                                                                                                                      | ClassLabel           |         | int64  |                   |
+| context                                                                                                                        | Text                 |         | string | The conversation  |
+:                                                                                                                                :                      :         :        : turns before the  :
+:                                                                                                                                :                      :         :        : final chatbot     :
+:                                                                                                                                :                      :         :        : response.         :
+| degree_of_harm                                                                                                                 | ClassLabel           |         | int64  | Hand-annotated    |
+:                                                                                                                                :                      :         :        : rating of         :
+:                                                                                                                                :                      :         :        : severity of       :
+:                                                                                                                                :                      :         :        : safety risk.      :
+| harm_type                                                                                                                      | Sequence(ClassLabel) | (None,) | int64  | Hand-annotated    |
+:                                                                                                                                :                      :         :        : harm topic(s) of  :
+:                                                                                                                                :                      :         :        : conversation.     :
+| id                                                                                                                             | Scalar               |         | int64  | Numerical         |
+:                                                                                                                                :                      :         :        : identifier for    :
+:                                                                                                                                :                      :         :        : each row,         :
+:                                                                                                                                :                      :         :        : representing all  :
+:                                                                                                                                :                      :         :        : ratings by a      :
+:                                                                                                                                :                      :         :        : single rater to a :
+:                                                                                                                                :                      :         :        : single            :
+:                                                                                                                                :                      :         :        : conversation.     :
+| item_id                                                                                                                        | Scalar               |         | int64  | Numerical         |
+:                                                                                                                                :                      :         :        : identifier for    :
+:                                                                                                                                :                      :         :        : each              :
+:                                                                                                                                :                      :         :        : conversation.     :
+| phase                                                                                                                          | ClassLabel           |         | int64  | One of three      |
+:                                                                                                                                :                      :         :        : distinct time     :
+:                                                                                                                                :                      :         :        : periods.          :
+| rater_age                                                                                                                      | ClassLabel           |         | int64  | The age group of  |
+:                                                                                                                                :                      :         :        : the rater.        :
+| rater_education                                                                                                                | ClassLabel           |         | int64  | The education of  |
+:                                                                                                                                :                      :         :        : the rater.        :
+| rater_gender                                                                                                                   | ClassLabel           |         | int64  | The gender of the |
+:                                                                                                                                :                      :         :        : rater.            :
+| rater_id                                                                                                                       | Scalar               |         | int64  | Numerical         |
+:                                                                                                                                :                      :         :        : identifier for    :
+:                                                                                                                                :                      :         :        : each rater.       :
+| rater_locale                                                                                                                   | ClassLabel           |         | int64  | The locale of the |
+:                                                                                                                                :                      :         :        : rater.            :
+| rater_race                                                                                                                     | ClassLabel           |         | int64  | The               |
+:                                                                                                                                :                      :         :        : race/ethnicity of :
+:                                                                                                                                :                      :         :        : the rater.        :
+| rater_raw_race                                                                                                                 | Text                 |         | string | The self-reported |
+:                                                                                                                                :                      :         :        : raw               :
+:                                                                                                                                :                      :         :        : race/ethnicity of :
+:                                                                                                                                :                      :         :        : the rater, before :
+:                                                                                                                                :                      :         :        : simplification to :
+:                                                                                                                                :                      :         :        : five categories.  :
+| response                                                                                                                       | Text                 |         | string | The final chatbot |
+:                                                                                                                                :                      :         :        : response in the   :
+:                                                                                                                                :                      :         :        : conversation.     :
 
 *   **Examples**
     ([tfds.as_dataframe](https://www.tensorflow.org/datasets/api_docs/python/tfds/as_dataframe)):

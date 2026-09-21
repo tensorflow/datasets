@@ -72,25 +72,25 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature         | Class          | Shape        | Dtype   | Description      |
-| :-------------- | :------------- | :----------- | :------ | :--------------- |
-|                 | FeaturesDict   |              |         |                  |
-| caption         | Text           |              | string  |                  |
-| entities        | Sequence       |              |         |                  |
-| entities/bounds | BBoxFeature    | (4,)         | float32 |                  |
-| entities/cat    | ClassLabel     |              | int64   |                  |
-| entities/from   | Text           |              | string  |                  |
-| entities/id     | Text           |              | string  |                  |
-| entities/label  | Text           |              | string  |                  |
-| entities/to     | Text           |              | string  |                  |
-| entities/type   | ClassLabel     |              | int64   |                  |
-| image           | Image          | (None, None, | uint8   | The image of the |
-:                 :                : 3)           :         : diagram.         :
-| image_filename  | Text           |              | string  | Image filename.  |
-:                 :                :              :         : e.g. "1337.png"  :
-| layout          | ClassLabel     |              | int64   |                  |
-| relationships   | Sequence(Text) | (None,)      | string  |                  |
-| topic           | ClassLabel     |              | int64   |                  |
+| Feature         | Class          | Shape    | Dtype   | Description          |
+| :-------------- | :------------- | :------- | :------ | :------------------- |
+|                 | FeaturesDict   |          |         |                      |
+| caption         | Text           |          | string  |                      |
+| entities        | Sequence       |          |         |                      |
+| entities/bounds | BBoxFeature    | (4,)     | float32 |                      |
+| entities/cat    | ClassLabel     |          | int64   |                      |
+| entities/from   | Text           |          | string  |                      |
+| entities/id     | Text           |          | string  |                      |
+| entities/label  | Text           |          | string  |                      |
+| entities/to     | Text           |          | string  |                      |
+| entities/type   | ClassLabel     |          | int64   |                      |
+| image           | Image          | (None,   | uint8   | The image of the     |
+:                 :                : None, 3) :         : diagram.             :
+| image_filename  | Text           |          | string  | Image filename. e.g. |
+:                 :                :          :         : "1337.png"           :
+| layout          | ClassLabel     |          | int64   |                      |
+| relationships   | Sequence(Text) | (None,)  | string  |                      |
+| topic           | ClassLabel     |          | int64   |                      |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

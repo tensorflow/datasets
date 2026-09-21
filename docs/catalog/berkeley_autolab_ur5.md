@@ -70,26 +70,31 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape         | Dtype   | Description
-:--------------------------------------------- | :----------- | :------------ | :------ | :----------
-                                               | FeaturesDict |               |         |
-steps                                          | Dataset      |               |         |
-steps/action                                   | FeaturesDict |               |         |
-steps/action/gripper_closedness_action         | Tensor       |               | float32 | 1 if close gripper, -1 if open gripper, 0 if no change.
-steps/action/rotation_delta                    | Tensor       | (3,)          | float32 | Delta change in roll, pitch, yaw.
-steps/action/terminate_episode                 | Tensor       |               | float32 |
-steps/action/world_vector                      | Tensor       | (3,)          | float32 | Delta change in XYZ.
-steps/is_first                                 | Tensor       |               | bool    |
-steps/is_last                                  | Tensor       |               | bool    |
-steps/is_terminal                              | Tensor       |               | bool    |
-steps/observation                              | FeaturesDict |               |         |
-steps/observation/hand_image                   | Image        | (480, 640, 3) | uint8   |
-steps/observation/image                        | Image        | (480, 640, 3) | uint8   |
-steps/observation/image_with_depth             | Image        | (480, 640, 1) | float32 |
-steps/observation/natural_language_embedding   | Tensor       | (512,)        | float32 |
-steps/observation/natural_language_instruction | Tensor       |               | string  |
-steps/observation/robot_state                  | Tensor       | (15,)         | float32 | Explanation of the robot state can be found at https://sites.google.com/corp/view/berkeley-ur5
-steps/reward                                   | Scalar       |               | float32 |
+| Feature                                        | Class        | Shape   | Dtype   | Description                                      |
+| :--------------------------------------------- | :----------- | :------ | :------ | :----------------------------------------------- |
+|                                                | FeaturesDict |         |         |                                                  |
+| steps                                          | Dataset      |         |         |                                                  |
+| steps/action                                   | FeaturesDict |         |         |                                                  |
+| steps/action/gripper_closedness_action         | Tensor       |         | float32 | 1 if close gripper, -1 if open gripper, 0 if no  |
+:                                                :              :         :         : change.                                          :
+| steps/action/rotation_delta                    | Tensor       | (3,)    | float32 | Delta change in roll, pitch, yaw.                |
+| steps/action/terminate_episode                 | Tensor       |         | float32 |                                                  |
+| steps/action/world_vector                      | Tensor       | (3,)    | float32 | Delta change in XYZ.                             |
+| steps/is_first                                 | Tensor       |         | bool    |                                                  |
+| steps/is_last                                  | Tensor       |         | bool    |                                                  |
+| steps/is_terminal                              | Tensor       |         | bool    |                                                  |
+| steps/observation                              | FeaturesDict |         |         |                                                  |
+| steps/observation/hand_image                   | Image        | (480,   | uint8   |                                                  |
+:                                                :              : 640, 3) :         :                                                  :
+| steps/observation/image                        | Image        | (480,   | uint8   |                                                  |
+:                                                :              : 640, 3) :         :                                                  :
+| steps/observation/image_with_depth             | Image        | (480,   | float32 |                                                  |
+:                                                :              : 640, 1) :         :                                                  :
+| steps/observation/natural_language_embedding   | Tensor       | (512,)  | float32 |                                                  |
+| steps/observation/natural_language_instruction | Tensor       |         | string  |                                                  |
+| steps/observation/robot_state                  | Tensor       | (15,)   | float32 | Explanation of the robot state can be found at   |
+:                                                :              :         :         : https\://sites.google.com/corp/view/berkeley-ur5 :
+| steps/reward                                   | Scalar       |         | float32 |                                                  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

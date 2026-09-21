@@ -71,27 +71,43 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape         | Dtype   | Description
-:--------------------------------------------- | :----------- | :------------ | :------ | :----------
-                                               | FeaturesDict |               |         |
-steps                                          | Dataset      |               |         |
-steps/action                                   | FeaturesDict |               |         |
-steps/action/gripper_closedness_action         | Tensor       |               | float32 |
-steps/action/rotation_delta                    | Tensor       | (3,)          | float32 |
-steps/action/terminate_episode                 | Tensor       |               | float32 |
-steps/action/world_vector                      | Tensor       | (3,)          | float32 |
-steps/is_first                                 | Tensor       |               | bool    |
-steps/is_last                                  | Tensor       |               | bool    |
-steps/is_terminal                              | Tensor       |               | bool    |
-steps/observation                              | FeaturesDict |               |         |
-steps/observation/agentview_rgb                | Image        | (224, 224, 3) | uint8   | RGB captured by workspace camera
-steps/observation/ee_states                    | Tensor       | (16,)         | float32 | Pose of the end effector specified as a homogenous matrix.
-steps/observation/eye_in_hand_rgb              | Image        | (224, 224, 3) | uint8   | RGB captured by in hand camera
-steps/observation/gripper_states               | Tensor       | (1,)          | float32 | gripper_states = 0 means the gripper is fully closed. The value represents the gripper width of Franka Panda Gripper.
-steps/observation/joint_states                 | Tensor       | (7,)          | float32 | joint values
-steps/observation/natural_language_embedding   | Tensor       | (512,)        | float32 |
-steps/observation/natural_language_instruction | Tensor       |               | string  |
-steps/reward                                   | Scalar       |               | float32 |
+| Feature                                        | Class        | Shape   | Dtype   | Description    |
+| :--------------------------------------------- | :----------- | :------ | :------ | :------------- |
+|                                                | FeaturesDict |         |         |                |
+| steps                                          | Dataset      |         |         |                |
+| steps/action                                   | FeaturesDict |         |         |                |
+| steps/action/gripper_closedness_action         | Tensor       |         | float32 |                |
+| steps/action/rotation_delta                    | Tensor       | (3,)    | float32 |                |
+| steps/action/terminate_episode                 | Tensor       |         | float32 |                |
+| steps/action/world_vector                      | Tensor       | (3,)    | float32 |                |
+| steps/is_first                                 | Tensor       |         | bool    |                |
+| steps/is_last                                  | Tensor       |         | bool    |                |
+| steps/is_terminal                              | Tensor       |         | bool    |                |
+| steps/observation                              | FeaturesDict |         |         |                |
+| steps/observation/agentview_rgb                | Image        | (224,   | uint8   | RGB captured   |
+:                                                :              : 224, 3) :         : by workspace   :
+:                                                :              :         :         : camera         :
+| steps/observation/ee_states                    | Tensor       | (16,)   | float32 | Pose of the    |
+:                                                :              :         :         : end effector   :
+:                                                :              :         :         : specified as a :
+:                                                :              :         :         : homogenous     :
+:                                                :              :         :         : matrix.        :
+| steps/observation/eye_in_hand_rgb              | Image        | (224,   | uint8   | RGB captured   |
+:                                                :              : 224, 3) :         : by in hand     :
+:                                                :              :         :         : camera         :
+| steps/observation/gripper_states               | Tensor       | (1,)    | float32 | gripper_states |
+:                                                :              :         :         : = 0 means the  :
+:                                                :              :         :         : gripper is     :
+:                                                :              :         :         : fully closed.  :
+:                                                :              :         :         : The value      :
+:                                                :              :         :         : represents the :
+:                                                :              :         :         : gripper width  :
+:                                                :              :         :         : of Franka      :
+:                                                :              :         :         : Panda Gripper. :
+| steps/observation/joint_states                 | Tensor       | (7,)    | float32 | joint values   |
+| steps/observation/natural_language_embedding   | Tensor       | (512,)  | float32 |                |
+| steps/observation/natural_language_instruction | Tensor       |         | string  |                |
+| steps/reward                                   | Scalar       |         | float32 |                |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

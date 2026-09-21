@@ -73,29 +73,44 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape         | Dtype   | Description
-:--------------------------------------------- | :----------- | :------------ | :------ | :----------
-                                               | FeaturesDict |               |         |
-steps                                          | Dataset      |               |         |
-steps/action                                   | FeaturesDict |               |         |
-steps/action/future/axis_angle_residual        | Tensor       | (30,)         | float32 | The next 10 actions for the rotation. Each action is a 3D delta to add to the current axis angle.
-steps/action/future/target_close               | Tensor       | (10,)         | int64   | The next 10 actions for the gripper. Each action is the value the gripper closure should be changed to (notably it is *not* a delta.)
-steps/action/future/xyz_residual               | Tensor       | (30,)         | float32 | The next 10 actions for the positions. Each action is a 3D delta to add to current position.
-steps/is_first                                 | Tensor       |               | bool    |
-steps/is_last                                  | Tensor       |               | bool    |
-steps/is_terminal                              | Tensor       |               | bool    |
-steps/observation                              | FeaturesDict |               |         |
-steps/observation/episode_success              | Tensor       |               | float32 | A 0-1 success label
-steps/observation/image                        | Image        | (171, 213, 3) | uint8   | Camera image of the robot, downsampled 3x
-steps/observation/natural_language_embedding   | Tensor       | (512,)        | float32 | An embedding of the task via Universal Sentence Encoder (https://tfhub.dev/google/universal-sentence-encoder/4)
-steps/observation/natural_language_instruction | Tensor       |               | string  | The task the robot was asked to do.
-steps/observation/present/autonomous           | Tensor       |               | int64   | Episodes are collected via DAgger. This is a 0/1 label for whether the action is from the policy or the teleoperator. 1 = from policy.
-steps/observation/present/axis_angle           | Tensor       | (3,)          | float32 | The current rotation of the end effector in axis-angle representation.
-steps/observation/present/intervention         | Tensor       |               | int64   | Episodes are collected via DAgger. This is a 0/1 label for whether the action is from the policy or the teleoperator. 1 = from teleoperator. This is exactly the opposite of present/autonomous
-steps/observation/present/sensed_close         | Tensor       | (1,)          | float32 | How much the gripper is currently closed. Scaled from 0 to 1, but not all values from 0 to 1 are reachable. The range in the data is about 0.2 to 1
-steps/observation/present/xyz                  | Tensor       | (3,)          | float32 | The current position of the end effector in axis-angle representation, in robot frame
-steps/observation/sequence_length              | Tensor       |               | int64   | Length of the episode
-steps/reward                                   | Scalar       |               | float32 |
+| Feature                                        | Class        | Shape   | Dtype   | Description                                              |
+| :--------------------------------------------- | :----------- | :------ | :------ | :------------------------------------------------------- |
+|                                                | FeaturesDict |         |         |                                                          |
+| steps                                          | Dataset      |         |         |                                                          |
+| steps/action                                   | FeaturesDict |         |         |                                                          |
+| steps/action/future/axis_angle_residual        | Tensor       | (30,)   | float32 | The next 10 actions for the rotation. Each action is a   |
+:                                                :              :         :         : 3D delta to add to the current axis angle.               :
+| steps/action/future/target_close               | Tensor       | (10,)   | int64   | The next 10 actions for the gripper. Each action is the  |
+:                                                :              :         :         : value the gripper closure should be changed to (notably  :
+:                                                :              :         :         : it is *not* a delta.)                                    :
+| steps/action/future/xyz_residual               | Tensor       | (30,)   | float32 | The next 10 actions for the positions. Each action is a  |
+:                                                :              :         :         : 3D delta to add to current position.                     :
+| steps/is_first                                 | Tensor       |         | bool    |                                                          |
+| steps/is_last                                  | Tensor       |         | bool    |                                                          |
+| steps/is_terminal                              | Tensor       |         | bool    |                                                          |
+| steps/observation                              | FeaturesDict |         |         |                                                          |
+| steps/observation/episode_success              | Tensor       |         | float32 | A 0-1 success label                                      |
+| steps/observation/image                        | Image        | (171,   | uint8   | Camera image of the robot, downsampled 3x                |
+:                                                :              : 213, 3) :         :                                                          :
+| steps/observation/natural_language_embedding   | Tensor       | (512,)  | float32 | An embedding of the task via Universal Sentence Encoder  |
+:                                                :              :         :         : (https\://tfhub.dev/google/universal-sentence-encoder/4) :
+| steps/observation/natural_language_instruction | Tensor       |         | string  | The task the robot was asked to do.                      |
+| steps/observation/present/autonomous           | Tensor       |         | int64   | Episodes are collected via DAgger. This is a 0/1 label   |
+:                                                :              :         :         : for whether the action is from the policy or the         :
+:                                                :              :         :         : teleoperator. 1 = from policy.                           :
+| steps/observation/present/axis_angle           | Tensor       | (3,)    | float32 | The current rotation of the end effector in axis-angle   |
+:                                                :              :         :         : representation.                                          :
+| steps/observation/present/intervention         | Tensor       |         | int64   | Episodes are collected via DAgger. This is a 0/1 label   |
+:                                                :              :         :         : for whether the action is from the policy or the         :
+:                                                :              :         :         : teleoperator. 1 = from teleoperator. This is exactly the :
+:                                                :              :         :         : opposite of present/autonomous                           :
+| steps/observation/present/sensed_close         | Tensor       | (1,)    | float32 | How much the gripper is currently closed. Scaled from 0  |
+:                                                :              :         :         : to 1, but not all values from 0 to 1 are reachable. The  :
+:                                                :              :         :         : range in the data is about 0.2 to 1                      :
+| steps/observation/present/xyz                  | Tensor       | (3,)    | float32 | The current position of the end effector in axis-angle   |
+:                                                :              :         :         : representation, in robot frame                           :
+| steps/observation/sequence_length              | Tensor       |         | int64   | Length of the episode                                    |
+| steps/reward                                   | Scalar       |         | float32 |                                                          |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -25,11 +25,15 @@ data in addition to movie and rating data.
 
 -   "25m": This is the latest stable version of the MovieLens dataset. It is
     recommended for research purposes.
+
 -   "latest-small": This is a small subset of the latest version of the
     MovieLens dataset. It is changed and updated over time by GroupLens.
+
 -   "100k": This is the oldest version of the MovieLens datasets. It is a small
     dataset with demographic data.
+
 -   "1m": This is the largest MovieLens dataset that contains demographic data.
+
 -   "20m": This is one of the most used MovieLens datasets in academic papers
     along with the 1m dataset.
 
@@ -43,9 +47,13 @@ The features below are included in all versions with the "-ratings" suffix.
 -   "movie_id": a unique identifier of the rated movie
 -   "movie_title": the title of the rated movie with the release year in
     parentheses
+
 -   "movie_genres": a sequence of genres to which the rated movie belongs
+
 -   "user_id": a unique identifier of the user who made the rating
+
 -   "user_rating": the score of the rating on a five-star scale
+
 -   "timestamp": the timestamp of the ratings, represented in seconds since
     midnight Coordinated Universal Time (UTC) of January 1, 1970
 
@@ -54,8 +62,10 @@ demographic features.
 
 -   "user_gender": gender of the user who made the rating; a true value
     corresponds to male
+
 -   "bucketized_user_age": bucketized age values of the user who made the
     rating, the values and the corresponding ranges are:
+
     -   1: "Under 18"
     -   18: "18-24"
     -   25: "25-34"
@@ -63,12 +73,15 @@ demographic features.
     -   45: "45-49"
     -   50: "50-55"
     -   56: "56+"
+
 -   "user_occupation_label": the occupation of the user who made the rating
     represented by an integer-encoded label; labels are preprocessed to be
     consistent across different versions
+
 -   "user_occupation_text": the occupation of the user who made the rating in
     the original string; different versions can have different set of raw text
     labels
+
 -   "user_zip_code": the zip code of the user who made the rating
 
 In addition, the "100k-ratings" dataset would also have a feature "raw_user_age"
@@ -124,7 +137,8 @@ keywords = {Datasets, recommendations, ratings, MovieLens}
 *   **Config description**: This dataset contains 25,000,095 ratings across
     62,423 movies, created by 162,541 users between January 09, 1995 and
     November 21,
-*   This dataset is the latest stable version of the MovieLens dataset,
+
+2019. This dataset is the latest stable version of the MovieLens dataset,
     generated on November 21, 2019.
 
 Each user has rated at least 20 movies. The ratings are in half-star increments.
@@ -621,7 +635,8 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: This dataset contains 1,000,209 anonymous ratings of
     approximately 3,900 movies made by 6,040 MovieLens users who joined
     MovieLens in
-*   This dataset is the largest dataset that includes demographic data.
+
+2000. This dataset is the largest dataset that includes demographic data.
 
 Each user has rated at least 20 movies. Ratings are in whole-star increments. In
 demographic data, age values are divided into ranges and the lowest age value

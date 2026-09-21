@@ -2429,7 +2429,7 @@ dataButton.addEventListener('click', async () => {
 ```
 @article{kocisky-etal-2018-narrativeqa,
     title = "The {N}arrative{QA} Reading Comprehension Challenge",
-    author = "Ko{{c}}isk{'y}, Tom{'a}{{s}}  and
+    author = "Ko{ {c}}isk{'y}, Tom{'a}{ {s}}  and
       Schwarz, Jonathan  and
       Blunsom, Phil  and
       Dyer, Chris  and
@@ -2533,7 +2533,7 @@ dataButton.addEventListener('click', async () => {
 ```
 @article{kocisky-etal-2018-narrativeqa,
     title = "The {N}arrative{QA} Reading Comprehension Challenge",
-    author = "Ko{{c}}isk{'y}, Tom{'a}{{s}}  and
+    author = "Ko{ {c}}isk{'y}, Tom{'a}{ {s}}  and
       Schwarz, Jonathan  and
       Blunsom, Phil  and
       Dyer, Chris  and

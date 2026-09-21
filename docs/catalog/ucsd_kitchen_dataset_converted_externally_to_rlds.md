@@ -16,7 +16,7 @@
 
 xArm interacting with different toy kitchens
 
-*   **Homepage**: [ ]()
+*   **Homepage**: []()
 
 *   **Source code**:
     [`tfds.robotics.rtx.UcsdKitchenDatasetConvertedExternallyToRlds`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/robotics/rtx/rtx.py)
@@ -65,23 +65,28 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape         | Dtype   | Description
-:------------------------- | :----------- | :------------ | :------ | :----------
-                           | FeaturesDict |               |         |
-episode_metadata           | FeaturesDict |               |         |
-episode_metadata/file_path | Text         |               | string  | Path to the original data file.
-steps                      | Dataset      |               |         |
-steps/action               | Tensor       | (8,)          | float32 | 8-dimensional action, consisting of end-effector position and orientation, gripper open/close and a episode termination action.
-steps/discount             | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first             | Tensor       |               | bool    |
-steps/is_last              | Tensor       |               | bool    |
-steps/is_terminal          | Tensor       |               | bool    |
-steps/language_embedding   | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction | Text         |               | string  | Language Instruction.
-steps/observation          | FeaturesDict |               |         |
-steps/observation/image    | Image        | (480, 640, 3) | uint8   | Main camera RGB observation.
-steps/observation/state    | Tensor       | (21,)         | float32 | 21-dimensional joint states, consists of robot joint angles, joint velocity and joint torque.
-steps/reward               | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                    | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                            | FeaturesDict |         |         |                                                              |
+| episode_metadata           | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path | Text         |         | string  | Path to the original data file.                              |
+| steps                      | Dataset      |         |         |                                                              |
+| steps/action               | Tensor       | (8,)    | float32 | 8-dimensional action, consisting of end-effector position    |
+:                            :              :         :         : and orientation, gripper open/close and a episode            :
+:                            :              :         :         : termination action.                                          :
+| steps/discount             | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first             | Tensor       |         | bool    |                                                              |
+| steps/is_last              | Tensor       |         | bool    |                                                              |
+| steps/is_terminal          | Tensor       |         | bool    |                                                              |
+| steps/language_embedding   | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                            :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction | Text         |         | string  | Language Instruction.                                        |
+| steps/observation          | FeaturesDict |         |         |                                                              |
+| steps/observation/image    | Image        | (480,   | uint8   | Main camera RGB observation.                                 |
+:                            :              : 640, 3) :         :                                                              :
+| steps/observation/state    | Tensor       | (21,)   | float32 | 21-dimensional joint states, consists of robot joint angles, |
+:                            :              :         :         : joint velocity and joint torque.                             :
+| steps/reward               | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

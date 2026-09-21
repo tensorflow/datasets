@@ -64,19 +64,33 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature           | Class        | Shape   | Dtype  | Description
-:---------------- | :----------- | :------ | :----- | :----------
-                  | FeaturesDict |         |        |
-audio             | Audio        | (None,) | int64  |
-gender            | ClassLabel   |         | int64  |
-id                | Scalar       |         | int32  | Source text identifier, consistent across all languages to keep n-way parallelism of translations. Since each transcription may be spoken by multiple speakers, within each language multiple examples will also share the same id.
-lang_group_id     | ClassLabel   |         | int64  |
-lang_id           | ClassLabel   |         | int64  |
-language          | Text         |         | string | Language encoded as lowercase, underscore-separatedversion of a BCP-47 tag.
-num_samples       | Scalar       |         | int32  | Total number of frames in the audio
-path              | Tensor       |         | string |
-raw_transcription | Text         |         | string | Raw Transcription from FLoRes.
-transcription     | Text         |         | string | Normalized transcription.
+| Feature           | Class        | Shape   | Dtype  | Description                 |
+| :---------------- | :----------- | :------ | :----- | :-------------------------- |
+|                   | FeaturesDict |         |        |                             |
+| audio             | Audio        | (None,) | int64  |                             |
+| gender            | ClassLabel   |         | int64  |                             |
+| id                | Scalar       |         | int32  | Source text identifier,     |
+:                   :              :         :        : consistent across all       :
+:                   :              :         :        : languages to keep n-way     :
+:                   :              :         :        : parallelism of              :
+:                   :              :         :        : translations. Since each    :
+:                   :              :         :        : transcription may be spoken :
+:                   :              :         :        : by multiple speakers,       :
+:                   :              :         :        : within each language        :
+:                   :              :         :        : multiple examples will also :
+:                   :              :         :        : share the same id.          :
+| lang_group_id     | ClassLabel   |         | int64  |                             |
+| lang_id           | ClassLabel   |         | int64  |                             |
+| language          | Text         |         | string | Language encoded as         |
+:                   :              :         :        : lowercase,                  :
+:                   :              :         :        : underscore-separatedversion :
+:                   :              :         :        : of a BCP-47 tag.            :
+| num_samples       | Scalar       |         | int32  | Total number of frames in   |
+:                   :              :         :        : the audio                   :
+| path              | Tensor       |         | string |                             |
+| raw_transcription | Text         |         | string | Raw Transcription from      |
+:                   :              :         :        : FLoRes.                     :
+| transcription     | Text         |         | string | Normalized transcription.   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

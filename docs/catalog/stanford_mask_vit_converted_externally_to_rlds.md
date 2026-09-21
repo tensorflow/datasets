@@ -71,27 +71,38 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                             | Class        | Shape         | Dtype   | Description
-:---------------------------------- | :----------- | :------------ | :------ | :----------
-                                    | FeaturesDict |               |         |
-episode_metadata                    | FeaturesDict |               |         |
-episode_metadata/file_path          | Text         |               | string  | Path to the original data file.
-steps                               | Dataset      |               |         |
-steps/action                        | Tensor       | (5,)          | float32 | Robot action, consists of [3x change in end effector position, 1x gripper yaw, 1x open/close gripper (-1 means to open the gripper, 1 means close)].
-steps/discount                      | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                      | Tensor       |               | bool    |
-steps/is_last                       | Tensor       |               | bool    |
-steps/is_terminal                   | Tensor       |               | bool    |
-steps/language_embedding            | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction          | Text         |               | string  | Language Instruction.
-steps/observation                   | FeaturesDict |               |         |
-steps/observation/end_effector_pose | Tensor       | (5,)          | float32 | Robot end effector pose, consists of [3x Cartesian position, 1x gripper yaw, 1x gripper position]. This is the state used in the MaskViT paper.
-steps/observation/finger_sensors    | Tensor       | (1,)          | float32 | 1x Sawyer gripper finger sensors.
-steps/observation/high_bound        | Tensor       | (5,)          | float32 | High bound for end effector pose normalization. Consists of [3x Cartesian position, 1x gripper yaw, 1x gripper position].
-steps/observation/image             | Image        | (480, 480, 3) | uint8   | Main camera RGB observation.
-steps/observation/low_bound         | Tensor       | (5,)          | float32 | Low bound for end effector pose normalization. Consists of [3x Cartesian position, 1x gripper yaw, 1x gripper position].
-steps/observation/state             | Tensor       | (15,)         | float32 | Robot state, consists of [7x robot joint angles, 7x robot joint velocities,1x gripper position].
-steps/reward                        | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                             | Class        | Shape   | Dtype   | Description                                                  |
+| :---------------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                     | FeaturesDict |         |         |                                                              |
+| episode_metadata                    | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path          | Text         |         | string  | Path to the original data file.                              |
+| steps                               | Dataset      |         |         |                                                              |
+| steps/action                        | Tensor       | (5,)    | float32 | Robot action, consists of [3x change in end effector         |
+:                                     :              :         :         : position, 1x gripper yaw, 1x open/close gripper (-1 means to :
+:                                     :              :         :         : open the gripper, 1 means close)].                           :
+| steps/discount                      | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                      | Tensor       |         | bool    |                                                              |
+| steps/is_last                       | Tensor       |         | bool    |                                                              |
+| steps/is_terminal                   | Tensor       |         | bool    |                                                              |
+| steps/language_embedding            | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                     :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction          | Text         |         | string  | Language Instruction.                                        |
+| steps/observation                   | FeaturesDict |         |         |                                                              |
+| steps/observation/end_effector_pose | Tensor       | (5,)    | float32 | Robot end effector pose, consists of [3x Cartesian position, |
+:                                     :              :         :         : 1x gripper yaw, 1x gripper position]. This is the state used :
+:                                     :              :         :         : in the MaskViT paper.                                        :
+| steps/observation/finger_sensors    | Tensor       | (1,)    | float32 | 1x Sawyer gripper finger sensors.                            |
+| steps/observation/high_bound        | Tensor       | (5,)    | float32 | High bound for end effector pose normalization. Consists of  |
+:                                     :              :         :         : [3x Cartesian position, 1x gripper yaw, 1x gripper           :
+:                                     :              :         :         : position].                                                   :
+| steps/observation/image             | Image        | (480,   | uint8   | Main camera RGB observation.                                 |
+:                                     :              : 480, 3) :         :                                                              :
+| steps/observation/low_bound         | Tensor       | (5,)    | float32 | Low bound for end effector pose normalization. Consists of   |
+:                                     :              :         :         : [3x Cartesian position, 1x gripper yaw, 1x gripper           :
+:                                     :              :         :         : position].                                                   :
+| steps/observation/state             | Tensor       | (15,)   | float32 | Robot state, consists of [7x robot joint angles, 7x robot    |
+:                                     :              :         :         : joint velocities,1x gripper position].                       :
+| steps/reward                        | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

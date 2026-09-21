@@ -69,27 +69,33 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                             | Class        | Shape         | Dtype   | Description
-:---------------------------------- | :----------- | :------------ | :------ | :----------
-                                    | FeaturesDict |               |         |
-episode_metadata                    | FeaturesDict |               |         |
-episode_metadata/disclaimer         | Text         |               | string  | Disclaimer about the particular episode.
-episode_metadata/file_path          | Text         |               | string  | Path to the original data file.
-episode_metadata/n_transitions      | Scalar       |               | int32   | Number of transitions in the episode.
-episode_metadata/success            | Scalar       |               | bool    | True if the last state of an episode is a success state, False otherwise.
-episode_metadata/success_labeled_by | Text         |               | string  | Who labeled success (and thereby reward) of the episode. Can be one of: [human, classifier].
-steps                               | Dataset      |               |         |
-steps/action                        | Tensor       | (4,)          | float32 | Robot action, consists of [3x gripper velocities,1x gripper open/close torque].
-steps/discount                      | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                      | Tensor       |               | bool    |
-steps/is_last                       | Tensor       |               | bool    |
-steps/is_terminal                   | Tensor       |               | bool    |
-steps/language_embedding            | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction          | Text         |               | string  | Language Instruction.
-steps/observation                   | FeaturesDict |               |         |
-steps/observation/image             | Image        | (224, 224, 3) | uint8   | Camera RGB observation.
-steps/observation/state             | Tensor       | (7,)          | float32 | Robot state, consists of [3x gripper position,3x gripper orientation, 1x finger distance].
-steps/reward                        | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                             | Class        | Shape   | Dtype   | Description                                                  |
+| :---------------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                     | FeaturesDict |         |         |                                                              |
+| episode_metadata                    | FeaturesDict |         |         |                                                              |
+| episode_metadata/disclaimer         | Text         |         | string  | Disclaimer about the particular episode.                     |
+| episode_metadata/file_path          | Text         |         | string  | Path to the original data file.                              |
+| episode_metadata/n_transitions      | Scalar       |         | int32   | Number of transitions in the episode.                        |
+| episode_metadata/success            | Scalar       |         | bool    | True if the last state of an episode is a success state,     |
+:                                     :              :         :         : False otherwise.                                             :
+| episode_metadata/success_labeled_by | Text         |         | string  | Who labeled success (and thereby reward) of the episode. Can |
+:                                     :              :         :         : be one of\: [human, classifier].                             :
+| steps                               | Dataset      |         |         |                                                              |
+| steps/action                        | Tensor       | (4,)    | float32 | Robot action, consists of [3x gripper velocities,1x gripper  |
+:                                     :              :         :         : open/close torque].                                          :
+| steps/discount                      | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                      | Tensor       |         | bool    |                                                              |
+| steps/is_last                       | Tensor       |         | bool    |                                                              |
+| steps/is_terminal                   | Tensor       |         | bool    |                                                              |
+| steps/language_embedding            | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                     :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction          | Text         |         | string  | Language Instruction.                                        |
+| steps/observation                   | FeaturesDict |         |         |                                                              |
+| steps/observation/image             | Image        | (224,   | uint8   | Camera RGB observation.                                      |
+:                                     :              : 224, 3) :         :                                                              :
+| steps/observation/state             | Tensor       | (7,)    | float32 | Robot state, consists of [3x gripper position,3x gripper     |
+:                                     :              :         :         : orientation, 1x finger distance].                            :
+| steps/reward                        | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

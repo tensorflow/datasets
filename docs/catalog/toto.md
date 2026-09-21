@@ -65,24 +65,36 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                        | Class        | Shape         | Dtype   | Description
-:--------------------------------------------- | :----------- | :------------ | :------ | :----------
-                                               | FeaturesDict |               |         |
-steps                                          | Dataset      |               |         |
-steps/action                                   | FeaturesDict |               |         |
-steps/action/open_gripper                      | Tensor       |               | bool    |
-steps/action/rotation_delta                    | Tensor       | (3,)          | float32 |
-steps/action/terminate_episode                 | Tensor       |               | float32 |
-steps/action/world_vector                      | Tensor       | (3,)          | float32 |
-steps/is_first                                 | Tensor       |               | bool    |
-steps/is_last                                  | Tensor       |               | bool    |
-steps/is_terminal                              | Tensor       |               | bool    |
-steps/observation                              | FeaturesDict |               |         |
-steps/observation/image                        | Image        | (480, 640, 3) | uint8   |
-steps/observation/natural_language_embedding   | Tensor       | (512,)        | float32 |
-steps/observation/natural_language_instruction | Tensor       |               | string  |
-steps/observation/state                        | Tensor       | (7,)          | float32 | numpy array of shape (7,). Contains the robot joint states (as absolute joint angles) at each timestep
-steps/reward                                   | Scalar       |               | float32 |
+| Feature                                        | Class        | Shape   | Dtype   | Description |
+| :--------------------------------------------- | :----------- | :------ | :------ | :---------- |
+|                                                | FeaturesDict |         |         |             |
+| steps                                          | Dataset      |         |         |             |
+| steps/action                                   | FeaturesDict |         |         |             |
+| steps/action/open_gripper                      | Tensor       |         | bool    |             |
+| steps/action/rotation_delta                    | Tensor       | (3,)    | float32 |             |
+| steps/action/terminate_episode                 | Tensor       |         | float32 |             |
+| steps/action/world_vector                      | Tensor       | (3,)    | float32 |             |
+| steps/is_first                                 | Tensor       |         | bool    |             |
+| steps/is_last                                  | Tensor       |         | bool    |             |
+| steps/is_terminal                              | Tensor       |         | bool    |             |
+| steps/observation                              | FeaturesDict |         |         |             |
+| steps/observation/image                        | Image        | (480,   | uint8   |             |
+:                                                :              : 640, 3) :         :             :
+| steps/observation/natural_language_embedding   | Tensor       | (512,)  | float32 |             |
+| steps/observation/natural_language_instruction | Tensor       |         | string  |             |
+| steps/observation/state                        | Tensor       | (7,)    | float32 | numpy array |
+:                                                :              :         :         : of shape    :
+:                                                :              :         :         : (7,).       :
+:                                                :              :         :         : Contains    :
+:                                                :              :         :         : the robot   :
+:                                                :              :         :         : joint       :
+:                                                :              :         :         : states (as  :
+:                                                :              :         :         : absolute    :
+:                                                :              :         :         : joint       :
+:                                                :              :         :         : angles) at  :
+:                                                :              :         :         : each        :
+:                                                :              :         :         : timestep    :
+| steps/reward                                   | Scalar       |         | float32 |             |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

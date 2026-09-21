@@ -12,11 +12,6 @@
 # `multi_news`
 
 
-Note: This dataset has been updated since the last stable release. The new
-versions and config marked with
-<span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>
-are only available in the `tfds-nightly` package.
-
 *   **Description**:
 
 # Multi-News Dataset
@@ -49,10 +44,9 @@ Each record has two features:
 
     *   `1.0.0`: Initial release.
     *   `2.0.0`: [Do not use] Update the dataset with valid URLs.
-    *   **`2.1.0`** (default)
-        <span class="material-icons" title="Available only in the tfds-nightly package">nights_stay</span>:
-        Update the dataset with the correct URLs. The URLs in this version come
-        from HuggingFace's dataset repo, which is curated by the same author:
+    *   **`2.1.0`** (default): Update the dataset with the correct URLs. The
+        URLs in this version come from HuggingFace's dataset repo, which is
+        curated by the same author:
         https://huggingface.co/datasets/alexfabbri/multi_news.
 
 *   **Download size**: `721.73 MiB`

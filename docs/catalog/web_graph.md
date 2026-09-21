@@ -29,14 +29,17 @@ the following processing steps, in order:
 -   We started with WAT files from June 2021 crawl.
 -   Since the outlinks in HTTP-Response-Metadata are stored as relative paths,
     we convert them to absolute paths using urllib after validating each link.
+
 -   To study locale-specific graphs, we further filter based on 2 top level
     domains: ‘de’ and ‘in’, each producing a graph with an order of magnitude
     less number of nodes.
+
 -   These graphs can still have arbitrary sparsity patterns and dangling links.
     Thus we further filter the nodes in each graph to have minimum of K ∈ [10,
     50] inlinks and outlinks. Note that we only do this processing once, thus
     this is still an approximation i.e. the resulting graph might have nodes
     with less than K links.
+
 -   Using both locale and count filters, we finalize 6 versions of WebGraph
     dataset, summarized in the folling table.
 

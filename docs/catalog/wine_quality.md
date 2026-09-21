@@ -48,7 +48,7 @@ Input variables (based on physicochemical tests):
 
 Output variable (based on sensory data):
 
-1.  quality (score between 0 and 10)
+12. quality (score between 0 and 10)
 
 *   **Homepage**:
     [https://archive.ics.uci.edu/ml/datasets/wine+quality](https://archive.ics.uci.edu/ml/datasets/wine+quality)

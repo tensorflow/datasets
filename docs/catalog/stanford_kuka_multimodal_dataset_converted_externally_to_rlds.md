@@ -77,34 +77,40 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                | Class        | Shape         | Dtype   | Description
-:------------------------------------- | :----------- | :------------ | :------ | :----------
-                                       | FeaturesDict |               |         |
-episode_metadata                       | FeaturesDict |               |         |
-steps                                  | Dataset      |               |         |
-steps/action                           | Tensor       | (4,)          | float32 | Robot action, consists of [3x EEF position, 1x gripper open/close].
-steps/discount                         | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                         | Tensor       |               | bool    |
-steps/is_last                          | Tensor       |               | bool    |
-steps/is_terminal                      | Tensor       |               | bool    |
-steps/language_embedding               | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction             | Text         |               | string  | Language Instruction.
-steps/observation                      | FeaturesDict |               |         |
-steps/observation/contact              | Tensor       | (50,)         | float32 | Robot contact information.
-steps/observation/depth_image          | Tensor       | (128, 128, 1) | float32 | Main depth camera observation.
-steps/observation/ee_forces_continuous | Tensor       | (50, 6)       | float32 | Robot end-effector forces.
-steps/observation/ee_orientation       | Tensor       | (4,)          | float32 | Robot end-effector orientation quaternion.
-steps/observation/ee_orientation_vel   | Tensor       | (3,)          | float32 | Robot end-effector orientation velocity.
-steps/observation/ee_position          | Tensor       | (3,)          | float32 | Robot end-effector position.
-steps/observation/ee_vel               | Tensor       | (3,)          | float32 | Robot end-effector velocity.
-steps/observation/ee_yaw               | Tensor       | (4,)          | float32 | Robot end-effector yaw.
-steps/observation/ee_yaw_delta         | Tensor       | (4,)          | float32 | Robot end-effector yaw delta.
-steps/observation/image                | Image        | (128, 128, 3) | uint8   | Main camera RGB observation.
-steps/observation/joint_pos            | Tensor       | (7,)          | float32 | Robot joint positions.
-steps/observation/joint_vel            | Tensor       | (7,)          | float32 | Robot joint velocities.
-steps/observation/optical_flow         | Tensor       | (128, 128, 2) | float32 | Optical flow.
-steps/observation/state                | Tensor       | (8,)          | float32 | Robot proprioceptive information, [7x joint pos, 1x gripper open/close].
-steps/reward                           | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                                | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                        | FeaturesDict |         |         |                                                              |
+| episode_metadata                       | FeaturesDict |         |         |                                                              |
+| steps                                  | Dataset      |         |         |                                                              |
+| steps/action                           | Tensor       | (4,)    | float32 | Robot action, consists of [3x EEF position, 1x gripper       |
+:                                        :              :         :         : open/close].                                                 :
+| steps/discount                         | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                         | Tensor       |         | bool    |                                                              |
+| steps/is_last                          | Tensor       |         | bool    |                                                              |
+| steps/is_terminal                      | Tensor       |         | bool    |                                                              |
+| steps/language_embedding               | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                        :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction             | Text         |         | string  | Language Instruction.                                        |
+| steps/observation                      | FeaturesDict |         |         |                                                              |
+| steps/observation/contact              | Tensor       | (50,)   | float32 | Robot contact information.                                   |
+| steps/observation/depth_image          | Tensor       | (128,   | float32 | Main depth camera observation.                               |
+:                                        :              : 128, 1) :         :                                                              :
+| steps/observation/ee_forces_continuous | Tensor       | (50, 6) | float32 | Robot end-effector forces.                                   |
+| steps/observation/ee_orientation       | Tensor       | (4,)    | float32 | Robot end-effector orientation quaternion.                   |
+| steps/observation/ee_orientation_vel   | Tensor       | (3,)    | float32 | Robot end-effector orientation velocity.                     |
+| steps/observation/ee_position          | Tensor       | (3,)    | float32 | Robot end-effector position.                                 |
+| steps/observation/ee_vel               | Tensor       | (3,)    | float32 | Robot end-effector velocity.                                 |
+| steps/observation/ee_yaw               | Tensor       | (4,)    | float32 | Robot end-effector yaw.                                      |
+| steps/observation/ee_yaw_delta         | Tensor       | (4,)    | float32 | Robot end-effector yaw delta.                                |
+| steps/observation/image                | Image        | (128,   | uint8   | Main camera RGB observation.                                 |
+:                                        :              : 128, 3) :         :                                                              :
+| steps/observation/joint_pos            | Tensor       | (7,)    | float32 | Robot joint positions.                                       |
+| steps/observation/joint_vel            | Tensor       | (7,)    | float32 | Robot joint velocities.                                      |
+| steps/observation/optical_flow         | Tensor       | (128,   | float32 | Optical flow.                                                |
+:                                        :              : 128, 2) :         :                                                              :
+| steps/observation/state                | Tensor       | (8,)    | float32 | Robot proprioceptive information, [7x joint pos, 1x gripper  |
+:                                        :              :         :         : open/close].                                                 :
+| steps/reward                           | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):
