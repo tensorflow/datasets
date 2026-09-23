@@ -255,6 +255,7 @@ class Cars196(tfds.core.GeneratorBasedBuilder):
       '2.0.0': 'Initial release',
       '2.0.1': 'Website URL update',
       '2.1.0': 'Fixing bug https://github.com/tensorflow/datasets/issues/3927',
+      '2.2.0': 'Fix broken links',
   }
 
   def _info(self):
