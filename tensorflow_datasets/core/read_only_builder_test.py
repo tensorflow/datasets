@@ -107,7 +107,9 @@ def test_builder_files_exists(code_builder: dataset_builder.DatasetBuilder):
 
   # If the version is specified but files not found, load from the code
   builder = load.builder(
-      f'{code_builder.name}:*.*.*', data_dir='/tmp/path/tfds/not-exists'
+      f'{code_builder.name}:*.*.*',
+      data_dir='/tmp/path/tfds/not-exists',
+      fallback_to_builder_cls=True,
   )
   assert isinstance(builder, type(code_builder))
   assert not isinstance(builder, read_only_builder.ReadOnlyBuilder)
@@ -125,7 +127,9 @@ def test_builder_config(code_builder: dataset_builder.DatasetBuilder):
     # Config isn't present in the code anymore
     with pytest.raises(ValueError, match='BuilderConfig .* not found'):
       load.builder(
-          f'{code_builder.name}/dummy_config', data_dir='/tmp/path/not-exists'
+          f'{code_builder.name}/dummy_config',
+          data_dir='/tmp/path/not-exists',
+          fallback_to_builder_cls=True,
       )
 
     # But previously generated configs still be loaded from disk
