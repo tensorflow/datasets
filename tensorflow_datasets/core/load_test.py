@@ -25,14 +25,12 @@ from unittest import mock
 import pytest
 import tensorflow as tf
 from tensorflow_datasets import testing
-
 from tensorflow_datasets.core import file_adapters
 from tensorflow_datasets.core import load
 from tensorflow_datasets.core import naming
 from tensorflow_datasets.core import read_only_builder
 from tensorflow_datasets.core import registered
 from tensorflow_datasets.core import visibility
-
 def test_load_hf_dataset():
   builder = object()
   with mock.patch(

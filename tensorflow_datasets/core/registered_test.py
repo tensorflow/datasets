@@ -71,7 +71,7 @@ class EmptyDatasetBuilder(registered.RegisteredDataset):
 
   VERSION = utils.Version("1.0.0")
   BUILDER_CONFIGS = []
-  builder_configs = {"bar": None}
+  builder_configs = {}
 
 
 class UnregisteredBuilder(EmptyDatasetBuilder):
