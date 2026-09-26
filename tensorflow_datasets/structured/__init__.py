@@ -36,6 +36,7 @@ from tensorflow_datasets.structured.penguins import Penguins
 from tensorflow_datasets.structured.proteinnet import ProteinNet
 from tensorflow_datasets.structured.radon import Radon
 from tensorflow_datasets.structured.rock_you import RockYou
+from tensorflow_datasets.structured.tic_tac_toe import TicTacToe
 from tensorflow_datasets.structured.titanic import Titanic
 from tensorflow_datasets.structured.web_graph import WebGraph
 from tensorflow_datasets.structured.web_nlg.web_nlg import WebNlg
