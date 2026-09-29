@@ -362,8 +362,8 @@ class Image(feature_lib.FeatureConnector):
     example = np.frombuffer(example, dtype=np.uint8)  # pyrefly: ignore[bad-assignment]
     example = cv2.imdecode(example, cv2.IMREAD_UNCHANGED)
     dtype = self.np_dtype if self.np_dtype != np.float32 else np.uint8
-    example = example.astype(dtype, copy=False)
-    example = _reorder_opencv_channels(example)  # pyrefly: ignore[bad-assignment]
+    example = example.astype(dtype, copy=False)  # pyrefly: ignore[missing-attribute]
+    example = _reorder_opencv_channels(example)  # pyrefly: ignore[bad-argument-type, bad-assignment]
     example = _reshape_grayscale_image(example, num_channels)  # pyrefly: ignore[bad-argument-type, bad-assignment]
     # Bitcast 4 channels uint8 -> 1 channel float32.
     if self.np_dtype == np.float32:

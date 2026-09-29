@@ -146,7 +146,7 @@ def build_catalog(
       datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()
   ):
     # Write the builder documentation
-    dataset_file = catalog_dir / f'{builder_doc.filestem}.md'
+    dataset_file = catalog_dir / f'{builder_doc.filestem}.md'  # pyrefly: ignore[unsupported-operation]
     dataset_file.write_text(builder_doc.content)
     # Save the category
     for section in builder_doc.sections:
@@ -159,7 +159,7 @@ def build_catalog(
         ds_collections
     ):
       # Write the dataset collection documentation
-      collection_file = catalog_dir / f'{collection_doc.name}.md'
+      collection_file = catalog_dir / f'{collection_doc.name}.md'  # pyrefly: ignore[unsupported-operation]
       collection_file.write_text(collection_doc.content)
       # Save the "dataset collection" docs
       section_to_collection_docs['collections'].append(collection_doc)

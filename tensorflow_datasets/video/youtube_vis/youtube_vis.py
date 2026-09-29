@@ -86,8 +86,8 @@ def _decode_segmentation(
   if isinstance(segmentation, list):  # Polygon
     rle = pycocotools.merge(rle)
   segmentation = pycocotools.decode(rle)
-  assert segmentation.shape[0] == video['height']
-  assert segmentation.shape[1] == video['width']
+  assert segmentation.shape[0] == video['height']  # pyrefly: ignore[missing-attribute]
+  assert segmentation.shape[1] == video['width']  # pyrefly: ignore[missing-attribute]
   if video['height'] != desired_height or video['width'] != desired_width:
     cv2 = tfds.core.lazy_imports.cv2
     segmentation = cv2.resize(
@@ -95,7 +95,7 @@ def _decode_segmentation(
         (desired_width, desired_height),
         interpolation=cv2.INTER_NEAREST,
     )
-  segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[bad-assignment]
+  segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[bad-assignment, no-matching-overload]
   assert len(segmentation.shape) == 3  # pyrefly: ignore[missing-attribute]
   return segmentation
 
@@ -560,7 +560,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
   ):
     beam = tfds.core.lazy_imports.apache_beam
     annotations = json.loads(annotations.read_text())
-    video_id_to_tracks, videos = _build_annotations_index(annotations)
+    video_id_to_tracks, videos = _build_annotations_index(annotations)  # pyrefly: ignore[bad-argument-type]
     height = self._builder_config.height  # pyrefly: ignore[missing-attribute]
     width = self._builder_config.width  # pyrefly: ignore[missing-attribute]
     only_frames_with_labels = self._builder_config.only_frames_with_labels  # pyrefly: ignore[missing-attribute]

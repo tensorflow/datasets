@@ -363,7 +363,7 @@ def _merge_shard_info(
     The json SplitInfo proto
   """
   (split_name,) = {s.file_info.split for s in shard_infos}
-  shard_infos = sorted(shard_infos, key=lambda s: s.file_info.shard_index)
+  shard_infos = sorted(shard_infos, key=lambda s: s.file_info.shard_index)  # pyrefly: ignore[no-matching-overload]
   filename_template = filename_template.replace(split=split_name)
   return split_lib.SplitInfo(
       name=split_name,  # pyrefly: ignore[bad-argument-type]

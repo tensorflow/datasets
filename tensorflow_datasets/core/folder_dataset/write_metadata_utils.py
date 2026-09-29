@@ -162,7 +162,7 @@ def write_metadata(
   features = features_lib.features_dict.to_feature(features)
   ds_info = dataset_info.DatasetInfo(
       builder=dataset_identity,
-      features=features,
+      features=features,  # pyrefly: ignore[bad-argument-type]
       **ds_info_kwargs,
   )
   file_format = file_adapters.file_format_from_suffix(
