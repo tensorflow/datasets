@@ -70,7 +70,7 @@ REQUIRED_PKGS = [
     'tqdm',
     'wrapt',
     # Standard library backports
-    'importlib_resources;python_version<"3.9"',
+    'importlib_resources',
 ]
 
 TESTS_DEPENDENCIES = [
