@@ -140,6 +140,7 @@ DATASET_FILES = [
 # Extra dependencies required by specific datasets
 DATASET_EXTRAS = {
     # In alphabetical order
+    'affnist': ['scipy'],
     'aflw2k3d': ['scipy'],
     'beir': ['apache-beam<2.65.0'],
     'ble_wind_field': ['gcsfs', 'zarr<3.0.0'],
