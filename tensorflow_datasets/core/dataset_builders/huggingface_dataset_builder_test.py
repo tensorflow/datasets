@@ -77,6 +77,8 @@ def mock_hub_dataset_info():
       downloads=123,
       likes=456,
       tags=[],
+      gated='automatic',
+      card_data={'extra_gated_prompt': 'Extra condition'},
   )
   with mock.patch.object(
       huggingface_hub, 'dataset_info', return_value=fake_dataset_info
@@ -106,10 +108,30 @@ def mock_huggingface_dataset_builder(
 
 
 def test_dataset_info(builder):
-  assert builder.info.description == 'description'
+  assert builder.info.description.endswith('description')
   assert builder.info.citation == 'citation from the hub'
-  assert builder.info.redistribution_info.license == 'test-license'
+  assert builder.info.redistribution_info.license.startswith('test-license')
   assert builder.info.homepage == 'https://huggingface.co/datasets/foo/bar'
+
+
+def test_gated_text(builder):
+  expected_warning = (
+      'WARNING: This dataset is gated. Before using it, make sure to sign the'
+      ' conditions at: https://huggingface.co/datasets/foo/bar. Important:'
+      ' access requests are always granted to individual users rather than to'
+      ' entire organizations.'
+  )
+  expected_conditions = (
+      'The conditions consist of:\nBy agreeing you'
+      ' accept to share your contact information (email and username) with the'
+      ' repository authors.\nExtra condition'
+  )
+  expected_gated_text = expected_warning + '\n' + expected_conditions
+  assert builder._gated_text == expected_gated_text
+  expected_description = expected_gated_text + '\n' + 'description'
+  assert builder.info.description == expected_description
+  expected_license = 'test-license' + ' ' + expected_warning
+  assert builder.info.redistribution_info.license == expected_license
 
 
 def test_download_and_prepare(builder):
