@@ -20,6 +20,7 @@ from tensorflow_datasets.image_classification.bee_dataset import BeeDataset
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet
 from tensorflow_datasets.image_classification.binary_alpha_digits import BinaryAlphaDigits
 from tensorflow_datasets.image_classification.caltech import Caltech101
+from tensorflow_datasets.image_classification.caltech256 import Caltech256
 from tensorflow_datasets.image_classification.caltech_birds import CaltechBirds2010
 from tensorflow_datasets.image_classification.cars196 import Cars196
 from tensorflow_datasets.image_classification.cassava import Cassava
