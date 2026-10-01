@@ -39,6 +39,11 @@ tutorial](https://colab.research.google.com/github/tensorflow/datasets/blob/mast
 
 from __future__ import annotations
 
+import os
+
+if os.environ.get('GCS_PREFER_FSSPEC') == 'true':
+  os.environ['EPATH_PREFER_FSSPEC'] = 'true'
+
 from absl import logging
 from etils import epy as _epy
 
