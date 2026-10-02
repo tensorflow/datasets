@@ -108,7 +108,7 @@ def main(args: Args) -> None:
   # not the C++ ones (which are too verbose).
   # `logtostderr` may not be defined if `main()` is called directly without
   # `absl.run` (e.g. open source `pytest` tests)
-  if not FLAGS.is_parsed() or (
+  if (
       # If user explicitly request logs, keep C++ logger
       not FLAGS.logtostderr
       and not FLAGS.alsologtostderr
