@@ -24,7 +24,7 @@ jobs:
       run: echo "TFDS_NIGHTLY_TIMESTAMP=$(date +'%Y%m%d%H%M')" >> $GITHUB_ENV
 
     - name: Publish the package
-      uses: etils-actions/pypi-auto-publish@v1
+      uses: etils-actions/pypi-auto-publish@e3c4b4afc3a5b12a44734da938741995538e8223 # v1
       with:
         pypi-token: ${{ secrets.NIGHTLY_PYPI_PASSWORD }}
         parse-changelog: true
