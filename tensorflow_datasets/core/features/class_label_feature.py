@@ -190,7 +190,7 @@ class ClassLabel(tensor_feature.Tensor):
       pass
 
   def _additional_repr_info(self) -> dict[str, int]:
-    return {"num_classes": self.num_classes}  # pytype: disable=bad-return-type  # always-use-property-annotation
+    return {"num_classes": self.num_classes}  # pyrefly: ignore[bad-assignment]
 
   def repr_html(self, ex: int) -> str:  # pyrefly: ignore[bad-override]
     """Class labels are displayed with their name."""
@@ -209,7 +209,7 @@ class ClassLabel(tensor_feature.Tensor):
       return cls(**value)  # pyrefly: ignore[bad-argument-type]
     return cls(num_classes=value.num_classes)
 
-  def to_json_content(self) -> feature_pb2.ClassLabel:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> feature_pb2.ClassLabel:  # pyrefly: ignore[bad-override]
     return feature_pb2.ClassLabel(num_classes=self.num_classes)
 
   @classmethod

@@ -130,7 +130,7 @@ class ExampleParserNp(Parser):
   def parse_example(
       self, serialized_example: bytes | memoryview
   ) -> Mapping[str, Union[np.ndarray, list[Any]]]:
-    example = tf_example_pb2.Example.FromString(serialized_example)  # pyrefly: ignore[bad-argument-type]
+    example = tf_example_pb2.Example.FromString(serialized_example)
     np_example = _features_to_numpy(example.features, self._flat_example_specs)  # pyrefly: ignore[bad-argument-type]
     return utils.pack_as_nest_dict(np_example, self.example_specs)
 

@@ -139,7 +139,7 @@ class Text(tensor_feature.Tensor):
   def load_metadata(self, data_dir, feature_name: str) -> None:  # pyrefly: ignore[bad-override]
     if self._encoder_cls:
       fname_prefix = _file_name_prefix_for_metadata(feature_name, data_dir)
-      self._encoder = self._encoder_cls.load_from_file(fname_prefix)  # pytype: disable=attribute-error
+      self._encoder = self._encoder_cls.load_from_file(fname_prefix)
       return
 
     # Error checking: ensure there are no metadata files
@@ -209,7 +209,7 @@ class Text(tensor_feature.Tensor):
       )
     return cls()
 
-  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> Union[Json, feature_pb2.TextFeature]:  # pyrefly: ignore[bad-override]
     if self._encoder:
       logging.warning(
           "Dataset is using deprecated text encoder API which will be removed "

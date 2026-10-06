@@ -554,7 +554,7 @@ class C4(tfds.core.BeamBasedBuilder):
                 _OPENWEBTEXT_URLS_ZIP,
             )
         )
-      file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)  # pyrefly: ignore[unsupported-operation]
+      file_paths["openwebtext_urls_zip"] = dl_manager.extract(owt_path)
 
     file_paths = tree.map_structure(os.fspath, file_paths)
 

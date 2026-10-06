@@ -207,7 +207,7 @@ class Video(sequence_feature.Sequence):
         ffmpeg_extra_args=value.ffmpeg_extra_args,
     )
 
-  def to_json_content(self) -> feature_pb2.VideoFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> feature_pb2.VideoFeature:  # pyrefly: ignore[bad-override]
     return feature_pb2.VideoFeature(
         shape=feature_lib.to_shape_proto(self.shape),
         dtype=feature_lib.dtype_to_str(self.dtype),  # pyrefly: ignore[bad-argument-type]
@@ -219,5 +219,5 @@ class Video(sequence_feature.Sequence):
   def repr_html(self, ex: np.ndarray) -> str:
     """Video are displayed as `<video>`."""
     return image_feature.make_video_repr_html(
-        ex, use_colormap=self.feature._use_colormap  # pylint: disable=protected-access  # pytype: disable=attribute-error
+        ex, use_colormap=self.feature._use_colormap  # pylint: disable=protected-access
     )

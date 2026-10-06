@@ -1478,7 +1478,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         split=split_name,
         dataset_name=self.name,
         data_dir=self.data_path,
-        filetype_suffix=self.info.file_format.file_suffix,  # pytype: disable=attribute-error
+        filetype_suffix=self.info.file_format.file_suffix,
     )
 
 
@@ -1806,7 +1806,7 @@ class GeneratorBasedBuilder(FileReaderBuilder):
     # Finalize the splits (after apache beam completed, if it was used)
     return [future.result() for future in split_info_futures]
 
-  def _download_and_prepare(  # pytype: disable=signature-mismatch  # overriding-parameter-type-checks
+  def _download_and_prepare(  # pyrefly: ignore[bad-override]
       self,
       dl_manager: download.DownloadManager,
       download_config: download.DownloadConfig,
@@ -1931,7 +1931,7 @@ class ShardBasedBuilder(FileReaderBuilder):
   ) -> None:
     download_config = download_config or download.DownloadConfig()
 
-    split_builder = split_builder_lib.SplitBuilder(  # pytype: disable=wrong-arg-types
+    split_builder = split_builder_lib.SplitBuilder(
         split_dict=self.info.splits,
         features=self.info.features,
         dataset_size=self.info.dataset_size,

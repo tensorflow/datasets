@@ -242,7 +242,7 @@ def builder(
     with py_utils.try_reraise(
         prefix=f'Failed to construct {get_dataset_repr()}: '
     ):
-      return cls(**builder_kwargs)  # pytype: disable=not-instantiable
+      return cls(**builder_kwargs)
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
   if not_found_error is not None:
@@ -410,7 +410,7 @@ class DatasetCollectionLoader:
       raise RuntimeError(
           f'Unsupported return type {type(load_output)} of `load` function.'
       )
-    return loaded_datasets  # pytype: disable=bad-return-type
+    return loaded_datasets
 
   def load_datasets(
       self,
@@ -941,7 +941,7 @@ def single_full_names(
       _iter_single_full_names(
           builder_name,
           builder_cls(builder_name),
-          current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
+          current_version_only=current_version_only,
       )
   )
 

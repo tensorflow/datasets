@@ -409,7 +409,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
         raise ValueError(
             f'Python class name must contain a dot, got: "{python_class_name}"'
         )
-      module_name, _ = python_class_name.rsplit('.', maxsplit=1)  # pytype: disable=attribute-error
+      module_name, _ = python_class_name.rsplit('.', maxsplit=1)
       try:
         # Import to register the FeatureConnector
         importlib.import_module(module_name)
@@ -570,7 +570,7 @@ class FeatureConnector(object, metaclass=abc.ABCMeta):
     """
     if not isinstance(value, dict):
       raise TypeError(f'Unexpected feature connector value: {value!r}')
-    return cls(doc=doc, **value)  # pytype: disable=not-instantiable
+    return cls(doc=doc, **value)
 
   def to_json_content(self) -> Union[Json, message.Message]:
     """FeatureConnector factory (to overwrite).
@@ -1104,7 +1104,7 @@ def _has_shape_ambiguity(in_shape: Shape, out_shape: Shape) -> bool:
   """Returns True if the shape can be an empty sequence with unknown shape."""
   # Normalize shape if running with `tf.compat.v1.disable_v2_tensorshape`
   if isinstance(in_shape, tf.TensorShape):
-    in_shape = in_shape.as_list()  # pytype: disable=attribute-error
+    in_shape = in_shape.as_list()
 
   return bool(
       in_shape[0] is None  # Empty sequence

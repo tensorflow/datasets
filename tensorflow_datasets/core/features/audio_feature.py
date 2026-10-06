@@ -357,7 +357,7 @@ class Audio(tensor_feature.Tensor):
         lazy_decode=value.lazy_decode or False,
     )
 
-  def to_json_content(self) -> feature_pb2.AudioFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> feature_pb2.AudioFeature:  # pyrefly: ignore[bad-override]
     return feature_pb2.AudioFeature(
         shape=feature_lib.to_shape_proto(self.shape),
         dtype=feature_lib.dtype_to_str(self.dtype),  # pyrefly: ignore[bad-argument-type]

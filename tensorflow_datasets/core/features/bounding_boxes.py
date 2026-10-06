@@ -152,9 +152,7 @@ class BBoxFeature(tensor_feature.Tensor):
 
   def to_json_content(  # pyrefly: ignore[bad-override]
       self,
-  ) -> (
-      feature_pb2.BoundingBoxFeature
-  ):  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  ) -> feature_pb2.BoundingBoxFeature:
     bbox_format = None
     if self.bbox_format:
       bbox_format = (

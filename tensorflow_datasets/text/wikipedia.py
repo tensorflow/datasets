@@ -531,7 +531,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       wikicode = mwparserfromhell.parse(raw_content)
 
       def rm_wikilink(obj):
-        return bool(re_rm_wikilink.match(str(obj.title)))  # pytype: disable=wrong-arg-types
+        return bool(re_rm_wikilink.match(str(obj.title)))
 
       def rm_tag(obj):
         return str(obj.tag) in {"ref", "table"}

@@ -126,7 +126,7 @@ class Translation(features_dict.FeaturesDict):
     assert not value.variable_languages_per_example
     return cls(languages=value.languages)
 
-  def to_json_content(self) -> feature_pb2.TranslationFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> feature_pb2.TranslationFeature:  # pyrefly: ignore[bad-override]
     if self._encoder or self._encoder_config:
       raise ValueError(
           "TFDS encoder are deprecated and will be removed soon. "
@@ -249,7 +249,7 @@ class TranslationVariableLanguages(sequence_feature.Sequence):
     assert value.variable_languages_per_example
     return cls(languages=value.languages)
 
-  def to_json_content(self) -> feature_pb2.TranslationFeature:  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def to_json_content(self) -> feature_pb2.TranslationFeature:  # pyrefly: ignore[bad-override]
     return feature_pb2.TranslationFeature(
         languages=self.languages, variable_languages_per_example=True
     )

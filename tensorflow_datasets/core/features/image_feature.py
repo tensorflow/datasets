@@ -417,7 +417,7 @@ class Image(feature_lib.FeatureConnector):
   ) -> 'Image':
     if isinstance(value, dict):
       # For backwards compatibility
-      return cls(  # pytype: disable=wrong-arg-types
+      return cls(
           shape=tuple(value['shape']),  # pyrefly: ignore[bad-argument-type]
           dtype=feature_lib.dtype_from_str(value['dtype']),  # pyrefly: ignore[bad-argument-type]
           encoding_format=value['encoding_format'],  # pyrefly: ignore[bad-argument-type]

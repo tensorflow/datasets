@@ -132,7 +132,7 @@ class GlueConfig(tfds.core.BuilderConfig):
             "2.0.0": "Update data source for glue/qqp.",
         },
         **kwargs,
-    )  # pytype: disable=wrong-arg-types  # gen-stub-imports
+    )
     self.text_features = text_features
     self.label_column = label_column
     self.label_classes = label_classes

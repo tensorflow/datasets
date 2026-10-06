@@ -288,7 +288,7 @@ class Shuffler(object):
     hkey = self._hasher.hash_key(key)
     if self._ignore_duplicates:
       if hkey in self._seen_keys:
-        return  # pytype: disable=bad-return-type
+        return  # pyrefly: ignore[bad-return]
       self._seen_keys.add(hkey)
     if self._disable_shuffling:
       # Use the original key and not the hashed key to maintain the order.
@@ -298,7 +298,7 @@ class Shuffler(object):
       self._add_to_mem_buffer(hkey, data)
     else:
       self._add_to_bucket(hkey, data)
-    self._num_examples += 1  # pytype: disable=bad-return-type
+    self._num_examples += 1
 
   def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True

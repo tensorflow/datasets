@@ -226,7 +226,7 @@ def imported_dataset_collection_cls(
 
   dataset_collection_cls = _DATASET_COLLECTION_REGISTRY[name]
 
-  return dataset_collection_cls  # pytype: disable=bad-return-type
+  return dataset_collection_cls
 
 
 class RegisteredDataset(abc.ABC):
@@ -478,7 +478,7 @@ def imported_builder_cls(name: str) -> Type[RegisteredDataset]:
   if name in _ABSTRACT_DATASET_REGISTRY:
     # Will raise TypeError: Can't instantiate abstract class X with abstract
     # methods y, before __init__ even get called
-    _ABSTRACT_DATASET_REGISTRY[name]()  # pytype: disable=not-callable
+    _ABSTRACT_DATASET_REGISTRY[name]()
     # Alternatively, could manually extract the list of non-implemented
     # abstract methods.
     raise AssertionError(f'Dataset {name} is an abstract class.')

@@ -420,7 +420,7 @@ class DatasetInfo:
   def homepage(self) -> str:
     urls = self.as_proto.location.urls
     tfds_homepage = f"https://www.tensorflow.org/datasets/catalog/{self.name}"
-    return urls and urls[0] or tfds_homepage  # pytype: disable=bad-return-type
+    return urls and urls[0] or tfds_homepage  # pyrefly: ignore[bad-return]
 
   @property
   def citation(self) -> str:
@@ -726,7 +726,7 @@ class DatasetInfo:
     )
 
     # Update splits
-    filename_template = naming.ShardedFileTemplate(  # pytype: disable=wrong-arg-types  # always-use-property-annotation
+    filename_template = naming.ShardedFileTemplate(
         dataset_name=self.name,
         data_dir=self.data_dir,  # pyrefly: ignore[bad-argument-type]
         filetype_suffix=parsed_proto.file_format or "tfrecord",
@@ -1202,7 +1202,7 @@ def pack_as_supervised_ds(
       and isinstance(ds.element_spec, tuple)
       and len(ds.element_spec) == 2
   ):
-    x_key, y_key = ds_info.supervised_keys  # pytype: disable=bad-unpacking
+    x_key, y_key = ds_info.supervised_keys  # pyrefly: ignore[bad-unpacking]
     ds = ds.map(lambda x, y: {x_key: x, y_key: y})
     return ds
   else:  # If dataset isn't a supervised tuple (input, label), return as-is

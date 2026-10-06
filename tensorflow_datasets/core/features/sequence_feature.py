@@ -174,10 +174,10 @@ class Sequence(top_level_feature.TopLevelFeature):
 
   def __getitem__(self, key):
     """Convenience method to access the underlying features."""
-    return self._feature[key]  # pytype: disable=unsupported-operands
+    return self._feature[key]
 
   def __contains__(self, key: str) -> bool:
-    return key in self._feature  # pytype: disable=unsupported-operands
+    return key in self._feature
 
   def __getattr__(self, key):
     """Allow to access the underlying attributes directly."""
@@ -318,5 +318,5 @@ def transpose_dict_list(dict_list):
   # 3. Extract each individual elements
   return [
       utils.map_nested(lambda elem: elem[i], dict_list, dict_only=True)  # pylint: disable=cell-var-from-loop
-      for i in range(length['value'])  # pytype: disable=wrong-arg-types
+      for i in range(length['value'])  # pyrefly: ignore[bad-argument-type]
   ]
