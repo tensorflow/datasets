@@ -209,7 +209,7 @@ class DatasetBuilderTestCase(
   def dummy_data(cls) -> epath.Path:  # pylint: disable=no-self-argument
     """Path to the `dummy_data/` directory."""
     if cls is DatasetBuilderTestCase:  # Required for build_api_docs
-      return None  # pytype: disable=bad-return-type
+      return None  # pyrefly: ignore[bad-return]
 
     dummy_data_expected = cls.DATASET_CLASS.code_path.parent / "dummy_data"  # pyrefly: ignore[missing-attribute]
     fake_example_dir = epath.Path(test_utils.fake_examples_dir())
@@ -248,7 +248,7 @@ class DatasetBuilderTestCase(
     os_patcher.start()
     self.patchers.append(os_patcher)
 
-    mock_builtins = __builtins__.copy()  # pytype: disable=module-attr
+    mock_builtins = __builtins__.copy()
     mock_builtins["open"] = mock.Mock(side_effect=err)
     open_patcher = mock.patch(
         self.DATASET_CLASS.__module__ + ".__builtins__", mock_builtins

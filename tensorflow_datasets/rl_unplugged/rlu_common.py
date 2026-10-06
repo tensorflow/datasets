@@ -50,7 +50,7 @@ def filename(prefix: str, num_shards: int, shard_id: int):
 
 
 def get_files(prefix: str, num_shards: int) -> List[str]:
-  return [filename(prefix, num_shards, i) for i in range(num_shards)]  # pytype: disable=bad-return-type  # gen-stub-imports
+  return [filename(prefix, num_shards, i) for i in range(num_shards)]
 
 
 def float_tensor_feature(size: int) -> tfds.features.Tensor:

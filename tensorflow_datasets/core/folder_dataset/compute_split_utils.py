@@ -273,7 +273,7 @@ def _compute_split_statistics_beam(
           >> _process_split(  # pylint: disable=no-value-for-parameter
               filename_template=filename_template,
               out_dir=out_dir,
-              file_infos=file_infos,  # pytype: disable=missing-parameter
+              file_infos=file_infos,
           )
       )
 

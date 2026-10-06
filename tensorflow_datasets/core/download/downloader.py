@@ -384,7 +384,7 @@ def _open_with_urllib(
     **kwargs: Any,
 ) -> Iterator[tuple[Response, Iterable[bytes]]]:
   del kwargs
-  with urllib.request.urlopen(url) as response:  # pytype: disable=attribute-error
+  with urllib.request.urlopen(url) as response:
     yield (
         response,
         iter(functools.partial(response.read, io.DEFAULT_BUFFER_SIZE), b''),

@@ -142,7 +142,7 @@ class NonMutableDict(dict[T, U]):
       raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self).__setitem__(key, value)
 
-  def update(self, other):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
+  def update(self, other):
     if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
@@ -152,7 +152,7 @@ class classproperty(property):  # pylint: disable=invalid-name
   """Descriptor to be used as decorator for @classmethods."""
 
   def __get__(self, obj, objtype=None):
-    return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
+    return self.fget.__get__(None, objtype)()  # pyrefly: ignore[missing-attribute]
 
 
 if typing.TYPE_CHECKING:
@@ -228,7 +228,7 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
 # users to compile from source.
 def flatten_with_path(
     structure: Tree[T],
-) -> Iterator[tuple[tuple[str | int, ...], T]]:  # pytype: disable=invalid-annotation
+) -> Iterator[tuple[tuple[str | int, ...], T]]:
   """Convert a TreeDict into a flat list of paths and their values.
 
   ```py
@@ -529,7 +529,7 @@ def get_base64(
     buffer = io.BytesIO()
     write_fn(buffer)
     bytes_value = buffer.getvalue()
-  return base64.b64encode(bytes_value).decode('ascii')  # pytype: disable=bad-return-type
+  return base64.b64encode(bytes_value).decode('ascii')
 
 
 @contextlib.contextmanager

@@ -206,7 +206,7 @@ def iter_tar(arch_f, stream=False):
         continue
 
       if extract_file:  # File with data (not directory):
-        path = _normpath(member.path)  # pytype: disable=attribute-error
+        path = _normpath(member.path)
         if not path:
           continue
         yield (path, extract_file)
@@ -233,7 +233,7 @@ def iter_zip(arch_f):
   with _open_or_pass(arch_f) as fobj:
     z = zipfile.ZipFile(fobj)
     for member in z.infolist():
-      if member.is_dir():  # Filter directories  # pytype: disable=attribute-error
+      if member.is_dir():  # Filter directories
         continue
       extract_file = z.open(member)
       path = _normpath(member.filename)
@@ -270,4 +270,4 @@ def iter_archive(
     raise ValueError(
         f'Cannot `iter_archive` over {path}. Invalid or unrecognised archive.'
     )
-  return _EXTRACT_METHODS[method](path)  # pytype: disable=bad-return-type
+  return _EXTRACT_METHODS[method](path)

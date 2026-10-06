@@ -205,11 +205,11 @@ class MockFs(object):
     path = os.fspath(path)
     content = content or f'Content of {path}'
     fpath = self._to_tmp(path)
-    fpath.parent.mkdir(parents=True, exist_ok=True)  # pytype: disable=attribute-error
-    fpath.write_text(content)  # pytype: disable=attribute-error
+    fpath.parent.mkdir(parents=True, exist_ok=True)
+    fpath.write_text(content)
 
   def read_file(self, path) -> str:
-    return self._to_tmp(path).read_text()  # pytype: disable=attribute-error
+    return self._to_tmp(path).read_text()
 
   def _mock_open(self, original_fn, p, mode='r', **kwargs):
     return original_fn(self._to_tmp(p), mode, **kwargs)

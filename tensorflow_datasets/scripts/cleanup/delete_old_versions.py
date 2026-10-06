@@ -48,7 +48,7 @@ flags.DEFINE_boolean(
 )
 
 # Nested dict representing the file structure.
-TreeDict = Dict[str, 'TreeDict']  # pytype: disable=not-supported-yet
+TreeDict = Dict[str, 'TreeDict']
 
 # Folder in this lists are never deleted
 DIRS_TO_KEEP = frozenset({'downloads', 'download', 'manual', 'extracted'})

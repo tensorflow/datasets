@@ -36,7 +36,7 @@ _hex_codec = codecs.getdecoder('hex_codec')
 
 def _decode_hex(hexstr: str):
   """Returns binary digest, given str hex digest."""
-  return _hex_codec(hexstr)[0]  # pytype: disable=wrong-arg-types
+  return _hex_codec(hexstr)[0]  # pyrefly: ignore[bad-argument-type]
 
 
 class ExtractMethod(enum.Enum):
@@ -299,7 +299,7 @@ class Resource:
     """
     self._url = url
     self._extract_method = extract_method
-    self.path: epath.Path = epath.Path(path) if path else None  # pytype: disable=annotation-type-mismatch  # attribute-variable-annotations
+    self.path: epath.Path = epath.Path(path) if path else None  # pyrefly: ignore[bad-assignment]
     self.relative_download_dir = relative_download_dir
 
   @property

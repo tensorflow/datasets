@@ -93,23 +93,22 @@ def _get_example_objects(annon_filepath):
 
     # Disable pytype to avoid attribute-error due to find returning
     # Optional[Element]
-    # pytype: disable=attribute-error
     size = root.find("size")
-    width = float(size.find("width").text)
-    height = float(size.find("height").text)
+    width = float(size.find("width").text)  # pyrefly: ignore[missing-attribute]
+    height = float(size.find("height").text)  # pyrefly: ignore[missing-attribute]
 
     for obj in root.findall("object"):
       # Get object's label name.
-      label = obj.find("name").text.lower()
+      label = obj.find("name").text.lower()  # pyrefly: ignore[missing-attribute]
       # Get objects' pose name.
-      pose = obj.find("pose").text.lower()
-      is_truncated = obj.find("truncated").text == "1"
-      is_difficult = obj.find("difficult").text == "1"
+      pose = obj.find("pose").text.lower()  # pyrefly: ignore[missing-attribute]
+      is_truncated = obj.find("truncated").text == "1"  # pyrefly: ignore[missing-attribute]
+      is_difficult = obj.find("difficult").text == "1"  # pyrefly: ignore[missing-attribute]
       bndbox = obj.find("bndbox")
-      xmax = float(bndbox.find("xmax").text)
-      xmin = float(bndbox.find("xmin").text)
-      ymax = float(bndbox.find("ymax").text)
-      ymin = float(bndbox.find("ymin").text)
+      xmax = float(bndbox.find("xmax").text)  # pyrefly: ignore[missing-attribute]
+      xmin = float(bndbox.find("xmin").text)  # pyrefly: ignore[missing-attribute]
+      ymax = float(bndbox.find("ymax").text)  # pyrefly: ignore[missing-attribute]
+      ymin = float(bndbox.find("ymin").text)  # pyrefly: ignore[missing-attribute]
       yield {
           "label": label,
           "pose": pose,
@@ -119,7 +118,6 @@ def _get_example_objects(annon_filepath):
           "is_truncated": is_truncated,
           "is_difficult": is_difficult,
       }
-    # pytype: enable=attribute-error
 
 
 class VocConfig(tfds.core.BuilderConfig):
