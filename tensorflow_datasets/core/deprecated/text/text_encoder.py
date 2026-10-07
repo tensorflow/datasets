@@ -26,7 +26,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 
 
 def _re_compile(pattern):
-  return re.compile(pattern, flags=re.UNICODE)  # pytype: disable=wrong-keyword-args
+  return re.compile(pattern, flags=re.UNICODE)  # pyrefly: ignore[missing-attribute, unexpected-keyword]
 
 
 NUM_BYTES = 2**8

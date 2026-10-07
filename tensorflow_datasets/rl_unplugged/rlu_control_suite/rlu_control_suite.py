@@ -62,7 +62,6 @@ class ControlSuiteBuilderConfig(tfds.core.BuilderConfig):
   action_size: int = 0
 
 
-# pytype: disable=wrong-keyword-args
 _BUILDER_CONFIGS = [
     ControlSuiteBuilderConfig(
         name='cartpole_swingup',
@@ -151,7 +150,6 @@ _BUILDER_CONFIGS = [
         action_size=6,
     ),
 ]
-# pytype: enable=wrong-keyword-args
 
 
 def _sequence_feature(

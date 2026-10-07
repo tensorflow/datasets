@@ -373,7 +373,7 @@ class CroissantBuilder(
     """`tfds.core.BuilderConfig` for this builder."""
     return (
         self._builder_config  # pyrefly: ignore[bad-return]
-    )  # pytype: disable=bad-return-type  # always-use-return-annotations
+    )
 
   def _info(self) -> dataset_info.DatasetInfo:
     return dataset_info.DatasetInfo(
@@ -430,7 +430,7 @@ class CroissantBuilder(
           for split in split_reference.split_record_set.data  # pyrefly: ignore[not-iterable]
       }
     else:
-      return {'default': self._generate_examples(filters=self._filters)}  # pyrefly: ignore[bad-argument-type, bad-assignment, bad-return]
+      return {'default': self._generate_examples(filters=self._filters)}  # pyrefly: ignore[bad-argument-type, bad-assignment]
 
   def _generate_examples(
       self,

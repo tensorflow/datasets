@@ -111,7 +111,6 @@ _ADROIT_DESCRIPTION = (
     'https://github.com/rail-berkeley/d4rl/wiki/Tasks#adroit'
 )
 
-# pytype: disable=wrong-keyword-args
 MUJOCO_BUILDER_CONFIGS = [
     BuilderConfig(
         name='v0-expert',
@@ -339,7 +338,6 @@ ADROIT_BUILDER_CONFIGS = [
         description=_ADROIT_DESCRIPTION,
     ),
 ]
-# pytype: enable=wrong-keyword-args
 
 
 def _get_step_metadata(
@@ -565,4 +563,4 @@ class D4RLDatasetBuilder(
   def _generate_examples(self, path):
     """Yields examples."""
     file_path = path['file_path']
-    return dataset_utils.generate_examples(file_path)  # pytype: disable=wrong-arg-types
+    return dataset_utils.generate_examples(file_path)

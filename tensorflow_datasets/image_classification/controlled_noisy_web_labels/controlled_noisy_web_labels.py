@@ -230,7 +230,6 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
     - 5922767e5677aef4.jpg
 
   """
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       ControlledNoisyWebLabelsConfig(
           name='mini_imagenet_red',
@@ -245,8 +244,6 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
           num_classes=100,
       ),
   ]
-
-  # pytype: enable=wrong-keyword-args
 
   def _read_mini_imagenet_csv(self, path):
     fnames = []
@@ -342,7 +339,7 @@ class ControlledNoisyWebLabels(tfds.core.GeneratorBasedBuilder):
 
       for image_fname, image in tfds.download.iter_archive(
           fobj_mem, tfds.download.ExtractMethod.TAR_STREAM
-      ):  # pytype: disable=wrong-arg-types  # gen-stub-imports
+      ):
         if image_fname in selected_fnames:
           # Convert the image ID back to mini-Imagenet style, e.g.
           # n0144076400000009.jpg, for a quick access later

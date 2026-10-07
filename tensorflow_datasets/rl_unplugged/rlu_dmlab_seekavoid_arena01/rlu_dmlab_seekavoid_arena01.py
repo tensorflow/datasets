@@ -44,11 +44,9 @@ class RluDmlabSeekavoidArena01(dmlab_dataset.DMLabDatasetBuilder):
       '1.2.0': 'BGR -> RGB fix for pixel observations.',
   }
 
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       dmlab_dataset.BuilderConfig(
           name=name, task=_TASK, episode_length=_EPISODE_LENGTH
       )
       for name in _CONFIG_NAMES
   ]
-  # pytype: enable=wrong-keyword-args

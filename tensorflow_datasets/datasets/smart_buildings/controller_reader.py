@@ -84,7 +84,7 @@ class ProtoReader(reader_lib.BaseReader):
         smart_control_reward_pb2.RewardInfo.FromString,  # pyrefly: ignore[bad-argument-type]
     )
 
-  def read_reward_responses(  # pytype: disable=signature-mismatch  # overriding-return-type-checks
+  def read_reward_responses(  # pyrefly: ignore[bad-override]
       self, start_time: pd.Timestamp, end_time: pd.Timestamp
   ) -> Sequence[smart_control_reward_pb2.RewardResponse]:
     """Reads the reward responses obtained from the environment."""

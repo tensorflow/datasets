@@ -132,7 +132,7 @@ def _normalize_feature_dict(
     return inner_features
   elif type(feature) == features_lib.Sequence:  # pylint: disable=unidiomatic-typecheck
     inner_features = _normalize_feature_dict(
-        feature=feature.feature,  # pytype: disable=attribute-error
+        feature=feature.feature,
         expected_feature=expected_feature,
     )
     return features_lib.Sequence(inner_features)

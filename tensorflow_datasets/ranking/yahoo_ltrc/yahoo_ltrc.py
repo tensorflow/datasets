@@ -78,7 +78,6 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
       "1.0.0": "Initial release.",
       "1.1.0": "Add query and document identifiers.",
   }
-  # pytype: disable=wrong-keyword-args
   # pylint: disable=unexpected-keyword-arg
   BUILDER_CONFIGS = [
       YahooLTRCConfig(name="set1", prefix="set1", num_features=699),
@@ -86,7 +85,6 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
   ]
 
   # pylint: enable=unexpected-keyword-arg
-  # pytype: enable=wrong-keyword-args
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   Request access for the C14 Yahoo Learning To Rank Challenge dataset on

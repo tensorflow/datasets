@@ -129,9 +129,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
       '1.0.0': 'Initial release.',
   }
 
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [tfds.core.BuilderConfig(name=name) for name in _TASK_NAMES]
-  # pytype: enable=wrong-keyword-args
 
   _SHARDS = 100
   _INPUT_FILE_PREFIX = 'gs://rl_unplugged/dm_locomotion_episodes/'
@@ -171,7 +169,7 @@ class RluLocomotion(rlu_common.RLUBuilder):
       action_features = tfds.features.Tensor(shape=(38,), dtype=np.float32)
 
     return tfds.features.FeaturesDict({
-        'steps': tfds.features.Dataset({  # pyrefly: ignore[bad-argument-type]
+        'steps': tfds.features.Dataset({
             'observation': {
                 'walker': walker_features,  # pyrefly: ignore[bad-assignment]
             },

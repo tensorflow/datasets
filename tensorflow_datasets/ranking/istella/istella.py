@@ -99,14 +99,11 @@ class Istella(tfds.core.GeneratorBasedBuilder):
       "1.1.0": "Bundle features into a single 'float_features' feature.",
       "1.2.0": "Add query and document identifiers.",
   }
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       IstellaConfig(name="main", has_vali=False, subdirectory="full"),
       IstellaConfig(name="s", has_vali=True, subdirectory="sample"),
       IstellaConfig(name="x", has_vali=True, subdirectory=None),
   ]
-
-  # pytype: enable=wrong-keyword-args
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
