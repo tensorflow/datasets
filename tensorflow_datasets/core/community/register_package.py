@@ -187,7 +187,7 @@ class _PackageIndex(collections.UserDict[naming.DatasetName, DatasetPackage]):
       return
 
     # If read was sucessful, update the cache with the new dataset list
-    self._cached_path.write_text(content)  # pytype: disable=attribute-error  # attribute-variable-annotations
+    self._cached_path.write_text(content)
     self._refresh_from_content(content)
 
 
@@ -260,7 +260,7 @@ class PackageRegister(register_base.BaseRegister):
       **builder_kwargs: Any,
   ) -> dataset_builder.DatasetBuilder:
     """Returns the dataset builder."""
-    return self.builder_cls(name)(**builder_kwargs)  # pytype: disable=not-instantiable
+    return self.builder_cls(name)(**builder_kwargs)
 
 
 def list_ds_packages_for_namespace(

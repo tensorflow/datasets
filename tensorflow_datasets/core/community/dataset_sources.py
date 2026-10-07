@@ -55,7 +55,7 @@ class DatasetSource:
     if len(self.filenames) == 1:
       return os.fspath(self.root_path / self.filenames[0])
     else:
-      return {  # pyrefly: ignore[bad-return]
+      return {
           'root_path': os.fspath(self.root_path),
           'filenames': self.filenames,  # pyrefly: ignore[bad-assignment]
       }

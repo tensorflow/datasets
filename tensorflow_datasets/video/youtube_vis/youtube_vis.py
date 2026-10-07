@@ -71,7 +71,7 @@ def _convert_bbox(
       ymin=box[1] / height,
       xmax=(box[0] + box[2]) / width,
       ymax=(box[1] + box[3]) / height,
-  )  # pytype: disable=bad-return-type  # gen-stub-imports
+  )
 
 
 def _decode_segmentation(
@@ -95,7 +95,7 @@ def _decode_segmentation(
         (desired_width, desired_height),
         interpolation=cv2.INTER_NEAREST,
     )
-  segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[bad-assignment, no-matching-overload]
+  segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[no-matching-overload]
   assert len(segmentation.shape) == 3  # pyrefly: ignore[missing-attribute]
   return segmentation
 
@@ -432,7 +432,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     )
     seg_shape = (None, self.builder_config.height, self.builder_config.width, 1)  # pyrefly: ignore[missing-attribute]
     all_features = {
-        'video': tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        'video': tfds.features.Video(video_shape),
         'metadata': {
             'height': np.int32,
             'width': np.int32,
@@ -441,7 +441,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         },
         'tracks': tfds.features.Sequence({
             'bboxes': tfds.features.Sequence(tfds.features.BBoxFeature()),
-            'segmentations': tfds.features.Video(seg_shape, use_colormap=True),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+            'segmentations': tfds.features.Video(seg_shape, use_colormap=True),
             'category': tfds.features.ClassLabel(names_file=names_file),
             'is_crowd': np.bool_,
             'areas': tfds.features.Sequence(np.float32),

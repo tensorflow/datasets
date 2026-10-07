@@ -235,7 +235,7 @@ def _load_builder_from_code(
     return BuilderToDocument(
         sections=sections,
         namespace=None,
-        builder=builder_cls(),  # pytype: disable=not-instantiable
+        builder=builder_cls(),
         config_builders=[],
     )
 
@@ -365,30 +365,28 @@ def iter_documentation_builders(
   print('Retrieving the list of builders...')
   datasets = datasets or _all_tfds_datasets()
 
-  # pytype: disable=attribute-error
-  if doc_util_paths.fig_base_path:
+  if doc_util_paths.fig_base_path:  # pyrefly: ignore[missing-attribute]
     visu_doc_util = doc_utils.VisualizationDocUtil(
         base_path=doc_util_paths.fig_base_path,
-        base_url=doc_util_paths.fig_base_url,
+        base_url=doc_util_paths.fig_base_url,  # pyrefly: ignore[missing-attribute]
     )
   else:
     visu_doc_util = None
 
-  if doc_util_paths.df_base_path:
+  if doc_util_paths.df_base_path:  # pyrefly: ignore[missing-attribute]
     df_doc_util = doc_utils.DataframeDocUtil(
         base_path=doc_util_paths.df_base_path,
-        base_url=doc_util_paths.df_base_url,
+        base_url=doc_util_paths.df_base_url,  # pyrefly: ignore[missing-attribute]
     )
   else:
     df_doc_util = None
 
   if doc_util_paths.fig_base_path:
     nightly_doc_util = doc_utils.NightlyDocUtil(
-        path=doc_util_paths.nightly_path,
+        path=doc_util_paths.nightly_path,  # pyrefly: ignore[missing-attribute]
     )
   else:
     nightly_doc_util = None
-  # pytype: enable=attribute-error
 
   document_single_builder_fn = functools.partial(
       _document_single_builder,

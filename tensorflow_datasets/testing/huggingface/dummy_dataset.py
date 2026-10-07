@@ -17,7 +17,7 @@
 
 from pathlib import Path  # < Direct import of path should be patched  # pylint: disable=g-importing-member
 
-import datasets  # pytype: disable=import-error
+import datasets  # pyrefly: ignore[missing-import]
 import tensorflow_datasets.public_api as tfds
 
 

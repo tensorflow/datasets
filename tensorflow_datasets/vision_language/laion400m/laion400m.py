@@ -236,7 +236,7 @@ class Laion400m(tfds.core.GeneratorBasedBuilder):
 
       file_name_to_dl_path = dl_manager.download(file_name_to_url)
 
-      return file_name_to_dl_path  # pyrefly: ignore[bad-return]
+      return file_name_to_dl_path
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""

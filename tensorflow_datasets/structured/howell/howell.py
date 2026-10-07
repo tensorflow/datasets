@@ -89,7 +89,7 @@ class Howell(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, file_path):
     """Yields examples."""
-    with file_path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
+    with file_path.open() as f:
       reader = csv.DictReader(f, delimiter=";")
       for index, row in enumerate(reader):
         example = dict(row.items())

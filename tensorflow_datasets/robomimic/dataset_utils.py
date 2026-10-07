@@ -112,7 +112,6 @@ def make_builder_configs(dataset: DataSource):
   for task, details in TASKS.items():
     if dataset in details['datasets']:  # pyrefly: ignore[not-iterable]
       for observation_type in [ObservationType.IMAGE, ObservationType.LOW_DIM]:
-        # pytype: disable=wrong-keyword-args
         configs.append(
             # name is inherited from base dataclass unbeknownst to the linter
             BuilderConfig(  # pylint: disable=unexpected-keyword-arg
@@ -120,10 +119,9 @@ def make_builder_configs(dataset: DataSource):
                 task=task,
                 dataset=dataset,
                 filename=observation_type,
-                horizon=details['horizon'],
+                horizon=details['horizon'],  # pyrefly: ignore[bad-argument-type]
             )
         )
-        # pytype: enable=wrong-keyword-args
   return configs
 
 
@@ -301,7 +299,7 @@ class RobomimicBuilder(tfds.core.GeneratorBasedBuilder, skip_registration=True):
     features = tfds.features.FeaturesDict({
         'horizon': np.int32,
         'episode_id': np.str_,
-        'steps': tfds.features.Dataset({  # pyrefly: ignore[bad-argument-type]
+        'steps': tfds.features.Dataset({
             'action': tensor_feature(action_size),  # pyrefly: ignore[bad-argument-type]
             'observation': observation,  # pyrefly: ignore[bad-assignment]
             'reward': np.float64,

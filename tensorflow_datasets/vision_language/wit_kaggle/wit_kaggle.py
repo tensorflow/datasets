@@ -265,7 +265,6 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
       """,
   }
 
-  # pytype: disable=wrong-keyword-args
   # In the Wikipedia - Image/Caption Matching competition, train samples are
   # associated with a rich set of metadata, while test samples only have a
   # sample_id and four image-related fields.
@@ -315,7 +314,6 @@ class WitKaggle(tfds.core.GeneratorBasedBuilder):
           }),
       ),
   ]
-  # pytype: enable=wrong-keyword-args
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   Depending on the config called, manual_dir should contain some of the

@@ -36,7 +36,7 @@ DatasetPackage = tfds.core.community.register_package.DatasetPackage
 
 
 def main(_):
-  export_community_datasets(in_path=_IN_PATH, out_path=_OUT_PATH)  # pytype: disable=wrong-arg-types
+  export_community_datasets(in_path=_IN_PATH, out_path=_OUT_PATH)
 
 
 def export_community_datasets(

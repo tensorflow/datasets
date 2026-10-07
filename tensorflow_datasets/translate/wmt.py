@@ -1056,7 +1056,7 @@ def _parse_tmx(path):
 
   with epath.Path(path).open("rb") as f:
     utf_f = codecs.getreader("utf-8")(f)
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
       if elem.tag == "tu":
         yield line_id, {
             _get_tuv_lang(tuv): _get_tuv_seg(tuv)
@@ -1106,7 +1106,7 @@ def _parse_czeng(*paths, **kwargs):
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with epath.Path(filter_path).open() as f:
       bad_blocks = set(
-          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pytype: disable=attribute-error
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pyrefly: ignore[missing-attribute]
       )
     logging.info(
         "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",

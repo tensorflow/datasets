@@ -786,7 +786,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -800,7 +800,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"], "commongen.train.jsonl"  # pyrefly: ignore[bad-index]
+                      files["data"], "commongen.train.jsonl"
                   ),
                   "set_name": "train",
               },
@@ -809,7 +809,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"], "commongen.dev.jsonl"  # pyrefly: ignore[bad-index]
+                      files["data"], "commongen.dev.jsonl"
                   ),
                   "set_name": "validation",
               },
@@ -818,7 +818,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"], "commongen.test_noref.jsonl"  # pyrefly: ignore[bad-index]
+                      files["data"], "commongen.test_noref.jsonl"
                   ),
                   "set_name": "test",
               },
@@ -847,7 +847,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -860,21 +860,21 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["train"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["train"],
                   "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["validation"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["test"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["test"],
                   "set_name": "test",
               },
           ),
@@ -884,21 +884,21 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["train"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["train"],
                   "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["validation"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["test"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["test"],
                   "set_name": "test",
               },
           ),
@@ -922,7 +922,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -934,21 +934,21 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["train"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["train"],
                   "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["validation"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["test"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["test"],
                   "set_name": "test",
               },
           ),
@@ -974,7 +974,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(  # pyrefly: ignore[no-matching-overload]
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -987,31 +987,31 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["train"], lang + "_train.jsonl"  # pyrefly: ignore[bad-index]
+                      files["train"], lang + "_train.jsonl"
                   ),
                   "set_name": "train",
                   "lang": lang,
-                  "filepaths": files["bad_ids"],  # pyrefly: ignore[bad-index]
+                  "filepaths": files["bad_ids"],
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["validation"], lang + "_val.jsonl"  # pyrefly: ignore[bad-index]
+                      files["validation"], lang + "_val.jsonl"
                   ),
                   "set_name": "validation",
                   "lang": lang,
-                  "filepaths": files["bad_ids"],  # pyrefly: ignore[bad-index]
+                  "filepaths": files["bad_ids"],
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": os.path.join(files["test"], lang + "_test.jsonl"),  # pyrefly: ignore[bad-index]
+                  "filepath": os.path.join(files["test"], lang + "_test.jsonl"),
                   "set_name": "test",
                   "lang": lang,
-                  "filepaths": files["bad_ids"],  # pyrefly: ignore[bad-index]
+                  "filepaths": files["bad_ids"],
               },
           ),
       ] + challenge_splits
@@ -1053,7 +1053,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -1071,7 +1071,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
             tfds.core.SplitGenerator(
                 name=tfds_spl,
                 gen_kwargs={
-                    "filepath": os.path.join(files["data"], "gem_sgd.json"),  # pyrefly: ignore[bad-index]
+                    "filepath": os.path.join(files["data"], "gem_sgd.json"),
                     "set_name": spl,
                 },
             )
@@ -1096,7 +1096,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -1110,7 +1110,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"], "totto_data/totto_train_data.jsonl"  # pyrefly: ignore[bad-index]
+                      files["data"], "totto_data/totto_train_data.jsonl"
                   ),
                   "set_name": "train",
               },
@@ -1119,7 +1119,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"], "totto_data/totto_dev_data.jsonl"  # pyrefly: ignore[bad-index]
+                      files["data"], "totto_data/totto_dev_data.jsonl"
                   ),
                   "set_name": "validation",
               },
@@ -1128,7 +1128,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
                   "filepath": os.path.join(
-                      files["data"],  # pyrefly: ignore[bad-index]
+                      files["data"],
                       "totto_data/unlabeled_totto_test_data.jsonl",
                   ),
                   "set_name": "test",
@@ -1164,7 +1164,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(  # pyrefly: ignore[no-matching-overload]
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -1175,18 +1175,18 @@ class Gem(tfds.core.GeneratorBasedBuilder):
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
-              gen_kwargs={"filepath": files["train"], "set_name": "train"},  # pyrefly: ignore[bad-index]
+              gen_kwargs={"filepath": files["train"], "set_name": "train"},
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["validation"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
-              gen_kwargs={"filepath": files["test"], "set_name": "test"},  # pyrefly: ignore[bad-index]
+              gen_kwargs={"filepath": files["test"], "set_name": "test"},
           ),
       ] + challenge_splits
     elif self.builder_config.name == "wiki_auto_asset_turk":
@@ -1239,7 +1239,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -1251,14 +1251,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["train"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["train"],
                   "set_name": "train",
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["validation"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["validation"],
                   "set_name": "validation",
               },
           ),
@@ -1268,14 +1268,14 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                   "filepath": "",
                   "set_name": "test_asset",
                   "filepaths": [
-                      files["test_asset_" + str(i)] for i in range(10)  # pyrefly: ignore[bad-index]
+                      files["test_asset_" + str(i)] for i in range(10)
                   ],
               },
           ),
           tfds.core.SplitGenerator(
               name="test_turk",
               gen_kwargs={
-                  "filepath": files["test_turk"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["test_turk"],
                   "set_name": "test_turk",
               },
           ),
@@ -1283,7 +1283,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
     elif self.builder_config.name.startswith("wiki_lingua"):  # pyrefly: ignore[missing-attribute]
       lang_name = self.builder_config.name.split("_")[-2]  # pyrefly: ignore[missing-attribute]
       lang = self.builder_config.name.split("_")[-1]  # pyrefly: ignore[missing-attribute]
-      base_dir = os.path.join(files["data"], lang_name)  # pyrefly: ignore[bad-index]
+      base_dir = os.path.join(files["data"], lang_name)
       return [
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
@@ -1339,7 +1339,7 @@ class Gem(tfds.core.GeneratorBasedBuilder):
                 name=challenge_split,
                 gen_kwargs={
                     "filepath": os.path.join(
-                        files["challenge_set"],  # pyrefly: ignore[bad-index]
+                        files["challenge_set"],
                         self.builder_config.name,
                         filename,
                     ),
@@ -1351,25 +1351,25 @@ class Gem(tfds.core.GeneratorBasedBuilder):
           tfds.core.SplitGenerator(
               name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["splits"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["splits"],
                   "set_name": "train",
-                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),  # pyrefly: ignore[bad-index]
+                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["splits"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["splits"],
                   "set_name": "validation",
-                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),  # pyrefly: ignore[bad-index]
+                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),
               },
           ),
           tfds.core.SplitGenerator(
               name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               gen_kwargs={
-                  "filepath": files["splits"],  # pyrefly: ignore[bad-index]
+                  "filepath": files["splits"],
                   "set_name": "test",
-                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),  # pyrefly: ignore[bad-index]
+                  "filepaths": os.path.join(files["data"], "bbc-summary-data"),
               },
           ),
       ] + challenge_splits

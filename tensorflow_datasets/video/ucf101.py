@@ -146,7 +146,7 @@ class Ucf101(tfds.core.GeneratorBasedBuilder):
             video_shape,  # pyrefly: ignore[bad-argument-type]
             ffmpeg_extra_args=ffmpeg_extra_args,
             encoding_format='jpeg',
-        ),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        ),
         'label': tfds.features.ClassLabel(names_file=labels_names_file),
     })
     return tfds.core.DatasetInfo(

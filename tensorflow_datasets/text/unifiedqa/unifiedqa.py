@@ -1970,27 +1970,21 @@ class UnifiedQA(tfds.core.GeneratorBasedBuilder):
     split_generators = {}
 
     if 'train' in self.builder_config.data_urls:  # pyrefly: ignore[missing-attribute]
-      split_generators.update(
-          {
-              tfds.Split.TRAIN: self._generate_examples(path=data_dir['train']),  # pyrefly: ignore[bad-index, missing-attribute]
-          }
-      )
+      split_generators.update({
+          tfds.Split.TRAIN: self._generate_examples(path=data_dir['train']),  # pyrefly: ignore[missing-attribute]
+      })
 
     if 'validation' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
-      split_generators.update(
-          {
-              tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
-                  path=data_dir['validation']  # pyrefly: ignore[bad-index]
-              ),
-          }
-      )
+      split_generators.update({
+          tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+              path=data_dir['validation']
+          ),
+      })
 
     if 'test' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
-      split_generators.update(
-          {
-              tfds.Split.TEST: self._generate_examples(path=data_dir['test']),  # pyrefly: ignore[bad-index, missing-attribute]
-          }
-      )
+      split_generators.update({
+          tfds.Split.TEST: self._generate_examples(path=data_dir['test']),  # pyrefly: ignore[missing-attribute]
+      })
     return split_generators
 
   def _generate_examples(self, path):

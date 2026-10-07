@@ -119,7 +119,7 @@ class WineQuality(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict({  # pyrefly: ignore[bad-argument-type]
+        features=tfds.features.FeaturesDict({
             "quality": np.int32,
             "features": features_dict,  # pyrefly: ignore[bad-assignment]
         }),
