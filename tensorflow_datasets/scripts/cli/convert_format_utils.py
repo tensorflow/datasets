@@ -207,15 +207,15 @@ def get_all_shard_instructions(
     convert_config: ConvertConfig,
 ) -> list[ShardInstruction]:
   """Returns all shard instructions for the given dataset info."""
-  if info.file_format is None:
-    msg = 'No file format was found in the dataset info!'
-    if convert_config.fail_on_error:
-      raise ValueError(msg)
-    else:
-      logging.error(msg)
-      return []
+  in_file_format = info.file_format
+  if not in_file_format:
+    logging.info(
+        'No file format was found in the dataset info! Defaulting to %s',
+        file_adapters.DEFAULT_FILE_FORMAT.value,
+    )
+    in_file_format = file_adapters.DEFAULT_FILE_FORMAT
 
-  convert_config = convert_config.with_in_file_format(info.file_format)
+  convert_config = convert_config.with_in_file_format(in_file_format)
   shard_instructions = []
   splits_dict = dataset_info_lib.get_split_dict_from_proto(
       dataset_info_proto=info,
@@ -494,7 +494,10 @@ def _get_info_for_dirs_to_convert(
   except Exception:  # pylint: disable=broad-except
     logging.exception('Failed to read dataset info from %s', from_dir)
     return None
-  in_file_format = file_adapters.FileFormat(dataset_info_proto.file_format)
+  if dataset_info_proto.file_format:
+    in_file_format = file_adapters.FileFormat(dataset_info_proto.file_format)
+  else:
+    in_file_format = file_adapters.DEFAULT_FILE_FORMAT
   if out_file_format == in_file_format:
     if os.fspath(from_dir) == os.fspath(to_dir):
       logging.warning(
