@@ -634,7 +634,7 @@ class DatasetInfo:
         self.as_proto.splits.add().CopyFrom(split_info.to_proto())
 
   def update_data_dir(self, data_dir: str) -> None:
-    """Updates the data dir for each split."""
+    """Updates the data dir and data dir for each split."""
     new_split_infos = []
     for split_info in self._splits.values():
       if isinstance(split_info, splits_lib.MultiSplitInfo):
@@ -649,6 +649,7 @@ class DatasetInfo:
       new_split_info = split_info.replace(filename_template=filename_template)
       new_split_infos.append(new_split_info)
     self.set_splits(splits_lib.SplitDict(new_split_infos))
+    self._identity.data_dir = target_dir
 
   @property
   def initialized(self) -> bool:
