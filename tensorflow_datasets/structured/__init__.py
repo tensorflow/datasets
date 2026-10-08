@@ -27,6 +27,7 @@ from tensorflow_datasets.structured.efron_morris_75 import EfronMorris75
 from tensorflow_datasets.structured.forest_fires import ForestFires
 from tensorflow_datasets.structured.genomics_ood import GenomicsOod
 from tensorflow_datasets.structured.german_credit_numeric import GermanCreditNumeric
+from tensorflow_datasets.structured.heart_disease import HeartDisease
 from tensorflow_datasets.structured.higgs import Higgs
 from tensorflow_datasets.structured.howell import Howell
 from tensorflow_datasets.structured.iris import Iris
