@@ -61,8 +61,8 @@ _CITATION = """
 """
 
 _URLS = {
-    "10k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78/root/content",
-    "30k": "https://api.onedrive.com/v1.0/shares/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY/root/content",
+    "10k": "https://1drv.ms/u/s!AtsMfWUz5l8nbOIoJ6Ks0bEMp78",
+    "30k": "https://1drv.ms/u/s!AtsMfWUz5l8nbXGPBlwD1rnFdBY",
 }
 
 _FEATURE_NAMES = {
