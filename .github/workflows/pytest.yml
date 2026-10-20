@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - id: check
       uses: ./.github/actions/activate-tests
 
@@ -63,7 +63,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - uses: ./.github/actions/setup
       with:
         tf-version: tensorflow
@@ -85,7 +85,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - uses: ./.github/actions/setup
       with:
         tf-version: tensorflow
@@ -104,7 +104,7 @@ jobs:
     timeout-minutes: 30
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - uses: ./.github/actions/setup
       with:
         tf-version: tensorflow
