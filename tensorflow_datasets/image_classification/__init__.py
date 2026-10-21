@@ -66,6 +66,7 @@ from tensorflow_datasets.image_classification.imagenet_v2 import ImagenetV2
 from tensorflow_datasets.image_classification.imagenette import Imagenette
 from tensorflow_datasets.image_classification.imagewang import Imagewang
 from tensorflow_datasets.image_classification.inaturalist import INaturalist2017
+from tensorflow_datasets.image_classification.isic2019 import Isic2019
 from tensorflow_datasets.image_classification.lfw import LFW
 from tensorflow_datasets.image_classification.malaria import Malaria
 from tensorflow_datasets.image_classification.mnist import EMNIST
