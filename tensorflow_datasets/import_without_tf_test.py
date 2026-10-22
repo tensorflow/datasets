@@ -69,6 +69,11 @@ class ImportWithoutTfTest(unittest.TestCase):
     self.assertNotIn('array_record', sys.modules)
     self.assertNotIn('pandas', sys.modules)
 
+    # Building an `Audio` should not load TF either: its decoder used to
+    # resolve `tf.dtypes.as_dtype` from its constructor.
+    tfds.core.features.Audio(sample_rate=16000)
+    self.assertNotIn('tensorflow', sys.modules)
+
     data_dir = '/tmp/import_without_tf'
     builder = DummyDataset(data_dir=data_dir)
     builder.download_and_prepare(
