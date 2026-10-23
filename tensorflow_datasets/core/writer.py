@@ -716,7 +716,7 @@ class BeamWriter:
         # (_ShardInfo)
         | "CollectShardInfo" >> beam.transforms.combiners.ToList()
         # [_ShardInfo]
-        | "CalculateSplitInfo" >> beam.ParDo(self._store_split_info)
+        | "CalculateSplitInfo" >> beam.Map(self._store_split_info)
     )
 
   def finalize(self) -> tuple[list[int], int]:
