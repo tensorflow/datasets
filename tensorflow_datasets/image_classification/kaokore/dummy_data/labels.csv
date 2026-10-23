@@ -1,0 +1,5 @@
+image,gender,status,set
+00000000.jpg,0,1,train
+00000001.jpg,0,1,train
+00000002.jpg,0,1,dev
+00000003.jpg,1,0,test
