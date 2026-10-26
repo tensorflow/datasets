@@ -216,8 +216,20 @@ class _Downloader:
     """Update the tqdm bars to visually indicate the url_info is downloaded."""
     self._pbar_url.update_total(1)
     self._pbar_url.update(1)
-    self._pbar_dl_size.update_total(url_info.size)
-    self._pbar_dl_size.update(url_info.size)
+    self._update_dl_size_pbar(url_info.size)
+
+  def _update_dl_size_pbar(self, size_in_bytes: int) -> None:
+    """Adds a fully available file of `size_in_bytes` to the `Dl Size` bar.
+
+    The `Dl Size` bar counts MiB (see `tqdm()`), so the size is converted the
+    same way as in `_sync_download`.
+
+    Args:
+      size_in_bytes: Size of the file, in bytes.
+    """
+    size_in_mib = size_in_bytes // units.MiB
+    self._pbar_dl_size.update_total(size_in_mib)
+    self._pbar_dl_size.update(size_in_mib)
 
   def download(
       self, url: str, destination_path: epath.Path, verify: bool = True
@@ -252,8 +264,7 @@ class _Downloader:
     url_info = checksums_lib.compute_url_info(
         out_path, checksum_cls=self._checksumer_cls
     )
-    self._pbar_dl_size.update_total(url_info.size)
-    self._pbar_dl_size.update(url_info.size)
+    self._update_dl_size_pbar(url_info.size)
     self._pbar_url.update(1)
     return DownloadResult(path=out_path, url_info=url_info)
 
@@ -291,10 +302,9 @@ class _Downloader:
       path = destination_path / fname
       size = 0
 
-      # Initialize the download size progress bar
-      size_mb = 0
-      unit_mb = units.MiB
-      total_size = int(response.headers.get('Content-length', 0)) // unit_mb
+      # Initialize the download size progress bar (in MiB)
+      size_mib = 0
+      total_size = int(response.headers.get('Content-length', 0)) // units.MiB
       self._pbar_dl_size.update_total(total_size)
       with path.open('wb') as file_:
         checksum = self._checksumer_cls()
@@ -303,11 +313,11 @@ class _Downloader:
           checksum.update(block)
           file_.write(block)
 
-          # Update the download size progress bar
-          size_mb += len(block)
-          if size_mb > unit_mb:
-            self._pbar_dl_size.update(size_mb // unit_mb)
-            size_mb %= unit_mb
+          # Update the download size progress bar with each completed MiB
+          new_size_mib = size // units.MiB
+          if new_size_mib > size_mib:
+            self._pbar_dl_size.update(new_size_mib - size_mib)
+            size_mib = new_size_mib
     self._pbar_url.update(1)
     return DownloadResult(
         path=path,
