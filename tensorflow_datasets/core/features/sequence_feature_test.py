@@ -325,7 +325,7 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                 ),
                 expected_np=[
                     [[0, 1], [2, 3]],
-                    [],
+                    np.empty((0, 2), dtype=np.int32),
                     [[4, 5]],
                 ],
             ),
@@ -339,7 +339,9 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
             testing.FeatureExpectationItem(
                 value=[[], [], []],
                 expected=[[], [], []],
-                expected_np=[[], [], []],
+                expected_np=[
+                    np.empty((0, 2), dtype=np.int32) for _ in range(3)
+                ],
             ),
             # List of empty np.array
             testing.FeatureExpectationItem(
@@ -352,8 +354,8 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [],
                 ],
                 expected_np=[
-                    [],
-                    [],
+                    np.empty((0, 2), dtype=np.int32),
+                    np.empty((0, 2), dtype=np.int32),
                 ],
             ),
             testing.FeatureExpectationItem(
@@ -368,8 +370,8 @@ class SequenceDictFeatureTest(testing.FeatureExpectationsTestCase):
                     [[1, 1], [1, 1], [1, 1]],
                 ],
                 expected_np=[
-                    [],
-                    [],
+                    np.empty((0, 2), dtype=np.int32),
+                    np.empty((0, 2), dtype=np.int32),
                     [[1, 1], [1, 1], [1, 1]],
                 ],
             ),
