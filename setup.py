@@ -35,7 +35,7 @@ import setuptools
 # To enable importing version.py directly, we add its path to sys.path.
 version_path = os.path.join(os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+from version import __version__  # pyrefly: ignore[missing-import]  # pylint: disable=g-import-not-at-top
 
 if datestring := os.environ.get('TFDS_NIGHTLY_TIMESTAMP'):
   project_name = 'tfds-nightly'
@@ -265,7 +265,7 @@ setuptools.setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    python_requires='>=3.10',
+    python_requires='>=3.11',
     extras_require=EXTRAS,
     classifiers=[
         'Development Status :: 4 - Beta',
