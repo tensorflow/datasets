@@ -66,7 +66,6 @@ REQUIRED_PKGS = [
     'simple_parsing',
     'tensorflow-metadata',
     'termcolor',
-    'toml',
     'tqdm',
     'wrapt',
     # Standard library backports
