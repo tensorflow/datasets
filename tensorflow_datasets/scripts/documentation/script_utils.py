@@ -81,7 +81,9 @@ def generate_and_save_artifact(
   logging.info(f'Generating for {full_name}...')
   # Load the dataset.
   builder_name, _, version = full_name.rpartition('/')
-  builder = tfds.builder(f'{builder_name}:{version}')
+  builder = tfds.builder(
+      f'{builder_name}:{version}', fallback_to_builder_cls=True
+  )
   split_names = list(builder.info.splits.keys())
   if not split_names:
     logging.info(f'Dataset `{full_name}` not generated.')
