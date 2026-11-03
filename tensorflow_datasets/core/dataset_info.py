@@ -785,11 +785,11 @@ class DatasetInfo:
       if not is_defined_in_restored:
         continue
       # Otherwise, we restore the dataset_info.json value
-      is_repeated = getattr(
-          field,
-          "is_repeated",
-          getattr(field, "label", None) == getattr(field, "LABEL_REPEATED", 3),
-      )
+      is_repeated = getattr(field, "is_repeated", None)
+      if is_repeated is None:
+        is_repeated = getattr(field, "label", None) == getattr(
+            field, "LABEL_REPEATED", 3
+        )
       if field.type == field.TYPE_MESSAGE:
         field_value.MergeFrom(field_value_restored)
       elif is_repeated:
