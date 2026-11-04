@@ -24,7 +24,7 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
       with:
         ref: ${{ github.event.inputs.git-ref }}
 
@@ -35,7 +35,7 @@ jobs:
 
     # Publish the package (if local `__version__` > pip version)
     - name: Publish the package
-      uses: etils-actions/pypi-auto-publish@v1
+      uses: etils-actions/pypi-auto-publish@e3c4b4afc3a5b12a44734da938741995538e8223 # v1
       with:
         pypi-token: ${{ secrets.PYPI_PASSWORD }}
         gh-token: ${{ secrets.GITHUB_TOKEN }}
