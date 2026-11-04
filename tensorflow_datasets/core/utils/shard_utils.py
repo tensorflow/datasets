@@ -30,7 +30,8 @@ import os
 from typing import Any
 
 DEFAULT_MIN_SHARD_SIZE: int = 64 << 20  # 64 MiB
-DEFAULT_MAX_SHARD_SIZE: int = 1024 << 20  # 1 GiB
+# DEFAULT_MAX_SHARD_SIZE: int = 1024 << 20  # 1 GiB
+DEFAULT_MAX_SHARD_SIZE: int = 0.8 * (1024 << 20)  # 1 GiB
 
 
 @dataclasses.dataclass(frozen=True)
