@@ -8,6 +8,9 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: read
+
 env:
   PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
 
@@ -45,6 +48,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
     - uses: ./.github/actions/setup
       with:
         tf-version: ${{ inputs.tf-version }}
