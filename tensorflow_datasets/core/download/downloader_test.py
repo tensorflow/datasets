@@ -15,6 +15,7 @@
 
 import hashlib
 import io
+import os
 from typing import Optional
 from unittest import mock
 
@@ -22,6 +23,9 @@ import bs4
 from etils import epath
 import pytest
 from tensorflow_datasets import testing
+from tensorflow_datasets.core import units
+from tensorflow_datasets.core import utils
+from tensorflow_datasets.core.download import checksums
 from tensorflow_datasets.core.download import downloader
 from tensorflow_datasets.core.download import resource as resource_lib
 from tensorflow_datasets.core.download import util
@@ -151,6 +155,44 @@ class DownloaderTest(testing.TestCase):
     promise = self.downloader.download(url, self.tmp_dir)
     with self.assertRaises(downloader.urllib.error.URLError):
       promise.get()
+
+  def _dl_size_pbar_counts(self) -> tuple[int, int]:
+    """Returns the (total, current) MiB counted by the `Dl Size` bar."""
+    pbar = self.downloader._pbar_dl_size
+    total = sum(call.args[0] for call in pbar.update_total.call_args_list)
+    current = sum(call.args[0] for call in pbar.update.call_args_list)
+    return total, current
+
+  def test_dl_size_pbar_cached_file_counts_mib(self):
+    url_info = checksums.UrlInfo(
+        size=utils.Size(3 * units.MiB),
+        checksum=self.resp_checksum,
+        filename='foo.tar.gz',
+    )
+    self.downloader.increase_tqdm(url_info)
+    self.assertEqual(self._dl_size_pbar_counts(), (3, 3))
+
+  def test_dl_size_pbar_file_copy_counts_mib(self):
+    src_path = self.tmp_dir / 'src' / 'foo.tar.gz'
+    src_path.parent.mkdir()
+    src_path.write_bytes(b'x' * (2 * units.MiB))
+    dst_dir = self.tmp_dir / 'dst'
+    dst_dir.mkdir()
+    future = self.downloader.download(os.fspath(src_path), dst_dir).get()
+    self.assertEqual(future.url_info.size, 2 * units.MiB)
+    self.assertEqual(self._dl_size_pbar_counts(), (2, 2))
+
+  def test_dl_size_pbar_http_counts_last_mib(self):
+    content = (b'x' * (64 * 1024 - 1) + b'\n') * 48  # 3 MiB in 64 KiB chunks.
+    mock.patch.object(
+        downloader.requests.Session,
+        'get',
+        lambda *a, **kw: _FakeResponse(
+            self.url, content, headers={'Content-length': len(content)}
+        ),
+    ).start()
+    self.downloader.download(self.url, self.tmp_dir).get()
+    self.assertEqual(self._dl_size_pbar_counts(), (3, 3))
 
 
 # Gramar examples inspired from: https://tools.ietf.org/html/rfc6266#section-5
