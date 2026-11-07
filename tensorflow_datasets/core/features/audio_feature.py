@@ -82,9 +82,13 @@ class _AudioDecoder(abc.ABC):
     """
     self._file_format = file_format
     self._np_dtype = np_dtype
-    self._dtype = tf.dtypes.as_dtype(self._np_dtype)
     self._shape = shape
     self._channels = shape[1] if len(shape) > 1 else 1
+
+  @property
+  def _dtype(self) -> tf.dtypes.DType:
+    # Computed on access so that defining the feature doesn't import TensorFlow.
+    return tf.dtypes.as_dtype(self._np_dtype)
 
   @abc.abstractmethod
   def encode_audio(
