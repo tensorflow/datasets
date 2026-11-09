@@ -182,7 +182,7 @@ def create_thumbnail(
   if c == 1:
     ex = ex.squeeze(axis=-1)
     if ex.dtype == np.uint16:
-      mode = 'I;16'
+      mode = None
       postprocess = _postprocess_convert_rgb
     else:
       mode = 'L'
