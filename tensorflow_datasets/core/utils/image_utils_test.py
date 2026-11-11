@@ -102,6 +102,7 @@ class ImageUtilsTest(testing.TestCase):
         (np.uint8, 255, 'RGB', 3, (32, 32, 3)),
         (np.uint16, 65535, 'RGB', 1, (32, 32, 3)),
         (np.uint16, 65535, 'RGB', 3, (32, 32, 3)),
+        (np.float32, 255.0, 'RGB', 1, (32, 32, 3)),
     ],
 )
 def test_create_thumbnail_conversion(

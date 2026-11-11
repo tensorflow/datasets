@@ -181,7 +181,7 @@ def create_thumbnail(
   postprocess = _postprocess_noop
   if c == 1:
     ex = ex.squeeze(axis=-1)
-    if ex.dtype == np.uint16:
+    if ex.dtype in (np.uint16, np.float32):
       mode = None
       postprocess = _postprocess_convert_rgb
     else:
