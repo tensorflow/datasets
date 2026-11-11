@@ -18,6 +18,7 @@
 import array
 import pathlib
 import tempfile
+from unittest import mock
 
 from absl.testing import parameterized
 import numpy as np
@@ -25,6 +26,7 @@ import pydub
 import tensorflow as tf
 from tensorflow_datasets import testing
 from tensorflow_datasets.core import features
+from tensorflow_datasets.core.features import audio_feature
 
 
 class AudioFeatureTest(
@@ -189,6 +191,14 @@ class AudioFeatureTest(
               ),
           ],
       )
+
+  def test_construction_does_not_use_tensorflow(self):
+    # Defining the feature must not import TensorFlow, so TFDS can be used
+    # without it (e.g. with `tfds.data_source`).
+    with mock.patch.object(audio_feature, 'tf') as tf_mock:
+      features.Audio(sample_rate=1000)
+      features.Audio(sample_rate=1000, file_format='wav', shape=(None, 2))
+    tf_mock.dtypes.as_dtype.assert_not_called()
 
   def test_sample_rate_property(self):
     self.assertEqual(features.Audio(sample_rate=1600).sample_rate, 1600)
