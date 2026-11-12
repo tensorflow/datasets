@@ -1,0 +1,4 @@
+https://github.com/Amotica/spots-10/raw/refs/heads/main/dataset/train-images-idx3-ubyte.gz 219a7de4f14619757056c09710f43a57b1122233d85aa26b6b2137ebf4cedca1 train-images-idx3-ubyte.gz
+https://github.com/Amotica/spots-10/raw/refs/heads/main/dataset/train-labels-idx1-ubyte.gz 5228a38a96f11a7d8fea4dc8096d49d2c7e41725fdf9645f8746e5acb96d9e0a train-labels-idx1-ubyte.gz
+https://github.com/Amotica/spots-10/raw/refs/heads/main/dataset/test-images-idx3-ubyte.gz efcf680b245f52acad8053b710acf042eee54e182893353c91109cad65e9af2a test-images-idx3-ubyte.gz
+https://github.com/Amotica/spots-10/raw/refs/heads/main/dataset/test-labels-idx1-ubyte.gz 7897ba88f7897f7424202688b35d0ca41a31501e67ccb18e17ca9aa9ddbcf18a test-labels-idx1-ubyte.gz
