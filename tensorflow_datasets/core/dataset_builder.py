@@ -38,7 +38,7 @@ from tensorflow_datasets.core.utils.lazy_imports_utils import tree
 with epy.lazy_imports():
   # pylint: disable=g-import-not-at-top
   from etils import epath
-  import importlib_resources
+  from importlib.resources import abc as importlib_resources_abc
   import termcolor
 
   from tensorflow_datasets.core import constants
@@ -342,7 +342,7 @@ class DatasetBuilder(registered.RegisteredDataset):
         # do not have `.parts`.
         if (
             isinstance(path, epath.resource_utils.ResourcePath)
-            or isinstance(path, importlib_resources.abc.Traversable)
+            or isinstance(path, importlib_resources_abc.Traversable)
             or path.parts
         ):
           modules[-1] += ".py"
