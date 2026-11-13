@@ -21,6 +21,7 @@ import tempfile
 import time
 from typing import Union
 from unittest import mock
+import warnings
 
 from etils import epath
 from google.protobuf import text_format
@@ -519,6 +520,66 @@ def test_file_format_values(tmp_path: pathlib.Path):
   # Unknown value
   with pytest.raises(ValueError, match="is not a valid FileFormat"):
     testing.DummyDataset(data_dir=tmp_path, file_format="arrow")
+
+
+@pytest.mark.parametrize("has_disk_metadata", [False, True])
+@pytest.mark.parametrize(
+    "code_fields",
+    [
+        (),
+        ("description",),
+        ("config_tags",),
+        ("redistribution_info",),
+        ("description", "config_tags", "redistribution_info"),
+    ],
+)
+def test_read_from_directory_without_deprecated_label(
+    tmp_path: pathlib.Path,
+    has_disk_metadata: bool,
+    code_fields: tuple[str, ...],
+):
+  identity = dataset_info.DatasetIdentity(
+      name="restore_test",
+      version=utils.Version("1.0.0"),
+      data_dir=os.fspath(tmp_path),
+      module_name="restore_test",
+  )
+  disk_proto = dataset_info_pb2.DatasetInfo(
+      name="restore_test", version="1.0.0", module_name="restore_test"
+  )
+  if has_disk_metadata:
+    disk_proto.description = "Description from disk"
+    disk_proto.config_tags.extend(["first", "second"])
+    disk_proto.redistribution_info.license = "License from disk"
+  dataset_info.write_dataset_info_proto(disk_proto, dataset_info_dir=tmp_path)
+
+  info = dataset_info.DatasetInfo(builder=identity)
+  expected = dataset_info_pb2.DatasetInfo(
+      name="restore_test", version="1.0.0", module_name="restore_test"
+  )
+  if "description" in code_fields:
+    info.as_proto.description = "Description from code"
+    expected.description = "Description from code"
+  elif has_disk_metadata:
+    expected.description = "Description from disk"
+  if "config_tags" in code_fields:
+    info.as_proto.config_tags.extend(["code_first", "code_second"])
+    expected.config_tags.extend(["code_first", "code_second"])
+  elif has_disk_metadata:
+    expected.config_tags.extend(["first", "second"])
+  if "redistribution_info" in code_fields:
+    info.as_proto.redistribution_info.license = "License from code"
+    expected.redistribution_info.license = "License from code"
+  elif has_disk_metadata:
+    expected.redistribution_info.license = "License from disk"
+
+  # Protobuf 6 warns on label access even when is_repeated is available.
+  with warnings.catch_warnings():
+    warnings.simplefilter("error", DeprecationWarning)
+    info.read_from_directory(tmp_path)
+
+  assert info.as_proto == expected
+  assert info.initialized
 
 
 @pytest.fixture(scope="session")
