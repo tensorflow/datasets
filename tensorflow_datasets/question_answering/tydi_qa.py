@@ -135,11 +135,11 @@ class TydiQA(tfds.core.GeneratorBasedBuilder):
     return (
         [
             tfds.core.SplitGenerator(
-                name=tfds.Split.TRAIN,
+                name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
                 gen_kwargs={"filepath": downloaded_files["train"]},
             ),
             tfds.core.SplitGenerator(
-                name=tfds.Split.VALIDATION,
+                name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
                 gen_kwargs={"filepath": downloaded_files["validation"]},
             ),
         ]

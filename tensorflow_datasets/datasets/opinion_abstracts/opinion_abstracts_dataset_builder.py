@@ -81,14 +81,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     config = self.builder_config
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict({
-            config.name_key: np.str_,
-            config.id_key: np.str_,
-            config.summary_key: np.str_,
-            config.opinions_key: tfds.features.Sequence(
+            config.name_key: np.str_,  # pyrefly: ignore[missing-attribute]
+            config.id_key: np.str_,  # pyrefly: ignore[missing-attribute]
+            config.summary_key: np.str_,  # pyrefly: ignore[missing-attribute]
+            config.opinions_key: tfds.features.Sequence(  # pyrefly: ignore[missing-attribute]
                 tfds.features.FeaturesDict({"key": np.str_, "value": np.str_})
             ),
         }),
-        supervised_keys=(config.opinions_key, config.summary_key),
+        supervised_keys=(config.opinions_key, config.summary_key),  # pyrefly: ignore[missing-attribute]
         homepage="https://web.eecs.umich.edu/~wangluxy/data.html",
     )
 
@@ -98,11 +98,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(_URL)
     path = os.path.join(
-        dl_path, "opinion_abstracts", self.builder_config.filename
+        dl_path, "opinion_abstracts", self.builder_config.filename  # pyrefly: ignore[missing-attribute]
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": path},
         ),
     ]
@@ -116,7 +116,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         config = self.builder_config
         opinions = example[config.opinions_key].items()
         opinions = [{"key": k, "value": v} for k, v in opinions]
-        features = {config.opinions_key: opinions}
-        for k in [config.name_key, config.id_key, config.summary_key]:
+        features = {config.opinions_key: opinions}  # pyrefly: ignore[missing-attribute]
+        for k in [config.name_key, config.id_key, config.summary_key]:  # pyrefly: ignore[missing-attribute]
           features[k] = example[k]
         yield example[config.id_key], features

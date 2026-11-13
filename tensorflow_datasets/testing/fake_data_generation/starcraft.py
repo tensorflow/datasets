@@ -45,16 +45,17 @@ def main(argv):
   frame_list = []
   for _ in range(20):
     # generate 20 frames.
-    png_image = six.StringIO()
+    png_image = six.BytesIO()
     png.from_array(
+        # pypng expects a 2-D array of rows of (width * channels) samples.
         np.random.randint(
             low=0,
             high=255,
-            size=(FLAGS.resolution, FLAGS.resolution, 3),
+            size=(FLAGS.resolution, FLAGS.resolution * 3),
             dtype=np.uint8,
         ),
         "RGB",
-    ).save(png_image)
+    ).write(png_image)
     frame_list.append(
         tf.train.Feature(
             bytes_list=tf.train.BytesList(value=[png_image.getvalue()])

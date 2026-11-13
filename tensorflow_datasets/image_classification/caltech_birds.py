@@ -134,7 +134,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(download_path[2]),
                 "file_names": train_list,
@@ -142,7 +142,7 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(download_path[2]),
                 "file_names": test_list,
@@ -194,9 +194,9 @@ class CaltechBirds2010(tfds.core.GeneratorBasedBuilder):
       if not res or "/".join(fname.split("/")[-2:]) not in file_names:
         return
       matches = res.groups()
-      label_name = matches[-2].lower()  # pytype: disable=attribute-error
+      label_name = matches[-2].lower()
       label_key = int(matches[-3]) - 1
-      file_name = matches[-1].split(".")[0]  # pytype: disable=attribute-error
+      file_name = matches[-1].split(".")[0]
       segmentation_mask = annotations[file_name][1]
       height, width = segmentation_mask.shape
       bbox = self._get_bounding_box_values(
@@ -285,8 +285,8 @@ class CaltechBirds2011(CaltechBirds2010):
         img_idx, val = line.split()
         idx, img_name = line1.split()
         res = _NAME_RE.match(img_name)
-        matches = res.groups()
-        attributes[matches[-1].split(".")[0]].append(line2.split()[1:])  # pytype: disable=attribute-error
+        matches = res.groups()  # pyrefly: ignore[missing-attribute]
+        attributes[matches[-1].split(".")[0]].append(line2.split()[1:])
         if img_idx == idx:
           if int(val) == 1:
             train_list.append(img_name)
@@ -314,7 +314,7 @@ class CaltechBirds2011(CaltechBirds2010):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(download_path[0]),
                 "file_names": train_list,
@@ -322,7 +322,7 @@ class CaltechBirds2011(CaltechBirds2010):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(download_path[0]),
                 "file_names": test_list,

@@ -124,48 +124,47 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature         | Class        | Shape  | Dtype   | Description | Value      |
-:                 :              :        :         :             : range      :
-| :-------------- | :----------- | :----- | :------ | :---------- | :--------- |
-|                 | FeaturesDict |        |         |             |            |
-| caption         | Text         |        | string  | HTML        |            |
-:                 :              :        :         : alt-text    :            :
-:                 :              :        :         : attribute   :            :
-| image           | Image        | (None, | uint8   | image       |            |
-:                 :              : None,  :         :             :            :
-:                 :              : 3)     :         :             :            :
-| license         | Text         |        | string  | type of     |            |
-:                 :              :        :         : Creative    :            :
-:                 :              :        :         : Commons     :            :
-:                 :              :        :         : license (if :            :
-:                 :              :        :         : applicable) :            :
-| nsfw            | ClassLabel   |        | int64   | NSFW tag    |            |
-:                 :              :        :         : (detected   :            :
-:                 :              :        :         : with CLIP). :            :
-:                 :              :        :         : Incohesive  :            :
-:                 :              :        :         : and missing :            :
-:                 :              :        :         : tags are    :            :
-:                 :              :        :         : replaced    :            :
-:                 :              :        :         : with        :            :
-:                 :              :        :         : UNTAGGED    :            :
-| original_height | Scalar       |        | int32   | original    |            |
-:                 :              :        :         : height of   :            :
-:                 :              :        :         : the image   :            :
-| original_width  | Scalar       |        | int32   | original    |            |
-:                 :              :        :         : width of    :            :
-:                 :              :        :         : the image   :            :
-| similarity      | Scalar       |        | float64 | cosine      | [0.0, 1.0] |
-:                 :              :        :         : similarity  :            :
-:                 :              :        :         : score       :            :
-:                 :              :        :         : between the :            :
-:                 :              :        :         : text and    :            :
-:                 :              :        :         : image       :            :
-:                 :              :        :         : embedding.  :            :
-:                 :              :        :         : Missing     :            :
-:                 :              :        :         : values      :            :
-:                 :              :        :         : default to  :            :
-:                 :              :        :         : -1.0        :            :
-| url             | Text         |        | string  | image URL   |            |
+| Feature         | Class        | Shape    | Dtype   | Description | Value |
+:                 :              :          :         :             : range :
+| :-------------- | :----------- | :------- | :------ | :---------- | :---- |
+|                 | FeaturesDict |          |         |             |       |
+| caption         | Text         |          | string  | HTML        |       |
+:                 :              :          :         : alt-text    :       :
+:                 :              :          :         : attribute   :       :
+| image           | Image        | (None,   | uint8   | image       |       |
+:                 :              : None, 3) :         :             :       :
+| license         | Text         |          | string  | type of     |       |
+:                 :              :          :         : Creative    :       :
+:                 :              :          :         : Commons     :       :
+:                 :              :          :         : license (if :       :
+:                 :              :          :         : applicable) :       :
+| nsfw            | ClassLabel   |          | int64   | NSFW tag    |       |
+:                 :              :          :         : (detected   :       :
+:                 :              :          :         : with CLIP). :       :
+:                 :              :          :         : Incohesive  :       :
+:                 :              :          :         : and missing :       :
+:                 :              :          :         : tags are    :       :
+:                 :              :          :         : replaced    :       :
+:                 :              :          :         : with        :       :
+:                 :              :          :         : UNTAGGED    :       :
+| original_height | Scalar       |          | int32   | original    |       |
+:                 :              :          :         : height of   :       :
+:                 :              :          :         : the image   :       :
+| original_width  | Scalar       |          | int32   | original    |       |
+:                 :              :          :         : width of    :       :
+:                 :              :          :         : the image   :       :
+| similarity      | Scalar       |          | float64 | cosine      | [0.0, |
+:                 :              :          :         : similarity  : 1.0]  :
+:                 :              :          :         : score       :       :
+:                 :              :          :         : between the :       :
+:                 :              :          :         : text and    :       :
+:                 :              :          :         : image       :       :
+:                 :              :          :         : embedding.  :       :
+:                 :              :          :         : Missing     :       :
+:                 :              :          :         : values      :       :
+:                 :              :          :         : default to  :       :
+:                 :              :          :         : -1.0        :       :
+| url             | Text         |          | string  | image URL   |       |
 
 ## laion400m/embeddings
 

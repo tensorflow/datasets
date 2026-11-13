@@ -85,11 +85,11 @@ class Howell(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     file_path = dl_manager.download_and_extract(URL)
-    return {tfds.Split.TRAIN: self._generate_examples(file_path)}
+    return {tfds.Split.TRAIN: self._generate_examples(file_path)}  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(self, file_path):
     """Yields examples."""
-    with file_path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
+    with file_path.open() as f:
       reader = csv.DictReader(f, delimiter=";")
       for index, row in enumerate(reader):
         example = dict(row.items())

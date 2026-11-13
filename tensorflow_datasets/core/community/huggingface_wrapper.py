@@ -132,12 +132,12 @@ class GeneratorBasedBuilder(
       info = self._info()
     # HF DatasetInfo do not have `builder` args, so we insert
     # here
-    return dataset_info.DatasetInfo(builder=self, **info.kwargs)
+    return dataset_info.DatasetInfo(builder=self, **info.kwargs)  # pyrefly: ignore[missing-attribute]
 
   @property
   def config(self) -> dataset_builder.BuilderConfig:
     # HF datasets uses `self.config` rather than `self.builder_config`
-    return self.builder_config
+    return self.builder_config  # pyrefly: ignore[bad-return]
 
   def _download_and_prepare(self, *args, **kwargs):
     # * Patch `open` to use the GFile API (to supports GCS)

@@ -90,22 +90,22 @@ refcocog | umd       | test  | 5023  | 2600
     the annotations and the images, matching the data/ directory specified in
     the repo.
 
-1.  Follow the instructions of PythonAPI in
+2.  Follow the instructions of PythonAPI in
     https://github.com/cocodataset/cocoapi to get pycocotools and the
     instances_train2014 annotations file from https://cocodataset.org/#download
 
-2.  Add both refer.py from (1) and pycocotools from (2) to your PYTHONPATH.
+3.  Add both refer.py from (1) and pycocotools from (2) to your PYTHONPATH.
 
-3.  Run manual_download_process.py to generate refcoco.json, replacing
+4.  Run manual_download_process.py to generate refcoco.json, replacing
     `ref_data_root`, `coco_annotations_file`, and `out_file` with the values
     corresponding to where you have downloaded / want to save these files. Note
     that manual_download_process.py can be found in the TFDS repository.
 
-4.  Download the COCO training set from https://cocodataset.org/#download and
+5.  Download the COCO training set from https://cocodataset.org/#download and
     stick it into a folder called `coco_train2014/`. Move `refcoco.json` to the
     same level as `coco_train2014`.
 
-5.  Follow the standard manual download instructions.
+6.  Follow the standard manual download instructions.
 
 *   **Auto-cached**
     ([documentation](https://www.tensorflow.org/datasets/performances#auto-caching)):

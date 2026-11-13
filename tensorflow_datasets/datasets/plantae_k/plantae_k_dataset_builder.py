@@ -42,7 +42,7 @@ _LABEL_MAPPING = [
     ("walnut_h", "WALNUT DISEASED"),
     ("walnut-h", "WALNUT HEALTHY"),
 ]
-_URLS_FNAME = "image_classification/plantae_k_urls.txt"
+_URLS_FNAME = "datasets/plantae_k/plantae_k_urls.txt"
 _MAX_DOWNLOAD_RETRY = 10
 
 
@@ -91,7 +91,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             )
       return [
           tfds.core.SplitGenerator(
-              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}
+              name=tfds.Split.TRAIN, gen_kwargs={"image_files": image_files}  # pyrefly: ignore[missing-attribute]
           )
       ]
 

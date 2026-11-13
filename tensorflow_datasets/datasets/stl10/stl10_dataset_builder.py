@@ -61,11 +61,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Define the splits
     splits = [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepaths": gen_filenames(train_files)},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepaths": gen_filenames(test_files)},
         ),
         tfds.core.SplitGenerator(

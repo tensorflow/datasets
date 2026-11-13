@@ -118,9 +118,9 @@ class CFQConfig(tfds.core.BuilderConfig):
       directory = 'splits'
       split_name = name
     super(CFQConfig, self).__init__(
-        name=name, version=tfds.core.Version('1.2.0'), **kwargs
+        name=name, version=tfds.core.Version('1.2.0'), **kwargs  # pyrefly: ignore[bad-argument-type]
     )
-    self.split_file = os.path.join(directory, split_name + '.json')
+    self.split_file = os.path.join(directory, split_name + '.json')  # pyrefly: ignore[unsupported-operation]
 
 
 _QUESTION = 'question'
@@ -177,26 +177,26 @@ class CFQ(tfds.core.GeneratorBasedBuilder):
     data_dir = os.path.join(data_dir, 'cfq')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'base_directory': data_dir,
-                'splits_file': self.builder_config.split_file,
+                'splits_file': self.builder_config.split_file,  # pyrefly: ignore[missing-attribute]
                 'split_id': 'trainIdxs',
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'base_directory': data_dir,
-                'splits_file': self.builder_config.split_file,
+                'splits_file': self.builder_config.split_file,  # pyrefly: ignore[missing-attribute]
                 'split_id': 'devIdxs',
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'base_directory': data_dir,
-                'splits_file': self.builder_config.split_file,
+                'splits_file': self.builder_config.split_file,  # pyrefly: ignore[missing-attribute]
                 'split_id': 'testIdxs',
             },
         ),

@@ -213,7 +213,10 @@ def get_split_recordset(
       if not record_sets:
         raise ValueError(f"Field {field.id} has no RecordSet.")
       referenced_record_set = record_sets[0]
-      if mlc.DataType.SPLIT in referenced_record_set.data_types:
+      if (
+          referenced_record_set.data_types
+          and mlc.DataType.SPLIT in referenced_record_set.data_types
+      ):
         return SplitReference(referenced_record_set, field)
   return None
 
@@ -233,3 +236,5 @@ def get_record_set_ids(metadata: mlc.Metadata) -> list[str]:
       continue
     record_set_ids.append(record_set.id)
   return record_set_ids
+
+# Dummy comment to force pytype run

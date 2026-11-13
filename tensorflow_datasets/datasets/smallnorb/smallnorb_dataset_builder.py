@@ -59,7 +59,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "label_lighting": tfds.features.ClassLabel(num_classes=6),
     }
     if self.version > "2.0.0":
-      features_dict["id"] = tfds.features.Text()
+      features_dict["id"] = tfds.features.Text()  # pyrefly: ignore[bad-assignment]
     return self.dataset_info_from_configs(
         features=tfds.features.FeaturesDict(features_dict),
         homepage="https://cs.nyu.edu/~ylclab/data/norb-v1.0-small/",
@@ -81,7 +81,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 split_prefix="train_",
                 dat_path=files["training_dat"],
@@ -90,7 +90,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 split_prefix="test_",
                 dat_path=files["testing_dat"],

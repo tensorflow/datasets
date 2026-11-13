@@ -218,7 +218,7 @@ def get_collection_markdown_string(
   doc_str = [
       _display_collection_heading(collection),
       _display_collection_sections(
-          loader=collection, all_sections=all_sections
+          loader=collection, all_sections=all_sections  # pyrefly: ignore[bad-argument-type]
       ),
   ]
   return '\n\n'.join([tfds.core.utils.dedent(s) for s in doc_str if s])

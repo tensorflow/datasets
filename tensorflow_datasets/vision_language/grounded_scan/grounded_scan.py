@@ -240,12 +240,12 @@ class GroundedScan(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
 
-    path = dl_manager.download_and_extract(self.builder_config.data_path)
+    path = dl_manager.download_and_extract(self.builder_config.data_path)  # pyrefly: ignore[missing-attribute]
     return {
         split_name: self._generate_examples(
-            path / self.builder_config.name, split_name=split_name
+            path / self.builder_config.name, split_name=split_name  # pyrefly: ignore[missing-attribute]
         )
-        for split_name in self.builder_config.splits_names
+        for split_name in self.builder_config.splits_names  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, path, split_name):

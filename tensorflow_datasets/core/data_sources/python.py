@@ -39,7 +39,7 @@ class PythonDataSource(MappingView, Sequence):
     for i in range(self.length):
       yield self[i]
 
-  def __getitem__(self, i: int) -> Any:
+  def __getitem__(self, i: int) -> Any:  # pyrefly: ignore[bad-override]
     return self.getitem(i)
 
   def __repr__(self) -> str:

@@ -20,7 +20,7 @@ ordered categorical attributes have been encoded as indicator and integer
 quantities respectively.
 
 *   **Homepage**:
-    [https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)](https://archive.ics.uci.edu/ml/datasets/Statlog+\(German+Credit+Data\))
+    [https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data)](https://archive.ics.uci.edu/ml/datasets/Statlog+(German+Credit+Data))
 
 *   **Source code**:
     [`tfds.structured.GermanCreditNumeric`](https://github.com/tensorflow/datasets/tree/master/tensorflow_datasets/structured/german_credit_numeric.py)

@@ -155,7 +155,6 @@ def _builder_configs():
   configs = []
   for combined_challenge, domain, dataset_size in SHARDS_MAPPING:
     task = DOMAIN_TO_TASK[domain]
-    # pytype: disable=wrong-keyword-args
     configs.append(
         BuilderConfig(
             name=(
@@ -169,7 +168,6 @@ def _builder_configs():
             dataset_size=dataset_size,
         )
     )
-    # pytype: enable=wrong-keyword-args
   return configs
 
 
@@ -186,11 +184,11 @@ def tf_example_to_feature_description(
       raise AssertionError(
           'tf_example_to_feature_description() only works under eager mode.'
       )
-    example = example.numpy()  # pytype: disable=attribute-error
-  example = tf.train.Example.FromString(example)
+    example = example.numpy()  # pyrefly: ignore[bad-assignment]
+  example = tf.train.Example.FromString(example)  # pyrefly: ignore[bad-argument-type, bad-assignment]
 
   ret = {}
-  for k, v in example.features.feature.items():
+  for k, v in example.features.feature.items():  # pyrefly: ignore[missing-attribute]
     l = len(v.float_list.value)
     if l % num_timesteps:
       raise ValueError(
@@ -235,7 +233,7 @@ def tf_feature_to_tfds_feature(
     # For some reason the dicts are transposed within the tfds features.
     # See transpose_dict_list() under
     # tensorflow_datasets/core/features/sequence_feature.py
-    return tfds.features.Tensor(shape=nested.shape[1:], dtype=nested.dtype)  # pytype: disable=attribute-error
+    return tfds.features.Tensor(shape=nested.shape[1:], dtype=nested.dtype)  # pyrefly: ignore[bad-argument-type, bad-index]
   elif isinstance(nested, dict):
     ret = type(nested)()
     for k, v in nested.items():
@@ -336,10 +334,10 @@ class RluRwrl(rlu_common.RLUBuilder):
     return _CITATION
 
   def get_file_prefix(self):
-    domain = self.builder_config.domain
-    task = self.builder_config.task
-    combined_challenge = self.builder_config.combined_challenge
-    dataset_size = self.builder_config.dataset_size
+    domain = self.builder_config.domain  # pyrefly: ignore[missing-attribute]
+    task = self.builder_config.task  # pyrefly: ignore[missing-attribute]
+    combined_challenge = self.builder_config.combined_challenge  # pyrefly: ignore[missing-attribute]
+    dataset_size = self.builder_config.dataset_size  # pyrefly: ignore[missing-attribute]
     return (
         f'{self._INPUT_FILE_PREFIX}/'
         f'combined_challenge_{str(combined_challenge).lower()}/'
@@ -351,12 +349,12 @@ class RluRwrl(rlu_common.RLUBuilder):
       return self._SHARDS  # For testing.  # type: ignore
     except AttributeError:
       pass
-    domain = self.builder_config.domain
-    combined_challenge = self.builder_config.combined_challenge
-    dataset_size = self.builder_config.dataset_size
+    domain = self.builder_config.domain  # pyrefly: ignore[missing-attribute]
+    combined_challenge = self.builder_config.combined_challenge  # pyrefly: ignore[missing-attribute]
+    dataset_size = self.builder_config.dataset_size  # pyrefly: ignore[missing-attribute]
     return SHARDS_MAPPING[(combined_challenge, domain, dataset_size)]
 
-  def tf_example_to_step_ds(  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
+  def tf_example_to_step_ds(  # pyrefly: ignore[bad-override]
       self, tf_example: tf.Tensor, feature_description
   ) -> dict[str, Any]:
     data = tf.io.parse_single_example(tf_example, feature_description)

@@ -181,7 +181,7 @@ class SplitBuilder:
     num_shards = len(example_gen_per_shard)
     filename_template = filename_template.replace(split=split_name)
     serialized_info = self._features.get_serialized_info()
-    serializer = example_serializer.ExampleSerializer(serialized_info)
+    serializer = example_serializer.ExampleSerializer(serialized_info)  # pyrefly: ignore[bad-argument-type]
 
     shard_writer = writer_lib.ShardWriter(
         features=self._features,
@@ -198,7 +198,7 @@ class SplitBuilder:
         )
         shard_paths.append(shard_path)
         num_examples = shard_writer.write(
-            path=shard_path, examples=example_gen()
+            path=shard_path, examples=example_gen()  # pyrefly: ignore[bad-argument-type]
         )
         shard_lengths.append(num_examples)
     else:
@@ -217,7 +217,7 @@ class SplitBuilder:
           shard_paths.append(shard_path)
           shard_info = shard_writer.write_with_beam(
               path=shard_path,
-              example_gen=example_gen,
+              example_gen=example_gen,  # pyrefly: ignore[bad-argument-type]
               shard_index=shard_index,
               pipeline=self.beam_pipeline,
           )
@@ -457,9 +457,9 @@ class SplitBuilder:
         # Generate the beam.PCollection
         pcollection = self.beam_pipeline | split_name >> generator
         build_kwargs['generator'] = pcollection
-        return self._build_from_pcollection(**build_kwargs)
+        return self._build_from_pcollection(**build_kwargs)  # pyrefly: ignore[missing-argument]
       elif isinstance(generator, beam.PCollection):
-        return self._build_from_pcollection(**build_kwargs)
+        return self._build_from_pcollection(**build_kwargs)  # pyrefly: ignore[missing-argument]
       else:
         raise unknown_generator_type
 
@@ -498,7 +498,7 @@ class SplitBuilder:
 
     serialized_info = self._features.get_serialized_info()
     writer = writer_lib.Writer(
-        serializer=example_serializer.ExampleSerializer(serialized_info),
+        serializer=example_serializer.ExampleSerializer(serialized_info),  # pyrefly: ignore[bad-argument-type]
         filename_template=filename_template,
         hash_salt=split_name,
         disable_shuffling=disable_shuffling,
@@ -550,7 +550,7 @@ class SplitBuilder:
     """Split generator for `beam.PCollection`."""
     # TODO(tfds): Should try to add support to `max_examples_per_split`
     serializer = example_serializer.ExampleSerializer(
-        self._features.get_serialized_info()
+        self._features.get_serialized_info()  # pyrefly: ignore[bad-argument-type]
     )
     if nondeterministic_order:
       logging.info(
@@ -560,7 +560,7 @@ class SplitBuilder:
       beam_writer = writer_lib.NoShuffleBeamWriter(
           serializer=serializer,
           file_format=file_adapters.FileFormat.from_value(
-              filename_template.filetype_suffix
+              filename_template.filetype_suffix  # pyrefly: ignore[bad-argument-type]
           ),
           filename_template=filename_template,
           num_shards=num_shards,

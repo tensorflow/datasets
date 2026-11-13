@@ -80,7 +80,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     archive_path = dl_manager.download(_DOWNLOAD_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"archive": dl_manager.iter_archive(archive_path)},
         )
     ]

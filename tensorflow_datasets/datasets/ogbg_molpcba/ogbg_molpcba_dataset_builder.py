@@ -89,13 +89,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     # Return a list of the train/validation/test split generators.
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             all_data, split_indices['train']
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             all_data, split_indices['valid']
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             all_data, split_indices['test']
         ),
     }
@@ -104,7 +104,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # Precompute for later.
     num_total_graphs = len(all_data['labels'])
-    split_indices = set(split_indices)
+    split_indices = set(split_indices)  # pyrefly: ignore[bad-assignment]
     accumulated_num_nodes = np.concatenate(
         [np.array([0]), np.cumsum(all_data['num_nodes'])]
     )

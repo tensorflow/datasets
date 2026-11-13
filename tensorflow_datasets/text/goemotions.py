@@ -96,7 +96,7 @@ class Goemotions(tfds.core.GeneratorBasedBuilder):
     features = {_TEXT_LABEL: tfds.features.Text()}
 
     for label in _EMOTION_LABELS:
-      features[label] = tf.bool
+      features[label] = tf.bool  # pyrefly: ignore[unsupported-operation]
 
     return tfds.core.DatasetInfo(
         builder=self,
@@ -121,19 +121,19 @@ class Goemotions(tfds.core.GeneratorBasedBuilder):
     # Specify the splits.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filename': dl_paths['train'],
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filename': dl_paths['dev'],
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filename': dl_paths['test'],
             },

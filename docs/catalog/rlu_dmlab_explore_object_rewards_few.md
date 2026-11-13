@@ -90,24 +90,22 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature                       | Class        | Shape | Dtype   | Description |
-| :---------------------------- | :----------- | :---- | :------ | :---------- |
-|                               | FeaturesDict |       |         |             |
-| episode_id                    | Tensor       |       | int64   |             |
-| episode_return                | Tensor       |       | float32 |             |
-| steps                         | Dataset      |       |         |             |
-| steps/action                  | Tensor       |       | int64   |             |
-| steps/discount                | Tensor       |       | float32 |             |
-| steps/is_first                | Tensor       |       | bool    |             |
-| steps/is_last                 | Tensor       |       | bool    |             |
-| steps/is_terminal             | Tensor       |       | bool    |             |
-| steps/observation             | FeaturesDict |       |         |             |
-| steps/observation/last_action | Tensor       |       | int64   |             |
-| steps/observation/last_reward | Tensor       |       | float32 |             |
-| steps/observation/pixels      | Image        | (72,  | uint8   |             |
-:                               :              : 96,   :         :             :
-:                               :              : 3)    :         :             :
-| steps/reward                  | Tensor       |       | float32 |             |
+Feature                       | Class        | Shape       | Dtype   | Description
+:---------------------------- | :----------- | :---------- | :------ | :----------
+                              | FeaturesDict |             |         |
+episode_id                    | Tensor       |             | int64   |
+episode_return                | Tensor       |             | float32 |
+steps                         | Dataset      |             |         |
+steps/action                  | Tensor       |             | int64   |
+steps/discount                | Tensor       |             | float32 |
+steps/is_first                | Tensor       |             | bool    |
+steps/is_last                 | Tensor       |             | bool    |
+steps/is_terminal             | Tensor       |             | bool    |
+steps/observation             | FeaturesDict |             |         |
+steps/observation/last_action | Tensor       |             | int64   |
+steps/observation/last_reward | Tensor       |             | float32 |
+steps/observation/pixels      | Image        | (72, 96, 3) | uint8   |
+steps/reward                  | Tensor       |             | float32 |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

@@ -52,7 +52,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     extracted_dir = dl_manager.download_and_extract(_DL_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"directory": extracted_dir},
         ),
     ]

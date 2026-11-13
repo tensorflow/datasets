@@ -254,11 +254,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     beam = tfds.core.lazy_imports.apache_beam
     # Downloads the data and defines the splits.
     builder_config = self.builder_config
-    root = dl_manager.download_and_extract(builder_config.download_url)
-    basename = os.path.basename(builder_config.download_url)
+    root = dl_manager.download_and_extract(builder_config.download_url)  # pyrefly: ignore[missing-attribute]
+    basename = os.path.basename(builder_config.download_url)  # pyrefly: ignore[missing-attribute]
     unzip_dir_name = os.path.splitext(basename)[0]
-    subdir = builder_config.subdir if builder_config.subdir else ''
-    data_dir = os.path.join(root, unzip_dir_name, subdir)
+    subdir = builder_config.subdir if builder_config.subdir else ''  # pyrefly: ignore[missing-attribute]
+    data_dir = os.path.join(root, unzip_dir_name, subdir)  # pyrefly: ignore[no-matching-overload]
 
     query_pipeline = (
         pipeline
@@ -286,7 +286,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     }
 
     # Creates splits for (query, document) pairs.
-    for qrel_split, tsv_file in builder_config.qrel_splits.items():
+    for qrel_split, tsv_file in builder_config.qrel_splits.items():  # pyrefly: ignore[missing-attribute]
       splits[
           qrel_split
       ] = pipeline | qrel_split.capitalize() >> beam.ptransform_fn(

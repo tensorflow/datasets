@@ -29,18 +29,18 @@ import itertools
 import os
 import sys
 
-import pkg_resources
+from packaging.version import Version
 import setuptools
 
 # To enable importing version.py directly, we add its path to sys.path.
 version_path = os.path.join(os.path.dirname(__file__), 'tensorflow_datasets')
 sys.path.append(version_path)
-from version import __version__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+from version import __version__  # pyrefly: ignore[missing-import]  # pylint: disable=g-import-not-at-top
 
 if datestring := os.environ.get('TFDS_NIGHTLY_TIMESTAMP'):
   project_name = 'tfds-nightly'
   # Version as `X.Y.Z.dev199912312459`
-  curr_version = pkg_resources.parse_version(__version__)
+  curr_version = Version(__version__)
   __version__ = f'{curr_version.base_version}.dev{datestring}'
 else:
   project_name = 'tensorflow-datasets'
@@ -48,7 +48,7 @@ else:
 DOCLINES = __doc__.split('\n')
 
 REQUIRED_PKGS = [
-    'absl-py',
+    'absl-py>=1.0.0',
     # Min version of 0.5.0 as old array_record wheel are bugged on all
     # platform except 'x86_64'. See
     # https://github.com/google/array_record/issues/71
@@ -66,7 +66,6 @@ REQUIRED_PKGS = [
     'simple_parsing',
     'tensorflow-metadata',
     'termcolor',
-    'toml',
     'tqdm',
     'wrapt',
     # Standard library backports
@@ -105,8 +104,8 @@ DATASET_FILES = [
     'datasets/ogbg_molpcba/tasks.txt',
     'datasets/quickdraw/labels.txt',
     'datasets/smartwatch_gestures/labels.txt',
-    'image_classification/caltech101_labels.txt',
-    'image_classification/categories_places365.txt',
+    'datasets/caltech101/caltech101_labels.txt',
+    'datasets/places365_small/categories_places365.txt',
     'image_classification/cbis_ddsm_calc_distributions.txt',
     'image_classification/cbis_ddsm_calc_types.txt',
     'image_classification/cbis_ddsm_mass_margins.txt',
@@ -118,17 +117,17 @@ DATASET_FILES = [
     'image_classification/i_naturalist2018/inaturalist2018_supercategories.txt',
     'image_classification/i_naturalist2021/i_naturalist2021_labels.txt',
     'image_classification/i_naturalist2021/i_naturalist2021_supercategories.txt',
-    'image_classification/imagenet_resized_labels.txt',
-    'image_classification/imagenette_labels.txt',
-    'image_classification/imagewang_labels.txt',
+    'datasets/imagenet_resized/imagenet_resized_labels.txt',
+    'datasets/imagenette/imagenette_labels.txt',
+    'datasets/imagewang/imagewang_labels.txt',
     'image_classification/inaturalist_labels.txt',
     'image_classification/inaturalist_supercategories.txt',
     'image_classification/placesfull/categories_placesfull.txt',
-    'image_classification/plantae_k_urls.txt',
-    'image_classification/sun397_labels.txt',
-    'image_classification/sun397_tfds_te.txt',
-    'image_classification/sun397_tfds_tr.txt',
-    'image_classification/sun397_tfds_va.txt',
+    'datasets/plantae_k/plantae_k_urls.txt',
+    'datasets/sun397/sun397_labels.txt',
+    'datasets/sun397/sun397_tfds_te.txt',
+    'datasets/sun397/sun397_tfds_tr.txt',
+    'datasets/sun397/sun397_tfds_va.txt',
     'object_detection/open_images_classes_all.txt',
     'object_detection/open_images_classes_boxable.txt',
     'object_detection/open_images_classes_trainable.txt',
@@ -153,6 +152,7 @@ DATASET_EXTRAS = {
         # tensorflow==2.20.0 is not compatible with gcld3 because of protobuf
         # version conflict.
         'tensorflow<2.20.0',
+        'tensorflow-metadata<1.18.0',
     ],
     'c4_wsrs': ['apache-beam<2.65.0'],
     'cats_vs_dogs': ['matplotlib'],
@@ -170,16 +170,10 @@ DATASET_EXTRAS = {
         'scipy',
     ],
     'librispeech': ['pydub'],  # and ffmpeg installed
-    'lsun': [
-        # tensorflow-io is compiled against specific versions of TF.
-        'tensorflow-io[tensorflow]',
-    ],
+    'lsun': ['lmdb'],
     'nsynth': [
         'crepe',
         'librosa',
-        # tensorflow==2.20.0 is not compatible with librosa because of protobuf
-        # version conflict.
-        'tensorflow<2.20.0',
     ],
     'ogbg_molpcba': ['pandas', 'networkx'],
     'pet_finder': ['pandas'],
@@ -270,7 +264,7 @@ setuptools.setup(
     },
     scripts=[],
     install_requires=REQUIRED_PKGS,
-    python_requires='>=3.10',
+    python_requires='>=3.11',
     extras_require=EXTRAS,
     classifiers=[
         'Development Status :: 4 - Beta',

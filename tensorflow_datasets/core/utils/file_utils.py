@@ -112,8 +112,8 @@ def _get_incomplete_dir(dir_name: str) -> str:
   random_suffix = ''.join(
       random.choice(string.ascii_uppercase + string.digits) for _ in range(6)
   )
-  dir_name = Path(dir_name)
-  return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'
+  dir_name = Path(dir_name)  # pyrefly: ignore[bad-assignment]
+  return f'{dir_name.parent}/{constants.INCOMPLETE_PREFIX}{random_suffix}_{dir_name.name}/'  # pyrefly: ignore[missing-attribute]
 
 
 @contextlib.contextmanager
@@ -159,7 +159,7 @@ def list_data_dirs(
   else:
     default_data_dir = Path(constants.DATA_DIR)
     all_data_dirs = _REGISTERED_DATA_DIRS | {default_data_dir}
-    return sorted(d.expanduser() for d in all_data_dirs)
+    return sorted(d.expanduser() for d in all_data_dirs)  # pyrefly: ignore[bad-return]
 
 
 def get_dataset_dir(
@@ -354,7 +354,7 @@ def list_dataset_versions(
     version_folder = dataset_info_file.parent.name
     if version_lib.Version.is_valid(version_folder):
       found_versions.append(version_lib.Version(version_folder))
-  return sorted(found_versions)
+  return sorted(set(found_versions))
 
 
 def is_valid_variant_dir(

@@ -75,7 +75,7 @@ def main(args: argparse.Namespace) -> None:
         data_dir=args.data_dir,
         filetype_suffix=args.filetype or None,
         dataset_name=args.dataset_name or None,
-        template=args.filename_template or None,
+        template=args.filename_template or None,  # pyrefly: ignore[bad-argument-type]
     )
   else:
     filename_template = None

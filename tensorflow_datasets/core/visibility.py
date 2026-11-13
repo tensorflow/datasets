@@ -101,7 +101,7 @@ def _set_default_visibility() -> None:
   If the script executed is a TFDS script, then it restricts the visibility
   to only open-source non-community datasets.
   """
-  import __main__  # pytype: disable=import-error  # pylint: disable=g-import-not-at-top
+  import __main__  # pylint: disable=g-import-not-at-top
 
   main_file = getattr(__main__, '__file__', None)
   if main_file and 'tensorflow_datasets' in pathlib.Path(main_file).parts:

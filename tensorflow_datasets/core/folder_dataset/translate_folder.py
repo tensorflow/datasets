@@ -95,7 +95,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
         ),
     )
 
-  def _download_and_prepare(self, **kwargs):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
+  def _download_and_prepare(self, **kwargs):  # pyrefly: ignore[bad-override]
     raise NotImplementedError(
         'No need to call download_and_prepare function for {}.'.format(
             type(self).__name__
@@ -124,7 +124,7 @@ class TranslateFolder(dataset_builder.DatasetBuilder):
 
     # Build the tf.data.Dataset object
     lang_example_dict = self._split_examples[split]
-    ds = tf.data.Dataset.from_tensor_slices(lang_example_dict)
+    ds = tf.data.Dataset.from_tensor_slices(lang_example_dict)  # pyrefly: ignore[bad-argument-type]
     if shuffle_files:
       ds = ds.shuffle(len(lang_example_dict))
     return ds

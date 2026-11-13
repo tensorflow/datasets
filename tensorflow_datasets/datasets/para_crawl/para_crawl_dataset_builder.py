@@ -114,7 +114,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    target_language = self.builder_config.target_language
+    target_language = self.builder_config.target_language  # pyrefly: ignore[missing-attribute]
     return self.dataset_info_from_configs(
         features=tfds.features.Translation(
             languages=("en", target_language),
@@ -126,17 +126,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     # Download the data file.
     data_file = dl_manager.download_and_extract(
-        {"data_file": self.builder_config.data_url}
+        {"data_file": self.builder_config.data_url}  # pyrefly: ignore[missing-attribute]
     )
 
     # Return the single split of the data.
     return [
-        tfds.core.SplitGenerator(name=tfds.Split.TRAIN, gen_kwargs=data_file)
+        tfds.core.SplitGenerator(name=tfds.Split.TRAIN, gen_kwargs=data_file)  # pyrefly: ignore[missing-attribute]
     ]
 
   def _generate_examples(self, data_file):
     """This function returns the examples in the raw (text) form."""
-    target_language = self.builder_config.target_language
+    target_language = self.builder_config.target_language  # pyrefly: ignore[missing-attribute]
 
     with epath.Path(data_file).open() as f:
       for idx, line in enumerate(f):

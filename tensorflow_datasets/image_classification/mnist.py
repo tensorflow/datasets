@@ -18,7 +18,7 @@
 import os
 
 import numpy as np
-from six.moves import urllib
+from six.moves import urllib  # pyrefly: ignore[missing-source-for-stubs]
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
@@ -124,7 +124,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
     # write the TRAIN and TEST splits to disk.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 num_examples=_TRAIN_EXAMPLES,
                 data_path=mnist_files["train_data"],
@@ -132,7 +132,7 @@ class MNIST(tfds.core.GeneratorBasedBuilder):
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 num_examples=_TEST_EXAMPLES,
                 data_path=mnist_files["test_data"],
@@ -325,7 +325,7 @@ class EMNIST(MNIST):
         features=tfds.features.FeaturesDict({
             "image": tfds.features.Image(shape=MNIST_IMAGE_SHAPE),
             "label": tfds.features.ClassLabel(
-                num_classes=self.builder_config.class_number
+                num_classes=self.builder_config.class_number  # pyrefly: ignore[missing-attribute]
             ),
         }),
         supervised_keys=("image", "label"),
@@ -338,16 +338,16 @@ class EMNIST(MNIST):
   def _split_generators(self, dl_manager):
     filenames = {
         "train_data": "emnist-{}-train-images-idx3-ubyte.gz".format(
-            self.builder_config.name
+            self.builder_config.name  # pyrefly: ignore[missing-attribute]
         ),
         "train_labels": "emnist-{}-train-labels-idx1-ubyte.gz".format(
-            self.builder_config.name
+            self.builder_config.name  # pyrefly: ignore[missing-attribute]
         ),
         "test_data": "emnist-{}-test-images-idx3-ubyte.gz".format(
-            self.builder_config.name
+            self.builder_config.name  # pyrefly: ignore[missing-attribute]
         ),
         "test_labels": "emnist-{}-test-labels-idx1-ubyte.gz".format(
-            self.builder_config.name
+            self.builder_config.name  # pyrefly: ignore[missing-attribute]
         ),
     }
 
@@ -358,17 +358,17 @@ class EMNIST(MNIST):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
-                num_examples=self.builder_config.train_examples,
+                num_examples=self.builder_config.train_examples,  # pyrefly: ignore[missing-attribute]
                 data_path=extracted["train_data"],
                 label_path=extracted["train_labels"],
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
-                num_examples=self.builder_config.test_examples,
+                num_examples=self.builder_config.test_examples,  # pyrefly: ignore[missing-attribute]
                 data_path=extracted["test_data"],
                 label_path=extracted["test_labels"],
             ),

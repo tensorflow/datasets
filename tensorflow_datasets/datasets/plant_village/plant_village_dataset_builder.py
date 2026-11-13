@@ -84,7 +84,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path}
+            name=tfds.Split.TRAIN, gen_kwargs={"datapath": path}  # pyrefly: ignore[missing-attribute]
         )
     ]
 

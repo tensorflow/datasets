@@ -131,7 +131,7 @@ def _process_molecule(
     thermo = 0
     for z in atoms['Z'].values:
       thermo += v[z]
-    example[f'{k}_atomization'] = example[k] - thermo
+    example[f'{k}_atomization'] = example[k] - thermo  # pyrefly: ignore[unsupported-operation]
 
   return example
 
@@ -234,7 +234,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     return self.dataset_info_from_configs(
-        disable_shuffling=self.builder_config.permutation_seed is None,
+        disable_shuffling=self.builder_config.permutation_seed is None,  # pyrefly: ignore[missing-attribute]
         features=tfds.features.FeaturesDict({
             'num_atoms': tfds.features.Tensor(shape=(), dtype=np.int64),
             'charges': tfds.features.Tensor(shape=(29,), dtype=np.int64),
@@ -306,9 +306,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     split_ids = _get_split_ids(
         uncharacterized,
-        permutation_seed=self.builder_config.permutation_seed,
-        train_size=self.builder_config.train_size,
-        validation_size=self.builder_config.validation_size,
+        permutation_seed=self.builder_config.permutation_seed,  # pyrefly: ignore[missing-attribute]
+        train_size=self.builder_config.train_size,  # pyrefly: ignore[missing-attribute]
+        validation_size=self.builder_config.validation_size,  # pyrefly: ignore[missing-attribute]
     )
 
     return {

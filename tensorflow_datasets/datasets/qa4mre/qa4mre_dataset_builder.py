@@ -92,10 +92,10 @@ def _get_question(
       'document_id': document_id,
       'document_str': document_str,
       'question_id': question_id,
-      'question_str': question_str,
+      'question_str': question_str,  # pyrefly: ignore[unbound-name]
       'answer_options': possible_answers,
-      'correct_answer_id': correct_answer_id,
-      'correct_answer_str': correct_answer_str,
+      'correct_answer_id': correct_answer_id,  # pyrefly: ignore[unbound-name]
+      'correct_answer_str': correct_answer_str,  # pyrefly: ignore[unbound-name]
   }
 
   return id_, feats
@@ -247,17 +247,17 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     cfg = self.builder_config
     download_urls = dict()
 
-    if cfg.track == 'main':
-      download_urls['{}.main.{}'.format(cfg.year, cfg.lang)] = os.path.join(
-          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang)
+    if cfg.track == 'main':  # pyrefly: ignore[missing-attribute]
+      download_urls['{}.main.{}'.format(cfg.year, cfg.lang)] = os.path.join(  # pyrefly: ignore[missing-attribute]
+          _BASE_URL, PATHS[cfg.year]['_PATH_TMPL_MAIN_GS'].format(cfg.lang)  # pyrefly: ignore[missing-attribute]
       )  # pytype: disable=attribute-error
 
-    if cfg.year in ['2012', '2013'] and cfg.track == 'alzheimers':
-      download_urls['{}.alzheimers.EN'.format(cfg.year)] = os.path.join(
+    if cfg.year in ['2012', '2013'] and cfg.track == 'alzheimers':  # pyrefly: ignore[missing-attribute]
+      download_urls['{}.alzheimers.EN'.format(cfg.year)] = os.path.join(  # pyrefly: ignore[no-matching-overload]
           _BASE_URL, PATHS[cfg.year]['_PATH_ALZHEIMER']
       )
 
-    if cfg.year == '2013' and cfg.track == 'entrance_exam':
+    if cfg.year == '2013' and cfg.track == 'entrance_exam':  # pyrefly: ignore[missing-attribute]
       download_urls['2013.entrance_exam.EN'] = os.path.join(
           _BASE_URL, PATHS[cfg.year]['_PATH_ENTRANCE_EXAM']
       )
@@ -266,7 +266,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'filepath': downloaded_files[
                     '{}.{}.{}'.format(cfg.year, cfg.track, cfg.lang)
@@ -293,7 +293,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 topic_id,
                 topic_name,
                 test_id,
-                document_id,
-                document_str,
+                document_id,  # pyrefly: ignore[unbound-name]
+                document_str,  # pyrefly: ignore[unbound-name]
                 question,
             )

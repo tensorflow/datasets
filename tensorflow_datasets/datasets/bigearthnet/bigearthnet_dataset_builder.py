@@ -133,7 +133,7 @@ class Builder(tfds.core.BeamBasedBuilder):
         'projection': tfds.features.Text(),
         'tile_source': tfds.features.Text(),
     })
-    if self.builder_config.selection == 'rgb':
+    if self.builder_config.selection == 'rgb':  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[120, 120, 3]),
           'labels': tfds.features.Sequence(
@@ -166,8 +166,8 @@ class Builder(tfds.core.BeamBasedBuilder):
       supervised_keys = None
 
     return self.dataset_info_from_configs(
-        features=features,
-        supervised_keys=supervised_keys,
+        features=features,  # pyrefly: ignore[unbound-name]
+        supervised_keys=supervised_keys,  # pyrefly: ignore[unbound-name]
         homepage='http://bigearth.net',
     )
 
@@ -176,7 +176,7 @@ class Builder(tfds.core.BeamBasedBuilder):
     dl_path = dl_manager.download(_ZIP_FILE)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'archive_path': dl_path,
             },
@@ -186,7 +186,7 @@ class Builder(tfds.core.BeamBasedBuilder):
   def _build_pcollection(self, pipeline, archive_path):
     """Generates examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
-    selection = self.builder_config.selection
+    selection = self.builder_config.selection  # pyrefly: ignore[missing-attribute]
 
     return (
         pipeline

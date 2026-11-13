@@ -69,26 +69,35 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape         | Dtype   | Description
-:------------------------- | :----------- | :------------ | :------ | :----------
-                           | FeaturesDict |               |         |
-episode_metadata           | FeaturesDict |               |         |
-episode_metadata/file_path | Text         |               | string  | Path to the original data file.
-steps                      | Dataset      |               |         |
-steps/action               | Tensor       | (14,)         | float32 | Robot action, consists of [3x EEF position (L), 3x EEF orientation yaw/pitch/roll (L), 1x gripper open/close position (L), 3x EEF position (R), 3x EEF orientation yaw/pitch/roll (R), 1x gripper open/close position (R)].
-steps/discount             | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first             | Tensor       |               | bool    |
-steps/is_last              | Tensor       |               | bool    |
-steps/is_terminal          | Tensor       |               | bool    |
-steps/language_embedding   | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction | Text         |               | string  | Language Instruction.
-steps/observation          | FeaturesDict |               |         |
-steps/observation/action_l | Tensor       | (7,)          | float32 | Left robot action, consists of [3x EEF position, 3x EEF orientation yaw/pitch/roll].
-steps/observation/action_r | Tensor       | (7,)          | float32 | Right robot action, consists of [3x EEF position, 3x EEF orientation yaw/pitch/roll, 1x gripper open/close position].
-steps/observation/image    | Image        | (256, 256, 3) | uint8   | Main camera RGB observation.
-steps/observation/pose_l   | Tensor       | (6,)          | float32 | Left robot end effector pose, consists of [3x EEF position, 3x EEF orientation yaw/pitch/roll].
-steps/observation/pose_r   | Tensor       | (6,)          | float32 | Right robot end effector pose, consists of [3x EEF position, 3x EEF orientation yaw/pitch/roll].
-steps/reward               | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                    | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                            | FeaturesDict |         |         |                                                              |
+| episode_metadata           | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path | Text         |         | string  | Path to the original data file.                              |
+| steps                      | Dataset      |         |         |                                                              |
+| steps/action               | Tensor       | (14,)   | float32 | Robot action, consists of [3x EEF position (L), 3x EEF       |
+:                            :              :         :         : orientation yaw/pitch/roll (L), 1x gripper open/close        :
+:                            :              :         :         : position (L), 3x EEF position (R), 3x EEF orientation        :
+:                            :              :         :         : yaw/pitch/roll (R), 1x gripper open/close position (R)].     :
+| steps/discount             | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first             | Tensor       |         | bool    |                                                              |
+| steps/is_last              | Tensor       |         | bool    |                                                              |
+| steps/is_terminal          | Tensor       |         | bool    |                                                              |
+| steps/language_embedding   | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                            :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction | Text         |         | string  | Language Instruction.                                        |
+| steps/observation          | FeaturesDict |         |         |                                                              |
+| steps/observation/action_l | Tensor       | (7,)    | float32 | Left robot action, consists of [3x EEF position, 3x EEF      |
+:                            :              :         :         : orientation yaw/pitch/roll].                                 :
+| steps/observation/action_r | Tensor       | (7,)    | float32 | Right robot action, consists of [3x EEF position, 3x EEF     |
+:                            :              :         :         : orientation yaw/pitch/roll, 1x gripper open/close position]. :
+| steps/observation/image    | Image        | (256,   | uint8   | Main camera RGB observation.                                 |
+:                            :              : 256, 3) :         :                                                              :
+| steps/observation/pose_l   | Tensor       | (6,)    | float32 | Left robot end effector pose, consists of [3x EEF position,  |
+:                            :              :         :         : 3x EEF orientation yaw/pitch/roll].                          :
+| steps/observation/pose_r   | Tensor       | (6,)    | float32 | Right robot end effector pose, consists of [3x EEF position, |
+:                            :              :         :         : 3x EEF orientation yaw/pitch/roll].                          :
+| steps/reward               | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

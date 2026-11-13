@@ -64,7 +64,7 @@ class TedHrlrConfig(tfds.core.BuilderConfig):
         first will be used as source and second as target in supervised mode.
       **kwargs: keyword arguments forwarded to super.
     """
-    name = "%s_to_%s" % (language_pair[0].replace("_", ""), language_pair[1])
+    name = "%s_to_%s" % (language_pair[0].replace("_", ""), language_pair[1])  # pyrefly: ignore[missing-attribute]
 
     description = "Translation dataset from %s to %s in plain text." % (
         language_pair[0],
@@ -99,21 +99,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self):
     return self.dataset_info_from_configs(
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair
+            languages=self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
         ),
         homepage="https://github.com/neulab/word-embeddings-for-nmt",
-        supervised_keys=self.builder_config.language_pair,
+        supervised_keys=self.builder_config.language_pair,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
     dl_dir = dl_manager.download_and_extract(_DATA_URL)
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
 
     data_dir = os.path.join(dl_dir, "datasets", "%s_to_%s" % (source, target))
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "source_file": os.path.join(
                     data_dir, "{}.train".format(source.replace("_", "-"))
@@ -124,7 +124,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "source_file": os.path.join(
                     data_dir, "{}.dev".format(source.split("_")[0])
@@ -133,7 +133,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "source_file": os.path.join(
                     data_dir, "{}.test".format(source.split("_")[0])
@@ -159,7 +159,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         target_file,
     )
 
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     for idx, (l1, l2) in enumerate(zip(source_sentences, target_sentences)):
       result = {source: l1, target: l2}
       # Make sure that both translations are non-empty.

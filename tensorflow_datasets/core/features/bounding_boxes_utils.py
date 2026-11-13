@@ -123,7 +123,7 @@ def convert_coordinates_to_bbox(
     )
 
   if normalize:
-    bbox = normalize_bbox(bbox, img_shape)
+    bbox = normalize_bbox(bbox, img_shape)  # pyrefly: ignore[bad-argument-type]
 
   return bbox
 

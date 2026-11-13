@@ -13,9 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for xtreme."""
+# pylint: disable=unused-import
 from tensorflow_datasets.dataset_collections.xtreme import xtreme
+from tensorflow_datasets.question_answering import tydi_qa
+from tensorflow_datasets.question_answering import xquad
 from tensorflow_datasets.testing.dataset_collection_builder_testing import DatasetCollectionTestBase
+from tensorflow_datasets.text.wikiann import Wikiann
+from tensorflow_datasets.text.xtreme_pawsx import XtremePawsx
+from tensorflow_datasets.text.xtreme_xnli import XtremeXnli
+
+# pylint: enable=unused-import
 
 
 class TestXtreme(DatasetCollectionTestBase):

@@ -101,10 +101,10 @@ class YelpPolarityReviews(tfds.core.GeneratorBasedBuilder):
     test_file = os.path.join(arch_path, "yelp_review_polarity_csv", "test.csv")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_file}
+            name=tfds.Split.TRAIN, gen_kwargs={"filepath": train_file}  # pyrefly: ignore[missing-attribute]
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs={"filepath": test_file}
+            name=tfds.Split.TEST, gen_kwargs={"filepath": test_file}  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

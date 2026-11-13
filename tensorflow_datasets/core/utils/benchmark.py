@@ -83,8 +83,8 @@ class RawBenchmarkResult:
 
   def durations_s(self, include_first: bool = True) -> List[float]:
     if not include_first:
-      return [_ns_to_s(d) for d in self.durations_ns[1:]]
-    return [_ns_to_s(d) for d in self.durations_ns]
+      return [_ns_to_s(d) for d in self.durations_ns[1:]]  # pyrefly: ignore[unsupported-operation]
+    return [_ns_to_s(d) for d in self.durations_ns]  # pyrefly: ignore[not-iterable]
 
   def summary_statistics(
       self, include_first: bool
@@ -99,7 +99,7 @@ class RawBenchmarkResult:
         'quantiles': statistics.quantiles(durations),
     }
 
-  def raw_stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
+  def raw_stats_pd(self) -> pd.DataFrame:
     raw_stats = {
         'start_time': _ns_to_s(self.start_time),
         'first_batch_time': _ns_to_s(self.first_batch_time),
@@ -132,7 +132,7 @@ class RawBenchmarkResult:
         ),
     }
 
-  def stats_pd(self) -> pd.DataFrame:  # pytype: disable=invalid-annotation  # typed-pandas
+  def stats_pd(self) -> pd.DataFrame:
     return pd.DataFrame.from_dict(self.stats(), orient='index')
 
   def __repr__(self) -> str:
@@ -151,12 +151,12 @@ class RawBenchmarkResult:
 
 @dataclasses.dataclass(frozen=True)
 class BenchmarkResult:
-  stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
-  raw_stats: pd.DataFrame  # pytype: disable=invalid-annotation  # typed-pandas
+  stats: pd.DataFrame
+  raw_stats: pd.DataFrame
 
   def _repr_html_(self) -> str:
     """Colab/notebook representation."""
-    return '<strong>BenchmarkResult:</strong><br/>' + self.stats._repr_html_()  # pylint: disable=protected-access
+    return '<strong>BenchmarkResult:</strong><br/>' + self.stats._repr_html_()  # pylint: disable=protected-access  # pyrefly: ignore[unsupported-operation]
 
 
 def raw_benchmark(
@@ -188,12 +188,12 @@ def raw_benchmark(
     raw results.
   """
   try:
-    total = len(ds)  # pytype: disable=wrong-arg-types
+    total = len(ds)  # pyrefly: ignore[bad-argument-type]
   except TypeError:
     total = num_iter
 
   if num_iter is not None:
-    total = min(total, num_iter)
+    total = min(total, num_iter)  # pyrefly: ignore[bad-specialization]
 
   results = []
   actual_num_iter = 0
@@ -230,7 +230,7 @@ def raw_benchmark(
       num_iter=actual_num_iter,
       num_examples=actual_num_iter * batch_size,
       start_time=start_time,
-      first_batch_time=first_batch_time,
+      first_batch_time=first_batch_time,  # pyrefly: ignore[bad-argument-type]
       end_time=end_time,
       batch_size=batch_size,
       durations_ns=durations_ns,

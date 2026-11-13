@@ -102,13 +102,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dl_files = dl_manager.download_and_extract(_URLs)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": dl_files["train"],
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "filepath": dl_files["test"],
             },

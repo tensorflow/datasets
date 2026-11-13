@@ -179,8 +179,8 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
             name='',
             cls_name=type(self).__name__,
             tensor_info=None,
-            description=self._doc.desc,
-            value_range=self._doc.value_range,
+            description=self._doc.desc,  # pyrefly: ignore[bad-argument-type]
+            value_range=self._doc.value_range,  # pyrefly: ignore[bad-argument-type]
         )
     ]
     for feature_name, feature in sorted(list(self._feature_dict.items())):
@@ -209,12 +209,12 @@ class FeaturesDict(top_level_feature.TopLevelFeature):
     }
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Json | feature_pb2.FeaturesDict
   ) -> 'FeaturesDict':
     if isinstance(value, dict):
       features = {
-          k: feature_lib.FeatureConnector.from_json(v) for k, v in value.items()
+          k: feature_lib.FeatureConnector.from_json(v) for k, v in value.items()  # pyrefly: ignore[bad-argument-type]
       }
     else:
       features = {
@@ -315,7 +315,7 @@ def to_feature(value: feature_lib.FeatureConnectorArg):
   if isinstance(value, feature_lib.FeatureConnector):
     return value
   elif dtype_utils.is_np_or_tf_dtype(value):  # tf.int32, np.int32,...
-    return tensor_feature.Tensor(shape=(), dtype=value)
+    return tensor_feature.Tensor(shape=(), dtype=value)  # pyrefly: ignore[bad-argument-type]
   elif isinstance(value, dict):
     return FeaturesDict(value)
   else:

@@ -46,21 +46,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     extract_path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": extract_path},
         ),
     ]
 
   def _generate_examples(self, path=None):
     """Yields examples."""
-    topics_path = os.path.join(path, "topics")
+    topics_path = os.path.join(path, "topics")  # pyrefly: ignore[no-matching-overload]
     filenames = tf.io.gfile.listdir(topics_path)
     for filename in filenames:
       file_path = os.path.join(topics_path, filename)
       topic_name = filename.split(".txt")[0]
       with tf.io.gfile.GFile(file_path, "rb") as src_f:
         input_data = src_f.read()
-      summaries_path = os.path.join(path, "summaries-gold", topic_name)
+      summaries_path = os.path.join(path, "summaries-gold", topic_name)  # pyrefly: ignore[no-matching-overload]
       summary_lst = []
       for summ_filename in sorted(tf.io.gfile.listdir(summaries_path)):
         file_path = os.path.join(summaries_path, summ_filename)

@@ -75,7 +75,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             "speech": tfds.features.Audio(
                 sample_rate=16000,
                 dtype=np.int16,
-                lazy_decode=self.builder_config.lazy_decode,
+                lazy_decode=self.builder_config.lazy_decode,  # pyrefly: ignore[missing-attribute]
                 file_format="flac",
             ),
             "text": tfds.features.Text(),
@@ -125,10 +125,10 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     extracted_dirs = dl_manager.download_and_extract(_DL_URLS)
-    self._populate_metadata(extracted_dirs.values())
+    self._populate_metadata(extracted_dirs.values())  # pyrefly: ignore[missing-attribute]
     splits = {
         split: self._generate_examples(directory)
-        for split, directory in extracted_dirs.items()
+        for split, directory in extracted_dirs.items()  # pyrefly: ignore[missing-attribute]
     }
     return splits
 

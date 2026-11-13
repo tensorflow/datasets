@@ -66,7 +66,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     extracted_path = dl_manager.download_and_extract(_DATASET_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "image_dir_path": os.path.join(extracted_path, "300W_LP"),
             },

@@ -45,36 +45,34 @@ from etils import epy as _epy
 
 try:
   # pylint: disable=g-import-not-at-top
-  # pytype: disable=import-error
   # For builds that don't include all dataset builders, we don't want to fail on
   # import errors of dataset builders.
   with _epy.lazy_imports(
       error_callback='Could not import TFDS dataset builders.'
   ):
-    from tensorflow_datasets import audio
-    from tensorflow_datasets import graphs
-    from tensorflow_datasets import image
-    from tensorflow_datasets import image_classification
-    from tensorflow_datasets import object_detection
-    from tensorflow_datasets import nearest_neighbors
-    from tensorflow_datasets import question_answering
-    from tensorflow_datasets import d4rl
-    from tensorflow_datasets import ranking
-    from tensorflow_datasets import recommendation
-    from tensorflow_datasets import rl_unplugged
-    from tensorflow_datasets.rlds import datasets
-    from tensorflow_datasets import robotics
-    from tensorflow_datasets import robomimic
-    from tensorflow_datasets import structured
-    from tensorflow_datasets import summarization
-    from tensorflow_datasets import text
-    from tensorflow_datasets import text_simplification
-    from tensorflow_datasets import time_series
-    from tensorflow_datasets import translate
-    from tensorflow_datasets import video
-    from tensorflow_datasets import vision_language
+    from tensorflow_datasets import audio  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import graphs  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import image  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import image_classification  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import object_detection  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import nearest_neighbors  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import question_answering  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import d4rl  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import ranking  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import recommendation  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import rl_unplugged  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets.rlds import datasets  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import robotics  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import robomimic  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import structured  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import summarization  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import text  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import text_simplification  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import time_series  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import translate  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import video  # pyrefly: ignore[missing-module-attribute]
+    from tensorflow_datasets import vision_language  # pyrefly: ignore[missing-module-attribute]
 
-  # pytype: enable=import-error
 
   from tensorflow_datasets import rlds  # pylint: disable=g-bad-import-order
 

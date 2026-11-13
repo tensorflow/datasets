@@ -151,7 +151,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         dict_of_urls[name] = url
     paths = dl_manager.download_and_extract(dict_of_urls)
     return {
-        'train': self._generate_examples(paths),
+        'train': self._generate_examples(paths),  # pyrefly: ignore[bad-argument-type]
     }
 
   def _generate_examples(self, paths: Dict[str, epath.Path]):

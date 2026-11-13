@@ -178,7 +178,7 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
             'rhs': tfds.features.Text(),
         }),
         homepage='https://wordnet.princeton.edu/',
-        citation=self.builder_config.citation,
+        citation=self.builder_config.citation,  # pyrefly: ignore[missing-attribute]
         metadata=tfds.core.MetadataDict(),
         license=_LICENSE,
     )
@@ -197,18 +197,18 @@ class Wordnet(tfds.core.GeneratorBasedBuilder):
     )
     self.info.metadata.update(_make_wn18_metadata(synset_definitions_path))
     # Locate and output splits.
-    train_path, val_path, test_path = self.builder_config.get_paths(dl_paths)
+    train_path, val_path, test_path = self.builder_config.get_paths(dl_paths)  # pyrefly: ignore[missing-attribute]
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(triplets_path=train_path),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(triplets_path=val_path),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(triplets_path=test_path),
         ),
     ]

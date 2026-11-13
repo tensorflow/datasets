@@ -146,7 +146,7 @@ def build_catalog(
       datasets, doc_util_paths=doc_util_paths or doc_utils.DocUtilPaths()
   ):
     # Write the builder documentation
-    dataset_file = catalog_dir / f'{builder_doc.filestem}.md'
+    dataset_file = catalog_dir / f'{builder_doc.filestem}.md'  # pyrefly: ignore[unsupported-operation]
     dataset_file.write_text(builder_doc.content)
     # Save the category
     for section in builder_doc.sections:
@@ -159,7 +159,7 @@ def build_catalog(
         ds_collections
     ):
       # Write the dataset collection documentation
-      collection_file = catalog_dir / f'{collection_doc.name}.md'
+      collection_file = catalog_dir / f'{collection_doc.name}.md'  # pyrefly: ignore[unsupported-operation]
       collection_file.write_text(collection_doc.content)
       # Save the "dataset collection" docs
       section_to_collection_docs['collections'].append(collection_doc)
@@ -212,7 +212,7 @@ def _save_table_of_content(
             'title': doc.name,
         }
         sec_dict['section'].append(sidebar_item)
-      toc_yaml['toc'].append(sec_dict)
+      toc_yaml['toc'].append(sec_dict)  # pyrefly: ignore[bad-argument-type]
 
       # Add `overview.md` section
       toc_overview.append(_create_collections_section_toc(collection_docs))
@@ -231,7 +231,7 @@ def _save_table_of_content(
       if doc.is_nightly:
         sidebar_item['status'] = 'nightly'
       sec_dict['section'].append(sidebar_item)
-    toc_yaml['toc'].append(sec_dict)
+    toc_yaml['toc'].append(sec_dict)  # pyrefly: ignore[bad-argument-type]
 
     # Add `overview.md` section
     toc_overview.append(_create_datasets_section_toc(section, builder_docs))

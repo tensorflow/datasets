@@ -19,16 +19,8 @@ Question Generation from Text: A Preliminary Study' (Zhou et al, 2017) and
 'Learning to Ask: Neural Question Generation for Reading Comprehension' (Du et
 al, 2017).
 
-*   **Homepage**: [https://github.com/xinyadu/nqg
-    @inproceedings{du-etal-2017-learning, title = "Learning to Ask: Neural
-    Question Generation for Reading Comprehension", author = "Du, Xinya and
-    Shao, Junru and Cardie, Claire", booktitle = "Proceedings of the 55th Annual
-    Meeting of the Association for Computational Linguistics (Volume 1: Long
-    Papers)", month = jul, year = "2017", address = "Vancouver, Canada",
-    publisher = "Association for Computational Linguistics", url =
-    "https://aclanthology.org/P17-1123", doi = "10.18653/v1/P17-1123", pages =
-    "1342--1352",
-    }](https://github.com/xinyadu/nqg @inproceedings{du-etal-2017-learning, title = "Learning to Ask: Neural Question Generation for Reading Comprehension", author = "Du, Xinya and Shao, Junru and Cardie, Claire", booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics \(Volume 1: Long Papers)",
+*   **Homepage**:
+    [https://github.com/xinyadu/nqg @inproceedings{du-etal-2017-learning, title = "Learning to Ask: Neural Question Generation for Reading Comprehension", author = "Du, Xinya and Shao, Junru and Cardie, Claire", booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)", month = jul, year = "2017", address = "Vancouver, Canada", publisher = "Association for Computational Linguistics", url = "https://aclanthology.org/P17-1123", doi = "10.18653/v1/P17-1123", pages = "1342--1352", }](https://github.com/xinyadu/nqg @inproceedings{du-etal-2017-learning, title = "Learning to Ask: Neural Question Generation for Reading Comprehension", author = "Du, Xinya and Shao, Junru and Cardie, Claire", booktitle = "Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics \(Volume 1: Long Papers)",
     month = jul, year = "2017", address = "Vancouver, Canada", publisher =
     "Association for Computational Linguistics", url =
     "https://aclanthology.org/P17-1123", doi = "10.18653/v1/P17-1123", pages =

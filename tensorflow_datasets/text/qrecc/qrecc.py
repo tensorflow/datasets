@@ -81,10 +81,10 @@ class QReCC(tfds.core.GeneratorBasedBuilder):
 
     # Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             path=data_dir / "qrecc_train.json"
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             path=data_dir / "qrecc_test.json"
         ),
     }

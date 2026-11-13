@@ -20,6 +20,94 @@ and this project adheres to
 
 ### Security
 
+## [4.9.10] - 2026-05-08
+
+## What's Changed
+
+### Added
+
+* Publish 'RoboAiUR5e' OXE datasets, see https://robotics-transformer-x.github.io/. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11173
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+* Migrate from pkg_resources to packaging for version parsing. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11178
+* fix register_package_test.py by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11181
+* Fix compatibility with Protobuf 5+ in dataset_info.py by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11180
+* Fix handling map proto fields by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11183
+* Fix feature handling in Radon and NaN checks in LAION400M. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11185
+* Conditionally pass `run_post_process` to `hf_builder.as_dataset`. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11189
+* Use iterative `joinpath` instead of unpacking in TFDS paths. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11187
+* Fix PIL image conversion for uint16 multi-channel arrays. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11186
+* Fix missing value handling in Radon dataset. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11190
+* Fix `nsynth` tests. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11191
+* Fix pickling error in nsynth_dataset_builder_test by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11175
+* Fix issue with transformers library huggingface by @alexcbb in https://github.com/tensorflow/datasets/pull/11027
+* Internal by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11067
+* Update of TFDS to PwC links. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11069
+* Update caltech birds 2011 dataset by @SanjaySG in https://github.com/tensorflow/datasets/pull/11074
+* Fix shard computation in `NoShuffleBeamWriter` with overlapping split names by @lgeiger in https://github.com/tensorflow/datasets/pull/11070
+* Delete `tensorflow-io` tests dependency. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11080
+* Internal change. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11076
+* Do not manually change metadata. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11083
+* remove new links for the cars196 dataset by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11084
+* Add COVR to TFDS by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11081
+* Add audio support for croissant builder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11086
+* CroissantBuilder: Get the bounding box format from the field's source. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11085
+* Add `sc:Time` features to the CroissantBuilder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11088
+* Support huggingface Video feature by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11068
+* Cleanup. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11077
+* CroissantBuilder supports `sc:DateTime` features. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11089
+* Add tests to CroissantBuilder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11090
+* Include video support in conversion_utils. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11091
+* Fix documentation for the Video feature. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11092
+* Add video support for CroissantBuilder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11093
+* Fix `DatasetInfo.read_from_directory()` by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11094
+* Use simple_parsing for `convert_format` cli command. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11098
+* Use simple_parsing for `new` cli command. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11099
+* Fix parsing CLI arguments and ABSL flags. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11101
+* Reuse pytest fixture for setting TFDS_DATA_DIR. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11102
+* Use simple_parsing for `build` cli command. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11103
+* Refactor TFDS CLI commands. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11104
+* DatasetBuilderTestCase mentions new TFDS `dummy_data` folder format. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11105
+* Refactor `download_and_prepare` script. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11109
+* Fix the multi_news dataset. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11108
+* Small changes to cli_utils.py by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11107
+* Fix `c4_test`. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11112
+* Remove `build_api_docs`. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11114
+* Internal change. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11113
+* Move `file_utils.get_default_data_dir()` to `constants.get_default_data_dir()`. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11117
+* Remove `synchronizer` arg from `zarr.open_array()` call. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11111
+* Fix download links the multi_news dataset by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11118
+* Add typing to parametrized tests in croissant_builder_test by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11119
+* Block 2.0.0 version of the multi_news dataset as it contains broken URLs. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11120
+* Improve doc scripts. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11124
+* Prevent `load_read_only_builder` from modifying input `builder_kwargs`. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11122
+* Support multilingual names in croissant_utils. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11125
+* Add tests for handling multilingual names in Croissant. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11126
+* Refactor utils to support both multilingual descriptions and names in CroissantBuilder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11128
+* Add arguments for multilingual datasets support in the CroissantBuilder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11129
+* Add segmentation masks to LVIS minival split. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11130
+* Encode examples before writing them in the ShardBasedBuilder by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11133
+* More efficient determination of shard lengths and total size by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11139
+* Add `source` to `mlc.Field` in Croissant test utils. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11140
+* Pass num shards to the beam sink from the no shuffle beam writer by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11141
+* Make sure there are no empty shards when using the NoShuffleBeamWriter by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11142
+* Pin Pillow and ipykernel versions in tests. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11145
+* Replace unicode escaped characters in ipynb files by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11154
+* Fix incompatibility of tfds.Builder.as_data_source with MultiSplitInfo. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11155
+* Handle the argument deserialize_method in mocked data sources. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11156
+* TFDS: Refactor WIT (Wikipedia Image Text) builder. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11159
+* Refactor: Move nested Beam functions to top-level. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11157
+* Ensure pydub's fast path for WAV audio by passing format as str, not bytes. by @copybara-service[bot] in https://github.com/tensorflow/datasets/pull/11170
+
+### Security
+
 ## [4.9.9] - 2025-05-28
 
 ### Added

@@ -163,21 +163,21 @@ class Builder(tfds.core.BeamBasedBuilder):
     path = dl_manager.manual_dir
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "folder": path,
                 "split": "train",
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "folder": path,
                 "split": "val",
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "folder": path,
                 "split": "test",
@@ -189,7 +189,7 @@ class Builder(tfds.core.BeamBasedBuilder):
     """Generate examples as dicts."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    split_type = self.builder_config.split_type
+    split_type = self.builder_config.split_type  # pyrefly: ignore[missing-attribute]
     filename = os.path.join(folder, "{}.tar.gz".format(split_type))
 
     def _extract_data(inputs):
@@ -214,8 +214,8 @@ class Builder(tfds.core.BeamBasedBuilder):
           "relation_structure_encoded": data["relation_structure_encoded"],
           "target": data["target"],
           "meta_target": data["meta_target"],
-          "context": all_images[:8],
-          "answers": all_images[8:],
+          "context": all_images[:8],  # pyrefly: ignore[bad-index]
+          "answers": all_images[8:],  # pyrefly: ignore[bad-index]
           "filename": filename,
       }
 

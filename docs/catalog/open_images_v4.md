@@ -87,30 +87,28 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature                      | Class        | Shape  | Dtype   | Description |
-| :--------------------------- | :----------- | :----- | :------ | :---------- |
-|                              | FeaturesDict |        |         |             |
-| bobjects                     | Sequence     |        |         |             |
-| bobjects/bbox                | BBoxFeature  | (4,)   | float32 |             |
-| bobjects/is_depiction        | Tensor       |        | int8    |             |
-| bobjects/is_group_of         | Tensor       |        | int8    |             |
-| bobjects/is_inside           | Tensor       |        | int8    |             |
-| bobjects/is_occluded         | Tensor       |        | int8    |             |
-| bobjects/is_truncated        | Tensor       |        | int8    |             |
-| bobjects/label               | ClassLabel   |        | int64   |             |
-| bobjects/source              | ClassLabel   |        | int64   |             |
-| image                        | Image        | (None, | uint8   |             |
-:                              :              : None,  :         :             :
-:                              :              : 3)     :         :             :
-| image/filename               | Text         |        | string  |             |
-| objects                      | Sequence     |        |         |             |
-| objects/confidence           | Tensor       |        | int32   |             |
-| objects/label                | ClassLabel   |        | int64   |             |
-| objects/source               | ClassLabel   |        | int64   |             |
-| objects_trainable            | Sequence     |        |         |             |
-| objects_trainable/confidence | Tensor       |        | int32   |             |
-| objects_trainable/label      | ClassLabel   |        | int64   |             |
-| objects_trainable/source     | ClassLabel   |        | int64   |             |
+Feature                      | Class        | Shape           | Dtype   | Description
+:--------------------------- | :----------- | :-------------- | :------ | :----------
+                             | FeaturesDict |                 |         |
+bobjects                     | Sequence     |                 |         |
+bobjects/bbox                | BBoxFeature  | (4,)            | float32 |
+bobjects/is_depiction        | Tensor       |                 | int8    |
+bobjects/is_group_of         | Tensor       |                 | int8    |
+bobjects/is_inside           | Tensor       |                 | int8    |
+bobjects/is_occluded         | Tensor       |                 | int8    |
+bobjects/is_truncated        | Tensor       |                 | int8    |
+bobjects/label               | ClassLabel   |                 | int64   |
+bobjects/source              | ClassLabel   |                 | int64   |
+image                        | Image        | (None, None, 3) | uint8   |
+image/filename               | Text         |                 | string  |
+objects                      | Sequence     |                 |         |
+objects/confidence           | Tensor       |                 | int32   |
+objects/label                | ClassLabel   |                 | int64   |
+objects/source               | ClassLabel   |                 | int64   |
+objects_trainable            | Sequence     |                 |         |
+objects_trainable/confidence | Tensor       |                 | int32   |
+objects_trainable/label      | ClassLabel   |                 | int64   |
+objects_trainable/source     | ClassLabel   |                 | int64   |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

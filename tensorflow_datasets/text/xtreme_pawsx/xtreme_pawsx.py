@@ -105,7 +105,7 @@ class XtremePawsx(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     dl_path = dl_manager.download_and_extract(
-        _XTREME_TRANSLATIONS_FORMAT.format(self.builder_config.language)
+        _XTREME_TRANSLATIONS_FORMAT.format(self.builder_config.language)  # pyrefly: ignore[missing-attribute]
     )
     return {"train": self._generate_examples(dl_path)}
 

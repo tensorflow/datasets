@@ -146,14 +146,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     cfg = self.builder_config
     download_urls = {
-        cfg.name: '/'.join([_DOWNLOAD_URL, 'data', cfg.name + '.jsonl'])
+        cfg.name: '/'.join([_DOWNLOAD_URL, 'data', cfg.name + '.jsonl'])  # pyrefly: ignore[missing-attribute]
     }
 
     downloaded_files = dl_manager.download_and_extract(download_urls)
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'filepath': downloaded_files[cfg.name]},
         )
     ]

@@ -68,7 +68,7 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
       )
 
     # Download and load subset file.
-    subset_file = SUBSET2FILES[self.builder_config.name]
+    subset_file = SUBSET2FILES[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
     if isinstance(subset_file, list):  # it will only be a list during testing,
       subset_file = subset_file[0]  # where the first entry is 1shot.txt.
     subset = set(subset_file.read_text().splitlines())
@@ -77,13 +77,13 @@ class Builder(imagenet2012_subset_dataset_builder.Builder):
     tuneset = set(TUNE_FILE.read_text().splitlines())
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             archive=dl_manager.iter_archive(train_path), subset=subset
         ),
         tfds.Split('tune'): self._generate_examples(
             archive=dl_manager.iter_archive(train_path), subset=tuneset
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             archive=dl_manager.iter_archive(val_path),
             validation_labels=imagenet_common.get_validation_labels(val_path),
         ),

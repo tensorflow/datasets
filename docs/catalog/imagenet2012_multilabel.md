@@ -153,18 +153,16 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature              | Class                | Shape   | Dtype  | Description |
-| :------------------- | :------------------- | :------ | :----- | :---------- |
-|                      | FeaturesDict         |         |        |             |
-| correct_multi_labels | Sequence(ClassLabel) | (None,) | int64  |             |
-| file_name            | Text                 |         | string |             |
-| image                | Image                | (None,  | uint8  |             |
-:                      :                      : None,   :        :             :
-:                      :                      : 3)      :        :             :
-| is_problematic       | Tensor               |         | bool   |             |
-| original_label       | ClassLabel           |         | int64  |             |
-| unclear_multi_labels | Sequence(ClassLabel) | (None,) | int64  |             |
-| wrong_multi_labels   | Sequence(ClassLabel) | (None,) | int64  |             |
+Feature              | Class                | Shape           | Dtype  | Description
+:------------------- | :------------------- | :-------------- | :----- | :----------
+                     | FeaturesDict         |                 |        |
+correct_multi_labels | Sequence(ClassLabel) | (None,)         | int64  |
+file_name            | Text                 |                 | string |
+image                | Image                | (None, None, 3) | uint8  |
+is_problematic       | Tensor               |                 | bool   |
+original_label       | ClassLabel           |                 | int64  |
+unclear_multi_labels | Sequence(ClassLabel) | (None,)         | int64  |
+wrong_multi_labels   | Sequence(ClassLabel) | (None,)         | int64  |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

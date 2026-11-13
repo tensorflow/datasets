@@ -27,7 +27,7 @@ P = ParamSpec("P")
 T = TypeVar("T")
 
 
-def retry(func: Callable[P, T], *args: P.args, **kwargs: P.kwargs) -> T:
+def retry(func: Callable[P, T], *args: P.args, **kwargs: P.kwargs) -> T:  # pyrefly: ignore[bad-return]
   """Returns a decorator that retries the function."""
   # We purposely don't use flags, as this code might be run before flags are
   # parsed.

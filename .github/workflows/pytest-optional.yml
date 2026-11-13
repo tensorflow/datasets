@@ -15,6 +15,9 @@ concurrency:
   # Cancel only PR intermediate builds.
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
+permissions:
+  contents: read
+
 jobs:
   activate-tests:
     name: Check whether we should run tests or not
@@ -22,6 +25,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
     - id: check
       uses: ./.github/actions/activate-tests
 

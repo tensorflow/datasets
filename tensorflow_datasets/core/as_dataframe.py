@@ -111,11 +111,11 @@ def _get_feature(
     if type(feature) != features.Sequence and not path:  # pylint: disable=unidiomatic-typecheck
       break
     sequence_rank += 1
-    feature = feature.feature  # Extract inner feature  # pytype: disable=attribute-error
+    feature = feature.feature  # Extract inner feature
 
   if path:  # Has level deeper, recurse
     feature = typing.cast(features.FeaturesDict, feature)
-    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])  # pytype: disable=wrong-arg-types
+    feature, nested_sequence_rank = _get_feature(path[1:], feature[path[0]])
     sequence_rank += nested_sequence_rank
 
   return feature, sequence_rank
@@ -127,7 +127,7 @@ def _make_columns(
 ) -> List[ColumnInfo]:
   """Extract the columns info of the `panda.DataFrame`."""
   return [
-      ColumnInfo.from_spec(path, ds_info)
+      ColumnInfo.from_spec(path, ds_info)  # pyrefly: ignore[bad-argument-type]
       for path, _ in py_utils.flatten_with_path(specs)
   ]
 
@@ -186,7 +186,7 @@ def as_dataframe(
     # selecting sub-data frames.
 
     def __init__(self, *args, **kwargs):
-      super().__init__(*args, **kwargs)  # pytype: disable=wrong-arg-count  # re-none
+      super().__init__(*args, **kwargs)
       # Use name-mangling for forward-compatibility in case pandas
       # adds a `_styler` attribute in the future.
       self.__styler: Optional[Styler] = None
@@ -195,13 +195,13 @@ def as_dataframe(
     def current_style(self) -> Styler:
       """Like `pandas.DataFrame.style`, but attach the style to the DataFrame."""
       if self.__styler is None:
-        self.__styler = super().style  # pytype: disable=attribute-error  # re-none
+        self.__styler = super().style
       return self.__styler
 
     def _repr_html_(self) -> Union[None, str]:
       # See base class for doc
       if self.__styler is None:
-        return super()._repr_html_()  # pytype: disable=attribute-error  # re-none
+        return super()._repr_html_()
       return self.__styler._repr_html_()  # pylint: disable=protected-access
 
   # Pack `as_supervised=True` datasets
@@ -210,7 +210,7 @@ def as_dataframe(
 
   # Flatten the keys names, specs,... while keeping the feature key definition
   # order
-  columns = _make_columns(ds.element_spec, ds_info=ds_info)
+  columns = _make_columns(ds.element_spec, ds_info=ds_info)  # pyrefly: ignore[bad-argument-type]
   rows = [_make_row_dict(ex, columns) for ex in dataset_utils.as_numpy(ds)]
   df = StyledDataFrame(rows)
   df.current_style.format({c.name: c.format_fn for c in columns if c.format_fn})

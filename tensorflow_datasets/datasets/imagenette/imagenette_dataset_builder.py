@@ -24,7 +24,7 @@ import os
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_LABELS_FNAME = "image_classification/imagenette_labels.txt"
+_LABELS_FNAME = "datasets/imagenette/imagenette_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas/"
 
 
@@ -77,7 +77,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    dirname = self.builder_config.dirname
+    dirname = self.builder_config.dirname  # pyrefly: ignore[missing-attribute]
     url = _URL_PREFIX + "{}.tgz".format(dirname)
     path = dl_manager.download_and_extract(url)
     train_path = os.path.join(path, dirname, "train")
@@ -85,13 +85,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "datapath": train_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "datapath": val_path,
             },

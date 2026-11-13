@@ -70,27 +70,35 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                         | Class        | Shape         | Dtype   | Description
-:------------------------------ | :----------- | :------------ | :------ | :----------
-                                | FeaturesDict |               |         |
-episode_metadata                | FeaturesDict |               |         |
-episode_metadata/file_path      | Text         |               | string  | Path to the original data file.
-steps                           | Dataset      |               |         |
-steps/action                    | Tensor       | (7,)          | float32 | Robot action, consists of [3x ee relative pos, 3x ee relative rotation, 1x gripper action].
-steps/discount                  | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                  | Tensor       |               | bool    |
-steps/is_last                   | Tensor       |               | bool    |
-steps/is_terminal               | Tensor       |               | bool    |
-steps/language_embedding        | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction      | Text         |               | string  | Language Instruction.
-steps/observation               | FeaturesDict |               |         |
-steps/observation/image         | Image        | (128, 128, 3) | uint8   | Main camera RGB observation.
-steps/observation/state         | Tensor       | (8,)          | float32 | Default robot state, consists of [3x robot ee pos, 3x ee quat, 1x gripper state].
-steps/observation/state_ee      | Tensor       | (16,)         | float32 | End-effector state, represented as 4x4 homogeneous transformation matrix of ee pose.
-steps/observation/state_gripper | Tensor       | (1,)          | float32 | Robot gripper opening width. Ranges between ~0 (closed) to ~0.077 (open)
-steps/observation/state_joint   | Tensor       | (7,)          | float32 | Robot 7-dof joint information (not used in original SAILOR dataset).
-steps/observation/wrist_image   | Image        | (128, 128, 3) | uint8   | Wrist camera RGB observation.
-steps/reward                    | Scalar       |               | float32 | True on last step of the episode.
+| Feature                         | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------------ | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                 | FeaturesDict |         |         |                                                              |
+| episode_metadata                | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path      | Text         |         | string  | Path to the original data file.                              |
+| steps                           | Dataset      |         |         |                                                              |
+| steps/action                    | Tensor       | (7,)    | float32 | Robot action, consists of [3x ee relative pos, 3x ee         |
+:                                 :              :         :         : relative rotation, 1x gripper action].                       :
+| steps/discount                  | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                  | Tensor       |         | bool    |                                                              |
+| steps/is_last                   | Tensor       |         | bool    |                                                              |
+| steps/is_terminal               | Tensor       |         | bool    |                                                              |
+| steps/language_embedding        | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                 :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction      | Text         |         | string  | Language Instruction.                                        |
+| steps/observation               | FeaturesDict |         |         |                                                              |
+| steps/observation/image         | Image        | (128,   | uint8   | Main camera RGB observation.                                 |
+:                                 :              : 128, 3) :         :                                                              :
+| steps/observation/state         | Tensor       | (8,)    | float32 | Default robot state, consists of [3x robot ee pos, 3x ee     |
+:                                 :              :         :         : quat, 1x gripper state].                                     :
+| steps/observation/state_ee      | Tensor       | (16,)   | float32 | End-effector state, represented as 4x4 homogeneous           |
+:                                 :              :         :         : transformation matrix of ee pose.                            :
+| steps/observation/state_gripper | Tensor       | (1,)    | float32 | Robot gripper opening width. Ranges between ~0 (closed) to   |
+:                                 :              :         :         : ~0.077 (open)                                                :
+| steps/observation/state_joint   | Tensor       | (7,)    | float32 | Robot 7-dof joint information (not used in original SAILOR   |
+:                                 :              :         :         : dataset).                                                    :
+| steps/observation/wrist_image   | Image        | (128,   | uint8   | Wrist camera RGB observation.                                |
+:                                 :              : 128, 3) :         :                                                              :
+| steps/reward                    | Scalar       |         | float32 | True on last step of the episode.                            |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

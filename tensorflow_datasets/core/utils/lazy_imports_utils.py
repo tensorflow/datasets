@@ -54,7 +54,7 @@ def ensure_tf_version(module_name: str):
   _ensure_tf_version_called = True
 
   tf = importlib.import_module(module_name)
-  tf_version = tf.__version__  # pytype: disable=attribute-error
+  tf_version = tf.__version__
   if tf_version < MIN_TF_VERSION:
     raise ImportError(
         "This version of TensorFlow Datasets requires TensorFlow "
@@ -104,7 +104,7 @@ def datasets_error_callback(module_name: Exception):
 # pylint: disable=g-import-not-at-top,unused-import
 
 with epy.lazy_imports(error_callback=mlcroissant_error_callback):
-  import mlcroissant  # pytype: disable=import-error
+  import mlcroissant  # pyrefly: ignore[missing-import]
 
 
 with epy.lazy_imports():
@@ -121,14 +121,14 @@ with epy.lazy_imports():
 with epy.lazy_imports(
     error_callback=tf_error_callback, success_callback=ensure_tf_version
 ):
-  import tensorflow  # pytype: disable=import-error
+  import tensorflow  # pyrefly: ignore[missing-source-for-stubs]
 
 with epy.lazy_imports(error_callback=tf_agents_error_callback):
-  import tf_agents  # pytype: disable=import-error
+  import tf_agents  # pyrefly: ignore[missing-import]
 
 with epy.lazy_imports(error_callback=datasets_error_callback):
-  import datasets  # pytype: disable=import-error
-  import huggingface_hub  # pytype: disable=import-error
+  import datasets  # pyrefly: ignore[missing-import]
+  import huggingface_hub  # pyrefly: ignore[missing-import]
 
 with epy.lazy_imports(error_callback=array_record_error_callback):
   from array_record.python import array_record_data_source

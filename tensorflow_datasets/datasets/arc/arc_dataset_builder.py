@@ -92,7 +92,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # dl_manager is a tfds.download.DownloadManager that can be used to
     # download and extract URLs
     extracted_dir = dl_manager.download_and_extract(
-        self.builder_config.download_url
+        self.builder_config.download_url  # pyrefly: ignore[missing-attribute]
     )
     extract_subdir = [
         path
@@ -107,13 +107,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "directory": train_dir,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "directory": test_dir,
             },

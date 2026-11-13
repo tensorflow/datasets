@@ -178,7 +178,7 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'data_dir': os.path.join(path, _DIRNAME)},
         )
     ]
@@ -194,8 +194,8 @@ class Cifar10Corrupted(tfds.core.GeneratorBasedBuilder):
     Yields:
       dictionary with image file and label.
     """
-    corruption = self.builder_config.corruption
-    severity = self.builder_config.severity
+    corruption = self.builder_config.corruption  # pyrefly: ignore[missing-attribute]
+    severity = self.builder_config.severity  # pyrefly: ignore[missing-attribute]
 
     images_file = os.path.join(data_dir, _CORRUPTIONS_TO_FILENAMES[corruption])
     labels_file = os.path.join(data_dir, _LABELS_FILENAME)

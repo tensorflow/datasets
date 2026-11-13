@@ -87,7 +87,7 @@ class LabeledImage(image_feature.Image):
           f'LabeledImage shape should have a single channel. Got: {shape}'
       )
     label_kwargs = _labels_to_kwarg(labels)
-    self._class_label = class_label_feature.ClassLabel(**label_kwargs)
+    self._class_label = class_label_feature.ClassLabel(**label_kwargs)  # pyrefly: ignore[bad-argument-type]
 
   @property
   def num_classes(self) -> Optional[int]:
@@ -118,7 +118,7 @@ class LabeledImage(image_feature.Image):
   ) -> 'LabeledImage':
     if isinstance(value, dict):
       # For backwards compatibility
-      return cls(**value)
+      return cls(**value)  # pyrefly: ignore[bad-argument-type]
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
         dtype=feature_lib.dtype_from_str(value.dtype),

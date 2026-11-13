@@ -100,10 +100,10 @@ class Cifar10(tfds.core.GeneratorBasedBuilder):
         yield os.path.join(cifar_path, f)
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             "train_", gen_filenames(cifar_info.train_files)
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             "test_", gen_filenames(cifar_info.test_files)
         ),
     }

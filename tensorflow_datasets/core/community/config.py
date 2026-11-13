@@ -19,6 +19,7 @@ from collections.abc import Mapping, Sequence
 import dataclasses
 import functools
 import threading
+import tomllib
 from typing import Any
 
 from absl import logging
@@ -27,7 +28,6 @@ from etils import epath
 # understands paths that start with github://.
 from tensorflow_datasets.core import github_api  # pylint: disable=unused-import
 from tensorflow_datasets.core.utils import resource_utils
-import toml
 
 
 @dataclasses.dataclass(frozen=True)
@@ -90,7 +90,7 @@ class NamespaceRegistry:
       # meantime, so check again whether it's initialized.
       if not self._is_config_per_namespace_initialized:
         logging.info('Loading namespace config from %s', self.config_path)
-        raw_config = toml.loads(self.config_path.read_text())
+        raw_config = tomllib.loads(self.config_path.read_text())
         for namespace, raw_namespace_config in raw_config.items():
           namespace_config = _load_config(config=raw_namespace_config)
           self.add_namespace(namespace, namespace_config)

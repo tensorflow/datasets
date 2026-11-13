@@ -66,24 +66,38 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                              | Class        | Shape         | Dtype   | Description
-:----------------------------------- | :----------- | :------------ | :------ | :----------
-                                     | FeaturesDict |               |         |
-episode_metadata                     | FeaturesDict |               |         |
-episode_metadata/file_path           | Text         |               | string  | Path to the original data file.
-steps                                | Dataset      |               |         |
-steps/action                         | Tensor       | (20,)         | float32 | Robot action, consists of [3x end-effector position residual, 3x end-effector axis-angle residual, 7x robot joint k_p gain coefficient, 7x robot joint damping ratio coefficient].The action residuals are global, i.e. multiplied on theleft-hand side of the current end-effector state.
-steps/discount                       | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                       | Tensor       |               | bool    |
-steps/is_last                        | Tensor       |               | bool    |
-steps/is_terminal                    | Tensor       |               | bool    |
-steps/language_embedding             | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction           | Text         |               | string  | Language Instruction.
-steps/observation                    | FeaturesDict |               |         |
-steps/observation/image              | Image        | (480, 640, 3) | uint8   | Main camera RGB observation.
-steps/observation/partial_pointcloud | Tensor       | (512, 3)      | float32 | Partial pointcloud observation
-steps/observation/state              | Tensor       | (21,)         | float32 | Robot state, consists of [joint_states, end_effector_pose].Joint states are 14-dimensional, formatted in the order of [q_0, w_0, q_1, w_0, ...].In other words, joint positions and velocities are interleaved.The end-effector pose is 7-dimensional, formatted in the order of [position, quaternion].The quaternion is formatted in (x,y,z,w) order. The end-effector pose references the tool frame, in the center of the two fingers of the gripper.
-steps/reward                         | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                              | Class        | Shape    | Dtype   | Description                                                  |
+| :----------------------------------- | :----------- | :------- | :------ | :----------------------------------------------------------- |
+|                                      | FeaturesDict |          |         |                                                              |
+| episode_metadata                     | FeaturesDict |          |         |                                                              |
+| episode_metadata/file_path           | Text         |          | string  | Path to the original data file.                              |
+| steps                                | Dataset      |          |         |                                                              |
+| steps/action                         | Tensor       | (20,)    | float32 | Robot action, consists of [3x end-effector position          |
+:                                      :              :          :         : residual, 3x end-effector axis-angle residual, 7x robot      :
+:                                      :              :          :         : joint k_p gain coefficient, 7x robot joint damping ratio     :
+:                                      :              :          :         : coefficient].The action residuals are global, i.e.           :
+:                                      :              :          :         : multiplied on theleft-hand side of the current end-effector  :
+:                                      :              :          :         : state.                                                       :
+| steps/discount                       | Scalar       |          | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                       | Tensor       |          | bool    |                                                              |
+| steps/is_last                        | Tensor       |          | bool    |                                                              |
+| steps/is_terminal                    | Tensor       |          | bool    |                                                              |
+| steps/language_embedding             | Tensor       | (512,)   | float32 | Kona language embedding. See                                 |
+:                                      :              :          :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction           | Text         |          | string  | Language Instruction.                                        |
+| steps/observation                    | FeaturesDict |          |         |                                                              |
+| steps/observation/image              | Image        | (480,    | uint8   | Main camera RGB observation.                                 |
+:                                      :              : 640, 3)  :         :                                                              :
+| steps/observation/partial_pointcloud | Tensor       | (512, 3) | float32 | Partial pointcloud observation                               |
+| steps/observation/state              | Tensor       | (21,)    | float32 | Robot state, consists of [joint_states,                      |
+:                                      :              :          :         : end_effector_pose].Joint states are 14-dimensional,          :
+:                                      :              :          :         : formatted in the order of [q_0, w_0, q_1, w_0, ...].In other :
+:                                      :              :          :         : words, joint positions and velocities are interleaved.The    :
+:                                      :              :          :         : end-effector pose is 7-dimensional, formatted in the order   :
+:                                      :              :          :         : of [position, quaternion].The quaternion is formatted in     :
+:                                      :              :          :         : (x,y,z,w) order. The end-effector pose references the tool   :
+:                                      :              :          :         : frame, in the center of the two fingers of the gripper.      :
+| steps/reward                         | Scalar       |          | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

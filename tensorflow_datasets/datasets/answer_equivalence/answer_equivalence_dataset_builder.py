@@ -68,7 +68,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     paths = dl_manager.download_and_extract(archive)
 
     return {
-        split: self._generate_examples(path) for split, path in paths.items()
+        split: self._generate_examples(path) for split, path in paths.items()  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, filepath):

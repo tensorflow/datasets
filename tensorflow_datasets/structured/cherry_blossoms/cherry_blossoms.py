@@ -86,11 +86,11 @@ class CherryBlossoms(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(URL)
-    return {tfds.Split.TRAIN: self._generate_examples(path)}
+    return {tfds.Split.TRAIN: self._generate_examples(path)}  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(self, path):
     """Yields examples."""
-    with path.open() as f:  # pytype: disable=attribute-error  # gen-stub-imports
+    with path.open() as f:
       reader = csv.DictReader(f, delimiter=';')
       for index, row in enumerate(reader):
         example = {k: v.replace('NA', 'nan') for k, v in row.items()}

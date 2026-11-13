@@ -400,7 +400,7 @@ def split_wet_file(wet_file_path, counter_inc_fn=None, line_delimiter="\n"):
       fileobj=f
   ) as g:
     page = PageFeatures()
-    for i, line in enumerate(io.TextIOWrapper(g, encoding="utf-8")):  # pytype: disable=wrong-arg-types
+    for i, line in enumerate(io.TextIOWrapper(g, encoding="utf-8")):
       line = line.strip()
       if not line:
         continue

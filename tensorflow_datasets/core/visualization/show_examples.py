@@ -82,7 +82,7 @@ def _to_tf_dataset(
     else:
       tf_dataset = tf_dataset.concatenate(from_tensor(record))
     # Terminate if `tf_dataset` reached at least the expected `min_length`.
-    if tf_dataset.cardinality().numpy() >= min_length:
+    if tf_dataset.cardinality().numpy() >= min_length:  # pyrefly: ignore[missing-attribute]
       break
   if tf_dataset is None:
     raise ValueError(
@@ -134,7 +134,7 @@ def show_examples(
         'The old signature is deprecated and will be removed. '
         'Please change your call to `tfds.show_examples(ds, info)`'
     )
-    ds, ds_info = ds_info, ds
+    ds, ds_info = ds_info, ds  # pyrefly: ignore[bad-assignment]
 
   # Pack `as_supervised=True` datasets
   ds = dataset_info.pack_as_supervised_ds(ds, ds_info)
@@ -152,7 +152,7 @@ def show_examples(
 
 def show_statistics(
     ds_info: dataset_info.DatasetInfo,
-    split: splits.Split = splits.Split.TRAIN,
+    split: splits.Split = splits.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
     disable_logging: bool = True,
 ) -> None:
   """Display the datasets statistics on a Colab/Jupyter notebook.
@@ -202,6 +202,6 @@ def show_statistics(
 
   # Creates the statistics.
   statistics = statistics_pb2.DatasetFeatureStatisticsList()
-  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)  # pytype: disable=attribute-error  # bind-properties
+  statistics.datasets.add().CopyFrom(ds_info.splits[split].statistics)  # pyrefly: ignore[missing-attribute]
   with utils.disable_logging() if disable_logging else utils.nullcontext():
     return tfdv.visualize_statistics(statistics)

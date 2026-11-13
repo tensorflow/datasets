@@ -314,12 +314,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     split_dir = dl_manager.download_and_extract(
-        '%s/%s' % (_DATA_URL, self.builder_config.split_archive_path)
+        '%s/%s' % (_DATA_URL, self.builder_config.split_archive_path)  # pyrefly: ignore[missing-attribute]
     )
-    split_path = os.path.join(split_dir, self.builder_config.split_path)
+    split_path = os.path.join(split_dir, self.builder_config.split_path)  # pyrefly: ignore[missing-attribute]
 
     dataset_paths = {}
-    if self.builder_config.compound_divergence:
+    if self.builder_config.compound_divergence:  # pyrefly: ignore[missing-attribute]
       extracted_dataset_path = dl_manager.download_and_extract(
           _DATA_URL
           + '/datasets/u-cfq-for-divergence-splits-1.0-compact-combined.tar.gz'
@@ -364,7 +364,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, dataset_paths, split_path, split_id):
     """Yields examples."""
-    if self.builder_config.compound_divergence:
+    if self.builder_config.compound_divergence:  # pyrefly: ignore[missing-attribute]
       samples_path = os.path.join(dataset_paths[_UCFQ_POOL], 'dataset.json')
       with epath.Path(samples_path).open() as samples_file:
         logging.info('Reading json from %s into memory...', samples_path)
@@ -404,7 +404,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
               # be unique for each instance.
               key = f'{dataset}-{absolute_index}-{slice_index}'
               yield key, {
-                  _QUESTION: pool[idx][_QUESTION_FIELD],
-                  _QUERY: pool[idx][_QUERY_FIELD],
+                  _QUESTION: pool[idx][_QUESTION_FIELD],  # pyrefly: ignore[unsupported-operation]
+                  _QUERY: pool[idx][_QUERY_FIELD],  # pyrefly: ignore[unsupported-operation]
               }
             slice_index += 1

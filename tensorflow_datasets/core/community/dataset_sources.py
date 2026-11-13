@@ -44,8 +44,8 @@ class DatasetSource:
       return cls(root_path=path.parent, filenames=[path.name])
     elif isinstance(value, dict):  # Multi-file dataset
       return cls(
-          root_path=epath.Path(value['root_path']),
-          filenames=value['filenames'],
+          root_path=epath.Path(value['root_path']),  # pyrefly: ignore[bad-argument-type]
+          filenames=value['filenames'],  # pyrefly: ignore[bad-argument-type]
       )
     else:
       raise ValueError(f'Invalid input: {value}')
@@ -57,7 +57,7 @@ class DatasetSource:
     else:
       return {
           'root_path': os.fspath(self.root_path),
-          'filenames': self.filenames,
+          'filenames': self.filenames,  # pyrefly: ignore[bad-assignment]
       }
 
 

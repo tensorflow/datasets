@@ -187,21 +187,21 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(self.builder_config.features),
+        features=tfds.features.FeaturesDict(self.builder_config.features),  # pyrefly: ignore[missing-attribute]
         homepage=_HOMEPAGE_URL_DU_ET_AL + "\n" + _CITATION_ZHOU_ET_AL,
-        citation=self.builder_config.citation + "\n" + _CITATION_SQUAD,
+        citation=self.builder_config.citation + "\n" + _CITATION_SQUAD,  # pyrefly: ignore[missing-attribute]
         supervised_keys=(_CONTEXT_PASSAGE, _QUESTION),
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    dl_paths = dl_manager.download_and_extract(self.builder_config.data_urls)
+    dl_paths = dl_manager.download_and_extract(self.builder_config.data_urls)  # pyrefly: ignore[missing-attribute]
 
-    if self.builder_config.name == "split_du":
+    if self.builder_config.name == "split_du":  # pyrefly: ignore[missing-attribute]
       return {
-          tfds.Split.TRAIN: self._generate_examples(dl_paths["train"]),
-          tfds.Split.VALIDATION: self._generate_examples(dl_paths["dev"]),
-          tfds.Split.TEST: self._generate_examples(dl_paths["test"]),
+          tfds.Split.TRAIN: self._generate_examples(dl_paths["train"]),  # pyrefly: ignore[missing-attribute]
+          tfds.Split.VALIDATION: self._generate_examples(dl_paths["dev"]),  # pyrefly: ignore[missing-attribute]
+          tfds.Split.TEST: self._generate_examples(dl_paths["test"]),  # pyrefly: ignore[missing-attribute]
       }
     elif self.builder_config.name == "split_zhou":
       mapping_dir = os.path.join(dl_paths["mapping"], "qas_id_in_squad")
@@ -209,17 +209,17 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
           dl_paths["redistribute"], "redistribute/raw"
       )
       return {
-          tfds.Split.TRAIN: self._generate_examples(
+          tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
               dl_paths["train"],
               os.path.join(mapping_dir, "train.txt.id"),
               os.path.join(redistribute_raw_dir, "train.txt"),
           ),
-          tfds.Split.VALIDATION: self._generate_examples(
+          tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
               dl_paths["dev"],
               os.path.join(mapping_dir, "dev.txt.shuffle.dev.id"),
               os.path.join(redistribute_raw_dir, "dev.txt.shuffle.dev"),
           ),
-          tfds.Split.TEST: self._generate_examples(
+          tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
               dl_paths["dev"],
               os.path.join(mapping_dir, "dev.txt.shuffle.test.id"),
               os.path.join(redistribute_raw_dir, "dev.txt.shuffle.test"),
@@ -244,7 +244,7 @@ class SquadQuestionGeneration(tfds.core.GeneratorBasedBuilder):
     Yields:
       key and example dict.
     """
-    if self.builder_config.name == "split_du":
+    if self.builder_config.name == "split_du":  # pyrefly: ignore[missing-attribute]
       # The file format slightly differs from the original SQuAD JSON format.
       with epath.Path(squad_data_path).open() as f:
         squad_data = json.load(f)

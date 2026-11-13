@@ -350,20 +350,20 @@ class Wikiann(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     path = dl_manager.download_and_extract(URL)
     subpath = dl_manager.extract(
-        os.path.join(path, self.builder_config.language + ".tar.gz")
+        os.path.join(path, self.builder_config.language + ".tar.gz")  # pyrefly: ignore[missing-attribute]
     )
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepath": os.path.join(subpath, "dev")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepath": os.path.join(subpath, "test")},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"filepath": os.path.join(subpath, "train")},
         ),
     ]

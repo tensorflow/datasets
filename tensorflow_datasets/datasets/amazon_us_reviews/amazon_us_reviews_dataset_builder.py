@@ -153,7 +153,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
 
   def _split_generators(self, dl_manager):
-    url = _DL_URLS[self.builder_config.name]
+    url = _DL_URLS[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(url)
 
     # There is no predefined train/val/test split for this dataset.

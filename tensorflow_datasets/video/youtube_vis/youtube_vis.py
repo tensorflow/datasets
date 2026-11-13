@@ -71,7 +71,7 @@ def _convert_bbox(
       ymin=box[1] / height,
       xmax=(box[0] + box[2]) / width,
       ymax=(box[1] + box[3]) / height,
-  )  # pytype: disable=bad-return-type  # gen-stub-imports
+  )
 
 
 def _decode_segmentation(
@@ -86,8 +86,8 @@ def _decode_segmentation(
   if isinstance(segmentation, list):  # Polygon
     rle = pycocotools.merge(rle)
   segmentation = pycocotools.decode(rle)
-  assert segmentation.shape[0] == video['height']
-  assert segmentation.shape[1] == video['width']
+  assert segmentation.shape[0] == video['height']  # pyrefly: ignore[missing-attribute]
+  assert segmentation.shape[1] == video['width']  # pyrefly: ignore[missing-attribute]
   if video['height'] != desired_height or video['width'] != desired_width:
     cv2 = tfds.core.lazy_imports.cv2
     segmentation = cv2.resize(
@@ -95,8 +95,8 @@ def _decode_segmentation(
         (desired_width, desired_height),
         interpolation=cv2.INTER_NEAREST,
     )
-  segmentation = np.expand_dims(segmentation, axis=-1)
-  assert len(segmentation.shape) == 3
+  segmentation = np.expand_dims(segmentation, axis=-1)  # pyrefly: ignore[no-matching-overload]
+  assert len(segmentation.shape) == 3  # pyrefly: ignore[missing-attribute]
   return segmentation
 
 
@@ -426,13 +426,13 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     names_file = tfds.core.tfds_path('video/youtube_vis/labels.txt')
     video_shape = (
         None,
-        self.builder_config.height,
-        self.builder_config.width,
+        self.builder_config.height,  # pyrefly: ignore[missing-attribute]
+        self.builder_config.width,  # pyrefly: ignore[missing-attribute]
         3,
     )
-    seg_shape = (None, self.builder_config.height, self.builder_config.width, 1)
+    seg_shape = (None, self.builder_config.height, self.builder_config.width, 1)  # pyrefly: ignore[missing-attribute]
     all_features = {
-        'video': tfds.features.Video(video_shape),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+        'video': tfds.features.Video(video_shape),
         'metadata': {
             'height': np.int32,
             'width': np.int32,
@@ -441,7 +441,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         },
         'tracks': tfds.features.Sequence({
             'bboxes': tfds.features.Sequence(tfds.features.BBoxFeature()),
-            'segmentations': tfds.features.Video(seg_shape, use_colormap=True),  # pytype: disable=wrong-arg-types  # gen-stub-imports
+            'segmentations': tfds.features.Video(seg_shape, use_colormap=True),
             'category': tfds.features.ClassLabel(names_file=names_file),
             'is_crowd': np.bool_,
             'areas': tfds.features.Sequence(np.float32),
@@ -453,7 +453,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(all_features),
+        features=tfds.features.FeaturesDict(all_features),  # pyrefly: ignore[bad-argument-type]
         supervised_keys=None,
         homepage='https://youtube-vos.org/dataset/vis/',
         citation=_CITATION,
@@ -466,13 +466,13 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         'train_all_frames': dl_manager.manual_dir / 'train_all_frames.zip',
         'train_annotations': dl_manager.manual_dir / 'train.json',
     }
-    if self.builder_config.split_train_data_range is not None:
+    if self.builder_config.split_train_data_range is not None:  # pyrefly: ignore[missing-attribute]
       # Create a custom training split by subsampling the training data.
       train_data_range = self.builder_config.split_train_data_range
     else:  # Use the provided training split.
       train_data_range = None
 
-    if self.builder_config.split_val_data_range is not None:
+    if self.builder_config.split_val_data_range is not None:  # pyrefly: ignore[missing-attribute]
       # Create a custom validation split by subsampling the training data.
       val_data_range = self.builder_config.split_val_data_range
       manually_downloaded_files['valid_all_frames'] = manually_downloaded_files[
@@ -490,7 +490,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
           dl_manager.manual_dir / 'valid.json'
       )
 
-    if self.builder_config.split_test_data_range is not None:
+    if self.builder_config.split_test_data_range is not None:  # pyrefly: ignore[missing-attribute]
       # Create a custom test split by subsampling the training data.
       test_data_range = self.builder_config.split_test_data_range
       manually_downloaded_files['test_all_frames'] = manually_downloaded_files[
@@ -513,32 +513,32 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
     test_dir = 'train_all_frames' if test_data_range else 'test_all_frames'
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(
-            annotations=extracted_files['train_annotations'],
-            all_frames=extracted_files['train_all_frames']
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+            annotations=extracted_files['train_annotations'],  # pyrefly: ignore[bad-index]
+            all_frames=extracted_files['train_all_frames']  # pyrefly: ignore[bad-index]
             / 'train_all_frames'
             / 'JPEGImages',
-            video_range_to_use=train_data_range,
+            video_range_to_use=train_data_range,  # pyrefly: ignore[bad-argument-type]
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
-            annotations=extracted_files['valid_annotations'],
-            all_frames=extracted_files['valid_all_frames']
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+            annotations=extracted_files['valid_annotations'],  # pyrefly: ignore[bad-index]
+            all_frames=extracted_files['valid_all_frames']  # pyrefly: ignore[bad-index]
             / val_dir
             / 'JPEGImages',
-            video_range_to_use=val_data_range,
+            video_range_to_use=val_data_range,  # pyrefly: ignore[bad-argument-type]
         ),
-        tfds.Split.TEST: self._generate_examples(
-            annotations=extracted_files['test_annotations'],
-            all_frames=extracted_files['test_all_frames']
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+            annotations=extracted_files['test_annotations'],  # pyrefly: ignore[bad-index]
+            all_frames=extracted_files['test_all_frames']  # pyrefly: ignore[bad-index]
             / test_dir
             / 'JPEGImages',
-            video_range_to_use=test_data_range,
+            video_range_to_use=test_data_range,  # pyrefly: ignore[bad-argument-type]
         ),
     }
 
   def _maybe_resize_video(self, frames_list):
     """Resizes the video depending on the build_config."""
-    if self.builder_config.height is None:
+    if self.builder_config.height is None:  # pyrefly: ignore[missing-attribute]
       return frames_list  # Don't waste compute loading and resizing.
     resized_images = []
     cv2 = tfds.core.lazy_imports.cv2
@@ -547,7 +547,7 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
         image = tfds.core.lazy_imports.PIL_Image.open(f).convert('RGB')
         image = np.asarray(image)
       image = cv2.resize(
-          image, (self.builder_config.width, self.builder_config.height)
+          image, (self.builder_config.width, self.builder_config.height)  # pyrefly: ignore[missing-attribute]
       )
       resized_images.append(image)
     return resized_images
@@ -560,10 +560,10 @@ class YoutubeVis(tfds.core.BeamBasedBuilder):
   ):
     beam = tfds.core.lazy_imports.apache_beam
     annotations = json.loads(annotations.read_text())
-    video_id_to_tracks, videos = _build_annotations_index(annotations)
-    height = self._builder_config.height
-    width = self._builder_config.width
-    only_frames_with_labels = self._builder_config.only_frames_with_labels
+    video_id_to_tracks, videos = _build_annotations_index(annotations)  # pyrefly: ignore[bad-argument-type]
+    height = self._builder_config.height  # pyrefly: ignore[missing-attribute]
+    width = self._builder_config.width  # pyrefly: ignore[missing-attribute]
+    only_frames_with_labels = self._builder_config.only_frames_with_labels  # pyrefly: ignore[missing-attribute]
 
     video_keys = list(videos.keys())
     if video_range_to_use is not None:

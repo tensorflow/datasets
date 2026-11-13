@@ -224,8 +224,8 @@ dataButton.addEventListener('click', async () => {
 ## abstract_reasoning/extrapolation
 
 *   **Config description**: Same as in interpolation, but the values of \
-    the attributes were restricted to the lower half of the discrete set during
-    \
+    the attributes were restricted to the lower half of the discrete set
+    during \
     training, whereas in the test set they took values in the upper half.
 
 *   **Dataset size**: `35.91 GiB`
@@ -319,12 +319,12 @@ dataButton.addEventListener('click', async () => {
 ## abstract_reasoning/attr.rels
 
 *   **Config description**: In our dataset, there are 29 possible unique \
-    triples $[r,o,a]$. We allocated seven of these for the test set, at random,
-    \
+    triples $[r,o,a]$. We allocated seven of these for the test set, at
+    random, \
     but such that each of the attributes was represented exactly once in this
     set. \
-    These held-out triples never occurred in questions in the training set, and
-    \
+    These held-out triples never occurred in questions in the training set,
+    and \
     every $S$ in the test set contained at least one of them.
 
 *   **Dataset size**: `41.45 GiB`
@@ -371,10 +371,10 @@ dataButton.addEventListener('click', async () => {
 *   **Config description**: $S$ contained at least two triples. There are 20 \
     (unordered) viable pairs of attributes $(a_1, a_2)$ such that for some \
     $r_i, o_i, ([r_1,o_1,a_1],[r_2,o_2,a_2])$ is a viable triple pair \
-    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these pairs
-    \
-    for training and four for testing. For a pair $(a_1, a_2)$ in the test set,
-    \
+    $([r_1,o_1,a_1],[r_2,o_2,a_2]) = (t_1, t_2)$. We allocated 16 of these
+    pairs \
+    for training and four for testing. For a pair $(a_1, a_2)$ in the test
+    set, \
     $S$ in the training set contained triples with $a_1$ or $a_2$. In the test \
     set, all $S$ contained triples with $a_1$ and $a_2$.
 

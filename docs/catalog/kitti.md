@@ -77,58 +77,58 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-| Feature            | Class        | Shape        | Dtype   | Description     |
-| :----------------- | :----------- | :----------- | :------ | :-------------- |
-|                    | FeaturesDict |              |         |                 |
-| image              | Image        | (None, None, | uint8   |                 |
-:                    :              : 3)           :         :                 :
-| image/file_name    | Text         |              | string  |                 |
-| objects            | Sequence     |              |         |                 |
-| objects/alpha      | Tensor       |              | float32 | Observation     |
-:                    :              :              :         : angle of        :
-:                    :              :              :         : object, ranging :
-:                    :              :              :         : [-pi..pi]       :
-| objects/bbox       | BBoxFeature  | (4,)         | float32 | 2D bounding box |
-:                    :              :              :         : of object in    :
-:                    :              :              :         : the image       :
-| objects/dimensions | Tensor       | (3,)         | float32 | 3D object       |
-:                    :              :              :         : dimensions\:    :
-:                    :              :              :         : height, width,  :
-:                    :              :              :         : length (in      :
-:                    :              :              :         : meters)         :
-| objects/location   | Tensor       | (3,)         | float32 | 3D object       |
-:                    :              :              :         : location x,y,z  :
-:                    :              :              :         : in camera       :
-:                    :              :              :         : coordinates (in :
-:                    :              :              :         : meters)         :
-| objects/occluded   | ClassLabel   |              | int64   | Integer         |
-:                    :              :              :         : (0,1,2,3)       :
-:                    :              :              :         : indicating      :
-:                    :              :              :         : occlusion       :
-:                    :              :              :         : state\: 0 =     :
-:                    :              :              :         : fully visible,  :
-:                    :              :              :         : 1 = partly      :
-:                    :              :              :         : occluded2 =     :
-:                    :              :              :         : largely         :
-:                    :              :              :         : occluded, 3 =   :
-:                    :              :              :         : unknown         :
-| objects/rotation_y | Tensor       |              | float32 | Rotation ry     |
-:                    :              :              :         : around Y-axis   :
-:                    :              :              :         : in camera       :
-:                    :              :              :         : coordinates     :
-:                    :              :              :         : [-pi..pi]       :
-| objects/truncated  | Tensor       |              | float32 | Float from 0    |
-:                    :              :              :         : (non-truncated) :
-:                    :              :              :         : to 1            :
-:                    :              :              :         : (truncated),    :
-:                    :              :              :         : wheretruncated  :
-:                    :              :              :         : refers to the   :
-:                    :              :              :         : object leaving  :
-:                    :              :              :         : image           :
-:                    :              :              :         : boundaries      :
-| objects/type       | ClassLabel   |              | int64   | The type of     |
-:                    :              :              :         : object, e.g.    :
-:                    :              :              :         : 'Car' or 'Van'  :
+| Feature            | Class        | Shape    | Dtype   | Description     |
+| :----------------- | :----------- | :------- | :------ | :-------------- |
+|                    | FeaturesDict |          |         |                 |
+| image              | Image        | (None,   | uint8   |                 |
+:                    :              : None, 3) :         :                 :
+| image/file_name    | Text         |          | string  |                 |
+| objects            | Sequence     |          |         |                 |
+| objects/alpha      | Tensor       |          | float32 | Observation     |
+:                    :              :          :         : angle of        :
+:                    :              :          :         : object, ranging :
+:                    :              :          :         : [-pi..pi]       :
+| objects/bbox       | BBoxFeature  | (4,)     | float32 | 2D bounding box |
+:                    :              :          :         : of object in    :
+:                    :              :          :         : the image       :
+| objects/dimensions | Tensor       | (3,)     | float32 | 3D object       |
+:                    :              :          :         : dimensions\:    :
+:                    :              :          :         : height, width,  :
+:                    :              :          :         : length (in      :
+:                    :              :          :         : meters)         :
+| objects/location   | Tensor       | (3,)     | float32 | 3D object       |
+:                    :              :          :         : location x,y,z  :
+:                    :              :          :         : in camera       :
+:                    :              :          :         : coordinates (in :
+:                    :              :          :         : meters)         :
+| objects/occluded   | ClassLabel   |          | int64   | Integer         |
+:                    :              :          :         : (0,1,2,3)       :
+:                    :              :          :         : indicating      :
+:                    :              :          :         : occlusion       :
+:                    :              :          :         : state\: 0 =     :
+:                    :              :          :         : fully visible,  :
+:                    :              :          :         : 1 = partly      :
+:                    :              :          :         : occluded2 =     :
+:                    :              :          :         : largely         :
+:                    :              :          :         : occluded, 3 =   :
+:                    :              :          :         : unknown         :
+| objects/rotation_y | Tensor       |          | float32 | Rotation ry     |
+:                    :              :          :         : around Y-axis   :
+:                    :              :          :         : in camera       :
+:                    :              :          :         : coordinates     :
+:                    :              :          :         : [-pi..pi]       :
+| objects/truncated  | Tensor       |          | float32 | Float from 0    |
+:                    :              :          :         : (non-truncated) :
+:                    :              :          :         : to 1            :
+:                    :              :          :         : (truncated),    :
+:                    :              :          :         : wheretruncated  :
+:                    :              :          :         : refers to the   :
+:                    :              :          :         : object leaving  :
+:                    :              :          :         : image           :
+:                    :              :          :         : boundaries      :
+| objects/type       | ClassLabel   |          | int64   | The type of     |
+:                    :              :          :         : object, e.g.    :
+:                    :              :          :         : 'Car' or 'Van'  :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

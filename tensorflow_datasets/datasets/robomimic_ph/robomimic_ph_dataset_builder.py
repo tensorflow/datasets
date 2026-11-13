@@ -36,7 +36,7 @@ class Builder(utils.RobomimicBuilder):
   DATASET_NAME = 'robomimic_ph'
 
   def _get_metadata(self) -> Dict[Any, Any]:
-    if self.builder_config.task != utils.Task.TOOL_HANG:
+    if self.builder_config.task != utils.Task.TOOL_HANG:  # pyrefly: ignore[missing-attribute]
       episode_metadata = {
           '20_percent': np.bool_,
           '20_percent_train': np.bool_,

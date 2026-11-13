@@ -126,7 +126,7 @@ class Davis(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
 
-    if self.builder_config.full_resolution:
+    if self.builder_config.full_resolution:  # pyrefly: ignore[missing-attribute]
       trainval_data = dl_manager.download_and_extract(
           _URL + 'DAVIS-2017-trainval-Full-Resolution.zip'
       )
@@ -139,8 +139,8 @@ class Davis(tfds.core.GeneratorBasedBuilder):
     val_files = trainval_data / 'DAVIS/ImageSets/2017/val.txt'
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(train_files),
-        tfds.Split.VALIDATION: self._generate_examples(val_files),
+        tfds.Split.TRAIN: self._generate_examples(train_files),  # pyrefly: ignore[missing-attribute]
+        tfds.Split.VALIDATION: self._generate_examples(val_files),  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, path):
@@ -149,7 +149,7 @@ class Davis(tfds.core.GeneratorBasedBuilder):
     videos_to_include = path.read_text().splitlines()
     root_path = path.parent.parent.parent  # Move up three directories.
     resolution = (
-        'Full-Resolution' if self.builder_config.full_resolution else '480p'
+        'Full-Resolution' if self.builder_config.full_resolution else '480p'  # pyrefly: ignore[missing-attribute]
     )
     for video in videos_to_include:
       images_path = root_path / 'JPEGImages' / resolution / video

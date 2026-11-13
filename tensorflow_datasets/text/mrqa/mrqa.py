@@ -594,43 +594,37 @@ class MRQA(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=tfds.features.FeaturesDict(self.builder_config.features),
+        features=tfds.features.FeaturesDict(self.builder_config.features),  # pyrefly: ignore[missing-attribute]
         supervised_keys=None,
         homepage=_HOMEPAGE,
-        citation=self.builder_config.citation + '\n' + _CITATION,
+        citation=self.builder_config.citation + '\n' + _CITATION,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    data_dir = dl_manager.download_and_extract(self.builder_config.data_urls)
+    data_dir = dl_manager.download_and_extract(self.builder_config.data_urls)  # pyrefly: ignore[missing-attribute]
     split_generators = {}
 
-    if 'train' in self.builder_config.data_urls:
-      split_generators.update(
-          {
-              tfds.Split.TRAIN: self._generate_examples(
-                  path=data_dir['train'], split='train'
-              ),
-          }
-      )
+    if 'train' in self.builder_config.data_urls:  # pyrefly: ignore[missing-attribute]
+      split_generators.update({
+          tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+              path=data_dir['train'], split='train'
+          ),
+      })
 
-    if 'validation' in self.builder_config.data_urls:
-      split_generators.update(
-          {
-              tfds.Split.VALIDATION: self._generate_examples(
-                  path=data_dir['validation'], split='validation'
-              ),
-          }
-      )
+    if 'validation' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
+      split_generators.update({
+          tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+              path=data_dir['validation'], split='validation'
+          ),
+      })
 
-    if 'test' in self.builder_config.data_urls:
-      split_generators.update(
-          {
-              tfds.Split.TEST: self._generate_examples(
-                  path=data_dir['test'], split='test'
-              ),
-          }
-      )
+    if 'test' in self.builder_config.data_urls:  # pyrefly: ignore[not-iterable]
+      split_generators.update({
+          tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
+              path=data_dir['test'], split='test'
+          ),
+      })
     return split_generators
 
   def _generate_examples(self, path, split):

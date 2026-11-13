@@ -142,7 +142,7 @@ class NonMutableDict(dict[T, U]):
       raise ValueError(self._error_msg.format(key=key))
     return super(NonMutableDict, self).__setitem__(key, value)
 
-  def update(self, other):  # pytype: disable=signature-mismatch  # overriding-parameter-count-checks
+  def update(self, other):
     if any(k in self.keys() for k in other):
       raise ValueError(self._error_msg.format(key=set(self) & set(other)))
     return super(NonMutableDict, self).update(other)
@@ -152,7 +152,7 @@ class classproperty(property):  # pylint: disable=invalid-name
   """Descriptor to be used as decorator for @classmethods."""
 
   def __get__(self, obj, objtype=None):
-    return self.fget.__get__(None, objtype)()  # pytype: disable=attribute-error
+    return self.fget.__get__(None, objtype)()  # pyrefly: ignore[missing-attribute]
 
 
 if typing.TYPE_CHECKING:
@@ -177,7 +177,7 @@ def map_nested(function, data_struct, dict_only=False, map_tuple=False):
   elif not dict_only:
     types_ = [list]
     if map_tuple:
-      types_.append(tuple)
+      types_.append(tuple)  # pyrefly: ignore[bad-argument-type]
     if isinstance(data_struct, tuple(types_)):
       mapped = [
           map_nested(function, v, dict_only, map_tuple) for v in data_struct
@@ -212,7 +212,7 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
   """Return the dict with all nested keys flattened joined with '/'."""
   # Use NonMutableDict to ensure there is no collision between features keys
   flat_dict = NonMutableDict()
-  for k, v in d.items():
+  for k, v in d.items():  # pyrefly: ignore[missing-attribute]
     if isinstance(v, dict):
       for k2, v2 in flatten_nest_dict(v).items():
         flat_dict[f'{k}/{k2}'] = v2
@@ -228,7 +228,7 @@ def flatten_nest_dict(d: type_utils.TreeDict[T]) -> dict[str, T]:
 # users to compile from source.
 def flatten_with_path(
     structure: Tree[T],
-) -> Iterator[tuple[tuple[str | int, ...], T]]:  # pytype: disable=invalid-annotation
+) -> Iterator[tuple[tuple[str | int, ...], T]]:
   """Convert a TreeDict into a flat list of paths and their values.
 
   ```py
@@ -505,7 +505,7 @@ def build_synchronize_decorator() -> Callable[[Fn], Fn]:
       with lock:
         return fn(*args, **kwargs)
 
-    return lock_decorated
+    return lock_decorated  # pyrefly: ignore[bad-return]
 
   return lock_decorator
 
@@ -529,7 +529,7 @@ def get_base64(
     buffer = io.BytesIO()
     write_fn(buffer)
     bytes_value = buffer.getvalue()
-  return base64.b64encode(bytes_value).decode('ascii')  # pytype: disable=bad-return-type
+  return base64.b64encode(bytes_value).decode('ascii')
 
 
 @contextlib.contextmanager

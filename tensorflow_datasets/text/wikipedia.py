@@ -446,13 +446,13 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
   def _split_generators(self, dl_manager):
     def _base_url(lang):
       tmpl = _BASE_URL_TMPL
-      if self.builder_config.date <= "20220620":
+      if self.builder_config.date <= "20220620":  # pyrefly: ignore[missing-attribute]
         tmpl = _BASE_URL_TMPL_OLD
       return tmpl.format(
-          lang=lang.replace("-", "_"), date=self._builder_config.date
+          lang=lang.replace("-", "_"), date=self._builder_config.date  # pyrefly: ignore[missing-attribute]
       )
 
-    lang = self._builder_config.language
+    lang = self._builder_config.language  # pyrefly: ignore[missing-attribute]
 
     info_url = _base_url(lang) + _INFO_FILE
     # Use dictionary since testing mock always returns the same result.
@@ -480,7 +480,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
     downloaded_files = dl_manager.download({"xml": xml_urls})
 
     return {
-        tfds.Split.TRAIN: self._generate_examples(downloaded_files["xml"], lang)
+        tfds.Split.TRAIN: self._generate_examples(downloaded_files["xml"], lang)  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, filepaths, language):
@@ -531,7 +531,7 @@ class Wikipedia(tfds.core.BeamBasedBuilder):
       wikicode = mwparserfromhell.parse(raw_content)
 
       def rm_wikilink(obj):
-        return bool(re_rm_wikilink.match(str(obj.title)))  # pytype: disable=wrong-arg-types
+        return bool(re_rm_wikilink.match(str(obj.title)))
 
       def rm_tag(obj):
         return str(obj.tag) in {"ref", "table"}

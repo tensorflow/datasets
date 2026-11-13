@@ -131,7 +131,7 @@ def _getitems(
       for record_key in record_keys
   ]
   if serialized:
-    return np.array(items)
+    return np.array(items)  # pyrefly: ignore[bad-return]
   return items
 
 
@@ -354,8 +354,8 @@ def mock_data(
 
     if read_config and read_config.add_tfds_id:
       ds_id = reader_lib._make_id_dataset(  # pylint: disable=protected-access
-          filename=f'{self.name}-{split}.tfrecord-00000-of-00001',
-          start_index=0,  # pytype: disable=wrong-arg-types
+          filename=f'{self.name}-{split}.tfrecord-00000-of-00001',  # pyrefly: ignore[bad-argument-type]
+          start_index=0,  # pyrefly: ignore[bad-argument-type]
       )
       ds = tf.data.Dataset.zip((ds, ds_id))
       ds = ds.map(lambda ex, id: {'tfds_id': id, **ex})

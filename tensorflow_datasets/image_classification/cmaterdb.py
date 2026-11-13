@@ -129,8 +129,8 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     # Download the CMATERdb dataset by mentioned numeral
     train_path, test_path = dl_manager.download([
-        _CMATERDB_TRAINING_URL.format(type=self.builder_config.name),
-        _CMATERDB_TESTING_URL.format(type=self.builder_config.name),
+        _CMATERDB_TRAINING_URL.format(type=self.builder_config.name),  # pyrefly: ignore[missing-attribute]
+        _CMATERDB_TESTING_URL.format(type=self.builder_config.name),  # pyrefly: ignore[missing-attribute]
     ])
 
     # CMATERdb (mirrored) provides TRAIN and TEST splits,
@@ -138,11 +138,11 @@ class Cmaterdb(tfds.core.GeneratorBasedBuilder):
     # write the TRAIN and TEST splits to disk.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=train_path),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=test_path),
         ),
     ]

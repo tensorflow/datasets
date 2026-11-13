@@ -87,9 +87,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     splits = []
     for split_name in ["train", "val", "test"]:
       name_map = {
-          "train": tfds.Split.TRAIN,
-          "val": tfds.Split.VALIDATION,
-          "test": tfds.Split.TEST,
+          "train": tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+          "val": tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
+          "test": tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
       }
       splits.append(
           tfds.core.SplitGenerator(

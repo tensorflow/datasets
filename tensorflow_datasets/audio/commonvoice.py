@@ -28,9 +28,9 @@ import tensorflow_datasets.public_api as tfds
 
 _DEMOGRAPHICS_URL = "https://github.com/common-voice/common-voice/blob/main/web/src/stores/demographics.ts"
 _SPLITS = {
-    tfds.Split.TRAIN: "train",
-    tfds.Split.TEST: "test",
-    tfds.Split.VALIDATION: "validated",
+    tfds.Split.TRAIN: "train",  # pyrefly: ignore[missing-attribute]
+    tfds.Split.TEST: "test",  # pyrefly: ignore[missing-attribute]
+    tfds.Split.VALIDATION: "validated",  # pyrefly: ignore[missing-attribute]
     tfds.Split("dev"): "dev",
 }
 _GENDER_CLASSES = ("male", "female", "other")
@@ -224,7 +224,7 @@ class CommonVoice(tfds.core.GeneratorBasedBuilder):
     """Returns generators for each split in the dataset."""
     beam = tfds.core.lazy_imports.apache_beam
 
-    language = self.builder_config.language
+    language = self.builder_config.language  # pyrefly: ignore[missing-attribute]
     dl_path = dl_manager.download(_download_url(language))
 
     examples_per_file = {}

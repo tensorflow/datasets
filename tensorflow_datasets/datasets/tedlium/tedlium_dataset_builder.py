@@ -63,9 +63,9 @@ def _make_builder_configs():
       url="https://www.openslr.org/7/",
       download_url="http://www.openslr.org/resources/7/TEDLIUM_release1.tar.gz",
       split_paths=[
-          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release1", "train")),
-          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release1", "dev")),
-          (tfds.Split.TEST, os.path.join("TEDLIUM_release1", "test")),
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release1", "train")),  # pyrefly: ignore[missing-attribute]
+          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release1", "dev")),  # pyrefly: ignore[missing-attribute]
+          (tfds.Split.TEST, os.path.join("TEDLIUM_release1", "test")),  # pyrefly: ignore[missing-attribute]
       ],
   )
 
@@ -99,9 +99,9 @@ def _make_builder_configs():
           "http://www.openslr.org/resources/19/TEDLIUM_release2.tar.gz"
       ),
       split_paths=[
-          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release2", "train")),
-          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release2", "dev")),
-          (tfds.Split.TEST, os.path.join("TEDLIUM_release2", "test")),
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release2", "train")),  # pyrefly: ignore[missing-attribute]
+          (tfds.Split.VALIDATION, os.path.join("TEDLIUM_release2", "dev")),  # pyrefly: ignore[missing-attribute]
+          (tfds.Split.TEST, os.path.join("TEDLIUM_release2", "test")),  # pyrefly: ignore[missing-attribute]
       ],
   )
 
@@ -152,17 +152,17 @@ def _make_builder_configs():
       download_url="http://www.openslr.org/resources/51/TEDLIUM_release-3.tgz",
       split_paths=[
           (
-              tfds.Split.VALIDATION,
+              tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
               os.path.join("TEDLIUM_release-3", "legacy", "dev"),
           ),
           (
-              tfds.Split.TEST,
+              tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
               os.path.join("TEDLIUM_release-3", "legacy", "test"),
           ),
           # The legacy/train directory contains symlinks to "data",
           # which are skipped by extraction (see above).
           # Work around this by manually dereferencing the links here.
-          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release-3", "data")),
+          (tfds.Split.TRAIN, os.path.join("TEDLIUM_release-3", "data")),  # pyrefly: ignore[missing-attribute]
       ],
   )
 
@@ -186,8 +186,8 @@ class Builder(tfds.core.BeamBasedBuilder):
             "id": np.str_,
         }),
         supervised_keys=("speech", "text"),
-        homepage=self.builder_config.url,
-        citation=self.builder_config.citation,
+        homepage=self.builder_config.url,  # pyrefly: ignore[missing-attribute]
+        citation=self.builder_config.citation,  # pyrefly: ignore[missing-attribute]
         metadata=tfds.core.MetadataDict(
             sample_rate=16000,
         ),
@@ -195,10 +195,10 @@ class Builder(tfds.core.BeamBasedBuilder):
 
   def _split_generators(self, dl_manager):
     extracted_dir = dl_manager.download_and_extract(
-        self.builder_config.download_url
+        self.builder_config.download_url  # pyrefly: ignore[missing-attribute]
     )
     splits = []
-    for split, path in self.builder_config.split_paths:
+    for split, path in self.builder_config.split_paths:  # pyrefly: ignore[missing-attribute]
       kwargs = {"directory": os.path.join(extracted_dir, path)}
       splits.append(tfds.core.SplitGenerator(name=split, gen_kwargs=kwargs))
     return splits

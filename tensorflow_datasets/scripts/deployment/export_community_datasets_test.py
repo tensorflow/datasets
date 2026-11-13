@@ -18,10 +18,10 @@
 import pathlib
 import string
 import textwrap
+import tomllib
 from typing import Dict, List
 
 from tensorflow_datasets.scripts.deployment import export_community_datasets
-import toml
 
 
 def _write_dataset_files(
@@ -92,5 +92,5 @@ def test_export_community_datasets(tmp_path):
 
 def test_toml_valid():
   """Makes sure that reading the `.toml` file is valid."""
-  config = toml.load(export_community_datasets._IN_PATH)
+  config = tomllib.loads(export_community_datasets._IN_PATH.read_text())
   _ = {namespace: ns_config for namespace, ns_config in config.items()}

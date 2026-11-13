@@ -40,7 +40,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         "label": tfds.features.ClassLabel(num_classes=10),
     }
     if self.version > "3.0.0":
-      features_dict["id"] = tfds.features.Text()
+      features_dict["id"] = tfds.features.Text()  # pyrefly: ignore[bad-assignment]
     return self.dataset_info_from_configs(
         description=(
             "The Street View House Numbers (SVHN) Dataset is an image digit "
@@ -61,14 +61,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 split_prefix="train_",
                 filepath=output_files["train"],
             ),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
                 split_prefix="test_",
                 filepath=output_files["test"],

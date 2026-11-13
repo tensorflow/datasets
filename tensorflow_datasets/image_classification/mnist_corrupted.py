@@ -144,14 +144,14 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_DOWNLOAD_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
                 'is_train': True,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'data_dir': os.path.join(path, _DIRNAME),
                 'is_train': False,
@@ -171,7 +171,7 @@ class MNISTCorrupted(tfds.core.GeneratorBasedBuilder):
     Yields:
       dictionary with image file and label.
     """
-    corruption = self.builder_config.corruption
+    corruption = self.builder_config.corruption  # pyrefly: ignore[missing-attribute]
 
     if is_train:
       images_file = os.path.join(data_dir, corruption, _TRAIN_IMAGES_FILENAME)

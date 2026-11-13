@@ -444,7 +444,7 @@ Split.ALL = Split('all')
 if typing.TYPE_CHECKING:
   # For type checking, `tfds.Split` is an alias for `str` with additional
   # `.TRAIN`, `.TEST`,... attributes. All strings are valid split type.
-  Split = Split | str
+  Split = Split | str  # pyrefly: ignore[bad-assignment]
 
 
 class SplitDict(utils.NonMutableDict[str, SplitInfo]):
@@ -468,7 +468,7 @@ class SplitDict(utils.NonMutableDict[str, SplitInfo]):
       )
     self._dataset_name = dataset_name  # deprecated, please don't use
 
-  def __getitem__(self, key) -> SplitInfo | SubSplitInfo:
+  def __getitem__(self, key) -> SplitInfo | SubSplitInfo:  # pyrefly: ignore[bad-override]
     if not self:
       raise KeyError(
           f'Trying to access `splits[{key!r}]` but `splits` is empty. '
@@ -797,16 +797,16 @@ def _str_to_relative_instruction(spec: str) -> AbstractSplit:
       raise ValueError(err_msg)
     if len(slices) == 1:  # split='train[x]'
       (from_match,) = slices
-      from_ = from_match['val']
+      from_ = from_match['val']  # pyrefly: ignore[unsupported-operation]
       to = int(from_) + 1
-      unit = from_match['unit'] or 'abs'
+      unit = from_match['unit'] or 'abs'  # pyrefly: ignore[unsupported-operation]
       if unit != 'shard':
         raise ValueError('Absolute or percent only support slice syntax.')
     elif len(slices) == 2:  # split='train[x:y]'
       from_match, to_match = slices
-      from_ = from_match['val']
-      to = to_match['val']
-      unit = from_match['unit'] or to_match['unit'] or 'abs'
+      from_ = from_match['val']  # pyrefly: ignore[unsupported-operation]
+      to = to_match['val']  # pyrefly: ignore[unsupported-operation]
+      unit = from_match['unit'] or to_match['unit'] or 'abs'  # pyrefly: ignore[unsupported-operation]
     else:
       raise ValueError(err_msg)
 
@@ -867,10 +867,10 @@ def _rel_to_abs_instr(
     to = num_examples if to is None else pct_to_abs(to, num_examples)
   elif rel_instr.unit == 'shard':
     shard_lengths = split_infos[split].shard_lengths
-    from_ = 0 if from_ is None else sum(shard_lengths[:from_])
+    from_ = 0 if from_ is None else sum(shard_lengths[:from_])  # pyrefly: ignore[bad-index]
     if to is not None and to <= 0:
       to = len(shard_lengths) + to
-    to = num_examples if to is None else sum(shard_lengths[:to])
+    to = num_examples if to is None else sum(shard_lengths[:to])  # pyrefly: ignore[bad-index]
   elif rel_instr.unit == 'abs':
     from_ = 0 if from_ is None else from_
     to = num_examples if to is None else to
@@ -891,4 +891,4 @@ def _rel_to_abs_instr(
     to = num_examples + to
   elif to == num_examples:
     to = None
-  return _AbsoluteInstruction(split, from_, to)
+  return _AbsoluteInstruction(split, from_, to)  # pyrefly: ignore[bad-argument-type]

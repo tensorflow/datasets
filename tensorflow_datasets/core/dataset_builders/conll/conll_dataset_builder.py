@@ -97,7 +97,7 @@ class ConllDatasetBuilder(
   @property
   def builder_config(self) -> ConllBuilderConfig:
     """`tfds.core.BuilderConfig` for this builder."""
-    return self._builder_config  # pytype: disable=bad-return-type  # always-use-return-annotations
+    return self._builder_config  # pyrefly: ignore[bad-return]
 
   def create_dataset_info(
       self,

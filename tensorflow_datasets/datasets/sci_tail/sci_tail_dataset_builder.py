@@ -58,13 +58,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     # Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             path=data_dir / _SCITAIL_DIR / _TSV_DIR / 'scitail_1.0_train.tsv'
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             path=data_dir / _SCITAIL_DIR / _TSV_DIR / 'scitail_1.0_dev.tsv'
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             path=data_dir / _SCITAIL_DIR / _TSV_DIR / 'scitail_1.0_test.tsv'
         ),
     }

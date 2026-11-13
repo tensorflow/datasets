@@ -84,7 +84,7 @@ def reraise_with_context(error_cls: Type[Exception]) -> Iterator[None]:
   try:
     yield
   except error_cls as e:
-    context_msg = '\n'.join(context_holder.current_context_msg.messages)
+    context_msg = '\n'.join(context_holder.current_context_msg.messages)  # pyrefly: ignore[no-matching-overload]
     utils.reraise(e, suffix=context_msg)
   finally:
     context_holder.current_context_msg = None

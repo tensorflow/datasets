@@ -98,12 +98,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         'file_path_srrs2': urllib.parse.urljoin(BASE_URL, 'srrs2.dat'),
         'file_path_cty': urllib.parse.urljoin(BASE_URL, 'cty.dat'),
     })
-    return [
-        tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs=paths,
+    return {
+        'train': self._generate_examples(
+            file_path_srrs2=paths['file_path_srrs2'],
+            file_path_cty=paths['file_path_cty'],
         ),
-    ]
+    }
 
   def _generate_examples(self, file_path_srrs2, file_path_cty):
     """Yields examples."""
@@ -127,15 +127,25 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     df = df.drop_duplicates(subset='idnum')
     df.drop('fips', axis=1, inplace=True)
 
-    df['wave'].replace({'  .': '-1'}, inplace=True)
-    df['rep'].replace({' .': '-1'}, inplace=True)
-    df['zip'].replace({'     ': '-1'}, inplace=True)
+    # The raw data uses whitespace padding for missing values (e.g., "  ." or
+    # "     "). We cast to string, strip whitespace, and explicitly assign the
+    # result back to avoid pandas silent mutation failures with inplace dict
+    # replacements on object columns.
+    df['wave'] = df['wave'].astype(str).str.strip().replace('.', '-1')
+    df['rep'] = df['rep'].astype(str).str.strip().replace('.', '-1')
+    df['zip'] = df['zip'].astype(str).str.strip().replace('', '-1')
 
     for i, (_, row) in enumerate(df.iterrows()):
       radon_val = row.pop('activity')
+      features_dict = {}
+      for name, (_, convert_fn) in features().items():
+        try:
+          features_dict[name] = convert_fn(row[name])
+        except ValueError as e:
+          raise ValueError(
+              f'Failed to convert {name} with value {row[name]!r}'
+          ) from e
       yield i, {
           'activity': float(radon_val),
-          'features': {
-              name: features()[name][1](value) for name, value in row.items()
-          },
+          'features': features_dict,
       }

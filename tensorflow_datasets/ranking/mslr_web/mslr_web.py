@@ -222,13 +222,10 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
       "1.1.0": "Bundle features into a single 'float_features' feature.",
       "1.2.0": "Add query and document identifiers.",
   }
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       MslrWebConfig(name=f"{size}_fold{fold}", size=size, fold=fold)
       for size, fold in itertools.product(["10k", "30k"], [1, 2, 3, 4, 5])
   ]
-
-  # pytype: enable=wrong-keyword-args
 
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
@@ -267,8 +264,8 @@ class MslrWeb(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    size = self.builder_config.size
-    fold = self.builder_config.fold
+    size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
+    fold = self.builder_config.fold  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(_URLS[size])
 
     return {

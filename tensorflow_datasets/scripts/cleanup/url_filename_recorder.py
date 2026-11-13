@@ -30,7 +30,7 @@ from tensorflow_datasets.core.download import checksums
 import tqdm
 
 Url = NewType('Url', str)
-Filename = NewType('Filename', Optional[str])
+Filename = NewType('Filename', Optional[str])  # pyrefly: ignore[invalid-argument]
 
 # pylint: disable=logging-format-interpolation
 
@@ -45,8 +45,8 @@ def _collect_path_to_url_infos() -> (
   # Collect dataset-as-folder checksums path
   for name in tfds.list_builders(with_community_datasets=False):
     url_info_path = tfds.builder_cls(name)._checksums_path  # pylint: disable=protected-access
-    if url_info_path.exists():
-      url_info_paths.append(url_info_path)
+    if url_info_path.exists():  # pyrefly: ignore[missing-attribute]
+      url_info_paths.append(url_info_path)  # pyrefly: ignore[bad-argument-type]
 
   url_info_paths = [tfds.core.utils.to_write_path(p) for p in url_info_paths]
   return {

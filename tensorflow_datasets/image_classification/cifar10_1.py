@@ -116,8 +116,8 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
-    image_url = _DL_URL_IMAGES.format(self.builder_config.data)
-    label_url = _DL_URL_LABELS.format(self.builder_config.name)
+    image_url = _DL_URL_IMAGES.format(self.builder_config.data)  # pyrefly: ignore[missing-attribute]
+    label_url = _DL_URL_LABELS.format(self.builder_config.name)  # pyrefly: ignore[missing-attribute]
 
     image_path, label_path = dl_manager.download([
         image_url,
@@ -126,7 +126,7 @@ class Cifar10_1(tfds.core.GeneratorBasedBuilder):  # pylint: disable=invalid-nam
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "image_path": image_path,
                 "label_path": label_path,

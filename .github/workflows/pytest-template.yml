@@ -8,6 +8,9 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: read
+
 env:
   PYTEST_NUM_SHARDS: 4  # Controls tests sharding enabled by `pytest-shard`
 
@@ -37,7 +40,7 @@ jobs:
         num-shards: ${{ fromJson(needs.shards-job.outputs.num-shards) }}
         shard-id: ${{ fromJson(needs.shards-job.outputs.shard-ids) }}
         # TF suppported versions: https://www.tensorflow.org/install/pip#software_requirements
-        python-version: ['3.10', '3.11', '3.12']
+        python-version: ['3.11', '3.12']
     timeout-minutes: 30
 
     name: '[Python ${{ matrix.python-version }}][${{ matrix.shard-id }}/${{ matrix.num-shards }}]'
@@ -45,6 +48,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
     - uses: ./.github/actions/setup
       with:
         tf-version: ${{ inputs.tf-version }}
@@ -104,6 +109,9 @@ jobs:
     - name: Run nsynth dataset tests
       if: ${{ matrix.shard-id == 3 }}
       run: |
-        pip install .[nsynth]
+        # Pin setuptools and ignore build isolation to build crepe using the pinned setuptools.
+        # See https://setuptools.pypa.io/en/latest/history.html#v82-0-0 for more details.
+        pip install "setuptools<82.0.0" wheel
+        pip install .[nsynth] --no-build-isolation
         pytest -vv -n auto \
           tensorflow_datasets/datasets/nsynth/nsynth_dataset_builder_test.py

@@ -107,9 +107,9 @@ class Wit(tfds.core.GeneratorBasedBuilder):
     })
 
     return {
-        "train": self._generate_examples(paths_per_split["train"]),
-        "val": self._generate_examples(paths_per_split["val"]),
-        "test": self._generate_examples(paths_per_split["test"]),
+        "train": self._generate_examples(paths_per_split["train"]),  # pyrefly: ignore[bad-index]
+        "val": self._generate_examples(paths_per_split["val"]),  # pyrefly: ignore[bad-index]
+        "test": self._generate_examples(paths_per_split["test"]),  # pyrefly: ignore[bad-index]
     }
 
   def _generate_examples(self, filepaths):

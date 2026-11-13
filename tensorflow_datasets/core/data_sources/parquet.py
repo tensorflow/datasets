@@ -63,4 +63,4 @@ class ParquetDataSource(base.BaseDataSource):
     ]
     dataset = pq.ParquetDataset(filenames)
     table = dataset.read()
-    self.data_source = _ParquetTable(table=table)
+    self.data_source = _ParquetTable(table=table)  # pyrefly: ignore[bad-assignment]

@@ -77,34 +77,42 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape         | Dtype   | Description
-:---------------------------- | :----------- | :------------ | :------ | :----------
-                              | FeaturesDict |               |         |
-episode_metadata              | FeaturesDict |               |         |
-episode_metadata/extrinsics_1 | Tensor       | (4, 4)        | float32 | Camera 1 Extrinsic Matrix.
-episode_metadata/extrinsics_2 | Tensor       | (4, 4)        | float32 | Camera 2 Extrinsic Matrix.
-episode_metadata/extrinsics_3 | Tensor       | (4, 4)        | float32 | Camera 3 Extrinsic Matrix.
-episode_metadata/extrinsics_4 | Tensor       | (4, 4)        | float32 | Camera 4 Extrinsic Matrix.
-episode_metadata/file_path    | Text         |               | string  | Path to the original data file.
-steps                         | Dataset      |               |         |
-steps/action                  | Tensor       | (7,)          | float32 | Robot action, consists of [3x robot end-effector velocities, 3x robot end-effector angular velocities, 1x gripper velocity].
-steps/discount                | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                | Tensor       |               | bool    |
-steps/is_last                 | Tensor       |               | bool    |
-steps/is_terminal             | Tensor       |               | bool    |
-steps/language_embedding      | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction    | Text         |               | string  | Language Instruction.
-steps/observation             | FeaturesDict |               |         |
-steps/observation/depth_1     | Tensor       | (256, 256)    | float32 | Camera 1 Depth observation.
-steps/observation/depth_2     | Tensor       | (256, 256)    | float32 | Camera 2 Depth observation.
-steps/observation/depth_3     | Tensor       | (256, 256)    | float32 | Camera 3 Depth observation.
-steps/observation/depth_4     | Tensor       | (256, 256)    | float32 | Camera 4 Depth observation.
-steps/observation/image_1     | Image        | (256, 256, 3) | uint8   | Camera 1 RGB observation.
-steps/observation/image_2     | Image        | (256, 256, 3) | uint8   | Camera 2 RGB observation.
-steps/observation/image_3     | Image        | (256, 256, 3) | uint8   | Camera 3 RGB observation.
-steps/observation/image_4     | Image        | (256, 256, 3) | uint8   | Camera 4 RGB observation.
-steps/observation/state       | Tensor       | (7,)          | float32 | Robot state, consists of [3x robot end-effector position, 3x robot end-effector euler angles, 1x gripper position].
-steps/reward                  | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                       | Class        | Shape      | Dtype   | Description                                                  |
+| :---------------------------- | :----------- | :--------- | :------ | :----------------------------------------------------------- |
+|                               | FeaturesDict |            |         |                                                              |
+| episode_metadata              | FeaturesDict |            |         |                                                              |
+| episode_metadata/extrinsics_1 | Tensor       | (4, 4)     | float32 | Camera 1 Extrinsic Matrix.                                   |
+| episode_metadata/extrinsics_2 | Tensor       | (4, 4)     | float32 | Camera 2 Extrinsic Matrix.                                   |
+| episode_metadata/extrinsics_3 | Tensor       | (4, 4)     | float32 | Camera 3 Extrinsic Matrix.                                   |
+| episode_metadata/extrinsics_4 | Tensor       | (4, 4)     | float32 | Camera 4 Extrinsic Matrix.                                   |
+| episode_metadata/file_path    | Text         |            | string  | Path to the original data file.                              |
+| steps                         | Dataset      |            |         |                                                              |
+| steps/action                  | Tensor       | (7,)       | float32 | Robot action, consists of [3x robot end-effector velocities, |
+:                               :              :            :         : 3x robot end-effector angular velocities, 1x gripper         :
+:                               :              :            :         : velocity].                                                   :
+| steps/discount                | Scalar       |            | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                | Tensor       |            | bool    |                                                              |
+| steps/is_last                 | Tensor       |            | bool    |                                                              |
+| steps/is_terminal             | Tensor       |            | bool    |                                                              |
+| steps/language_embedding      | Tensor       | (512,)     | float32 | Kona language embedding. See                                 |
+:                               :              :            :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction    | Text         |            | string  | Language Instruction.                                        |
+| steps/observation             | FeaturesDict |            |         |                                                              |
+| steps/observation/depth_1     | Tensor       | (256, 256) | float32 | Camera 1 Depth observation.                                  |
+| steps/observation/depth_2     | Tensor       | (256, 256) | float32 | Camera 2 Depth observation.                                  |
+| steps/observation/depth_3     | Tensor       | (256, 256) | float32 | Camera 3 Depth observation.                                  |
+| steps/observation/depth_4     | Tensor       | (256, 256) | float32 | Camera 4 Depth observation.                                  |
+| steps/observation/image_1     | Image        | (256,      | uint8   | Camera 1 RGB observation.                                    |
+:                               :              : 256, 3)    :         :                                                              :
+| steps/observation/image_2     | Image        | (256,      | uint8   | Camera 2 RGB observation.                                    |
+:                               :              : 256, 3)    :         :                                                              :
+| steps/observation/image_3     | Image        | (256,      | uint8   | Camera 3 RGB observation.                                    |
+:                               :              : 256, 3)    :         :                                                              :
+| steps/observation/image_4     | Image        | (256,      | uint8   | Camera 4 RGB observation.                                    |
+:                               :              : 256, 3)    :         :                                                              :
+| steps/observation/state       | Tensor       | (7,)       | float32 | Robot state, consists of [3x robot end-effector position, 3x |
+:                               :              :            :         : robot end-effector euler angles, 1x gripper position].       :
+| steps/reward                  | Scalar       |            | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

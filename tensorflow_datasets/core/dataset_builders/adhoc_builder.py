@@ -133,13 +133,13 @@ class AdhocBuilder(
       disable_shuffling: bool | None = False,
       **kwargs: Any,
   ):
-    self.name = name
+    self.name = name  # pyrefly: ignore[read-only]
     self.VERSION = utils.Version(version)  # pylint: disable=invalid-name
-    self.RELEASE_NOTES = release_notes  # pylint: disable=invalid-name
+    self.RELEASE_NOTES = release_notes  # pylint: disable=invalid-name  # pyrefly: ignore[read-only]
     if config:
       if isinstance(config, str):
         config = dataset_builder.BuilderConfig(
-            name=config, version=version, release_notes=release_notes
+            name=config, version=version, release_notes=release_notes  # pyrefly: ignore[bad-argument-type]
         )
       self.BUILDER_CONFIGS = [config]  # pylint: disable=invalid-name
     self._split_datasets = split_datasets
@@ -165,7 +165,7 @@ class AdhocBuilder(
         features=self._feature_spec,
         homepage=self._homepage,
         citation=self._citation,
-        disable_shuffling=self._disable_shuffling,
+        disable_shuffling=self._disable_shuffling,  # pyrefly: ignore[bad-argument-type]
     )
 
   def _split_generators(

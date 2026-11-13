@@ -47,19 +47,19 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     input_path = os.path.join(dl_path, "AESLC-master", "enron_subject_line")
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "pattern": os.path.join(input_path, "train", "*.subject")
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "pattern": os.path.join(input_path, "dev", "*.subject")
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "pattern": os.path.join(input_path, "test", "*.subject")
             },
@@ -68,7 +68,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, pattern=None):
     """Yields examples."""
-    for filename in tf.io.gfile.glob(pattern):
+    for filename in tf.io.gfile.glob(pattern):  # pyrefly: ignore[bad-argument-type]
       email_body, subject_line = _parse_email_file(filename)
       key = os.path.basename(filename).rstrip(".subject")
       yield key, {_DOCUMENT: email_body, _SUMMARY: subject_line}

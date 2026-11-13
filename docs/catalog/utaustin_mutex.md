@@ -67,24 +67,29 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                       | Class        | Shape         | Dtype   | Description
-:---------------------------- | :----------- | :------------ | :------ | :----------
-                              | FeaturesDict |               |         |
-episode_metadata              | FeaturesDict |               |         |
-episode_metadata/file_path    | Text         |               | string  | Path to the original data file.
-steps                         | Dataset      |               |         |
-steps/action                  | Tensor       | (7,)          | float32 | Robot action, consists of [6x end effector delta pose, 1x gripper position]
-steps/discount                | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/is_first                | Tensor       |               | bool    |
-steps/is_last                 | Tensor       |               | bool    |
-steps/is_terminal             | Tensor       |               | bool    |
-steps/language_embedding      | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction    | Text         |               | string  | Detailed Language Instructions for each task.
-steps/observation             | FeaturesDict |               |         |
-steps/observation/image       | Image        | (128, 128, 3) | uint8   | Main camera RGB observation.
-steps/observation/state       | Tensor       | (24,)         | float32 | Robot state, consists of [7x robot joint angles, 1x gripper position, 16x robot end-effector homogeneous matrix].
-steps/observation/wrist_image | Image        | (128, 128, 3) | uint8   | Wrist camera RGB observation.
-steps/reward                  | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                       | Class        | Shape   | Dtype   | Description                                                  |
+| :---------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                               | FeaturesDict |         |         |                                                              |
+| episode_metadata              | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path    | Text         |         | string  | Path to the original data file.                              |
+| steps                         | Dataset      |         |         |                                                              |
+| steps/action                  | Tensor       | (7,)    | float32 | Robot action, consists of [6x end effector delta pose, 1x    |
+:                               :              :         :         : gripper position]                                            :
+| steps/discount                | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/is_first                | Tensor       |         | bool    |                                                              |
+| steps/is_last                 | Tensor       |         | bool    |                                                              |
+| steps/is_terminal             | Tensor       |         | bool    |                                                              |
+| steps/language_embedding      | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                               :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction    | Text         |         | string  | Detailed Language Instructions for each task.                |
+| steps/observation             | FeaturesDict |         |         |                                                              |
+| steps/observation/image       | Image        | (128,   | uint8   | Main camera RGB observation.                                 |
+:                               :              : 128, 3) :         :                                                              :
+| steps/observation/state       | Tensor       | (24,)   | float32 | Robot state, consists of [7x robot joint angles, 1x gripper  |
+:                               :              :         :         : position, 16x robot end-effector homogeneous matrix].        :
+| steps/observation/wrist_image | Image        | (128,   | uint8   | Wrist camera RGB observation.                                |
+:                               :              : 128, 3) :         :                                                              :
+| steps/reward                  | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

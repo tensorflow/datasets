@@ -29,8 +29,8 @@ missing values are replaced with -1, string missing values are replaced with
 
     *   `2.0.0`: New split API (https://tensorflow.org/datasets/splits)
     *   `3.0.0`: Use a standard flat dictionary of features for the dataset. Use
-        `as_supervised=True` to split the dataset into a `(features_dict,
-        survived)` tuple.
+        `as_supervised=True` to split the dataset into a
+        `(features_dict, survived)` tuple.
     *   **`4.0.0`** (default): Fix inverted labels which were inverted in the
         3.0.0.
 

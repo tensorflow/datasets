@@ -182,15 +182,15 @@ class CremaD(tfds.core.GeneratorBasedBuilder):
     splits = _get_inter_splits_by_group(wav_and_speaker_ids, split_probs, 0)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'file_paths_and_names': splits['train']},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'file_paths_and_names': splits['validation']},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={'file_paths_and_names': splits['test']},
         ),
     ]

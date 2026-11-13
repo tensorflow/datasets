@@ -123,8 +123,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     paths = {
-        **dl_manager.download_and_extract(_EXTRACT_URLS),
-        **dl_manager.download(_URLS),
+        **dl_manager.download_and_extract(_EXTRACT_URLS),  # pyrefly: ignore[invalid-argument]
+        **dl_manager.download(_URLS),  # pyrefly: ignore[invalid-argument]
     }
     image_dirs = [
         paths['train_images'] / 'train2017',
@@ -132,13 +132,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         paths['test_images'] / 'test2017',
     ]
     return {
-        tfds.Split.TRAIN: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             image_dirs, paths['train_annotation'] / 'lvis_v1_train.json'
         ),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             image_dirs, paths['validation_annotation'] / 'lvis_v1_val.json'
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             image_dirs,
             paths['test_annotation'] / 'lvis_v1_image_info_test_dev.json',
         ),

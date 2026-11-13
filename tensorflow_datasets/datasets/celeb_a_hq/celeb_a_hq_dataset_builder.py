@@ -77,8 +77,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             {
                 "image": tfds.features.Image(
                     shape=(
-                        self.builder_config.resolution,
-                        self.builder_config.resolution,
+                        self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
+                        self.builder_config.resolution,  # pyrefly: ignore[missing-attribute]
                         3,
                     ),
                     encoding_format="png",
@@ -92,7 +92,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     image_tar_file = os.path.join(
-        dl_manager.manual_dir, self.builder_config.file_name
+        dl_manager.manual_dir, self.builder_config.file_name  # pyrefly: ignore[missing-attribute]
     )
     if not tf.io.gfile.exists(image_tar_file):
       # The current celebahq generation code depends on a concrete version of
@@ -103,7 +103,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       raise AssertionError(msg)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"archive": dl_manager.iter_archive(image_tar_file)},
         )
     ]

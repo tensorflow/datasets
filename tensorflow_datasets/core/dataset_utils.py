@@ -117,7 +117,7 @@ def _elem_to_numpy_eager(
 ) -> Union[NumpyElem, Iterable[NumpyElem]]:
   """Converts a single element from tf to numpy."""
   if isinstance(tf_el, tf.Tensor):
-    return tf_el._numpy()  # pytype: disable=attribute-error  # pylint: disable=protected-access
+    return tf_el._numpy()  # pylint: disable=protected-access
   elif isinstance(tf_el, tf.RaggedTensor):
     return tf_el
   elif isinstance(tf_el, tf.data.Dataset):

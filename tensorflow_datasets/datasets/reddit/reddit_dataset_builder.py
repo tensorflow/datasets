@@ -57,7 +57,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     dl_path = dl_manager.download_and_extract(_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "path": os.path.join(dl_path, "corpus-webis-tldr-17.json")
             },

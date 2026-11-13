@@ -154,7 +154,7 @@ class DatasetDocumentation:
 
   @property
   def namespace(self) -> str:
-    return self.dataset.name.namespace
+    return self.dataset.name.namespace  # pyrefly: ignore[bad-return]
 
   def code_url(self, title: str = 'Code') -> str:
     return f'[{title}]({self.dataset.source.root_path})'
@@ -383,7 +383,7 @@ class HuggingfaceDatasetDocumentation(GithubDatasetDocumentation):
     if not isinstance(self.dataset_infos, dict):
       return {}
     return {
-        config_name: self._parse_dataset_info_proto(config_name, config)
+        config_name: self._parse_dataset_info_proto(config_name, config)  # pyrefly: ignore[bad-argument-type]
         for config_name, config in self.dataset_infos.items()
     }
 

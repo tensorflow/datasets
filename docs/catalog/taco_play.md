@@ -72,28 +72,55 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                                           | Class        | Shape         | Dtype   | Description
-:------------------------------------------------ | :----------- | :------------ | :------ | :----------
-                                                  | FeaturesDict |               |         |
-steps                                             | Dataset      |               |         |
-steps/action                                      | FeaturesDict |               |         |
-steps/action/actions                              | Tensor       | (7,)          | float32 | absolute desired values for gripper pose (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)
-steps/action/rel_actions_gripper                  | Tensor       | (7,)          | float32 | relative actions for gripper pose in the gripper camera frame (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)
-steps/action/rel_actions_world                    | Tensor       | (7,)          | float32 | relative actions for gripper pose in the robot base frame (first 6 dimensions are x, y, z, yaw, pitch, roll), last dimension is open_gripper (-1 is open gripper, 1 is close)
-steps/action/terminate_episode                    | Tensor       |               | float32 |
-steps/is_first                                    | Tensor       |               | bool    |
-steps/is_last                                     | Tensor       |               | bool    |
-steps/is_terminal                                 | Tensor       |               | bool    |
-steps/observation                                 | FeaturesDict |               |         |
-steps/observation/depth_gripper                   | Tensor       | (84, 84)      | float32 |
-steps/observation/depth_static                    | Tensor       | (150, 200)    | float32 |
-steps/observation/natural_language_embedding      | Tensor       | (512,)        | float32 |
-steps/observation/natural_language_instruction    | Tensor       |               | string  | Natural language instruction is a natural language instruction randomly sampled based on potential task synonyms derived from the structured language task. For example, 'turn blue light off' may map to 'switch the blue color light to off'.
-steps/observation/rgb_gripper                     | Image        | (84, 84, 3)   | uint8   |
-steps/observation/rgb_static                      | Image        | (150, 200, 3) | uint8   | RGB static image of shape. (150, 200, 3). Subsampled from (200,200, 3) image.
-steps/observation/robot_obs                       | Tensor       | (15,)         | float32 | EE position (3), EE orientation in euler angles (3), gripper width (1), joint positions (7), gripper action (1)
-steps/observation/structured_language_instruction | Tensor       |               | string  | One of 25 possible structured language instructions, see list in https://arxiv.org/pdf/2210.01911.pdf Table 2.
-steps/reward                                      | Scalar       |               | float32 |
+| Feature                                           | Class        | Shape      | Dtype   | Description                           |
+| :------------------------------------------------ | :----------- | :--------- | :------ | :------------------------------------ |
+|                                                   | FeaturesDict |            |         |                                       |
+| steps                                             | Dataset      |            |         |                                       |
+| steps/action                                      | FeaturesDict |            |         |                                       |
+| steps/action/actions                              | Tensor       | (7,)       | float32 | absolute desired values for gripper   |
+:                                                   :              :            :         : pose (first 6 dimensions are x, y, z, :
+:                                                   :              :            :         : yaw, pitch, roll), last dimension is  :
+:                                                   :              :            :         : open_gripper (-1 is open gripper, 1   :
+:                                                   :              :            :         : is close)                             :
+| steps/action/rel_actions_gripper                  | Tensor       | (7,)       | float32 | relative actions for gripper pose in  |
+:                                                   :              :            :         : the gripper camera frame (first 6     :
+:                                                   :              :            :         : dimensions are x, y, z, yaw, pitch,   :
+:                                                   :              :            :         : roll), last dimension is open_gripper :
+:                                                   :              :            :         : (-1 is open gripper, 1 is close)      :
+| steps/action/rel_actions_world                    | Tensor       | (7,)       | float32 | relative actions for gripper pose in  |
+:                                                   :              :            :         : the robot base frame (first 6         :
+:                                                   :              :            :         : dimensions are x, y, z, yaw, pitch,   :
+:                                                   :              :            :         : roll), last dimension is open_gripper :
+:                                                   :              :            :         : (-1 is open gripper, 1 is close)      :
+| steps/action/terminate_episode                    | Tensor       |            | float32 |                                       |
+| steps/is_first                                    | Tensor       |            | bool    |                                       |
+| steps/is_last                                     | Tensor       |            | bool    |                                       |
+| steps/is_terminal                                 | Tensor       |            | bool    |                                       |
+| steps/observation                                 | FeaturesDict |            |         |                                       |
+| steps/observation/depth_gripper                   | Tensor       | (84, 84)   | float32 |                                       |
+| steps/observation/depth_static                    | Tensor       | (150, 200) | float32 |                                       |
+| steps/observation/natural_language_embedding      | Tensor       | (512,)     | float32 |                                       |
+| steps/observation/natural_language_instruction    | Tensor       |            | string  | Natural language instruction is a     |
+:                                                   :              :            :         : natural language instruction randomly :
+:                                                   :              :            :         : sampled based on potential task       :
+:                                                   :              :            :         : synonyms derived from the structured  :
+:                                                   :              :            :         : language task. For example, 'turn     :
+:                                                   :              :            :         : blue light off' may map to 'switch    :
+:                                                   :              :            :         : the blue color light to off'.         :
+| steps/observation/rgb_gripper                     | Image        | (84,       | uint8   |                                       |
+:                                                   :              : 84, 3)     :         :                                       :
+| steps/observation/rgb_static                      | Image        | (150,      | uint8   | RGB static image of shape. (150, 200, |
+:                                                   :              : 200, 3)    :         : 3). Subsampled from (200,200, 3)      :
+:                                                   :              :            :         : image.                                :
+| steps/observation/robot_obs                       | Tensor       | (15,)      | float32 | EE position (3), EE orientation in    |
+:                                                   :              :            :         : euler angles (3), gripper width (1),  :
+:                                                   :              :            :         : joint positions (7), gripper action   :
+:                                                   :              :            :         : (1)                                   :
+| steps/observation/structured_language_instruction | Tensor       |            | string  | One of 25 possible structured         |
+:                                                   :              :            :         : language instructions, see list in    :
+:                                                   :              :            :         : https\://arxiv.org/pdf/2210.01911.pdf :
+:                                                   :              :            :         : Table 2.                              :
+| steps/reward                                      | Scalar       |            | float32 |                                       |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

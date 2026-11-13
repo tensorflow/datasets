@@ -159,11 +159,11 @@ class Builder(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
     supervised_keys = None
-    features = self.builder_config.features
+    features = self.builder_config.features  # pyrefly: ignore[missing-attribute]
     supervised_features = features.copy()
-    label_name = self.builder_config.label
+    label_name = self.builder_config.label  # pyrefly: ignore[missing-attribute]
 
-    if self.builder_config.name == 'processed':
+    if self.builder_config.name == 'processed':  # pyrefly: ignore[missing-attribute]
       label_feature = supervised_features.pop(label_name, None)
       supervised_keys = ('features', label_name)
       features = {
@@ -187,7 +187,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    path = dl_manager.download(_PENGUINS_PATH + self.builder_config.file_name)
+    path = dl_manager.download(_PENGUINS_PATH + self.builder_config.file_name)  # pyrefly: ignore[missing-attribute]
     return {'train': self._generate_examples(path)}
 
   def _generate_examples(self, path):
@@ -197,8 +197,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
         row = {f: self._clean_up(f, v) for f, v in row.items()}
 
         # Pack features if requested.
-        if self.builder_config.name == 'processed':
-          label_name = self.builder_config.label
+        if self.builder_config.name == 'processed':  # pyrefly: ignore[missing-attribute]
+          label_name = self.builder_config.label  # pyrefly: ignore[missing-attribute]
           label = row.pop(label_name, None)
           row = list(row.values())
           yield i, {'features': row, label_name: label}
@@ -207,21 +207,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _clean_up(self, field, value):
     """Applies field-level pre-processing, if needed."""
-    if not self.builder_config.cleanup:
+    if not self.builder_config.cleanup:  # pyrefly: ignore[missing-attribute]
       return value
     if field not in self.builder_config.cleanup:
       return value
 
-    feature_type = self.builder_config.features[field]
+    feature_type = self.builder_config.features[field]  # pyrefly: ignore[missing-attribute]
     if feature_type == np.float32:
       # Field is a float. If it won't parse, clean it up.
       try:
         return float(value)
       except ValueError:
-        return self.builder_config.cleanup[field]
+        return self.builder_config.cleanup[field]  # pyrefly: ignore[bad-index]
     elif isinstance(feature_type, tfds.features.ClassLabel):
       # Field is a class. If it's OOV, clean it up.
       if value not in feature_type.names:
-        return self.builder_config.cleanup[field]
+        return self.builder_config.cleanup[field]  # pyrefly: ignore[bad-index]
 
     return value

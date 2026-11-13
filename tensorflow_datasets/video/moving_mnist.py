@@ -79,7 +79,7 @@ class MovingMnist(tfds.core.GeneratorBasedBuilder):
     # function to create training/validation dataset from MNIST.
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)
+            name=tfds.Split.TEST, gen_kwargs=dict(data_path=data_path)  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

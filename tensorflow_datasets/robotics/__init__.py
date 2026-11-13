@@ -66,6 +66,7 @@ from tensorflow_datasets.robotics.rtx import NyuDoorOpeningSurprisingEffectivene
 from tensorflow_datasets.robotics.rtx import NyuFrankaPlayDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import NyuRotDatasetConvertedExternallyToRlds
 from tensorflow_datasets.robotics.rtx import PlexRobosuite
+from tensorflow_datasets.robotics.rtx import RoboAiUR5e
 from tensorflow_datasets.robotics.rtx import RoboSet
 from tensorflow_datasets.robotics.rtx import Roboturk
 from tensorflow_datasets.robotics.rtx import SpocRobot

@@ -107,7 +107,7 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
   ]
 
   def _info(self):
-    if self.builder_config.selection == 'rgb':
+    if self.builder_config.selection == 'rgb':  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           'image': tfds.features.Image(shape=[64, 64, 3]),
           'label': tfds.features.ClassLabel(names=_LABELS),
@@ -127,22 +127,22 @@ class Eurosat(tfds.core.GeneratorBasedBuilder):
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
-        features=features,
-        supervised_keys=supervised_keys,
+        features=features,  # pyrefly: ignore[unbound-name]
+        supervised_keys=supervised_keys,  # pyrefly: ignore[unbound-name]
         homepage=_URL,
         citation=_CITATION,
     )
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    path = dl_manager.download_and_extract(self.builder_config.download_url)
-    path = os.path.join(path, self.builder_config.subdir)
+    path = dl_manager.download_and_extract(self.builder_config.download_url)  # pyrefly: ignore[missing-attribute]
+    path = os.path.join(path, self.builder_config.subdir)  # pyrefly: ignore[missing-attribute]
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'path': path,
-                'selection': self.builder_config.selection,
+                'selection': self.builder_config.selection,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]

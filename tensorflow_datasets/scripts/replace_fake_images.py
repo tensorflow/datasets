@@ -124,13 +124,13 @@ def rewrite_tar(root_dir, tar_filepath):
       extension = ''
 
     # Extraction of .tar file
-    with tarfile.open(tar_filepath, 'r' + extension) as tar:
+    with tarfile.open(tar_filepath, 'r' + extension) as tar:  # pyrefly: ignore[no-matching-overload]
       tar.extractall(path=temp_dir)
 
     rewrite_dir(temp_dir)  # Recursively compress the archive content
 
     # Convert back into tar file
-    with tarfile.open(tar_filepath, 'w' + extension) as tar:
+    with tarfile.open(tar_filepath, 'w' + extension) as tar:  # pyrefly: ignore[no-matching-overload]
       tar.add(temp_dir, arcname='', recursive=True)
 
 

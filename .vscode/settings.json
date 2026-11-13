@@ -23,7 +23,8 @@
         "tensorflow_datasets",
         "-vv",
         "--continue-on-collection-errors",
-        "--ignore=tensorflow_datasets/testing/test_utils.py"
+        "--ignore=tensorflow_datasets/testing/test_utils.py",
+        "--ignore=tensorflow_datasets/scripts/documentation/build_api_docs_test.py"
     ],
     "files.watcherExclude": {
         "**/.git/**": true,

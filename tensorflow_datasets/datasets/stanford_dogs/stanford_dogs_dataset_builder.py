@@ -91,29 +91,29 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       elif "test" in fname:
         test_list, _ = parse_mat_file(full_file_name)
 
-    self.info.features["label"].names = sorted(label_names)
+    self.info.features["label"].names = sorted(label_names)  # pyrefly: ignore[unbound-name]
 
     for root, _, files in tf.io.gfile.walk(annotation_path):
       # Parsing the XML file which have the image annotations
       for fname in files:
         annotation_file_name = os.path.join(root, fname)
         with tf.io.gfile.GFile(annotation_file_name, "rb") as f:
-          xml_file_list[fname] = ET.parse(f)
+          xml_file_list[fname] = ET.parse(f)  # pyrefly: ignore[unsupported-operation]
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(images_path),
-                "file_names": train_list,
+                "file_names": train_list,  # pyrefly: ignore[unbound-name]
                 "annotation_files": xml_file_list,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "archive": dl_manager.iter_archive(images_path),
-                "file_names": test_list,
+                "file_names": test_list,  # pyrefly: ignore[unbound-name]
                 "annotation_files": xml_file_list,
             },
         ),

@@ -19,7 +19,10 @@ around 4 million articles. Use the 'org_data' provided by
 https://github.com/microsoft/unilm/ which is identical to
 https://github.com/harvardnlp/sent-summary but with better format.
 
-There are two features: - document: article. - summary: headline.
+There are two features:
+
+-   document: article.
+-   summary: headline.
 
 *   **Homepage**:
     [https://github.com/harvardnlp/sent-summary](https://github.com/harvardnlp/sent-summary)

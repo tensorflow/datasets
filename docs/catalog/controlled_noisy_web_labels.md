@@ -22,8 +22,10 @@ Data Labeling Service. Using these annotations, it establishes the first
 benchmark of controlled real-world label noise from the web.
 
 We provide the Red Mini-ImageNet (real-world web noise) and Blue Mini-ImageNet
-configs: - controlled_noisy_web_labels/mini_imagenet_red -
-controlled_noisy_web_labels/mini_imagenet_blue
+configs:
+
+-   controlled_noisy_web_labels/mini_imagenet_red
+-   controlled_noisy_web_labels/mini_imagenet_blue
 
 Each config contains ten variants with ten noise-levels p from 0% to 80%. The
 validation set has clean labels and is shared across all noisy training sets.

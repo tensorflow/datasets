@@ -161,12 +161,12 @@ class _Bucket(object):
     data_size = len(data)
 
     try:
-      self._fobj.write(_hkey_to_bytes(key))
+      self._fobj.write(_hkey_to_bytes(key))  # pyrefly: ignore[bad-argument-type]
     except tf.errors.ResourceExhaustedError as error:
       # catch "Too many open files"
       if error.message.endswith('Too many open files'):
         _increase_open_files_limit()
-        self._fobj.write(_hkey_to_bytes(key))
+        self._fobj.write(_hkey_to_bytes(key))  # pyrefly: ignore[bad-argument-type]
       else:
         raise error
     # http://docs.python.org/3/library/struct.html#byte-order-size-and-alignment
@@ -272,10 +272,10 @@ class Shuffler(object):
     if self._total_bytes > MAX_MEM_BUFFER_SIZE:
       for hkey, data in self._mem_buffer:
         self._add_to_bucket(hkey, data)
-      self._mem_buffer = None
+      self._mem_buffer = None  # pyrefly: ignore[bad-assignment]
       self._in_memory = False
 
-  def add(self, key: type_utils.Key, data: bytes) -> bool:
+  def add(self, key: type_utils.Key, data: bytes) -> bool:  # pyrefly: ignore[bad-return]
     """Add (key, data) to shuffler."""
     if self._read_only:
       raise AssertionError('add() cannot be called after __iter__.')
@@ -288,7 +288,7 @@ class Shuffler(object):
     hkey = self._hasher.hash_key(key)
     if self._ignore_duplicates:
       if hkey in self._seen_keys:
-        return  # pytype: disable=bad-return-type
+        return  # pyrefly: ignore[bad-return]
       self._seen_keys.add(hkey)
     if self._disable_shuffling:
       # Use the original key and not the hashed key to maintain the order.
@@ -298,7 +298,7 @@ class Shuffler(object):
       self._add_to_mem_buffer(hkey, data)
     else:
       self._add_to_bucket(hkey, data)
-    self._num_examples += 1  # pytype: disable=bad-return-type
+    self._num_examples += 1
 
   def __iter__(self) -> Iterator[type_utils.KeySerializedExample]:
     self._read_only = True

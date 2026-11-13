@@ -78,14 +78,14 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     """Returns SplitGenerators."""
     pd = tfds.core.lazy_imports.pandas
     paths = dl_manager.download(_URLS)
-    with tf.io.gfile.GFile(paths['meta_data']) as f:
+    with tf.io.gfile.GFile(paths['meta_data']) as f:  # pyrefly: ignore[bad-index]
       meta = pd.read_csv(f)
     meta = meta.set_index('hash')
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(
-                parts=paths['train_images'], meta=meta, dl_manager=dl_manager
+                parts=paths['train_images'], meta=meta, dl_manager=dl_manager  # pyrefly: ignore[bad-index]
             ),
         )
     ]

@@ -167,8 +167,8 @@ class _GithubTree:
       )
       if element['type'] in {'blob', 'tree'}:
         files_per_folder.setdefault(github_element.parent_folder, set())
-        files_per_folder[github_element.parent_folder].add(github_element)
-    return _GithubTree(files_per_folder=files_per_folder)
+        files_per_folder[github_element.parent_folder].add(github_element)  # pyrefly: ignore[bad-argument-type]
+    return _GithubTree(files_per_folder=files_per_folder)  # pyrefly: ignore[bad-argument-type]
 
   @staticmethod
   @functools.lru_cache(maxsize=None)
@@ -178,7 +178,7 @@ class _GithubTree:
     # If the tree is truncated, then we'll need a more sophisticated method to
     # retrieve the whole tree. Since this is currently not supported, it raises
     # an exception.
-    assert not tree_json.get('truncated', False)  # pytype: disable=attribute-error  # dynamic-method-lookup
+    assert not tree_json.get('truncated', False)  # pyrefly: ignore[missing-attribute]
     return _GithubTree.from_json(tree_json)
 
 

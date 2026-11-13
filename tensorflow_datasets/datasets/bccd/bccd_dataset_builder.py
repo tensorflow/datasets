@@ -81,21 +81,21 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "file_names": train_list,
                 "extracted_dir_path": extracted_dir_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "file_names": val_list,
                 "extracted_dir_path": extracted_dir_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "file_names": test_list,
                 "extracted_dir_path": extracted_dir_path,
@@ -151,9 +151,9 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     for fname in file_names:
       annotation_file_path = get_annotations_file_path(fname)
       with epath.Path(annotation_file_path).open() as f:
-        xml_list[fname] = ET.parse(f)
+        xml_list[fname] = ET.parse(f)  # pyrefly: ignore[unsupported-operation]
       attributes = collections.defaultdict(list)
-      for element in xml_list[fname].iter():
+      for element in xml_list[fname].iter():  # pyrefly: ignore[missing-attribute]
         # Extract necessary Bbox attributes from XML file
         # "Name" tag contains the label
         if element.tag.strip() == "name":

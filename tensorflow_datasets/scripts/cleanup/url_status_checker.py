@@ -60,7 +60,7 @@ def main(_):
   print('\n************ Summary ************\n')
   total_errors = 0
   for url, code in zip(urls, all_codes):
-    if code == requests.codes.ok:
+    if code == requests.codes.ok:  # pyrefly: ignore[missing-attribute]
       continue
     total_errors += 1
     print(f'{url} - status code: {code}')

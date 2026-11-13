@@ -205,7 +205,7 @@ def normalize_shape(
 ) -> type_utils.Shape:
   """Normalize `tf.TensorShape` to tuple of int/None."""
   if isinstance(shape, tf.TensorShape):
-    return tuple(shape.as_list())  # pytype: disable=attribute-error
+    return tuple(shape.as_list())
   else:
     assert isinstance(shape, tuple)
     return shape

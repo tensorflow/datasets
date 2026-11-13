@@ -35,9 +35,9 @@ def _output_dir():
 
 def _dummy_file(participant: int, gesture: int, attempt: int) -> epath.Path:
   """Return path to fake data file."""
-  participant = f'U{participant:02}'
-  gesture = f'{gesture:02}'
-  attempt = f'{attempt:02}.txt'
+  participant = f'U{participant:02}'  # pyrefly: ignore[bad-assignment]
+  gesture = f'{gesture:02}'  # pyrefly: ignore[bad-assignment]
+  attempt = f'{attempt:02}.txt'  # pyrefly: ignore[bad-assignment]
   return _output_dir() / participant / gesture / attempt
 
 

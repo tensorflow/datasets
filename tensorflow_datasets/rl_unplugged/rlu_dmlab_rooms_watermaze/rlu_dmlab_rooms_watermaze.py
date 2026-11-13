@@ -31,7 +31,6 @@ class RluDmlabRoomsWatermaze(dmlab_dataset.DMLabDatasetBuilder):
       '1.2.0': 'BGR -> RGB fix for pixel observations.',
   }
 
-  # pytype: disable=wrong-keyword-args
   BUILDER_CONFIGS = [
       dmlab_dataset.BuilderConfig(
           name='training_0', task=_TASK, episode_length=_EPISODE_LENGTH
@@ -43,4 +42,3 @@ class RluDmlabRoomsWatermaze(dmlab_dataset.DMLabDatasetBuilder):
           name='training_2', task=_TASK, episode_length=_EPISODE_LENGTH
       ),
   ]
-  # pytype: enable=wrong-keyword-args

@@ -18,8 +18,10 @@ Warning: Manual download required. See instructions below.
 
 Extreme Summarization (XSum) Dataset.
 
-There are two features: - document: Input news article. - summary: One sentence
-summary of the article.
+There are two features:
+
+-   document: Input news article.
+-   summary: One sentence summary of the article.
 
 This data need to manaully downloaded and extracted as described in
 https://github.com/EdinburghNLP/XSum/blob/master/XSum-Dataset/README.md. The

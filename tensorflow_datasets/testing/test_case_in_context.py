@@ -49,7 +49,7 @@ class TestCaseInContext(absltest.TestCase):
     cls._stack.close()
     super().tearDownClass()
 
-  def assertRaisesWithPredicateMatch(self, err_type, predicate):  # pylint: disable=invalid-name
+  def assertRaisesWithPredicateMatch(self, err_type, predicate):  # pylint: disable=invalid-name  # pyrefly: ignore[bad-override]
     if isinstance(predicate, str):
       predicate_fn = lambda err: predicate in str(err)
     else:

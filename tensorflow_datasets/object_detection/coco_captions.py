@@ -85,8 +85,8 @@ class CocoCaptions(coco.Coco):
         split.name: split
         for split in super(CocoCaptions, self)._split_generators(dl_manager)
     }
-    coco_train_split = coco_splits[tfds.Split.TRAIN]
-    coco_val_split = coco_splits[tfds.Split.VALIDATION]
+    coco_train_split = coco_splits[tfds.Split.TRAIN]  # pyrefly: ignore[missing-attribute]
+    coco_val_split = coco_splits[tfds.Split.VALIDATION]  # pyrefly: ignore[missing-attribute]
 
     urls = {}
     urls['karpathy_and_li_splits'] = (
@@ -140,7 +140,7 @@ class CocoCaptions(coco.Coco):
         ),
     ]
 
-  def _generate_examples(self, image_filename_to_annotations, coco_gen_kwargs):
+  def _generate_examples(self, image_filename_to_annotations, coco_gen_kwargs):  # pyrefly: ignore[bad-override]
     """Generate examples as dicts.
 
     Args:

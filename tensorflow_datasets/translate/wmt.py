@@ -774,12 +774,12 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
   @property
   def _subsets(self):
     """Subsets that make up each split of the dataset."""
-    return self.builder_config.subsets
+    return self.builder_config.subsets  # pyrefly: ignore[missing-attribute]
 
   @property
   def subsets(self):
     """Subsets that make up each split of the dataset for the language pair."""
-    source, target = self.builder_config.language_pair
+    source, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     filtered_subsets = {}
     for split, ss_names in self._subsets.items():
       filtered_subsets[split] = []
@@ -796,20 +796,20 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
     return filtered_subsets
 
   def _info(self):
-    src, target = self.builder_config.language_pair
+    src, target = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
     return tfds.core.DatasetInfo(
         builder=self,
         description=_DESCRIPTION,
         features=tfds.features.Translation(
-            languages=self.builder_config.language_pair,
+            languages=self.builder_config.language_pair,  # pyrefly: ignore[missing-attribute]
         ),
         supervised_keys=(src, target),
-        homepage=self.builder_config.url,
-        citation=self.builder_config.citation,
+        homepage=self.builder_config.url,  # pyrefly: ignore[missing-attribute]
+        citation=self.builder_config.citation,  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
-    source, _ = self.builder_config.language_pair
+    source, _ = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
 
     def _check_manual_files(ds):
       """Verifies the manual files are downloaded for the given sub-dataset."""
@@ -879,7 +879,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
 
   def _generate_examples(self, split_subsets, extraction_map):
     """Returns the examples in the raw (text) form."""
-    source, _ = self.builder_config.language_pair
+    source, _ = self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
 
     def _get_local_paths(ds, extract_dirs):
       rel_paths = ds.get_path(source)
@@ -924,7 +924,7 @@ class WmtTranslate(tfds.core.GeneratorBasedBuilder):
           sub_generator = _parse_tsv
         elif ss_name.startswith("newscommentary_v14"):
           sub_generator = functools.partial(
-              _parse_tsv, language_pair=self.builder_config.language_pair
+              _parse_tsv, language_pair=self.builder_config.language_pair  # pyrefly: ignore[missing-attribute]
           )
         elif "tmx" in fname:
           sub_generator = _parse_tmx
@@ -1056,7 +1056,7 @@ def _parse_tmx(path):
 
   with epath.Path(path).open("rb") as f:
     utf_f = codecs.getreader("utf-8")(f)
-    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):  # pytype: disable=wrong-arg-types
+    for line_id, (_, elem) in enumerate(ElementTree.iterparse(utf_f)):
       if elem.tag == "tu":
         yield line_id, {
             _get_tuv_lang(tuv): _get_tuv_seg(tuv)
@@ -1106,7 +1106,7 @@ def _parse_czeng(*paths, **kwargs):
     re_block = re.compile(r"^[^-]+-b(\d+)-\d\d[tde]")
     with epath.Path(filter_path).open() as f:
       bad_blocks = set(
-          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pytype: disable=attribute-error
+          re.search(r"qw{([\s\d]*)}", f.read()).groups()[0].split()  # pyrefly: ignore[missing-attribute]
       )
     logging.info(
         "Loaded %d bad blocks to filter from CzEng v1.6 to make v1.7.",
@@ -1123,8 +1123,8 @@ def _parse_czeng(*paths, **kwargs):
             continue
           id_, unused_score, cs, en = line.split("\t")
           if filter_path:
-            block_match = re.match(re_block, id_)
-            if block_match and block_match.groups()[0] in bad_blocks:
+            block_match = re.match(re_block, id_)  # pyrefly: ignore[unbound-name]
+            if block_match and block_match.groups()[0] in bad_blocks:  # pyrefly: ignore[unbound-name]
               continue
           sub_key = "{}/{}".format(filename, line_id)
           yield sub_key, {

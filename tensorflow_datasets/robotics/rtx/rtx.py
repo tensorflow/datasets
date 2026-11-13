@@ -1432,3 +1432,25 @@ class SpocRobot(dataset_importer_builder.DatasetImporterBuilder):
 
   def get_relative_dataset_location(self):
     return 'spoc/0.0.1'
+
+
+class RoboAiUR5e(dataset_importer_builder.DatasetImporterBuilder):
+  """DatasetBuilder for `robo_ai_u_r5e` dataset."""
+
+  def get_description(self):
+    return r"""Universal Robots UR5e demonstration dataset for VLA model training. Data collected from real-world robot workspace with preprogrammed robot routines."""
+
+  def get_citation(self):
+    return r"""@article{RoboAIUR5e2025,
+  title        = {RoboAI UR5e Training Dataset},
+  author       = {Joonas Rouhiainen},
+  institution  = {RoboAI Research Center, Satakunta University of Applied Sciences},
+  year         = {2025},
+  howpublished = {\url{https://sites.google.com/view/roboai-ur5e/home}},
+}"""
+
+  def get_homepage(self):
+    return r"""https://sites.google.com/view/roboai-ur5e/home"""
+
+  def get_relative_dataset_location(self):
+    return 'robo_ai_u_r5e/0.0.1'

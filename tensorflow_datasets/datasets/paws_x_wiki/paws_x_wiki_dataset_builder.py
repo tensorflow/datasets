@@ -75,32 +75,32 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     base_path = os.path.join(dl_path["x-final"], "x-final")
 
     # Name of file for training for 'en' is different from other languages
-    if self.builder_config.language == "en":
+    if self.builder_config.language == "en":  # pyrefly: ignore[missing-attribute]
       training_path = os.path.join(
           base_path, self.builder_config.language, "train.tsv"
       )
     else:
-      training_path = os.path.join(
+      training_path = os.path.join(  # pyrefly: ignore[no-matching-overload]
           base_path, self.builder_config.language, "translated_train.tsv"
       )
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": training_path},
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
-                "path": os.path.join(
+                "path": os.path.join(  # pyrefly: ignore[no-matching-overload]
                     base_path, self.builder_config.language, "test_2k.tsv"
                 )
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
-                "path": os.path.join(
+                "path": os.path.join(  # pyrefly: ignore[no-matching-overload]
                     base_path, self.builder_config.language, "dev_2k.tsv"
                 )
             },

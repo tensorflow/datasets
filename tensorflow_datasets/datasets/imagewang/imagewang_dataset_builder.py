@@ -25,7 +25,7 @@ _DESCRIPTION_SHORT = """\
 Imagewang contains Imagenette and Imagewoof combined.
 """
 
-_LABELS_FNAME = "image_classification/imagewang_labels.txt"
+_LABELS_FNAME = "datasets/imagewang/imagewang_labels.txt"
 _URL_PREFIX = "https://s3.amazonaws.com/fast-ai-imageclas"
 _SIZES = ["full-size", "320px", "160px"]
 
@@ -73,7 +73,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
-    size = self.builder_config.size
+    size = self.builder_config.size  # pyrefly: ignore[missing-attribute]
     if size in _SIZES:
       size_str = "" if size == "full-size" else "-" + size[:-2]
       url = "/".join([_URL_PREFIX, "imagewang%s.tgz" % size_str])
@@ -85,13 +85,13 @@ class Builder(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "datapath": train_path,
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "datapath": val_path,
             },

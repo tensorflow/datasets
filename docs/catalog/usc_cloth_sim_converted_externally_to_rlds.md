@@ -66,22 +66,27 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                    | Class        | Shape       | Dtype   | Description
-:------------------------- | :----------- | :---------- | :------ | :----------
-                           | FeaturesDict |             |         |
-episode_metadata           | FeaturesDict |             |         |
-episode_metadata/file_path | Text         |             | string  | Path to the original data file.
-steps                      | Dataset      |             |         |
-steps/action               | Tensor       | (4,)        | float32 | Robot action, consists of x,y,z goal and picker commandpicker<0.5 = open, picker>0.5 = close.
-steps/discount             | Scalar       |             | float32 | Discount if provided, default to 1.
-steps/is_first             | Tensor       |             | bool    |
-steps/is_last              | Tensor       |             | bool    |
-steps/is_terminal          | Tensor       |             | bool    |
-steps/language_embedding   | Tensor       | (512,)      | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction | Text         |             | string  | Language Instruction.
-steps/observation          | FeaturesDict |             |         |
-steps/observation/image    | Image        | (32, 32, 3) | uint8   | Image observation of cloth.
-steps/reward               | Scalar       |             | float32 | Reward as a normalized performance metric in [0, 1].0 = no change from initial state. 1 = perfect fold.-ve performance means the cloth is worse off than initial state.
+| Feature                    | Class        | Shape  | Dtype   | Description                                                  |
+| :------------------------- | :----------- | :----- | :------ | :----------------------------------------------------------- |
+|                            | FeaturesDict |        |         |                                                              |
+| episode_metadata           | FeaturesDict |        |         |                                                              |
+| episode_metadata/file_path | Text         |        | string  | Path to the original data file.                              |
+| steps                      | Dataset      |        |         |                                                              |
+| steps/action               | Tensor       | (4,)   | float32 | Robot action, consists of x,y,z goal and picker              |
+:                            :              :        :         : commandpicker<0.5 = open, picker>0.5 = close.                :
+| steps/discount             | Scalar       |        | float32 | Discount if provided, default to 1.                          |
+| steps/is_first             | Tensor       |        | bool    |                                                              |
+| steps/is_last              | Tensor       |        | bool    |                                                              |
+| steps/is_terminal          | Tensor       |        | bool    |                                                              |
+| steps/language_embedding   | Tensor       | (512,) | float32 | Kona language embedding. See                                 |
+:                            :              :        :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction | Text         |        | string  | Language Instruction.                                        |
+| steps/observation          | FeaturesDict |        |         |                                                              |
+| steps/observation/image    | Image        | (32,   | uint8   | Image observation of cloth.                                  |
+:                            :              : 32, 3) :         :                                                              :
+| steps/reward               | Scalar       |        | float32 | Reward as a normalized performance metric in [0, 1].0 = no   |
+:                            :              :        :         : change from initial state. 1 = perfect fold.-ve performance  :
+:                            :              :        :         : means the cloth is worse off than initial state.             :
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

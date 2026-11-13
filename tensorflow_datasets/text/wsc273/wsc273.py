@@ -75,7 +75,7 @@ class Wsc273(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
     file_path = dl_manager.download(_DOWNLOAD_URL)
-    return {tfds.Split.TEST: self._generate_examples(file_path)}
+    return {tfds.Split.TEST: self._generate_examples(file_path)}  # pyrefly: ignore[missing-attribute]
 
   def _generate_examples(self, file_path):
     """Yields Examples.

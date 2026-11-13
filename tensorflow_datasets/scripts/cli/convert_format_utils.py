@@ -236,13 +236,13 @@ def get_all_shard_instructions(
 def _get_root_data_dir(
     in_dir: epath.Path, info: dataset_info_pb2.DatasetInfo
 ) -> epath.Path:
-  in_dir = os.fspath(in_dir)
+  in_dir = os.fspath(in_dir)  # pyrefly: ignore[bad-assignment]
   if info.config_name:
     parts = [info.name, info.config_name, info.version]
   else:
     parts = [info.name, info.version]
   relative_data_dir = os.path.join(*parts)
-  return epath.Path(re.sub(rf'{relative_data_dir}/?$', '', in_dir))
+  return epath.Path(re.sub(rf'{relative_data_dir}/?$', '', in_dir))  # pyrefly: ignore[no-matching-overload]
 
 
 class ConvertMetadataFn(beam.DoFn):
@@ -838,7 +838,7 @@ def convert_dataset(
     if isinstance(dataset_version_dir, str):
       dataset_version_dir = [dataset_version_dir]
 
-    if len(dataset_version_dir) > 1 and out_dir is not None:
+    if len(dataset_version_dir) > 1 and out_dir is not None:  # pyrefly: ignore[bad-argument-type]
       raise ValueError(
           'If multiple dataset version dirs are specified, `out_dir` must be'
           ' `None`, since each dataset will be converted in the same folder as'
@@ -846,7 +846,7 @@ def convert_dataset(
       )
 
     from_to_dirs = {}
-    for path in dataset_version_dir:
+    for path in dataset_version_dir:  # pyrefly: ignore[not-iterable]
       if out_dir is None:
         from_to_dirs[epath.Path(path)] = epath.Path(path)
       else:

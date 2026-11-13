@@ -79,35 +79,41 @@ FeaturesDict({
 
 *   **Feature documentation**:
 
-Feature                          | Class        | Shape         | Dtype   | Description
-:------------------------------- | :----------- | :------------ | :------ | :----------
-                                 | FeaturesDict |               |         |
-episode_metadata                 | FeaturesDict |               |         |
-episode_metadata/file_path       | Text         |               | string  | Path to the original data file.
-steps                            | Dataset      |               |         |
-steps/action                     | Tensor       | (7,)          | float32 | Robot action, consists of [7x joint velocities, 2x gripper velocities, 1x terminate episode].
-steps/action_delta               | Tensor       | (7,)          | float32 | Robot delta action, consists of [7x joint velocities, 2x gripper velocities, 1x terminate episode].
-steps/action_inst                | Text         |               | string  | Action to be performed.
-steps/discount                   | Scalar       |               | float32 | Discount if provided, default to 1.
-steps/goal_object                | Text         |               | string  | Object to be manipulated with.
-steps/ground_truth_states        | FeaturesDict |               |         |
-steps/ground_truth_states/EE     | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/bottle | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/bread  | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/coke   | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/cube   | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/milk   | Tensor       | (6,)          | float32 | xyzrpy
-steps/ground_truth_states/pepsi  | Tensor       | (6,)          | float32 | xyzrpy
-steps/is_first                   | Tensor       |               | bool    |
-steps/is_last                    | Tensor       |               | bool    |
-steps/is_terminal                | Tensor       |               | bool    |
-steps/language_embedding         | Tensor       | (512,)        | float32 | Kona language embedding. See https://tfhub.dev/google/universal-sentence-encoder-large/5
-steps/language_instruction       | Text         |               | string  | Language Instruction.
-steps/observation                | FeaturesDict |               |         |
-steps/observation/image          | Image        | (224, 224, 3) | uint8   | Main camera RGB observation.
-steps/observation/state          | Tensor       | (7,)          | float32 | Robot state, consists of [6x robot joint angles, 1x gripper position].
-steps/observation/state_vel      | Tensor       | (7,)          | float32 | Robot joint velocity, consists of [6x robot joint angles, 1x gripper position].
-steps/reward                     | Scalar       |               | float32 | Reward if provided, 1 on final step for demos.
+| Feature                          | Class        | Shape   | Dtype   | Description                                                  |
+| :------------------------------- | :----------- | :------ | :------ | :----------------------------------------------------------- |
+|                                  | FeaturesDict |         |         |                                                              |
+| episode_metadata                 | FeaturesDict |         |         |                                                              |
+| episode_metadata/file_path       | Text         |         | string  | Path to the original data file.                              |
+| steps                            | Dataset      |         |         |                                                              |
+| steps/action                     | Tensor       | (7,)    | float32 | Robot action, consists of [7x joint velocities, 2x gripper   |
+:                                  :              :         :         : velocities, 1x terminate episode].                           :
+| steps/action_delta               | Tensor       | (7,)    | float32 | Robot delta action, consists of [7x joint velocities, 2x     |
+:                                  :              :         :         : gripper velocities, 1x terminate episode].                   :
+| steps/action_inst                | Text         |         | string  | Action to be performed.                                      |
+| steps/discount                   | Scalar       |         | float32 | Discount if provided, default to 1.                          |
+| steps/goal_object                | Text         |         | string  | Object to be manipulated with.                               |
+| steps/ground_truth_states        | FeaturesDict |         |         |                                                              |
+| steps/ground_truth_states/EE     | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/bottle | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/bread  | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/coke   | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/cube   | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/milk   | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/ground_truth_states/pepsi  | Tensor       | (6,)    | float32 | xyzrpy                                                       |
+| steps/is_first                   | Tensor       |         | bool    |                                                              |
+| steps/is_last                    | Tensor       |         | bool    |                                                              |
+| steps/is_terminal                | Tensor       |         | bool    |                                                              |
+| steps/language_embedding         | Tensor       | (512,)  | float32 | Kona language embedding. See                                 |
+:                                  :              :         :         : https\://tfhub.dev/google/universal-sentence-encoder-large/5 :
+| steps/language_instruction       | Text         |         | string  | Language Instruction.                                        |
+| steps/observation                | FeaturesDict |         |         |                                                              |
+| steps/observation/image          | Image        | (224,   | uint8   | Main camera RGB observation.                                 |
+:                                  :              : 224, 3) :         :                                                              :
+| steps/observation/state          | Tensor       | (7,)    | float32 | Robot state, consists of [6x robot joint angles, 1x gripper  |
+:                                  :              :         :         : position].                                                   :
+| steps/observation/state_vel      | Tensor       | (7,)    | float32 | Robot joint velocity, consists of [6x robot joint angles, 1x |
+:                                  :              :         :         : gripper position].                                           :
+| steps/reward                     | Scalar       |         | float32 | Reward if provided, 1 on final step for demos.               |
 
 *   **Supervised keys** (See
     [`as_supervised` doc](https://www.tensorflow.org/datasets/api_docs/python/tfds/load#args)):

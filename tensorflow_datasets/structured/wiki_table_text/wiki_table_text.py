@@ -79,11 +79,11 @@ class WikiTableText(tfds.core.GeneratorBasedBuilder):
         {'train_path': _TRAIN_URL, 'dev_path': _DEV_URL, 'test_path': _TEST_URL}
     )
     return {
-        tfds.Split.TRAIN: self._generate_examples(extracted_path['train_path']),
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.TRAIN: self._generate_examples(extracted_path['train_path']),  # pyrefly: ignore[missing-attribute]
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             extracted_path['dev_path']
         ),
-        tfds.Split.TEST: self._generate_examples(extracted_path['test_path']),
+        tfds.Split.TEST: self._generate_examples(extracted_path['test_path']),  # pyrefly: ignore[missing-attribute]
     }
 
   def _generate_examples(self, path):

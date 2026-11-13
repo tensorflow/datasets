@@ -21,7 +21,7 @@ import numpy as np
 from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 import tensorflow_datasets.public_api as tfds
 
-_LABELS_FNAME = "image_classification/caltech101_labels.txt"
+_LABELS_FNAME = "datasets/caltech101/caltech101_labels.txt"
 _URL = "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip?download=1"
 _TRAIN_POINTS_PER_CLASS = 30
 

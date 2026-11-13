@@ -99,10 +99,10 @@ class Gpt3(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "directory": directory,
-                "task": self.builder_config.name,
+                "task": self.builder_config.name,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]

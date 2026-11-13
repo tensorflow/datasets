@@ -202,17 +202,17 @@ class DiabeticRetinopathyDetection(tfds.core.GeneratorBasedBuilder):
 
   def _process_image(self, filepath):
     with tf.io.gfile.GFile(filepath, mode="rb") as image_fobj:
-      if self.builder_config.name.startswith("btgraham"):
+      if self.builder_config.name.startswith("btgraham"):  # pyrefly: ignore[missing-attribute]
         return _btgraham_processing(
             image_fobj=image_fobj,
             filepath=filepath,
-            target_pixels=self.builder_config.target_pixels,
+            target_pixels=self.builder_config.target_pixels,  # pyrefly: ignore[missing-attribute]
             crop_to_radius=True,
         )
       else:
         return _resize_image_if_necessary(
             image_fobj=image_fobj,
-            target_pixels=self.builder_config.target_pixels,
+            target_pixels=self.builder_config.target_pixels,  # pyrefly: ignore[missing-attribute]
         )
 
 

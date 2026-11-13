@@ -78,7 +78,6 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
       "1.0.0": "Initial release.",
       "1.1.0": "Add query and document identifiers.",
   }
-  # pytype: disable=wrong-keyword-args
   # pylint: disable=unexpected-keyword-arg
   BUILDER_CONFIGS = [
       YahooLTRCConfig(name="set1", prefix="set1", num_features=699),
@@ -86,7 +85,6 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
   ]
 
   # pylint: enable=unexpected-keyword-arg
-  # pytype: enable=wrong-keyword-args
 
   MANUAL_DOWNLOAD_INSTRUCTIONS = """
   Request access for the C14 Yahoo Learning To Rank Challenge dataset on
@@ -99,7 +97,7 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
     encoding = tfds.features.Encoding.ZLIB
     features = {
         "float_features": tfds.features.Tensor(
-            shape=(None, self.builder_config.num_features),
+            shape=(None, self.builder_config.num_features),  # pyrefly: ignore[missing-attribute]
             dtype=np.float64,
             encoding=encoding,
         ),
@@ -126,10 +124,10 @@ class YahooLTRC(tfds.core.GeneratorBasedBuilder):
     archive_path = dl_manager.manual_dir / "ltrc_yahoo.tar.bz2"
     path = dl_manager.extract(archive_path)
 
-    prefix = self.builder_config.prefix
+    prefix = self.builder_config.prefix  # pyrefly: ignore[missing-attribute]
     feature_names = {
         n: f"feature_{n}"
-        for n in range(1, self.builder_config.num_features + 1)
+        for n in range(1, self.builder_config.num_features + 1)  # pyrefly: ignore[missing-attribute]
     }
 
     splits = {

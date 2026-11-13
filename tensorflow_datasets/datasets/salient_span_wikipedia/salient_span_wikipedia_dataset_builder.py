@@ -66,7 +66,7 @@ class Builder(tfds.core.BeamBasedBuilder):
             "type": np.str_,
         }),
     }
-    if not self.builder_config.split_sentences:
+    if not self.builder_config.split_sentences:  # pyrefly: ignore[missing-attribute]
       feature_dict["sentences"] = tfds.features.Sequence({
           "start": np.int32,
           "limit": np.int32,
@@ -79,8 +79,8 @@ class Builder(tfds.core.BeamBasedBuilder):
   def _split_generators(self, dl_manager):
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
-            gen_kwargs={"split_sentences": self.builder_config.split_sentences},
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
+            gen_kwargs={"split_sentences": self.builder_config.split_sentences},  # pyrefly: ignore[missing-attribute]
         ),
     ]
 

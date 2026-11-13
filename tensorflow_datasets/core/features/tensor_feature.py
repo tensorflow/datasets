@@ -189,16 +189,16 @@ class Tensor(feature_lib.FeatureConnector):
     if dtype_utils.is_string(dtype):
       default_value = b''
     elif dtype_utils.is_integer(dtype):
-      default_value = np.iinfo(dtype).min
+      default_value = np.iinfo(dtype).min  # pyrefly: ignore[no-matching-overload]
     elif dtype_utils.is_floating(dtype):
-      default_value = np.finfo(dtype).min
+      default_value = np.finfo(dtype).min  # pyrefly: ignore[no-matching-overload]
     elif dtype_utils.is_bool(dtype):
       default_value = False
     else:
       raise ValueError(f'Unsupported dtype: {dtype}')
     if not self._shape:
       return default_value
-    return np.full(self._shape, default_value, dtype=dtype)
+    return np.full(self._shape, default_value, dtype=dtype)  # pyrefly: ignore[no-matching-overload]
 
   def encode_example(self, example_data):
     """See base class for details."""
@@ -346,18 +346,18 @@ class Tensor(feature_lib.FeatureConnector):
       return self.decode_example_np(example_data)
 
   @classmethod
-  def from_json_content(
+  def from_json_content(  # pyrefly: ignore[bad-override]
       cls, value: Union[Json, feature_pb2.TensorFeature]
   ) -> 'Tensor':
     if isinstance(value, dict):
       return cls(
-          shape=tuple(value['shape']),
-          dtype=feature_lib.dtype_from_str(value['dtype']),
+          shape=tuple(value['shape']),  # pyrefly: ignore[bad-argument-type]
+          dtype=feature_lib.dtype_from_str(value['dtype']),  # pyrefly: ignore[bad-argument-type]
           # Use .get for backward-compatibility
-          encoding=value.get('encoding', Encoding.NONE),
-          minimum=value.get('minimum', None),
-          maximum=value.get('maximum', None),
-          optional=value.get('optional', False),
+          encoding=value.get('encoding', Encoding.NONE),  # pyrefly: ignore[bad-argument-type]
+          minimum=value.get('minimum', None),  # pyrefly: ignore[bad-argument-type]
+          maximum=value.get('maximum', None),  # pyrefly: ignore[bad-argument-type]
+          optional=value.get('optional', False),  # pyrefly: ignore[bad-argument-type]
       )
     return cls(
         shape=feature_lib.from_shape_proto(value.shape),
@@ -373,8 +373,8 @@ class Tensor(feature_lib.FeatureConnector):
         shape=feature_lib.to_shape_proto(self._shape),
         dtype=feature_lib.dtype_to_str(self._dtype),
         encoding=self._encoding.value,
-        minimum=self._minimum,
-        maximum=self._maximum,
+        minimum=self._minimum,  # pyrefly: ignore[bad-argument-type]
+        maximum=self._maximum,  # pyrefly: ignore[bad-argument-type]
         optional=self._optional,
     )
 
@@ -403,7 +403,7 @@ def _execute_function_on_array_or_scalar(
     return function(data, *args, **kwargs)
   if isinstance(data, np.ndarray):
     partial_function = functools.partial(function, *args, **kwargs)
-    return np.array(list(map(partial_function, data)))
+    return np.array(list(map(partial_function, data)))  # pyrefly: ignore[bad-return]
   raise ValueError(
       'example should have type `bytes` or `np.ndarray(dtype=bytes)`, but'
       f' has wrong type {type(data)}'
@@ -427,6 +427,6 @@ def get_inner_feature_repr(feature):
   # * For the base `Tensor` class (and not subclass).
   # * When shape is scalar (explicit check to avoid trigger when `shape=None`).
   if type(feature) == Tensor and feature.shape == ():  # pylint: disable=unidiomatic-typecheck,g-explicit-bool-comparison
-    return feature_lib.dtype_to_str(feature.np_dtype)
+    return feature_lib.dtype_to_str(feature.np_dtype)  # pyrefly: ignore[bad-argument-type]
   else:
     return repr(feature)

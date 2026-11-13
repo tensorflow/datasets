@@ -2202,6 +2202,7 @@ rlu_rwrl/walker_walk_combined_challenge_none_1_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_20_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_40_percent/1.0.1
 rlu_rwrl/walker_walk_combined_challenge_none_5_percent/1.0.1
+robo_ai_u_r5e/0.1.0
 robo_set/0.1.0
 robomimic_mg/can_mg_image/1.0.0
 robomimic_mg/can_mg_low_dim/1.0.0

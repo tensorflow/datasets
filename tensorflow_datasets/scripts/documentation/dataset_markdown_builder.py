@@ -769,10 +769,10 @@ def get_markdown_string(
       SupervisedKeySection(),
   ]
   if visu_doc_util:
-    all_sections.append(DatasetVisualizationSection(visu_doc_util))
+    all_sections.append(DatasetVisualizationSection(visu_doc_util))  # pyrefly: ignore[bad-argument-type]
   if df_doc_util:
-    all_sections.append(DatasetDataframeSection(df_doc_util))
-  all_sections.append(DatasetCitationSection())
+    all_sections.append(DatasetDataframeSection(df_doc_util))  # pyrefly: ignore[bad-argument-type]
+  all_sections.append(DatasetCitationSection())  # pyrefly: ignore[bad-argument-type]
 
   doc_str = [
       _display_schema_org(builder, visu_doc_util),
@@ -784,7 +784,7 @@ def get_markdown_string(
           namespace=namespace,
           nightly_doc_util=nightly_doc_util,
           config_builders=config_builders,
-          all_sections=all_sections,
+          all_sections=all_sections,  # pyrefly: ignore[bad-argument-type]
       ),
   ]
   return '\n\n'.join([tfds.core.utils.dedent(s) for s in doc_str if s])

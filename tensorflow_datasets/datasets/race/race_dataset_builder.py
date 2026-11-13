@@ -64,7 +64,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
 
     path = path / "RACE"
-    task = self.builder_config.name
+    task = self.builder_config.name  # pyrefly: ignore[missing-attribute]
 
     return {
         "train": self._generate_examples(path / "train" / task),

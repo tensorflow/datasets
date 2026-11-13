@@ -282,12 +282,12 @@ def glass_blur(x, severity=1):
 
   # locally shuffle pixels
   for _ in range(c[2]):
-    for h in range(x.shape[0] - c[1], c[1], -1):
-      for w in range(x.shape[1] - c[1], c[1], -1):
+    for h in range(x.shape[0] - c[1], c[1], -1):  # pyrefly: ignore[bad-index]
+      for w in range(x.shape[1] - c[1], c[1], -1):  # pyrefly: ignore[bad-index]
         dx, dy = np.random.randint(-c[1], c[1], size=(2,))
         h_prime, w_prime = h + dy, w + dx
         # swap
-        x[h, w], x[h_prime, w_prime] = x[h_prime, w_prime], x[h, w]
+        x[h, w], x[h_prime, w_prime] = x[h_prime, w_prime], x[h, w]  # pyrefly: ignore[bad-index, unsupported-operation]
   x_clip = np.clip(
       tfds.core.lazy_imports.skimage.filters.gaussian(
           x / 255.0, sigma=c[0], channel_axis=-1
@@ -418,11 +418,11 @@ def elastic_transform(x, severity=1):
   shape_size = shape[:2]
 
   # random affine
-  center_square = np.float32(shape_size) // 2
+  center_square = np.float32(shape_size) // 2  # pyrefly: ignore[bad-argument-type]
   square_size = min(shape_size) // 3
-  pts1 = np.float32([
+  pts1 = np.float32([  # pyrefly: ignore[bad-argument-type]
       center_square + square_size,
-      [center_square[0] + square_size, center_square[1] - square_size],
+      [center_square[0] + square_size, center_square[1] - square_size],  # pyrefly: ignore[bad-index]
       center_square - square_size,
   ])
   pts2 = pts1 + np.random.uniform(-c[2], c[2], size=pts1.shape).astype(

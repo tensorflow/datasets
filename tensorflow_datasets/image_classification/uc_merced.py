@@ -95,7 +95,7 @@ class UcMerced(tfds.core.GeneratorBasedBuilder):
     path = dl_manager.download_and_extract(_ZIP_URL)
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={"path": os.path.join(path, _ZIP_SUBDIR)},
         ),
     ]

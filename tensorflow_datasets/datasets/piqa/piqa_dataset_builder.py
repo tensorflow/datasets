@@ -58,7 +58,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     # Specify the splits
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_path": os.path.join(
                     extracted_path, "physicaliqa-train-dev/train.jsonl"
@@ -69,7 +69,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_path": os.path.join(
                     extracted_path, "physicaliqa-train-dev/dev.jsonl"

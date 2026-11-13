@@ -174,11 +174,9 @@ def builder_configs():
   configs = []
   for game in _GAMES:
     for run in range(1, 6):
-      # pytype: disable=wrong-keyword-args
       configs.append(
           BuilderConfig(name=f'{game}_run_{run}', game=game, run=run)
       )
-      # pytype: enable=wrong-keyword-args
   return configs
 
 

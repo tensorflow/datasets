@@ -132,6 +132,7 @@ def builder(
     name: str,
     *,
     try_gcs: bool = False,
+    fallback_to_builder_cls: bool = True,
     **builder_kwargs: Any,
 ) -> dataset_builder.DatasetBuilder:
   """Fetches a `tfds.core.DatasetBuilder` by string name.
@@ -156,6 +157,11 @@ def builder(
       fully bypass GCS, please use `try_gcs=False` and
       `download_and_prepare_kwargs={'download_config':
       tfds.core.download.DownloadConfig(try_download_gcs=False)})`.
+    fallback_to_builder_cls: `bool`, if True and loading pre-generated dataset
+      files fails, fall back to instantiating the registered `DatasetBuilder`
+      class (`builder_cls`). Defaults to `False` internally outside of unit
+      tests (to avoid silent fallback when file-based loading fails), and `True`
+      in unit tests and in OSS.
     **builder_kwargs: `dict` of keyword arguments passed to the
       `tfds.core.DatasetBuilder`.
 
@@ -168,15 +174,19 @@ def builder(
   # 'kaggle:my_ds/config:1.0.0' -> (
   #     DatasetName('kaggle:my_ds'), {'version': '1.0.0', 'config': 'conf0'}
   # )
-  name, builder_kwargs = naming.parse_builder_name_kwargs(
+  name, builder_kwargs = naming.parse_builder_name_kwargs(  # pyrefly: ignore[bad-assignment]
       name, **builder_kwargs
   )
+  fallback_to_builder_cls = builder_kwargs.pop(
+      'fallback_to_builder_cls', fallback_to_builder_cls
+  )
+  fallback_to_builder_cls = bool(fallback_to_builder_cls)
 
   def get_dataset_repr() -> str:
     return f'dataset "{name}", builder_kwargs "{builder_kwargs}"'
 
   # `try_gcs` currently only supports non-community datasets
-  if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):
+  if try_gcs and not name.namespace and gcs_utils.is_dataset_on_gcs(str(name)):  # pyrefly: ignore[missing-attribute]
     data_dir = builder_kwargs.get('data_dir')
     if data_dir:
       raise ValueError(
@@ -184,17 +194,18 @@ def builder(
           f' explicitly set. Wrong arguments for {get_dataset_repr()}'
       )
     builder_kwargs['data_dir'] = gcs_utils.gcs_path('datasets')
-  if name.namespace:
+  if name.namespace:  # pyrefly: ignore[missing-attribute]
     if name.namespace == 'huggingface':
       return huggingface_dataset_builder.builder(
           name=name.name, **builder_kwargs)
     if (
         visibility.DatasetType.COMMUNITY_PUBLIC.is_available()
-        and community.community_register().has_namespace(name.namespace)
+        and community.community_register().has_namespace(name.namespace)  # pyrefly: ignore[bad-argument-type]
     ):
-      return community.community_register().builder(name=name, **builder_kwargs)
+      return community.community_register().builder(name=name, **builder_kwargs)  # pyrefly: ignore[bad-argument-type]
 
   # First check whether we can find the corresponding dataset builder code
+  not_found_error: registered.DatasetNotFoundError | None = None
   try:
     cls = builder_cls(str(name))
   except registered.DatasetNotFoundError as e:
@@ -206,20 +217,39 @@ def builder(
     try:
       return read_only_builder.builder_from_files(str(name), **builder_kwargs)
     except registered.DatasetNotFoundError as e:
+      if not fallback_to_builder_cls:
+        logging.error(
+            'Failed to load %s from files: %s', get_dataset_repr(), str(e)
+        )
+        if not cls and not_found_error is not None:
+          raise not_found_error from e
+        if cls:
+          error_utils.add_context(
+              'Note: Falling back to instantiating the Python DatasetBuilder '
+              'class (`builder_cls`) when loading from files fails is disabled '
+              'by default. To re-enable the legacy fallback, pass '
+              '`fallback_to_builder_cls=True` to `tfds.builder()` (or via '
+              '`builder_kwargs` in `tfds.load()` / `tfds.data_source()`).'
+          )
+        raise
       logging.info(
           'Failed to load %s from files: %s', get_dataset_repr(), str(e)
       )
 
-  # If code exists and loading from files was skipped (e.g. files not found),
+  # If code exists and loading from files was skipped (e.g. unversioned load),
   # load from the source code.
   if cls:
     with py_utils.try_reraise(
         prefix=f'Failed to construct {get_dataset_repr()}: '
     ):
-      return cls(**builder_kwargs)  # pytype: disable=not-instantiable
+      return cls(**builder_kwargs)
 
   # If neither the code nor the files are found, raise DatasetNotFoundError
-  raise not_found_error
+  if not_found_error is not None:
+    raise not_found_error
+  raise registered.DatasetNotFoundError(
+      f'Could not find dataset {get_dataset_repr()}'
+  )
 
 
 def _try_load_from_files_first(
@@ -343,7 +373,7 @@ class DatasetCollectionLoader:
     # If `split` is defined both as argument and in `loader_kwargs`, always keep
     # the one defined as argument.
     if split:
-      loader_kwargs['split'] = dataset_reference.get_split(split)
+      loader_kwargs['split'] = dataset_reference.get_split(split)  # pyrefly: ignore[bad-argument-type]
     # Make sure we always return a dict of dicts.
     if 'split' in loader_kwargs and isinstance(loader_kwargs['split'], str):
       loader_kwargs['split'] = [loader_kwargs['split']]
@@ -380,7 +410,7 @@ class DatasetCollectionLoader:
       raise RuntimeError(
           f'Unsupported return type {type(load_output)} of `load` function.'
       )
-    return loaded_datasets  # pytype: disable=bad-return-type
+    return loaded_datasets
 
   def load_datasets(
       self,
@@ -911,7 +941,7 @@ def single_full_names(
       _iter_single_full_names(
           builder_name,
           builder_cls(builder_name),
-          current_version_only=current_version_only,  # pytype: disable=wrong-arg-types
+          current_version_only=current_version_only,
       )
   )
 

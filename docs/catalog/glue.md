@@ -1136,10 +1136,10 @@ the correct citation for each contained dataset.
 
 ## glue/wnli
 
-*   **Config description**: The Winograd Schema Challenge (Levesque et al.,
-    2011) is a reading comprehension task in which a system must read a sentence
-    with a pronoun and select the referent of that pronoun from a list of
-    choices. The examples are manually constructed to foil simple statistical
+*   **Config description**: The Winograd Schema Challenge (Levesque et
+    al., 2011) is a reading comprehension task in which a system must read a
+    sentence with a pronoun and select the referent of that pronoun from a list
+    of choices. The examples are manually constructed to foil simple statistical
     methods: Each one is contingent on contextual information provided by a
     single word or phrase in the sentence. To convert the problem into sentence
     pair classification, we construct sentence pairs by replacing the ambiguous

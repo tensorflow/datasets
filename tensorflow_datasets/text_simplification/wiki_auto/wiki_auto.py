@@ -120,7 +120,7 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
   def _info(self) -> tfds.core.DatasetInfo:
     """Returns the dataset metadata."""
 
-    if self.builder_config.name == 'manual':
+    if self.builder_config.name == 'manual':  # pyrefly: ignore[missing-attribute]
       features = tfds.features.FeaturesDict({
           'alignment_label': tfds.features.ClassLabel(
               names=['notAligned', 'aligned', 'partialAligned']
@@ -182,9 +182,9 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager):
     """Returns SplitGenerators."""
 
-    urls_to_download = _URLs[self.builder_config.name]
+    urls_to_download = _URLs[self.builder_config.name]  # pyrefly: ignore[missing-attribute]
     data_dir = dl_manager.download_and_extract(urls_to_download)
-    if self.builder_config.name in ['manual', 'auto']:
+    if self.builder_config.name in ['manual', 'auto']:  # pyrefly: ignore[missing-attribute]
       return {
           spl: self._generate_examples(filepaths=data_dir, split=spl)
           for spl in data_dir
@@ -195,7 +195,7 @@ class WikiAuto(tfds.core.GeneratorBasedBuilder):
   def _generate_examples(self, filepaths, split):
     """Yields examples."""
 
-    if self.builder_config.name == 'manual':
+    if self.builder_config.name == 'manual':  # pyrefly: ignore[missing-attribute]
       keys = [
           'alignment_label',
           'simple_sentence_id',

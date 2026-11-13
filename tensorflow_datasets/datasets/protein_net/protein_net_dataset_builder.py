@@ -34,7 +34,7 @@ _LINES_PER_ENTRY = 33
 
 def _parse_array(lines: Sequence[str]) -> np.ndarray:
   """Parse lines of tab-separated numbers into an array."""
-  lines = [x.split('\t') for x in lines]
+  lines = [x.split('\t') for x in lines]  # pyrefly: ignore[bad-assignment]
   return np.array(lines, dtype=np.float32)
 
 
@@ -165,16 +165,16 @@ class Builder(tfds.core.GeneratorBasedBuilder):
       self, dl_manager: tfds.download.DownloadManager
   ) -> Dict[Union[str, tfds.Split], _ExampleIterator]:
     """Returns SplitGenerators."""
-    name = self.builder_config.name  # Configurable dataset (config) name.
+    name = self.builder_config.name  # Configurable dataset (config) name.  # pyrefly: ignore[missing-attribute]
     path = dl_manager.download_and_extract(
         urllib.parse.urljoin(self.URL, self.FILES[name])
     )
 
     splits = {
-        tfds.Split.VALIDATION: self._generate_examples(
+        tfds.Split.VALIDATION: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             os.path.join(path, name, 'validation')
         ),
-        tfds.Split.TEST: self._generate_examples(
+        tfds.Split.TEST: self._generate_examples(  # pyrefly: ignore[missing-attribute]
             os.path.join(path, name, 'testing')
         ),
     }

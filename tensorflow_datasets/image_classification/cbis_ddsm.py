@@ -174,7 +174,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
         'original-mass': self._get_features_original_mass,
         'patches': self._get_features_patches,
     }
-    if self.builder_config.name not in features_fn_map:
+    if self.builder_config.name not in features_fn_map:  # pyrefly: ignore[missing-attribute]
       raise ValueError(
           'Builder config named {} not supported!'.format(
               self.builder_config.name
@@ -276,7 +276,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
     })
 
   def _split_generators(self, dl_manager):
-    if self.builder_config.name in ['original-calc', 'original-mass']:
+    if self.builder_config.name in ['original-calc', 'original-mass']:  # pyrefly: ignore[missing-attribute]
       return self._split_generators_original(dl_manager)
     elif self.builder_config.name == 'patches':
       return self._split_generators_patches(dl_manager)
@@ -288,7 +288,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
       )
 
   def _split_generators_original(self, dl_manager):
-    if self.builder_config.name == 'original-calc':
+    if self.builder_config.name == 'original-calc':  # pyrefly: ignore[missing-attribute]
       test_url = _CALC_TEST_CSV_URL
       train_url = _CALC_TRAIN_CSV_URL
     elif self.builder_config.name == 'original-mass':
@@ -307,7 +307,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,
@@ -315,7 +315,7 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'generate_fn': self._generate_examples_original,
                 'patients_data': patients_data,
@@ -360,30 +360,30 @@ class CuratedBreastImagingDDSM(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'generate_fn': self._generate_examples_patches,
                 'patients_data': patients_data_train,
-                'image_size': self.builder_config.image_size,
-                'patch_size': self.builder_config.patch_size,
+                'image_size': self.builder_config.image_size,  # pyrefly: ignore[missing-attribute]
+                'patch_size': self.builder_config.patch_size,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'generate_fn': self._generate_examples_patches,
                 'patients_data': patients_data_test,
-                'image_size': self.builder_config.image_size,
-                'patch_size': self.builder_config.patch_size,
+                'image_size': self.builder_config.image_size,  # pyrefly: ignore[missing-attribute]
+                'patch_size': self.builder_config.patch_size,  # pyrefly: ignore[missing-attribute]
             },
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 'generate_fn': self._generate_examples_patches,
                 'patients_data': patients_data_valid,
-                'image_size': self.builder_config.image_size,
-                'patch_size': self.builder_config.patch_size,
+                'image_size': self.builder_config.image_size,  # pyrefly: ignore[missing-attribute]
+                'patch_size': self.builder_config.patch_size,  # pyrefly: ignore[missing-attribute]
             },
         ),
     ]

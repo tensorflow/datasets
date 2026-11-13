@@ -69,12 +69,12 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     files = dl_manager.download_and_extract(data_dict)
     return {
         "train": self._generate_examples(
-            files["train_src"], files["train_tgt"]
+            files["train_src"], files["train_tgt"]  # pyrefly: ignore[bad-index]
         ),
         "validation": self._generate_examples(
-            files["val_src"], files["val_tgt"]
+            files["val_src"], files["val_tgt"]  # pyrefly: ignore[bad-index]
         ),
-        "test": self._generate_examples(files["test_src"], files["test_tgt"]),
+        "test": self._generate_examples(files["test_src"], files["test_tgt"]),  # pyrefly: ignore[bad-index]
     }
 
   def _generate_examples(self, src_file, tgt_file):

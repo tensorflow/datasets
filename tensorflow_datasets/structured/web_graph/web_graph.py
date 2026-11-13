@@ -82,16 +82,16 @@ _CITATION = """
 
 
 def _get_int_feature(example: tf.train.Example, feature_name: str) -> list[int]:
-  return example.features.feature[feature_name].int64_list.value
+  return example.features.feature[feature_name].int64_list.value  # pyrefly: ignore[bad-return]
 
 
 def _process_example(example: bytes, is_test=False):
   """Process a single example."""
-  example = tf.train.Example.FromString(example)
-  row_tag = _get_int_feature(example, 'row_tag')[0]
-  col_tag = np.array(_get_int_feature(example, 'col_tag'), dtype=np.int64)
+  example = tf.train.Example.FromString(example)  # pyrefly: ignore[bad-assignment]
+  row_tag = _get_int_feature(example, 'row_tag')[0]  # pyrefly: ignore[bad-argument-type]
+  col_tag = np.array(_get_int_feature(example, 'col_tag'), dtype=np.int64)  # pyrefly: ignore[bad-argument-type]
   gt_tag = np.array(
-      _get_int_feature(example, 'gt_tag') if is_test else [], dtype=np.int64
+      _get_int_feature(example, 'gt_tag') if is_test else [], dtype=np.int64  # pyrefly: ignore[bad-argument-type]
   )
   return_dict = {'row_tag': row_tag, 'col_tag': col_tag, 'gt_tag': gt_tag}
   return row_tag, return_dict
@@ -212,9 +212,9 @@ class WebGraph(tfds.core.GeneratorBasedBuilder):
     del dl_manager
 
     subfolder = os.path.join(
-        self.WEB_GRAPH_HOMEPAGE, self.builder_config.subfolder
+        self.WEB_GRAPH_HOMEPAGE, self.builder_config.subfolder  # pyrefly: ignore[missing-attribute]
     )
-    shards = self.SHARDS or self.builder_config.num_shards
+    shards = self.SHARDS or self.builder_config.num_shards  # pyrefly: ignore[missing-attribute]
 
     train_files = [
         filename(subfolder, f'train.tfr-{i:05}-of-{int(shards):05}')

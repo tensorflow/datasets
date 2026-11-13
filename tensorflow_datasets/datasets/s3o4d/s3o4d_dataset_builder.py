@@ -68,8 +68,8 @@ class Builder(tfds.core.GeneratorBasedBuilder):
                 '_'.join([a, b]),
                 self._generate_examples(
                     dl_manager,
-                    paths['_'.join([a, b, 'img'])],
-                    paths['_'.join([a, b, 'latent'])],
+                    paths['_'.join([a, b, 'img'])],  # pyrefly: ignore[bad-index]
+                    paths['_'.join([a, b, 'latent'])],  # pyrefly: ignore[bad-index]
                     a,
                 ),
             )

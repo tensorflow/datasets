@@ -51,7 +51,7 @@ class Builder(tfds.core.GeneratorBasedBuilder):
     )
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "image_dir_path": os.path.join(extracted_path, "AFLW2000"),
             },

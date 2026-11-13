@@ -162,7 +162,7 @@ class DatasetIdentity:
         module_name=info_proto.module_name,
         config_name=info_proto.config_name,
         config_description=info_proto.config_description,
-        config_tags=info_proto.config_tags or [],
+        config_tags=info_proto.config_tags or [],  # pyrefly: ignore[bad-argument-type]
         release_notes={k: v for k, v in info_proto.release_notes.items()},
     )
 
@@ -420,7 +420,7 @@ class DatasetInfo:
   def homepage(self) -> str:
     urls = self.as_proto.location.urls
     tfds_homepage = f"https://www.tensorflow.org/datasets/catalog/{self.name}"
-    return urls and urls[0] or tfds_homepage  # pytype: disable=bad-return-type
+    return urls and urls[0] or tfds_homepage  # pyrefly: ignore[bad-return]
 
   @property
   def citation(self) -> str:
@@ -726,9 +726,9 @@ class DatasetInfo:
     )
 
     # Update splits
-    filename_template = naming.ShardedFileTemplate(  # pytype: disable=wrong-arg-types  # always-use-property-annotation
+    filename_template = naming.ShardedFileTemplate(
         dataset_name=self.name,
-        data_dir=self.data_dir,
+        data_dir=self.data_dir,  # pyrefly: ignore[bad-argument-type]
         filetype_suffix=parsed_proto.file_format or "tfrecord",
     )
     split_dict = splits_lib.SplitDict.from_proto(
@@ -743,7 +743,7 @@ class DatasetInfo:
     # For `ReadOnlyBuilder`, reconstruct the features from the config.
     elif feature_lib.make_config_path(dataset_info_dir).exists():
       self._features = top_level_feature.TopLevelFeature.from_config(
-          dataset_info_dir
+          dataset_info_dir  # pyrefly: ignore[bad-argument-type]
       )
 
     # If the dataset was loaded from file, self.metadata will be `None`, so
@@ -785,10 +785,15 @@ class DatasetInfo:
       if not is_defined_in_restored:
         continue
       # Otherwise, we restore the dataset_info.json value
+      is_repeated = getattr(
+          field,
+          "is_repeated",
+          getattr(field, "label", None) == getattr(field, "LABEL_REPEATED", 3),
+      )
       if field.type == field.TYPE_MESSAGE:
         field_value.MergeFrom(field_value_restored)
-      elif field.label == field.LABEL_REPEATED:
-        del field_value[:]
+      elif is_repeated:
+        field_value[:] = []
         field_value.extend(field_value_restored)
       else:
         setattr(self._info_proto, field_name, field_value_restored)
@@ -822,7 +827,7 @@ class DatasetInfo:
     access_timestamp_ms = _now_in_milliseconds()
     if isinstance(path, str) or isinstance(path, epath.Path):
       path = os.fspath(path).split(",")
-    for p in path:
+    for p in path:  # pyrefly: ignore[not-iterable]
       for file in file_utils.expand_glob(p):
         self._info_proto.data_source_accesses.append(
             dataset_info_pb2.DataSourceAccess(
@@ -916,7 +921,7 @@ class DatasetInfo:
       config_description = SKIP
 
     if self._info_proto.config_tags:
-      config_tags = ", ".join(self.config_tags)
+      config_tags = ", ".join(self.config_tags)  # pyrefly: ignore[no-matching-overload]
     else:
       config_tags = SKIP
 
@@ -1002,10 +1007,10 @@ def _nest_to_proto(nest: Nest) -> dataset_info_pb2.SupervisedKeys.Nest:
     for item in nest:
       proto.tuple.items.append(_nest_to_proto(item))
   elif nest_type is dict:
-    nest = {key: _nest_to_proto(value) for key, value in nest.items()}
-    proto.dict.CopyFrom(dataset_info_pb2.SupervisedKeys.Dict(dict=nest))
+    nest = {key: _nest_to_proto(value) for key, value in nest.items()}  # pyrefly: ignore[bad-assignment, missing-attribute]
+    proto.dict.CopyFrom(dataset_info_pb2.SupervisedKeys.Dict(dict=nest))  # pyrefly: ignore[bad-argument-type]
   elif nest_type is str:
-    proto.feature_key = nest
+    proto.feature_key = nest  # pyrefly: ignore[bad-assignment]
   else:
     raise ValueError(
         "The nested structures in `supervised_keys` must only "
@@ -1067,7 +1072,7 @@ def _supervised_keys_from_proto(
   if proto.input and proto.output:
     return (proto.input, proto.output)
   elif proto.tuple:
-    return tuple(_nest_from_proto(item) for item in proto.tuple.items)
+    return tuple(_nest_from_proto(item) for item in proto.tuple.items)  # pyrefly: ignore[bad-return]
   else:
     raise ValueError(
         "A `SupervisedKeys` proto must have either `input` and "
@@ -1197,7 +1202,7 @@ def pack_as_supervised_ds(
       and isinstance(ds.element_spec, tuple)
       and len(ds.element_spec) == 2
   ):
-    x_key, y_key = ds_info.supervised_keys  # pytype: disable=bad-unpacking
+    x_key, y_key = ds_info.supervised_keys  # pyrefly: ignore[bad-unpacking]
     ds = ds.map(lambda x, y: {x_key: x, y_key: y})
     return ds
   else:  # If dataset isn't a supervised tuple (input, label), return as-is
@@ -1371,7 +1376,7 @@ def add_tfds_data_source_access(
               name=dataset_reference.dataset_name,
               config=dataset_reference.config,
               version=str(dataset_reference.version),
-              data_dir=os.fspath(dataset_reference.data_dir),
+              data_dir=os.fspath(dataset_reference.data_dir),  # pyrefly: ignore[no-matching-overload]
               ds_namespace=dataset_reference.namespace,
           ),
           url=dataset_info_pb2.Url(url=url),

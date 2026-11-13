@@ -193,12 +193,12 @@ class Cifar100N(tfds.core.GeneratorBasedBuilder):
           # Note: The human labels are provided according to default shuffling
           # of 'cifar100'. We need to invert the shuffling to assign the right
           # human label to each example.
-          annotations_index = np.where(annotations_order == index)[0][0]
+          annotations_index = np.where(annotations_order == index)[0][0]  # pyrefly: ignore[unbound-name]
 
-          record['noise_label'] = noise_label[annotations_index]
+          record['noise_label'] = noise_label[annotations_index]  # pyrefly: ignore[unbound-name]
           # Worker metadata is shared every 5 samples
-          record['worker_id'] = worker_id[index // 5]
-          record['worker_time'] = worker_time[index // 5]
+          record['worker_id'] = worker_id[index // 5]  # pyrefly: ignore[unbound-name]
+          record['worker_time'] = worker_time[index // 5]  # pyrefly: ignore[unbound-name]
         else:
           # There is no annotator metadata for test split
           record['noise_label'] = -1

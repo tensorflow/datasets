@@ -29,7 +29,6 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
       '1.1.0': 'Added is_last.',
   }
 
-  # pytype: disable=wrong-keyword-args
   # pylint: disable=protected-access
   # Pen uses a different policy size in expert-v1
   BUILDER_CONFIGS = dataset_builder.ADROIT_BUILDER_CONFIGS[:-1] + [
@@ -48,12 +47,11 @@ class D4rlAdroitPen(dataset_builder.D4RLDatasetBuilder):
           episode_metadata_keys=frozenset([dataset_builder._ALGORITHM]),
           has_policy_metadata=True,
           has_policy_last_fc_log_std=True,
-          policy_size=64,  # pytype: disable=wrong-arg-types  # gen-stub-imports
+          policy_size=64,
       ),
   ]
 
   # pylint: enable=protected-access
-  # pytype: enable=wrong-keyword-args
 
   def __init__(self, **kwargs: Any):
     config = dataset_builder.DatasetConfig(

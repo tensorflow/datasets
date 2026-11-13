@@ -21,8 +21,8 @@ project, and has been carefully segmented and aligned.
 
 It's recommended to use lazy audio decoding for faster reading and smaller
 dataset size: - install `tensorflow_io` library: `pip install tensorflow-io` -
-enable lazy decoding: `tfds.load('librispeech', builder_kwargs={'config':
-'lazy_decode'})`
+enable lazy decoding:
+`tfds.load('librispeech', builder_kwargs={'config': 'lazy_decode'})`
 
 *   **Additional Documentation**:
     <a class="button button-with-icon" href="https://paperswithcode.com/dataset/librispeech">

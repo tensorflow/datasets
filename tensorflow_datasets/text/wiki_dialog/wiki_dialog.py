@@ -118,7 +118,7 @@ class WikiDialog(tfds.core.GeneratorBasedBuilder):
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
-    base_download_url = self.builder_config.base_download_url
+    base_download_url = self.builder_config.base_download_url  # pyrefly: ignore[missing-attribute]
     download_urls = {
         'train': [
             os.path.join(
@@ -133,7 +133,7 @@ class WikiDialog(tfds.core.GeneratorBasedBuilder):
     filepaths = dl_manager.download(download_urls)
 
     splits = {
-        'train': self._generate_examples(filepaths['train']),
-        'validation': self._generate_examples(filepaths['validation']),
+        'train': self._generate_examples(filepaths['train']),  # pyrefly: ignore[bad-index]
+        'validation': self._generate_examples(filepaths['validation']),  # pyrefly: ignore[bad-index]
     }
     return splits

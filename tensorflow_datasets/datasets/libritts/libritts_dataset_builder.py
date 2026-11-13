@@ -69,7 +69,7 @@ class Builder(tfds.core.BeamBasedBuilder):
     with tf.io.gfile.GFile(archive_path, "rb") as f:
       tarf = tarfile.open(mode="r:gz", fileobj=f)
       speakers_tsv = tarf.extractfile("LibriTTS/speakers.tsv")
-      for n, line in enumerate(speakers_tsv):
+      for n, line in enumerate(speakers_tsv):  # pyrefly: ignore[bad-argument-type]
         # Skip the first line which is just a header.
         if n == 0:
           continue

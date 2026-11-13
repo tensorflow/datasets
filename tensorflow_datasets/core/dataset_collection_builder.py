@@ -107,7 +107,7 @@ class DatasetCollectionInfo:
     return cls(
         name=name,
         release_notes=release_notes,
-        description=description,
+        description=description,  # pyrefly: ignore[bad-argument-type]
         citation=citation,
         homepage=homepage,
     )

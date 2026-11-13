@@ -93,23 +93,22 @@ def _get_example_objects(annon_filepath):
 
     # Disable pytype to avoid attribute-error due to find returning
     # Optional[Element]
-    # pytype: disable=attribute-error
     size = root.find("size")
-    width = float(size.find("width").text)
-    height = float(size.find("height").text)
+    width = float(size.find("width").text)  # pyrefly: ignore[missing-attribute]
+    height = float(size.find("height").text)  # pyrefly: ignore[missing-attribute]
 
     for obj in root.findall("object"):
       # Get object's label name.
-      label = obj.find("name").text.lower()
+      label = obj.find("name").text.lower()  # pyrefly: ignore[missing-attribute]
       # Get objects' pose name.
-      pose = obj.find("pose").text.lower()
-      is_truncated = obj.find("truncated").text == "1"
-      is_difficult = obj.find("difficult").text == "1"
+      pose = obj.find("pose").text.lower()  # pyrefly: ignore[missing-attribute]
+      is_truncated = obj.find("truncated").text == "1"  # pyrefly: ignore[missing-attribute]
+      is_difficult = obj.find("difficult").text == "1"  # pyrefly: ignore[missing-attribute]
       bndbox = obj.find("bndbox")
-      xmax = float(bndbox.find("xmax").text)
-      xmin = float(bndbox.find("xmin").text)
-      ymax = float(bndbox.find("ymax").text)
-      ymin = float(bndbox.find("ymin").text)
+      xmax = float(bndbox.find("xmax").text)  # pyrefly: ignore[missing-attribute]
+      xmin = float(bndbox.find("xmin").text)  # pyrefly: ignore[missing-attribute]
+      ymax = float(bndbox.find("ymax").text)  # pyrefly: ignore[missing-attribute]
+      ymin = float(bndbox.find("ymin").text)  # pyrefly: ignore[missing-attribute]
       yield {
           "label": label,
           "pose": pose,
@@ -119,7 +118,6 @@ def _get_example_objects(annon_filepath):
           "is_truncated": is_truncated,
           "is_difficult": is_difficult,
       }
-    # pytype: enable=attribute-error
 
 
 class VocConfig(tfds.core.BuilderConfig):
@@ -132,7 +130,7 @@ class VocConfig(tfds.core.BuilderConfig):
     self.filenames = filenames
     self.has_test_annotations = has_test_annotations
     super(VocConfig, self).__init__(
-        name=year,
+        name=year,  # pyrefly: ignore[bad-argument-type]
         # Version history:
         # 5.0.0: Added new download links and updated checksums.
         # 4.0.0: Added BuildConfig and 2012 version support, deprecate Voc2007.
@@ -192,26 +190,26 @@ class Voc(tfds.core.GeneratorBasedBuilder):
                 tfds.features.ClassLabel(names=_VOC_LABELS)
             ),
         }),
-        homepage=_VOC_URL.format(year=self.builder_config.year),
-        citation=_VOC_CITATION.format(year=self.builder_config.year),
+        homepage=_VOC_URL.format(year=self.builder_config.year),  # pyrefly: ignore[missing-attribute]
+        citation=_VOC_CITATION.format(year=self.builder_config.year),  # pyrefly: ignore[missing-attribute]
     )
 
   def _split_generators(self, dl_manager):
     paths = dl_manager.download_and_extract({
         k: os.path.join(_VOC_DATA_URL, v)
-        for k, v in self.builder_config.filenames.items()
+        for k, v in self.builder_config.filenames.items()  # pyrefly: ignore[missing-attribute]
     })
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["test"], set_name="test"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.TRAIN,
+            name=tfds.Split.TRAIN,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["trainval"], set_name="train"),
         ),
         tfds.core.SplitGenerator(
-            name=tfds.Split.VALIDATION,
+            name=tfds.Split.VALIDATION,  # pyrefly: ignore[missing-attribute]
             gen_kwargs=dict(data_path=paths["trainval"], set_name="val"),
         ),
     ]
@@ -222,12 +220,12 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/ImageSets/Main/{}.txt".format(
-                self.builder_config.year, set_name
+                self.builder_config.year, set_name  # pyrefly: ignore[missing-attribute]
             )
         ),
     )
     load_annotations = (
-        self.builder_config.has_test_annotations or set_name != "test"
+        self.builder_config.has_test_annotations or set_name != "test"  # pyrefly: ignore[missing-attribute]
     )
     with tf.io.gfile.GFile(set_filepath, "r") as f:
       for line in f:
@@ -240,7 +238,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/JPEGImages/{}.jpg".format(
-                self.builder_config.year, image_id
+                self.builder_config.year, image_id  # pyrefly: ignore[missing-attribute]
             )
         ),
     )
@@ -248,7 +246,7 @@ class Voc(tfds.core.GeneratorBasedBuilder):
         data_path,
         os.path.normpath(
             "VOCdevkit/VOC{}/Annotations/{}.xml".format(
-                self.builder_config.year, image_id
+                self.builder_config.year, image_id  # pyrefly: ignore[missing-attribute]
             )
         ),
     )

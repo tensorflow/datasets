@@ -43,10 +43,12 @@ GitHub: https://github.com/salesforce/booksum
 *   **Manual download instructions**: This dataset requires you to
     download the source data manually into `download_config.manual_dir`
     (defaults to `~/tensorflow_datasets/downloads/manual/`):<br/>
-    1) Go to https://github.com/salesforce/booksum, and run steps 1-3. Place the
-    whole `booksum` git project in the manual folder.
-    2) Download the chapterized books from https://storage.cloud.google.com/sfr-books-dataset-chapters-research/all_chapterized_books.zip
-    and unzip to the manual folder.
+
+1\) Go to https://github.com/salesforce/booksum, and run steps 1-3. Place the
+whole `booksum` git project in the manual folder. 2) Download the chapterized
+books from
+https://storage.cloud.google.com/sfr-books-dataset-chapters-research/all_chapterized_books.zip
+and unzip to the manual folder.
 
 The manual folder should contain the following directories:
 

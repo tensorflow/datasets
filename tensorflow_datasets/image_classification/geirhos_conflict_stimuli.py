@@ -109,7 +109,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
 
     return [
         tfds.core.SplitGenerator(
-            name=tfds.Split.TEST,
+            name=tfds.Split.TEST,  # pyrefly: ignore[missing-attribute]
             gen_kwargs={
                 "data_dir_path": os.path.join(
                     dl_paths["texture_vs_shape"], _DATA_DIR_PATH
@@ -141,7 +141,7 @@ class GeirhosConflictStimuli(tfds.core.GeneratorBasedBuilder):
       class_dir_path = os.path.join(data_dir_path, shape_class_name)
       for image_name in tf.io.gfile.listdir(class_dir_path):
         image = os.path.join(class_dir_path, image_name)
-        texture_class_name = re.search("-([a-z]+)", image_name).group(1)  # pytype: disable=attribute-error
+        texture_class_name = re.search("-([a-z]+)", image_name).group(1)  # pyrefly: ignore[missing-attribute]
         yield image_name, {
             "image": image,
             "file_name": image_name,
