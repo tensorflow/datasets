@@ -220,6 +220,20 @@ def _feature_to_numpy(
     return value_array.item()
   feature_name = _key_to_feature_name(key)
   row_lengths = _extract_row_lengths(features, feature_name)
+  if tensor_info.sequence_rank > 1:
+    # Every nested Sequence has stored row lengths, even with a fixed length.
+    # Keep the trailing tensor dimensions together while rebuilding sequences.
+    values: Union[np.ndarray, list[Any]] = value_array.reshape(
+        (sum(row_lengths[-1]),) + shape[tensor_info.sequence_rank :]
+    )
+    for lengths in reversed(row_lengths):
+      rows = []
+      offset = 0
+      for length in lengths:
+        rows.append(values[offset : offset + length])
+        offset += length
+      values = rows
+    return values
   return reshape_ragged_tensor(value_array, row_lengths, shape)  # pyrefly: ignore[bad-argument-type]
 
 
@@ -380,23 +394,7 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
   # Convert the shape
 
   # Select the feature proto type in function of the unknown shape
-  if all(s is not None for s in tensor_info.shape):
-    return tf.io.FixedLenFeature(  # All shaped defined
-        shape=tensor_info.shape,
-        dtype=dtype,
-        default_value=tensor_info.default_value,
-    )
-  elif tensor_info.shape.count(None) == 1:
-    # Extract the defined shape (without the None dimension)
-    # The original shape is restored in `_deserialize_single_field`
-    shape = tuple(dim for dim in tensor_info.shape if dim is not None)
-    return tf.io.FixedLenSequenceFeature(  # First shape undefined
-        shape=shape,
-        dtype=dtype,
-        allow_missing=True,
-        default_value=tensor_info.default_value,
-    )
-  elif tensor_info.sequence_rank > 1:  # RaggedTensor
+  if tensor_info.sequence_rank > 1:  # RaggedTensor
     # Decoding here should match encoding from `_add_ragged_fields` in
     # `example_serializer.py`
     tf_specs = {  # pylint: disable=g-complex-comprehension
@@ -414,6 +412,22 @@ def _to_tf_example_spec(tensor_info: feature_lib.TensorInfo):
         default_value=tensor_info.default_value,
     )
     return tf_specs
+  elif all(s is not None for s in tensor_info.shape):
+    return tf.io.FixedLenFeature(  # All shaped defined
+        shape=tensor_info.shape,
+        dtype=dtype,
+        default_value=tensor_info.default_value,
+    )
+  elif tensor_info.shape.count(None) == 1:
+    # Extract the defined shape (without the None dimension)
+    # The original shape is restored in `_deserialize_single_field`
+    shape = tuple(dim for dim in tensor_info.shape if dim is not None)
+    return tf.io.FixedLenSequenceFeature(  # First shape undefined
+        shape=shape,
+        dtype=dtype,
+        allow_missing=True,
+        default_value=tensor_info.default_value,
+    )
   else:
     raise NotImplementedError(
         "Multiple unknown dimension not supported.\n"

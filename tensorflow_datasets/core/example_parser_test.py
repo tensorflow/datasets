@@ -18,7 +18,9 @@
 import numpy as np
 import pytest
 from tensorflow_datasets.core import example_parser
+from tensorflow_datasets.core import example_serializer
 from tensorflow_datasets.core import features as features_lib
+from tensorflow_datasets.core.utils.lazy_imports_utils import tensorflow as tf
 from tensorflow_datasets.proto import tf_example_pb2
 from tensorflow_datasets.proto import tf_feature_pb2
 
@@ -84,7 +86,7 @@ def test_example_parser_np():
       'array_of_unknown_shape': np.asarray([4, 5, 6], dtype=np.uint16),
       'ragged_tensor': [
           [[0, 1], [2, 3]],
-          [],
+          np.empty((0, 2), dtype=np.int32),
           [[4, 5]],
       ],
       'ragged_tensor_without_length': [
@@ -175,3 +177,81 @@ def test_full_row_lengths():
           (None, 3, None),
       )
   ) == [[3, 0, 2, 2, 2, 1], [3, 3]]
+
+
+@pytest.mark.parametrize(
+    'lengths',
+    [
+        (outer, inner)
+        for outer in (None, 0, 2)
+        for inner in (None, 0, 2)
+    ] + [
+        (outer, middle, inner)
+        for outer in (None, 0, 2)
+        for middle in (None, 0, 2)
+        for inner in (None, 0, 2)
+    ],
+)
+@pytest.mark.parametrize('tensor_shape', [(), (3,), (2, 3)])
+@pytest.mark.parametrize('parser_type', ['numpy', 'eager', 'graph'])
+def test_nested_sequence_round_trip(lengths, tensor_shape, parser_type):
+  feature = features_lib.Tensor(shape=tensor_shape, dtype=np.int16)
+  for length in reversed(lengths):
+    feature = features_lib.Sequence(feature, length=length)
+  features = features_lib.FeaturesDict({'value': feature})
+
+  def make_value(level, index=0):
+    if level == len(lengths):
+      return np.full(tensor_shape, index, dtype=np.int16)
+    length = lengths[level]
+    if length is None:
+      length = 2 if level == 0 else index % 3
+    return [make_value(level + 1, i) for i in range(length)]
+
+  value = make_value(0)
+  specs = features.get_serialized_info()
+  serialized = example_serializer.ExampleSerializer(specs).serialize_example(
+      features.encode_example({'value': value})
+  )
+  if parser_type == 'numpy':
+    actual = example_parser.ExampleParserNp(specs).parse_example(serialized)[
+        'value'
+    ]
+
+    def assert_rows(actual_rows, expected_rows, level):
+      assert len(actual_rows) == len(expected_rows)
+      if level == len(lengths) - 1:
+        assert isinstance(actual_rows, np.ndarray)
+        assert actual_rows.dtype == np.int16
+        assert actual_rows.shape == (len(expected_rows),) + tensor_shape
+        np.testing.assert_array_equal(
+            actual_rows,
+            np.asarray(expected_rows, dtype=np.int16).reshape(
+                (len(expected_rows),) + tensor_shape
+            ),
+        )
+      else:
+        for actual_row, expected_row in zip(actual_rows, expected_rows):
+          assert_rows(actual_row, expected_row, level + 1)
+
+    assert_rows(actual, value, 0)
+  else:
+    parser = example_parser.ExampleParser(specs)
+    parse = parser.parse_example
+    if parser_type == 'graph':
+      parse = tf.function(parse)
+    actual = parse(serialized)['value']
+    assert isinstance(actual, tf.RaggedTensor)
+    assert actual.dtype == tf.int16
+    assert actual.ragged_rank == len(lengths) - 1
+    assert actual.shape.as_list() == (
+        [len(value)] + [None] * (len(lengths) - 1) + list(tensor_shape)
+    )
+    assert actual.flat_values.shape.as_list()[1:] == list(tensor_shape)
+
+    def as_list(item):
+      if isinstance(item, list):
+        return [as_list(child) for child in item]
+      return item.tolist()
+
+    assert actual.to_list() == as_list(value)
