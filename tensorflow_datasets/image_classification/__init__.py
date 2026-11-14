@@ -15,6 +15,7 @@
 
 """Image Classification datasets."""
 
+from tensorflow_datasets.image_classification.affnist import Affnist
 from tensorflow_datasets.image_classification.beans import Beans
 from tensorflow_datasets.image_classification.bee_dataset import BeeDataset
 from tensorflow_datasets.image_classification.bigearthnet import Bigearthnet
